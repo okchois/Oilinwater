@@ -65,7 +65,7 @@ MAP = {
     ("STM32G0B1CxTx", "STM32G0B1CCT3"): ("MCU", "ST", "STM32G0B1CCT3", "MCU Cortex-M0+ 64 MHz 256 KB, LQFP48, −40~125 °C (사내 DP2000 G0B1CCT6 동일 다이)", 1.50, 2.50, "확정"),
     ("PCAP04", "PCAP04-AQFM-24"): ("측정", "ScioSense", "PCAP04-AQFM-24", "정전용량-디지털 변환기 QFN24", 6.50, 7.10, "확정"),
     ("ADS1220", "ADS1220IPWR"): ("측정", "TI", "ADS1220IPWR", "24-bit ADC, Pt1000 4선, TSSOP-16", 1.90, 3.50, "확정"),
-    ("DAC8760", "DAC8760IPWP"): ("출력", "TI", "DAC8760IPWPR", "16-bit 전압/전류 출력 DAC, HTSSOP-24", 7.80, 12.40, "확정"),
+    ("DAC8760", "DAC8760IPWP"): ("출력", "TI", "DAC8760IPWPR", "16-bit 전압/전류 출력 DAC, HTSSOP-24. 사양 확정 후 같은 핀 대체: DAC7760(12-bit V/I), DAC8750(16-bit 전류), DAC7750(12-bit 전류)", 7.80, 12.40, "확정"),
     ("TPS26611", "TPS26611"): ("출력", "TI", "TPS26611 (패키지·주문코드 확인)", "4–20 mA 출력 오결선 보호", 1.20, 2.50, "확인 필요"),
     ("THVD2450", "THVD2450DR"): ("통신", "TI", "THVD2450DR", "RS-485 트랜시버, 버스 ±70 V 내성, SOIC-8", 1.50, 3.00, "확정"),
 }

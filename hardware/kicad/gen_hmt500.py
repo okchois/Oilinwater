@@ -772,6 +772,15 @@ for ch, y0 in ((1, 10), (2, 44)):
     S.text(f"VOUT and IOUT combined (per TI TIDUBK2 - VERIFY). +VSENSE taken after R{20 + 10 * ch} to cancel series drop.",
            (8.5, y0 + 25.3), 1.27)
     S.box(93, y0 - 6, 115, y0 + 12, f"CH{ch} DECOUPLING")
+S.box(8, 74, 115, 88, "DAC SELECTION  (decision 2026-09-26: fit DAC8760 now; final part after output spec is fixed)")
+for i, t in enumerate([
+        "U7/U8 fitted: DAC8760 (16-bit, current + voltage output).  Same package/pinout family - drop-in alternates, no layout change:",
+        "  DAC7760  12-bit, current + voltage   (cost-down if V/I selectable output is kept)",
+        "  DAC8750  16-bit, current only 4-20/0-20/0-24 mA   (EE364-equivalent, 3-wire)",
+        "  DAC7750  12-bit, current only   (lowest cost; ~5 uA/step vs EE364 2 uA)",
+        "Current-only (x750): VOUT/+VSENSE/-VSENSE functions absent - check pin handling in datasheet before fitting (VERIFY).",
+]):
+    S.text(t, (8.5, 77.5 + 2.2 * i), 1.27)
 
 # ════════════════════════════ 6. RS-485 ════════════════════════════
 S = Sheet("rs485.kicad_sch", "RS-485", "THVD2450 +/-70V fault-protected transceiver", dx=4, dy=4, paper="A4")
@@ -939,7 +948,7 @@ def title_block(title):
     return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-26") (rev "0.3") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Oil moisture transmitter HMT500 - RS-485 + 2x V/I analog output") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
-            f'(comment 3 "VERIFY=YES parts: placeholder pin numbers (LMR36006, PCAP04, DAC8760, TPS26611); TPS2660 RTN wiring"))')
+            f'(comment 3 "VERIFY=YES parts: pin numbers LMR36006/PCAP04/DAC8760/TPS26611; TPS2660 R22"))')
 
 
 def write_all():

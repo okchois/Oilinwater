@@ -2,6 +2,7 @@
 
 오일(유압유·윤활유·절연유·연료) 속 수분을 온라인으로 측정하는 트랜스미터 개발 프로젝트.
 
+- [결정 기록](docs/decision-log.md) — 확정 사항과 미결 사항 (MCU, DAC 대체 계획 등)
 - [조사 보고서](docs/research-report.md) — 측정 원리, 경쟁 제품, 센서 소자, 회로/기구/펌웨어 설계, 교정, 인증, 로드맵
 - [시장 조사 종합](docs/market/00-summary.md) — 세계 시장, 경쟁 제품·가격, 국내 시장, 포지셔닝 제안
 - [E+E EE364 원문 요약](docs/reference/ee364-summary.md) — 구조 참고 제품의 치수, 사양, 핀맵, Modbus 맵
