@@ -1,0 +1,209 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 900" width="1180" height="900" font-family="'Noto Sans KR','Malgun Gothic','NanumGothic',sans-serif">
+<rect width="100%" height="100%" fill="#fff"/>
+<style>.w{stroke:#0f172a;stroke-width:2;fill:none}.t{font-size:12px;fill:#0f172a}.s{font-size:10.5px;fill:#475569}.h{font-size:15px;font-weight:700;fill:#0f172a}.b{fill:#fff;stroke:#0f172a;stroke-width:1.6}.ic{fill:#eff6ff;stroke:#1d4ed8;stroke-width:1.8}.pin{fill:#f1f5f9;stroke:#475569;stroke-width:1.6}</style>
+<text x="20" y="32" font-size="20" font-weight="700" fill="#0f172a">DOTECH HMT500 — 서지·오결선 보호 회로 구성도 v0.1</text>
+<text x="20" y="54" class="s">초기 부품값 · 회로도 CAD 입력 전 · 오결선 요구: 임의의 두 핀 사이 ±30 V 연속 인가에 손상 없음</text>
+<rect x="15" y="70" width="1150" height="250" rx="10" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="29" y="94" class="h">A. 전원 입력 — 역극성 / 과전압 / 서지 (±60 V 내성)</text>
+<rect class="pin" x="31" y="138" width="88" height="24" rx="4"/>
+<text x="75" y="154" class="t" text-anchor="middle" font-weight="700">8: V+</text>
+<rect class="pin" x="31" y="258" width="88" height="24" rx="4"/>
+<text x="75" y="274" class="t" text-anchor="middle" font-weight="700">6: GND</text>
+<rect class="b" x="140" y="125" width="90" height="150" rx="6"/>
+<text x="148" y="143" class="t" font-weight="700">L1</text>
+<text x="148" y="160" class="s">공통모드</text>
+<text x="148" y="175" class="s">초크</text>
+<text x="148" y="190" class="s">V+·GND</text>
+<text x="148" y="205" class="s">동시 통과</text>
+<path class="w" d="M119,150 L140,150"/>
+<path class="w" d="M230,150 L270,150"/>
+<path class="w" d="M119,270 L140,270"/>
+<path class="w" d="M230,270 L270,270"/>
+<circle cx="290" cy="150" r="3.2" fill="#0f172a"/>
+<circle cx="290" cy="270" r="3.2" fill="#0f172a"/>
+<path class="w" d="M270,150 L330,150"/>
+<path class="w" d="M270,270 L1080,270"/>
+<path class="w" d="M290,150 L290,194.0"/>
+<path class="w" d="M290,226.0 L290,270"/>
+<path d="M281,194.0 L299,194.0 L290,210.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M281,226.0 L299,226.0 L290,210.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M279,207.0 L281,210.0 L299,210.0 L301,213.0" stroke="#b91c1c" stroke-width="1.8" fill="none"/>
+<text x="304" y="208.0" class="t">D1 SMDJ36CA</text>
+<text x="304" y="222.0" class="s">양방향 3000 W (1단)</text>
+<path class="w" d="M400,150 L408,150"/>
+<rect class="b" x="408" y="142" width="44" height="16"/>
+<path class="w" d="M452,150 L460,150"/>
+<text x="430" y="137" class="t" text-anchor="middle">R1 4.7 Ω</text>
+<text x="430" y="174" class="s" text-anchor="middle">펄스 정격 1 W</text>
+<path class="w" d="M330,150 L400,150"/>
+<path class="w" d="M460,150 L560,150"/>
+<circle cx="520" cy="150" r="3.2" fill="#0f172a"/>
+<circle cx="520" cy="270" r="3.2" fill="#0f172a"/>
+<path class="w" d="M520,150 L520,194.0"/>
+<path class="w" d="M520,226.0 L520,270"/>
+<path d="M511,194.0 L529,194.0 L520,210.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M511,226.0 L529,226.0 L520,210.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M509,207.0 L511,210.0 L529,210.0 L531,213.0" stroke="#b91c1c" stroke-width="1.8" fill="none"/>
+<text x="534" y="208.0" class="t">D2 SMBJ33CA</text>
+<text x="534" y="222.0" class="s">양방향 (2단)</text>
+<circle cx="640" cy="150" r="3.2" fill="#0f172a"/>
+<circle cx="640" cy="270" r="3.2" fill="#0f172a"/>
+<path class="w" d="M560,150 L700,150"/>
+<path class="w" d="M640,150 L640,206.0"/>
+<path class="w" d="M640,214.0 L640,270"/>
+<path class="w" d="M630,206.0 L650,206.0"/>
+<path class="w" d="M630,214.0 L650,214.0"/>
+<text x="654" y="214.0" class="t">C1</text>
+<text x="600" y="288" class="s">C1: 100 nF/100 V + 10 µF/50 V</text>
+<rect class="ic" x="700" y="120" width="190" height="95" rx="6"/>
+<text x="708" y="138" class="t" font-weight="700">U1 TPS2660 eFuse</text>
+<text x="708" y="155" class="s">±60 V 내성, 역극성 차단</text>
+<text x="708" y="170" class="s">OVP 33 V · UVLO 9 V</text>
+<text x="708" y="185" class="s">ILIM 150 mA · FLT→MCU</text>
+<path class="w" d="M795,215 L795,270"/>
+<circle cx="795" cy="270" r="3.2" fill="#0f172a"/>
+<path class="w" d="M890,150 L1080,150"/>
+<text x="905" y="142" class="t" font-weight="700">VIN_P (12–33 V)</text>
+<text x="905" y="172" class="s">→ DAC8760 AVDD ×2, TPS2661</text>
+<text x="905" y="188" class="s">→ LMR36006 → 5 V → TPS7A20 → 3.3 V</text>
+<text x="905" y="262" class="t">GND</text>
+<rect x="15" y="335" width="700" height="290" rx="10" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="29" y="359" class="h">B. 아날로그 출력 (채널당) — 전압/전류 선택, 오결선 차단</text>
+<rect class="ic" x="35" y="425" width="150" height="120" rx="6"/>
+<text x="43" y="443" class="t" font-weight="700">U2 DAC8760</text>
+<text x="43" y="460" class="s">AVDD = VIN_P</text>
+<text x="43" y="475" class="s">VOUT / IOUT 결합</text>
+<text x="43" y="490" class="s">+VSENSE 입력</text>
+<text x="43" y="505" class="s">ALARM → MCU</text>
+<rect class="ic" x="225" y="445" width="145" height="70" rx="6"/>
+<text x="233" y="463" class="t" font-weight="700">U3 TPS26611</text>
+<text x="233" y="480" class="s">오결선 시 경로 차단</text>
+<text x="233" y="495" class="s">FLT → MCU</text>
+<path class="w" d="M185,480 L225,480"/>
+<path class="w" d="M370,480 L400,480"/>
+<path class="w" d="M400,480 L408,480"/>
+<rect class="b" x="408" y="472" width="44" height="16"/>
+<path class="w" d="M452,480 L460,480"/>
+<text x="430" y="467" class="t" text-anchor="middle">R2 10 Ω</text>
+<text x="430" y="504" class="s" text-anchor="middle">펄스 정격</text>
+<path class="w" d="M460,480 L640,480"/>
+<circle cx="510" cy="480" r="3.2" fill="#0f172a"/>
+<circle cx="595" cy="480" r="3.2" fill="#0f172a"/>
+<path class="w" d="M510,480 L510,516.5"/>
+<path class="w" d="M510,548.5 L510,585"/>
+<path d="M501,516.5 L519,516.5 L510,532.5 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M501,548.5 L519,548.5 L510,532.5 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M499,529.5 L501,532.5 L519,532.5 L521,535.5" stroke="#b91c1c" stroke-width="1.8" fill="none"/>
+<text x="524" y="530.5" class="t">D3</text>
+<text x="524" y="544.5" class="s">SMAJ33CA</text>
+<path class="w" d="M595,480 L595,528.5"/>
+<path class="w" d="M595,536.5 L595,585"/>
+<path class="w" d="M585,528.5 L605,528.5"/>
+<path class="w" d="M585,536.5 L605,536.5"/>
+<text x="609" y="536.5" class="t"></text>
+<text x="607" y="538" class="s">C2 1 nF</text>
+<path class="w" d="M510,585 L510,591"/>
+<path class="w" d="M501,591 L519,591"/>
+<path class="w" d="M505,595 L515,595"/>
+<path class="w" d="M595,585 L595,591"/>
+<path class="w" d="M586,591 L604,591"/>
+<path class="w" d="M590,595 L600,595"/>
+<rect class="pin" x="626" y="468" width="88" height="24" rx="4"/>
+<text x="670" y="484" class="t" text-anchor="middle" font-weight="700">4 / 5: OUT</text>
+<circle cx="610" cy="480" r="3.2" fill="#0f172a"/>
+<path class="w" d="M610,480 L610,410 L110,410 L110,425"/>
+<path class="w" d="M330,410 L338,410"/>
+<rect class="b" x="338" y="402" width="44" height="16"/>
+<path class="w" d="M382,410 L390,410"/>
+<text x="360" y="397" class="t" text-anchor="middle">R4 10 kΩ</text>
+<text x="35" y="612" class="s">+VSENSE(R4): 출력 단자 전압을 되먹임해 R2·스위치 저항의 전압강하 보정</text>
+<rect x="730" y="335" width="435" height="290" rx="10" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="744" y="359" class="h">C. RS-485 — 버스 ±70 V 내성</text>
+<rect class="ic" x="750" y="400" width="150" height="150" rx="6"/>
+<text x="758" y="418" class="t" font-weight="700">U4 THVD2450</text>
+<text x="758" y="435" class="s">3.3 V 전원</text>
+<text x="758" y="450" class="s">버스 ±70 V 내성</text>
+<text x="758" y="465" class="s">±25 V 공통모드</text>
+<text x="758" y="480" class="s">IEC ESD ±12 kV</text>
+<text x="758" y="495" class="s">EFT ±4 kV</text>
+<text x="758" y="510" class="s">TX/RX/DE ← MCU</text>
+<path class="w" d="M900,425 L960,425"/>
+<path class="w" d="M900,525 L960,525"/>
+<path class="w" d="M960,425 L968,425"/>
+<rect class="b" x="968" y="417" width="44" height="16"/>
+<path class="w" d="M1012,425 L1020,425"/>
+<text x="990" y="412" class="t" text-anchor="middle">R5 2.2 Ω</text>
+<text x="990" y="449" class="s" text-anchor="middle">(선택)</text>
+<path class="w" d="M960,525 L968,525"/>
+<rect class="b" x="968" y="517" width="44" height="16"/>
+<path class="w" d="M1012,525 L1020,525"/>
+<text x="990" y="512" class="t" text-anchor="middle">R6 2.2 Ω</text>
+<text x="990" y="549" class="s" text-anchor="middle">(선택)</text>
+<path class="w" d="M1020,425 L1100,425"/>
+<path class="w" d="M1020,525 L1100,525"/>
+<circle cx="1050" cy="425" r="3.2" fill="#0f172a"/>
+<circle cx="1050" cy="525" r="3.2" fill="#0f172a"/>
+<path class="w" d="M1050,425 L1050,434.0"/>
+<path class="w" d="M1050,466.0 L1050,475"/>
+<path d="M1041,434.0 L1059,434.0 L1050,450.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M1041,466.0 L1059,466.0 L1050,450.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M1039,447.0 L1041,450.0 L1059,450.0 L1061,453.0" stroke="#b91c1c" stroke-width="1.8" fill="none"/>
+<text x="1064" y="448.0" class="t"></text>
+<path class="w" d="M1050,475 L1050,484.0"/>
+<path class="w" d="M1050,516.0 L1050,525"/>
+<path d="M1041,484.0 L1059,484.0 L1050,500.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M1041,516.0 L1059,516.0 L1050,500.0 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
+<path d="M1039,497.0 L1041,500.0 L1059,500.0 L1061,503.0" stroke="#b91c1c" stroke-width="1.8" fill="none"/>
+<text x="1064" y="498.0" class="t"></text>
+<circle cx="1050" cy="475" r="3.2" fill="#0f172a"/>
+<path class="w" d="M1050,475 L1010,475"/>
+<path class="w" d="M1010,475 L1010,481"/>
+<path class="w" d="M1001,481 L1019,481"/>
+<path class="w" d="M1005,485 L1015,485"/>
+<text x="1062" y="470" class="s">D4·D5 SMAJ40CA</text>
+<text x="1062" y="484" class="s">(선택, 36 V 이상)</text>
+<rect class="pin" x="1066" y="383" width="88" height="24" rx="4"/>
+<text x="1110" y="399" class="t" text-anchor="middle" font-weight="700">3: A (D+)</text>
+<rect class="pin" x="1066" y="543" width="88" height="24" rx="4"/>
+<text x="1110" y="559" class="t" text-anchor="middle" font-weight="700">2: B (D−)</text>
+<path class="w" d="M1100,425 L1110,425 L1110,407"/>
+<path class="w" d="M1100,525 L1110,525 L1110,543"/>
+<rect x="15" y="640" width="700" height="245" rx="10" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="29" y="664" class="h">D. 회로 GND ↔ 하우징 — 평소 분리, 서지 때만 연결</text>
+<text x="40" y="704" class="t" font-weight="700">회로 GND</text>
+<text x="40" y="834" class="t" font-weight="700">하우징 (SUS, 배관 접지)</text>
+<path class="w" d="M120,700 L560,700"/>
+<path class="w" d="M200,830 L560,830"/>
+<circle cx="260" cy="700" r="3.2" fill="#0f172a"/>
+<circle cx="260" cy="830" r="3.2" fill="#0f172a"/>
+<circle cx="400" cy="700" r="3.2" fill="#0f172a"/>
+<circle cx="400" cy="830" r="3.2" fill="#0f172a"/>
+<circle cx="540" cy="700" r="3.2" fill="#0f172a"/>
+<circle cx="540" cy="830" r="3.2" fill="#0f172a"/>
+<path class="w" d="M260,700 L260,740"/>
+<rect class="b" x="252" y="740" width="16" height="44"/>
+<path class="w" d="M260,784 L260,830"/>
+<text x="274" y="766" class="t">1 MΩ</text>
+<path class="w" d="M400,700 L400,761.0"/>
+<path class="w" d="M400,769.0 L400,830"/>
+<path class="w" d="M390,761.0 L410,761.0"/>
+<path class="w" d="M390,769.0 L410,769.0"/>
+<text x="414" y="769.0" class="t">4.7 nF 2 kV (Y)</text>
+<path class="w" d="M540,700 L540,745"/>
+<ellipse cx="540" cy="765.0" rx="16" ry="20" fill="#fef9c3" stroke="#a16207" stroke-width="1.6"/>
+<text x="540" y="769.0" class="s" text-anchor="middle">GDT</text>
+<path class="w" d="M540,785 L540,830"/>
+<text x="562" y="761.0" class="t">GDT 230 V</text>
+<text x="562" y="777.0" class="s">선–접지 서지 때만 방전</text>
+<rect x="730" y="640" width="435" height="245" rx="10" fill="none" stroke="#cbd5e1" stroke-width="1.5"/>
+<text x="744" y="664" class="h">설계 규칙</text>
+<text x="748" y="690" class="t">① 외부 핀의 TVS는 모두 양방향, 동작전압 ≥ 33 V</text>
+<text x="748" y="710" class="t">   → −30 V 오결선에서 TVS가 도통하지 않음</text>
+<text x="748" y="730" class="t">② 1단(대용량 TVS) → 직렬 저항 → 2단(소형 TVS)</text>
+<text x="748" y="750" class="t">   → 잔류 전압을 IC 정격 이하로</text>
+<text x="748" y="770" class="t">③ 오결선은 IC가 차단: TPS2660 / TPS2661 / THVD2450</text>
+<text x="748" y="790" class="t">   → 퓨즈 교체 없이 자동 복귀</text>
+<text x="748" y="810" class="t">④ 1, 7번 핀은 PCB에서 연결하지 않음 (NC)</text>
+<text x="748" y="830" class="t">⑤ PCB–하우징 연면·공간거리 ≥ 2 mm</text>
+<text x="748" y="850" class="t">⑥ 모든 FLT/ALARM 신호는 MCU가 기록 → Modbus 상태</text>
+</svg>

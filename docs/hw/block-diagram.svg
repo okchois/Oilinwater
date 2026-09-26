@@ -18,7 +18,7 @@
   </defs>
 
   <rect width="1180" height="760" fill="#ffffff"/>
-  <text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">오일 내 수분 트랜스미터 — 회로 블록도 (v0.2)</text>
+  <text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">오일 내 수분 트랜스미터 — 회로 블록도 (v0.3)</text>
   <text x="20" y="56" class="s">출력: RS-485 Modbus RTU + 아날로그 2채널 (채널별 전압/전류 선택) · 센서: IST AG MK 계열 + Pt1000 · 커넥터: M Connect 8핀</text>
 
   <!-- 프로브 -->
@@ -89,12 +89,12 @@
   <rect x="830" y="130" width="170" height="74" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
   <text x="842" y="153" class="t">출력 DAC AD5422 #1</text>
   <text x="842" y="172" class="s">4–20·0–20 mA / 0–10·0–5 V</text>
-  <text x="842" y="190" class="xs">V·I 단일 핀 결합 · TVS+PTC</text>
+  <text x="842" y="190" class="xs">+ TPS2661 오결선 차단</text>
 
   <rect x="830" y="218" width="170" height="74" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
   <text x="842" y="241" class="t">출력 DAC AD5422 #2</text>
   <text x="842" y="260" class="s">4–20·0–20 mA / 0–10·0–5 V</text>
-  <text x="842" y="278" class="xs">V·I 단일 핀 결합 · TVS+PTC</text>
+  <text x="842" y="278" class="xs">+ TPS2661 오결선 차단</text>
 
   <path class="sig" d="M790,167 H828" marker-end="url(#a)"/>
   <text x="796" y="160" class="lbl">SPI</text>
@@ -103,9 +103,9 @@
 
   <rect x="830" y="320" width="150" height="96" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
   <text x="842" y="343" class="t">RS-485 트랜시버</text>
-  <text x="842" y="362" class="s">THVD1450 (±12 kV)</text>
-  <text x="842" y="380" class="xs">옵션: 절연 ISO1410</text>
-  <text x="842" y="398" class="xs">SM712 TVS + PTC</text>
+  <text x="842" y="362" class="s">THVD2450 (버스 ±70 V)</text>
+  <text x="842" y="380" class="xs">오결선·서지 보호</text>
+  <text x="842" y="398" class="xs">양방향 TVS (선택)</text>
   <path class="sig" d="M790,368 H828" marker-start="url(#a)" marker-end="url(#a)"/>
   <text x="794" y="358" class="lbl">UART</text>
   <text x="794" y="386" class="xs">TX/RX</text>
@@ -121,7 +121,7 @@
   <text x="1052" y="352" class="s">3: RS485 A(D+)</text>
   <text x="1052" y="372" class="s">2: RS485 B(D−)</text>
   <text x="1052" y="430" class="s">1: NC</text>
-  <text x="1052" y="450" class="s">7: AGND (제안)</text>
+  <text x="1052" y="450" class="s">7: NC</text>
   <text x="1052" y="600" class="s"></text>
   <text x="1052" y="530" class="s">8: V+</text>
   <text x="1052" y="550" class="s">6: GND</text>
@@ -133,9 +133,9 @@
   <!-- 전원 -->
   <rect x="830" y="600" width="170" height="86" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
   <text x="842" y="624" class="t">입력 보호</text>
-  <text x="842" y="643" class="s">역극성 P-MOSFET</text>
-  <text x="842" y="660" class="s">TVS SMBJ33A, PTC</text>
-  <text x="842" y="677" class="xs">EMI 필터 (CM 초크)</text>
+  <text x="842" y="643" class="s">eFuse TPS2660 (±60 V)</text>
+  <text x="842" y="660" class="s">양방향 TVS 2단</text>
+  <text x="842" y="677" class="xs">CM 초크, OVP 33 V</text>
 
   <rect x="580" y="600" width="190" height="86" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
   <text x="592" y="624" class="t">벅 컨버터</text>
@@ -148,7 +148,7 @@
   <text x="332" y="660" class="s">MCU · CDC · ADC · 트랜시버</text>
 
   <path class="pwr" d="M1102,570 V643 H1002" marker-end="url(#p)"/>
-  <text x="1010" y="636" class="plbl">V+ 15–30 V</text>
+  <text x="1010" y="636" class="plbl">V+ 12–30 V</text>
   <path class="pwr" d="M830,643 H772" marker-end="url(#p)"/>
   <path class="pwr" d="M580,643 H522" marker-end="url(#p)"/>
   <text x="532" y="636" class="plbl">5 V</text>
