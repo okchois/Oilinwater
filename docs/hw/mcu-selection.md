@@ -1,10 +1,23 @@
 # MCU 선정 검토 — HMT500
 
-작성일: 2026-09-26 · 상태: **검토 중** (교차 검토 대기)
+작성일: 2026-09-26 · 상태: **검토 중** — 1순위 STM32G0B1CCT3 (교차 검토·T3 견적 대기)
 
 현재 회로도는 STM32L431RCT6(LQFP64, −40~85 °C)입니다. 이 문서는 "이 칩이 최선인가"를 요구사항부터 다시 따져 봅니다. 끝에 다른 AI 도구(Codex CLI 등)나 외부 검토자에게 그대로 넘길 수 있는 질문지를 붙였습니다.
 
 > 표의 가격과 온도 등급은 공개 자료와 기억에 기댄 값입니다. **대리점 견적과 데이터시트로 반드시 확인**해야 합니다. "확인 필요" 표시가 붙은 항목은 특히 그렇습니다.
+
+## 0. 두텍 MCU 사용 이력 (구매현황 2023-09 ~ 2026-09 기준)
+
+| 부품 | 코어 | 적용 제품 | 구매 경로 | 단가 수준 (참고) |
+|---|---|---|---|---|
+| STM32F412RET6 | M4F 100 MHz, 512 KB | HPX300 | Mouser | 약 9,200~9,900원 |
+| STM32G071CBT6 (LQFP48) | M0+ 64 MHz, 128 KB | PSU750, GTX500 | Mouser | 약 3,300~3,600원 |
+| **STM32G0B1CCT6 (LQFP48)** | M0+ 64 MHz, **256 KB** | **DP2000** | **국내 대리점**, Mouser | **약 2,060원 (100개, 국내)** |
+| STM32G031K6T6 (LQFP32) | M0+ 64 MHz, 32 KB | GTX30P | Mouser | 약 2,600원 |
+| STM32L011F3/F4U6 | M0+ 32 MHz, 16 KB | HTP110W | DigiKey | 약 1,200원 |
+| STM32F103VET6 외 | M3 | — | — | — |
+
+**정리:** 두텍은 STM32만 쓰고, 특히 **G0 계열(G031, G071, G0B1)** 을 여러 제품에 쓰고 있습니다. L4와 G4는 쓴 적이 없습니다. M4F는 F412를 HPX300에 씁니다. **STM32G0B1CC는 같은 부품을 DP2000에 쓰고 있고 국내에서 사고 있어서**, 개발 도구, 드라이버, 생산 기록 지그, 재고를 함께 쓸 수 있습니다.
 
 ## 1. MCU가 해야 할 일 (요구사항)
 
@@ -60,6 +73,17 @@
 
 ## 3. 현재 판단 (교차 검토 전)
 
+**(최종 갱신 — 구매 이력 반영) 1순위: STM32G0B1CCT3** (M0+ 64 MHz, 256 KB, 144 KB RAM, LQFP48, −40~125 °C)
+   - DP2000에서 쓰는 G0B1CCT6과 같은 칩의 125 °C 등급입니다. 핀·코드·툴체인·생산 지그가 같습니다.
+   - 플래시 256 KB, 2 KB 페이지, 64비트 단위 기록이라 **부트로더 메모리 맵(32K + 208K + 8K + 8K)을 그대로** 씁니다. 단, 256 KB판은 뱅크 2개(각 64페이지)라서 뱅크 2의 페이지 번호 지정과 "이중 뱅크 + 프리페치" 에라타를 부트로더 포팅 때 확인합니다.
+   - FPU가 없지만 1 Hz ppm 계산은 소프트웨어 실수 연산으로 충분합니다(R5).
+   - USART 하드웨어 DE, IWDG, BOR, 하드웨어 CRC가 모두 있습니다.
+   - 가격: T6이 국내 약 2,060원(100개)입니다. T3(125 °C)은 이보다 조금 비쌀 것으로 보이며, **국내 대리점에 T3 견적과 재고를 확인**해야 합니다.
+   **2순위: STM32G491CET3** — FPU·성능 여유가 필요하거나 A/B 이중 이미지(512 KB)를 원할 때. 두텍은 G4를 써 본 적이 없고 가격이 약 3배입니다.
+   **제외: STM32L431** — 두텍 사용 이력이 없고 G0B1 대비 이점이 FPU뿐입니다.
+
+이전 판단 (구매 이력 반영 전):
+
 0. **(갱신) 고온 조건이 확정되거나 L431CC 고온 등급을 구하기 어려우면 STM32G491CET3(또는 CC 256 KB판)를 1순위로 합니다.** 125 °C 등급이 판매 중인 것이 확인되었고, 설계 변경은 L431CC와 비슷하게 적습니다.
 1. **추천: STM32L431CC 48핀으로 바꾸기.** 단, 105 °C 또는 125 °C 등급을 구할 수 있을 때만입니다.
    - 부트로더 메모리 맵, 하드웨어 DE, CRC, 핀 할당이 그대로라 설계 변경이 가장 적습니다.
@@ -87,12 +111,13 @@
 - 참고 파일: docs/hw/mcu-selection.md, docs/hw/hardware-block-design.md,
   docs/hw/circuit-design.md, docs/rs485-bootloader-design.md, firmware/bootloader/
 
-현재 선택: STM32L431RCT6 (LQFP64, −40~85 °C). 검토안: STM32L431CC 48핀 고온 등급, STM32G491CET3 (512 KB, 125 °C).
+현재 선택: STM32L431RCT6 (LQFP64, −40~85 °C). 검토안: STM32G0B1CCT3 (1순위, 회사가 DP2000에 G0B1CCT6 사용 중, 국내 구매), STM32G491CET3 (2순위), STM32L431CC.
+회사 사용 이력: STM32만 사용 (F412, G071, G0B1, G031, L011). L4·G4 사용 이력 없음.
 
 질문:
 1. 위 요구사항에 대해 STM32L431이 최선인가? 더 나은 후보가 있다면 이유와 함께.
 2. STM32L431CC의 105 °C/125 °C 등급(주문 코드 접미사 7/3) 실제 존재 여부와 패키지.
-3. STM32G491CET3(또는 G491CC), STM32G0B1, TI MSPM0G3507과 비교해 원가·고온·RS-485 하드웨어 DE·플래시 구조·장기 공급 측면의 장단점.
+3. STM32G0B1CCT3, STM32G491CET3(또는 G491CC), TI MSPM0G3507과 비교해 원가·고온·RS-485 하드웨어 DE·플래시 구조·장기 공급 측면의 장단점.
 4. FPU 없는 코어로 1 Hz ppm 계산과 5계수 모델을 처리할 때의 실제 부담.
 5. 이 요구사항에서 놓친 MCU 관련 위험(ESD, 클럭 정확도와 Modbus 보레이트, 플래시 내구성, 부트로더 안전성 등).
 답은 표 하나와 추천 1순위·2순위로 정리하고, 확신이 낮은 사실은 "확인 필요"로 표시할 것.
@@ -108,6 +133,8 @@
 
 ## 참고 자료
 
+- STM32G0B1CC 데이터시트 (−40~125 °C 등급 포함): https://www.st.com/resource/en/datasheet/stm32g0b1cc.pdf
+- STM32G0B1 이중 뱅크·프리페치 에라타 논의: https://community.st.com/stm32-mcus-products-25/dual-bank-issue-on-stm32g0b1rct6-26786
 - STM32G491CET3 가격: RS Online https://sg.rs-online.com/web/p/microcontrollers/0330260 , https://hkcn.rs-online.com/web/p/microcontrollers/0330260
 - STM32G491CEU3 (125 °C, QFN): https://estore.st.com/en/stm32g491ceu3tr-cpn.html , Mouser https://www.mouser.com/ProductDetail/STMicroelectronics/STM32G491CEU3?qs=CiayqK2gdcKP%2BMERfRJ0Dg%3D%3D
 - STM32G491 플래시 구성(카테고리 4, 2 KB 페이지): https://community.st.com/t5/stm32cubeide-mcus/stm32g491-flash-memory-organization/td-p/696784
