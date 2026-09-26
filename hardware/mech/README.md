@@ -16,6 +16,12 @@ DOTECH HMT500 오일 수분 트랜스미터의 3D CAD와 2D 제작 도면입니�
 ![HMT500 렌더](out/HMT500_render.png)
 ![HMT500 단면 렌더](out/HMT500_render_section.png)
 
+## 제품 시안 (스튜디오 렌더)
+
+`render_studio.py` → `out/studio/HMT500_studio_01~06.png` (외관 시안: 레이저 마킹 문안·커넥터 외형은 가안)
+
+![시안](out/studio/HMT500_studio_01_hero.png)
+
 ## 산출물 (`out/`)
 
 | 파일 | 내용 |

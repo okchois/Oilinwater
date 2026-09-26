@@ -1,4 +1,4 @@
-"""DOTECH HMT500 KiCad 회로도 생성기 v0.2 — 배치·배선된 정식 회로도.
+"""DOTECH HMT500 KiCad 회로도 생성기 v0.3 — 배치·배선된 정식 회로도.
 
 python3 hardware/kicad/gen_hmt500.py  →  hardware/kicad/HMT500/
 
@@ -78,10 +78,12 @@ ic("CONN_M8", right=[("8", "V+", P), ("6", "GND", P), ("4", "OUT1", P), ("5", "O
    w=6, prefix="J", desc="M Connect 8-pin male panel connector, EE364-compatible pinout. P/N TBD")
 ic("CMC", left=[("1", "", P), ("3", "", P)], right=[("2", "", P), ("4", "", P)], w=4, prefix="L",
    desc="2-line common mode choke")
-ic("TPS2660", left=[("1", "IN", PI), ("2", "EN/UVLO", I), ("3", "OVP", I), ("4", "~{SHDN}", I), ("5", "MODE", I)],
-   right=[("7", "OUT", PO), ("8", "~{FLT}", OC), ("9", "ILIM", P), ("10", "IMON", P), ("11", "dVdT", P)],
-   bottom=[("6", "GND", PI), ("12", "EP", P)], w=8, verify=True,
-   desc="TI TPS2660 60V eFuse, reverse polarity protection. PIN NUMBERS ARE PLACEHOLDERS")
+ic("TPS2660", left=[("1", "IN", PI), ("2", "IN", P), ("3", "UVLO", I), ("5", "OVP", I), ("7", "~{SHDN}", I),
+                   ("6", "MODE", I), ("4", "NC", NC)],
+   right=[("15", "OUT", PO), ("16", "OUT", P), ("14", "~{FLT}", OC), ("11", "ILIM", P), ("10", "IMON", P),
+          ("12", "dVdT", P), ("13", "NC", NC)],
+   bottom=[("9", "GND", PI), ("8", "RTN", P), ("17", "EP", P)], w=8, verify=True,
+   desc="TI TPS26600PWP 60V eFuse, HTSSOP-16 (pinout: KiCad TPS26600PWP). VERIFY RTN/GND wiring for reverse polarity")
 ic("LMR36006", left=[("1", "VIN", PI), ("2", "EN", I), ("3", "PG", OC), ("4", "FB", I)],
    right=[("7", "BOOT", P), ("6", "SW", PO), ("8", "VCC", P)], bottom=[("5", "AGND", PI), ("9", "PGND", PI)],
    w=8, verify=True, desc="TI LMR36006 60V 0.6A buck. PIN NUMBERS ARE PLACEHOLDERS")
@@ -438,31 +440,41 @@ S.text("PCB-housing creepage >= 2 mm", (56, 50), 1.27)
 # ════════════════════════════ 2. 전원 ════════════════════════════
 S = Sheet("power.kicad_sch", "Power", "eFuse (reverse/OV/UV), 60V buck to 5V, LDO 3.3V", dx=4, dy=14)
 SHEETS.append(S)
-S.place("U1", "TPS2660", "TPS26600", "TBD:HTSSOP-16_TPS2660", 30, 22, nets={
-    "1": "VIN_F", "2": "UV_DIV", "3": "OV_DIV", "5": "GND", "6": "GND", "7": "VIN_P", "8": "PWR_FLT",
-    "9": "ILIM", "10": "IMON", "11": "DVDT", "12": "GND"})
+S.place("U1", "TPS2660", "TPS26600PWPR",
+        "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias", 30, 23, nets={
+    "1": "VIN_F", "2": "VIN_F", "3": "UV_DIV", "5": "OV_DIV", "6": "GND", "9": "GND", "8": "EF_RTN", "17": "EF_RTN",
+    "15": "VIN_P", "16": "VIN_P", "14": "PWR_FLT", "11": "ILIM", "10": "IMON", "12": "DVDT"})
 S.v2("R3", "R", "866k 1%", FP["R0603"], 14, 20, "VIN_F", "UV_DIV")
 S.v2("R4", "R", "97.6k 1%", FP["R0603"], 14, 23, "UV_DIV", "OV_DIV")
 S.v2("R5", "R", "36.5k 1%", FP["R0603"], 14, 26, "OV_DIV", "GND")
 S.gnd_stub(S.P("R5", "2"))
 S.gl("VIN_F", S.o((10, 20)), "L", length=0)
 S.w((10, 20), (14, 20))
-S.wa(S.o((14, 20)), S.P("U1", "1"))
-S.wa(S.P("R3", "2"), S.o((18, 23)), S.o((18, 21)), S.P("U1", "2"))
-S.wa(S.P("R4", "2"), S.o((20, 26)), S.o((20, 22)), S.P("U1", "3"))
+p1, p2 = S.P("U1", "1"), S.P("U1", "2")
+S.wa(S.o((14, 20)), (p1[0] - 1, p1[1]), p1)
+S.wa(p2, (p1[0] - 1, p2[1]), (p1[0] - 1, p1[1]))
+S.wa(S.P("R3", "2"), S.o((18, 23)), S.o((18, 22)), S.P("U1", "3"))
+S.wa(S.P("R4", "2"), S.o((20, 26)), S.o((20, 23)), S.P("U1", "5"))
+S.nc(S.P("U1", "7"))
 S.nc(S.P("U1", "4"))
-m = S.P("U1", "5")
+S.nc(S.P("U1", "13"))
+m = S.P("U1", "6")
 S.wa(m, (m[0] - 2, m[1]))
 S.gnd_stub((m[0] - 2, m[1]))
-S.gnd_stub(S.P("U1", "6"))
-S.gnd_stub(S.P("U1", "12"))
-S.gl("PWR_FLT", S.P("U1", "8"), "R", length=2)
-S.v2("R6", "R", "R_ILIM *", FP["R0603"], 46, 22, "ILIM", "GND")
-S.v2("R7", "R", "10k", FP["R0603"], 43, 23, "IMON", "GND")
-S.v2("C4", "C", "22n", FP["C0603"], 40, 24, "DVDT", "GND")
-S.wa(S.P("U1", "9"), S.P("R6", "1"))
+S.gnd_stub(S.P("U1", "9"))
+r8, r17 = S.P("U1", "8"), S.P("U1", "17")
+S.v2("R22", "R", "0R RTN link*", FP["R0603"], r17[0] - S.dx, r17[1] - S.dy + 2, "EF_RTN", "GND")
+S.wa(r17, (r17[0], r8[1] + 1), S.P("R22", "1"))
+S.wa(r8, (r8[0], r8[1] + 1), (r17[0], r8[1] + 1))
+S.gnd_stub(S.P("R22", "2"))
+S.text("*R22 RTN link: verify vs TPS2660 datasheet - RTN tied to GND disables reverse-polarity protection", (6, 40), 1.27)
+S.gl("PWR_FLT", S.P("U1", "14"), "R", length=2)
+S.v2("R6", "R", "R_ILIM *", FP["R0603"], 46, 23, "ILIM", "GND")
+S.v2("R7", "R", "10k", FP["R0603"], 43, 24, "IMON", "GND")
+S.v2("C4", "C", "22n", FP["C0603"], 40, 25, "DVDT", "GND")
+S.wa(S.P("U1", "11"), S.P("R6", "1"))
 S.wa(S.P("U1", "10"), S.P("R7", "1"))
-S.wa(S.P("U1", "11"), S.P("C4", "1"))
+S.wa(S.P("U1", "12"), S.P("C4", "1"))
 for r_ in ("R6", "R7", "C4"):
     S.gnd_stub(S.P(r_, "2"))
 S.v2("C5", "C", "10u 50V", FP["C1210"], 52, 20, "VIN_P", "GND")
@@ -473,7 +485,9 @@ for r_ in ("C5", "C6", "C7"):
 S.place("U2", "LMR36006", "LMR36006", "TBD:VQFN-HR-12_LMR36006", 78, 21, nets={
     "1": "VIN_P", "2": "VIN_P", "4": "BUCK_FB", "5": "GND", "7": "BUCK_BOOT", "6": "BUCK_SW",
     "8": "BUCK_VCC", "9": "GND"})
-S.wa(S.P("U1", "7"), S.o((52, 20)), S.o((57, 20)), S.o((62, 20)), S.o((66, 20)), S.o((71, 20)), S.P("U2", "1"))
+po1, po2 = S.P("U1", "15"), S.P("U1", "16")
+S.wa(po2, (po1[0] + 1, po2[1]), (po1[0] + 1, po1[1]))
+S.wa(S.P("U1", "15"), (po1[0] + 1, po1[1]), S.o((52, 20)), S.o((57, 20)), S.o((62, 20)), S.o((66, 20)), S.o((71, 20)), S.P("U2", "1"))
 S.sup_stub("VIN_P", S.o((62, 20)), d=2)
 S.wa(S.P("U2", "2"), S.o((71, 21)), S.o((71, 20)))
 S.nc(S.P("U2", "3"))
@@ -515,7 +529,7 @@ S.pw("+3V3", (133, 21))
 S.wa(S.P("FB1", "2"), S.o((143, 21)), S.o((146, 21)), S.o((149, 21)))
 S.flag((146, 21))
 S.pw("+3V3A", (149, 21))
-S.box(6, 12, 63.5, 33, "eFuse  TPS2660   reverse -60 V  /  OVP 33 V  /  UVLO 9 V")
+S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 33 V  /  UVLO 9 V")
 S.text("UVLO = 1.2 V x (R3+R4+R5)/(R4+R5) = 8.9 V", (6.5, 35.5), 1.27)
 S.text("OVP  = 1.2 V x (R3+R4+R5)/R5 = 32.9 V   (Vref 1.2 V: VERIFY)", (6.5, 37), 1.27)
 S.text("* R6 sets current limit 150 mA (formula in TPS2660 datasheet)", (6.5, 38.5), 1.27)
@@ -922,10 +936,10 @@ def validate(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-26") (rev "0.2") '
+    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-26") (rev "0.3") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Oil moisture transmitter HMT500 - RS-485 + 2x V/I analog output") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
-            f'(comment 3 "VERIFY=YES parts: placeholder pin numbers (TPS2660, LMR36006, PCAP04, DAC8760, TPS26611)"))')
+            f'(comment 3 "VERIFY=YES parts: placeholder pin numbers (LMR36006, PCAP04, DAC8760, TPS26611); TPS2660 RTN wiring"))')
 
 
 def write_all():
@@ -951,13 +965,14 @@ def write_all():
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
-        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.2", 2.5, True),
+        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.3", 2.5, True),
+        ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2450 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-30 V DC.", 1.4, False),
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), VDDA, CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
-        ("VERIFY: TPS2660, LMR36006, PCAP04, DAC8760, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn).", 1.4, False),
-        ("TBD footprints: M Connect 8P, CMC, GDT, feedthrough, buck inductor, the five VERIFY ICs.", 1.4, False),
+        ("VERIFY: LMR36006, PCAP04, DAC8760, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn). TPS2660: RTN link R22 to confirm.", 1.4, False),
+        ("TBD footprints: M Connect 8P, CMC, GDT, feedthrough, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
     ]
     y = 88
     for i, (t, size, bold) in enumerate(notes):
