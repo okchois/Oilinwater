@@ -12,7 +12,7 @@
 | **Vaisala MMT143** (EE364와 가장 비슷한 형태, MMT162 후속으로 추정) | aw, %RS, T | ±2 %RS (0–90), ±3 %RS (90–100) | n/a | 200 bar(옵션, 미검증) | n/a | RS-485 Modbus RTU + 4–20 mA | n/a | n/a | OEM 소형, HUMICAP 180L2 | n/a |
 | Vaisala Indigo MMP8 | aw, %RS, T, ppm | ±0.01 aw (±1 %RS) | 최대 180 °C | 0–40 bar abs | 프로브 262/448 mm | 단독 Modbus RTU / Indigo520 연결 시 아날로그 4ch + 릴레이 | n/a | n/a | 변압기, 고급 공정 | 약 $3,581 (미검증) |
 | Vaisala MHT410 | 수분 + H₂ 0–5000 ppm + T | n/a | n/a | n/a | 변압기 밸브 | 아날로그 3ch, Modbus RTU, DNP3.0 | n/a | n/a | 변압기 | n/a |
-| **E+E EE364** (구조 참고 제품) | aw, T, ppm | ±0.02 aw 수준 (미검증) | ≤80 °C (옵션 100 °C) | 20 bar | G½ ISO / ½" NPT | 4–20 mA 2ch + Modbus RTU | n/a | **M12 8핀, IP65, 316L** | OEM, 유압/윤활/변압기/디젤 | 특정 구성 약 $1,762 (미검증) |
+| **E+E EE364** (구조 참고 제품, **원문 확인**) | aw, T, ppm | ±0.02 (0–0.9), ±0.03 (0.9–1), T ±0.2 °C | −40~80 °C (옵션 100 °C) | 20 bar | G½ ISO / ½" NPT | 4–20 mA 2ch(3선) + Modbus RTU | 10–28 VDC | **M12 8핀, IP65, 316L** | OEM, 유압/윤활/변압기/디젤 | 특정 구성 약 $1,762 (미검증) |
 | E+E EE381 | aw, T, ppm | n/a | ≤120 °C | 20 bar (옵션 100) | G½ / ½" NPT | 아날로그 2ch(V/mA), 스위치, LCD 옵션 | n/a | 금속 하우징 | 산업 범용 | 약 $4,147부터 (미검증) |
 | E+E EE360 | aw, T, ppm | n/a | ≤180 °C | 20 bar | n/a | 아날로그 2ch + RS-485 Modbus RTU 또는 Modbus TCP, TFT 디스플레이 | n/a | n/a | 고급형 | n/a |
 | HYDAC AS1000 | 포화도 %, T | ≤±2 % FS | −25~100 °C | −0.5~50 bar | G3/8 (미검증) | 4–20 mA 2ch + 스위치 | n/a | M12 5핀, IP67 | 유압, 모바일 OEM | 약 $1,250 (eBay) |
@@ -60,7 +60,7 @@
 8. **교체 호환성:**
    - 스위치 출력(60/80 % 기본값), 상태 LED, 선택형 디스플레이 같은 부가 기능이 있습니다.
    - **EE364 호환 모드**로 기존 제품을 그대로 대체할 수 있게 하면 유리합니다. EE364와 같은 M12 8핀 핀맵과 같은 Modbus 레지스터 맵을 쓰는 방식입니다.
-   - 조사 에이전트가 제시한 EE364 레지스터 주소(aw=52, ppm=54, T=26)는 미검증입니다. 원문 Application Note AN0103으로 확인해야 합니다.
+   - EE364 레지스터 번호(aw=52, ppm=54, T=26, 1부터 셈)는 Quick Guide 원문으로 확인했습니다. FLOAT32는 CDAB 워드 순서입니다([요약](../reference/ee364-summary.md)).
 
 ## 출처
 
