@@ -41,7 +41,7 @@
   </div>
   <table class="meta">
     <tr><td>발행</td><td>(주)두텍 DOTECH</td></tr>
-    <tr><td>문서번호</td><td>HMT500-RFQ-M-001 Rev A</td></tr>
+    <tr><td>문서번호</td><td>HMT500-RFQ-M-001 Rev B</td></tr>
     <tr><td>발행일</td><td>2026-09-26</td></tr>
     <tr><td>담당자</td><td><span class="fill">&nbsp;</span></td></tr>
     <tr><td>연락처</td><td><span class="fill">&nbsp;</span></td></tr>
@@ -59,13 +59,15 @@
 <p>본 요청서는 <b>기구 설계(3D/2D), 내압·밀봉·열 검토, 시제품 가공</b>에 대한 견적을 요청합니다. 첨부 도면은 두텍의 개념 설계안이며, 상세 설계와 개선 제안을 환영합니다.</p>
 
 <h2>2. 개념 구조도</h2>
-<div class="fig"><img src="assembly.svg" alt="HMT500 기구 구조 설계안"></div>
-<div class="cap">도번 HMT500-M-000 Rev A · 측면 + 내부 투시 · 단위 mm · 척도 NTS · 치수는 개념 설계값이며 상세 설계에서 확정</div>
+<div class="fig"><img src="../../hardware/mech/out/HMT500-M-000_assembly.svg" alt="HMT500 조립도 Rev B"></div>
+<div class="cap">도번 HMT500-M-000 Rev B 조립도 (반단면) · 단위 mm · 부품도 HMT500-M-101~104와 STEP 파일은 hardware/mech/out 에 첨부</div>
+<div class="fig"><img src="../../hardware/mech/out/HMT500_render_section.png" alt="HMT500 단면 렌더" style="max-width:80%"></div>
+<div class="cap">Rev B 3D 단면: 바디–하우징–엔드캡 M28×1 나사 + O링 결합, 커넥터 전면 장착</div>
 
 <h2 class="pb">3. 주요 요구 사양</h2>
 <table class="t">
   <tr><th style="width:28%">항목</th><th>요구 사양</th></tr>
-  <tr><td>외형 치수 (고정)</td><td>노출 프로브 34 mm, 프로브 외경 Ø12, 공정 나사 <b>G½ ISO 228-1</b> 길이 14, 육각 <b>AF27</b>, 하우징 외경 <b>Ø30</b> (기존 설치 위치 호환을 위해 이 치수는 유지)</td></tr>
+  <tr><td>외형 치수 (고정)</td><td>노출 프로브 34 mm, 프로브 외경 Ø12, 공정 나사 <b>G½ ISO 228-1</b> 길이 14, 육각 <b>AF27</b>, 하우징 외경 <b>Ø32</b>, 전장 144 (Rev B: 나사·O링 결합부 벽 두께 확보를 위해 Ø30 → Ø32. 설치 치수 34 / G½ 14 / AF27은 유지). 상세 치수는 제작 도면 HMT500-M-000~104 Rev B 참조</td></tr>
   <tr><td>외형 치수 (목표)</td><td>씰면~하우징 끝 약 80 mm, 전장 약 145 mm 이하 (내부 수납이 가능하면 더 짧게)</td></tr>
   <tr><td>공정 연결 옵션</td><td>½" NPT 버전 가능 여부와 원가 차이를 제시 (육각 AF22 수준)</td></tr>
   <tr><td>사용 압력</td><td><b>기본 50 bar</b>. 200 bar 고압형이 가능한지와 원가 차이를 제시</td></tr>
@@ -90,9 +92,9 @@
   <tr><td>⑤</td><td>프로세스 바디</td><td>SUS316L 일체 선삭: 프로브 튜브 + G½ 나사 + 언더컷 + 씰면. 씰면 표면거칠기와 평면도 지정</td></tr>
   <tr><td>⑥</td><td>본디드 씰</td><td>G½용 금속+고무 본디드 씰(DIN 3869 / USIT 형) 규격품 선정</td></tr>
   <tr><td>⑦</td><td>육각</td><td>AF27, 바디와 일체. 체결 토크 제시</td></tr>
-  <tr><td>⑧</td><td>하우징</td><td>SUS316L Ø30, 내부에 Ø26 원형 PCB 2장 수납. 방열(전자부 발열 최대 약 1.5 W)과 오일 온도 120 °C 조건의 열 검토</td></tr>
+  <tr><td>⑧</td><td>하우징</td><td>SUS316L Ø32 × 60, 양 끝 M28×1-6H + Ø29 H8 O링 보어. 내부에 Ø26 원형 PCB 2장 수납. 방열(전자부 발열 최대 약 1.5 W)과 오일 온도 120 °C 조건의 열 검토</td></tr>
   <tr><td>⑨</td><td>PCB 고정</td><td>Ø26 원형 PCB 2장(간격 약 25 mm)의 고정·절연·보드 간 연결 구조. PCB 외형도는 두텍 제공</td></tr>
-  <tr><td>⑩</td><td>바디–하우징 결합</td><td>시제품: 나사 + O링(분해 가능) / 양산: 레이저 용접 권장. 두 방식의 원가와 제안</td></tr>
+  <tr><td>⑩</td><td>바디–하우징 결합</td><td><b>나사 M28×1 + 반경 O링 25×2 FKM</b> (바디–하우징, 하우징–엔드캡 모두, 시제·양산 공통). 용접 없음, 분해·수리 가능. 중강도 나사 고정제, 토크 5 N·m(TBD)</td></tr>
   <tr><td>⑪</td><td>엔드캡</td><td>커넥터 체결, O링 밀봉, IP67. 하우징 접지(EMC) 연결 구조</td></tr>
   <tr><td>⑫</td><td>M Connect 8핀</td><td>패널형 수컷. 품번은 두텍 제공. PCB 연결 방식(리드/FPC) 설계</td></tr>
 </table>
@@ -101,7 +103,7 @@
 <table class="t">
   <tr><th style="width:7%">No</th><th style="width:35%">업무</th><th>산출물</th></tr>
   <tr><td>1</td><td>3D 모델링 (조립 + 부품)</td><td>STEP, 원본 CAD 파일</td></tr>
-  <tr><td>2</td><td>2D 도면</td><td>부품 가공도(공차, 표면거칠기, 용접 기호), 조립도, 부품표(BOM)</td></tr>
+  <tr><td>2</td><td>2D 도면</td><td>부품 가공도(공차, 표면거칠기, 피드스루 용접 기호), 조립도, 부품표(BOM)</td></tr>
   <tr><td>3</td><td>내압 구조 검토</td><td>계산서 또는 FEA 보고서 (50 bar, 선택 시 200 bar)</td></tr>
   <tr><td>4</td><td>압력 격벽(피드스루) 설계</td><td>피드스루 사양서, 협력사 견적, 접합 공정 제안</td></tr>
   <tr><td>5</td><td>밀봉·열 검토</td><td>O링 홈 설계, IP67 구조, 열 검토 결과</td></tr>
@@ -124,7 +126,7 @@
   <tr><td>기구 설계비 (항목 1~5)</td><td></td></tr>
   <tr><td>시제품 가공비 (세트당 / 총액, 수량 명시)</td><td></td></tr>
   <tr><td>압력 격벽 피드스루 단가 (시제 / 1,000개)</td><td></td></tr>
-  <tr><td>양산 가공 단가: 바디, 하우징, 엔드캡, 보호캡, 용접·마킹 (1,000 / 5,000대)</td><td></td></tr>
+  <tr><td>양산 가공 단가: 바디, 하우징, 엔드캡, 보호캡, 피드스루 용접·O링 조립·마킹 (1,000 / 5,000대)</td><td></td></tr>
   <tr><td>200 bar 고압형 추가 비용 (선택)</td><td></td></tr>
   <tr><td>½" NPT 버전 추가 비용 (선택)</td><td></td></tr>
   <tr><td>지그·치구비</td><td></td></tr>

@@ -32,8 +32,10 @@ def tube(x0, x1, d_out, d_in):
 def body():
     B = P.BODY
     solid = cyl(*B["spigot"]["x"], B["spigot"]["d"])
-    for k in ("tube", "gthread", "relief", "collar", "wspigot"):
+    for k in ("tube", "gthread", "relief", "collar", "seal", "mthread"):
         solid = solid.union(cyl(*B[k]["x"], B[k]["d"]))
+    g0, g1 = B["seal"]["groove_x"]
+    solid = solid.cut(tube(g0, g1, B["seal"]["d"] + 1, P.ORING["groove_d"]))       # O링 홈
     # 육각 + 30° 모따기 (원추와 교차)
     h = B["hexa"]
     x0, x1 = h["x"]
@@ -68,13 +70,38 @@ def cap():
 
 def housing():
     H = P.HOUSING
-    return tube(*H["x"], H["od"], H["id"])
+    x0, x1 = H["x"]
+    s = tube(x0, x1, H["od"], H["id"])
+    for a, b, sgn in ((x0, x0 + H["seal_len"], 1), (x1 - H["seal_len"], x1, -1)):
+        s = s.cut(cyl(a - 0.01, b + 0.01, H["seal_bore"]))
+    s = s.cut(cyl(x0 + H["seal_len"], x0 + H["seal_len"] + H["thread_len"], H["thread_minor"]))
+    s = s.cut(cyl(x1 - H["seal_len"] - H["thread_len"], x1 - H["seal_len"], H["thread_minor"]))
+    return s
 
 
 def endcap():
     E = P.ENDCAP
-    s = cyl(*E["spigot"]["x"], E["spigot"]["d"]).union(cyl(*E["flange"]["x"], E["flange"]["d"]))
-    return s.cut(cyl(E["spigot"]["x"][0] - 0.1, E["flange"]["x"][1] + 0.1, E["thread"]["d"]))
+    s = cyl(*E["mthread"]["x"], E["mthread"]["d"]).union(cyl(*E["seal"]["x"], E["seal"]["d"])).union(
+        cyl(*E["flange"]["x"], E["flange"]["d"]))
+    g0, g1 = E["seal"]["groove_x"]
+    s = s.cut(tube(g0, g1, E["seal"]["d"] + 1, P.ORING["groove_d"]))
+    f0, f1 = E["flange"]["x"]
+    for sgn in (1, -1):   # 렌치 평면 AF28
+        slab = cq.Workplane("XY").box(f1 - f0 + 0.2, 10, 40).translate(((f0 + f1) / 2, sgn * (E["flange"]["flats_af"] / 2 + 5), 0))
+        s = s.cut(slab)
+    s = s.cut(cyl(E["cbore"]["x"][0] - 0.1, E["cbore"]["x"][1], E["cbore"]["d"]))
+    return s.cut(cyl(E["thread"]["x"][0] - 0.1, f1 + 0.1, E["thread"]["d_minor"]))
+
+
+def orings():
+    O = P.ORING
+    out = None
+    for g in (P.BODY["seal"]["groove_x"], P.ENDCAP["seal"]["groove_x"]):
+        c = (g[0] + g[1]) / 2
+        r0 = O["groove_d"] / 2 + O["cs"] / 2 - 0.15
+        ring = cq.Workplane("XY").add(cq.Solid.makeTorus(r0, O["cs"] / 2, cq.Vector(c, 0, 0), cq.Vector(1, 0, 0)))
+        out = ring if out is None else out.union(ring)
+    return out
 
 
 def seal():
@@ -120,7 +147,7 @@ def pcbs():
 def connector():
     Cn = P.CONNECTOR
     s = cyl(*Cn["body"]["x"], Cn["body"]["d"]).union(cyl(*Cn["thread"]["x"], Cn["thread"]["d"]))
-    s = s.union(cyl(P.ENDCAP["spigot"]["x"][0] + 1, P.ENDCAP["flange"]["x"][1], 15.9))
+    s = s.union(cyl(P.ENDCAP["flange"]["x"][1] - 10, P.ENDCAP["flange"]["x"][1], 15.9))   # M16 나사부
     return s.cut(cyl(Cn["thread"]["x"][1] - 8, Cn["thread"]["x"][1] + 0.1, 9.5))
 
 
@@ -132,6 +159,7 @@ PARTS = [
     ("P-201_header", header, (0.85, 0.65, 0.25)),
     ("P-202_carrier", carrier, (0.95, 0.93, 0.85)),
     ("P-203_seal", seal, (0.20, 0.65, 0.30)),
+    ("P-205_orings", orings, (0.10, 0.10, 0.10)),
     ("E-301_pcb", pcbs, (0.10, 0.45, 0.20)),
     ("P-204_connector", connector, (0.35, 0.35, 0.38)),
 ]
