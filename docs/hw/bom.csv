@@ -1,0 +1,15 @@
+no,block,part,qty,unit_usd_low,unit_usd_high,ext_usd_low,ext_usd_high,basis
+1,MCU,STM32L431RCT6,1,1.7,3.1,1.7,3.1,LCSC / TME
+2,Capacitance,PCAP04-AQFM-24,1,6.5,7.1,6.5,7.1,DigiKey
+3,RTD ADC,ADS1220IPWR,1,1.9,3.5,1.9,3.5,LCSC / estimate
+4,Analog out,DAC8760IPWP,2,7.8,12.4,15.7,24.7,DigiKey/Mouser 1k
+5,RS-485,THVD1450DR,1,0.6,1.2,0.6,1.2,LCSC / estimate
+6,Power,LMR36006 + inductor,1,1.1,1.8,1.1,1.8,LCSC / estimate
+7,Power,TPS7A2033PDBVR,1,0.07,0.3,0.1,0.3,LCSC
+8,Protection,TVS/PTC/FET/CM choke set,1,0.5,2.5,0.5,2.5,LCSC / estimate
+9,Temperature,Pt1000 thin film Class A,1,0.5,3,0.5,3,estimate
+10,Reference,C0G ref cap + 0.01% resistor,1,0.6,2,0.6,2,estimate
+11,Passives,R/C/crystal set,1,0.5,1.5,0.5,1.5,estimate
+12,PCB,round 4-layer x2,1,0.8,2,0.8,2,estimate
+13,Indicator,status LED (option),1,0.05,0.05,0.05,0.05,estimate
+,,TOTAL (excl. connector/sensor/assembly),,,,31.05,52.75,
