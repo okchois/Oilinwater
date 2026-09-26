@@ -3,10 +3,6 @@
     "filename": "HMT500.kicad_pro",
     "version": 1
   },
-  "schematic": {
-    "legacy_lib_dir": "",
-    "legacy_lib_list": []
-  },
   "sheets": [
     [
       "1ebb025b-11bd-5f7c-aaab-41e2a750e8b3",
@@ -14,28 +10,27 @@
     ],
     [
       "d8924d4b-0329-5e79-8dd6-1c12c7722a4b",
-      "Connector, input surge protection, chassis"
+      "Connector & input protection"
     ],
     [
       "aba38c96-ce06-5d7f-8bcf-9698fcc08aeb",
-      "eFuse, buck 5V, LDO 3.3V"
+      "Power"
     ],
     [
       "0c4bf7d4-9d5c-53b1-9acd-02d419e0823f",
-      "MCU STM32L431, SWD, status LED"
+      "MCU"
     ],
     [
       "3db4a209-237d-57e2-bca4-a1eda7d94116",
-      "Capacitance (PCAP04) and Pt1000 (ADS1220)"
+      "Measurement"
     ],
     [
       "41cd7a48-3e3d-5ed7-a9e3-c51ab363ff56",
-      "Analog outputs x2 (V/I selectable) with miswiring protection"
+      "Analog outputs"
     ],
     [
       "45f1df26-d453-5179-997b-24dddad436e5",
-      "RS-485 (+/-70V fault protected)"
+      "RS-485"
     ]
-  ],
-  "text_variables": {}
+  ]
 }

@@ -1,34 +1,52 @@
-"""KiCad 회로도 생성기 점검: 모든 핀에 넷(또는 NC)이 지정되고, 한 번만 쓰인 넷이 없어야 한다."""
+"""KiCad 회로도 생성기 점검.
+
+- 그리기 규칙(선 중간 핀, 연결 안 된 핀, 용지 밖, 표제란 침범) 위반이 없어야 한다.
+- 모든 설계 넷은 두 개 이상의 핀을 잇고, 참조번호는 중복되지 않아야 한다.
+- kicad-cli가 있으면 넷리스트를 내보내 그린 회로 = 설계 의도인지 확인한다.
+"""
 
 import os
+import shutil
+import subprocess
 import sys
+import tempfile
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
 
+import check_netlist  # noqa: E402
 import gen_hmt500 as g  # noqa: E402
 
 
 class KicadGenTest(unittest.TestCase):
-    def test_every_pin_assigned(self):
-        for sh in g.SHEETS:
-            for ref, sym, val, fp, nets, opt in sh["parts"]:
-                pins = {p[0] for p in g.sym_pins(sym)}
-                self.assertEqual(pins, set(nets), f"{ref} ({sym}) pin/net mismatch")
+    def test_drawing_rules(self):
+        for S in g.SHEETS:
+            g.validate(S)
 
-    def test_no_single_use_nets(self):
-        count = {}
-        for sh in g.SHEETS:
-            for ref, sym, val, fp, nets, opt in sh["parts"]:
-                for n in nets.values():
-                    if n:
-                        count[n] = count.get(n, 0) + 1
-        self.assertEqual([n for n, c in count.items() if c < 2], [])
+    def test_nets_have_two_or_more_pins(self):
+        single = [n for n, nodes in g.intended_nets().items() if len(nodes) < 2]
+        self.assertEqual(single, [])
 
     def test_unique_references(self):
-        refs = [p[0] for sh in g.SHEETS for p in sh["parts"]]
+        refs = [r for S in g.SHEETS for r in S.order if not r.startswith("#")]
         self.assertEqual(len(refs), len(set(refs)))
+
+    def test_every_part_pin_has_intent(self):
+        for S in g.SHEETS:
+            for ref in S.order:
+                if ref.startswith("#"):
+                    continue
+                self.assertIn(ref, S.nets, f"{ref} has no net intent")
+
+    @unittest.skipUnless(shutil.which("kicad-cli"), "kicad-cli not installed")
+    def test_drawn_netlist_matches_intent(self):
+        g.write_all()
+        with tempfile.TemporaryDirectory() as d:
+            net = os.path.join(d, "hmt500.net")
+            subprocess.run(["kicad-cli", "sch", "export", "netlist", "-o", net,
+                            os.path.join(g.OUT, "HMT500.kicad_sch")], check=True, capture_output=True)
+            self.assertEqual(check_netlist.main(net), 0)
 
 
 if __name__ == "__main__":
