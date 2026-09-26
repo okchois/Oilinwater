@@ -5,7 +5,7 @@
 - [조사 보고서](docs/research-report.md) — 측정 원리, 경쟁 제품, 센서 소자, 회로/기구/펌웨어 설계, 교정, 인증, 로드맵
 - [시장 조사 종합](docs/market/00-summary.md) — 세계 시장, 경쟁 제품·가격, 국내 시장, 포지셔닝 제안
 - [E+E EE364 원문 요약](docs/reference/ee364-summary.md) — 구조 참고 제품의 치수, 사양, 핀맵, Modbus 맵
-- [HMT500 기구 설계 Rev B](hardware/mech/README.md) — 제작 도면 PDF(조립도·부품도), 3D STEP, 렌더 (나사 M28×1 + O링 결합, Ø32)
+- [HMT500 기구 설계 Rev C](hardware/mech/README.md) — 제작 도면 PDF(조립도·부품도 4장), 3D STEP, 렌더 (나사 M28×1 + O링 결합, Ø32, 축 방향 PCB 1장)
 - [HMT500 기구설계 견적 요청서 (PDF)](docs/mech/HMT500_RFQ.pdf) · [도면 HMT500-M-000](docs/mech/HMT500-M-000.pdf)
 - [기구 설계안](docs/mech/mechanical-design.md) — EE364형 일체형 구조도, 압력 격벽, 밀봉, 열, 원가
 - [KiCad 회로도 HMT500](hardware/kicad/README.md) — 계층 시트 6장, 심볼 라이브러리, BOM, PDF

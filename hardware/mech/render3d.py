@@ -35,7 +35,7 @@ def render(parts, out, cut=False):
     cutter = cq.Workplane("XY").box(400, 100, 100).translate((0, -50, 0))
     for name, fn, col in parts:
         s = fn()
-        if cut:
+        if cut and not name.startswith("E-301"):   # PCB는 자르지 않고 전체를 보여 줌
             s = s.cut(cutter)
         ren.AddActor(actor_for(s, col))
     win = vtk.vtkRenderWindow()

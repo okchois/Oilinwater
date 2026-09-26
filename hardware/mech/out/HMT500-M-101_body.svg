@@ -48,6 +48,9 @@
 <line x1="54.000" y1="132.000" x2="69.000" y2="132.000" class="hidden"/>
 <line x1="69.000" y1="127.500" x2="186.000" y2="127.500" class="hidden"/>
 <line x1="186.000" y1="153.000" x2="228.000" y2="153.000" class="hidden"/>
+<line x1="171.000" y1="141.000" x2="186.000" y2="141.000" class="hidden"/>
+<line x1="171.000" y1="147.000" x2="186.000" y2="147.000" class="hidden"/>
+<line x1="171.000" y1="141.000" x2="171.000" y2="147.000" class="hidden"/>
 <line x1="54.000" y1="136.000" x2="54.000" y2="181.500" class="thin"/>
 <line x1="72.000" y1="139.000" x2="72.000" y2="181.500" class="thin"/>
 <line x1="54.000" y1="180.000" x2="72.000" y2="180.000" class="thin"/>
@@ -189,6 +192,10 @@
 <text x="395.295" y="100.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 395.295 100.000)" class="t ">AF27 (0/-0.3)</text>
 <text x="352.000" y="146.295" font-size="3.0" text-anchor="middle" class="t ">화살표 방향에서 본 육각 끝면 (2.2:1)</text>
 <text x="352.000" y="151.295" font-size="3.0" text-anchor="middle" class="t ">모따기 30° 양쪽 / 숨은선 = 칼라 Ø32</text>
+<circle cx="352.000" cy="117.600" r="2.200" class="hidden" fill="none"/>
+<circle cx="352.000" cy="82.400" r="2.200" class="hidden" fill="none"/>
+<text x="352.000" y="156.295" font-size="3.0" text-anchor="middle" class="t ">숨은선 원 2개: 2×M2-6H 깊이 5, PCD 16</text>
+<text x="352.000" y="161.295" font-size="3.0" text-anchor="middle" class="t ">(Ø22 카운터보어 바닥, PCB 홀더 M-105 고정)</text>
 <text x="18.000" y="205.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="211.200" font-size="3.1" text-anchor="start" class="t ">1. 재질 SUS316L (1.4404), 봉재 선삭. 재질성적서 EN 10204 3.1.</text>
 <text x="18.000" y="217.400" font-size="3.1" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 날카로운 모서리 제거. 지정 외 표면 Ra 1.6.</text>
@@ -227,7 +234,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-101</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">B / 2026-09-26</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">C / 2026-09-26</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS316L (1.4404)</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>
@@ -239,7 +246,7 @@
 <text x="291.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">표면(지정 외)</text>
 <text x="291.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">Ra 1.6</text>
 <text x="351.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">쪽</text>
-<text x="351.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">2/3</text>
+<text x="351.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">2/4</text>
 <text x="231.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">작성</text>
 <text x="231.500" y="286.200" font-size="3.3" text-anchor="start" class="t ">HMT500 설계</text>
 <text x="291.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">검토</text>

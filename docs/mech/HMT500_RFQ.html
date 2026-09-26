@@ -41,7 +41,7 @@
   </div>
   <table class="meta">
     <tr><td>발행</td><td>(주)두텍 DOTECH</td></tr>
-    <tr><td>문서번호</td><td>HMT500-RFQ-M-001 Rev B</td></tr>
+    <tr><td>문서번호</td><td>HMT500-RFQ-M-001 Rev C</td></tr>
     <tr><td>발행일</td><td>2026-09-26</td></tr>
     <tr><td>담당자</td><td><span class="fill">&nbsp;</span></td></tr>
     <tr><td>연락처</td><td><span class="fill">&nbsp;</span></td></tr>
@@ -53,16 +53,16 @@
 <p><b>HMT500</b>은 유압유·윤활유·변압기 절연유 등 산업용 오일 속의 수분(수분 활동도 aw, ppm)과 온도를 연속 측정하는 인라인 트랜스미터입니다.</p>
 <ul>
   <li>배관이나 탱크에 <b>G½ 나사</b>로 체결하며, 앞쪽 프로브가 오일에 잠깁니다.</li>
-  <li>원통 하우징 안에 전자부(원형 PCB 2장)가 들어가고, 뒤쪽에 <b>M Connect 8핀</b> 커넥터가 있습니다.</li>
+  <li>원통 하우징 안에 전자부(축 방향 긴 PCB 1장)가 들어가고, 뒤쪽에 <b>M Connect 8핀</b> 커넥터가 있습니다.</li>
   <li>출력은 RS-485(Modbus RTU)와 아날로그 2채널입니다.</li>
 </ul>
 <p>본 요청서는 <b>기구 설계(3D/2D), 내압·밀봉·열 검토, 시제품 가공</b>에 대한 견적을 요청합니다. 첨부 도면은 두텍의 개념 설계안이며, 상세 설계와 개선 제안을 환영합니다.</p>
 
 <h2>2. 개념 구조도</h2>
 <div class="fig"><img src="../../hardware/mech/out/HMT500-M-000_assembly.svg" alt="HMT500 조립도 Rev B"></div>
-<div class="cap">도번 HMT500-M-000 Rev B 조립도 (반단면) · 단위 mm · 부품도 HMT500-M-101~104와 STEP 파일은 hardware/mech/out 에 첨부</div>
+<div class="cap">도번 HMT500-M-000 Rev C 조립도 (반단면) · 단위 mm · 부품도 HMT500-M-101~106과 STEP 파일은 hardware/mech/out 에 첨부</div>
 <div class="fig"><img src="../../hardware/mech/out/HMT500_render_section.png" alt="HMT500 단면 렌더" style="max-width:80%"></div>
-<div class="cap">Rev B 3D 단면: 바디–하우징–엔드캡 M28×1 나사 + O링 결합, 커넥터 전면 장착</div>
+<div class="cap">Rev C 3D 단면: 바디–하우징–엔드캡 M28×1 나사 + O링 결합, 축 방향 PCB 1장(홀더·지지링 고정), 커넥터 전면 장착</div>
 
 <h2 class="pb">3. 주요 요구 사양</h2>
 <table class="t">
@@ -92,8 +92,8 @@
   <tr><td>⑤</td><td>프로세스 바디</td><td>SUS316L 일체 선삭: 프로브 튜브 + G½ 나사 + 언더컷 + 씰면. 씰면 표면거칠기와 평면도 지정</td></tr>
   <tr><td>⑥</td><td>본디드 씰</td><td>G½용 금속+고무 본디드 씰(DIN 3869 / USIT 형) 규격품 선정</td></tr>
   <tr><td>⑦</td><td>육각</td><td>AF27, 바디와 일체. 체결 토크 제시</td></tr>
-  <tr><td>⑧</td><td>하우징</td><td>SUS316L Ø32 × 60, 양 끝 M28×1-6H + Ø29 H8 O링 보어. 내부에 Ø26 원형 PCB 2장 수납. 방열(전자부 발열 최대 약 1.5 W)과 오일 온도 120 °C 조건의 열 검토</td></tr>
-  <tr><td>⑨</td><td>PCB 고정</td><td>Ø26 원형 PCB 2장(간격 약 25 mm)의 고정·절연·보드 간 연결 구조. PCB 외형도는 두텍 제공</td></tr>
+  <tr><td>⑧</td><td>하우징</td><td>SUS316L Ø32 × 60, 양 끝 M28×1-6H + Ø29 H8 O링 보어. 내부에 축 방향 PCB 1장(57 × 23) 수납. 방열(전자부 발열 최대 약 1.5 W)과 오일 온도 120 °C 조건의 열 검토</td></tr>
+  <tr><td>⑨</td><td>PCB 고정</td><td>PCB 1장을 바디에 고정하는 수지 홀더(M-105, 바디에 M2 나사 2개)와 뒤쪽 지지링(M-106). 하우징·엔드캡 체결 회전이 PCB에 전달되지 않는 구조. 도면 HMT500-M-105~106 참조</td></tr>
   <tr><td>⑩</td><td>바디–하우징 결합</td><td><b>나사 M28×1 + 반경 O링 25×2 FKM</b> (바디–하우징, 하우징–엔드캡 모두, 시제·양산 공통). 용접 없음, 분해·수리 가능. 중강도 나사 고정제, 토크 5 N·m(TBD)</td></tr>
   <tr><td>⑪</td><td>엔드캡</td><td>커넥터 체결, O링 밀봉, IP67. 하우징 접지(EMC) 연결 구조</td></tr>
   <tr><td>⑫</td><td>M Connect 8핀</td><td>패널형 수컷. 품번은 두텍 제공. PCB 연결 방식(리드/FPC) 설계</td></tr>
@@ -116,7 +116,7 @@
 <ul>
   <li>센서 소자(IST AG MK 계열) 외형도와 Pt1000 사양</li>
   <li>M Connect 8핀 커넥터 품번과 도면</li>
-  <li>PCB 외형도(Ø26 × 2장), 부품 높이 제한, 발열 정보</li>
+  <li>PCB 외형도(E-301, 57 × 23), 부품 높이 제한, 발열 정보 — 도면 4쪽과 KiCad 보드 파일</li>
   <li>레이저 마킹 문안, 로고</li>
 </ul>
 

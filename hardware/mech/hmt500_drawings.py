@@ -246,6 +246,11 @@ def draw_body(v, detail=True):
     # 내부 외형(아래 반): 숨은선
     for x0_, x1_, r in BODY_IN:
         sh.line(v.X(x0_), v.Yl(r), v.X(x1_), v.Yl(r), "hidden")
+    T = B["holder_taps"]                          # PCB 홀더 고정 M2 탭 (숨은선)
+    xb = B["cbore"]["x"][0]
+    for r in (T["pcd"] / 2 - T["d"] / 2, T["pcd"] / 2 + T["d"] / 2):
+        sh.line(v.X(xb - T["depth"]), v.Yl(r), v.X(xb), v.Yl(r), "hidden")
+    sh.line(v.X(xb - T["depth"]), v.Yl(T["pcd"] / 2 - T["d"] / 2), v.X(xb - T["depth"]), v.Yl(T["pcd"] / 2 + T["d"] / 2), "hidden")
 
 
 def draw_cap(v):
@@ -301,8 +306,31 @@ def oring_xsec(v, gx):
     v.sh.a(f'<circle cx="{v.X(c):.3f}" cy="{v.Yu(r0):.3f}" r="{O["cs"] / 2 * v.s:.3f}" style="fill:#000;stroke:none"/>')
 
 
+def draw_pcb_inside(v):
+    """조립도: PCB(단면 평면에 놓임) 위쪽 반 + 홀더·지지링 단면."""
+    sh = v.sh
+    Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
+    # 홀더: 홈(단면 평면) 앞쪽만 재료가 보임
+    v.section([(Hh["x"][0], Hh["slot_x"][0], Hh["d"] / 2)], [(Hh["x"][0], Hh["slot_x"][0], Hh["hole_d"] / 2)], "part2")
+    # 지지링: 홈 바깥 띠만 재료
+    v.section([(*R["x"], R["od"] / 2)], [(*R["x"], R["slot_y"])], "part2")
+    # PCB 외곽 (위쪽 반)
+    pts = [(v.X(Pc["x"][0]), v.oy)]
+    for x0, x1, w in Pc["sections"]:
+        pts += [(v.X(x0), v.Yu(w / 2)), (v.X(x1), v.Yu(w / 2))]
+    pts += [(v.X(Pc["x"][1]), v.oy)]
+    sh.poly(pts, "green", close=True)
+    for x, y, a, b, h, side in P.PCB_PARTS:
+        if side > 0 and y + b / 2 > 0:
+            y0 = max(0.0, y - b / 2)
+            sh.a(f'<rect x="{v.X(x - a / 2):.3f}" y="{v.Yu(y + b / 2):.3f}" width="{v.s * a:.3f}" height="{v.s * (y + b / 2 - y0):.3f}" fill="#333" stroke="none"/>')
+    for x, y in Pc["holes"]:
+        if y > 0:
+            sh.circle(v.X(x), v.Yu(y), Pc["hole_d"] / 2 * v.s, "thin", "#fff")
+
+
 def sheet_assembly():
-    sh = Sheet("HMT500-M-000", "HMT500 조립도 (Assembly)", "2 : 1", "부품표 참조", "1/3")
+    sh = Sheet("HMT500-M-000", "HMT500 조립도 (Assembly)", "2 : 1", "부품표 참조", "1/4")
     s = 2.0
     v = View(sh, 150, 100, s)
     v.axis(P.TIP_X, P.END_X)
@@ -310,8 +338,6 @@ def sheet_assembly():
     Sd, Hd, Cr, Pc, Cn = P.SEAL, P.HEADER, P.CARRIER, P.PCB, P.CONNECTOR
     buy_rect(v, *Sd["x"], Sd["id"] / 2, Sd["od"] / 2, "green")
     buy_rect(v, *Hd["x"], 0, Hd["d"] / 2, "buy", lower=False)
-    for x in Pc["x"]:
-        buy_rect(v, x, x + Pc["t"], 0, Pc["d"] / 2, "green", lower=False)
     sh.a(f'<rect x="{v.X(Cr["x"][0]):.3f}" y="{v.Yu(Cr["t"] / 2 + 0.6):.3f}" width="{s * (Cr["x"][1] - Cr["x"][0]):.3f}" height="{s * (Cr["t"] + 1.2):.3f}" class="buy"/>')
     for yy in (1.2, -1.2):
         sh.line(v.X(Hd["pin_front"]), v.oy - s * yy, v.X(Hd["x"][0]), v.oy - s * yy, "thin")
@@ -329,11 +355,14 @@ def sheet_assembly():
     draw_housing(v)
     for gx in (B["seal"]["groove_x"], E["seal"]["groove_x"]):
         oring_xsec(v, gx)
+    draw_pcb_inside(v)
     # 풍선
     bl = [("2", v.X(-40), v.Yu(6), v.X(-40), 46), ("6", v.X(-38), v.oy, v.X(-30), 58),
           ("5", v.X(-29.5), v.Yu(3.5), v.X(-20), 46), ("7", v.X(-1), v.Yu(13.5), v.X(-6), 58),
-          ("1", v.X(6), v.Yu(HEX_R), v.X(8), 46), ("10", v.X(17), v.Yu(13.65), v.X(20), 58),
-          ("8", v.X(29), v.Yu(10), v.X(34), 46), ("3", v.X(45), v.Yu(R_OD), v.X(50), 58),
+          ("1", v.X(4), v.Yu(HEX_R), v.X(-10), 46), ("10", v.X(17), v.Yu(13.65), v.X(20), 58),
+          ("12", v.X(13.3), v.Yu(7), v.X(8), 58),
+          ("8", v.X(30), v.Yu(10), v.X(34), 46), ("3", v.X(45), v.Yu(R_OD), v.X(50), 58),
+          ("13", v.X(61), v.Yu(12.4), v.X(60), 46),
           ("4", v.X(78), v.Yu(R_OD), v.X(70), 46), ("11", v.X(82), v.Yu(10), v.X(84), 58),
           ("9", v.X(90), v.Yu(6), v.X(95), 46)]
     for n, x, y, bx, by in bl:
@@ -353,19 +382,19 @@ def sheet_assembly():
     sh.a(f'<rect x="{v.X(0) - 3:.2f}" y="{yb + 1.2:.2f}" width="4.6" height="5" class="thin" fill="none"/>')
     sh.text(v.X(0) - 4.5, yb + 5, "씰면 = 기준면", 2.8, "end")
     # 부품표
-    tx, ty = W - 190, 179
+    tx, ty = W - 190, 175
     cols = [(0, 9, "No"), (9, 30, "도번"), (39, 45, "품명"), (84, 36, "재질"), (120, 8, "수량"), (128, 52, "비고")]
-    rh = 5.3
+    rh = 4.6
     sh.a(f'<rect x="{tx}" y="{ty}" width="180" height="{rh * (len(P.PARTS) + 1)}" class="thick" fill="#fff"/>')
     for c0, cw, lab in cols:
-        sh.text(tx + c0 + 1, ty + 3.9, lab, 2.8, bold=True)
+        sh.text(tx + c0 + 1, ty + 3.4, lab, 2.5, bold=True)
         if c0:
             sh.line(tx + c0, ty, tx + c0, ty + rh * (len(P.PARTS) + 1), "thin")
     for i, row in enumerate(P.PARTS):
         y = ty + rh * (i + 1)
         sh.line(tx, y, tx + 180, y, "thin")
         for (c0, cw, _), val in zip(cols, row):
-            sh.text(tx + c0 + 1, y + 3.9, str(val), 2.4 if len(str(val)) > 18 else 2.8)
+            sh.text(tx + c0 + 1, y + 3.4, str(val), 2.2 if len(str(val)) > 18 else 2.5)
     # 주기
     notes = [
         "주기 (NOTES)",
@@ -373,13 +402,14 @@ def sheet_assembly():
         "2. ①–③, ③–④ 나사 결합 M28×1 + O링 ⑩ (반경 밀봉, Ø29 H8/f7). 용접 없음 → 분해·수리 가능.",
         "3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF28 로 고정.",
         "4. O링 FKM 75, 조립 전 실리콘 그리스 얇게 도포. 나사·모서리 통과 시 O링 손상 주의 (C0.5 도입부).",
-        "5. 조립 순서: ①+⑤+⑥ → ⑦ → ⑧ 배선 → ③ 체결 → 리드선을 ④ 구멍 통과 → ④ 체결 → ⑨ 전면 체결(⑪).",
+        "5. 조립: ①+⑤+⑥ → ⑦ → ⑫ 고정(M2×6 ×2) → 피드스루 핀–⑧ 짧은 선(≤10) → ⑧ 삽입, M2×12 ×2 → ⑬",
+        "    → ③ 체결 → 커넥터 리드 납땜(40) → ④ 체결 → ⑨ 체결(⑪). ⑨ 체결 회전만큼 리드를 반대로 미리 꼼.",
         "6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·⑤·⑦). 보호 등급 IP67 (커넥터 체결).",
         "7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.",
-        "8. 나사는 도면 표시만(회전체 모델). 규격 치수는 부품도(HMT500-M-101~104) 따름.",
+        "8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.",
     ]
     for i, n in enumerate(notes):
-        sh.text(18, 192 + i * 6.0, n, 2.9 if i else 3.6, bold=(i == 0))
+        sh.text(18, 186 + i * 5.8, n, 2.9 if i else 3.6, bold=(i == 0))
     sh.text(18, 22, "HMT500 조립도  —  반단면 (위: 단면, 아래: 외형)", 5, bold=True)
     sh.text(18, 29, "오일 측(프로브)  ←                                                                                 →  하우징·커넥터", 3.0, cls="muted")
     sh.frame()
@@ -388,7 +418,7 @@ def sheet_assembly():
 
 # ═════════════════════ 시트 2: 바디 부품도 ═════════════════════
 def sheet_body():
-    sh = Sheet("HMT500-M-101", "프로세스 바디 (Process body)", "3 : 1", "SUS316L (1.4404)", "2/3")
+    sh = Sheet("HMT500-M-101", "프로세스 바디 (Process body)", "3 : 1", "SUS316L (1.4404)", "2/4")
     s = 3.0
     v = View(sh, 150, 120, s)
     v.axis(-32, 26)
@@ -443,6 +473,11 @@ def sheet_body():
     sh.dim_v_ext(cx + 10, cx + R + 10, cy - af, cy + af, "AF27 (0/-0.3)")
     sh.text(cx, cy + R + 12, "화살표 방향에서 본 육각 끝면 (2.2:1)", 3.0, "middle")
     sh.text(cx, cy + R + 17, "모따기 30° 양쪽 / 숨은선 = 칼라 Ø32", 3.0, "middle")
+    T = B["holder_taps"]
+    for sgn in (1, -1):
+        sh.circle(cx, cy + sgn * T["pcd"] / 2 * 2.2, T["d"] / 2 * 2.2, "hidden")
+    sh.text(cx, cy + R + 22, f"숨은선 원 2개: 2×{T['thread']} 깊이 {T['depth']:.0f}, PCD {T['pcd']:.0f}", 3.0, "middle")
+    sh.text(cx, cy + R + 27, "(Ø22 카운터보어 바닥, PCB 홀더 M-105 고정)", 3.0, "middle")
     notes = ["주기 (NOTES)",
              "1. 재질 SUS316L (1.4404), 봉재 선삭. 재질성적서 EN 10204 3.1.",
              "2. 지정 없는 모서리 C0.3, 날카로운 모서리 제거. 지정 외 표면 Ra 1.6.",
@@ -460,7 +495,7 @@ def sheet_body():
 
 # ═════════════════════ 시트 3: 캡 / 하우징 / 엔드캡 ═════════════════════
 def sheet_small():
-    sh = Sheet("HMT500-M-102~104", "보호캡 · 하우징 · 엔드캡", "표기", "SUS316L (1.4404)", "3/3")
+    sh = Sheet("HMT500-M-102~104", "보호캡 · 하우징 · 엔드캡", "표기", "SUS316L (1.4404)", "3/4")
     # ── 보호캡 (4:1), 왼쪽 위 ──
     s = 4.0
     v = View(sh, 0, 92, s)
@@ -534,10 +569,164 @@ def sheet_small():
     return sh
 
 
+# ═════════════════════ 시트 4: PCB 외곽 / 홀더 / 지지링 ═════════════════════
+def pcb_limits():
+    """구간별 (x0, x1, 폭, 보어 지름, 가장자리 높이 한계, 중심 높이 한계) — 여유 0.5 포함."""
+    Pc = P.PCB
+    out = []
+    for x0, x1, w in Pc["sections"]:
+        bore = Hs["id"] if w > 20 else B["cbore"]["d"]
+        R = bore / 2
+        edge = math.sqrt(R ** 2 - (w / 2) ** 2) - Pc["t"] / 2 - 0.5
+        out.append((x0, x1, w, bore, edge, R - Pc["t"] / 2 - 0.5))
+    return out
+
+
+def sheet_pcb():
+    sh = Sheet("HMT500-M-105~106", "PCB 홀더 · 지지링 · PCB 외곽", "표기", "PEEK / PA66-GF30", "4/4")
+    Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
+    f = Pc["x"][0]
+    # ── PCB 외곽 (2:1) ──
+    s, X0, cy = 2.5, 40.0, 92.0
+    X = lambda x: X0 + s * (x - f)          # noqa: E731
+    Y = lambda y: cy - s * y                # noqa: E731
+    up = []
+    for x0, x1, w in Pc["sections"]:
+        up += [(X(x0), Y(w / 2)), (X(x1), Y(w / 2))]
+    sh.poly(up + [(x, 2 * cy - y) for x, y in reversed(up)], "thick", close=True)
+    sh.line(X(f) - 5, cy, X(Pc["x"][1]) + 5, cy, "center")
+    # 금지 구역: 홀더 홈 물림, 지지링 홈
+    s0, s1 = Hh["slot_x"]
+    w0 = Pc["sections"][0][2] / 2
+    sh.a(f'<rect x="{X(s0):.3f}" y="{Y(w0):.3f}" width="{s * (s1 - s0):.3f}" height="{s * 2 * w0:.3f}" class="hatchfill2"/>')
+    wm = Pc["sections"][1][2] / 2
+    for sgn in (1, -1):
+        y0 = wm if sgn > 0 else -R["id"] / 2
+        sh.a(f'<rect x="{X(R["x"][0]):.3f}" y="{Y(y0):.3f}" width="{s * (R["x"][1] - R["x"][0]):.3f}" height="{s * (wm - R["id"] / 2):.3f}" class="hatchfill2"/>')
+    for x, y in Pc["holes"]:
+        sh.circle(X(x), Y(y), Pc["hole_d"] / 2 * s, "thick")
+    # 패드 구역
+    for (xa, xb), lab in ((Pc["wire_pads_x"], "피드스루 패드 6"), (Pc["conn_pads_x"], "커넥터 패드 8")):
+        sh.a(f'<rect x="{X(xa):.3f}" y="{Y(3.5):.3f}" width="{s * (xb - xa):.3f}" height="{s * 7:.3f}" fill="#f3d9a4" class="thin"/>')
+    # 배치 구역 (점선) + 이름
+    for i, (name, parts, xa, xb) in enumerate(Pc["zones"]):
+        sh.a(f'<rect x="{X(xa) + 0.6:.3f}" y="{Y(8.2):.3f}" width="{s * (xb - xa) - 1.2:.3f}" height="{s * 16.4:.3f}" class="hidden"/>')
+        sh.text((X(xa) + X(xb)) / 2, Y(-11.5) + 7 if i != 1 else Y(-11.5) + 7, name, 3.0, "middle", bold=True)
+    sh.text((X(Pc["wire_pads_x"][0]) + X(Pc["wire_pads_x"][1])) / 2, Y(-3.5) + 3.5, "피드스루 패드", 2.2, "middle")
+    sh.text((X(Pc["conn_pads_x"][0]) + X(Pc["conn_pads_x"][1])) / 2, Y(-3.5) + 3.5, "커넥터 패드", 2.2, "middle")
+    # 치수
+    yt = Y(11.5) - 8
+    xs = [Pc["sections"][0][0]] + [sec[1] for sec in Pc["sections"]]
+    for xa, xb in zip(xs, xs[1:]):
+        sh.dim_h(X(xa), Y(9), X(xb), Y(9), yt, f"{xb - xa:g}")
+    sh.dim_h(X(xs[0]), Y(9), X(xs[-1]), Y(9), yt - 9, f"{xs[-1] - xs[0]:g}  (PCB 전장)")
+    sh.dim_h(X(f), Y(0), X(s1), Y(0), Y(-11.5) + 16, f"{s1 - s0:g}")
+    sh.dim_h(X(f), Y(-5), X(Pc["holes"][0][0]), Y(-5), Y(-11.5) + 23, "")
+    sh.text(X(Pc["holes"][0][0]) + 6, Y(-11.5) + 24, f"{Pc['holes'][0][0] - f:g}", 3.2)
+    sh.dim_h(X(f), Y(-9), X(R["x"][0]), Y(-11.5), Y(-11.5) + 30, f"{R['x'][0] - f:g}")
+    sh.dim_h(X(R["x"][0]), Y(-11.5), X(R["x"][1]), Y(-11.5), Y(-11.5) + 30, f"{R['x'][1] - R['x'][0]:g}")
+    sh.dim_v_ext(X(f), X(f) - 8, Y(9), Y(-9), "18")
+    sh.dim_v(X(45), Y(11.5), Y(-11.5), "23")
+    sh.dim_v_ext(X(Pc["x"][1]), X(Pc["x"][1]) + 8, Y(9), Y(-9), "18")
+    sh.leader(X(Pc["holes"][0][0]) - 1, Y(5) - 1, X(f) + 4, Y(11.5) - 24, f"2×Ø{Pc['hole_d']}, 간격 10 (홀더 가로 나사 M2)")
+    sh.text(45, 26, "HMT500-E-301  PCB 외곽 — 기구 인터페이스 (2.5:1)", 4.6, bold=True)
+    sh.text(45, 32, f"4층 FR-4 t{Pc['t']}, 모서리 R{Pc['corner_r']:g}. 빗금 = 부품·동박 금지 (양면): 홀더 홈 물림, 지지링 홈. 기준 = 앞 끝(피드스루 쪽)", 2.8, cls="muted")
+    # 높이 한계 표
+    tx, ty = 18.0, 160.0
+    hdr = ["구간 (앞 끝 기준)", "폭", "둘러싼 보어", "부품 높이 한계 (한 면, 여유 0.5 포함)"]
+    cw = [42, 16, 30, 90]
+    sh.a(f'<rect x="{tx}" y="{ty}" width="{sum(cw)}" height="{5.4 * 4}" class="thick" fill="#fff"/>')
+    xx = tx
+    for c, h_ in zip(cw, hdr):
+        sh.text(xx + 1.2, ty + 3.9, h_, 2.7, bold=True)
+        xx += c
+        sh.line(xx, ty, xx, ty + 5.4 * 4, "thin")
+    for i, (x0, x1, w, bore, edge, ctr) in enumerate(pcb_limits()):
+        y = ty + 5.4 * (i + 1)
+        sh.line(tx, y, tx + sum(cw), y, "thin")
+        where = "바디 카운터보어" if i == 0 else ("하우징" if i == 1 else "엔드캡 카운터보어")
+        vals = [f"{x0 - f:g} ~ {x1 - f:g}", f"{w:g}", f"Ø{bore:g} ({where})", f"가장자리 {edge:.1f} / 중심 {ctr:.1f} mm"]
+        xx = tx
+        for c, val in zip(cw, vals):
+            sh.text(xx + 1.2, y + 3.9, val, 2.7)
+            xx += c
+    # ── 홀더 M-105 (3:1) — 뒤에서 본 끝면 + 측면 ──
+    s3, cx, cyh = 3.0, 250.0, 90.0
+    rO, rH = Hh["d"] / 2 * s3, Hh["hole_d"] / 2 * s3
+    sw = Hh["slot_w"] / 2 * s3
+    sh.circle(cx, cyh, rO, "thick")
+    sh.circle(cx, cyh, rH, "thick")
+    sh.a(f'<rect x="{cx - rO:.3f}" y="{cyh - sw:.3f}" width="{2 * rO:.3f}" height="{2 * sw:.3f}" fill="#fff" class="thick"/>')
+    sh.circle(cx, cyh, rO, "thick")
+    for sgn in (1, -1):
+        yy = cyh + sgn * Hh["screw_pcd"] / 2 * s3
+        sh.circle(cx, yy, Hh["screw_d"] / 2 * s3, "thick")
+        sh.circle(cx, yy, Hh["cbore_d"] / 2 * s3, "thin")
+    for y in Hh["cross"]["y"]:          # 가로 나사 (z 방향, 슬롯에 수직) — 숨은선
+        xh = cx + y * s3
+        for dx in (-1, 1):
+            sh.line(xh + dx * Hh["cross"]["d"] / 2 * s3, cyh - rO + 3, xh + dx * Hh["cross"]["d"] / 2 * s3, cyh + rO - 3, "hidden")
+    sh.line(cx - rO - 5, cyh, cx + rO + 5, cyh, "center")
+    sh.line(cx, cyh - rO - 5, cx, cyh + rO + 5, "center")
+    sh.dim_v_ext(cx + rO, cx + rO + 9, cyh - rO, cyh + rO, f"Ø{Hh['d']:g} (0/-0.1)")
+    sh.dim_v_ext(cx, cx - rO - 9, cyh - Hh["screw_pcd"] / 2 * s3, cyh + Hh["screw_pcd"] / 2 * s3, f"PCD {Hh['screw_pcd']:g}")
+    sh.dim_h(cx - Hh["cross"]["y"][0] * s3, cyh - rO + 6, cx + Hh["cross"]["y"][0] * s3, cyh - rO + 6, cyh - rO - 6, "10")
+    sh.leader(cx + 5, cyh - Hh["screw_pcd"] / 2 * s3 - 3, cx + 22, cyh - rO - 14,
+              f"2×Ø{Hh['screw_d']} 관통, 카운터보어 Ø{Hh['cbore_d']:g} 깊이 {Hh['cbore_depth']:g} (M2×6 → 바디)")
+    sh.leader(cx + rO - 3, cyh + sw, cx - 6, cyh + rO + 18, f"홈 폭 {Hh['slot_w']} (+0.1/0) 깊이 {s1 - s0:g}, 전폭")
+    sh.leader(cx - rH * 0.7, cyh + rH * 0.7, cx - 18, cyh + rO + 10, f"Ø{Hh['hole_d']:g} 관통 (피드스루 배선)")
+    sh.text(cx - 50, cyh + rO + 26, "2×M2 가로 탭 (숨은선, 홈에 수직) — PCB 관통 고정 M2×12", 2.8)
+    # 측면 (홈에 수직 방향에서 봄)
+    L = (Hh["x"][1] - Hh["x"][0]) * s3
+    sx0 = 302.0
+    sh.a(f'<rect x="{sx0:.3f}" y="{cyh - rO:.3f}" width="{L:.3f}" height="{2 * rO:.3f}" class="thick" fill="none"/>')
+    xs_slot = sx0 + (Hh["slot_x"][0] - Hh["x"][0]) * s3
+    sh.line(xs_slot, cyh - rO, xs_slot, cyh + rO, "hidden")
+    for y in Hh["cross"]["y"]:
+        sh.circle(sx0 + (Hh["cross"]["x"] - Hh["x"][0]) * s3, cyh - y * s3, Hh["cross"]["d"] * 0.8 / 2 * s3, "thick")
+    for dy in (-rH, rH):
+        sh.line(sx0, cyh + dy, sx0 + L, cyh + dy, "hidden")
+    sh.line(sx0 - 4, cyh, sx0 + L + 4, cyh, "center")
+    sh.dim_h(sx0, cyh + rO, sx0 + L, cyh + rO, cyh + rO + 8, f"{Hh['x'][1] - Hh['x'][0]:g}", above=False)
+    sh.dim_h(xs_slot, cyh - rO, sx0 + L, cyh - rO, cyh - rO - 6, f"{s1 - s0:g}")
+    sh.text(sx0, cyh + rO + 5, "← 앞(바디 쪽)", 2.6, cls="muted")
+    sh.text(215, 26, "HMT500-M-105  PCB 홀더 (3:1)", 4.6, bold=True)
+    sh.text(215, 32, "왼쪽: 뒤(PCB 쪽)에서 본 끝면 / 오른쪽: 측면", 2.8, cls="muted")
+    # ── 지지링 M-106 (3:1) ──
+    s3 = 2.0
+    cx2, cy2 = 370.0, 200.0
+    ro, ri = R["od"] / 2 * s3, R["id"] / 2 * s3
+    sh.circle(cx2, cy2, ro, "thick")
+    sh.circle(cx2, cy2, ri, "thick")
+    ns = R["slot_w"] / 2 * s3
+    for sgn in (1, -1):
+        x_in = cx2 + sgn * math.sqrt(ri ** 2 - ns ** 2)
+        x_out = cx2 + sgn * R["slot_y"] * s3
+        sh.a(f'<rect x="{min(x_in, x_out):.3f}" y="{cy2 - ns:.3f}" width="{abs(x_out - x_in):.3f}" height="{2 * ns:.3f}" fill="#fff" class="thick"/>')
+    sh.line(cx2 - ro - 5, cy2, cx2 + ro + 5, cy2, "center")
+    sh.line(cx2, cy2 - ro - 5, cx2, cy2 + ro + 5, "center")
+    sh.dim_v_ext(cx2 + ro, cx2 + ro + 9, cy2 - ro, cy2 + ro, f"Ø{R['od']:g} (0/-0.1)")
+    sh.dim_v(cx2 - 8, cy2 - ri, cy2 + ri, f"Ø{R['id']:g}")
+    sh.dim_h(cx2 - R["slot_y"] * s3, cy2 + 2, cx2 + R["slot_y"] * s3, cy2 + 2, cy2 + ro + 8, f"{2 * R['slot_y']:g} (+0.2/0)  홈 바닥 사이", above=False)
+    sh.leader(cx2 - R["slot_y"] * s3 + 1, cy2 + ns, cx2 - 34, cy2 + 10, f"홈 폭 {R['slot_w']} (+0.1/0) 2곳")
+    sh.text(275, 160, f"HMT500-M-106  PCB 지지링 (2:1), 두께 {R['x'][1] - R['x'][0]:g}", 4.6, bold=True)
+    sh.text(275, 166, "하우징 안에서 PCB 뒤쪽을 받침. 엔드캡과 연결 안 함 (체결 회전 전달 없음)", 2.8, cls="muted")
+    notes = ["주기 (NOTES)",
+             "1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.",
+             "2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.",
+             "3. 피드스루 핀 6개는 PCB 앞 끝 패드에 ≤ 10 mm 선으로 연결 (정전용량 측정선은 최단).",
+             "4. 커넥터 리드 8가닥(약 40 mm)은 뒤쪽 패드에 납땜. 방열: 필요 시 DAC 아래 갭필러로 하우징 접촉.",
+             "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음."]
+    for i, n in enumerate(notes):
+        sh.text(18, 196 + i * 6.0, n, 2.9 if i else 3.6, bold=(i == 0))
+    sh.frame()
+    return sh
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in (("HMT500-M-000_assembly", sheet_assembly), ("HMT500-M-101_body", sheet_body),
-                     ("HMT500-M-102-104_parts", sheet_small)):
+                     ("HMT500-M-102-104_parts", sheet_small), ("HMT500-M-105-106_pcb", sheet_pcb)):
         open(os.path.join(OUT, name + ".svg"), "w", encoding="utf-8").write(fn().svg())
         print(name)
 

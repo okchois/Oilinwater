@@ -15,6 +15,8 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 | `HMT500/HMT500.kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
 | `HMT500/HMT500_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
 | `HMT500/HMT500_schematic.pdf` | 회로도 PDF (7쪽) |
+| `HMT500/HMT500.kicad_pcb` | 보드 외곽(57 × 23, 기구 Rev C), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), 배치 구역·부품 높이 한계 표기. 부품 배치·배선 전 |
+| `gen_pcb_outline.py` | 위 보드 파일 생성기. 치수는 `hardware/mech/hmt500_params.py`에서 읽습니다 |
 
 ## 도면 스타일 (v0.2)
 

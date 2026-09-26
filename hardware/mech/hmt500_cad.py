@@ -49,8 +49,16 @@ def body():
     # 내부
     for k in ("seat", "wire", "cbore"):
         solid = solid.cut(cyl(*B[k]["x"], B[k]["d"]))
-    # 앞쪽 나사 끝 모따기
+    # PCB 홀더 고정 M2 탭 (카운터보어 바닥, z = ±PCD/2 — PCB 평면에 수직 방향)
+    T = B["holder_taps"]
+    x_bot = B["cbore"]["x"][0]
+    for sgn in (1, -1):
+        solid = solid.cut(axial_hole(x_bot - T["depth"], x_bot + 0.01, 0, sgn * T["pcd"] / 2, T["d"] * 0.8))
     return solid
+
+
+def axial_hole(x0, x1, y, z, d):
+    return cq.Workplane("YZ").workplane(offset=x0).center(y, z).circle(d / 2).extrude(x1 - x0)
 
 
 def cap():
@@ -130,24 +138,63 @@ def carrier():
     return s.union(chip).union(rtd)
 
 
+def pcb_outline_pts():
+    """PCB 외곽 (x, y) — 앞→뒤 위쪽 가장자리, 뒤→앞 아래쪽 가장자리."""
+    up = []
+    for x0, x1, w in P.PCB["sections"]:
+        up += [(x0, w / 2), (x1, w / 2)]
+    return up + [(x, -y) for x, y in reversed(up)]
+
+
 def pcbs():
+    Pc = P.PCB
+    t = Pc["t"]
+    b = cq.Workplane("XY").polyline(pcb_outline_pts()).close().extrude(t).translate((0, 0, -t / 2))
+    try:
+        b = b.edges("|Z").fillet(Pc["corner_r"] * 0.5)
+    except Exception:
+        pass
+    for x, y in Pc["holes"]:
+        b = b.cut(cq.Workplane("XY").center(x, y).circle(Pc["hole_d"] / 2).extrude(4).translate((0, 0, -2)))
+    return b
+
+
+def pcb_parts():
     out = None
-    for x in P.PCB["x"]:
-        b = cyl(x, x + P.PCB["t"], P.PCB["d"])
-        out = b if out is None else out.union(b)
-    # 스페이서 3개
-    x0, x1 = P.PCB["x"][0] + P.PCB["t"], P.PCB["x"][1]
-    for i in range(3):
-        a = 2 * math.pi * i / 3 + math.pi / 6
-        y, z = 10.5 * math.cos(a), 10.5 * math.sin(a)
-        out = out.union(cq.Workplane("YZ").workplane(offset=x0).center(y, z).circle(1.5).extrude(x1 - x0))
+    t = P.PCB["t"]
+    for x, y, a, b, h, side in P.PCB_PARTS:
+        z = side * (t / 2 + h / 2)
+        bx = cq.Workplane("XY").box(a, b, h).translate((x, y, z))
+        out = bx if out is None else out.union(bx)
     return out
+
+
+def pcb_holder():
+    Hh = P.PCB_HOLDER
+    x0, x1 = Hh["x"]
+    s = cyl(x0, x1, Hh["d"]).cut(cyl(x0 - 0.1, x1 + 0.1, Hh["hole_d"]))
+    s0, s1 = Hh["slot_x"]
+    s = s.cut(cq.Workplane("XY").box(s1 - s0 + 0.1, Hh["d"] + 1, Hh["slot_w"]).translate(((s0 + s1) / 2 + 0.05, 0, 0)))
+    for sgn in (1, -1):   # 바디 고정 나사 구멍 + 머리 자리
+        s = s.cut(axial_hole(x0 - 0.1, x1 + 0.1, 0, sgn * Hh["screw_pcd"] / 2, Hh["screw_d"]))
+        s = s.cut(axial_hole(x1 - Hh["cbore_depth"], x1 + 0.1, 0, sgn * Hh["screw_pcd"] / 2, Hh["cbore_d"]))
+    c = Hh["cross"]
+    for y in c["y"]:      # PCB 가로 고정 나사 (z 방향)
+        s = s.cut(cq.Workplane("XY").center(c["x"], y).circle(c["d"] * 0.8 / 2).extrude(30).translate((0, 0, -15)))
+    return s
+
+
+def pcb_ring():
+    R = P.PCB_RING
+    s = tube(*R["x"], R["od"], R["id"])
+    x0, x1 = R["x"]
+    return s.cut(cq.Workplane("XY").box(x1 - x0 + 1, 2 * R["slot_y"], R["slot_w"]).translate(((x0 + x1) / 2, 0, 0)))
 
 
 def connector():
     Cn = P.CONNECTOR
     s = cyl(*Cn["body"]["x"], Cn["body"]["d"]).union(cyl(*Cn["thread"]["x"], Cn["thread"]["d"]))
-    s = s.union(cyl(P.ENDCAP["flange"]["x"][1] - 10, P.ENDCAP["flange"]["x"][1], 15.9))   # M16 나사부
+    s = s.union(cyl(*Cn["inner"]["x"], Cn["inner"]["d"]))   # M16 나사부 (엔드캡 안)
     return s.cut(cyl(Cn["thread"]["x"][1] - 8, Cn["thread"]["x"][1] + 0.1, 9.5))
 
 
@@ -161,6 +208,9 @@ PARTS = [
     ("P-203_seal", seal, (0.20, 0.65, 0.30)),
     ("P-205_orings", orings, (0.10, 0.10, 0.10)),
     ("E-301_pcb", pcbs, (0.10, 0.45, 0.20)),
+    ("E-301_parts", pcb_parts, (0.15, 0.15, 0.17)),
+    ("M-105_holder", pcb_holder, (0.85, 0.72, 0.45)),
+    ("M-106_ring", pcb_ring, (0.85, 0.72, 0.45)),
     ("P-204_connector", connector, (0.35, 0.35, 0.38)),
 ]
 
@@ -181,7 +231,8 @@ def main():
     print(f"assembly bbox x {bb.xmin:.1f}..{bb.xmax:.1f} (length {bb.xlen:.1f}), dia {bb.ylen:.1f}")
     for name, s in shapes.items():
         v = s.val().Volume()
-        print(f"  {name:18s} volume {v / 1000:7.2f} cm3" + (f"  mass(316L) {v * 7.98e-3:6.1f} g" if name.startswith("M-") else ""))
+        rho, mat = (1.32e-3, "PEEK") if name in ("M-105_holder", "M-106_ring") else (7.98e-3, "316L")
+        print(f"  {name:18s} volume {v / 1000:7.2f} cm3" + (f"  mass({mat}) {v * rho:6.1f} g" if name.startswith("M-") else ""))
 
 
 if __name__ == "__main__":

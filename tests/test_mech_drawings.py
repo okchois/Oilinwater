@@ -2,6 +2,7 @@
 
 import os
 import sys
+import math
 import tempfile
 import unittest
 import xml.dom.minidom
@@ -40,8 +41,43 @@ class MechTest(unittest.TestCase):
         self.assertEqual(P.HOUSING["x"][0], P.BODY["collar"]["x"][1])
         self.assertEqual(P.HOUSING["x"][1], P.ENDCAP["flange"]["x"][0])
 
+    def test_pcb_fits(self):
+        """Rev C: 긴 PCB 1장이 보어 안에 들어가고 부품 높이 여유가 있는지."""
+        Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
+        secs = Pc["sections"]
+        self.assertEqual(secs[0][0], Pc["x"][0])
+        self.assertEqual(secs[-1][1], Pc["x"][1])
+        for (a0, a1, _), (b0, _, _) in zip(secs, secs[1:]):
+            self.assertEqual(a1, b0)
+        for x0, x1, w in secs:
+            # 구간을 둘러싼 가장 좁은 보어
+            bores = []
+            if x0 < P.BODY["cbore"]["x"][1]:
+                bores.append(P.BODY["cbore"]["d"])
+            if x1 > P.ENDCAP["cbore"]["x"][0]:
+                bores.append(P.ENDCAP["cbore"]["d"])
+            if x1 > P.BODY["cbore"]["x"][1] and x0 < P.ENDCAP["cbore"]["x"][0]:
+                bores.append(P.HOUSING["id"])
+            bore = min(bores)
+            edge = math.sqrt((bore / 2) ** 2 - (w / 2) ** 2) - Pc["t"] / 2
+            self.assertGreater(edge, 5.0, (x0, x1, w, bore))
+        # 앞 끝은 홀더 홈 안, 뒤 끝은 커넥터 안쪽 나사부와 떨어짐
+        self.assertTrue(Hh["slot_x"][0] <= Pc["x"][0] < Hh["slot_x"][1])
+        self.assertLess(Pc["x"][1], P.CONNECTOR["inner"]["x"][0])
+        # 홀더는 바디 카운터보어 안, 홀더 가로 나사는 PCB 구멍과 일치
+        self.assertLess(Hh["d"], P.BODY["cbore"]["d"])
+        self.assertLess(Hh["x"][1], P.BODY["cbore"]["x"][1])
+        self.assertEqual(sorted(Pc["holes"]), sorted((Hh["cross"]["x"], y) for y in Hh["cross"]["y"]))
+        self.assertEqual(Hh["screw_pcd"], P.BODY["holder_taps"]["pcd"])
+        # 지지링: 하우징 Ø27 구간 안, PCB 넓은 구간이 링 홈에 물림
+        self.assertLess(R["od"], P.HOUSING["thread_minor"])
+        wide = [s for s in secs if s[0] <= R["x"][0] and R["x"][1] <= s[1]][0]
+        self.assertTrue(R["id"] / 2 < wide[2] / 2 < R["slot_y"])
+        # 피드스루 핀은 홀더 구멍 안에서 끝남 (PCB 앞 끝과 겹치지 않음)
+        self.assertTrue(Hh["x"][0] < P.HEADER["pin_rear"] < Pc["x"][0])
+
     def test_svg_valid(self):
-        for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small):
+        for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small, D.sheet_pcb):
             with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False, encoding="utf-8") as f:
                 f.write(fn().svg())
             xml.dom.minidom.parse(f.name)

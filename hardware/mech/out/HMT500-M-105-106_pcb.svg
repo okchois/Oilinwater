@@ -1,0 +1,283 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0"><rect width="420.0" height="297.0" fill="#fff"/><style>
+ .thick{stroke:#000;stroke-width:0.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+ .thin{stroke:#000;stroke-width:0.22;fill:none}
+ .center{stroke:#000;stroke-width:0.2;stroke-dasharray:8 1.5 1.5 1.5;fill:none}
+ .hidden{stroke:#000;stroke-width:0.25;stroke-dasharray:2 1.2;fill:none}
+ .hatchfill{stroke:#000;stroke-width:0.5;fill:url(#hatch)}
+ .hatchfill2{stroke:#000;stroke-width:0.5;fill:url(#hatch2)}
+ .part2{stroke:#000;stroke-width:0.35;fill:url(#hatch2)}
+ .buy{stroke:#000;stroke-width:0.35;fill:#e8e8e8}
+ .green{stroke:#000;stroke-width:0.35;fill:#cfe8d0}
+ .arrow{fill:#000;stroke:none}
+ .t{font-family:'Noto Sans KR','NanumGothic','Malgun Gothic',Arial,sans-serif;fill:#000}
+ .muted{fill:#555}
+</style>
+<defs>
+ <pattern id="hatch" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
+ <pattern id="hatch2" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
+</defs><polygon points="40.000,69.500 68.750,69.500 68.750,63.250 163.750,63.250 163.750,69.500 181.250,69.500 181.250,114.500 163.750,114.500 163.750,120.750 68.750,120.750 68.750,114.500 40.000,114.500" class="thick"/>
+<line x1="35.000" y1="92.000" x2="186.250" y2="92.000" class="center"/>
+<rect x="40.000" y="69.500" width="8.750" height="45.000" class="hatchfill2"/>
+<rect x="151.250" y="63.250" width="10.000" height="3.750" class="hatchfill2"/>
+<rect x="151.250" y="117.000" width="10.000" height="3.750" class="hatchfill2"/>
+<circle cx="44.375" cy="79.500" r="2.750" class="thick" fill="none"/>
+<circle cx="44.375" cy="104.500" r="2.750" class="thick" fill="none"/>
+<rect x="51.250" y="83.250" width="7.500" height="17.500" fill="#f3d9a4" class="thin"/>
+<rect x="168.750" y="83.250" width="10.000" height="17.500" fill="#f3d9a4" class="thin"/>
+<rect x="49.350" y="71.500" width="36.300" height="41.000" class="hidden"/>
+<text x="67.500" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">측정</text>
+<rect x="86.850" y="71.500" width="41.300" height="41.000" class="hidden"/>
+<text x="107.500" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">MCU·전원</text>
+<rect x="129.350" y="71.500" width="51.300" height="41.000" class="hidden"/>
+<text x="155.000" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">출력·보호</text>
+<text x="55.000" y="104.250" font-size="2.2" text-anchor="middle" class="t ">피드스루 패드</text>
+<text x="173.750" y="104.250" font-size="2.2" text-anchor="middle" class="t ">커넥터 패드</text>
+<line x1="40.000" y1="68.500" x2="40.000" y2="53.750" class="thin"/>
+<line x1="68.750" y1="68.500" x2="68.750" y2="53.750" class="thin"/>
+<line x1="40.000" y1="55.250" x2="68.750" y2="55.250" class="thin"/>
+<polygon points="40.000,55.250 42.600,54.350 42.600,56.150" class="arrow"/>
+<polygon points="68.750,55.250 66.150,56.150 66.150,54.350" class="arrow"/>
+<text x="54.375" y="54.250" font-size="3.2" text-anchor="middle" class="t ">11.5</text>
+<line x1="68.750" y1="68.500" x2="68.750" y2="53.750" class="thin"/>
+<line x1="163.750" y1="68.500" x2="163.750" y2="53.750" class="thin"/>
+<line x1="68.750" y1="55.250" x2="163.750" y2="55.250" class="thin"/>
+<polygon points="68.750,55.250 71.350,54.350 71.350,56.150" class="arrow"/>
+<polygon points="163.750,55.250 161.150,56.150 161.150,54.350" class="arrow"/>
+<text x="116.250" y="54.250" font-size="3.2" text-anchor="middle" class="t ">38</text>
+<line x1="163.750" y1="68.500" x2="163.750" y2="53.750" class="thin"/>
+<line x1="181.250" y1="68.500" x2="181.250" y2="53.750" class="thin"/>
+<line x1="163.750" y1="55.250" x2="181.250" y2="55.250" class="thin"/>
+<polygon points="163.750,55.250 166.350,54.350 166.350,56.150" class="arrow"/>
+<polygon points="181.250,55.250 178.650,56.150 178.650,54.350" class="arrow"/>
+<text x="172.500" y="54.250" font-size="3.2" text-anchor="middle" class="t ">7</text>
+<line x1="40.000" y1="68.500" x2="40.000" y2="44.750" class="thin"/>
+<line x1="181.250" y1="68.500" x2="181.250" y2="44.750" class="thin"/>
+<line x1="40.000" y1="46.250" x2="181.250" y2="46.250" class="thin"/>
+<polygon points="40.000,46.250 42.600,45.350 42.600,47.150" class="arrow"/>
+<polygon points="181.250,46.250 178.650,47.150 178.650,45.350" class="arrow"/>
+<text x="110.625" y="45.250" font-size="3.2" text-anchor="middle" class="t ">56.5  (PCB 전장)</text>
+<line x1="40.000" y1="93.000" x2="40.000" y2="138.250" class="thin"/>
+<line x1="48.750" y1="93.000" x2="48.750" y2="138.250" class="thin"/>
+<line x1="40.000" y1="136.750" x2="48.750" y2="136.750" class="thin"/>
+<polygon points="40.000,136.750 42.600,135.850 42.600,137.650" class="arrow"/>
+<polygon points="48.750,136.750 46.150,137.650 46.150,135.850" class="arrow"/>
+<text x="44.375" y="135.750" font-size="3.2" text-anchor="middle" class="t ">3.5</text>
+<line x1="40.000" y1="105.500" x2="40.000" y2="145.250" class="thin"/>
+<line x1="44.375" y1="105.500" x2="44.375" y2="145.250" class="thin"/>
+<line x1="40.000" y1="143.750" x2="44.375" y2="143.750" class="thin"/>
+<polygon points="40.000,143.750 37.400,144.650 37.400,142.850" class="arrow"/>
+<polygon points="44.375,143.750 46.975,142.850 46.975,144.650" class="arrow"/>
+<line x1="35.000" y1="143.750" x2="40.000" y2="143.750" class="thin"/>
+<line x1="44.375" y1="143.750" x2="49.375" y2="143.750" class="thin"/>
+<text x="42.188" y="142.750" font-size="3.2" text-anchor="middle" class="t "></text>
+<text x="50.375" y="144.750" font-size="3.2" text-anchor="start" class="t ">1.75</text>
+<line x1="40.000" y1="115.500" x2="40.000" y2="152.250" class="thin"/>
+<line x1="151.250" y1="121.750" x2="151.250" y2="152.250" class="thin"/>
+<line x1="40.000" y1="150.750" x2="151.250" y2="150.750" class="thin"/>
+<polygon points="40.000,150.750 42.600,149.850 42.600,151.650" class="arrow"/>
+<polygon points="151.250,150.750 148.650,151.650 148.650,149.850" class="arrow"/>
+<text x="95.625" y="149.750" font-size="3.2" text-anchor="middle" class="t ">44.5</text>
+<line x1="151.250" y1="121.750" x2="151.250" y2="152.250" class="thin"/>
+<line x1="161.250" y1="121.750" x2="161.250" y2="152.250" class="thin"/>
+<line x1="151.250" y1="150.750" x2="161.250" y2="150.750" class="thin"/>
+<polygon points="151.250,150.750 153.850,149.850 153.850,151.650" class="arrow"/>
+<polygon points="161.250,150.750 158.650,151.650 158.650,149.850" class="arrow"/>
+<text x="156.250" y="149.750" font-size="3.2" text-anchor="middle" class="t ">4</text>
+<line x1="39.000" y1="69.500" x2="30.500" y2="69.500" class="thin"/>
+<line x1="39.000" y1="114.500" x2="30.500" y2="114.500" class="thin"/>
+<line x1="32.000" y1="69.500" x2="32.000" y2="114.500" class="thin"/>
+<polygon points="32.000,69.500 32.900,72.100 31.100,72.100" class="arrow"/>
+<polygon points="32.000,114.500 31.100,111.900 32.900,111.900" class="arrow"/>
+<text x="31.000" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 31.000 92.000)" class="t ">18</text>
+<line x1="116.250" y1="63.250" x2="116.250" y2="120.750" class="thin"/>
+<polygon points="116.250,63.250 117.150,65.850 115.350,65.850" class="arrow"/>
+<polygon points="116.250,120.750 115.350,118.150 117.150,118.150" class="arrow"/>
+<text x="115.250" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 115.250 92.000)" class="t ">23</text>
+<line x1="182.250" y1="69.500" x2="190.750" y2="69.500" class="thin"/>
+<line x1="182.250" y1="114.500" x2="190.750" y2="114.500" class="thin"/>
+<line x1="189.250" y1="69.500" x2="189.250" y2="114.500" class="thin"/>
+<polygon points="189.250,69.500 190.150,72.100 188.350,72.100" class="arrow"/>
+<polygon points="189.250,114.500 188.350,111.900 190.150,111.900" class="arrow"/>
+<text x="188.250" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 188.250 92.000)" class="t ">18</text>
+<line x1="43.375" y1="78.500" x2="44.000" y2="39.250" class="thin"/>
+<polygon points="43.375,78.500 42.517,75.886 44.316,75.915" class="arrow"/>
+<line x1="44.000" y1="39.250" x2="66.000" y2="39.250" class="thin"/>
+<text x="45.000" y="38.250" font-size="3.2" text-anchor="start" class="t ">2×Ø2.2, 간격 10 (홀더 가로 나사 M2)</text>
+<text x="45.000" y="26.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-E-301  PCB 외곽 — 기구 인터페이스 (2.5:1)</text>
+<text x="45.000" y="32.000" font-size="2.8" text-anchor="start" class="t muted">4층 FR-4 t1.6, 모서리 R1. 빗금 = 부품·동박 금지 (양면): 홀더 홈 물림, 지지링 홈. 기준 = 앞 끝(피드스루 쪽)</text>
+<rect x="18.0" y="160.0" width="178" height="21.6" class="thick" fill="#fff"/>
+<text x="19.200" y="163.900" font-size="2.7" text-anchor="start" font-weight="700" class="t ">구간 (앞 끝 기준)</text>
+<line x1="60.000" y1="160.000" x2="60.000" y2="181.600" class="thin"/>
+<text x="61.200" y="163.900" font-size="2.7" text-anchor="start" font-weight="700" class="t ">폭</text>
+<line x1="76.000" y1="160.000" x2="76.000" y2="181.600" class="thin"/>
+<text x="77.200" y="163.900" font-size="2.7" text-anchor="start" font-weight="700" class="t ">둘러싼 보어</text>
+<line x1="106.000" y1="160.000" x2="106.000" y2="181.600" class="thin"/>
+<text x="107.200" y="163.900" font-size="2.7" text-anchor="start" font-weight="700" class="t ">부품 높이 한계 (한 면, 여유 0.5 포함)</text>
+<line x1="196.000" y1="160.000" x2="196.000" y2="181.600" class="thin"/>
+<line x1="18.000" y1="165.400" x2="196.000" y2="165.400" class="thin"/>
+<text x="19.200" y="169.300" font-size="2.7" text-anchor="start" class="t ">0 ~ 11.5</text>
+<text x="61.200" y="169.300" font-size="2.7" text-anchor="start" class="t ">18</text>
+<text x="77.200" y="169.300" font-size="2.7" text-anchor="start" class="t ">Ø22 (바디 카운터보어)</text>
+<text x="107.200" y="169.300" font-size="2.7" text-anchor="start" class="t ">가장자리 5.0 / 중심 9.7 mm</text>
+<line x1="18.000" y1="170.800" x2="196.000" y2="170.800" class="thin"/>
+<text x="19.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">11.5 ~ 49.5</text>
+<text x="61.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">23</text>
+<text x="77.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">Ø27 (하우징)</text>
+<text x="107.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">가장자리 5.8 / 중심 12.2 mm</text>
+<line x1="18.000" y1="176.200" x2="196.000" y2="176.200" class="thin"/>
+<text x="19.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">49.5 ~ 56.5</text>
+<text x="61.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">18</text>
+<text x="77.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">Ø22 (엔드캡 카운터보어)</text>
+<text x="107.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">가장자리 5.0 / 중심 9.7 mm</text>
+<circle cx="250.000" cy="90.000" r="32.400" class="thick" fill="none"/>
+<circle cx="250.000" cy="90.000" r="9.000" class="thick" fill="none"/>
+<rect x="217.600" y="87.450" width="64.800" height="5.100" fill="#fff" class="thick"/>
+<circle cx="250.000" cy="90.000" r="32.400" class="thick" fill="none"/>
+<circle cx="250.000" cy="114.000" r="3.300" class="thick" fill="none"/>
+<circle cx="250.000" cy="114.000" r="6.000" class="thin" fill="none"/>
+<circle cx="250.000" cy="66.000" r="3.300" class="thick" fill="none"/>
+<circle cx="250.000" cy="66.000" r="6.000" class="thin" fill="none"/>
+<line x1="261.700" y1="60.600" x2="261.700" y2="119.400" class="hidden"/>
+<line x1="268.300" y1="60.600" x2="268.300" y2="119.400" class="hidden"/>
+<line x1="231.700" y1="60.600" x2="231.700" y2="119.400" class="hidden"/>
+<line x1="238.300" y1="60.600" x2="238.300" y2="119.400" class="hidden"/>
+<line x1="212.600" y1="90.000" x2="287.400" y2="90.000" class="center"/>
+<line x1="250.000" y1="52.600" x2="250.000" y2="127.400" class="center"/>
+<line x1="283.400" y1="57.600" x2="292.900" y2="57.600" class="thin"/>
+<line x1="283.400" y1="122.400" x2="292.900" y2="122.400" class="thin"/>
+<line x1="291.400" y1="57.600" x2="291.400" y2="122.400" class="thin"/>
+<polygon points="291.400,57.600 292.300,60.200 290.500,60.200" class="arrow"/>
+<polygon points="291.400,122.400 290.500,119.800 292.300,119.800" class="arrow"/>
+<text x="290.400" y="90.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 290.400 90.000)" class="t ">Ø21.6 (0/-0.1)</text>
+<line x1="249.000" y1="66.000" x2="207.100" y2="66.000" class="thin"/>
+<line x1="249.000" y1="114.000" x2="207.100" y2="114.000" class="thin"/>
+<line x1="208.600" y1="66.000" x2="208.600" y2="114.000" class="thin"/>
+<polygon points="208.600,66.000 209.500,68.600 207.700,68.600" class="arrow"/>
+<polygon points="208.600,114.000 207.700,111.400 209.500,111.400" class="arrow"/>
+<text x="207.600" y="90.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 207.600 90.000)" class="t ">PCD 16</text>
+<line x1="235.000" y1="62.600" x2="235.000" y2="50.100" class="thin"/>
+<line x1="265.000" y1="62.600" x2="265.000" y2="50.100" class="thin"/>
+<line x1="235.000" y1="51.600" x2="265.000" y2="51.600" class="thin"/>
+<polygon points="235.000,51.600 237.600,50.700 237.600,52.500" class="arrow"/>
+<polygon points="265.000,51.600 262.400,52.500 262.400,50.700" class="arrow"/>
+<text x="250.000" y="50.600" font-size="3.2" text-anchor="middle" class="t ">10</text>
+<line x1="255.000" y1="63.000" x2="272.000" y2="43.600" class="thin"/>
+<polygon points="255.000,63.000 256.037,60.451 257.390,61.638" class="arrow"/>
+<line x1="272.000" y1="43.600" x2="294.000" y2="43.600" class="thin"/>
+<text x="273.000" y="42.600" font-size="3.2" text-anchor="start" class="t ">2×Ø2.2 관통, 카운터보어 Ø4 깊이 1.8 (M2×6 → 바디)</text>
+<line x1="279.400" y1="92.550" x2="244.000" y2="140.400" class="thin"/>
+<polygon points="279.400,92.550 278.577,95.175 277.130,94.105" class="arrow"/>
+<line x1="244.000" y1="140.400" x2="222.000" y2="140.400" class="thin"/>
+<text x="243.000" y="139.400" font-size="3.2" text-anchor="end" class="t ">홈 폭 1.7 (+0.1/0) 깊이 3.5, 전폭</text>
+<line x1="243.700" y1="96.300" x2="232.000" y2="132.400" class="thin"/>
+<polygon points="243.700,96.300 243.755,99.051 242.042,98.496" class="arrow"/>
+<line x1="232.000" y1="132.400" x2="210.000" y2="132.400" class="thin"/>
+<text x="231.000" y="131.400" font-size="3.2" text-anchor="end" class="t ">Ø6 관통 (피드스루 배선)</text>
+<text x="200.000" y="148.400" font-size="2.8" text-anchor="start" class="t ">2×M2 가로 탭 (숨은선, 홈에 수직) — PCB 관통 고정 M2×12</text>
+<rect x="302.000" y="57.600" width="17.400" height="64.800" class="thick" fill="none"/>
+<line x1="308.900" y1="57.600" x2="308.900" y2="122.400" class="hidden"/>
+<circle cx="314.150" cy="75.000" r="2.640" class="thick" fill="none"/>
+<circle cx="314.150" cy="105.000" r="2.640" class="thick" fill="none"/>
+<line x1="302.000" y1="81.000" x2="319.400" y2="81.000" class="hidden"/>
+<line x1="302.000" y1="99.000" x2="319.400" y2="99.000" class="hidden"/>
+<line x1="298.000" y1="90.000" x2="323.400" y2="90.000" class="center"/>
+<line x1="302.000" y1="123.400" x2="302.000" y2="131.900" class="thin"/>
+<line x1="319.400" y1="123.400" x2="319.400" y2="131.900" class="thin"/>
+<line x1="302.000" y1="130.400" x2="319.400" y2="130.400" class="thin"/>
+<polygon points="302.000,130.400 304.600,129.500 304.600,131.300" class="arrow"/>
+<polygon points="319.400,130.400 316.800,131.300 316.800,129.500" class="arrow"/>
+<text x="310.700" y="134.400" font-size="3.2" text-anchor="middle" class="t ">5.8</text>
+<line x1="308.900" y1="56.600" x2="308.900" y2="50.100" class="thin"/>
+<line x1="319.400" y1="56.600" x2="319.400" y2="50.100" class="thin"/>
+<line x1="308.900" y1="51.600" x2="319.400" y2="51.600" class="thin"/>
+<polygon points="308.900,51.600 311.500,50.700 311.500,52.500" class="arrow"/>
+<polygon points="319.400,51.600 316.800,52.500 316.800,50.700" class="arrow"/>
+<text x="314.150" y="50.600" font-size="3.2" text-anchor="middle" class="t ">3.5</text>
+<text x="302.000" y="127.400" font-size="2.6" text-anchor="start" class="t muted">← 앞(바디 쪽)</text>
+<text x="215.000" y="26.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-105  PCB 홀더 (3:1)</text>
+<text x="215.000" y="32.000" font-size="2.8" text-anchor="start" class="t muted">왼쪽: 뒤(PCB 쪽)에서 본 끝면 / 오른쪽: 측면</text>
+<circle cx="370.000" cy="200.000" r="26.400" class="thick" fill="none"/>
+<circle cx="370.000" cy="200.000" r="20.000" class="thick" fill="none"/>
+<rect x="389.928" y="198.300" width="3.272" height="3.400" fill="#fff" class="thick"/>
+<rect x="346.800" y="198.300" width="3.272" height="3.400" fill="#fff" class="thick"/>
+<line x1="338.600" y1="200.000" x2="401.400" y2="200.000" class="center"/>
+<line x1="370.000" y1="168.600" x2="370.000" y2="231.400" class="center"/>
+<line x1="397.400" y1="173.600" x2="406.900" y2="173.600" class="thin"/>
+<line x1="397.400" y1="226.400" x2="406.900" y2="226.400" class="thin"/>
+<line x1="405.400" y1="173.600" x2="405.400" y2="226.400" class="thin"/>
+<polygon points="405.400,173.600 406.300,176.200 404.500,176.200" class="arrow"/>
+<polygon points="405.400,226.400 404.500,223.800 406.300,223.800" class="arrow"/>
+<text x="404.400" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 404.400 200.000)" class="t ">Ø26.4 (0/-0.1)</text>
+<line x1="362.000" y1="180.000" x2="362.000" y2="220.000" class="thin"/>
+<polygon points="362.000,180.000 362.900,182.600 361.100,182.600" class="arrow"/>
+<polygon points="362.000,220.000 361.100,217.400 362.900,217.400" class="arrow"/>
+<text x="361.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 361.000 200.000)" class="t ">Ø20</text>
+<line x1="346.800" y1="203.000" x2="346.800" y2="235.900" class="thin"/>
+<line x1="393.200" y1="203.000" x2="393.200" y2="235.900" class="thin"/>
+<line x1="346.800" y1="234.400" x2="393.200" y2="234.400" class="thin"/>
+<polygon points="346.800,234.400 349.400,233.500 349.400,235.300" class="arrow"/>
+<polygon points="393.200,234.400 390.600,235.300 390.600,233.500" class="arrow"/>
+<text x="370.000" y="238.400" font-size="3.2" text-anchor="middle" class="t ">23.2 (+0.2/0)  홈 바닥 사이</text>
+<line x1="347.800" y1="201.700" x2="336.000" y2="210.000" class="thin"/>
+<polygon points="347.800,201.700 346.191,203.932 345.156,202.460" class="arrow"/>
+<line x1="336.000" y1="210.000" x2="314.000" y2="210.000" class="thin"/>
+<text x="335.000" y="209.000" font-size="3.2" text-anchor="end" class="t ">홈 폭 1.7 (+0.1/0) 2곳</text>
+<text x="275.000" y="160.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-106  PCB 지지링 (2:1), 두께 4</text>
+<text x="275.000" y="166.000" font-size="2.8" text-anchor="start" class="t muted">하우징 안에서 PCB 뒤쪽을 받침. 엔드캡과 연결 안 함 (체결 회전 전달 없음)</text>
+<text x="18.000" y="196.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
+<text x="18.000" y="202.000" font-size="2.9" text-anchor="start" class="t ">1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.</text>
+<text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
+<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. 피드스루 핀 6개는 PCB 앞 끝 패드에 ≤ 10 mm 선으로 연결 (정전용량 측정선은 최단).</text>
+<text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. 커넥터 리드 8가닥(약 40 mm)은 뒤쪽 패드에 납땜. 방열: 필요 시 DAC 아래 갭필러로 하우징 접촉.</text>
+<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음.</text>
+<rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
+<text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
+<text x="85.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">2</text>
+<text x="135.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">3</text>
+<text x="185.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">4</text>
+<text x="235.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">5</text>
+<text x="285.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">6</text>
+<text x="335.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">7</text>
+<text x="385.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">8</text>
+<text x="6.500" y="34.083" font-size="2.8" text-anchor="middle" class="t ">A</text>
+<text x="6.500" y="80.250" font-size="2.8" text-anchor="middle" class="t ">B</text>
+<text x="6.500" y="126.417" font-size="2.8" text-anchor="middle" class="t ">C</text>
+<text x="6.500" y="172.583" font-size="2.8" text-anchor="middle" class="t ">D</text>
+<text x="6.500" y="218.750" font-size="2.8" text-anchor="middle" class="t ">E</text>
+<text x="6.500" y="264.917" font-size="2.8" text-anchor="middle" class="t ">F</text>
+<rect x="230.0" y="245.0" width="180" height="42" class="thick" fill="#fff"/>
+<line x1="230.000" y1="255.000" x2="410.000" y2="255.000" class="thin"/>
+<line x1="230.000" y1="263.000" x2="410.000" y2="263.000" class="thin"/>
+<line x1="230.000" y1="271.000" x2="410.000" y2="271.000" class="thin"/>
+<line x1="230.000" y1="279.000" x2="410.000" y2="279.000" class="thin"/>
+<line x1="290.000" y1="255.000" x2="290.000" y2="287.000" class="thin"/>
+<line x1="350.000" y1="255.000" x2="350.000" y2="287.000" class="thin"/>
+<text x="233.000" y="252.000" font-size="4.2" text-anchor="start" font-weight="700" class="t ">(주)두텍  DOTECH Co., Ltd.</text>
+<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500 오일 수분 트랜스미터</text>
+<text x="231.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">품명</text>
+<text x="231.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">PCB 홀더 · 지지링 · PCB 외곽</text>
+<text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
+<text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-105~106</text>
+<text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">C / 2026-09-26</text>
+<text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
+<text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">PEEK / PA66-GF30</text>
+<text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>
+<text x="291.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">표기</text>
+<text x="351.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">단위 / 투상</text>
+<text x="351.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">mm / 제1각법</text>
+<text x="231.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">일반공차</text>
+<text x="231.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">ISO 2768-mK</text>
+<text x="291.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">표면(지정 외)</text>
+<text x="291.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">Ra 1.6</text>
+<text x="351.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">쪽</text>
+<text x="351.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">4/4</text>
+<text x="231.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">작성</text>
+<text x="231.500" y="286.200" font-size="3.3" text-anchor="start" class="t ">HMT500 설계</text>
+<text x="291.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">검토</text>
+<text x="291.500" y="286.200" font-size="3.3" text-anchor="start" class="t "></text>
+<text x="351.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">승인</text>
+<text x="351.500" y="286.200" font-size="3.3" text-anchor="start" class="t "></text>
+<polygon points="380.0,265.0 387.0,263.8 387.0,270.2 380.0,269.0" class="thin" fill="none"/>
+<circle cx="393.000" cy="267.000" r="3.200" class="thin" fill="none"/>
+<circle cx="393.000" cy="267.000" r="1.600" class="thin" fill="none"/></svg>

@@ -17,6 +17,7 @@ sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
 
 import check_netlist  # noqa: E402
 import gen_hmt500 as g  # noqa: E402
+import gen_pcb_outline as pcb  # noqa: E402
 
 
 class KicadGenTest(unittest.TestCase):
@@ -47,6 +48,27 @@ class KicadGenTest(unittest.TestCase):
             subprocess.run(["kicad-cli", "sch", "export", "netlist", "-o", net,
                             os.path.join(g.OUT, "HMT500.kicad_sch")], check=True, capture_output=True)
             self.assertEqual(check_netlist.main(net), 0)
+
+
+class PcbOutlineTest(unittest.TestCase):
+    def test_outline_closed_and_balanced(self):
+        body = pcb.build()
+        self.assertEqual(body.count("("), body.count(")"))
+        segs = pcb.fillet_outline(pcb.outline_pts(), pcb.P.PCB["corner_r"])
+        ends = [s[-1] for s in segs]
+        starts = [s[1] for s in segs]
+        for e, s in zip(ends, starts[1:] + starts[:1]):
+            self.assertAlmostEqual(e[0], s[0], places=6)
+            self.assertAlmostEqual(e[1], s[1], places=6)
+
+    @unittest.skipUnless(shutil.which("kicad-cli"), "kicad-cli 없음")
+    def test_kicad_loads_board(self):
+        with tempfile.TemporaryDirectory() as d:
+            f = os.path.join(d, "b.kicad_pcb")
+            open(f, "w", encoding="utf-8").write(pcb.build())
+            r = subprocess.run(["kicad-cli", "pcb", "export", "svg", "--layers", "Edge.Cuts", "-o",
+                                os.path.join(d, "b.svg"), f], capture_output=True, text=True)
+            self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
 
 if __name__ == "__main__":
