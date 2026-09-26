@@ -200,4 +200,4 @@ MCU USART2 TX/RX/DE ── THVD2450 (3.3 V) ── R5/R6 2.2Ω ──┬──�
 2. TPS2660의 정확한 절대최대정격과 SMBJ33CA 클램프 전압 사이의 여유 (서지 시뮬레이션)
 3. THVD2450 단독 서지 내성 → 외부 TVS(D4, D5) 실장 여부
 4. 7번 핀을 NC로 되돌리는 것 (위 1.1절 제안)
-5. 회로도 CAD 도구 (KiCad / OrCAD / Altium 중 두텍 사용 도구)
+5. ~~회로도 CAD 도구~~ → **KiCad로 결정**, [hardware/kicad](../../hardware/kicad/README.md)에 v0.1 회로도 작성
