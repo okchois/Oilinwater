@@ -28,6 +28,7 @@
 | 후보 | 코어 / 클럭 | 플래시 | HW RS-485 DE | 125 °C 등급 | 패키지 (작은 것) | 단가 감 (1k) | 비고 |
 |---|---|---|---|---|---|---|---|
 | **STM32L431CC** (현재 계열, 48핀) | M4F / 80 MHz | 256 KB, 2 KB 페이지 | 있음 (USART DEM) | 접미사 3/7 있는지 **확인 필요** | UFQFPN48 7×7, LQFP48 | 약 $2~3 | 부트로더 맵·핀표 그대로 사용. 가장 적은 변경 |
+| STM32G491CE/CC (2A절) | M4F / 170 MHz | 512 / 256 KB | 있음 | **있음 (CET3·CEU3 판매 확인)** | LQFP48, UFQFPN48 7×7 | 약 $5~6 (100개) | 요청 후보. 125 °C 확실, 가격 약 2배 |
 | STM32G431CB | M4F / 170 MHz | 128 KB | 있음 | 있음 (접미사 3, **확인 필요**) | UFQFPN48 7×7 | 약 $3~4 | 성능 과잉. 125 °C가 꼭 필요하면 후보 |
 | STM32G0B1CB / G071 | M0+ / 64 MHz | 128 KB | 있음 | 있음 (접미사 3, **확인 필요**) | UFQFPN48, LQFP48 | 약 $1.5~2.5 | FPU 없음 (R5는 소프트웨어로 해결). 원가 절감 1순위 |
 | STM32U0 / U3 계열 | M0+ / M33 | 64~256 KB | 있음 | **확인 필요** | 작은 패키지 다수 | **확인 필요** | 신규 계열. 수급·장기 공급 확인 필요 |
@@ -35,8 +36,31 @@
 | Renesas RA4M1 / RA2L1 | M4F / M23 | 256 KB | **확인 필요** | 제품별 상이 | LQFP48 | 약 $2~3 | 국내 지원 있음. 선택 이유가 약함 |
 | GigaDevice GD32 (STM32 호환) | M4F 등 | 다양 | 있음 | 제품별 상이 | 다양 | 저가 | 호환성·장기 공급·품질 문서가 약함. 산업용 계측기에는 비추천 |
 
+## 2A. 요청 후보: STM32G491CET3 상세 검토
+
+주문 코드 해석: G491 · **C** = 48핀 · **E** = 플래시 512 KB · **T** = LQFP48 7×7 · **3** = −40~125 °C (접합 130 °C).
+
+| 항목 | STM32G491CET3 | STM32L431CC (비교) | HMT500에서 의미 |
+|---|---|---|---|
+| 코어 | Cortex-M4F 170 MHz, CORDIC·FMAC 가속기 | Cortex-M4F 80 MHz | 둘 다 충분. 성능은 G491이 과잉. CORDIC은 지수·로그 계산에 쓸 수 있지만 필요하지는 않음 |
+| 플래시 / RAM | 512 KB / 112 KB | 256 KB / 64 KB | 512 KB면 **A/B 두 이미지 업데이트**(실패 시 이전 펌웨어로 복귀)가 가능. 지금 부트로더 맵(256 KB)도 그대로 들어감 |
+| 플래시 페이지 | 2 KB (카테고리 4, 단일 뱅크), 64비트 단위 기록 | 2 KB, 64비트 단위 기록 | **부트로더 포팅이 거의 같음** (`bl_port.h` 함수 3개) |
+| 온도 등급 | **125 °C 등급이 실제 판매 중** (CET3, CEU3 확인) | 계열 데이터시트에는 125 °C 범위가 있으나 CC 48핀의 3/7 접미사 판매 여부는 **확인 필요** | **G491의 가장 큰 장점** |
+| USART / RS-485 DE | USART 3 + LPUART, 하드웨어 DE 있음 | 있음 | 같음 |
+| 아날로그 | 12-bit ADC ×2, DAC ×4, OPAMP, 비교기, CAN-FD | ADC ×1, DAC ×2, OPAMP | 이 제품에서는 대부분 안 씀 (측정은 PCAP04·ADS1220, 출력은 DAC8760) |
+| 소비 전류 | 170 MHz 동작 시 수십 mA (클럭을 낮추면 줄어듦) | 저전력 계열 | 외부 전원이라 문제는 아님. 3.3 V LDO 여유와 발열만 확인. 16~48 MHz로 돌리면 충분 |
+| 패키지 | LQFP48 7×7 (CET3), UFQFPN48 7×7 (CEU3) | 같음 | 폭 23 mm PCB에 들어감 |
+| 가격 (참고) | RS 100개 기준 약 SGD 8.5 / HK$ 50 (약 $6.3) | 약 $2~3 | 1k 견적은 대략 **$2~3 비쌀 것**으로 예상. 대리점 확인 필요 |
+
+**평가**
+
+- **장점:** 125 °C 등급을 확실히 구할 수 있습니다. 오일이 120 °C일 때 전자부 온도가 85~105 °C를 넘을 수 있다는 위험을 칩 선정 단계에서 없앨 수 있습니다. 부트로더와 드라이버는 L4와 거의 그대로 쓸 수 있습니다(같은 STM32 HAL, 같은 2 KB 페이지).
+- **단점:** 가격이 약 2배이고, 170 MHz와 풍부한 아날로그 기능 대부분을 쓰지 않습니다.
+- **변형안:** 512 KB가 필요 없으면 **STM32G491CC(256 KB)** 의 125 °C 등급이 더 쌀 수 있습니다(주문 코드와 가격 확인 필요). A/B 두 이미지 업데이트를 원하면 CE(512 KB)를 유지합니다.
+
 ## 3. 현재 판단 (교차 검토 전)
 
+0. **(갱신) 고온 조건이 확정되거나 L431CC 고온 등급을 구하기 어려우면 STM32G491CET3(또는 CC 256 KB판)를 1순위로 합니다.** 125 °C 등급이 판매 중인 것이 확인되었고, 설계 변경은 L431CC와 비슷하게 적습니다.
 1. **추천: STM32L431CC 48핀으로 바꾸기.** 단, 105 °C 또는 125 °C 등급을 구할 수 있을 때만입니다.
    - 부트로더 메모리 맵, 하드웨어 DE, CRC, 핀 할당이 그대로라 설계 변경이 가장 적습니다.
    - 64핀 → 48핀으로 PCB 면적이 약 절반이 됩니다.
@@ -63,12 +87,12 @@
 - 참고 파일: docs/hw/mcu-selection.md, docs/hw/hardware-block-design.md,
   docs/hw/circuit-design.md, docs/rs485-bootloader-design.md, firmware/bootloader/
 
-현재 선택: STM32L431RCT6 (LQFP64, −40~85 °C). 검토안: STM32L431CC 48핀 고온 등급.
+현재 선택: STM32L431RCT6 (LQFP64, −40~85 °C). 검토안: STM32L431CC 48핀 고온 등급, STM32G491CET3 (512 KB, 125 °C).
 
 질문:
 1. 위 요구사항에 대해 STM32L431이 최선인가? 더 나은 후보가 있다면 이유와 함께.
 2. STM32L431CC의 105 °C/125 °C 등급(주문 코드 접미사 7/3) 실제 존재 여부와 패키지.
-3. STM32G0B1, STM32G431, TI MSPM0G3507과 비교해 원가·고온·RS-485 하드웨어 DE·플래시 구조·장기 공급 측면의 장단점.
+3. STM32G491CET3(또는 G491CC), STM32G0B1, TI MSPM0G3507과 비교해 원가·고온·RS-485 하드웨어 DE·플래시 구조·장기 공급 측면의 장단점.
 4. FPU 없는 코어로 1 Hz ppm 계산과 5계수 모델을 처리할 때의 실제 부담.
 5. 이 요구사항에서 놓친 MCU 관련 위험(ESD, 클럭 정확도와 Modbus 보레이트, 플래시 내구성, 부트로더 안전성 등).
 답은 표 하나와 추천 1순위·2순위로 정리하고, 확신이 낮은 사실은 "확인 필요"로 표시할 것.
@@ -81,3 +105,11 @@
 - 부트로더 메모리 맵: `docs/rs485-bootloader-design.md` 3절, `firmware/` (플래시 크기가 바뀔 때만)
 - 부품표·원가: `docs/hw/bom.csv`, `docs/hw/bom-cost.md`
 - 기구 3D의 MCU 크기: `hardware/mech/hmt500_params.py` `PCB_PARTS`
+
+## 참고 자료
+
+- STM32G491CET3 가격: RS Online https://sg.rs-online.com/web/p/microcontrollers/0330260 , https://hkcn.rs-online.com/web/p/microcontrollers/0330260
+- STM32G491CEU3 (125 °C, QFN): https://estore.st.com/en/stm32g491ceu3tr-cpn.html , Mouser https://www.mouser.com/ProductDetail/STMicroelectronics/STM32G491CEU3?qs=CiayqK2gdcKP%2BMERfRJ0Dg%3D%3D
+- STM32G491 플래시 구성(카테고리 4, 2 KB 페이지): https://community.st.com/t5/stm32cubeide-mcus/stm32g491-flash-memory-organization/td-p/696784
+- STM32G491 데이터시트 DS13122: https://www.st.com/resource/en/datasheet/stm32g491cc.pdf
+- STM32L431 데이터시트 (온도 범위): https://www.st.com/resource/en/datasheet/stm32l431cb.pdf
