@@ -3,9 +3,19 @@
 오일(유압유·윤활유·절연유·연료) 속 수분을 온라인으로 측정하는 트랜스미터 개발 프로젝트.
 
 - [조사 보고서](docs/research-report.md) — 측정 원리, 경쟁 제품, 센서 소자, 회로/기구/펌웨어 설계, 교정, 인증, 로드맵
+- [RS-485 + 부트로더 설계](docs/rs485-bootloader-design.md) — 기본 출력 RS-485 Modbus RTU, 통신으로 펌웨어 업데이트
+- [`firmware/`](firmware/) — MCU 비의존 부트로더 코어 + PC 시뮬레이터
+- [`tools/fwupdate.py`](tools/fwupdate.py) — 펌웨어 이미지 생성 및 RS-485 업데이트 도구
 - [`tools/moisture_calc.py`](tools/moisture_calc.py) — 수분 활동도(aw) ↔ ppm 환산 참조 구현
 
 ```bash
 python3 tools/moisture_calc.py --temp 20 --aw 0.5     # aw -> ppm
 python3 tools/moisture_calc.py --temp 60 --ppm 20     # ppm -> aw
+```
+
+```bash
+make -C firmware                               # 부트로더 시뮬레이터 빌드
+python3 -m unittest discover -s tests          # 통합 테스트
+python3 tools/fwupdate.py mkimage app.bin app.oiw --hw-id 1 --version 1.0.0
+python3 tools/fwupdate.py flash app.oiw --port /dev/ttyUSB0 --addr 1   # pyserial 필요
 ```

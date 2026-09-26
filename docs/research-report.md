@@ -296,7 +296,8 @@ ppm = aw × Ws(T)
 | 온도 정확도 | ±0.3 °C | ±0.2 °C |
 | 오일 온도 | −20~+100 °C | −40~+120 °C (원격형 180 °C) |
 | 압력 | 50 bar (옵션 200 bar) | 20 bar, 볼밸브 삽입형 |
-| 출력 | 4–20 mA ×2, 스위치 2, (IO-Link/CAN 옵션) | 4–20 mA/HART, RS-485 Modbus, 릴레이 2 |
+| 출력 | **RS-485 Modbus RTU (기본)**, 옵션: 4–20 mA ×2, 스위치 2, IO-Link/CAN | **RS-485 Modbus RTU (기본)**, 옵션: 4–20 mA/HART, 릴레이 2 |
+| 펌웨어 업데이트 | RS-485 부트로더 (현장 원격 업데이트) | RS-485 부트로더 |
 | 전원 | 9–30 V DC | 루프 전원 또는 24 V DC / 옵션 AC |
 | 보호등급 | IP67 | IP66, 서지 강화 |
 | 원가 목표 | BOM 약 USD 40–70 | BOM 약 USD 120–250 |
@@ -365,6 +366,8 @@ ppm = aw × Ws(T)
 - 표준 시험법: IEC 60814, ASTM D6304, ASTM D1533, IEEE C57.106, IEC 61326-1, IEC 61010-1, IEC 60529, NAMUR NE43/NE107
 
 ---
+
+> **결정 (2026-09-26):** RS-485 Modbus RTU를 기본 출력으로 하고, 부트로더로 RS-485 통신을 통해 펌웨어를 업데이트한다. 상세 설계: [rs485-bootloader-design.md](rs485-bootloader-design.md)
 
 ## 다음 단계 제안
 
