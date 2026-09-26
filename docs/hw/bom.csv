@@ -12,4 +12,4 @@ no,block,part,qty,unit_usd_low,unit_usd_high,ext_usd_low,ext_usd_high,basis
 11,Passives,R/C/crystal set,1,0.5,1.5,0.5,1.5,estimate
 12,PCB,round 4-layer x2,1,0.8,2,0.8,2,estimate
 13,Indicator,status LED (option),1,0.05,0.05,0.05,0.05,estimate
-,,TOTAL (excl. connector/sensor/assembly),,,,31.05,52.75,
+,,TOTAL (excl. connector/sensor/assembly),,,,30.55,52.75,
