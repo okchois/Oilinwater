@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 760" width="1180" height="760" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo','NanumGothic',sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155"/>
+    </marker>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+    <style>
+      .t  { font-size: 14px; font-weight: 700; fill: #0f172a; }
+      .s  { font-size: 12px; fill: #334155; }
+      .xs { font-size: 11px; fill: #475569; }
+      .sig { stroke: #334155; stroke-width: 2; fill: none; }
+      .pwr { stroke: #dc2626; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+      .lbl { font-size: 11px; fill: #1e293b; font-weight: 600; }
+      .plbl { font-size: 11px; fill: #b91c1c; font-weight: 600; }
+    </style>
+  </defs>
+
+  <rect width="1180" height="760" fill="#ffffff"/>
+  <text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">오일 내 수분 트랜스미터 — 회로 블록도 (v0.1)</text>
+  <text x="20" y="56" class="s">출력: RS-485 Modbus RTU + 아날로그 4–20 mA 2채널 · 센서: IST AG MK 계열 + Pt1000 · 커넥터: M Connect 8핀</text>
+
+  <!-- 프로브 -->
+  <rect x="20" y="110" width="210" height="290" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <text x="34" y="134" class="t">프로브 (오일 접액부)</text>
+  <text x="34" y="152" class="xs">SUS316L · G½ ISO 228 · 보호캡</text>
+  <rect x="35" y="170" width="180" height="72" rx="6" fill="#fff" stroke="#059669"/>
+  <text x="47" y="194" class="t">IST MK 정전용량 센서</text>
+  <text x="47" y="213" class="s">기저 약 100–300 pF</text>
+  <text x="47" y="230" class="xs">aw → 용량 변화</text>
+  <rect x="35" y="280" width="180" height="72" rx="6" fill="#fff" stroke="#059669"/>
+  <text x="47" y="304" class="t">Pt1000 (4선)</text>
+  <text x="47" y="323" class="s">Class A/AA, 센서와 열결합</text>
+  <text x="47" y="340" class="xs">ppm 환산의 핵심</text>
+  <text x="34" y="388" class="xs">피드스루 + 포팅 · 가드 차폐 배선</text>
+
+  <!-- 측정 프론트엔드 -->
+  <rect x="290" y="150" width="200" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="302" y="175" class="t">CDC — ScioSense PCAP04</text>
+  <text x="302" y="195" class="s">1 pF–100 nF, 고분해능</text>
+  <text x="302" y="213" class="s">접지/플로팅 측정, 내장 DSP</text>
+  <text x="302" y="230" class="xs">대안: MCU 충방전 시간 측정(저가)</text>
+
+  <rect x="290" y="252" width="200" height="40" rx="6" fill="#fff" stroke="#2563eb"/>
+  <text x="302" y="277" class="s">기준 커패시터 C0G (비율 측정)</text>
+
+  <rect x="290" y="310" width="200" height="90" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="302" y="335" class="t">RTD ADC — TI ADS1220</text>
+  <text x="302" y="355" class="s">24-bit, IDAC 여기</text>
+  <text x="302" y="373" class="s">기준저항 비율측정 (±0.1 °C)</text>
+  <text x="302" y="390" class="xs">대안: PCAP04 내장 RDC</text>
+
+  <path class="sig" d="M215,206 H288" marker-end="url(#a)"/>
+  <path class="sig" d="M215,316 H250 V355 H288" marker-end="url(#a)"/>
+  <path class="sig" d="M390,252 V242" marker-end="url(#a)"/>
+
+  <!-- MCU -->
+  <rect x="550" y="130" width="240" height="330" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="564" y="156" class="t">MCU — STM32L4 (Cortex-M4F)</text>
+  <text x="564" y="180" class="s">Flash 256 KB</text>
+  <text x="576" y="198" class="xs">· 부트로더 32 KB (쓰기 보호)</text>
+  <text x="576" y="214" class="xs">· 앱 슬롯 208 KB</text>
+  <text x="576" y="230" class="xs">· 설정 8 KB / 공장 교정 8 KB</text>
+  <text x="564" y="256" class="s">SPI — CDC, ADC</text>
+  <text x="564" y="276" class="s">DAC 12-bit × 2 → 아날로그 출력</text>
+  <text x="564" y="296" class="s">USART + 하드웨어 DE → RS-485</text>
+  <text x="564" y="316" class="s">GPIO — XTR111 오류 플래그 ×2</text>
+  <text x="564" y="340" class="s">aw·T 보정, ppm 환산, 필터</text>
+  <text x="564" y="360" class="s">Modbus RTU, 진단(NE43/NE107)</text>
+  <text x="564" y="384" class="s">IWDG 워치독, BOR</text>
+  <text x="564" y="404" class="s">RS-485 부트로더 펌웨어 업데이트</text>
+  <text x="564" y="440" class="xs">내부 온도로 전자부 과열 감시</text>
+
+  <path class="sig" d="M490,195 H548" marker-end="url(#a)"/>
+  <text x="500" y="188" class="lbl">SPI</text>
+  <path class="sig" d="M490,355 H548" marker-end="url(#a)"/>
+  <text x="500" y="348" class="lbl">SPI</text>
+
+  <rect x="550" y="70" width="112" height="40" rx="6" fill="#fff" stroke="#7c3aed"/>
+  <text x="562" y="95" class="s">SWD 패드 (생산)</text>
+  <rect x="678" y="70" width="112" height="40" rx="6" fill="#fff" stroke="#7c3aed"/>
+  <text x="688" y="95" class="s">상태 LED (옵션)</text>
+  <path class="sig" d="M606,110 V128" marker-end="url(#a)"/>
+  <path class="sig" d="M734,128 V112" marker-end="url(#a)"/>
+
+  <rect x="550" y="480" width="240" height="46" rx="6" fill="#fff" stroke="#7c3aed"/>
+  <text x="562" y="499" class="s">정밀 기준전압 3.0 V (REF3030)</text>
+  <text x="562" y="516" class="xs">→ VREF+ (DAC·ADC 정확도)</text>
+  <path class="sig" d="M670,480 V462" marker-end="url(#a)"/>
+
+  <!-- 출력 -->
+  <rect x="830" y="130" width="170" height="74" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="842" y="153" class="t">V/I 변환 XTR111 #1</text>
+  <text x="842" y="172" class="s">OUT1 4–20 mA (능동)</text>
+  <text x="842" y="190" class="xs">NE43 3.6/21 mA · TVS+PTC</text>
+
+  <rect x="830" y="218" width="170" height="74" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="842" y="241" class="t">V/I 변환 XTR111 #2</text>
+  <text x="842" y="260" class="s">OUT2 4–20 mA (능동)</text>
+  <text x="842" y="278" class="xs">NE43 3.6/21 mA · TVS+PTC</text>
+
+  <path class="sig" d="M790,167 H828" marker-end="url(#a)"/>
+  <text x="796" y="160" class="lbl">DAC1</text>
+  <path class="sig" d="M790,255 H828" marker-end="url(#a)"/>
+  <text x="796" y="248" class="lbl">DAC2</text>
+
+  <rect x="830" y="320" width="150" height="96" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+  <text x="842" y="343" class="t">RS-485 트랜시버</text>
+  <text x="842" y="362" class="s">THVD1450 (±12 kV)</text>
+  <text x="842" y="380" class="xs">옵션: 절연 ISO1410</text>
+  <text x="842" y="398" class="xs">SM712 TVS + PTC</text>
+  <path class="sig" d="M790,368 H828" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="794" y="358" class="lbl">UART</text>
+  <text x="794" y="386" class="xs">TX/RX</text>
+  <text x="794" y="400" class="xs">DE</text>
+
+  <!-- 커넥터 -->
+  <rect x="1040" y="110" width="125" height="460" rx="10" fill="#f1f5f9" stroke="#475569" stroke-width="2"/>
+  <text x="1052" y="134" class="t">M Connect</text>
+  <text x="1052" y="151" class="t">8핀</text>
+  <text x="1052" y="170" class="xs">EE364 호환안*</text>
+  <text x="1052" y="196" class="s">4: OUT1</text>
+  <text x="1052" y="258" class="s">5: OUT2</text>
+  <text x="1052" y="352" class="s">3: RS485 A(D+)</text>
+  <text x="1052" y="372" class="s">2: RS485 B(D−)</text>
+  <text x="1052" y="440" class="s">1, 7: NC</text>
+  <text x="1052" y="600" class="s"></text>
+  <text x="1052" y="530" class="s">8: V+</text>
+  <text x="1052" y="550" class="s">6: GND</text>
+
+  <path class="sig" d="M1000,190 H1038" marker-end="url(#a)"/>
+  <path class="sig" d="M1000,254 H1038" marker-end="url(#a)"/>
+  <path class="sig" d="M980,362 H1038" marker-start="url(#a)" marker-end="url(#a)"/>
+
+  <!-- 전원 -->
+  <rect x="830" y="600" width="170" height="86" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="842" y="624" class="t">입력 보호</text>
+  <text x="842" y="643" class="s">역극성 P-MOSFET</text>
+  <text x="842" y="660" class="s">TVS SMBJ33A, PTC</text>
+  <text x="842" y="677" class="xs">EMI 필터 (CM 초크)</text>
+
+  <rect x="580" y="600" width="190" height="86" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="592" y="624" class="t">벅 컨버터</text>
+  <text x="592" y="643" class="s">LMR36006 (4.2–60 V)</text>
+  <text x="592" y="660" class="s">V+ → 5 V</text>
+
+  <rect x="320" y="600" width="200" height="86" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+  <text x="332" y="624" class="t">저잡음 LDO 3.3 V</text>
+  <text x="332" y="643" class="s">TPS7A20</text>
+  <text x="332" y="660" class="s">MCU · CDC · ADC · 트랜시버</text>
+
+  <path class="pwr" d="M1102,570 V643 H1002" marker-end="url(#p)"/>
+  <text x="1010" y="636" class="plbl">V+ 15–30 V</text>
+  <path class="pwr" d="M830,643 H772" marker-end="url(#p)"/>
+  <path class="pwr" d="M580,643 H522" marker-end="url(#p)"/>
+  <text x="532" y="636" class="plbl">5 V</text>
+  <path class="pwr" d="M420,600 V560 H528 V440 H548" marker-end="url(#p)"/>
+  <path class="pwr" d="M420,560 H380 V402" marker-end="url(#p)"/>
+  <text x="536" y="584" class="plbl">3.3 V</text>
+  <path class="pwr" d="M990,600 V294" marker-end="url(#p)"/>
+  <text x="918" y="440" class="plbl">V+ 레일 → XTR111</text>
+
+  <!-- 범례 -->
+  <line x1="20" y1="722" x2="60" y2="722" class="sig"/>
+  <text x="68" y="726" class="xs">신호</text>
+  <line x1="110" y1="722" x2="150" y2="722" class="pwr"/>
+  <text x="158" y="726" class="xs">전원</text>
+  <text x="210" y="726" class="xs">* 핀 배치는 E+E EE364 공개 자료 기반 호환안 (원문 확인 필요) · 부품은 1차 선정안이며 평가 후 확정 · 아날로그 출력과 전원은 GND 공통(비절연)</text>
+</svg>

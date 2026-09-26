@@ -4,6 +4,7 @@
 
 - [조사 보고서](docs/research-report.md) — 측정 원리, 경쟁 제품, 센서 소자, 회로/기구/펌웨어 설계, 교정, 인증, 로드맵
 - [시장 조사 종합](docs/market/00-summary.md) — 세계 시장, 경쟁 제품·가격, 국내 시장, 포지셔닝 제안
+- [하드웨어 블록 설계](docs/hw/hardware-block-design.md) — 회로 블록도, 부품 선정, 아날로그 2ch + RS-485
 - [RS-485 + 부트로더 설계](docs/rs485-bootloader-design.md) — 기본 출력 RS-485 Modbus RTU, 통신으로 펌웨어 업데이트
 - [`firmware/`](firmware/) — MCU 비의존 부트로더 코어 + PC 시뮬레이터
 - [`tools/fwupdate.py`](tools/fwupdate.py) — 펌웨어 이미지 생성 및 RS-485 업데이트 도구
