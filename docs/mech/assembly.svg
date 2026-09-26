@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="1180" height="720" font-family="'Noto Sans KR','Malgun Gothic','NanumGothic',sans-serif">
+<defs><marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#0f172a"/></marker><pattern id="thr" width="6" height="8" patternUnits="userSpaceOnUse"><path d="M0,8 L6,0" stroke="#64748b" stroke-width="1"/></pattern></defs>
+<rect width="1180" height="720" fill="#fff"/>
+<text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">기구 구조 설계안 v0.1 — EE364형 일체형 (측면 + 내부 투시)</text>
+<text x="20" y="56" font-size="12" fill="#475569">치수 단위 mm · 설계안(시제 전) · EE364 치수를 복제한 것이 아니라 G½ 나사 기준으로 새로 잡은 값</text>
+<line x1="123.6" y1="300" x2="871.6" y2="300" stroke="#94a3b8" stroke-dasharray="12 4 2 4"/>
+<rect x="150.0" y="273.6" width="140.8" height="52.8" fill="#e2e8f0" stroke="#334155" stroke-width="1.5"/>
+<rect x="290.8" y="273.6" width="57.2" height="52.8" fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
+<rect x="348.0" y="253.9" width="61.6" height="92.2" fill="url(#thr)" stroke="#334155" stroke-width="1.5"/>
+<rect x="409.6" y="262.6" width="8.8" height="74.8" fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
+<rect x="418.4" y="231.4" width="52.8" height="137.3" fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+<rect x="471.2" y="247.2" width="13.2" height="105.6" fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
+<rect x="484.4" y="234.0" width="272.8" height="132.0" fill="#e2e8f0" stroke="#334155" stroke-width="1.5"/>
+<rect x="757.2" y="234.0" width="26.4" height="132.0" fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
+<rect x="783.6" y="273.6" width="61.6" height="52.8" fill="#94a3b8" stroke="#334155" stroke-width="1.5"/>
+<line x1="418.40000000000003" y1="270.3" x2="471.20000000000005" y2="270.3" stroke="#334155"/>
+<line x1="418.40000000000003" y1="329.7" x2="471.20000000000005" y2="329.7" stroke="#334155"/>
+<rect x="408.7" y="238.4" width="9.7" height="123.2" fill="#86efac" stroke="#15803d" stroke-width="1.5"/>
+<circle cx="185.2" cy="288.1" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="185.2" cy="311.9" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="211.6" cy="288.1" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="211.6" cy="311.9" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="238.0" cy="288.1" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="238.0" cy="311.9" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="264.4" cy="288.1" r="5.7" fill="#fff" stroke="#334155"/>
+<circle cx="264.4" cy="311.9" r="5.7" fill="#fff" stroke="#334155"/>
+<rect x="149.0" y="294.7" width="3" height="10.6" fill="#fff" stroke="#334155"/>
+<rect x="176.4" y="285.7" width="52.8" height="28.6" fill="#fde68a" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="282.0" y="278.0" width="13.2" height="44.0" fill="#e9d5ff" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="326.0" y="284.6" width="70.4" height="30.8" fill="#fca5a5" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="396.4" y="291.2" width="88.0" height="17.6" fill="#fecaca" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="510.8" y="242.8" width="7.0" height="114.4" fill="#86efac" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="625.2" y="242.8" width="7.0" height="114.4" fill="#86efac" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="517.8" y="293.4" width="107.4" height="13.2" fill="#e2e8f0" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<rect x="761.6" y="278.0" width="30.8" height="44.0" fill="#bfdbfe" fill-opacity="0.55" stroke="#1e293b" stroke-dasharray="4 3"/>
+<line x1="484.40000000000003" y1="228.0" x2="484.40000000000003" y2="372.0" stroke="#dc2626" stroke-width="2" stroke-dasharray="3 3"/>
+<line x1="757.2" y1="228.0" x2="757.2" y2="372.0" stroke="#dc2626" stroke-width="2" stroke-dasharray="3 3"/>
+<line x1="238.0" y1="273.6" x2="211.6" y2="150.0" stroke="#0f172a"/>
+<circle cx="211.6" cy="150.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="211.6" y="154.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">1</text>
+<line x1="202.8" y1="300.0" x2="176.4" y2="200.0" stroke="#0f172a"/>
+<circle cx="176.4" cy="200.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="176.4" y="204.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">2</text>
+<line x1="288.6" y1="278.0" x2="299.6" y2="150.0" stroke="#0f172a"/>
+<circle cx="299.6" cy="150.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="299.6" y="154.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">3</text>
+<line x1="361.2" y1="284.6" x2="370.0" y2="170.0" stroke="#0f172a"/>
+<circle cx="370.0" cy="170.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="370.0" y="174.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">4</text>
+<line x1="378.8" y1="253.8" x2="405.2" y2="130.0" stroke="#0f172a"/>
+<circle cx="405.2" cy="130.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="405.2" y="134.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">5</text>
+<line x1="414.0" y1="238.4" x2="458.0" y2="130.0" stroke="#0f172a"/>
+<circle cx="458.0" cy="130.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="458.0" y="134.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">6</text>
+<line x1="444.8" y1="231.4" x2="510.8" y2="150.0" stroke="#0f172a"/>
+<circle cx="510.8" cy="150.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="510.8" y="154.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">7</text>
+<line x1="590.0" y1="234.0" x2="590.0" y2="150.0" stroke="#0f172a"/>
+<circle cx="590.0" cy="150.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="590.0" y="154.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">8</text>
+<line x1="515.2" y1="242.8" x2="546.0" y2="190.0" stroke="#0f172a"/>
+<circle cx="546.0" cy="190.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="546.0" y="194.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">9</text>
+<line x1="484.4" y1="366.0" x2="484.4" y2="400.0" stroke="#0f172a"/>
+<circle cx="484.4" cy="400.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="484.4" y="404.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">10</text>
+<line x1="770.4" y1="234.0" x2="770.4" y2="150.0" stroke="#0f172a"/>
+<circle cx="770.4" cy="150.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="770.4" y="154.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">11</text>
+<line x1="814.4" y1="273.6" x2="845.2" y2="190.0" stroke="#0f172a"/>
+<circle cx="845.2" cy="190.0" r="13" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="845.2" y="194.5" font-size="13" font-weight="700" text-anchor="middle" fill="#0f172a">12</text>
+<line x1="150.0" y1="420" x2="348.0" y2="420" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="150.0" y1="412" x2="150.0" y2="424" stroke="#94a3b8"/>
+<line x1="348.0" y1="412" x2="348.0" y2="424" stroke="#94a3b8"/>
+<text x="249.0" y="415" font-size="12" text-anchor="middle" fill="#0f172a">프로브 45 (삽입 깊이, 씰면 기준 ~43)</text>
+<line x1="348.0" y1="450" x2="409.6" y2="450" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="348.0" y1="442" x2="348.0" y2="454" stroke="#94a3b8"/>
+<line x1="409.6" y1="442" x2="409.6" y2="454" stroke="#94a3b8"/>
+<text x="378.8" y="445" font-size="12" text-anchor="middle" fill="#0f172a">나사 14</text>
+<line x1="418.40000000000003" y1="420" x2="471.20000000000005" y2="420" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="418.40000000000003" y1="412" x2="418.40000000000003" y2="424" stroke="#94a3b8"/>
+<line x1="471.20000000000005" y1="412" x2="471.20000000000005" y2="424" stroke="#94a3b8"/>
+<text x="444.8" y="415" font-size="12" text-anchor="middle" fill="#0f172a">SW27</text>
+<line x1="484.40000000000003" y1="450" x2="757.2" y2="450" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="484.40000000000003" y1="442" x2="484.40000000000003" y2="454" stroke="#94a3b8"/>
+<line x1="757.2" y1="442" x2="757.2" y2="454" stroke="#94a3b8"/>
+<text x="620.8" y="445" font-size="12" text-anchor="middle" fill="#0f172a">하우징 62</text>
+<line x1="150.0" y1="490" x2="845.2" y2="490" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<line x1="150.0" y1="482" x2="150.0" y2="494" stroke="#94a3b8"/>
+<line x1="845.2" y1="482" x2="845.2" y2="494" stroke="#94a3b8"/>
+<text x="497.6" y="485" font-size="12" text-anchor="middle" fill="#0f172a">전장 약 158</text>
+<line x1="317.20000000000005" y1="273.6" x2="317.20000000000005" y2="326.4" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="323.20000000000005" y="342.4" font-size="12" fill="#0f172a">Ø12</text>
+<line x1="669.2" y1="234.0" x2="669.2" y2="366.0" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
+<text x="675.2" y="382.0" font-size="12" fill="#0f172a">Ø30</text>
+<text x="20" y="535" font-size="14" font-weight="700" fill="#0f172a">부품 구성</text>
+<text x="20" y="560" font-size="12" fill="#1e293b">① 보호캡 — SUS316L, 측면 구멍 Ø2.6×8 + 끝단 구멍, 교체형(나사 결합), 옵션: 소결 필터</text>
+<text x="20" y="582" font-size="12" fill="#1e293b">② 센서 헤드 — IST MK 정전용량 소자 + Pt1000, 세라믹/폴리이미드 캐리어, 오일 노출</text>
+<text x="20" y="604" font-size="12" fill="#1e293b">③ 캡 결합부 — M10×0.75 나사 + 풀림 방지(록타이트 또는 코킹)</text>
+<text x="20" y="626" font-size="12" fill="#1e293b">④ 압력 격벽 — 유리-금속 밀봉(GTMS) 피드스루 4~6핀, 50 bar 기본 / 200 bar 고압형</text>
+<text x="20" y="648" font-size="12" fill="#1e293b">⑤ 프로세스 바디 — SUS316L 일체 선삭: 프로브 튜브 + G½ ISO 228-1 + 언더컷</text>
+<text x="20" y="670" font-size="12" fill="#1e293b">⑥ 본디드 씰 — G½용 USIT/DIN 3869 형, 금속+FKM (에스테르유: EPDM/FFKM)</text>
+<text x="600" y="560" font-size="12" fill="#1e293b">⑦ 육각 SW27 — 체결 토크 부위, 바디와 일체</text>
+<text x="600" y="582" font-size="12" fill="#1e293b">⑧ 하우징 튜브 — SUS316L Ø30×62, 두께 1.5, 레이저 마킹 라벨</text>
+<text x="600" y="604" font-size="12" fill="#1e293b">⑨ PCB 2장 — Ø26 원형 4층: 측정 보드(피드스루 쪽) / 전원·출력 보드</text>
+<text x="600" y="626" font-size="12" fill="#1e293b">⑩ 결합부 1 — 바디–하우징 레이저 용접 또는 나사+O링 (적색 점선)</text>
+<text x="600" y="648" font-size="12" fill="#1e293b">⑪ 엔드캡 — SUS316L, 커넥터 체결·O링 밀봉, IP67</text>
+<text x="600" y="670" font-size="12" fill="#1e293b">⑫ M Connect 8핀 수컷 — 패널형, PCB에 FPC/리드로 연결</text>
+<text x="20" y="705" font-size="11" fill="#64748b">점선 = 내부 부품 · 녹색 링 = 본디드 씰 · 적색 점선 = 용접/결합부 · 모든 치수는 시제품 전 설계안이며 PCB 외형·피드스루 선정 후 확정</text>
+</svg>
