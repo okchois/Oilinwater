@@ -1,5 +1,5 @@
 no,block,part,qty,unit_usd_low,unit_usd_high,ext_usd_low,ext_usd_high,basis
-1,MCU,STM32L431RCT6,1,1.7,3.1,1.7,3.1,LCSC / TME
+1,MCU,STM32G0B1CCT3,1,1.5,2.5,1.5,2.5,domestic distributor (G0B1CCT6 in use for DP2000)
 2,Capacitance,PCAP04-AQFM-24,1,6.5,7.1,6.5,7.1,DigiKey
 3,RTD ADC,ADS1220IPWR,1,1.9,3.5,1.9,3.5,LCSC / estimate
 4,Analog out,DAC8760IPWP,2,7.8,12.4,15.7,24.7,DigiKey/Mouser 1k

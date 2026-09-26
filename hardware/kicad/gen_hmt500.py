@@ -87,18 +87,18 @@ ic("LMR36006", left=[("1", "VIN", PI), ("2", "EN", I), ("3", "PG", OC), ("4", "F
    w=8, verify=True, desc="TI LMR36006 60V 0.6A buck. PIN NUMBERS ARE PLACEHOLDERS")
 ic("TPS7A2033", left=[("1", "IN", PI), ("3", "EN", I)], right=[("5", "OUT", PO), ("4", "NC", NC)],
    bottom=[("2", "GND", PI)], w=6, desc="TI TPS7A2033 3.3V LDO, SOT-23-5")
-ic("STM32L431RCTx",
-   left=[("7", "NRST", B), ("60", "PH3-BOOT0", I), ("5", "PH0", B), ("6", "PH1", B)] +
-        [(n, f"PC{i}", B) for i, n in enumerate(["8", "9", "10", "11", "24", "25", "37", "38", "39", "40", "51",
-                                                  "52", "53", "2", "3", "4"])] + [("54", "PD2", B)],
-   right=[(n, f"PA{i}", B) for i, n in enumerate(["14", "15", "16", "17", "20", "21", "22", "23", "41", "42", "43",
-                                                   "44", "45", "46", "49", "50"])] +
-         [(n, f"PB{i}", B) for i, n in enumerate(["26", "27", "28", "55", "56", "57", "58", "59", "61", "62", "29",
-                                                  "30", "33", "34", "35", "36"])],
-   top=[("1", "VBAT", PI), ("19", "VDD", PI), ("32", "VDD", PI), ("64", "VDD", PI), ("48", "VDDUSB", PI),
-        ("13", "VDDA", PI)],
-   bottom=[("12", "VSSA", PI), ("18", "VSS", PI), ("31", "VSS", PI), ("47", "VSS", PI), ("63", "VSS", PI)],
-   w=20, toff=1, desc="STM32L431RCT6 LQFP64 (verify pinout with ST datasheet)")
+ic("STM32G0B1CxTx",
+   left=[("10", "PF2-NRST", B), ("1", "PC13", B), ("2", "PC14", B), ("3", "PC15", B), ("8", "PF0", B), ("9", "PF1", B),
+         ("30", "PC6", B), ("31", "PC7", B), ("38", "PD0", B), ("39", "PD1", B), ("40", "PD2", B), ("41", "PD3", B)],
+   right=[(n, nm, B) for n, nm in (("11", "PA0"), ("12", "PA1"), ("13", "PA2"), ("14", "PA3"), ("15", "PA4"),
+                                   ("16", "PA5"), ("17", "PA6"), ("18", "PA7"), ("28", "PA8"), ("29", "PA9"),
+                                   ("32", "PA10"), ("33", "PA11"), ("34", "PA12"), ("35", "PA13"),
+                                   ("36", "PA14-BOOT0"), ("37", "PA15"))] +
+         [(n, f"PB{i}", B) for i, n in enumerate(["19", "20", "21", "42", "43", "44", "45", "46", "47", "48", "22",
+                                                  "23", "24", "25", "26", "27"])],
+   top=[("4", "VBAT", PI), ("6", "VDD", PI), ("5", "VREF+", PI)],
+   bottom=[("7", "VSS", PI)], ts=4,
+   w=20, toff=1, desc="STM32G0B1CCT3 LQFP48, -40..125C (pinout from KiCad library STM32G0B1C_B-C-E_Tx)")
 ic("CONN_SWD", left=[("1", "VCC", P), ("2", "SWDIO", P), ("4", "SWCLK", P), ("6", "SWO", P), ("3", "NRST", P),
                      ("5", "GND", P)], w=6, prefix="J", desc="Tag-Connect TC2030 SWD")
 ic("CONN_PROBE", right=[("1", "SENS_1", P), ("2", "SENS_2", P), ("3", "PT_F+", P), ("4", "PT_S+", P),
@@ -524,63 +524,54 @@ S.text("Vout = 1.0 V x (1 + R8/R9) = 5.0 V   (Vref 1.0 V: VERIFY)", (64, 35.5), 
 S.box(112, 14, 153, 29, "LDO 3.3 V   TPS7A2033   +   analog rail +3V3A")
 
 # ════════════════════════════ 3. MCU ════════════════════════════
-S = Sheet("mcu.kicad_sch", "MCU", "STM32L431RC, SWD, status LED, fault pull-ups", dx=6, dy=6)
+S = Sheet("mcu.kicad_sch", "MCU", "STM32G0B1CCT3, SWD, status LED, fault pull-ups", dx=6, dy=6)
 SHEETS.append(S)
-mnet = {"1": "+3V3", "19": "+3V3", "32": "+3V3", "64": "+3V3", "48": "+3V3", "13": "VDDA", "12": "GND",
-        "18": "GND", "31": "GND", "47": "GND", "63": "GND", "7": "NRST", "60": "BOOT0",
-        "15": "RS485_DE", "16": "RS485_TX", "17": "RS485_RX", "21": "SPI_SCK", "22": "SPI_MISO", "23": "SPI_MOSI",
-        "46": "SWDIO", "49": "SWCLK", "55": "SWO", "26": "CS_CDC", "27": "CS_ADC", "28": "ADC_DRDY",
-        "29": "DAC1_LATCH", "30": "DAC2_LATCH", "33": "CDC_INT", "57": "LED", "37": "OUT1_FLT", "38": "OUT2_FLT",
-        "39": "DAC1_ALARM", "40": "DAC2_ALARM", "51": "PWR_FLT"}
-S.place("U4", "STM32L431RCTx", "STM32L431RCT6", "Package_QFP:LQFP-64_10x10mm_P0.5mm", 62, 52, nets=mnet)
-tops = [S.P("U4", n) for n in ("1", "19", "32", "64", "48")]
+mnet = {"4": "+3V3", "6": "+3V3", "5": "VDDA", "7": "GND", "10": "NRST",
+        "12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO", "18": "SPI_MOSI",
+        "35": "SWDIO", "36": "SWCLK", "19": "CS_CDC", "20": "CS_ADC", "21": "ADC_DRDY",
+        "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "44": "LED", "30": "OUT1_FLT", "31": "OUT2_FLT",
+        "25": "DAC1_ALARM", "26": "DAC2_ALARM", "27": "PWR_FLT"}
+S.place("U4", "STM32G0B1CxTx", "STM32G0B1CCT3", "Package_QFP:LQFP-48_7x7mm_P0.5mm", 62, 52, nets=mnet)
+tops = [S.P("U4", n) for n in ("4", "6")]
 ytop = tops[0][1] - 2
 for p in tops:
     S.wa(p, (p[0], ytop))
 S.wa(*[(p[0], ytop) for p in tops])
-S.pw("+3V3", (tops[2][0], ytop), absolute=True)
-S.sup_stub("VDDA", S.P("U4", "13"), d=2)
-bots = [S.P("U4", n) for n in ("12", "18", "31", "47", "63")]
-yb = bots[0][1] + 2
-for p in bots:
-    S.wa(p, (p[0], yb))
-S.wa(*[(p[0], yb) for p in bots])
-S.wa((bots[2][0], yb), (bots[2][0], yb + 1))
-S.pw("GND", (bots[2][0], yb + 1), absolute=True)
-S.gl("NRST", S.P("U4", "7"), "L")
-bo = S.P("U4", "60")
-S.v2("R10", "R", "10k", FP["R0603"], bo[0] - S.dx - 4, bo[1] - S.dy, "BOOT0", "GND")
-S.wa(bo, S.P("R10", "1"))
-S.gnd_stub(S.P("R10", "2"))
-left_lbl = {"37": "OUT1_FLT", "38": "OUT2_FLT", "39": "DAC1_ALARM", "40": "DAC2_ALARM", "51": "PWR_FLT"}
-for num, nm, t, *_ in SYM["STM32L431RCTx"]["left"]:
-    if num in ("7", "60"):
+S.pw("+3V3", (tops[0][0], ytop), absolute=True)
+S.sup_stub("VDDA", S.P("U4", "5"), d=2)
+gp = S.P("U4", "7")
+S.wa(gp, (gp[0], gp[1] + 2))
+S.pw("GND", (gp[0], gp[1] + 2), absolute=True)
+S.gl("NRST", S.P("U4", "10"), "L")
+left_lbl = {"30": "OUT1_FLT", "31": "OUT2_FLT"}
+for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["left"]:
+    if num == "10":
         continue
     if num in left_lbl:
         S.gl(left_lbl[num], S.P("U4", num), "L")
     else:
         S.nc(S.P("U4", num))
-right_lbl = {"15": "RS485_DE", "16": "RS485_TX", "17": "RS485_RX", "21": "SPI_SCK", "22": "SPI_MISO",
-             "23": "SPI_MOSI", "46": "SWDIO", "49": "SWCLK", "55": "SWO", "26": "CS_CDC", "27": "CS_ADC",
-             "28": "ADC_DRDY", "29": "DAC1_LATCH", "30": "DAC2_LATCH", "33": "CDC_INT"}
-for num, nm, t, *_ in SYM["STM32L431RCTx"]["right"]:
-    if num == "57":
+right_lbl = {"12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO",
+             "18": "SPI_MOSI", "35": "SWDIO", "36": "SWCLK", "19": "CS_CDC", "20": "CS_ADC",
+             "21": "ADC_DRDY", "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT",
+             "25": "DAC1_ALARM", "26": "DAC2_ALARM", "27": "PWR_FLT"}
+for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["right"]:
+    if num == "44":
         continue
     if num in right_lbl:
         S.gl(right_lbl[num], S.P("U4", num), "R")
     else:
         S.nc(S.P("U4", num))
-pb5 = S.P("U4", "57")
+pb5 = S.P("U4", "44")
 S.h2("R16", "R", "1k", FP["R0603"], pb5[0] - S.dx + 8, pb5[1] - S.dy, "LED", "LED_A")
 S.wa(pb5, S.P("R16", "1"))
 S.v2("D3", "LED", "green", FP["LED"], pb5[0] - S.dx + 15, pb5[1] - S.dy, "GND", "LED_A", flip=True)
 S.wa(S.P("R16", "2"), S.P("D3", "2"))
 S.gnd_stub(S.P("D3", "1"))
-for i, (ref, val, fp) in enumerate([("C14", "100n", "C0603"), ("C15", "100n", "C0603"), ("C16", "100n", "C0603"),
-                                    ("C17", "100n", "C0603"), ("C18", "4.7u", "C0805")]):
+for i, (ref, val, fp) in enumerate([("C14", "100n", "C0603"), ("C15", "100n", "C0603"), ("C18", "4.7u", "C0805")]):
     decap(S, ref, val, fp, 10 + 5 * i, 12, "+3V3")
 S.box(6, 7, 38, 21, "MCU DECOUPLING")
-S.text("100 nF at each VDD / VDDUSB / VBAT pin", (6.5, 20.3), 1.27)
+S.text("100 nF at VDD and VBAT, 4.7 uF bulk", (6.5, 20.3), 1.27)
 S.h2("FB2", "FB", "600R@100MHz", FP["FB0603"], 12, 30, "+3V3", "VDDA")
 f2 = S.P("FB2", "1")
 S.wa(f2, (f2[0] - 2, f2[1]))
@@ -605,17 +596,25 @@ S.gnd_stub(S.P("C21", "2"))
 S.box(96, 7, 134, 27, "FAULT PULL-UPS  /  RESET")
 S.text("Open-drain fault lines pulled up to +3V3", (96.5, 26.3), 1.27)
 S.place("J2", "CONN_SWD", "TC2030-IDC-NL", "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical", 126, 38,
-        nets={"1": "+3V3", "2": "SWDIO", "4": "SWCLK", "6": "SWO", "3": "NRST", "5": "GND"})
+        nets={"1": "+3V3", "2": "SWDIO", "4": "SWCLK", "3": "NRST", "5": "GND"})
 v = S.P("J2", "1")
 S.wa(v, (v[0] - 2, v[1]))
 S.sup_stub("+3V3", (v[0] - 2, v[1]))
-for num, net in (("2", "SWDIO"), ("4", "SWCLK"), ("6", "SWO"), ("3", "NRST")):
+for num, net in (("2", "SWDIO"), ("4", "SWCLK"), ("3", "NRST")):
     S.gl(net, S.P("J2", num), "L", length=3)
+S.nc(S.P("J2", "6"))                      # Cortex-M0+: SWO 없음
 g_ = S.P("J2", "5")
 S.wa(g_, (g_[0] - 1, g_[1]))
 S.gnd_stub((g_[0] - 1, g_[1]))
 S.box(106, 31, 134, 47, "SWD  (production programming)")
-S.text("BOOT0 pulled low: boot from flash (RS-485 bootloader at 0x08000000)", (6, 40), 1.27)
+S.box(6, 62, 48, 80, "MCU NOTES (STM32G0B1)")
+for i, t in enumerate(["BOOT0 shares PA14/SWCLK - no pull-down.",
+                       "Option bytes: nBOOT_SEL=1, nBOOT0=1",
+                       "  -> boot from flash (RS-485 bootloader 0x08000000).",
+                       "VDDA bonded to VDD in LQFP48; VREF+ via FB2.",
+                       "Cortex-M0+: no SWO (J2 pin 6 NC).",
+                       "Same die as DP2000 (G0B1CCT6); T3 = -40..125 C."]):
+    S.text(t, (7, 66 + 2.3 * i), 1.27)
 
 # ════════════════════════════ 4. 측정 ════════════════════════════
 S = Sheet("measurement.kicad_sch", "Measurement", "Capacitive humidity sensor (PCAP04) and Pt1000 4-wire (ADS1220)",

@@ -145,22 +145,22 @@ MCU USART2 TX/RX/DE ── THVD2450 (3.3 V) ── R5/R6 2.2Ω ──┬──�
 
 ## 6. 측정부·MCU (요약)
 
-블록 설계서와 같습니다. 핀 할당(안)은 아래와 같습니다. STM32L431RC(LQFP64) 기준이며 CubeMX로 확정합니다.
+블록 설계서와 같습니다. 핀 할당(안)은 아래와 같습니다. STM32G0B1CCT3(LQFP48) 기준이며 CubeMX로 확정합니다. 핀 번호는 KiCad 공식 심볼 기준입니다.
 
 | 기능 | MCU 핀 (안) | 상대 부품 |
 |---|---|---|
-| SPI1 SCK / MISO / MOSI | PA5 / PA6 / PA7 | PCAP04, ADS1220, DAC8760 ×2 (공유) |
-| CS: PCAP04 / ADS1220 | PB0 / PB1 | |
-| LATCH(CS): DAC1 / DAC2 | PB10 / PB11 | DAC8760 |
-| ADS1220 DRDY | PB2 (EXTI) | |
-| PCAP04 INTN | PB12 (EXTI) | |
-| USART2 TX / RX / DE | PA2 / PA3 / PA1 | THVD2450 D / R / DE+/RE |
-| DAC ALARM ×2 | PC8 / PC9 | DAC8760 |
-| TPS2661 FLT ×2 | PC6 / PC7 | |
-| TPS2660 FLT | PC10 | |
-| 상태 LED | PB5 | |
-| SWD | PA13 / PA14, NRST | 생산 기록용 패드 |
-| BOOT0 | 10 kΩ 풀다운 | |
+| SPI1 SCK / MISO / MOSI | PA5 / PA6 / PA7 (16/17/18) | PCAP04, ADS1220, DAC8760 ×2 (공유) |
+| CS: PCAP04 / ADS1220 | PB0 / PB1 (19/20) | |
+| LATCH(CS): DAC1 / DAC2 | PB10 / PB11 (22/23) | DAC8760 |
+| ADS1220 DRDY | PB2 (21, EXTI) | |
+| PCAP04 INTN | PB12 (24, EXTI) | |
+| USART2 TX / RX / DE | PA2 / PA3 / PA1 (13/14/12) | THVD2450 D / R / DE+/RE |
+| DAC ALARM ×2 | PB13 / PB14 (25/26) | DAC8760 |
+| TPS2661 FLT ×2 | PC6 / PC7 (30/31) | |
+| TPS2660 FLT | PB15 (27) | |
+| 상태 LED | PB5 (44) | |
+| SWD | PA13 / PA14 (35/36), NRST = PF2 (10) | 생산 기록용 패드. M0+라 SWO 없음 |
+| BOOT0 | PA14와 공유, 풀다운 없음 | 옵션 바이트 nBOOT_SEL=1, nBOOT0=1 → 플래시 부팅 |
 
 ### 6.1 전압 출력 오차 예산 (3선식, 참고)
 

@@ -23,7 +23,7 @@ F0 = P.PCB["x"][0]
 
 
 ZONES_EN = [("MEASUREMENT", "PCAP04, ADS1220, Cref"),
-            ("MCU + POWER", "STM32L431, eFuse, buck, LDO"),
+            ("MCU + POWER", "STM32G0B1, eFuse, buck, LDO"),
             ("OUTPUT + PROTECTION", "DAC8760x2, TPS26611, THVD2450, TVS")]
 
 

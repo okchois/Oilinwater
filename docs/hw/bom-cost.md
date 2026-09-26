@@ -13,7 +13,7 @@
 
 | # | 블록 | 부품 | 수량 | 단가 USD (저가 ~ 정규 유통) | 1대분 USD | 가격 근거 |
 |---|---|---|---|---|---|---|
-| 1 | MCU | STM32L431RCT6 | 1 | 1.7 ~ 3.1 | 1.7 ~ 3.1 | LCSC $1.71부터, TME $3.13 (160개 이상) |
+| 1 | MCU | STM32G0B1CCT3 (LQFP48, 125 °C) | 1 | 1.5 ~ 2.5 | 1.5 ~ 2.5 | 두텍 구매 이력: G0B1CCT6 국내 2,060원(100개) ≈ $1.5. T3는 견적 필요 |
 | 2 | 정전용량 측정 | ScioSense PCAP04-AQFM-24 | 1 | 6.5 ~ 7.1 | 6.5 ~ 7.1 | DigiKey $6.47~7.11 |
 | 3 | 온도 측정 | TI ADS1220IPWR | 1 | 1.9 ~ 3.5 | 1.9 ~ 3.5 | LCSC $1.91~1.95, 정규 유통 1k (추정) |
 | 4 | **아날로그 출력** | **TI DAC8760IPWP** (기준안) | **2** | 7.8 ~ 12.4 | **15.7 ~ 24.7** | DigiKey/Mouser 1k $12.09~12.37, 1ku $7.84 |
@@ -57,7 +57,7 @@
 
 ## 4. 다음 단계
 
-1. 국내 공식 대리점(TI·ADI·ST 대리점, 디바이스마트 등)에 1k/5k 견적을 요청합니다. 대상은 DAC8760, AD5422, PCAP04, ADS1220, STM32L431, M Connect입니다.
+1. 국내 공식 대리점(TI·ADI·ST 대리점, 디바이스마트 등)에 1k/5k 견적을 요청합니다. 대상은 DAC8760, AD5422, PCAP04, ADS1220, STM32G0B1CCT3, M Connect입니다.
 2. 출력부 방식을 결정합니다: DAC8760 / AD5422 / XTR300.
 3. 회로도 작성 후 전체 BOM(수동소자 포함)을 확정하고 [bom.csv](bom.csv)를 갱신합니다.
 
@@ -67,7 +67,7 @@
 - DAC8760IPWP: https://octopart.com/dac8760ipwp-texas+instruments-29661991 , https://www.digikey.com/en/products/detail/texas-instruments/DAC8760IPWP/5176207
 - PCAP04: https://www.digikey.com/en/products/detail/sciosense/PCAP04-AQFM-24/10324311
 - ADS1220IPWR: https://www.lcsc.com/product-detail/C48263.html
-- STM32L431RCT6: https://www.lcsc.com/product-detail/ST-Microelectronics_STMicroelectronics_STM32L431RCT6_STM32L431RCT6_C92468.html , https://www.tme.com/us/en-us/details/stm32l431rct6/st-microcontrollers/stmicroelectronics/
+- STM32G0B1CC: 두텍 구매 이력(DP2000용 G0B1CCT6), 데이터시트 https://www.st.com/resource/en/datasheet/stm32g0b1cc.pdf
 - THVD1450DR: https://www.lcsc.com/product-detail/C2671361.html
 - LMR36006: https://www.lcsc.com/product-detail/C2869760.html
 - TPS7A2033PDBVR: https://www.lcsc.com/product-detail/C2862740.html
