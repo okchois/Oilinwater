@@ -12,6 +12,7 @@
 - [회로 설계서 (서지·오결선 보호)](docs/hw/circuit-design.md) — 전원 eFuse, 출력 보호, RS-485 ±70 V, 접지, MCU 핀 할당
 - [하드웨어 블록 설계](docs/hw/hardware-block-design.md) — 회로 블록도, 부품 선정, 아날로그 2ch + RS-485
 - [MCU 선정 검토](docs/hw/mcu-selection.md) — STM32L431 재검토, 후보 비교, 교차 검토 질문지
+- [사내 사용 부품 적용 검토](docs/hw/inhouse-parts.md) — MCU·DAC 구매 이력, DAC8760 → DAC7562 + 출력단 비교
 - [RS-485 + 부트로더 설계](docs/rs485-bootloader-design.md) — 기본 출력 RS-485 Modbus RTU, 통신으로 펌웨어 업데이트
 - [`firmware/`](firmware/) — MCU 비의존 부트로더 코어 + PC 시뮬레이터
 - [`tools/fwupdate.py`](tools/fwupdate.py) — 펌웨어 이미지 생성 및 RS-485 업데이트 도구
