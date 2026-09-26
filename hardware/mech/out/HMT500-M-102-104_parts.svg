@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420.0mm" height="297.0mm" viewBox="0 0 420.0 297.0"><rect width="420.0" height="297.0" fill="#fff"/><style>
+ .thick{stroke:#000;stroke-width:0.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+ .thin{stroke:#000;stroke-width:0.22;fill:none}
+ .center{stroke:#000;stroke-width:0.2;stroke-dasharray:8 1.5 1.5 1.5;fill:none}
+ .hidden{stroke:#000;stroke-width:0.25;stroke-dasharray:2 1.2;fill:none}
+ .hatchfill{stroke:#000;stroke-width:0.5;fill:url(#hatch)}
+ .hatchfill2{stroke:#000;stroke-width:0.5;fill:url(#hatch2)}
+ .part2{stroke:#000;stroke-width:0.35;fill:url(#hatch2)}
+ .buy{stroke:#000;stroke-width:0.35;fill:#e8e8e8}
+ .green{stroke:#000;stroke-width:0.35;fill:#cfe8d0}
+ .arrow{fill:#000;stroke:none}
+ .t{font-family:'Noto Sans KR','NanumGothic','Malgun Gothic',Arial,sans-serif;fill:#000}
+ .muted{fill:#555}
+</style>
+<defs>
+ <pattern id="hatch" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
+ <pattern id="hatch2" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
+</defs><line x1="39.000" y1="92.000" x2="139.000" y2="92.000" class="center"/>
+<polygon points="45.000,68.000 133.000,68.000 133.000,73.600 109.000,73.600 109.000,74.000 49.800,74.000 49.800,86.000 45.000,86.000" class="hatchfill2"/>
+<line x1="45.000" y1="116.000" x2="133.000" y2="116.000" class="thick"/>
+<line x1="45.000" y1="92.000" x2="45.000" y2="116.000" class="thick"/>
+<line x1="133.000" y1="92.000" x2="133.000" y2="116.000" class="thick"/>
+<line x1="109.000" y1="72.000" x2="133.000" y2="72.000" class="thin"/>
+<circle cx="59.000" cy="92.000" r="0.000" class="thin" fill="none"/>
+<rect x="53.800" y="68.000" width="10.400" height="6.000" fill="#fff" class="thin"/>
+<circle cx="59.000" cy="92.000" r="0.000" class="thin" fill="none"/>
+<rect x="53.800" y="68.000" width="10.400" height="6.000" fill="#fff" class="thin"/>
+<circle cx="73.000" cy="92.000" r="5.200" class="thin" fill="none"/>
+<circle cx="87.000" cy="92.000" r="0.000" class="thin" fill="none"/>
+<rect x="81.800" y="68.000" width="10.400" height="6.000" fill="#fff" class="thin"/>
+<circle cx="87.000" cy="92.000" r="0.000" class="thin" fill="none"/>
+<rect x="81.800" y="68.000" width="10.400" height="6.000" fill="#fff" class="thin"/>
+<circle cx="101.000" cy="92.000" r="5.200" class="thin" fill="none"/>
+<line x1="45.000" y1="117.000" x2="45.000" y2="125.500" class="thin"/>
+<line x1="49.800" y1="99.000" x2="49.800" y2="125.500" class="thin"/>
+<line x1="45.000" y1="124.000" x2="49.800" y2="124.000" class="thin"/>
+<polygon points="45.000,124.000 42.400,124.900 42.400,123.100" class="arrow"/>
+<polygon points="49.800,124.000 52.400,123.100 52.400,124.900" class="arrow"/>
+<line x1="40.000" y1="124.000" x2="45.000" y2="124.000" class="thin"/>
+<line x1="49.800" y1="124.000" x2="54.800" y2="124.000" class="thin"/>
+<text x="47.400" y="123.000" font-size="3.2" text-anchor="middle" class="t ">1.2</text>
+<line x1="45.000" y1="117.000" x2="45.000" y2="132.500" class="thin"/>
+<line x1="59.000" y1="95.000" x2="59.000" y2="132.500" class="thin"/>
+<line x1="45.000" y1="131.000" x2="59.000" y2="131.000" class="thin"/>
+<polygon points="45.000,131.000 47.600,130.100 47.600,131.900" class="arrow"/>
+<polygon points="59.000,131.000 56.400,131.900 56.400,130.100" class="arrow"/>
+<text x="52.000" y="130.000" font-size="3.2" text-anchor="middle" class="t ">3.5</text>
+<line x1="45.000" y1="117.000" x2="45.000" y2="139.500" class="thin"/>
+<line x1="73.000" y1="95.000" x2="73.000" y2="139.500" class="thin"/>
+<line x1="45.000" y1="138.000" x2="73.000" y2="138.000" class="thin"/>
+<polygon points="45.000,138.000 47.600,137.100 47.600,138.900" class="arrow"/>
+<polygon points="73.000,138.000 70.400,138.900 70.400,137.100" class="arrow"/>
+<text x="59.000" y="137.000" font-size="3.2" text-anchor="middle" class="t ">7.0</text>
+<line x1="45.000" y1="117.000" x2="45.000" y2="146.500" class="thin"/>
+<line x1="87.000" y1="95.000" x2="87.000" y2="146.500" class="thin"/>
+<line x1="45.000" y1="145.000" x2="87.000" y2="145.000" class="thin"/>
+<polygon points="45.000,145.000 47.600,144.100 47.600,145.900" class="arrow"/>
+<polygon points="87.000,145.000 84.400,145.900 84.400,144.100" class="arrow"/>
+<text x="66.000" y="144.000" font-size="3.2" text-anchor="middle" class="t ">10.5</text>
+<line x1="45.000" y1="117.000" x2="45.000" y2="153.500" class="thin"/>
+<line x1="101.000" y1="95.000" x2="101.000" y2="153.500" class="thin"/>
+<line x1="45.000" y1="152.000" x2="101.000" y2="152.000" class="thin"/>
+<polygon points="45.000,152.000 47.600,151.100 47.600,152.900" class="arrow"/>
+<polygon points="101.000,152.000 98.400,152.900 98.400,151.100" class="arrow"/>
+<text x="73.000" y="151.000" font-size="3.2" text-anchor="middle" class="t ">14.0</text>
+<line x1="45.000" y1="117.000" x2="45.000" y2="160.500" class="thin"/>
+<line x1="133.000" y1="117.000" x2="133.000" y2="160.500" class="thin"/>
+<line x1="45.000" y1="159.000" x2="133.000" y2="159.000" class="thin"/>
+<polygon points="45.000,159.000 47.600,158.100 47.600,159.900" class="arrow"/>
+<polygon points="133.000,159.000 130.400,159.900 130.400,158.100" class="arrow"/>
+<text x="89.000" y="158.000" font-size="3.2" text-anchor="middle" class="t ">22</text>
+<line x1="109.000" y1="71.000" x2="109.000" y2="59.500" class="thin"/>
+<line x1="133.000" y1="71.000" x2="133.000" y2="59.500" class="thin"/>
+<line x1="109.000" y1="61.000" x2="133.000" y2="61.000" class="thin"/>
+<polygon points="109.000,61.000 111.600,60.100 111.600,61.900" class="arrow"/>
+<polygon points="133.000,61.000 130.400,61.900 130.400,60.100" class="arrow"/>
+<text x="121.000" y="60.000" font-size="3.2" text-anchor="middle" class="t ">6</text>
+<line x1="141.000" y1="68.000" x2="141.000" y2="116.000" class="thin"/>
+<polygon points="141.000,68.000 141.900,70.600 140.100,70.600" class="arrow"/>
+<polygon points="141.000,116.000 140.100,113.400 141.900,113.400" class="arrow"/>
+<text x="140.000" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 140.000 92.000)" class="t ">Ø12</text>
+<line x1="97.000" y1="74.000" x2="105.000" y2="50.000" class="thin"/>
+<polygon points="97.000,74.000 96.968,71.249 98.676,71.818" class="arrow"/>
+<line x1="105.000" y1="50.000" x2="127.000" y2="50.000" class="thin"/>
+<text x="106.000" y="49.000" font-size="3.2" text-anchor="start" class="t ">Ø9 (센서실)</text>
+<line x1="125.000" y1="72.800" x2="149.000" y2="58.000" class="thin"/>
+<polygon points="125.000,72.800 126.741,70.669 127.685,72.201" class="arrow"/>
+<line x1="149.000" y1="58.000" x2="171.000" y2="58.000" class="thin"/>
+<text x="150.000" y="57.000" font-size="3.2" text-anchor="start" class="t ">M10×0.75-6H 깊이 6</text>
+<line x1="45.300" y1="91.000" x2="51.000" y2="50.000" class="thin"/>
+<polygon points="45.300,91.000 44.767,88.301 46.549,88.549" class="arrow"/>
+<line x1="51.000" y1="50.000" x2="73.000" y2="50.000" class="thin"/>
+<text x="52.000" y="49.000" font-size="3.2" text-anchor="start" class="t ">Ø3 끝단 구멍</text>
+<line x1="73.000" y1="97.200" x2="157.000" y2="130.000" class="thin"/>
+<polygon points="73.000,97.200 75.749,97.307 75.095,98.984" class="arrow"/>
+<line x1="157.000" y1="130.000" x2="179.000" y2="130.000" class="thin"/>
+<text x="158.000" y="129.000" font-size="3.2" text-anchor="start" class="t ">8×Ø2.6 관통</text>
+<text x="158.000" y="134.000" font-size="2.8" text-anchor="start" class="t ">줄마다 180° 2개, 이웃 줄 90° 엇갈림</text>
+<text x="45.000" y="30.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-102  보호캡 (4:1)</text>
+<text x="45.000" y="36.000" font-size="2.8" text-anchor="start" class="t muted">유속 &lt; 1 m/s: 본 도면 / &gt; 1 m/s: Ø1.8 구멍 + 소결 필터 삽입형 (별도 도면)</text>
+<line x1="294.000" y1="90.000" x2="328.500" y2="90.000" class="center"/>
+<polygon points="300.000,56.250 312.500,56.250 312.500,52.500 322.500,52.500 322.500,72.030 300.000,72.030" class="hatchfill"/>
+<line x1="300.000" y1="123.750" x2="312.500" y2="123.750" class="thick"/>
+<line x1="300.000" y1="90.000" x2="300.000" y2="123.750" class="thick"/>
+<line x1="312.500" y1="127.500" x2="322.500" y2="127.500" class="thick"/>
+<line x1="312.500" y1="90.000" x2="312.500" y2="127.500" class="thick"/>
+<line x1="322.500" y1="90.000" x2="322.500" y2="127.500" class="thick"/>
+<line x1="300.000" y1="70.000" x2="322.500" y2="70.000" class="thin"/>
+<line x1="300.000" y1="107.970" x2="322.500" y2="107.970" class="hidden"/>
+<line x1="300.000" y1="124.750" x2="300.000" y2="137.000" class="thin"/>
+<line x1="312.500" y1="128.500" x2="312.500" y2="137.000" class="thin"/>
+<line x1="300.000" y1="135.500" x2="312.500" y2="135.500" class="thin"/>
+<polygon points="300.000,135.500 302.600,134.600 302.600,136.400" class="arrow"/>
+<polygon points="312.500,135.500 309.900,136.400 309.900,134.600" class="arrow"/>
+<text x="306.250" y="134.500" font-size="3.2" text-anchor="middle" class="t ">5</text>
+<line x1="312.500" y1="128.500" x2="312.500" y2="137.000" class="thin"/>
+<line x1="322.500" y1="128.500" x2="322.500" y2="137.000" class="thin"/>
+<line x1="312.500" y1="135.500" x2="322.500" y2="135.500" class="thin"/>
+<polygon points="312.500,135.500 315.100,134.600 315.100,136.400" class="arrow"/>
+<polygon points="322.500,135.500 319.900,136.400 319.900,134.600" class="arrow"/>
+<text x="317.500" y="134.500" font-size="3.2" text-anchor="middle" class="t ">4</text>
+<line x1="300.000" y1="124.750" x2="300.000" y2="145.000" class="thin"/>
+<line x1="322.500" y1="128.500" x2="322.500" y2="145.000" class="thin"/>
+<line x1="300.000" y1="143.500" x2="322.500" y2="143.500" class="thin"/>
+<polygon points="300.000,143.500 302.600,142.600 302.600,144.400" class="arrow"/>
+<polygon points="322.500,143.500 319.900,144.400 319.900,142.600" class="arrow"/>
+<text x="311.250" y="142.500" font-size="3.2" text-anchor="middle" class="t ">9</text>
+<line x1="299.000" y1="56.250" x2="288.500" y2="56.250" class="thin"/>
+<line x1="299.000" y1="123.750" x2="288.500" y2="123.750" class="thin"/>
+<line x1="290.000" y1="56.250" x2="290.000" y2="123.750" class="thin"/>
+<polygon points="290.000,56.250 290.900,58.850 289.100,58.850" class="arrow"/>
+<polygon points="290.000,123.750 289.100,121.150 290.900,121.150" class="arrow"/>
+<text x="289.000" y="90.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 289.000 90.000)" class="t ">Ø27 h7 (0/-0.021)</text>
+<line x1="332.500" y1="52.500" x2="332.500" y2="127.500" class="thin"/>
+<polygon points="332.500,52.500 333.400,55.100 331.600,55.100" class="arrow"/>
+<polygon points="332.500,127.500 331.600,124.900 333.400,124.900" class="arrow"/>
+<text x="331.500" y="90.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 331.500 90.000)" class="t ">Ø30</text>
+<line x1="317.500" y1="71.250" x2="340.000" y2="42.500" class="thin"/>
+<polygon points="317.500,71.250 318.394,68.648 319.811,69.757" class="arrow"/>
+<line x1="340.000" y1="42.500" x2="362.000" y2="42.500" class="thin"/>
+<text x="341.000" y="41.500" font-size="3.2" text-anchor="start" class="t ">M16×1.5-6H 관통</text>
+<text x="285.000" y="30.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-104  엔드캡 (2.5:1)</text>
+<text x="285.000" y="36.000" font-size="2.8" text-anchor="start" class="t muted">커넥터 O링 면 Ra 0.8 / 커넥터 P/N 확정 후 나사 규격 재확인</text>
+<line x1="54.000" y1="206.000" x2="156.000" y2="206.000" class="center"/>
+<polygon points="60.000,183.500 150.000,183.500 150.000,185.750 60.000,185.750" class="hatchfill2"/>
+<line x1="60.000" y1="228.500" x2="150.000" y2="228.500" class="thick"/>
+<line x1="60.000" y1="206.000" x2="60.000" y2="228.500" class="thick"/>
+<line x1="150.000" y1="206.000" x2="150.000" y2="228.500" class="thick"/>
+<line x1="60.000" y1="229.500" x2="60.000" y2="239.000" class="thin"/>
+<line x1="150.000" y1="229.500" x2="150.000" y2="239.000" class="thin"/>
+<line x1="60.000" y1="237.500" x2="150.000" y2="237.500" class="thin"/>
+<polygon points="60.000,237.500 62.600,236.600 62.600,238.400" class="arrow"/>
+<polygon points="150.000,237.500 147.400,238.400 147.400,236.600" class="arrow"/>
+<text x="105.000" y="236.500" font-size="3.2" text-anchor="middle" class="t ">60</text>
+<line x1="159.000" y1="183.500" x2="159.000" y2="228.500" class="thin"/>
+<polygon points="159.000,183.500 159.900,186.100 158.100,186.100" class="arrow"/>
+<polygon points="159.000,228.500 158.100,225.900 159.900,225.900" class="arrow"/>
+<text x="158.000" y="206.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 158.000 206.000)" class="t ">Ø30</text>
+<line x1="59.000" y1="185.750" x2="48.500" y2="185.750" class="thin"/>
+<line x1="59.000" y1="226.250" x2="48.500" y2="226.250" class="thin"/>
+<line x1="50.000" y1="185.750" x2="50.000" y2="226.250" class="thin"/>
+<polygon points="50.000,185.750 50.900,188.350 49.100,188.350" class="arrow"/>
+<polygon points="50.000,226.250 49.100,223.650 50.900,223.650" class="arrow"/>
+<text x="49.000" y="206.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 49.000 206.000)" class="t ">Ø27 H7 (+0.021/0)</text>
+<text x="60.000" y="170.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-103  하우징 (1.5:1)</text>
+<text x="60.000" y="176.000" font-size="2.8" text-anchor="start" class="t muted">양 끝 C0.3 / 외면 Ra 0.8 헤어라인 또는 비드 / 레이저 마킹 영역 45×20 (문안 별도)</text>
+<text x="18.000" y="247.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
+<text x="18.000" y="253.200" font-size="3.0" text-anchor="start" class="t ">1. 재질 SUS316L (1.4404), 재질성적서 EN 10204 3.1, 부동태 처리 (ASTM A967).</text>
+<text x="18.000" y="259.400" font-size="3.0" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 버 제거. 지정 외 표면 Ra 1.6. 일반공차 ISO 2768-mK.</text>
+<text x="18.000" y="265.600" font-size="3.0" text-anchor="start" class="t ">3. ③–① (Ø27 H7/h7), ③–④ 끼워맞춤 후 전둘레 레이저 용접 (시제품: 나사+O링 대안).</text>
+<text x="18.000" y="271.800" font-size="3.0" text-anchor="start" class="t ">4. ② 보호캡 구멍 가공 후 내부 버 완전 제거 (센서 손상 방지).</text>
+<rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
+<text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
+<text x="85.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">2</text>
+<text x="135.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">3</text>
+<text x="185.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">4</text>
+<text x="235.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">5</text>
+<text x="285.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">6</text>
+<text x="335.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">7</text>
+<text x="385.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">8</text>
+<text x="6.500" y="34.083" font-size="2.8" text-anchor="middle" class="t ">A</text>
+<text x="6.500" y="80.250" font-size="2.8" text-anchor="middle" class="t ">B</text>
+<text x="6.500" y="126.417" font-size="2.8" text-anchor="middle" class="t ">C</text>
+<text x="6.500" y="172.583" font-size="2.8" text-anchor="middle" class="t ">D</text>
+<text x="6.500" y="218.750" font-size="2.8" text-anchor="middle" class="t ">E</text>
+<text x="6.500" y="264.917" font-size="2.8" text-anchor="middle" class="t ">F</text>
+<rect x="230.0" y="245.0" width="180" height="42" class="thick" fill="#fff"/>
+<line x1="230.000" y1="255.000" x2="410.000" y2="255.000" class="thin"/>
+<line x1="230.000" y1="263.000" x2="410.000" y2="263.000" class="thin"/>
+<line x1="230.000" y1="271.000" x2="410.000" y2="271.000" class="thin"/>
+<line x1="230.000" y1="279.000" x2="410.000" y2="279.000" class="thin"/>
+<line x1="290.000" y1="255.000" x2="290.000" y2="287.000" class="thin"/>
+<line x1="350.000" y1="255.000" x2="350.000" y2="287.000" class="thin"/>
+<text x="233.000" y="252.000" font-size="4.2" text-anchor="start" font-weight="700" class="t ">(주)두텍  DOTECH Co., Ltd.</text>
+<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500 오일 수분 트랜스미터</text>
+<text x="231.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">품명</text>
+<text x="231.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">보호캡 · 하우징 · 엔드캡</text>
+<text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
+<text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-102~104</text>
+<text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">A / 2026-09-26</text>
+<text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
+<text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS316L (1.4404)</text>
+<text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>
+<text x="291.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">표기</text>
+<text x="351.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">단위 / 투상</text>
+<text x="351.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">mm / 제1각법</text>
+<text x="231.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">일반공차</text>
+<text x="231.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">ISO 2768-mK</text>
+<text x="291.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">표면(지정 외)</text>
+<text x="291.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">Ra 1.6</text>
+<text x="351.500" y="274.200" font-size="2.3" text-anchor="start" class="t muted">쪽</text>
+<text x="351.500" y="278.200" font-size="3.3" text-anchor="start" class="t ">3/3</text>
+<text x="231.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">작성</text>
+<text x="231.500" y="286.200" font-size="3.3" text-anchor="start" class="t ">HMT500 설계</text>
+<text x="291.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">검토</text>
+<text x="291.500" y="286.200" font-size="3.3" text-anchor="start" class="t "></text>
+<text x="351.500" y="282.200" font-size="2.3" text-anchor="start" class="t muted">승인</text>
+<text x="351.500" y="286.200" font-size="3.3" text-anchor="start" class="t "></text>
+<polygon points="380.0,265.0 387.0,263.8 387.0,270.2 380.0,269.0" class="thin" fill="none"/>
+<circle cx="393.000" cy="267.000" r="3.200" class="thin" fill="none"/>
+<circle cx="393.000" cy="267.000" r="1.600" class="thin" fill="none"/></svg>

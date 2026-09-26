@@ -4,6 +4,14 @@
 
 ![기구 구조도](assembly.png)
 
+> **Rev A 제작 도면·3D CAD 완료 (2026-09-26):** [hardware/mech](../../hardware/mech/README.md)
+> — 조립도·부품도 PDF(A3 3장), STEP(조립품·가공부품 4종), 렌더.
+> 이 개념안(v0.2)에서 달라진 점:
+> - 전장 142 mm, 씰면에서 하우징 끝까지 79 mm, 커넥터 끝까지 94 mm로 확정
+> - 바디에 Ø30 용접 칼라를 두어 하우징과 같은 지름으로 맞대기 레이저 용접
+> - 커넥터는 엔드캡 M16×1.5 구멍에 뒤쪽 장착
+> - 보호캡 나사는 M10×0.75
+
 **견적용 자료:** [HMT500 기구설계 견적 요청서 (PDF)](HMT500_RFQ.pdf) · [도면 HMT500-M-000 (PDF)](HMT500-M-000.pdf)
 
 원본: [assembly.svg](assembly.svg) · 생성 스크립트: [make_drawing.py](make_drawing.py) (치수를 바꾸면 다시 실행)

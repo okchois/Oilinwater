@@ -1,0 +1,160 @@
+"""DOTECH HMT500 3D CAD 모델 (CadQuery). 파라미터: hmt500_params.py
+
+  pip install cadquery
+  python hardware/mech/hmt500_cad.py   →  hardware/mech/out/*.step  (음영 렌더: render3d.py)
+
+나사는 표현용(원통)이며 규격은 2D 도면에 표기한다.
+"""
+
+import math
+import os
+
+import cadquery as cq
+
+import hmt500_params as P
+
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "out")
+
+
+def revolve(profile):
+    """profile: [(x, r), ...] 닫힌 단면(축 포함 또는 링). x축 기준 회전체."""
+    return cq.Workplane("XY").polyline(profile).close().revolve(360, (0, 0, 0), (1, 0, 0))
+
+
+def cyl(x0, x1, d):
+    return revolve([(x0, 0), (x1, 0), (x1, d / 2), (x0, d / 2)])
+
+
+def tube(x0, x1, d_out, d_in):
+    return revolve([(x0, d_in / 2), (x1, d_in / 2), (x1, d_out / 2), (x0, d_out / 2)])
+
+
+def body():
+    B = P.BODY
+    solid = cyl(*B["spigot"]["x"], B["spigot"]["d"])
+    for k in ("tube", "gthread", "relief", "collar", "wspigot"):
+        solid = solid.union(cyl(*B[k]["x"], B[k]["d"]))
+    # 육각 + 30° 모따기 (원추와 교차)
+    h = B["hexa"]
+    x0, x1 = h["x"]
+    dc = P.hex_corner_d(h["af"])
+    hexa = cq.Workplane("YZ").workplane(offset=x0).polygon(6, dc).extrude(x1 - x0)
+    t = math.tan(math.radians(h["chamfer_angle"]))
+    r_af = h["af"] / 2
+    c = (dc / 2 - r_af) / t
+    cham = revolve([(x0, 0), (x1, 0), (x1, r_af), (x1 - c, dc / 2 + 0.01), (x0 + c, dc / 2 + 0.01), (x0, r_af)])
+    solid = solid.union(hexa.intersect(cham))
+    # 내부
+    for k in ("seat", "wire", "cbore"):
+        solid = solid.cut(cyl(*B[k]["x"], B[k]["d"]))
+    # 앞쪽 나사 끝 모따기
+    return solid
+
+
+def cap():
+    C = P.CAP
+    x0, x1 = C["x_tip"], C["x_rear"]
+    outer = cyl(x0, x1, C["od"])
+    inner = cyl(x0 + C["tip_wall"], x1 - C["thread_len"], C["bore"]).union(
+        cyl(x1 - C["thread_len"], x1 + 0.01, P.BODY["spigot"]["d"]))
+    s = outer.cut(inner).cut(cyl(x0 - 0.1, x0 + C["tip_wall"] + 0.1, C["tip_hole"]))
+    for x, ang in C["holes"]:
+        a = math.radians(ang)
+        d = (0, math.cos(a), math.sin(a))
+        hole = cq.Workplane(cq.Plane(origin=(x, 0, 0), xDir=(1, 0, 0), normal=d)).circle(C["hole_d"] / 2).extrude(C["od"])
+        s = s.cut(hole)
+    return s
+
+
+def housing():
+    H = P.HOUSING
+    return tube(*H["x"], H["od"], H["id"])
+
+
+def endcap():
+    E = P.ENDCAP
+    s = cyl(*E["spigot"]["x"], E["spigot"]["d"]).union(cyl(*E["flange"]["x"], E["flange"]["d"]))
+    return s.cut(cyl(E["spigot"]["x"][0] - 0.1, E["flange"]["x"][1] + 0.1, E["thread"]["d"]))
+
+
+def seal():
+    S = P.SEAL
+    return tube(*S["x"], S["od"], S["id"])
+
+
+def header():
+    Hd = P.HEADER
+    s = cyl(*Hd["x"], Hd["d"])
+    for i in range(Hd["pins"]):
+        a = 2 * math.pi * i / Hd["pins"]
+        y, z = Hd["pcd"] / 2 * math.cos(a), Hd["pcd"] / 2 * math.sin(a)
+        pin = cq.Workplane("YZ").workplane(offset=Hd["pin_front"]).center(y, z).circle(Hd["pin_d"] / 2).extrude(
+            Hd["pin_rear"] - Hd["pin_front"])
+        s = s.union(pin)
+    return s
+
+
+def carrier():
+    Cr = P.CARRIER
+    x0, x1 = Cr["x"]
+    s = cq.Workplane("XY").box(x1 - x0, Cr["w"], Cr["t"]).translate(((x0 + x1) / 2, 0, 0))
+    chip = cq.Workplane("XY").box(2.5, 2.0, 0.5).translate((x0 + 2.5, 0, Cr["t"] / 2 + 0.25))
+    rtd = cq.Workplane("XY").box(2.0, 1.2, 0.5).translate((x0 + 6.0, 0, Cr["t"] / 2 + 0.25))
+    return s.union(chip).union(rtd)
+
+
+def pcbs():
+    out = None
+    for x in P.PCB["x"]:
+        b = cyl(x, x + P.PCB["t"], P.PCB["d"])
+        out = b if out is None else out.union(b)
+    # 스페이서 3개
+    x0, x1 = P.PCB["x"][0] + P.PCB["t"], P.PCB["x"][1]
+    for i in range(3):
+        a = 2 * math.pi * i / 3 + math.pi / 6
+        y, z = 10.5 * math.cos(a), 10.5 * math.sin(a)
+        out = out.union(cq.Workplane("YZ").workplane(offset=x0).center(y, z).circle(1.5).extrude(x1 - x0))
+    return out
+
+
+def connector():
+    Cn = P.CONNECTOR
+    s = cyl(*Cn["body"]["x"], Cn["body"]["d"]).union(cyl(*Cn["thread"]["x"], Cn["thread"]["d"]))
+    s = s.union(cyl(P.ENDCAP["spigot"]["x"][0] + 1, P.ENDCAP["flange"]["x"][1], 15.9))
+    return s.cut(cyl(Cn["thread"]["x"][1] - 8, Cn["thread"]["x"][1] + 0.1, 9.5))
+
+
+PARTS = [
+    ("M-101_body", body, (0.72, 0.74, 0.78)),
+    ("M-102_cap", cap, (0.80, 0.82, 0.86)),
+    ("M-103_housing", housing, (0.82, 0.84, 0.88)),
+    ("M-104_endcap", endcap, (0.72, 0.74, 0.78)),
+    ("P-201_header", header, (0.85, 0.65, 0.25)),
+    ("P-202_carrier", carrier, (0.95, 0.93, 0.85)),
+    ("P-203_seal", seal, (0.20, 0.65, 0.30)),
+    ("E-301_pcb", pcbs, (0.10, 0.45, 0.20)),
+    ("P-204_connector", connector, (0.35, 0.35, 0.38)),
+]
+
+
+def main():
+    os.makedirs(OUT, exist_ok=True)
+    asm = cq.Assembly(name="HMT500")
+    shapes = {}
+    for name, fn, col in PARTS:
+        s = fn()
+        shapes[name] = s
+        if name.startswith("M-"):
+            cq.exporters.export(s, os.path.join(OUT, f"HMT500-{name}.step"))
+        asm.add(s, name=name, color=cq.Color(*col))
+    asm.save(os.path.join(OUT, "HMT500_assembly.step"))
+    comp = cq.Workplane("XY").newObject([cq.Compound.makeCompound([s.val() for s in shapes.values()])])
+    bb = comp.val().BoundingBox()
+    print(f"assembly bbox x {bb.xmin:.1f}..{bb.xmax:.1f} (length {bb.xlen:.1f}), dia {bb.ylen:.1f}")
+    for name, s in shapes.items():
+        v = s.val().Volume()
+        print(f"  {name:18s} volume {v / 1000:7.2f} cm3" + (f"  mass(316L) {v * 7.98e-3:6.1f} g" if name.startswith("M-") else ""))
+
+
+if __name__ == "__main__":
+    main()
