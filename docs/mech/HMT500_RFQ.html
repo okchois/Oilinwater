@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HMT500 기구설계 견적 요청서</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm 16mm 14mm; }
+  :root { --ink:#0f172a; --muted:#475569; --line:#cbd5e1; --head:#f1f5f9; --accent:#1d4ed8; }
+  body { font-family: 'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo','NanumGothic',sans-serif; color:var(--ink); font-size:10.5pt; line-height:1.55; margin:0; background:#fff; }
+  .wrap { max-width: 190mm; margin: 0 auto; padding: 0 4px; }
+  header { border-bottom: 3px solid var(--ink); padding-bottom: 8px; margin-bottom: 14px; display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap; }
+  header h1 { font-size: 19pt; margin: 0; }
+  header .sub { color: var(--muted); font-size: 10pt; margin-top: 2px; }
+  .meta { font-size: 9pt; border-collapse: collapse; }
+  .meta td { border: 1px solid var(--ink); padding: 2px 8px; }
+  .meta td:first-child { background: var(--head); color: var(--muted); }
+  h2 { font-size: 12.5pt; margin: 13px 0 5px; padding-left: 8px; border-left: 4px solid var(--accent); page-break-after: avoid; }
+  table.t { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 4px 0 8px; page-break-inside: auto; }
+  table.t th, table.t td { border: 1px solid var(--line); padding: 4px 6px; vertical-align: top; text-align: left; }
+  table.t th { background: var(--head); font-weight: 600; }
+  table.t tr { page-break-inside: avoid; }
+  .fig { border: 1px solid var(--line); padding: 4px; margin: 6px 0; }
+  .fig img { width: 100%; display: block; }
+  .cap { font-size: 9pt; color: var(--muted); margin-top: 2px; }
+  .note { background: #fffbeb; border: 1px solid #fcd34d; padding: 6px 10px; font-size: 9.5pt; margin: 8px 0; }
+  ul, ol { margin: 4px 0 8px 18px; padding: 0; }
+  li { margin: 2px 0; }
+  .fill { display:inline-block; min-width: 110px; border-bottom: 1px solid var(--ink); }
+  footer { margin-top: 8px; border-top: 1px solid var(--line); padding-top: 6px; font-size: 8.5pt; color: var(--muted); }
+  .pb { page-break-before: always; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>기구설계 견적 요청서 (RFQ)</h1>
+    <div class="sub">HMT500 오일 수분 트랜스미터 — 기구 설계 및 시제품 가공</div>
+  </div>
+  <table class="meta">
+    <tr><td>발행</td><td>(주)두텍 DOTECH</td></tr>
+    <tr><td>문서번호</td><td>HMT500-RFQ-M-001 Rev A</td></tr>
+    <tr><td>발행일</td><td>2026-09-26</td></tr>
+    <tr><td>담당자</td><td><span class="fill">&nbsp;</span></td></tr>
+    <tr><td>연락처</td><td><span class="fill">&nbsp;</span></td></tr>
+    <tr><td>회신 기한</td><td><span class="fill">&nbsp;</span></td></tr>
+  </table>
+</header>
+
+<h2>1. 제품 개요</h2>
+<p><b>HMT500</b>은 유압유·윤활유·변압기 절연유 등 산업용 오일 속의 수분(수분 활동도 aw, ppm)과 온도를 연속 측정하는 인라인 트랜스미터입니다.</p>
+<ul>
+  <li>배관이나 탱크에 <b>G½ 나사</b>로 체결하며, 앞쪽 프로브가 오일에 잠깁니다.</li>
+  <li>원통 하우징 안에 전자부(원형 PCB 2장)가 들어가고, 뒤쪽에 <b>M Connect 8핀</b> 커넥터가 있습니다.</li>
+  <li>출력은 RS-485(Modbus RTU)와 아날로그 2채널입니다.</li>
+</ul>
+<p>본 요청서는 <b>기구 설계(3D/2D), 내압·밀봉·열 검토, 시제품 가공</b>에 대한 견적을 요청합니다. 첨부 도면은 두텍의 개념 설계안이며, 상세 설계와 개선 제안을 환영합니다.</p>
+
+<h2>2. 개념 구조도</h2>
+<div class="fig"><img src="assembly.svg" alt="HMT500 기구 구조 설계안"></div>
+<div class="cap">도번 HMT500-M-000 Rev A · 측면 + 내부 투시 · 단위 mm · 척도 NTS · 치수는 개념 설계값이며 상세 설계에서 확정</div>
+
+<h2 class="pb">3. 주요 요구 사양</h2>
+<table class="t">
+  <tr><th style="width:28%">항목</th><th>요구 사양</th></tr>
+  <tr><td>외형 치수 (고정)</td><td>노출 프로브 34 mm, 프로브 외경 Ø12, 공정 나사 <b>G½ ISO 228-1</b> 길이 14, 육각 <b>AF27</b>, 하우징 외경 <b>Ø30</b> (기존 설치 위치 호환을 위해 이 치수는 유지)</td></tr>
+  <tr><td>외형 치수 (목표)</td><td>씰면~하우징 끝 약 80 mm, 전장 약 145 mm 이하 (내부 수납이 가능하면 더 짧게)</td></tr>
+  <tr><td>공정 연결 옵션</td><td>½" NPT 버전 가능 여부와 원가 차이를 제시 (육각 AF22 수준)</td></tr>
+  <tr><td>사용 압력</td><td><b>기본 50 bar</b>. 200 bar 고압형이 가능한지와 원가 차이를 제시</td></tr>
+  <tr><td>내압 / 파열</td><td>내압 시험: 정격의 1.5배 누설 없음 / 파열: 정격의 4배 이상 목표</td></tr>
+  <tr><td>오일 온도</td><td>−40 ~ +120 °C (프로브·바디)</td></tr>
+  <tr><td>주위 온도</td><td>−40 ~ +70 °C (전자부 부품 온도 85 °C 이하 유지)</td></tr>
+  <tr><td>보호 등급</td><td>IP67 (커넥터 체결 상태), IEC 60529</td></tr>
+  <tr><td>접액부·하우징 재질</td><td>SUS316L (1.4404), 재질 성적서 EN 10204 3.1 제공</td></tr>
+  <tr><td>씰 재질</td><td>기본 FKM. 에스테르유용으로 EPDM/FFKM 옵션</td></tr>
+  <tr><td>진동 / 충격</td><td>IEC 60068-2-6 / -27 수준 (산업·모바일 유압 설치)</td></tr>
+  <tr><td>표시</td><td>하우징 레이저 마킹 (모델명, 출력, 전원, 핀맵, 시리얼) — 문안은 두텍 제공</td></tr>
+  <tr><td>디자인</td><td>기능 치수 외 외관은 <b>두텍 고유 디자인</b>으로 제안 (타사 제품 외관과 차별화)</td></tr>
+</table>
+
+<h2>4. 부품별 요구사항</h2>
+<table class="t">
+  <tr><th style="width:7%">번호</th><th style="width:17%">부품</th><th>요구사항 / 설계 포인트</th></tr>
+  <tr><td>①</td><td>보호캡</td><td>SUS316L, 측면 구멍과 끝단 구멍. <b>나사 결합 교체형</b>. 유속별 2종(&lt; 1 m/s, &gt; 1 m/s). 옵션으로 소결 필터 삽입형. 오일이 잘 교환되도록 구멍 배치 제안</td></tr>
+  <tr><td>②</td><td>센서 헤드</td><td>정전용량 습도 소자(IST AG MK 계열) + Pt1000을 캐리어에 실장. 소자 감지면은 막지 않을 것. 진동에 견디는 고정 구조 설계</td></tr>
+  <tr><td>③</td><td>캡 결합부</td><td>가는 나사(예: M10×0.75) + 풀림 방지 방식 제안</td></tr>
+  <tr><td>④</td><td><b>압력 격벽</b></td><td><b>가장 중요한 부위.</b> 오일 압력을 받는 쪽과 전자부를 완전히 분리합니다. 유리-금속 밀봉(GTMS) 피드스루 4~6핀을 기본안으로 하며, 협력사 선정과 바디 접합(레이저 용접 등) 설계를 포함합니다. 기밀 목표는 헬륨 리크 1×10⁻⁸ mbar·l/s 수준(협력사 사양 확인)</td></tr>
+  <tr><td>⑤</td><td>프로세스 바디</td><td>SUS316L 일체 선삭: 프로브 튜브 + G½ 나사 + 언더컷 + 씰면. 씰면 표면거칠기와 평면도 지정</td></tr>
+  <tr><td>⑥</td><td>본디드 씰</td><td>G½용 금속+고무 본디드 씰(DIN 3869 / USIT 형) 규격품 선정</td></tr>
+  <tr><td>⑦</td><td>육각</td><td>AF27, 바디와 일체. 체결 토크 제시</td></tr>
+  <tr><td>⑧</td><td>하우징</td><td>SUS316L Ø30, 내부에 Ø26 원형 PCB 2장 수납. 방열(전자부 발열 최대 약 1.5 W)과 오일 온도 120 °C 조건의 열 검토</td></tr>
+  <tr><td>⑨</td><td>PCB 고정</td><td>Ø26 원형 PCB 2장(간격 약 25 mm)의 고정·절연·보드 간 연결 구조. PCB 외형도는 두텍 제공</td></tr>
+  <tr><td>⑩</td><td>바디–하우징 결합</td><td>시제품: 나사 + O링(분해 가능) / 양산: 레이저 용접 권장. 두 방식의 원가와 제안</td></tr>
+  <tr><td>⑪</td><td>엔드캡</td><td>커넥터 체결, O링 밀봉, IP67. 하우징 접지(EMC) 연결 구조</td></tr>
+  <tr><td>⑫</td><td>M Connect 8핀</td><td>패널형 수컷. 품번은 두텍 제공. PCB 연결 방식(리드/FPC) 설계</td></tr>
+</table>
+
+<h2>5. 의뢰 범위와 산출물</h2>
+<table class="t">
+  <tr><th style="width:7%">No</th><th style="width:35%">업무</th><th>산출물</th></tr>
+  <tr><td>1</td><td>3D 모델링 (조립 + 부품)</td><td>STEP, 원본 CAD 파일</td></tr>
+  <tr><td>2</td><td>2D 도면</td><td>부품 가공도(공차, 표면거칠기, 용접 기호), 조립도, 부품표(BOM)</td></tr>
+  <tr><td>3</td><td>내압 구조 검토</td><td>계산서 또는 FEA 보고서 (50 bar, 선택 시 200 bar)</td></tr>
+  <tr><td>4</td><td>압력 격벽(피드스루) 설계</td><td>피드스루 사양서, 협력사 견적, 접합 공정 제안</td></tr>
+  <tr><td>5</td><td>밀봉·열 검토</td><td>O링 홈 설계, IP67 구조, 열 검토 결과</td></tr>
+  <tr><td>6</td><td>시제품 가공 및 조립 (선택)</td><td>시제품 <span class="fill">&nbsp;</span> 세트 (예: 5세트), 조립 지원</td></tr>
+  <tr><td>7</td><td>시험 지원 (선택)</td><td>내압 시험, 헬륨 리크 시험, IP67 시험 성적</td></tr>
+  <tr><td>8</td><td>양산 원가 산출</td><td>부품별 양산 단가 (1,000대 / 5,000대)</td></tr>
+</table>
+
+<h2>6. 두텍 제공 자료 (계약 후)</h2>
+<ul>
+  <li>센서 소자(IST AG MK 계열) 외형도와 Pt1000 사양</li>
+  <li>M Connect 8핀 커넥터 품번과 도면</li>
+  <li>PCB 외형도(Ø26 × 2장), 부품 높이 제한, 발열 정보</li>
+  <li>레이저 마킹 문안, 로고</li>
+</ul>
+
+<h2>7. 견적 제출 항목</h2>
+<table class="t">
+  <tr><th style="width:50%">항목</th><th>금액 / 기간</th></tr>
+  <tr><td>기구 설계비 (항목 1~5)</td><td></td></tr>
+  <tr><td>시제품 가공비 (세트당 / 총액, 수량 명시)</td><td></td></tr>
+  <tr><td>압력 격벽 피드스루 단가 (시제 / 1,000개)</td><td></td></tr>
+  <tr><td>양산 가공 단가: 바디, 하우징, 엔드캡, 보호캡, 용접·마킹 (1,000 / 5,000대)</td><td></td></tr>
+  <tr><td>200 bar 고압형 추가 비용 (선택)</td><td></td></tr>
+  <tr><td>½" NPT 버전 추가 비용 (선택)</td><td></td></tr>
+  <tr><td>지그·치구비</td><td></td></tr>
+  <tr><td>시험 지원비 (선택)</td><td></td></tr>
+  <tr><td>일정: 설계 완료 / 시제품 납품</td><td></td></tr>
+  <tr><td>지급 조건, 견적 유효 기간</td><td></td></tr>
+</table>
+
+<div class="note">
+  <b>제안 요청:</b> 원가 절감, 조립성 개선, 압력 격벽 대안(에폭시 포팅 등)의 신뢰성 비교, 외관 디자인 제안을 견적서에 함께 적어 주시면 평가에 반영합니다.
+</div>
+
+<h2>8. 비밀유지</h2>
+<p>본 문서와 첨부 도면은 (주)두텍의 기밀 정보입니다. 견적 검토 목적으로만 사용하고, 제3자에게 공개하지 마십시오. 필요하면 비밀유지계약(NDA)을 체결합니다.</p>
+
+</div>
+</body>
+</html>

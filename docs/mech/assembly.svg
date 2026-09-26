@@ -1,8 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 720" width="1180" height="720" font-family="'Noto Sans KR','Malgun Gothic','NanumGothic',sans-serif">
 <defs><marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,1 L10,5 L0,9 z" fill="#0f172a"/></marker><pattern id="thr" width="6" height="8" patternUnits="userSpaceOnUse"><path d="M0,8 L6,0" stroke="#64748b" stroke-width="1"/></pattern></defs>
 <rect width="1180" height="720" fill="#fff"/>
-<text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">기구 구조 설계안 v0.2 — EE364형 일체형 (측면 + 내부 투시)</text>
-<text x="20" y="56" font-size="12" fill="#475569">치수 단위 mm · 설계안(시제 전) · 설치 치수(노출 프로브 34, G½, AF27, Ø30)는 EE364 원문과 맞춰 교체 설치 가능하게 함</text>
+<text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">DOTECH HMT500 오일 수분 트랜스미터 — 기구 구조 설계안</text>
+<text x="20" y="56" font-size="12" fill="#475569">측면 + 내부 투시 · 치수 단위 mm · 개념 설계(시제 전) · 견적용 참고 도면</text>
+<rect x="880" y="70" width="280" height="110" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>
+<text x="888" y="85" font-size="11" fill="#475569">품명</text>
+<text x="965" y="85" font-size="12" font-weight="600" fill="#0f172a">HMT500 오일 수분 트랜스미터</text>
+<line x1="880" y1="92" x2="1160" y2="92" stroke="#0f172a"/>
+<text x="888" y="107" font-size="11" fill="#475569">도번</text>
+<text x="965" y="107" font-size="12" font-weight="600" fill="#0f172a">HMT500-M-000</text>
+<line x1="880" y1="114" x2="1160" y2="114" stroke="#0f172a"/>
+<text x="888" y="129" font-size="11" fill="#475569">Rev / 일자</text>
+<text x="965" y="129" font-size="12" font-weight="600" fill="#0f172a">A / 2026-09-26</text>
+<line x1="880" y1="136" x2="1160" y2="136" stroke="#0f172a"/>
+<text x="888" y="151" font-size="11" fill="#475569">단위 / 척도</text>
+<text x="965" y="151" font-size="12" font-weight="600" fill="#0f172a">mm / NTS</text>
+<line x1="880" y1="158" x2="1160" y2="158" stroke="#0f172a"/>
+<text x="888" y="173" font-size="11" fill="#475569">작성</text>
+<text x="965" y="173" font-size="12" font-weight="600" fill="#0f172a">(주)두텍 DOTECH</text>
+<line x1="958" y1="70" x2="958" y2="180" stroke="#0f172a"/>
 <line x1="123.6" y1="300" x2="871.6" y2="300" stroke="#94a3b8" stroke-dasharray="12 4 2 4"/>
 <rect x="150.0" y="273.6" width="96.8" height="52.8" fill="#e2e8f0" stroke="#334155" stroke-width="1.5"/>
 <rect x="246.8" y="273.6" width="52.8" height="52.8" fill="#cbd5e1" stroke="#334155" stroke-width="1.5"/>
@@ -86,11 +102,11 @@
 <line x1="370.0" y1="450" x2="722.0" y2="450" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
 <line x1="370.0" y1="442" x2="370.0" y2="454" stroke="#94a3b8"/>
 <line x1="722.0" y1="442" x2="722.0" y2="454" stroke="#94a3b8"/>
-<text x="546.0" y="445" font-size="12" text-anchor="middle" fill="#0f172a">씰면~하우징 끝 80 (EE364: 77)</text>
+<text x="546.0" y="445" font-size="12" text-anchor="middle" fill="#0f172a">씰면~하우징 끝 80</text>
 <line x1="150.0" y1="490" x2="788.0" y2="490" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
 <line x1="150.0" y1="482" x2="150.0" y2="494" stroke="#94a3b8"/>
 <line x1="788.0" y1="482" x2="788.0" y2="494" stroke="#94a3b8"/>
-<text x="469.0" y="485" font-size="12" text-anchor="middle" fill="#0f172a">전장 약 145 (EE364: 140)</text>
+<text x="469.0" y="485" font-size="12" text-anchor="middle" fill="#0f172a">전장 약 145</text>
 <line x1="273.20000000000005" y1="273.6" x2="273.20000000000005" y2="326.4" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>
 <text x="279.20000000000005" y="342.4" font-size="12" fill="#0f172a">Ø12</text>
 <line x1="634.0" y1="234.0" x2="634.0" y2="366.0" stroke="#0f172a" marker-start="url(#d)" marker-end="url(#d)"/>

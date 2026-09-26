@@ -1,8 +1,10 @@
-# 기구 설계안 v0.2 — EE364형 일체형 트랜스미터
+# 기구 설계안 v0.2 — HMT500 (EE364형 일체형)
 
 작성일: 2026-09-26 · 상태: 개념 설계 (시제품 전, 치수는 설계안)
 
 ![기구 구조도](assembly.png)
+
+**견적용 자료:** [HMT500 기구설계 견적 요청서 (PDF)](HMT500_RFQ.pdf) · [도면 HMT500-M-000 (PDF)](HMT500-M-000.pdf)
 
 원본: [assembly.svg](assembly.svg) · 생성 스크립트: [make_drawing.py](make_drawing.py) (치수를 바꾸면 다시 실행)
 

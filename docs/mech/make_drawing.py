@@ -39,8 +39,19 @@ add('<defs><marker id="d" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" 
     '<pattern id="thr" width="6" height="8" patternUnits="userSpaceOnUse">'
     '<path d="M0,8 L6,0" stroke="#64748b" stroke-width="1"/></pattern></defs>')
 add('<rect width="1180" height="720" fill="#fff"/>')
-add('<text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">기구 구조 설계안 v0.2 — EE364형 일체형 (측면 + 내부 투시)</text>')
-add('<text x="20" y="56" font-size="12" fill="#475569">치수 단위 mm · 설계안(시제 전) · 설치 치수(노출 프로브 34, G½, AF27, Ø30)는 EE364 원문과 맞춰 교체 설치 가능하게 함</text>')
+add('<text x="20" y="34" font-size="20" font-weight="700" fill="#0f172a">DOTECH HMT500 오일 수분 트랜스미터 — 기구 구조 설계안</text>')
+add('<text x="20" y="56" font-size="12" fill="#475569">측면 + 내부 투시 · 치수 단위 mm · 개념 설계(시제 전) · 견적용 참고 도면</text>')
+# 표제란
+tb = [("품명", "HMT500 오일 수분 트랜스미터"), ("도번", "HMT500-M-000"), ("Rev / 일자", "A / 2026-09-26"),
+      ("단위 / 척도", "mm / NTS"), ("작성", "(주)두텍 DOTECH")]
+add('<rect x="880" y="70" width="280" height="110" fill="#fff" stroke="#0f172a" stroke-width="1.5"/>')
+for k, (a, b) in enumerate(tb):
+    yy = 70 + 22 * k
+    if k:
+        add(f'<line x1="880" y1="{yy}" x2="1160" y2="{yy}" stroke="#0f172a"/>')
+    add(f'<text x="888" y="{yy + 15}" font-size="11" fill="#475569">{a}</text>')
+    add(f'<text x="965" y="{yy + 15}" font-size="12" font-weight="600" fill="#0f172a">{b}</text>')
+add('<line x1="958" y1="70" x2="958" y2="180" stroke="#0f172a"/>')
 
 # 중심선
 add(f'<line x1="{x(-6)}" y1="{CY}" x2="{x(164)}" y2="{CY}" stroke="#94a3b8" stroke-dasharray="12 4 2 4"/>')
@@ -112,8 +123,8 @@ def dim_h(a, b, y, text):
 dim_h(0, 34, 420, "노출 프로브 34")
 dim_h(34, 48, 450, "나사 14")
 dim_h(50, 62, 420, "AF27")
-dim_h(50, 130, 450, "씰면~하우징 끝 80 (EE364: 77)")
-dim_h(0, 145, 490, "전장 약 145 (EE364: 140)")
+dim_h(50, 130, 450, "씰면~하우징 끝 80")
+dim_h(0, 145, 490, "전장 약 145")
 
 
 def dim_v(mm, d, text, dx=0):
