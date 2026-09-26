@@ -9,7 +9,7 @@
 | 제조사/모델 | 측정량 | aw/%RS 정확도 | 오일 온도 | 압력 | 공정 연결 | 출력/인터페이스 | 전원 | 커넥터/IP | 용도 | 가격 |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Vaisala MMT162 (단종 공지) | aw, T, ppm(변압기유) | ±0.02 (0–0.9), ±0.03 (0.9–1) | −40~80 °C | 200 bar | n/a | RS-485 비절연 Modbus RTU + 아날로그 2ch | 14–28 VDC(RS-485), 22–28 V(전류 출력) | M8 4핀, IP66 | OEM, 유압/윤활/변압기 | 약 €1,205 (미검증) |
-| Vaisala MMT143 | aw, %RS, T, ppm | n/a | n/a | 200 bar(옵션) | n/a | RS-485 Modbus | n/a | n/a | OEM 소형 | n/a |
+| **Vaisala MMT143** (EE364와 가장 비슷한 형태, MMT162 후속으로 추정) | aw, %RS, T | ±2 %RS (0–90), ±3 %RS (90–100) | n/a | 200 bar(옵션, 미검증) | n/a | RS-485 Modbus RTU + 4–20 mA | n/a | n/a | OEM 소형, HUMICAP 180L2 | n/a |
 | Vaisala Indigo MMP8 | aw, %RS, T, ppm | ±0.01 aw (±1 %RS) | 최대 180 °C | 0–40 bar abs | 프로브 262/448 mm | 단독 Modbus RTU / Indigo520 연결 시 아날로그 4ch + 릴레이 | n/a | n/a | 변압기, 고급 공정 | 약 $3,581 (미검증) |
 | Vaisala MHT410 | 수분 + H₂ 0–5000 ppm + T | n/a | n/a | n/a | 변압기 밸브 | 아날로그 3ch, Modbus RTU, DNP3.0 | n/a | n/a | 변압기 | n/a |
 | **E+E EE364** (구조 참고 제품) | aw, T, ppm | ±0.02 aw 수준 (미검증) | ≤80 °C (옵션 100 °C) | 20 bar | G½ ISO / ½" NPT | 4–20 mA 2ch + Modbus RTU | n/a | **M12 8핀, IP65, 316L** | OEM, 유압/윤활/변압기/디젤 | 특정 구성 약 $1,762 (미검증) |
