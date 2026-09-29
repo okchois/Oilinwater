@@ -36,6 +36,19 @@ def fnum(v):
     return f"{round(v, 4):g}"
 
 
+REF_SZ, VAL_SZ = 1.27, 1.27
+HANGUL_FACE = "NanumGothic"          # KiCad 기본(스트로크) 글꼴에는 한글이 없어 한글 글자는 트루타입으로
+
+
+def has_hangul(t):
+    return any("가" <= ch <= "힣" or "ㄱ" <= ch <= "ㆎ" for ch in str(t))
+
+
+def text_w(t, size, bold=False):
+    w = sum((1.0 if has_hangul(ch) else 1.05) for ch in str(t)) * size / U
+    return w * (1.08 if bold else 1.0)
+
+
 FONT = "(effects (font (size 1.27 1.27)))"
 HIDE = "(effects (font (size 1.27 1.27)) hide)"
 ST = "(stroke (width 0.254) (type default))"
@@ -74,7 +87,7 @@ B, I, O, P, PI, PO, OC, T, NC = ("bidirectional", "input", "output", "passive", 
                                  "open_collector", "tri_state", "no_connect")
 
 ic("CONN_GH8", right=[("8", "V+", P), ("6", "GND", P), ("4", "OUT1", P), ("5", "OUT2", P), ("3", "RS485_A", P),
-                      ("2", "RS485_B", P), ("1", "NC", P), ("7", "NC", P), ("MP", "MP", P)],
+                      ("2", "RS485_B", P), ("1", "NC", P), ("7", "NC", P)],
    w=6, prefix="J", desc="JST GH 1.25 mm 8-pin side-entry header. Harness W-2 to M12 8P field connector (pin n = M12 pin n)")
 ic("CONN_CH", right=[("1", "CHASSIS", P)], w=6, prefix="J",
    desc="PCB-to-housing chassis contact (spring finger on PCB edge). P/N TBD")
@@ -362,12 +375,29 @@ class Sheet:
     def text(self, s, pt, size=1.5, bold=False):
         self.texts.append((s, self.o(pt), size, bold))
 
-    def box(self, x1, y1, x2, y2, title):
+    def box(self, x1, y1, x2, y2, title, tdx=0.5, ko_next=False):
         self.boxes.append((self.o((x1, y1)), self.o((x2, y2))))
-        self.texts.append((title, self.o((x1 + 0.5, y1 + 1.2)), 1.6, True))
+        self.texts.append((title, self.o((x1 + tdx, y1 + 1.2)), 1.6, True))
+        ko = next((v for k, v in BOX_KO if title.startswith(k)), None)
+        if ko:                                   # 한글 부제목: 같은 줄에 들어가면 옆, 아니면 다음 줄
+            ko = ko.format(ch=title[len("ANALOG OUTPUT CH"):].split()[0] if title.startswith("ANALOG") else
+                           title[2:].split()[0] if title.startswith("CH") else "")
+            xe = x1 + tdx + text_w(title, 1.6, True) + 1.5
+            if not ko_next and xe + text_w(ko, 1.4) < x2 - 0.5:
+                self.texts.append((ko, self.o((xe, y1 + 1.2)), 1.4, False))
+            else:
+                self.texts.append((ko, self.o((x1 + tdx, y1 + 2.3)), 1.3, False))
 
 
 SHEETS = []
+# 박스 제목 한글 부제목 (영문 제목 시작 문자열 → 한글). 한글은 NanumGothic 트루타입으로 출력
+BOX_KO = [("FIELD CONNECTOR", "현장 커넥터"), ("INPUT SURGE", "입력 서지·역극성 보호"),
+          ("CIRCUIT GND", "회로 GND–외함 분리"), ("eFuse", "전자 퓨즈"), ("BUCK", "5 V 강압 전원"),
+          ("LDO", "3.3 V 레귤레이터"), ("MCU DECOUPLING", "MCU 바이패스"), ("VDDA FILTER", "아날로그 기준 전원 필터"),
+          ("FAULT PULL-UPS", "고장 신호 풀업·리셋"), ("SWD", "생산 프로그래밍"), ("MCU NOTES", "MCU 설정 메모"),
+          ("CAPACITIVE HUMIDITY", "습도 센서 측정"), ("Pt1000", "온도 측정 (2선식)"), ("DECOUPLING", "바이패스"),
+          ("ANALOG OUTPUT CH", "아날로그 출력 {ch}"), ("CH", "채널 {ch} 바이패스"), ("DAC SELECTION", "DAC 선정 (결정 #10)"),
+          ("RS-485", "RS-485 통신")]
 
 FP = {
     "R0603": "Resistor_SMD:R_0603_1608Metric", "R2512": "Resistor_SMD:R_2512_6332Metric",
@@ -391,9 +421,9 @@ S = Sheet("connector.kicad_sch", "Connector & input protection",
           "Field connector, 2-stage bidirectional TVS surge protection, chassis isolation", dx=2, dy=2, paper="A4")
 SHEETS.append(S)
 S.place("J1", "CONN_GH8", "SM08B-GHS-TB", "Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal",
-        16, 30, nets={"8": "VIN_EXT", "6": "GND_IN", "4": "OUT1_EXT", "5": "OUT2_EXT", "3": "RS485_A_EXT",
+        16, 29, nets={"8": "VIN_EXT", "6": "GND_IN", "4": "OUT1_EXT", "5": "OUT2_EXT", "3": "RS485_A_EXT",
                       "2": "RS485_B_EXT"})
-S.place("L1", "CMC", "CMC 2x1mH 0.3A", "TBD:CMC_WE-SL", 30, 26,
+S.place("L1", "CMC", "CMC 2x1mH 0.3A", "TBD:CMC_WE-SL", 32.5, 26,
         nets={"1": "VIN_EXT", "2": "VIN_L", "3": "GND_IN", "4": "GND"})
 S.wa(S.P("J1", "8"), S.P("L1", "1"))
 S.wa(S.P("J1", "6"), S.P("L1", "3"))
@@ -415,30 +445,30 @@ S.w((45, 26), (49, 26), (55, 26), (61, 26), (66, 26))
 S.flag((66, 26))
 S.gl("VIN_F", S.o((66, 26)), "R")
 for num, net in (("4", "OUT1_EXT"), ("5", "OUT2_EXT"), ("3", "RS485_A_EXT"), ("2", "RS485_B_EXT")):
-    S.gl(net, S.P("J1", num), "R", length=3)
+    S.gl(net, S.P("J1", num), "R", length=1)
 S.nc(S.P("J1", "1"))
 S.nc(S.P("J1", "7"))
-S.nc(S.P("J1", "MP"))                     # GH 고정 패드 (기구용)
 S.place("J5", "CONN_CH", "Chassis contact", "TBD:Chassis_Spring_Contact", 16, 45, nets={"1": "CHASSIS"})
 sh = S.P("J5", "1")
 S.v2("R2", "R", "1M", FP["R0603"], 36, 44, "CHASSIS", "GND")
 S.v2("C3", "C", "4.7n 2kV Y2", FP["C1812"], 42, 44, "CHASSIS", "GND")
-S.place("GDT1", "GDT", "GDT 230V", "TBD:GDT_Bourns_2038", 49, 45.5, nets={"1": "CHASSIS", "2": "GND"})
+S.place("GDT1", "GDT", "GDT 230V", "TBD:GDT_Bourns_2038", 52, 45.5, nets={"1": "CHASSIS", "2": "GND"})
 S.wa(sh, (26, sh[1]), (26, 43 + S.dy))
-S.w((24, 43), (36, 43), (42, 43), (49, 43), (58, 43))
+S.w((24, 43), (36, 43), (42, 43), (52, 43), (60, 43))
 for r_ in ("R2", "C3", "GDT1"):
     S.wa((S.P(r_, "1")[0], 43 + S.dy), S.P(r_, "1"))
     S.gnd_stub(S.P(r_, "2"))
-S.pw("CHASSIS", (58, 43))
-S.box(8, 17, 31, 38, "FIELD CONNECTOR")
-S.text("J1 JST GH 8P -> harness W-2 -> M12 8P", (8.5, 19.5), 1.27)
-S.text("(EE364-compatible pinout, pin n = pin n)", (8.5, 21.0), 1.27)
-S.text("Pins 1, 7: not connected", (8.5, 36.5), 1.27)
-S.box(32, 17, 75, 35, "INPUT SURGE / REVERSE-POLARITY PROTECTION")
-S.text("TVS bidirectional: -30 V miswiring must not conduct", (32.5, 19.5), 1.27)
-S.text("SMDJ 3 kW (1st) -> R1 -> SMBJ (2nd) -> eFuse on sheet Power", (32.5, 34), 1.27)
+S.pw("CHASSIS", (60, 43))
+S.box(8, 17, 28.5, 38, "FIELD CONNECTOR")
+S.text("J1 JST GH 8P -> W-2 -> M12 8P", (8.5, 19.5), 1.27)
+S.text("EE364 pinout, pin n = pin n", (8.5, 21.0), 1.27)
+S.text("GH mounting pads (MP): PCB only", (8.5, 37.0), 1.27)
+S.text("Pins 1, 7: not connected", (8.5, 35.4), 1.27)
+S.box(29, 17, 75, 35, "INPUT SURGE / REVERSE-POLARITY PROTECTION")
+S.text("TVS bidirectional: -30 V miswiring must not conduct", (29.5, 19.5), 1.27)
+S.text("SMDJ 3 kW (1st) -> R1 -> SMBJ (2nd) -> eFuse on sheet Power", (29.5, 34), 1.27)
 S.box(32, 39.5, 75, 54, "CIRCUIT GND <-> CHASSIS  (floating)")
-S.text("GDT conducts only on line-to-ground surge", (56, 48.5), 1.27)
+S.text("GDT conducts only on line-to-ground surge", (56, 52.5), 1.27)
 S.text("PCB-housing creepage >= 2 mm", (56, 50), 1.27)
 
 # ════════════════════════════ 2. 전원 ════════════════════════════
@@ -447,7 +477,7 @@ SHEETS.append(S)
 S.place("U1", "TPS2660", "TPS26600PWPR",
         "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias", 30, 23, nets={
     "1": "VIN_F", "2": "VIN_F", "3": "UV_DIV", "5": "OV_DIV", "6": "GND", "9": "GND", "8": "EF_RTN", "17": "EF_RTN",
-    "15": "VIN_P", "16": "VIN_P", "14": "PWR_FLT", "11": "ILIM", "10": "IMON", "12": "DVDT"})
+    "15": "VIN_P", "16": "VIN_P", "14": "PWR_FLT", "11": "EF_ILIM", "10": "EF_IMON", "12": "EF_DVDT"})
 S.v2("R3", "R", "866k 1%", FP["R0603"], 14, 20, "VIN_F", "UV_DIV")
 S.v2("R4", "R", "97.6k 1%", FP["R0603"], 14, 23, "UV_DIV", "OV_DIV")
 S.v2("R5", "R", "36.5k 1%", FP["R0603"], 14, 26, "OV_DIV", "GND")
@@ -473,9 +503,9 @@ S.wa(r8, (r8[0], r8[1] + 1), (r17[0], r8[1] + 1))
 S.gnd_stub(S.P("R22", "2"))
 S.text("*R22 RTN link: verify vs TPS2660 datasheet - RTN tied to GND disables reverse-polarity protection", (6, 40), 1.27)
 S.gl("PWR_FLT", S.P("U1", "14"), "R", length=2)
-S.v2("R6", "R", "R_ILIM *", FP["R0603"], 46, 23, "ILIM", "GND")
-S.v2("R7", "R", "10k", FP["R0603"], 43, 24, "IMON", "GND")
-S.v2("C4", "C", "22n", FP["C0603"], 40, 25, "DVDT", "GND")
+S.v2("R6", "R", "R_ILIM *", FP["R0603"], 46, 23, "EF_ILIM", "GND")
+S.v2("R7", "R", "10k", FP["R0603"], 43, 24, "EF_IMON", "GND")
+S.v2("C4", "C", "22n", FP["C0603"], 40, 25, "EF_DVDT", "GND")
 S.wa(S.P("U1", "11"), S.P("R6", "1"))
 S.wa(S.P("U1", "10"), S.P("R7", "1"))
 S.wa(S.P("U1", "12"), S.P("C4", "1"))
@@ -547,7 +577,7 @@ SHEETS.append(S)
 mnet = {"4": "+3V3", "6": "+3V3", "5": "VDDA", "7": "GND", "10": "NRST",
         "12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO", "18": "SPI_MOSI",
         "35": "SWDIO", "36": "SWCLK", "19": "CS_CDC", "20": "CS_ADC", "21": "ADC_DRDY",
-        "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "44": "LED", "30": "OUT1_FLT", "31": "OUT2_FLT",
+        "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "44": "STAT_LED", "30": "OUT1_FLT", "31": "OUT2_FLT",
         "25": "DAC1_ALARM", "26": "DAC2_ALARM", "27": "PWR_FLT"}
 S.place("U4", "STM32G0B1CxTx", "STM32G0B1CCT3", "Package_QFP:LQFP-48_7x7mm_P0.5mm", 62, 52, nets=mnet)
 tops = [S.P("U4", n) for n in ("4", "6")]
@@ -581,9 +611,9 @@ for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["right"]:
     else:
         S.nc(S.P("U4", num))
 pb5 = S.P("U4", "44")
-S.h2("R16", "R", "1k", FP["R0603"], pb5[0] - S.dx + 8, pb5[1] - S.dy, "LED", "LED_A")
+S.h2("R16", "R", "1k", FP["R0603"], pb5[0] - S.dx + 8, pb5[1] - S.dy, "STAT_LED", "STAT_LED_A")
 S.wa(pb5, S.P("R16", "1"))
-S.v2("D3", "LED", "green", FP["LED"], pb5[0] - S.dx + 15, pb5[1] - S.dy, "GND", "LED_A", flip=True)
+S.v2("D3", "LED", "green", FP["LED"], pb5[0] - S.dx + 15, pb5[1] - S.dy, "GND", "STAT_LED_A", flip=True)
 S.wa(S.P("R16", "2"), S.P("D3", "2"))
 S.gnd_stub(S.P("D3", "1"))
 for i, (ref, val, fp) in enumerate([("C14", "100n", "C0603"), ("C15", "100n", "C0603"), ("C18", "4.7u", "C0805")]):
@@ -703,10 +733,11 @@ decap(S, "C28", "100n", "C0603", 82, 42, "+3V3")
 decap(S, "C29", "100n", "C0603", 87, 42, "+3V3A")
 S.box(14, 0.5, 72, 28.5, "CAPACITIVE HUMIDITY SENSOR  (IST MK)  ->  PCAP04")
 S.text("Floating mode: C22 reference on PC0/PC1, sensor on PC2/PC3 (VERIFY with PCAP04 datasheet)", (14.5, 3.2), 1.27)
-S.box(14, 37, 72, 62, "Pt1000 2-WIRE  ->  ADS1220  (ratiometric)")
+S.box(14, 37, 72, 62, "Pt1000 2-WIRE -> ADS1220", tdx=11.2, ko_next=True)
+S.text("ratiometric: Rref R19 on REFP0/REFN0", (25.2, 40.9), 1.27)
 S.text("IDAC1 (AIN0) -> PT+ ; sense AIN1-AIN2, split at J3 pads", (46, 57.3), 1.27)
 S.text("Lead R (harness+HTX99R+probe) removed by calibration", (46, 58.6), 1.27)
-S.text("RC filter R17/R18/C27 ; Rref R19 on REFP0/REFN0", (50, 59.9), 1.27)
+S.text("RC filter R17/R18/C27 (differential + common mode)", (50, 59.9), 1.27)
 S.box(78, 5, 93, 21, "DECOUPLING")
 S.box(78, 35, 93, 51, "DECOUPLING")
 
@@ -850,13 +881,18 @@ def sheet_items(S, sheet_uuid):
         used.add(p["sym"])
         s = SYM[p["sym"]]
         key = (S.file, ref)
-        (rx, ry, rj), (vx, vy, vj) = prop_pos(p)
+        (rx, ry, rj), (vx, vy, vj) = S.propxy[ref] if hasattr(S, "propxy") else prop_pos(p)
         hide_ref = s["kind"] in ("pwr", "flag")
-        fx = lambda j: "" if j == "center" else f" (justify {j})"
+        # 180° 회전 부품은 KiCad가 좌우 정렬을 뒤집어 그리므로 미리 뒤집어 둔다
+        flipj = {"left": "right", "right": "left", "center": "center"} if p["r"] == 180 else {}
+        fx = lambda j: "" if flipj.get(j, j) == "center" else f" (justify {flipj.get(j, j)})"
         fa = 90 if p["r"] in (90, 270) else 0
         hide_val = s["kind"] == "flag" or s.get("style") == "gnd"
-        props = [f'(property "Reference" {q(ref)} (at {mm(rx)} {mm(ry)} {fa}) (effects (font (size 1.27 1.27)){fx(rj)}{" hide" if hide_ref else ""}))',
-                 f'(property "Value" {q(p["val"])} (at {mm(vx)} {mm(vy)} {fa}) (effects (font (size 1.27 1.27)){fx(vj)}{" hide" if hide_val else ""}))',
+        # 구분: 참조번호 = 굵게, 부품값 = 보통, 네트(전원 심볼) 이름 = 기울임 / 신호 네트 = 테두리 있는 전역 라벨
+        vstyle = " italic" if s["kind"] == "pwr" else ""
+        vface = f' (face "{HANGUL_FACE}")' if has_hangul(p["val"]) else ""
+        props = [f'(property "Reference" {q(ref)} (at {mm(rx)} {mm(ry)} {fa}) (effects (font (size {REF_SZ} {REF_SZ}) bold){fx(rj)}{" hide" if hide_ref else ""}))',
+                 f'(property "Value" {q(p["val"])} (at {mm(vx)} {mm(vy)} {fa}) (effects (font{vface} (size {VAL_SZ} {VAL_SZ}){vstyle}){fx(vj)}{" hide" if hide_val else ""}))',
                  f'(property "Footprint" {q(p["fp"])} (at {mm(p["x"])} {mm(p["y"])} 0) {HIDE})',
                  f'(property "Datasheet" "~" (at {mm(p["x"])} {mm(p["y"])} 0) {HIDE})']
         if s.get("verify"):
@@ -881,7 +917,8 @@ def sheet_items(S, sheet_uuid):
         items.append(f"(rectangle (start {mm(a[0])} {mm(a[1])}) (end {mm(b[0])} {mm(b[1])}) "
                      f"(stroke (width 0.1524) (type dash) (color 72 72 160 1)) (fill (type none)) (uuid {uid(S.file, 'box', i)}))")
     for i, (t, pt, size, bold) in enumerate(S.texts):
-        items.append(f"(text {q(t)} (at {mm(pt[0])} {mm(pt[1])} 0) (effects (font (size {size} {size}){' bold' if bold else ''}) "
+        face = f' (face "{HANGUL_FACE}")' if has_hangul(t) else ""
+        items.append(f"(text {q(t)} (at {mm(pt[0])} {mm(pt[1])} 0) (effects (font{face} (size {size} {size}){' bold' if bold else ''}) "
                      f"(justify left bottom)) (uuid {uid(S.file, 'txt', i)}))")
     return items, used
 
@@ -946,8 +983,172 @@ def validate(S):
             errs.append(f"off-page point {(x, y)}")
         if x > W - 48 and y > H - 17:
             errs.append(f"title-block collision {(x, y)}")
+    errs += place_props(S) + overlap_errors(S)
     if errs:
-        raise SystemExit(f"{S.file}:\n  " + "\n  ".join(sorted(set(errs))[:40]))
+        raise SystemExit(f"{S.file}:\n  " + "\n  ".join(sorted(set(errs))[:60]))
+
+
+# ════════════════════════════ 글자 배치·겹침 검사 ════════════════════════════
+# 단위 u(2.54 mm), y 아래로 +. 글자 폭은 KiCad 기본 글꼴 실측(문자당 약 1.05 × 글자 크기).
+def text_rect(t, x, y, size, just="left", bold=False, valign="center"):
+    w, h = text_w(t, size, bold), size * 1.2 / U
+    x0 = {"left": x, "center": x - w / 2, "right": x - w}[just]
+    y0 = {"center": y - h / 2, "bottom": y - h}[valign]
+    return (x0, y0, x0 + w, y0 + h)
+
+
+def _hit(a, b, pad=0.05):
+    return a[0] < b[2] + pad and b[0] < a[2] + pad and a[1] < b[3] + pad and b[1] < a[3] + pad
+
+
+TWO_HW = {"rect": 0.45, "cap": 0.85, "ind": 0.35, "ferrite": 0.45, "tvs": 0.75, "gdt": 0.85, "led": 1.05}
+
+
+def part_rects(p):
+    """부품 몸체·핀·핀 번호가 차지하는 영역 (절대 u)."""
+    s = SYM[p["sym"]]
+    x, y, r = p["x"], p["y"], p["r"]
+    k = s["kind"]
+    out = []
+    if k == "ic":
+        pins, (x1, y1, x2, y2) = ic_geom(s)
+        out.append((x + x1, y - y1, x + x2, y - y2))
+        for num, nm, t, px, py, ang in pins:
+            X, Y = x + px, y - py
+            if ang in (0, 180):
+                out.append((min(X, x + (x1 if ang == 0 else x2)), Y - 0.45, max(X, x + (x1 if ang == 0 else x2)), Y + 0.45))
+            else:
+                ey = y - (y1 if ang == 270 else y2)
+                out.append((X - 0.45, min(Y, ey), X + 0.45, max(Y, ey)))
+        return out
+    if k == "pwr":
+        st = s["style"]
+        if st == "up":
+            return [(x - 0.35, y - 0.55, x + 0.35, y)]
+        if st == "gnd":
+            return [(x - 0.55, y, x + 0.55, y + 1.05)]
+        return [(x - 1.05, y, x + 0.8, y + 1.05)]
+    if k == "flag":
+        return [(x - 0.45, y - 1.05, x + 0.45, y)]
+    hw = TWO_HW[s["draw"]]
+    return [(x - hw, y - 1.5, x + hw, y + 1.5)] if r in (0, 180) else [(x - 1.5, y - hw, x + 1.5, y + hw)]
+
+
+def fixed_rects(S):
+    """배치를 바꾸지 않는 요소: 몸체, 선, 라벨, 비연결 표시, 메모 글, 박스 테두리, 전원 심볼 글자."""
+    R = []
+    for ref in S.order:
+        p = S.parts[ref]
+        R += [(r_, "body " + ref) for r_ in part_rects(p)]
+        s = SYM[p["sym"]]
+        if s["kind"] == "pwr" and s["style"] != "gnd":
+            (_, _, _), (vx, vy, vj) = prop_pos(p)
+            R.append((text_rect(p["val"], vx, vy, VAL_SZ, vj), "net " + p["val"]))
+    for a, b in S.wires:
+        R.append(((min(a[0], b[0]) - 0.08, min(a[1], b[1]) - 0.08, max(a[0], b[0]) + 0.08, max(a[1], b[1]) + 0.08), "wire"))
+    for net, pt, ang, kind in S.labels:
+        L = text_w(net, 1.27) + 0.9
+        x, y = pt
+        rr = {0: (x, y - 0.4, x + L, y + 0.4), 180: (x - L, y - 0.4, x, y + 0.4),
+              90: (x - 0.4, y - L, x + 0.4, y), 270: (x - 0.4, y, x + 0.4, y + L)}[ang]
+        R.append((rr, "label " + net))
+    for pt in S.ncs:
+        R.append(((pt[0] - 0.3, pt[1] - 0.3, pt[0] + 0.3, pt[1] + 0.3), "nc"))
+    for t, pt, size, bold in S.texts:
+        R.append((text_rect(t, pt[0], pt[1], size, "left", bold, "bottom"), "text " + t[:24]))
+    for a, b in S.boxes:
+        x0, y0, x1, y1 = a[0], a[1], b[0], b[1]
+        for e in ((x0, y0, x1, y0), (x0, y1, x1, y1), (x0, y0, x0, y1), (x1, y0, x1, y1)):
+            R.append(((e[0] - 0.05, e[1] - 0.05, e[2] + 0.05, e[3] + 0.05), "box"))
+    return R
+
+
+def prop_candidates(p):
+    """(ref, val) 글자 위치 후보 [(x, y, just), (x, y, just)]. 가까운 것부터."""
+    s = SYM[p["sym"]]
+    x, y, r = p["x"], p["y"], p["r"]
+    c = []
+    if s["kind"] == "ic":
+        pins, (x1, y1, x2, y2) = ic_geom(s)
+        top, bot = y - y1, y - y2
+        up = 1.4 if s["top"] else 0
+        for dy in (0, 1, 2, 3):
+            c.append(((x + x1, top - 1.5 - up - dy, "left"), (x + x1, top - 0.6 - up - dy, "left")))
+            c.append(((x + x2 + 0.6, top - 1.5 - dy, "left"), (x + x2 + 0.6, top - 0.6 - dy, "left")))
+            c.append(((x + x1, bot + 0.9 + (1.4 if s["bottom"] else 0) + dy, "left"),
+                      (x + x1, bot + 1.8 + (1.4 if s["bottom"] else 0) + dy, "left")))
+            c.append(((x + x2 + 0.6, bot + 0.6 + dy, "left"), (x + x2 + 0.6, bot + 1.5 + dy, "left")))
+        return c
+    hw = TWO_HW[s["draw"]]
+    if r in (0, 180):
+        for dy in (0, -1.0, 1.0, -2.0, 2.0, -3.0, 3.0):
+            for g in (0.5, 1.5, 2.5):
+                c.append(((x + hw + g, y - 0.45 + dy, "left"), (x + hw + g, y + 0.45 + dy, "left")))
+                c.append(((x - hw - g, y - 0.45 + dy, "right"), (x - hw - g, y + 0.45 + dy, "right")))
+        for dx in (0, 1.5, -1.5, 3.0, -3.0):          # 좁은 곳: 몸체 위·아래
+            c.append(((x + dx, y + 2.1, "center"), (x + dx, y + 3.0, "center")))
+            c.append(((x + dx, y - 3.0, "center"), (x + dx, y - 2.1, "center")))
+        return c
+    for dx in (0, 1.0, -1.0, 2.0, -2.0, 3.0, -3.0, 4.0, -4.0):
+        for g in (0.5, 1.5):
+            c.append(((x + dx, y - hw - g - 0.95, "center"), (x + dx, y - hw - g - 0.05, "center")))
+            c.append(((x + dx, y + hw + g + 0.05, "center"), (x + dx, y + hw + g + 0.95, "center")))
+    return c
+
+
+def place_props(S):
+    """참조·값 글자를 몸체·선·라벨·다른 글자와 겹치지 않는 첫 후보에 놓는다. 못 놓으면 오류."""
+    fixed = fixed_rects(S)
+    placed, errs = [], []
+    S.propxy = {}
+    for ref in S.order:
+        p = S.parts[ref]
+        s = SYM[p["sym"]]
+        if s["kind"] in ("pwr", "flag"):
+            S.propxy[ref] = prop_pos(p)
+            continue
+        own = part_rects(p)
+        ok = None
+        for (rx, ry, rj), (vx, vy, vj) in prop_candidates(p):
+            rr = text_rect(ref, rx, ry, REF_SZ, rj, True)
+            vr = text_rect(p["val"], vx, vy, VAL_SZ, vj)
+            if any(_hit(t, o) for t in (rr, vr) for o, _ in fixed) or any(_hit(t, o) for t in (rr, vr) for o in placed):
+                continue
+            ok = ((rx, ry, rj), (vx, vy, vj))
+            placed += [rr, vr]
+            break
+        if ok is None:
+            errs.append(f"no free place for {ref} ({p['val']})")
+            ok = prop_pos(p)
+        S.propxy[ref] = ok
+    return errs
+
+
+def overlap_errors(S):
+    """고정 요소끼리의 글자 겹침 (메모 글·라벨·전원 이름이 선·몸체·다른 글자와)."""
+    R = fixed_rects(S)
+    errs = []
+    txt = [(r_, n) for r_, n in R if n.startswith(("text", "net ", "label"))]
+    for i, (a, na) in enumerate(txt):
+        for b, nb in R:
+            if b is a or nb == na:
+                continue
+            if nb.startswith("box") and na.startswith("text"):
+                continue                      # 박스 제목은 테두리 안쪽에 붙음
+            if na.startswith("label") and nb == "wire":
+                continue                      # 라벨은 선 끝에 붙음
+            if na.startswith("net ") and nb in ("wire",) :
+                continue
+            if _hit(a, b, pad=-0.02):
+                errs.append(f"{na} overlaps {nb}")
+    bodies = [(r_, n) for r_, n in R if n.startswith("body") and not n.startswith("body #")]
+    for a, na in bodies:                        # 부품 몸체가 박스 테두리·다른 몸체·글자와 겹침
+        for b, nb in R:
+            if nb == na or nb.startswith(("wire", "label", "nc", "body #")):
+                continue
+            if _hit(a, b, pad=-0.02):
+                errs.append(f"{na} overlaps {nb}")
+    return errs
 
 
 def title_block(title):
@@ -990,10 +1191,14 @@ def write_all():
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), VDDA, CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("VERIFY: LMR36006, PCAP04, DAC8760, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn). TPS2660: RTN link R22 to confirm.", 1.4, False),
         ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
+        ("표기 규칙: 부품번호 = 굵은 글자 (R1, U4) / 부품값 = 보통 글자 (10k, DAC8760) / 전원 네트 = 기울인 글자 (+3V3, VIN_P)", 1.4, False),
+        ("         신호 네트 = 테두리 있는 라벨 (SPI_SCK, OUT1_EXT) - 네트 이름은 부품번호·부품명과 겹치지 않게 지음", 1.4, False),
+        ("글자 겹침: 생성기가 부품 몸체·핀·선·라벨·메모와 겹치지 않는 자리에 자동 배치하고, 겹치면 생성 실패로 처리", 1.4, False),
     ]
-    y = 88
+    y = 77
     for i, (t, size, bold) in enumerate(notes):
-        items.append(f"(text {q(t)} (at {mm(12)} {mm(y)} 0) (effects (font (size {size} {size}){' bold' if bold else ''}) (justify left bottom)) (uuid {uid('note', i)}))")
+        face = f' (face "{HANGUL_FACE}")' if has_hangul(t) else ""
+        items.append(f"(text {q(t)} (at {mm(12)} {mm(y)} 0) (effects (font{face} (size {size} {size}){' bold' if bold else ''}) (justify left bottom)) (uuid {uid('note', i)}))")
         y += 3.2 if i == 0 else 2.2
     open(os.path.join(OUT, PROJECT + ".kicad_sch"), "w", encoding="utf-8").write(
         f"(kicad_sch (version 20230121) (generator eeschema) (uuid {ROOT}) (paper \"A3\")\n{title_block('Top')}\n"

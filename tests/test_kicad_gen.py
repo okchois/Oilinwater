@@ -40,6 +40,27 @@ class KicadGenTest(unittest.TestCase):
                     continue
                 self.assertIn(ref, S.nets, f"{ref} has no net intent")
 
+    def test_net_names_distinct_from_parts(self):
+        """네트 이름은 참조번호·부품값·심볼 이름과 같거나 참조번호 모양(R12 등)이면 안 된다."""
+        import re
+        nets = set(g.intended_nets())
+        refs = {r for S in g.SHEETS for r in S.order if not r.startswith("#")}
+        vals = {S.parts[r]["val"] for S in g.SHEETS for r in S.order if not r.startswith("#")}
+        syms = {k for k, v in g.SYM.items() if v["kind"] not in ("pwr", "flag")}
+        self.assertEqual(nets & (refs | vals | syms), set())
+        self.assertEqual([n for n in nets if re.fullmatch(r"(R|C|L|U|D|J|FB|Q|GDT)\d+", n)], [])
+
+    def test_hangul_uses_truetype_face(self):
+        """한글이 들어간 글자는 트루타입 글꼴(face)을 지정해야 깨지지 않는다."""
+        g.write_all()
+        for f in os.listdir(g.OUT):
+            if not f.endswith(".kicad_sch"):
+                continue
+            for line in open(os.path.join(g.OUT, f), encoding="utf-8").read().split("(text ")[1:]:
+                head = line.split("(uuid")[0]
+                if g.has_hangul(head.split('" (at')[0]):
+                    self.assertIn(f'(face "{g.HANGUL_FACE}")', head, f)
+
     @unittest.skipUnless(shutil.which("kicad-cli"), "kicad-cli not installed")
     def test_drawn_netlist_matches_intent(self):
         g.write_all()

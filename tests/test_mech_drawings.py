@@ -167,7 +167,7 @@ class MechTest(unittest.TestCase):
         sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
         import gen_hmt500 as g
         j1 = next(S.nets["J1"] for S in g.SHEETS if "J1" in S.nets)
-        self.assertEqual(len(j1), 6)                                    # 1·7 NC, MP NC
+        self.assertEqual(len(j1), 6)                                    # 1·7 NC (GH 고정 패드 MP는 PCB 전용)
         self.assertIn("J5", next(S for S in g.SHEETS if "J5" in S.nets).nets)
 
     def test_svg_valid(self):
