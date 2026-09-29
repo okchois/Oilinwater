@@ -14,27 +14,51 @@ Rev B (2026-09-26): 바디–하우징, 하우징–엔드캡을 용접 → 나�
 Rev C (2026-09-26): 원형 PCB 2장 → 축 방향 긴 PCB 1장 (축을 지나는 평면, 가운데가 넓은 모양).
   앞쪽은 바디 카운터보어에 나사 고정한 수지 홀더(M-105)의 홈에, 뒤쪽은 수지 지지링(M-106)의 홈에 끼운다.
   하우징·엔드캡을 돌려 체결해도 PCB는 바디에 고정되어 함께 돌지 않는다.
+
+Rev D (2026-09-29): 센서 접속을 두텍 HTX99R 센서 커넥터(ref/ STEP)로 변경.
+  교체형 센서 프로브(MK33-W mini + Pt1000, 4핀)를 커넥터 소켓에 꽂는다.
+  커넥터는 바디 앞 Ø10 H8 구멍에 O링(홈 Ø8.2)으로 밀봉, 플랜지 Ø11은 바디 턱이 압력을 받고 보호캡 턱이 빠짐을 막는다.
+  커넥터 뒤 핀 → 납땜·포팅 공간 → GTMS 피드스루(압력 격벽 유지) → 전자부.
+  커넥터 플랜지 Ø11을 수용하려고 노출 프로브·보호캡 Ø12 → Ø16 (노출 길이 34, G1/2, 전장 144 유지).
 """
 
-DRAWING_REV = "C"
-DATE = "2026-09-26"
+DRAWING_REV = "D"
+DATE = "2026-09-29"
 
 # ── 보호캡 M-102 ──
 CAP = dict(
     x_tip=-48.0,          # 프로브 끝
-    x_rear=-26.0,         # 프로브 튜브 어깨에 맞닿는 면
-    od=12.0,
-    bore=9.0,             # 센서실 내경
+    x_rear=-24.0,         # 프로브 튜브 어깨에 맞닿는 면
+    od=16.0,
+    bore=12.0,            # 센서실 내경 (센서 프로브 수용)
     tip_wall=1.2,
     tip_hole=3.0,
-    thread="M10x0.75-6H",
-    thread_len=6.0,       # 뒤쪽 내부 나사 길이 (x -32 ~ -26)
-    hole_d=2.6,
-    # (x 위치, 각도°) 측면 유통 구멍 8개: 2줄씩 90° 엇갈림
-    holes=[(-44.5, 0), (-44.5, 180), (-41.0, 90), (-41.0, 270),
-           (-37.5, 0), (-37.5, 180), (-34.0, 90), (-34.0, 270)],
+    thread="M14x1-6H",
+    thread_len=6.0,       # 뒤쪽 내부 나사 (x -30 ~ -24)
+    thread_minor=12.917,
+    lip=dict(x=(-31.5, -30.0), d=10.2),   # 커넥터 플랜지 앞면을 누르는 턱 (빠짐 방지)
+    hole_d=3.0,
+    # (x 위치, 각도°) 측면 유통 구멍 8개: 2줄씩 90° 엇갈림 (센서 프로브 둘레)
+    holes=[(-45.0, 0), (-45.0, 180), (-42.0, 90), (-42.0, 270),
+           (-39.0, 0), (-39.0, 180), (-36.0, 90), (-36.0, 270)],
     chamfer=0.5,
 )
+
+# ── 센서 커넥터 HTX99R-SC (두텍 기존 부품, ref/ STEP) ──
+# 커넥터 좌표 y(축) → 제품 x = CONN_X0 - y (소켓 면 y=15 이 프로브 끝 쪽)
+SENSOR_CONN = dict(step="ref/HTX99R_Sensor_Probe_Sensor_Connector.STEP", x0=-22.0,
+                   body_d=10.0, flange_d=11.0, flange_y=(7.0, 8.0), len=15.0, pin_y=-3.0,
+                   oring_groove=dict(d=8.2, y=(5.5, 7.0)), socket_face_y=15.0, sock_depth=7.9,
+                   name="HTX99R sensor connector 4P (DOTECH)")
+CONN_ORING = dict(id=8.0, cs=1.2, name="O-ring 8 x 1.2 FKM (connector seal in Ø10 H8)")
+
+# ── 교체형 센서 프로브 (MK33-W mini + Pt1000 MiniSens) ──
+SENSOR_PROBE = dict(plug=dict(x=(-39.5, -37.0), d=9.5),          # 수지 플러그 (PEEK)
+                    pins=dict(x=(-37.0, -32.0), d=1.0, pitch=2.54),  # 소켓에 꽂히는 핀 4개 (규격 확인)
+                    board=dict(x=(-46.3, -39.5), w=6.0, t=0.8),    # 센서 기판 (세라믹 또는 FR-4)
+                    mk33=dict(l=5.0, w=3.81, t=0.4),              # IST MK33-W mini (150138)
+                    pt1000=dict(l=1.6, w=1.2, t=0.5),             # IST MiniSens Pt1000 F0.1
+                    name="Sensor probe insert: MK33-W mini + Pt1000, 4 pins")
 
 # ── O링 (바디–하우징, 하우징–엔드캡 공통, 반경 방향 정적 밀봉) ──
 ORING = dict(id=25.0, cs=2.0, groove_d=25.6, groove_w=2.7, bore=29.0,
@@ -42,9 +66,9 @@ ORING = dict(id=25.0, cs=2.0, groove_d=25.6, groove_w=2.7, bore=29.0,
 
 # ── 프로세스 바디 M-101 (SUS316L 일체 선삭) ──
 BODY = dict(
-    x_front=-32.0,
-    spigot=dict(x=(-32.0, -26.0), d=10.0, thread="M10x0.75-6g"),   # 보호캡 체결부
-    tube=dict(x=(-26.0, -14.0), d=12.0),                            # 노출 프로브(캡 뒤)
+    x_front=-30.0,
+    spigot=dict(x=(-30.0, -24.0), d=14.0, d_minor=12.917, thread="M14x1-6g"),   # 보호캡 체결부
+    tube=dict(x=(-24.0, -14.0), d=16.0),                            # 노출 프로브(캡 뒤)
     gthread=dict(x=(-14.0, -2.0), d=20.955, d_minor=18.631, thread="G1/2-A (ISO 228-1)"),
     relief=dict(x=(-2.0, 0.0), d=18.4),                              # 나사 언더컷
     hexa=dict(x=(0.0, 12.0), af=27.0, chamfer_angle=30),
@@ -52,8 +76,11 @@ BODY = dict(
     seal=dict(x=(15.0, 19.0), d=29.0, fit="f7", groove_x=(15.65, 18.35)),   # O링 자리
     mthread=dict(x=(19.0, 26.0), d=28.0, d_minor=26.917, thread="M28x1-6g"),  # 하우징 체결 수나사
     # 내부
-    seat=dict(x=(-32.0, -27.0), d=8.0, fit="H7"),                    # GTMS 피드스루 안착
-    wire=dict(x=(-27.0, 12.0), d=5.0),
+    conn_cbore=dict(x=(-30.0, -29.0), d=11.2),                      # 커넥터 플랜지 자리
+    conn_bore=dict(x=(-29.0, -22.0), d=10.0, fit="H8"),              # 커넥터 몸체 + O링 밀봉면
+    cavity=dict(x=(-22.0, -16.0), d=9.0),                            # 커넥터 핀–피드스루 납땜·포팅
+    seat=dict(x=(-16.0, -11.0), d=8.0, fit="H7"),                    # GTMS 피드스루 안착 (압력 격벽)
+    wire=dict(x=(-11.0, 12.0), d=5.0),
     cbore=dict(x=(12.0, 26.0), d=22.0),
     holder_taps=dict(n=2, d=2.0, depth=5.0, pcd=16.0, thread="M2-6H"),   # 홀더 고정 나사 (카운터보어 바닥 x=12)
 )
@@ -71,9 +98,8 @@ ENDCAP = dict(mthread=dict(x=(64.0, 71.0), d=28.0, d_minor=26.917, thread="M28x1
 
 # ── 구매품 (단순 형상) ──
 SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 3869 type), steel + FKM")
-HEADER = dict(x=(-32.0, -27.0), d=8.0, pins=6, pin_d=0.46, pcd=4.5, pin_front=-40.0, pin_rear=13.5,
+HEADER = dict(x=(-16.0, -11.0), d=8.0, pins=6, pin_d=0.46, pcd=4.5, pin_front=-19.5, pin_rear=13.5,
               name="Glass-to-metal feedthrough header, 6 pin, Ø8 (supplier TBD)")
-CARRIER = dict(x=(-44.0, -34.5), w=4.5, t=0.635, name="Sensor carrier, alumina 0.635 (IST MK + Pt1000)")
 # ── PCB E-301: 축 방향 1장, 축을 지나는 평면(z=0)에 세움. 폭은 y 방향 ──
 PCB = dict(t=1.6, x=(14.5, 71.0),
            sections=[(14.5, 26.0, 18.0),    # 바디 카운터보어 Ø22 안
@@ -130,7 +156,7 @@ PARTS = [
     ("3", "HMT500-M-103", "Housing tube Ø32", "SUS316L (1.4404)", 1, "Machined, M28x1 both ends, marking"),
     ("4", "HMT500-M-104", "End cap", "SUS316L (1.4404)", 1, "Machined, flats AF28"),
     ("5", "HMT500-P-201", "Feedthrough header 6P", "Kovar/316L + glass", 1, "Purchased, laser welded to 1"),
-    ("6", "HMT500-P-202", "Sensor carrier + IST MK + Pt1000", "Alumina", 1, "Sub-assembly"),
+    ("6", "HMT500-P-202", "Sensor probe: MK33-W mini + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
     ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500"),
     ("9", "HMT500-P-204", "M Connect 8P male, M16x1.5", "-", 1, "Purchased, front mount, P/N TBD"),
@@ -139,4 +165,6 @@ PARTS = [
     ("12", "HMT500-M-105", "PCB holder", "PEEK / PA66-GF30", 1, "Machined or molded"),
     ("13", "HMT500-M-106", "PCB rear support ring", "PEEK / PA66-GF30", 1, "Machined or molded"),
     ("14", "HMT500-P-207", "Screw M2x6 (2) + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
+    ("15", "HTX99R-SC", "Sensor connector 4P (HTX99R)", "per DOTECH dwg", 1, "In-house part, O-ring sealed"),
+    ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
 ]

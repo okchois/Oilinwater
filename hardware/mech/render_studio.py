@@ -125,7 +125,10 @@ EXTERIOR = [
 ]
 INTERIOR = [
     ("header", M.header, KOVAR),
-    ("carrier", M.carrier, ALUMINA),
+    ("sensor_probe", M.sensor_probe, PEEK),
+    ("elements", M.sensor_elements, ALUMINA),
+    ("sensor_conn", M.sensor_connector, BLACK),
+    ("conn_oring", M.conn_oring, RUBBER),
     ("orings", M.orings, RUBBER),
     ("pcb", M.pcbs, FR4),
     ("pcb_parts", M.pcb_parts, IC),
@@ -357,7 +360,7 @@ def build_scene(rotz, cutaway=False, cache={}):
         parts = []
         for name, fn, mat in EXTERIOR + (INTERIOR if cutaway else []):
             s = fn()
-            if cutaway and name not in ("pcb", "pcb_parts", "pins", "carrier"):
+            if cutaway and name not in ("pcb", "pcb_parts", "pins", "sensor_probe", "elements"):
                 s = s.cut(cutter)
             parts.append((name, polydata(s), mat))
         cache[key] = parts

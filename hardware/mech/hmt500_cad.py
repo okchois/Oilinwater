@@ -47,7 +47,7 @@ def body():
     cham = revolve([(x0, 0), (x1, 0), (x1, r_af), (x1 - c, dc / 2 + 0.01), (x0 + c, dc / 2 + 0.01), (x0, r_af)])
     solid = solid.union(hexa.intersect(cham))
     # 내부
-    for k in ("seat", "wire", "cbore"):
+    for k in ("conn_cbore", "conn_bore", "cavity", "seat", "wire", "cbore"):
         solid = solid.cut(cyl(*B[k]["x"], B[k]["d"]))
     # PCB 홀더 고정 M2 탭 (카운터보어 바닥, z = ±PCD/2 — PCB 평면에 수직 방향)
     T = B["holder_taps"]
@@ -64,9 +64,11 @@ def axial_hole(x0, x1, y, z, d):
 def cap():
     C = P.CAP
     x0, x1 = C["x_tip"], C["x_rear"]
+    L = C["lip"]
     outer = cyl(x0, x1, C["od"])
-    inner = cyl(x0 + C["tip_wall"], x1 - C["thread_len"], C["bore"]).union(
-        cyl(x1 - C["thread_len"], x1 + 0.01, P.BODY["spigot"]["d"]))
+    inner = cyl(x0 + C["tip_wall"], L["x"][0], C["bore"]).union(
+        cyl(L["x"][0] - 0.01, L["x"][1], L["d"])).union(
+        cyl(L["x"][1] - 0.01, x1 + 0.01, C["thread_minor"]))
     s = outer.cut(inner).cut(cyl(x0 - 0.1, x0 + C["tip_wall"] + 0.1, C["tip_hole"]))
     for x, ang in C["holes"]:
         a = math.radians(ang)
@@ -129,13 +131,50 @@ def header():
     return s
 
 
-def carrier():
-    Cr = P.CARRIER
-    x0, x1 = Cr["x"]
-    s = cq.Workplane("XY").box(x1 - x0, Cr["w"], Cr["t"]).translate(((x0 + x1) / 2, 0, 0))
-    chip = cq.Workplane("XY").box(2.5, 2.0, 0.5).translate((x0 + 2.5, 0, Cr["t"] / 2 + 0.25))
-    rtd = cq.Workplane("XY").box(2.0, 1.2, 0.5).translate((x0 + 6.0, 0, Cr["t"] / 2 + 0.25))
-    return s.union(chip).union(rtd)
+_CONN = {}
+
+
+def sensor_connector():
+    """두텍 HTX99R 센서 커넥터 STEP을 제품 좌표로 배치: 커넥터 y축 → 제품 −x, y=0 면이 x0."""
+    if "s" not in _CONN:
+        S = P.SENSOR_CONN
+        s = cq.importers.importStep(os.path.join(os.path.dirname(os.path.abspath(__file__)), S["step"]))
+        s = s.rotate((0, 0, 0), (0, 0, 1), 90).translate((S["x0"], 0, 0))
+        _CONN["s"] = s
+    return _CONN["s"]
+
+
+def conn_oring():
+    S, O = P.SENSOR_CONN, P.CONN_ORING
+    y0, y1 = S["oring_groove"]["y"]
+    c = S["x0"] - (y0 + y1) / 2
+    r0 = S["oring_groove"]["d"] / 2 + O["cs"] / 2 - 0.15
+    return cq.Workplane("XY").add(cq.Solid.makeTorus(r0, O["cs"] / 2, cq.Vector(c, 0, 0), cq.Vector(1, 0, 0)))
+
+
+def sensor_probe():
+    """교체형 센서 프로브: 수지 플러그 + 핀 4개 + 센서 기판 (기판 평면 = XY)."""
+    SP = P.SENSOR_PROBE
+    s = cyl(*SP["plug"]["x"], SP["plug"]["d"])
+    h = SP["pins"]["pitch"] / 2
+    for y in (-h, h):
+        for z in (-h, h):
+            s = s.union(cq.Workplane("YZ").workplane(offset=SP["pins"]["x"][0]).center(y, z)
+                        .circle(SP["pins"]["d"] / 2).extrude(SP["pins"]["x"][1] - SP["pins"]["x"][0]))
+    b = SP["board"]
+    x0, x1 = b["x"]
+    s = s.union(cq.Workplane("XY").box(x1 - x0 + 1.0, b["w"], b["t"]).translate(((x0 + x1) / 2 + 0.5, 0, 0)))
+    return s
+
+
+def sensor_elements():
+    SP = P.SENSOR_PROBE
+    b, mk, pt = SP["board"], SP["mk33"], SP["pt1000"]
+    x0 = b["x"][0] + 0.3
+    z = b["t"] / 2
+    m = cq.Workplane("XY").box(mk["l"], mk["w"], mk["t"]).translate((x0 + mk["l"] / 2, -0.8, z + mk["t"] / 2))
+    t = cq.Workplane("XY").box(pt["l"], pt["w"], pt["t"]).translate((x0 + mk["l"] + 0.6 + pt["l"] / 2, 1.6, z + pt["t"] / 2))
+    return m.union(t)
 
 
 def pcb_outline_pts():
@@ -204,7 +243,10 @@ PARTS = [
     ("M-103_housing", housing, (0.82, 0.84, 0.88)),
     ("M-104_endcap", endcap, (0.72, 0.74, 0.78)),
     ("P-201_header", header, (0.85, 0.65, 0.25)),
-    ("P-202_carrier", carrier, (0.95, 0.93, 0.85)),
+    ("P-202_sensor_probe", sensor_probe, (0.78, 0.66, 0.46)),
+    ("P-202_elements", sensor_elements, (0.95, 0.93, 0.85)),
+    ("HTX99R-SC_connector", sensor_connector, (0.15, 0.15, 0.17)),
+    ("P-208_conn_oring", conn_oring, (0.10, 0.10, 0.10)),
     ("P-203_seal", seal, (0.20, 0.65, 0.30)),
     ("P-205_orings", orings, (0.10, 0.10, 0.10)),
     ("E-301_pcb", pcbs, (0.10, 0.45, 0.20)),

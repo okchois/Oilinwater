@@ -76,6 +76,37 @@ class MechTest(unittest.TestCase):
         # 피드스루 핀은 홀더 구멍 안에서 끝남 (PCB 앞 끝과 겹치지 않음)
         self.assertTrue(Hh["x"][0] < P.HEADER["pin_rear"] < Pc["x"][0])
 
+    def test_sensor_connector_fits(self):
+        """Rev D: HTX99R 센서 커넥터·센서 프로브·보호캡 끼워맞춤."""
+        B, C, S, SP, O = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING
+        x = lambda y: S["x0"] - y                                    # noqa: E731
+        # 커넥터 몸체 Ø10 → Ø10 H8 구멍, 플랜지 Ø11 → Ø11.2 자리, 플랜지 뒷면이 턱에 닿음
+        self.assertEqual(B["conn_bore"]["d"], S["body_d"])
+        self.assertGreater(B["conn_cbore"]["d"], S["flange_d"])
+        self.assertAlmostEqual(x(S["flange_y"][0]), B["conn_cbore"]["x"][1])      # 압력은 턱이 받음
+        self.assertAlmostEqual(x(S["flange_y"][1]), B["x_front"])
+        self.assertAlmostEqual(x(0), B["conn_bore"]["x"][1])                      # 아랫면 = 구멍 바닥
+        # 핀 돌출은 납땜 공간 안, 공간은 피드스루 앞
+        self.assertTrue(B["cavity"]["x"][0] < x(S["pin_y"]) < B["cavity"]["x"][1])
+        self.assertEqual(B["cavity"]["x"][1], B["seat"]["x"][0])
+        self.assertTrue(B["cavity"]["d"] > P.HEADER["d"])                         # 피드스루를 앞에서 넣고 용접
+        # O링 압축률 15~30 %, 늘림 < 5 %
+        sq = 1 - (S["body_d"] - S["oring_groove"]["d"]) / 2 / O["cs"]
+        self.assertTrue(0.15 <= sq <= 0.30, sq)
+        self.assertLess(S["oring_groove"]["d"] / O["id"] - 1, 0.05)
+        # 보호캡: 턱이 플랜지 앞면을 누름, 턱 구멍은 커넥터 앞쪽 몸체보다 큼
+        self.assertAlmostEqual(C["lip"]["x"][1], B["x_front"])
+        self.assertTrue(S["body_d"] < C["lip"]["d"] < S["flange_d"])
+        self.assertEqual(C["x_rear"] - C["thread_len"], B["spigot"]["x"][0])
+        # 센서 프로브: 플러그가 소켓 면에 닿고, 핀은 소켓 깊이 안, 기판은 센서실 안
+        self.assertAlmostEqual(SP["plug"]["x"][1], x(S["socket_face_y"]))
+        self.assertLessEqual(SP["pins"]["x"][1] - SP["pins"]["x"][0], S["sock_depth"])
+        self.assertGreater(SP["board"]["x"][0], C["x_tip"] + C["tip_wall"])
+        self.assertLess(SP["board"]["w"], C["bore"])
+        self.assertLess(SP["plug"]["d"], C["bore"])
+        # 프로브 튜브가 G1/2 설치 구멍(골지름)을 통과
+        self.assertLess(C["od"], B["gthread"]["d_minor"])
+
     def test_svg_valid(self):
         for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small, D.sheet_pcb):
             with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False, encoding="utf-8") as f:
