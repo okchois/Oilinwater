@@ -59,6 +59,22 @@ class KicadGenTest(unittest.TestCase):
             total_j += js
         self.assertLessEqual(total_j, 35)
 
+    def test_hangul_font_has_all_glyphs(self):
+        """한글 글자(나눔고딕으로 출력)에 쓰인 모든 문자가 글꼴에 있어야 한다 (네모 깨짐 방지)."""
+        try:
+            from fontTools.ttLib import TTFont
+        except ImportError:
+            self.skipTest("fontTools 없음")
+        path = subprocess.run(["fc-match", "-f", "%{file}", g.HANGUL_FACE], capture_output=True, text=True).stdout
+        if not path or "Nanum" not in path:
+            self.skipTest("NanumGothic 없음")
+        cmap = TTFont(path).getBestCmap()
+        for S in g.SHEETS:
+            for t, *_ in S.texts:
+                if g.has_hangul(t):
+                    missing = {ch for ch in g.ko_safe(t) if ord(ch) not in cmap}
+                    self.assertEqual(missing, set(), t)
+
     def test_hangul_uses_truetype_face(self):
         """한글이 들어간 글자는 트루타입 글꼴(face)을 지정해야 깨지지 않는다."""
         g.write_all()

@@ -44,6 +44,13 @@ def has_hangul(t):
     return any("가" <= ch <= "힣" or "ㄱ" <= ch <= "ㆎ" for ch in str(t))
 
 
+KO_SAFE = {"\u2212": "-", "\u00b5": "u"}      # NanumGothic에 없는 글자 → 대체
+
+
+def ko_safe(t):
+    return "".join(KO_SAFE.get(ch, ch) for ch in t) if has_hangul(t) else t
+
+
 def text_w(t, size, bold=False):
     w = sum((1.0 if has_hangul(ch) else 1.05) for ch in str(t)) * size / U
     return w * (1.08 if bold else 1.0)
@@ -417,9 +424,25 @@ def decap(S, ref, val, fp, x, ytop, net):
     S.gnd_stub(S.P(ref, "2"))
 
 
+def part_table(S, x, y, rows, title="주요 부품  —  역할 · 특징 · 사양"):
+    """주요 부품 표: 부품번호 | 부품 | 역할 | 특징·사양 (열 정렬). * = 데이터시트로 확인할 값."""
+    head = ("부품번호", "부품", "역할", "특징 · 사양")
+    widths = [max(text_w(r[c], 1.27, c == 0) for r in list(rows) + [head]) + 1.4 for c in range(4)]
+    y0 = y + 3.4
+    for i, r in enumerate([head] + list(rows)):
+        xx = x + 0.5
+        for c, t in enumerate(r):
+            S.texts.append((t, S.o((xx, y0 + 1.7 * i)), 1.27, i == 0 or c == 0))
+            xx += widths[c]
+    yb = y0 + 1.7 * len(rows) + 0.9
+    S.boxes.append((S.o((x, y)), S.o((x + sum(widths) + 0.6, yb + 1.1))))
+    S.texts.append((title, S.o((x + 0.5, y + 1.2)), 1.6, True))
+    S.texts.append(("* 표시 값은 데이터시트로 확인", S.o((x + 0.5, yb + 0.7)), 1.1, False))
+
+
 # ════════════════════════════ 1. 커넥터·입력 보호 ════════════════════════════
 S = Sheet("connector.kicad_sch", "Connector & input protection",
-          "Field connector, 2-stage bidirectional TVS surge protection, chassis isolation", dx=2, dy=2, paper="A4")
+          "Field connector, 2-stage bidirectional TVS surge protection, chassis isolation", dx=2, dy=2)
 SHEETS.append(S)
 S.place("J1", "CONN_GH8", "SM08B-GHS-TB", "Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal",
         16, 29, nets={"8": "VIN_EXT", "6": "GND_IN", "4": "OUT1_EXT", "5": "OUT2_EXT", "3": "RS485_A_EXT",
@@ -470,6 +493,17 @@ S.text("SMDJ 3 kW (1st) -> R1 -> SMBJ (2nd) -> eFuse on sheet Power", (29.5, 34)
 S.box(32, 39.5, 75, 54, "CIRCUIT GND <-> CHASSIS  (floating)")
 S.text("GDT conducts only on line-to-ground surge", (56, 52.5), 1.27)
 S.text("PCB-housing creepage >= 2 mm", (56, 50), 1.27)
+
+part_table(S, 6, 58, [
+    ("J1", "SM08B-GHS-TB", "현장 커넥터 연결", "JST GH 1.25 mm 8P 옆 삽입, 하네스 W-2 → M12 8P, 핀 n = M12 핀 n"),
+    ("L1", "CMC 2x1mH 0.3A", "전원선 공통모드 노이즈 차단", "2 × 1 mH, 0.3 A — 전도 방출·전도 내성 대책"),
+    ("D1", "SMDJ36CA", "입력 서지 1단 흡수", "TVS 양방향 3000 W, 36 V — −30 V 오결선에 도통 안 함"),
+    ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "MELF 1 W 펄스 내량 저항"),
+    ("D2", "SMBJ33CA", "입력 서지 2단 클램프", "TVS 양방향 600 W, 33 V — eFuse 정격 이하로 제한"),
+    ("GDT1", "GDT 230V", "회로 GND–외함 서지 방전", "230 V 방전관, 선–대지 서지 때만 도통 (평소 절연)"),
+    ("C3, R2", "4.7n Y2 / 1M", "GND–외함 고주파 결합", "Y2 안전 콘덴서 + 1 MΩ 정전기 방전 경로"),
+    ("J5", "Chassis contact", "PCB–하우징 접지 접점", "SMD 스프링 접점, PCB 가장자리 → 하우징 Ø27 내면"),
+])
 
 # ════════════════════════════ 2. 전원 ════════════════════════════
 S = Sheet("power.kicad_sch", "Power", "eFuse (reverse/OV/UV), 60V buck to 5V, LDO 3.3V", dx=4, dy=14)
@@ -569,6 +603,14 @@ S.box(64, 12, 106, 33, "BUCK 5 V   LMR36006  (4.2-60 V in, 0.6 A)")
 S.text("Vout = 1.0 V x (1 + R8/R9) = 5.0 V   (Vref 1.0 V: VERIFY)", (64, 35.5), 1.27)
 S.box(108, 12, 153, 33, "LDO 3.3 V   TPS7A2033   +   analog rail +3V3A")
 
+part_table(S, 6, 46, [
+    ("U1", "TPS26600PWPR", "전자 퓨즈 (입력 보호)", "역극성 −60 V 차단, 과전압 33 V·저전압 9 V (R3–R5), 전류 제한 (R6)*, 돌입 제한 (C4), 고장 출력 FLT"),
+    ("U2", "LMR36006", "5 V 강압 전원 (벅)", "입력 4.2–60 V, 출력 0.6 A 동기식, 무부하 소비전류 작음*, 출력 = 1 V × (1 + R8/R9)*"),
+    ("L2", "22uH", "벅 출력 인덕터", "4 × 4 mm 차폐형, 포화 전류 0.8 A 이상으로 선정"),
+    ("U3", "TPS7A2033PDBVR", "3.3 V 저잡음 레귤레이터", "300 mA, 저잡음·높은 PSRR* → 벅 리플 제거, SOT-23-5"),
+    ("FB1", "600R@100MHz", "아날로그 전원 +3V3A 분리", "페라이트 비드 + C13 10 µF → PCAP04·ADS1220 전원"),
+])
+
 # ════════════════════════════ 3. MCU ════════════════════════════
 S = Sheet("mcu.kicad_sch", "MCU", "STM32G0B1CCT3, SWD, reset, internal temperature sensor", dx=6, dy=6)
 SHEETS.append(S)
@@ -629,6 +671,12 @@ for i, t in enumerate(["BOOT0 shares PA14/SWCLK - no pull-down.",
                        "Cortex-M0+: no SWO (J2 pin 6 NC).",
                        "Same die as DP2000 (G0B1CCT6); T3 = -40..125 C."]):
     S.text(t, (7, 66 + 2.3 * i), 1.27)
+
+part_table(S, 6, 86, [
+    ("U4", "STM32G0B1CCT3", "제어·통신·보정 연산", "Cortex-M0+ 64 MHz, 플래시 256 KB, RAM 144 KB, −40–125 °C, LQFP48, 내부 온도센서 (PCB 온도)"),
+    ("J2", "TC2030-IDC-NL", "생산 때 펌웨어 기록 (SWD)", "PCB 패드만 (부품 없음). 이후 업데이트는 RS-485 부트로더"),
+    ("C21", "100n", "리셋 노이즈 필터", "NRST 핀, 몰딩 후 EMC 여유"),
+])
 
 # ════════════════════════════ 4. 측정 ════════════════════════════
 S = Sheet("measurement.kicad_sch", "Measurement", "Capacitive humidity sensor (PCAP04) and Pt1000 2-wire (ADS1220)",
@@ -710,6 +758,15 @@ S.text("PCB temp: ADS1220 internal sensor (TS mode)", (22.5, 74.4), 1.27)
 S.box(80, 5, 95, 21, "DECOUPLING")
 S.box(80, 43, 95, 59, "DECOUPLING")
 
+part_table(S, 22, 78, [
+    ("J3", "SM04B-SRSS-TB", "센서 하네스 W-1 연결", "JST SH 1.0 mm 4P 옆 삽입, 1·2 = MK33, 3·4 = Pt1000"),
+    ("U5", "PCAP04-AQFM-24", "습도 센서 정전용량 측정", "정전용량–디지털 변환, 기준 C와 비율 측정, 내부 DSP, SPI*"),
+    ("C22", "220p C0G 1%", "PCAP04 기준 용량", "MK33-W mini (200 pF)와 비슷한 값, C0G (온도 변화 거의 없음)"),
+    ("U6", "ADS1220IPWR", "Pt1000 온도 측정", "24비트 ADC, PGA, 여기 전류 IDAC, 50/60 Hz 제거, 내부 온도센서 (PCB 온도)"),
+    ("R19", "4.02k 0.01% 5ppm", "Pt1000 비율 측정 기준저항", "IDAC 전류 오차 상쇄, 온도계수 5 ppm/°C"),
+    ("R17, R18, C27", "1k / 10n", "입력 RC 필터", "차동·공통모드 노이즈 제거"),
+])
+
 # ════════════════════════════ 5. 아날로그 출력 ════════════════════════════
 S = Sheet("analog_out.kicad_sch", "Analog outputs", "2x DAC8760 V/I output with TPS26611 miswiring protection",
           dx=4, dy=2)
@@ -778,8 +835,17 @@ for i, t in enumerate([
 ]):
     S.text(t, (8.5, 77.5 + 2.2 * i), 1.27)
 
+part_table(S, 8, 90, [
+    ("U7, U8", "DAC8760IPWP", "아날로그 출력 1·2", "16비트, 4–20 / 0–20 / 0–24 mA · 0–5 / 0–10 V 선택, 내부 기준, 고장 알람 — 대체 DAC7760/8750/7750"),
+    ("U9, U10", "TPS26611", "출력 오결선 보호", "출력 단자 과전압·역전압 차단, 전류 제한, 고장 출력 FLT*"),
+    ("R30, R40", "10R pulse (2512)", "서지 전류 제한", "출력 보호기와 TVS 사이 직렬"),
+    ("D30, D40", "SMAJ33CA", "출력 서지 클램프", "TVS 양방향 400 W, 33 V"),
+    ("C41, C51", "1n 100V", "출력 고주파 필터", "케이블로 들어오는 RF 억제"),
+    ("R31, R41", "10k", "전압 출력 감지", "R30·R40 뒤에서 +VSENSE로 되먹임 (직렬 저항 전압강하 보상)"),
+])
+
 # ════════════════════════════ 6. RS-485 ════════════════════════════
-S = Sheet("rs485.kicad_sch", "RS-485", "THVD2450 +/-70V fault-protected transceiver", dx=4, dy=4, paper="A4")
+S = Sheet("rs485.kicad_sch", "RS-485", "THVD2450 +/-70V fault-protected transceiver", dx=4, dy=4)
 SHEETS.append(S)
 S.place("U11", "THVD2450", "THVD2450DR", "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", 30, 21, nets={
     "4": "RS485_TX", "1": "RS485_RX", "2": "RS485_DE", "3": "RS485_DE", "8": "+3V3", "6": "RS485_A_EXT",
@@ -797,6 +863,11 @@ decap(S, "C60", "100n", "C0603", 14, 13, "+3V3")
 S.box(8, 7, 75, 36, "RS-485  (Modbus RTU)   -   bus pins +/-70 V fault protected")
 S.text("No termination on board (fit at bus ends). Fail-safe receiver built in.", (8.5, 34.2), 1.27)
 S.text("No series R / TVS: THVD2450 has +/-70 V bus fault and IEC ESD protection built in.", (8.5, 35.5), 1.27)
+
+part_table(S, 8, 40, [
+    ("U11", "THVD2450DR", "RS-485 (Modbus RTU) 통신", "3.3 V 반이중, 버스 핀 ±70 V 고장 보호, IEC ESD 보호 내장*, 버스 개방 시 안전 수신"),
+    ("C60", "100n", "전원 바이패스", "U11 VCC"),
+])
 
 # ════════════════════════════ 출력 ════════════════════════════
 ROOT = uid("root")
@@ -866,7 +937,7 @@ def sheet_items(S, sheet_uuid):
                      f"(stroke (width 0.1524) (type dash) (color 72 72 160 1)) (fill (type none)) (uuid {uid(S.file, 'box', i)}))")
     for i, (t, pt, size, bold) in enumerate(S.texts):
         face = f' (face "{HANGUL_FACE}")' if has_hangul(t) else ""
-        items.append(f"(text {q(t)} (at {mm(pt[0])} {mm(pt[1])} 0) (effects (font{face} (size {size} {size}){' bold' if bold else ''}) "
+        items.append(f"(text {q(ko_safe(t))} (at {mm(pt[0])} {mm(pt[1])} 0) (effects (font{face} (size {size} {size}){' bold' if bold else ''}) "
                      f"(justify left bottom)) (uuid {uid(S.file, 'txt', i)}))")
     return items, used
 
@@ -1118,6 +1189,14 @@ def overlap_errors(S):
                 continue
             if _hit(a, b, pad=-0.02):
                 errs.append(f"{na} overlaps {nb}")
+    PW, PH = {"A3": (165.3, 116.9), "A4": (116.9, 82.7)}[S.paper]
+    tb = (PW - 48, PH - 17, PW, PH)
+    for r_, n in txt:                                 # 글자가 용지 밖·표제란으로 넘어가지 않게
+        if r_[2] > PW - 4.5 or r_[3] > PH - 4.5 or _hit(r_, tb, pad=0):
+            errs.append(f"{n} off page / in title block")
+    for a0, a1 in S.boxes:
+        if _hit((a0[0], a0[1], a1[0], a1[1]), tb, pad=0) or a1[0] > PW - 4.5 or a1[1] > PH - 4.5:
+            errs.append(f"box {a0} off page / in title block")
     for i, (a0, a1) in enumerate(S.boxes):          # 박스끼리 겹침 금지
         for b0, b1 in S.boxes[i + 1:]:
             if _hit((a0[0], a0[1], a1[0], a1[1]), (b0[0], b0[1], b1[0], b1[1]), pad=-0.1):
