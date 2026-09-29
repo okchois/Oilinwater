@@ -24,7 +24,7 @@ F0 = P.PCB["x"][0]
 
 ZONES_EN = [("MEASUREMENT", "J3, PCAP04, ADS1220, Cref"),
             ("MCU + POWER", "STM32G0B1, eFuse, buck, LDO"),
-            ("OUTPUT + PROTECTION", "DAC8760x2, TPS26611, THVD2450, TVS")]
+            ("OUTPUT + PROTECTION", "J1, DAC8760x2, TPS26611, THVD2450")]
 
 
 def uid(key):
@@ -203,7 +203,7 @@ def build():
     # 패드 구역
     J = Pc["jst"]
     for key, (xa, xb), (yb, yt), lab in (("wp", J["x"], J["y"], "J3 JST SH 4P BM04B-SRSS-TB (top, h4.25)"),
-                                         ("cp", Pc["conn_pads_x"], (-3.5, 3.5), "CONNECTOR PADS x8")):
+                                         ("cp", Pc["gh"]["x"], Pc["gh"]["y"], "J1 JST GH 8P SM08B-GHS-TB (side entry -> rear)")):
         o.append(gr_rect(xa, yt, xb, yb, "Dwgs.User", key))
         o.append(gr_text(lab, (xa + xb) / 2, yb - 0.8, "Dwgs.User", key + "t", 0.5))
     # 부품 높이 한계 (Cmts.User)

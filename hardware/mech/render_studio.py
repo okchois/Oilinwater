@@ -124,6 +124,7 @@ EXTERIOR = [
     ("pins", connector_pins, GOLD),
 ]
 INTERIOR = [
+    ("epoxy", M.potting, dict(color=(0.45, 0.33, 0.16), metal=0.0, rough=0.35)),
     ("sensor_probe", M.sensor_probe, PEEK),
     ("elements", M.sensor_elements, ALUMINA),
     ("sensor_conn", M.sensor_connector, BLACK),
@@ -135,6 +136,8 @@ INTERIOR = [
     ("ring", M.pcb_ring, PEEK),
     ("harness", M.harness, dict(color=(0.90, 0.90, 0.88), metal=0.0, rough=0.4)),
     ("harness_plug", M.harness_plug, dict(color=(0.92, 0.88, 0.76), metal=0.0, rough=0.5)),
+    ("harness2", M.harness2, dict(color=(0.90, 0.90, 0.88), metal=0.0, rough=0.4)),
+    ("harness2_plug", M.harness2_plug, dict(color=(0.92, 0.88, 0.76), metal=0.0, rough=0.5)),
 ]
 
 
@@ -361,7 +364,7 @@ def build_scene(rotz, cutaway=False, cache={}):
         parts = []
         for name, fn, mat in EXTERIOR + (INTERIOR if cutaway else []):
             s = fn()
-            if cutaway and name not in ("pcb", "pcb_parts", "pins", "sensor_probe", "elements", "harness", "harness_plug"):
+            if cutaway and name not in ("pcb", "pcb_parts", "pins", "sensor_probe", "elements", "harness", "harness_plug", "harness2", "harness2_plug"):
                 s = s.cut(cutter)
             parts.append((name, polydata(s), mat))
         cache[key] = parts

@@ -114,6 +114,12 @@ def seal():
     return tube(*S["x"], S["od"], S["id"])
 
 
+def potting():
+    """Ø7 관통 통로 전 길이 에폭시 몰딩 (W-1 전선 매립, 1차 격벽)."""
+    Pt = P.POTTING
+    return cyl(*Pt["x"], Pt["d"] - 0.02)
+
+
 _CONN = {}
 
 
@@ -209,11 +215,30 @@ def harness_paths():
     return out
 
 
-def harness():
-    W = P.HARNESS
-    r = W["wire_d"] / 2
+def harness2_paths():
+    """W-2 전선 경로: J1 GH 플러그 뒤(+x) → 엔드캡 카운터보어 → M12 커넥터 뒤면 핀 (1–7 원주, 8 가운데)."""
+    W = P.HARNESS2
+    pl = W["plug"]
+    zc = (pl["z"][0] + pl["z"][1]) / 2
+    x_face = P.CONNECTOR["inner"]["x"][0]
+    out = []
+    for n in range(1, 9):
+        yk = (n - 4.5) * W["pitch"]
+        if n == 8:
+            py, pz = 0.0, 0.0
+        else:
+            a = math.radians(90 + (n - 1) * 360 / 7)
+            py, pz = W["conn_pcd"] / 2 * math.cos(a), W["conn_pcd"] / 2 * math.sin(a)
+        x_pcb = P.PCB["x"][1]
+        out.append([(pl["x"][1], yk, zc), (66.0, yk * 0.8, W["wire_z"]), (x_pcb + 0.4, py * 0.8, W["wire_z"]),
+                    (x_face - 0.7, py, pz), (x_face, py, pz)])     # PCB 끝을 지난 뒤 핀 높이로 내려감
+    return out
+
+
+def _wires(paths, d):
+    r = d / 2
     out = None
-    for path in harness_paths():
+    for path in paths:
         for p0, p1 in zip(path, path[1:]):
             v0, v1 = cq.Vector(*p0), cq.Vector(*p1)
             seg = cq.Solid.makeCylinder(r, (v1 - v0).Length, v0, v1 - v0)
@@ -221,6 +246,20 @@ def harness():
         for p_ in path[1:-1]:
             out = out.fuse(cq.Solid.makeSphere(r, cq.Vector(*p_), angleDegrees1=-90, angleDegrees2=90))
     return cq.Workplane("XY").newObject([out.clean()])
+
+
+def harness():
+    return _wires(harness_paths(), P.HARNESS["wire_d"])
+
+
+def harness2():
+    return _wires(harness2_paths(), P.HARNESS2["wire_d"])
+
+
+def harness2_plug():
+    pl = P.HARNESS2["plug"]
+    (x0, x1), (y0, y1), (z0, z1) = pl["x"], pl["y"], pl["z"]
+    return cq.Workplane("XY").box(x1 - x0, y1 - y0, z1 - z0).translate(((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
 
 
 def harness_plug():
@@ -265,6 +304,7 @@ PARTS = [
     ("M-102_cap", cap, (0.80, 0.82, 0.86)),
     ("M-103_housing", housing, (0.82, 0.84, 0.88)),
     ("M-104_endcap", endcap, (0.72, 0.74, 0.78)),
+    ("P-209_epoxy", potting, (0.55, 0.45, 0.25)),
     ("P-202_sensor_probe", sensor_probe, (0.78, 0.66, 0.46)),
     ("P-202_elements", sensor_elements, (0.95, 0.93, 0.85)),
     ("HTX99R-SC_connector", sensor_connector, (0.15, 0.15, 0.17)),
@@ -275,6 +315,8 @@ PARTS = [
     ("E-301_parts", pcb_parts, (0.15, 0.15, 0.17)),
     ("W-1_harness", harness, (0.92, 0.92, 0.90)),
     ("W-1_plug", harness_plug, (0.93, 0.90, 0.80)),
+    ("W-2_harness", harness2, (0.92, 0.92, 0.90)),
+    ("W-2_plug", harness2_plug, (0.93, 0.90, 0.80)),
     ("M-105_holder", pcb_holder, (0.85, 0.72, 0.45)),
     ("M-106_ring", pcb_ring, (0.85, 0.72, 0.45)),
     ("P-204_connector", connector, (0.35, 0.35, 0.38)),

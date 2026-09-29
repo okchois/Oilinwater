@@ -73,9 +73,11 @@ pwr("CHASSIS", "chassis", "Chassis / housing (earth via process pipe)")
 B, I, O, P, PI, PO, OC, T, NC = ("bidirectional", "input", "output", "passive", "power_in", "power_out",
                                  "open_collector", "tri_state", "no_connect")
 
-ic("CONN_M8", right=[("8", "V+", P), ("6", "GND", P), ("4", "OUT1", P), ("5", "OUT2", P), ("3", "RS485_A", P),
-                     ("2", "RS485_B", P), ("1", "NC", P), ("7", "NC", P), ("9", "SHELL", P)],
-   w=6, prefix="J", desc="M Connect 8-pin male panel connector, EE364-compatible pinout. P/N TBD")
+ic("CONN_GH8", right=[("8", "V+", P), ("6", "GND", P), ("4", "OUT1", P), ("5", "OUT2", P), ("3", "RS485_A", P),
+                      ("2", "RS485_B", P), ("1", "NC", P), ("7", "NC", P), ("MP", "MP", P)],
+   w=6, prefix="J", desc="JST GH 1.25 mm 8-pin side-entry header. Harness W-2 to M12 8P field connector (pin n = M12 pin n)")
+ic("CONN_CH", right=[("1", "CHASSIS", P)], w=6, prefix="J",
+   desc="PCB-to-housing chassis contact (spring finger on PCB edge). P/N TBD")
 ic("CMC", left=[("1", "", P), ("3", "", P)], right=[("2", "", P), ("4", "", P)], w=4, prefix="L",
    desc="2-line common mode choke")
 ic("TPS2660", left=[("1", "IN", PI), ("2", "IN", P), ("3", "UVLO", I), ("5", "OVP", I), ("7", "~{SHDN}", I),
@@ -388,9 +390,9 @@ def decap(S, ref, val, fp, x, ytop, net):
 S = Sheet("connector.kicad_sch", "Connector & input protection",
           "Field connector, 2-stage bidirectional TVS surge protection, chassis isolation", dx=2, dy=2, paper="A4")
 SHEETS.append(S)
-S.place("J1", "CONN_M8", "M Connect 8P male", "TBD:M_Connect_8P", 16, 30, nets={
-    "8": "VIN_EXT", "6": "GND_IN", "4": "OUT1_EXT", "5": "OUT2_EXT", "3": "RS485_A_EXT", "2": "RS485_B_EXT",
-    "9": "CHASSIS"})
+S.place("J1", "CONN_GH8", "SM08B-GHS-TB", "Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal",
+        16, 30, nets={"8": "VIN_EXT", "6": "GND_IN", "4": "OUT1_EXT", "5": "OUT2_EXT", "3": "RS485_A_EXT",
+                      "2": "RS485_B_EXT"})
 S.place("L1", "CMC", "CMC 2x1mH 0.3A", "TBD:CMC_WE-SL", 30, 26,
         nets={"1": "VIN_EXT", "2": "VIN_L", "3": "GND_IN", "4": "GND"})
 S.wa(S.P("J1", "8"), S.P("L1", "1"))
@@ -416,18 +418,21 @@ for num, net in (("4", "OUT1_EXT"), ("5", "OUT2_EXT"), ("3", "RS485_A_EXT"), ("2
     S.gl(net, S.P("J1", num), "R", length=3)
 S.nc(S.P("J1", "1"))
 S.nc(S.P("J1", "7"))
-sh = S.P("J1", "9")
+S.nc(S.P("J1", "MP"))                     # GH 고정 패드 (기구용)
+S.place("J5", "CONN_CH", "Chassis contact", "TBD:Chassis_Spring_Contact", 16, 45, nets={"1": "CHASSIS"})
+sh = S.P("J5", "1")
 S.v2("R2", "R", "1M", FP["R0603"], 36, 44, "CHASSIS", "GND")
 S.v2("C3", "C", "4.7n 2kV Y2", FP["C1812"], 42, 44, "CHASSIS", "GND")
 S.place("GDT1", "GDT", "GDT 230V", "TBD:GDT_Bourns_2038", 49, 45.5, nets={"1": "CHASSIS", "2": "GND"})
-S.wa(sh, (sh[0] + 4, sh[1]), (sh[0] + 4, 43 + S.dy))
+S.wa(sh, (26, sh[1]), (26, 43 + S.dy))
 S.w((24, 43), (36, 43), (42, 43), (49, 43), (58, 43))
 for r_ in ("R2", "C3", "GDT1"):
     S.wa((S.P(r_, "1")[0], 43 + S.dy), S.P(r_, "1"))
     S.gnd_stub(S.P(r_, "2"))
 S.pw("CHASSIS", (58, 43))
 S.box(8, 17, 31, 38, "FIELD CONNECTOR")
-S.text("M Connect 8P (EE364-compatible pinout)", (8.5, 19.5), 1.27)
+S.text("J1 JST GH 8P -> harness W-2 -> M12 8P", (8.5, 19.5), 1.27)
+S.text("(EE364-compatible pinout, pin n = pin n)", (8.5, 21.0), 1.27)
 S.text("Pins 1, 7: not connected", (8.5, 36.5), 1.27)
 S.box(32, 17, 75, 35, "INPUT SURGE / REVERSE-POLARITY PROTECTION")
 S.text("TVS bidirectional: -30 V miswiring must not conduct", (32.5, 19.5), 1.27)
@@ -946,7 +951,7 @@ def validate(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-29") (rev "0.4") '
+    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-29") (rev "0.5") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Oil moisture transmitter HMT500 - RS-485 + 2x V/I analog output") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "VERIFY=YES parts: pin numbers LMR36006/PCAP04/DAC8760/TPS26611; TPS2660 R22"))')
@@ -975,7 +980,8 @@ def write_all():
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
-        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.4", 2.5, True),
+        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.5", 2.5, True),
+        ("v0.5: J1 = JST GH 1.25 mm 8P side entry (SM08B-GHS-TB), harness W-2 to M12 8P; J5 chassis spring contact (was M12 shell pin).", 1.4, False),
         ("v0.4: J3 = JST SH 1.0 mm 4P (BM04B-SRSS-TB) for sensor harness W-1 direct from HTX99R (no feedthrough, mech Rev F); Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
         ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2450 -> J1", 1.4, False),
@@ -983,7 +989,7 @@ def write_all():
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), VDDA, CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("VERIFY: LMR36006, PCAP04, DAC8760, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn). TPS2660: RTN link R22 to confirm.", 1.4, False),
-        ("TBD footprints: M Connect 8P, CMC, GDT, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
+        ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
     ]
     y = 88
     for i, (t, size, bold) in enumerate(notes):

@@ -111,7 +111,9 @@ ENDCAP = dict(mthread=dict(x=(64.0, 71.0), d=28.0, d_minor=26.917, thread="M28x1
 
 # ── 구매품 (단순 형상) ──
 SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 3869 type), steel + FKM")
-# Ø7 통로는 비워 둠 (pass-through, 케이블만). 피드스루·포팅 없음: 압력 격벽 = HTX99R 몰드 핀 + O링
+# Ø7 관통 통로(pass-through)는 케이블을 넣은 뒤 전 길이를 에폭시로 몰딩 (1차 격벽, 두텍 지시)
+# 압력 격벽: HTX99R O링 + 몰드 핀 → Ø7 × 34 에폭시 몰딩 (전선 매립). 피드스루 없음
+POTTING = dict(x=(-22.0, 12.0), d=7.0, name="Epoxy molding, Ø7 x 34 channel (W-1 embedded)")
 # ── PCB E-301: 축 방향 1장, 축을 지나는 평면(z=0)에 세움. 폭은 y 방향 ──
 PCB = dict(t=1.6, x=(14.5, 71.0),
            sections=[(14.5, 26.0, 18.0),    # 바디 카운터보어 Ø22 안
@@ -122,10 +124,12 @@ PCB = dict(t=1.6, x=(14.5, 71.0),
            # J3 센서 하네스 헤더: JST SH 1.0 mm 4P 윗면 삽입 (BM04B-SRSS-TB), 윗면(+z), 외형 포함 MP 패드
            jst=dict(x=(19.5, 23.5), y=(-3.5, 3.5), h=4.25, side=1,
                     part="JST BM04B-SRSS-TB (SH 1.0 mm 4P, top entry, SMD)"),
-           conn_pads_x=(66.0, 70.0),                           # 커넥터 리드선 패드
+           # J1 M12 하네스 헤더: JST GH 1.25 mm 8P 옆 삽입(직각, SM08B-GHS-TB), 윗면, 입구 = 뒤(+x, 커넥터 쪽)
+           gh=dict(x=(52.5, 58.5), y=(-6.4, 6.4), h=4.25, side=1,
+                   part="JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD)"),
            zones=[("측정", "J3 · PCAP04 · ADS1220 · 기준 C", 18.0, 34.0),
                   ("MCU·전원", "STM32G0B1 · eFuse · 벅 · LDO", 34.0, 50.0),
-                  ("출력·보호", "DAC8760×2 · TPS26611 · THVD2450 · TVS", 50.0, 71.0)],
+                  ("출력·보호", "J1 · DAC8760×2 · TPS26611 · THVD2450", 50.0, 71.0)],
            name="PCB 57×23 4-layer, 1 board (E-301)")
 # 표현용 주요 부품 (x, y, 가로, 세로, 높이, 면 +1/-1)
 PCB_PARTS = [
@@ -137,12 +141,14 @@ PCB_PARTS = [
     (38.0, 0.0, 5.0, 4.0, 1.0, -1),    # TPS2660 eFuse
     (45.0, 0.0, 4.0, 4.0, 3.0, -1),    # 벅 인덕터
     (41.0, 7.0, 3.0, 3.0, 1.0, -1),    # LMR36006
-    (55.0, 0.0, 6.0, 6.0, 1.0, 1),     # DAC8760 #1 VQFN40
+    (55.5, 0.0, 6.0, 12.8, 4.25, 1),   # J1 JST GH 8P 헤더 (옆 삽입, 입구 +x) — 외형 개략
+    (48.5, 6.5, 7.0, 6.0, 2.4, 1),     # SMCJ TVS (입력 1단)
+    (67.5, 0.0, 6.0, 6.0, 1.0, 1),     # DAC8760 #1 VQFN40
     (55.0, 0.0, 6.0, 6.0, 1.0, -1),    # DAC8760 #2
-    (61.5, 0.0, 3.0, 3.0, 1.0, 1),     # TPS26611
+    (61.5, -4.5, 3.0, 3.0, 1.0, -1),   # TPS26611
     (61.5, 5.5, 5.0, 6.0, 1.7, -1),    # THVD2450 SOIC8
-    (67.5, 0.0, 7.0, 6.0, 2.4, 1),     # SMCJ TVS
     (67.5, 0.0, 5.0, 4.0, 2.0, -1),    # CM 초크
+    (30.0, 10.5, 3.0, 2.0, 1.5, 1),    # J5 샤시 스프링 접점 (가장자리 → 하우징 Ø27 내면)
 ]
 
 PCB_HOLDER = dict(x=(12.2, 18.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(14.5, 18.0),   # Ø6: 하네스 W-1 전선 통과
@@ -151,7 +157,13 @@ PCB_HOLDER = dict(x=(12.2, 18.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(14.5, 
                   name="PCB holder (PEEK or PA66-GF30)")
 PCB_RING = dict(x=(59.0, 63.0), od=26.4, id=20.0, slot_w=1.7, slot_y=11.6,
                 name="PCB rear support ring (PEEK or PA66-GF30)")
-# 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜 + 수축튜브) → Ø7 관통 통로 → JST SH 플러그 → PCB J3
+# M12 하네스 W-2: J1 GH 플러그 (입구 +x) → 엔드캡 카운터보어 → M12 커넥터 뒤 핀 8개 (납땜 + 수축튜브)
+HARNESS2 = dict(plug=dict(x=(58.5, 62.5), y=(-5.9, 5.9), z=(0.8, 4.3)),   # GHR-08V-S 꽂힌 상태 외형 (개략)
+                wire_d=0.6, pitch=1.25, wire_z=3.3, conn_pcd=5.0, length=60.0,
+                housing="JST GHR-08V-S", contact="JST SSHL-002T-P0.2 ×8 (AWG 30–26)",
+                wire="AWG 28 PTFE 절연 (UL1213 계열), 8심, 길이 60 ±2",
+                name="Field harness W-2, JST GH 1.25 mm 8P → M12 8P (pin n = pin n)")
+# 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜) → Ø7 관통 통로 (에폭시 몰딩) → JST SH 플러그 → PCB J3
 HARNESS = dict(plug=dict(x=(20.0, 23.0), y=(-2.5, 2.5), z_top=5.6),   # SHR-04V-S 꽂힌 상태 외형
                wire_d=0.6, pitch=1.0, bend_z=6.6, gap_z=2.2, length=60.0,
                pins=[("1", "SENS_C1", "MK33 전극 1"), ("2", "SENS_C2", "MK33 전극 2"),
@@ -162,7 +174,7 @@ HARNESS = dict(plug=dict(x=(20.0, 23.0), y=(-2.5, 2.5), z_top=5.6),   # SHR-04V-
                name="Sensor harness W-1, JST SH 1.0 mm 4P")
 CONNECTOR = dict(body=dict(x=(81.0, 85.0), d=20.0), thread=dict(x=(85.0, 96.0), d=12.0),
                  inner=dict(x=(73.0, 81.0), d=15.9),
-                 name="M Connect 8P male, front mount M16x1.5 (P/N TBD)")
+                 name="M12 8P male (M Connect), front mount M16x1.5 (P/N TBD)")
 
 TIP_X = CAP["x_tip"]
 END_X = CONNECTOR["thread"]["x"][1]
@@ -179,11 +191,11 @@ PARTS = [
     ("2", "390000-001100", "SUS probe oil filter (cap)", "SUS304", 1, "In-house DOTECH, M10x1.0"),
     ("3", "HMT500-M-103", "Housing tube Ø32", "SUS316L (1.4404)", 1, "Machined, M28x1 both ends, marking"),
     ("4", "HMT500-M-104", "End cap", "SUS316L (1.4404)", 1, "Machined, flats AF28"),
-    ("5", "HMT500-P-209", "Heat-shrink sleeve Ø1.5 x 6", "PTFE / PVDF", 4, "On 15 pin joints (W-1)"),
+    ("5", "HMT500-P-209", "Epoxy molding, Ø7 x 34 channel", "Epoxy, ≥150 °C (TBD)", 1, "Primary barrier, W-1 embedded"),
     ("6", "HMT500-P-202", "Sensor probe: MK33-W mini + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
     ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500"),
-    ("9", "HMT500-P-204", "M Connect 8P male, M16x1.5", "-", 1, "Purchased, front mount, P/N TBD"),
+    ("9", "HMT500-P-204", "M12 8P male (M Connect), M16x1.5", "-", 1, "Front mount, leads → W-2, P/N TBD"),
     ("10", "HMT500-P-205", "O-ring 25 x 2", "FKM 75", 2, "1-3 and 3-4 seal"),
     ("11", "HMT500-P-206", "O-ring for connector", "FKM", 1, "Per connector spec"),
     ("12", "HMT500-M-105", "PCB holder", "PEEK / PA66-GF30", 1, "Machined or molded"),
@@ -192,4 +204,5 @@ PARTS = [
     ("15", "HTX99R-SC", "Sensor connector 4P, M10x0.75 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
     ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "15 → J3 on 8, L60"),
+    ("18", "HMT500-W-2", "Field harness, JST GH 1.25 8P", "PTFE AWG28", 1, "9 → J1 on 8, L60"),
 ]

@@ -94,7 +94,8 @@ class MechTest(unittest.TestCase):
         self.assertEqual(B["channel"]["x"][1], B["cbore"]["x"][0])
         self.assertNotIn("seat", B)
         self.assertTrue(B["channel"]["x"][0] < x(S["pin_y"]) < B["channel"]["x"][1])
-        self.assertFalse(hasattr(P, "POTTING"))
+        self.assertEqual(P.POTTING["x"], B["channel"]["x"])         # 통로 전 길이 에폭시 몰딩 (1차 격벽)
+        self.assertEqual(P.POTTING["x"][0], S["x0"])
         pl = P.HARNESS["plug"]
         self.assertLess(math.hypot(pl["x"][1] - pl["x"][0], pl["y"][1] - pl["y"][0]), B["channel"]["d"])
         # O링 압축률 15~30 %, 늘림 < 5 %
@@ -146,6 +147,25 @@ class MechTest(unittest.TestCase):
         import gen_hmt500 as g
         j3 = next(S.nets["J3"] for S in g.SHEETS if "J3" in S.nets)
         self.assertEqual({k: v for k, v, _ in W["pins"]}, j3)
+
+    def test_field_harness(self):
+        """W-2 + J1 JST GH 8P: 플러그가 PCB 위, 지지링 안쪽, 커넥터와 떨어짐, 높이 한계 안, 회로도 J1 핀 8개."""
+        Pc, G, W, R = P.PCB, P.PCB["gh"], P.HARNESS2, P.PCB_RING
+        pl = W["plug"]
+        self.assertEqual(G["x"][1], pl["x"][0])                         # 플러그는 헤더 입구(+x)에 꽂힘
+        self.assertLess(pl["x"][1], P.CONNECTOR["inner"]["x"][0] - 5)   # 전선 굽힘 여유
+        self.assertLessEqual(pl["x"][1], Pc["x"][1])
+        self.assertLess(math.hypot(pl["y"][1], pl["z"][1]), R["id"] / 2)  # 지지링 안쪽 통과
+        lim = D.pcb_limits()
+        self.assertLess(G["h"], lim[1][5])
+        self.assertLess(math.hypot(G["y"][1], Pc["t"] / 2 + G["h"]), P.HOUSING["id"] / 2)
+        route = (P.CONNECTOR["inner"]["x"][0] - pl["x"][1]) + 2 * W["wire_z"] + W["conn_pcd"]
+        self.assertLessEqual(route + 30.0, W["length"])                # 엔드캡 구멍으로 꽂을 여유
+        sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
+        import gen_hmt500 as g
+        j1 = next(S.nets["J1"] for S in g.SHEETS if "J1" in S.nets)
+        self.assertEqual(len(j1), 6)                                    # 1·7 NC, MP NC
+        self.assertIn("J5", next(S for S in g.SHEETS if "J5" in S.nets).nets)
 
     def test_svg_valid(self):
         for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small, D.sheet_pcb):

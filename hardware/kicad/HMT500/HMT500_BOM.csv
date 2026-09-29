@@ -21,9 +21,10 @@ Qty,References,Symbol,Value,Footprint,Verify
 2,D60 D61,TVS_BI,SMAJ40CA (opt.),Diode_SMD:D_SMA,
 2,FB1 FB2,FB,600R@100MHz,Inductor_SMD:L_0603_1608Metric,
 1,GDT1,GDT,GDT 230V,TBD:GDT_Bourns_2038,footprint
-1,J1,CONN_M8,M Connect 8P male,TBD:M_Connect_8P,footprint
+1,J1,CONN_GH8,SM08B-GHS-TB,Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,
 1,J2,CONN_SWD,TC2030-IDC-NL,Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,
 1,J3,CONN_SH4,BM04B-SRSS-TB,Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,
+1,J5,CONN_CH,Chassis contact,TBD:Chassis_Spring_Contact,footprint
 1,L1,CMC,CMC 2x1mH 0.3A,TBD:CMC_WE-SL,footprint
 1,L2,L,22uH,TBD:L_4x4mm,footprint
 1,R1,R,4.7R 1W pulse,Resistor_SMD:R_MELF_MMB-0207,
