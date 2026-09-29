@@ -54,7 +54,7 @@ def body_photo():
     g = B["gthread"]
     s = s.cut(M.tube(*g["x"], g["d"] + 1, g["d_minor"] - 0.01)).union(
         saw_thread(*g["x"], g["d"], g["d_minor"], 25.4 / 14))
-    return s.cut(M.cyl(*B["wire"]["x"], B["wire"]["d"]))
+    return s
 
 
 def connector_photo():

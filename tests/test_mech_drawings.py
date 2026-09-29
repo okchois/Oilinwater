@@ -77,35 +77,45 @@ class MechTest(unittest.TestCase):
         self.assertTrue(Hh["x"][0] < P.HEADER["pin_rear"] < Pc["x"][0])
 
     def test_sensor_connector_fits(self):
-        """Rev D: HTX99R 센서 커넥터·센서 프로브·보호캡 끼워맞춤."""
-        B, C, S, SP, O = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING
+        """Rev E: HTX99R 센서 커넥터(M10×0.75 ×2)·센서 프로브·보호캡·피드스루 끼워맞춤."""
+        B, C, S, SP, O, Hd = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING, P.HEADER
         x = lambda y: S["x0"] - y                                    # noqa: E731
-        # 커넥터 몸체 Ø10 → Ø10 H8 구멍, 플랜지 Ø11 → Ø11.2 자리, 플랜지 뒷면이 턱에 닿음
-        self.assertEqual(B["conn_bore"]["d"], S["body_d"])
+        # 플랜지: Ø11.2 자리에 앉고 뒷면이 턱에 닿음, 앞면 = 바디 앞면
         self.assertGreater(B["conn_cbore"]["d"], S["flange_d"])
-        self.assertAlmostEqual(x(S["flange_y"][0]), B["conn_cbore"]["x"][1])      # 압력은 턱이 받음
+        self.assertAlmostEqual(x(S["flange_y"][0]), B["conn_cbore"]["x"][1])
         self.assertAlmostEqual(x(S["flange_y"][1]), B["x_front"])
-        self.assertAlmostEqual(x(0), B["conn_bore"]["x"][1])                      # 아랫면 = 구멍 바닥
-        # 핀 돌출은 납땜 공간 안, 공간은 피드스루 앞
-        self.assertTrue(B["cavity"]["x"][0] < x(S["pin_y"]) < B["cavity"]["x"][1])
-        self.assertEqual(B["cavity"]["x"][1], B["seat"]["x"][0])
-        self.assertTrue(B["cavity"]["d"] > P.HEADER["d"])                         # 피드스루를 앞에서 넣고 용접
+        # O링 홈 구간은 Ø10 H8 밀봉면 안, 아래 나사 구간은 M10×0.75 암나사 안
+        g0, g1 = sorted(x(y) for y in S["oring_groove"]["y"])
+        self.assertTrue(B["conn_land"]["x"][0] <= g0 and g1 <= B["conn_land"]["x"][1] + 1e-9)
+        self.assertEqual(B["conn_land"]["d"], S["body_d"])
+        t0, t1 = sorted(x(y) for y in S["thread_lower"]["y"])
+        self.assertTrue(B["conn_thread"]["x"][0] <= t0 and t1 <= B["conn_thread"]["x"][1])
+        self.assertEqual(B["conn_thread"]["d_major"], S["body_d"])
+        # 핀 끝은 배선 통로 안, 통로 뒤에 피드스루 (뒤에서 삽입: 통로 < 피드스루 = 턱)
+        self.assertTrue(B["channel"]["x"][0] < x(S["pin_y"]) < B["channel"]["x"][1])
+        self.assertEqual(B["channel"]["x"][1], B["seat"]["x"][0])
+        self.assertLess(B["channel"]["d"], Hd["d"])
+        self.assertEqual(B["seat"]["x"][1], B["cbore"]["x"][0])                 # 용접부는 Ø22 카운터보어 바닥
+        self.assertEqual(Hd["x"], B["seat"]["x"])
         # O링 압축률 15~30 %, 늘림 < 5 %
         sq = 1 - (S["body_d"] - S["oring_groove"]["d"]) / 2 / O["cs"]
         self.assertTrue(0.15 <= sq <= 0.30, sq)
         self.assertLess(S["oring_groove"]["d"] / O["id"] - 1, 0.05)
-        # 보호캡: 턱이 플랜지 앞면을 누름, 턱 구멍은 커넥터 앞쪽 몸체보다 큼
-        self.assertAlmostEqual(C["lip"]["x"][1], B["x_front"])
-        self.assertTrue(S["body_d"] < C["lip"]["d"] < S["flange_d"])
-        self.assertEqual(C["x_rear"] - C["thread_len"], B["spigot"]["x"][0])
-        # 센서 프로브: 플러그가 소켓 면에 닿고, 핀은 소켓 깊이 안, 기판은 센서실 안
+        # 보호캡: 커넥터 위 나사 구간에 체결, 뒷면 = 바디 앞면
+        u0, u1 = sorted(x(y) for y in S["thread_upper"]["y"])
+        self.assertAlmostEqual(C["thread_x"][0], u0)
+        self.assertLessEqual(C["thread_x"][1], u1 + 1e-9)
+        self.assertAlmostEqual(C["x_rear"], B["x_front"])
+        self.assertGreater(C["relief"]["d"], S["body_d"])
+        # 센서 프로브: 플러그가 소켓 면에 닿고, 핀은 소켓 깊이 안, 기판·플러그는 센서실 안
         self.assertAlmostEqual(SP["plug"]["x"][1], x(S["socket_face_y"]))
         self.assertLessEqual(SP["pins"]["x"][1] - SP["pins"]["x"][0], S["sock_depth"])
         self.assertGreater(SP["board"]["x"][0], C["x_tip"] + C["tip_wall"])
         self.assertLess(SP["board"]["w"], C["bore"])
         self.assertLess(SP["plug"]["d"], C["bore"])
-        # 프로브 튜브가 G1/2 설치 구멍(골지름)을 통과
-        self.assertLess(C["od"], B["gthread"]["d_minor"])
+        # 튜브가 G1/2 설치 구멍(골지름)을 통과, 캡은 EE364와 같은 Ø12
+        self.assertLess(B["tube"]["d"], B["gthread"]["d_minor"])
+        self.assertEqual(C["od"], 12.0)
 
     def test_svg_valid(self):
         for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small, D.sheet_pcb):

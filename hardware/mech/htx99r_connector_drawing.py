@@ -44,6 +44,7 @@ FEAT = dict(
     sock_d=1.5, sock_bottom=7.1, sock_cs=0.2, pitch=2.54,
     recess_d=7.0, recess_depth=7.0,
     pin_sq=0.64, pin_y=(-3.0, 7.0), pin_tip=0.2,
+    thread="M10×0.75", thread_lower=(0.5, 5.5), thread_upper=(9.5, 15.0), thread_minor=9.188,
 )
 
 
@@ -190,7 +191,12 @@ def main():
     dim_y(sh, vf, F["flats_af"] / 2, xr - 4, F["flats_y"][0], F["flats_y"][1], "3")
     # 지름
     yb = vf.P(0, F["pin_y"][0])[1] + 8
-    dim_x(sh, vf, -R, R, 2.5, 2.5, yb, "Ø10")
+    dim_x(sh, vf, -R, R, 2.5, 2.5, yb, f"{F['thread']} (하우징 체결)")
+    for (y0, y1) in (F["thread_lower"], F["thread_upper"]):                  # 나사 골지름 (가는 선)
+        for xs in (-F["thread_minor"] / 2, F["thread_minor"] / 2):
+            a_, b_ = vf.P(xs, y0), vf.P(xs, y1)
+            sh.line(*a_, *b_, "thin")
+    sh.leader(*vf.P(R, 11.0), xr + 14, vf.P(0, 12.5)[1] + 2, f"{F['thread']} (캡)")
     dim_x(sh, vf, -F["flange_d"] / 2, F["flange_d"] / 2, 7.5, 7.5, vf.P(0, F["len"])[1] - 14, "Ø11")
     dim_x(sh, vf, -F["flats_af"] / 2, F["flats_af"] / 2, 13.5, 13.5, vf.P(0, F["len"])[1] - 6, "7 (맞변)")
     tx = xl - 12
@@ -276,10 +282,10 @@ def main():
         "주기 (NOTES)",
         "1. 형상·치수는 두텍 SolidWorks 모델 (HTX99R) Sensor Probe_Sensor Connector.STEP 에서 추출. 단위 mm.",
         "2. 재질·공차·표면처리는 STEP에 없음 — 원 도면 또는 공급사 사양 확인. 일반공차 ISO 2768-mK 가정.",
-        "3. 윗면 소켓 4× Ø1.5 (2.54 격자): 센서 프로브 핀 삽입. 아랫면 핀 4× □0.64 (2.54 격자): PCB 납땜.",
+        "3. Ø10 두 곳은 M10×0.75 나사 (두텍 확인): 아래 = 하우징 체결, 위 = 보호캡 체결. 윗면 소켓 4× Ø1.5: 센서 프로브 핀.",
         "4. PCB 풋프린트 제안: 2×2, 피치 2.54, 도금 구멍 Ø1.0, 패드 Ø1.7. 핀 돌출 3.0 → PCB 1.6 t 관통 후 1.4.",
-        "5. 홈 2개(플랜지 위·아래)는 O링 또는 고정용으로 보임 — 용도·O링 규격 확인 필요.",
-        "6. HMT500 적용: 피드스루 대신 이 커넥터로 센서 프로브를 꽂는 방식 검토용.",
+        "5. 홈 Ø8.2 (플랜지 아래): O링 자리 (HMT500은 O링 8×1.2, Ø10 H8 밀봉면). 홈 Ø8.1 (플랜지 위): 위 나사 언더컷.",
+        "6. HMT500 Rev E 적용: 바디 앞 M10×0.75-6H 암나사에 체결, 보호캡(M-102)을 위 나사에 체결. 아랫면 핀 4× □0.64: 선 납땜 후 포팅.",
     ]
     for i, t in enumerate(notes):
         sh.text(252, 168 + i * 6.0, t, 2.6 if i else 3.6, bold=(i == 0))

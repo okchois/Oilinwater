@@ -31,8 +31,8 @@ def tube(x0, x1, d_out, d_in):
 
 def body():
     B = P.BODY
-    solid = cyl(*B["spigot"]["x"], B["spigot"]["d"])
-    for k in ("tube", "gthread", "relief", "collar", "seal", "mthread"):
+    solid = cyl(*B["tube"]["x"], B["tube"]["d"])
+    for k in ("gthread", "relief", "collar", "seal", "mthread"):
         solid = solid.union(cyl(*B[k]["x"], B[k]["d"]))
     g0, g1 = B["seal"]["groove_x"]
     solid = solid.cut(tube(g0, g1, B["seal"]["d"] + 1, P.ORING["groove_d"]))       # O링 홈
@@ -47,7 +47,7 @@ def body():
     cham = revolve([(x0, 0), (x1, 0), (x1, r_af), (x1 - c, dc / 2 + 0.01), (x0 + c, dc / 2 + 0.01), (x0, r_af)])
     solid = solid.union(hexa.intersect(cham))
     # 내부
-    for k in ("conn_cbore", "conn_bore", "cavity", "seat", "wire", "cbore"):
+    for k in ("conn_cbore", "conn_land", "conn_thread", "channel", "seat", "cbore"):
         solid = solid.cut(cyl(*B[k]["x"], B[k]["d"]))
     # PCB 홀더 고정 M2 탭 (카운터보어 바닥, z = ±PCD/2 — PCB 평면에 수직 방향)
     T = B["holder_taps"]
@@ -64,11 +64,11 @@ def axial_hole(x0, x1, y, z, d):
 def cap():
     C = P.CAP
     x0, x1 = C["x_tip"], C["x_rear"]
-    L = C["lip"]
+    t0, t1 = C["thread_x"]
     outer = cyl(x0, x1, C["od"])
-    inner = cyl(x0 + C["tip_wall"], L["x"][0], C["bore"]).union(
-        cyl(L["x"][0] - 0.01, L["x"][1], L["d"])).union(
-        cyl(L["x"][1] - 0.01, x1 + 0.01, C["thread_minor"]))
+    inner = cyl(x0 + C["tip_wall"], t0, C["bore"]).union(
+        cyl(t0 - 0.01, t1, C["thread_minor"])).union(
+        cyl(t1 - 0.01, x1 + 0.01, C["relief"]["d"]))
     s = outer.cut(inner).cut(cyl(x0 - 0.1, x0 + C["tip_wall"] + 0.1, C["tip_hole"]))
     for x, ang in C["holes"]:
         a = math.radians(ang)
