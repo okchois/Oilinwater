@@ -1,11 +1,11 @@
 ﻿No,분류,참조번호,수량,값,풋프린트,제조사,품번,설명,단가USD_하한,단가USD_상한,상태
-1,수동,C1 C6,2,100n 100V,C_0805_2012Metric,Murata,GRM21BR72A104KA35L,MLCC 100 nF 100 V X7R 0805,0.02,0.05,제안
-2,수동,C2 C5,2,10u 50V,C_1210_3225Metric,Murata,GRM32ER71H106KA12L,MLCC 10 uF 50 V X7R 1210,0.15,0.35,제안
-3,보호,C3,1,4.7n 2kV Y2,C_1812_4532Metric,Murata,GA343QR7GF472KW01L,Safety cap 4.7 nF Y2 (250 VAC) 1812,0.15,0.4,제안
-4,수동,C4,1,22n,C_0603_1608Metric,Murata,GRM188R71H223KA01D,MLCC 22 nF 50 V X7R 0603,0.004,0.01,제안
+1,수동,C1,1,100n 100V,C_0805_2012Metric,Murata,GRM21BR72A104KA35L,MLCC 100 nF 100 V X7R 0805,0.02,0.05,제안
+2,보호,C3,1,4.7n 2kV Y2,C_1812_4532Metric,Murata,GA343QR7GF472KW01L,Safety cap 4.7 nF Y2 (250 VAC) 1812,0.15,0.4,제안
+3,수동,C4,1,22n,C_0603_1608Metric,Murata,GRM188R71H223KA01D,MLCC 22 nF 50 V X7R 0603,0.004,0.01,제안
+4,수동,C5,1,10u 50V,C_1210_3225Metric,Murata,GRM32ER71H106KA12L,MLCC 10 uF 50 V X7R 1210,0.15,0.35,제안
 5,수동,C7,1,2.2u 100V,C_1210_3225Metric,Murata,GRM32ER72A225KA35L,MLCC 2.2 uF 100 V X7R 1210,0.15,0.35,제안
 6,수동,C8 C14 C15 C20 C21 C23 C28 C29 C40 C44 C50 C54 C60,13,100n,C_0603_1608Metric,Murata,GRM188R71H104KA93D,MLCC 100 nF 50 V X7R 0603,0.004,0.01,제안
-7,수동,C9 C11 C12 C19 C24 C25 C26,7,1u,C_0603_1608Metric,Murata,GRM188R61E105KA12D,MLCC 1 uF 25 V X5R 0603,0.005,0.015,제안
+7,수동,C9 C12 C24 C25 C26,5,1u,C_0603_1608Metric,Murata,GRM188R61E105KA12D,MLCC 1 uF 25 V X5R 0603,0.005,0.015,제안
 8,수동,C10,1,22u 10V,C_0805_2012Metric,Murata,GRM21BR61A226ME44L,MLCC 22 uF 10 V X5R 0805,0.04,0.1,제안
 9,수동,C13,1,10u,C_0805_2012Metric,Murata,GRM21BR61E106KA73L,MLCC 10 uF 25 V X5R 0805,0.03,0.08,제안
 10,수동,C18,1,4.7u,C_0805_2012Metric,Murata,GRM21BR61E475KA12L,MLCC 4.7 uF 25 V X5R 0805,0.02,0.06,제안
@@ -16,48 +16,45 @@
 15,수동,C43 C53,2,4.7u 50V,C_1210_3225Metric,Murata,GRM32ER71H475KA88L,MLCC 4.7 uF 50 V X7R 1210,0.1,0.25,제안
 16,보호,D1,1,SMDJ36CA,D_SMC,Littelfuse,SMDJ36CA,TVS 3000 W 36 V 양방향 SMC (입력 1단),0.25,0.6,제안
 17,보호,D2,1,SMBJ33CA,D_SMB,Littelfuse,SMBJ33CA,TVS 600 W 33 V 양방향 SMB (입력 2단),0.08,0.2,제안
-18,표시,D3,1,green,LED_0603_1608Metric,Würth,150060GS75000,LED 녹색 0603,0.03,0.08,제안
-19,보호,D30 D40,2,SMAJ33CA,D_SMA,Littelfuse,SMAJ33CA,TVS 400 W 33 V 양방향 SMA (아날로그 출력),0.06,0.15,제안
-20,보호,D60 D61,2,SMAJ40CA (opt.),D_SMA,Littelfuse,SMAJ40CA,"TVS 400 W 40 V 양방향 SMA (RS-485, 옵션)",0.06,0.15,제안
-21,수동,FB1 FB2,2,600R@100MHz,L_0603_1608Metric,Murata,BLM18KG601SN1D,페라이트 비드 600 Ω@100 MHz 0603,0.01,0.03,제안
-22,보호,GDT1,1,GDT 230V,GDT_Bourns_2038,Bourns,2038-23-SM-RPLF,GDT 230 V SMD (회로 GND–외함),0.4,1.0,확인 필요
-23,커넥터,J1,1,SM08B-GHS-TB,JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,JST,SM08B-GHS-TB,"GH 1.25 mm 8핀 헤더, 옆 삽입(직각) SMD (M12 하네스 W-2, 정격 −25~+85 °C)",0.35,0.8,제안
-24,생산,J2,1,TC2030-IDC-NL,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Tag-Connect,(PCB 패드만),SWD 기록용 패드 — 부품 실장 없음,0.0,0.0,확정
-25,커넥터,J3,1,SM04B-SRSS-TB,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB,"SH 1.0 mm 4핀 헤더, 옆 삽입(직각) SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안
-26,커넥터,J5,1,Chassis contact,Chassis_Spring_Contact,TBD,SMD 스프링 접점 (Würth WE-SECF 계열 등),PCB 가장자리 → 하우징 내면 샤시 접촉 (구 M12 쉘 핀 대체),0.1,0.4,TBD
-27,보호,L1,1,CMC 2x1mH 0.3A,CMC_WE-SL,Würth,WE-SL2 계열 (품번 확인),"공통모드 초크 2×1 mH, ≥0.3 A",0.3,0.8,확인 필요
-28,전원,L2,1,22uH,L_4x4mm,Coilcraft,XGL4030-223ME (확인),"파워 인덕터 22 uH, 4×4 mm, Isat ≥ 0.8 A",0.25,0.6,확인 필요
-29,보호,R1,1,4.7R 1W pulse,R_MELF_MMB-0207,Vishay,MMB 0207 4.7 Ω (품번 확인),MELF 펄스 저항 4.7 Ω 1 W (입력 직렬),0.1,0.3,확인 필요
-30,수동,R2,1,1M,R_0603_1608Metric,Yageo,RC0603FR-071ML,저항 1 MΩ 1% 0603,0.002,0.005,제안
-31,전원,R3,1,866k 1%,R_0603_1608Metric,Yageo,RC0603FR-07866KL,저항 866 kΩ 1% 0603 (UVLO),0.002,0.005,제안
-32,전원,R4,1,97.6k 1%,R_0603_1608Metric,Yageo,RC0603FR-0797K6L,저항 97.6 kΩ 1% 0603 (UVLO/OVP),0.002,0.005,제안
-33,전원,R5,1,36.5k 1%,R_0603_1608Metric,Yageo,RC0603FR-0736K5L,저항 36.5 kΩ 1% 0603 (OVP),0.002,0.005,제안
-34,전원,R6,1,R_ILIM *,R_0603_1608Metric,Yageo,RC0603FR-07 (값 TBD),저항 1% 0603 — TPS2660 전류제한 150 mA 값 계산 필요,0.002,0.005,TBD
-35,수동,R7 R11 R12 R13 R14 R15 R31 R41,8,10k,R_0603_1608Metric,Yageo,RC0603FR-0710KL,저항 10 kΩ 1% 0603,0.002,0.005,제안
-36,전원,R8,1,100k 1%,R_0603_1608Metric,Yageo,RC0603FR-07100KL,저항 100 kΩ 1% 0603 (벅 FB),0.002,0.005,제안
-37,전원,R9,1,24.9k 1%,R_0603_1608Metric,Yageo,RC0603FR-0724K9L,저항 24.9 kΩ 1% 0603 (벅 FB),0.002,0.005,제안
-38,수동,R16 R17 R18 R20,4,1k,R_0603_1608Metric,Yageo,RC0603FR-071KL,저항 1 kΩ 1% 0603,0.002,0.005,제안
-39,측정,R19,1,4.02k 0.01% 5ppm,R_0603_1608Metric,Vishay / Susumu,0.01% 5 ppm 박막 (품번 확인),Pt1000 기준저항 4.02 kΩ 0.01% 5 ppm/K 0603,1.0,4.0,확인 필요
-40,전원,R22,1,0R RTN link*,R_0603_1608Metric,Yageo,RC0603JR-070RL,0 Ω 링크 — TPS2660 RTN 연결 확인 후 실장 여부 결정,0.002,0.005,확인 필요
-41,보호,R30 R40,2,10R pulse,R_2512_6332Metric,Vishay,CRCW251210R0FKEGHP (확인),펄스 내성 저항 10 Ω 2512 (출력 직렬),0.05,0.15,확인 필요
-42,보호,R60 R61,2,2.2R (or 0R),R_0603_1608Metric,Yageo,RC0603FR-072R2L,저항 2.2 Ω 1% 0603 (RS-485 직렬),0.002,0.005,제안
-43,전원,U1,1,TPS26600PWPR,HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias,TI,TPS26600PWPR,"eFuse 60 V 2 A, 역극성·OVP·UVLO, HTSSOP-16",1.5,3.0,확정
-44,전원,U2,1,LMR36006,VQFN-HR-12_LMR36006,TI,LMR36006 (가변판 주문코드 확인),벅 60 V 0.6 A → 5 V,1.0,1.6,확인 필요
-45,전원,U3,1,TPS7A2033PDBVR,SOT-23-5,TI,TPS7A2033PDBVR,LDO 3.3 V 300 mA 저잡음 SOT-23-5,0.07,0.3,확정
-46,MCU,U4,1,STM32G0B1CCT3,LQFP-48_7x7mm_P0.5mm,ST,STM32G0B1CCT3,"MCU Cortex-M0+ 64 MHz 256 KB, LQFP48, −40~125 °C (사내 DP2000 G0B1CCT6 동일 다이)",1.5,2.5,확정
-47,측정,U5,1,PCAP04-AQFM-24,QFN-24_PCAP04,ScioSense,PCAP04-AQFM-24,정전용량-디지털 변환기 QFN24,6.5,7.1,확정
-48,측정,U6,1,ADS1220IPWR,TSSOP-16_4.4x5mm_P0.65mm,TI,ADS1220IPWR,"24-bit ADC, Pt1000 2선 (J3 패드에서 켈빈 분기), TSSOP-16",1.9,3.5,확정
-49,출력,U7 U8,2,DAC8760IPWP,HTSSOP-24_DAC8760,TI,DAC8760IPWPR,"16-bit 전압/전류 출력 DAC, HTSSOP-24. 사양 확정 후 같은 핀 대체: DAC7760(12-bit V/I), DAC8750(16-bit 전류), DAC7750(12-bit 전류)",7.8,12.4,확정
-50,출력,U9 U10,2,TPS26611,TPS26611,TI,TPS26611 (패키지·주문코드 확인),4–20 mA 출력 오결선 보호,1.2,2.5,확인 필요
-51,통신,U11,1,THVD2450DR,SOIC-8_3.9x4.9mm_P1.27mm,TI,THVD2450DR,"RS-485 트랜시버, 버스 ±70 V 내성, SOIC-8",1.5,3.0,확정
-52,기판,PCB,1,-,-,-,HMT500-E-301,"PCB 4층 57×23 mm, FR-4 1.6 t, ENIG (기구 Rev C 외곽)",0.8,2.0,추정
-53,센서,센서 헤드,1,-,-,IST,MK33-W mini (150138),정전용량 습도 소자 200 pF (센서 프로브 P-202에 실장),0.0,0.0,사내 단가
-54,센서,센서 헤드,1,-,-,IST,MiniSens Pt1000 F0.1,온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장),0.5,3.0,추정
-55,커넥터,P-204,1,-,-,M Connect,TBD (두텍 사용품),"M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)",2.0,10.0,TBD
-56,하네스,W-2,1,-,-,JST,GHR-08V-S,GH 1.25 mm 8핀 소켓 하우징 (M12 하네스 W-2),0.06,0.15,제안
-57,하네스,W-2,8,-,-,JST,SSHL-002T-P0.2,GH 크림프 단자 AWG 30–26,0.03,0.06,제안
-58,하네스,W-2,1,-,-,TBD,PTFE AWG28 전선,"UL1213 계열 200 °C, 8심 × 60 mm + 수축튜브 (M12 핀 납땜)",0.15,0.4,추정
-59,하네스,W-1,1,-,-,JST,SHR-04V-S,SH 1.0 mm 4핀 소켓 하우징 (센서 하네스 W-1),0.04,0.1,제안
-60,하네스,W-1,4,-,-,JST,SSH-003T-P0.2-H,SH 크림프 단자 AWG 32–28,0.03,0.06,제안
-61,하네스,W-1,1,-,-,TBD,PTFE AWG30 전선,"UL1213 계열 200 °C, 4심 × 60 mm (HTX99R 뒤 핀 납땜 + 수축튜브)",0.1,0.3,추정
-62,조립,-,1,-,-,-,SMT 양면 실장,1k 기준 조립비,2.0,4.0,추정
+18,보호,D30 D40,2,SMAJ33CA,D_SMA,Littelfuse,SMAJ33CA,TVS 400 W 33 V 양방향 SMA (아날로그 출력),0.06,0.15,제안
+19,수동,FB1,1,600R@100MHz,L_0603_1608Metric,Murata,BLM18KG601SN1D,페라이트 비드 600 Ω@100 MHz 0603,0.01,0.03,제안
+20,보호,GDT1,1,GDT 230V,GDT_Bourns_2038,Bourns,2038-23-SM-RPLF,GDT 230 V SMD (회로 GND–외함),0.4,1.0,확인 필요
+21,커넥터,J1,1,SM08B-GHS-TB,JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,JST,SM08B-GHS-TB,"GH 1.25 mm 8핀 헤더, 옆 삽입(직각) SMD (M12 하네스 W-2, 정격 −25~+85 °C)",0.35,0.8,제안
+22,생산,J2,1,TC2030-IDC-NL,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Tag-Connect,(PCB 패드만),SWD 기록용 패드 — 부품 실장 없음,0.0,0.0,확정
+23,커넥터,J3,1,SM04B-SRSS-TB,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB,"SH 1.0 mm 4핀 헤더, 옆 삽입(직각) SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안
+24,커넥터,J5,1,Chassis contact,Chassis_Spring_Contact,TBD,SMD 스프링 접점 (Würth WE-SECF 계열 등),PCB 가장자리 → 하우징 내면 샤시 접촉 (구 M12 쉘 핀 대체),0.1,0.4,TBD
+25,보호,L1,1,CMC 2x1mH 0.3A,CMC_WE-SL,Würth,WE-SL2 계열 (품번 확인),"공통모드 초크 2×1 mH, ≥0.3 A",0.3,0.8,확인 필요
+26,전원,L2,1,22uH,L_4x4mm,Coilcraft,XGL4030-223ME (확인),"파워 인덕터 22 uH, 4×4 mm, Isat ≥ 0.8 A",0.25,0.6,확인 필요
+27,보호,R1,1,4.7R 1W pulse,R_MELF_MMB-0207,Vishay,MMB 0207 4.7 Ω (품번 확인),MELF 펄스 저항 4.7 Ω 1 W (입력 직렬),0.1,0.3,확인 필요
+28,수동,R2,1,1M,R_0603_1608Metric,Yageo,RC0603FR-071ML,저항 1 MΩ 1% 0603,0.002,0.005,제안
+29,전원,R3,1,866k 1%,R_0603_1608Metric,Yageo,RC0603FR-07866KL,저항 866 kΩ 1% 0603 (UVLO),0.002,0.005,제안
+30,전원,R4,1,97.6k 1%,R_0603_1608Metric,Yageo,RC0603FR-0797K6L,저항 97.6 kΩ 1% 0603 (UVLO/OVP),0.002,0.005,제안
+31,전원,R5,1,36.5k 1%,R_0603_1608Metric,Yageo,RC0603FR-0736K5L,저항 36.5 kΩ 1% 0603 (OVP),0.002,0.005,제안
+32,전원,R6,1,R_ILIM *,R_0603_1608Metric,Yageo,RC0603FR-07 (값 TBD),저항 1% 0603 — TPS2660 전류제한 150 mA 값 계산 필요,0.002,0.005,TBD
+33,수동,R7 R31 R41,3,10k,R_0603_1608Metric,Yageo,RC0603FR-0710KL,저항 10 kΩ 1% 0603,0.002,0.005,제안
+34,전원,R8,1,100k 1%,R_0603_1608Metric,Yageo,RC0603FR-07100KL,저항 100 kΩ 1% 0603 (벅 FB),0.002,0.005,제안
+35,전원,R9,1,24.9k 1%,R_0603_1608Metric,Yageo,RC0603FR-0724K9L,저항 24.9 kΩ 1% 0603 (벅 FB),0.002,0.005,제안
+36,수동,R17 R18 R20,3,1k,R_0603_1608Metric,Yageo,RC0603FR-071KL,저항 1 kΩ 1% 0603,0.002,0.005,제안
+37,측정,R19,1,4.02k 0.01% 5ppm,R_0603_1608Metric,Vishay / Susumu,0.01% 5 ppm 박막 (품번 확인),Pt1000 기준저항 4.02 kΩ 0.01% 5 ppm/K 0603,1.0,4.0,확인 필요
+38,전원,R22,1,0R RTN link*,R_0603_1608Metric,Yageo,RC0603JR-070RL,0 Ω 링크 — TPS2660 RTN 연결 확인 후 실장 여부 결정,0.002,0.005,확인 필요
+39,보호,R30 R40,2,10R pulse,R_2512_6332Metric,Vishay,CRCW251210R0FKEGHP (확인),펄스 내성 저항 10 Ω 2512 (출력 직렬),0.05,0.15,확인 필요
+40,전원,U1,1,TPS26600PWPR,HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias,TI,TPS26600PWPR,"eFuse 60 V 2 A, 역극성·OVP·UVLO, HTSSOP-16",1.5,3.0,확정
+41,전원,U2,1,LMR36006,VQFN-HR-12_LMR36006,TI,LMR36006 (가변판 주문코드 확인),벅 60 V 0.6 A → 5 V,1.0,1.6,확인 필요
+42,전원,U3,1,TPS7A2033PDBVR,SOT-23-5,TI,TPS7A2033PDBVR,LDO 3.3 V 300 mA 저잡음 SOT-23-5,0.07,0.3,확정
+43,MCU,U4,1,STM32G0B1CCT3,LQFP-48_7x7mm_P0.5mm,ST,STM32G0B1CCT3,"MCU Cortex-M0+ 64 MHz 256 KB, LQFP48, −40~125 °C (사내 DP2000 G0B1CCT6 동일 다이)",1.5,2.5,확정
+44,측정,U5,1,PCAP04-AQFM-24,QFN-24_PCAP04,ScioSense,PCAP04-AQFM-24,정전용량-디지털 변환기 QFN24,6.5,7.1,확정
+45,측정,U6,1,ADS1220IPWR,TSSOP-16_4.4x5mm_P0.65mm,TI,ADS1220IPWR,"24-bit ADC, Pt1000 2선 (J3 패드에서 켈빈 분기), TSSOP-16",1.9,3.5,확정
+46,출력,U7 U8,2,DAC8760IPWP,HTSSOP-24_DAC8760,TI,DAC8760IPWPR,"16-bit 전압/전류 출력 DAC, HTSSOP-24. 사양 확정 후 같은 핀 대체: DAC7760(12-bit V/I), DAC8750(16-bit 전류), DAC7750(12-bit 전류)",7.8,12.4,확정
+47,출력,U9 U10,2,TPS26611,TPS26611,TI,TPS26611 (패키지·주문코드 확인),4–20 mA 출력 오결선 보호,1.2,2.5,확인 필요
+48,통신,U11,1,THVD2450DR,SOIC-8_3.9x4.9mm_P1.27mm,TI,THVD2450DR,"RS-485 트랜시버, 버스 ±70 V 내성, SOIC-8",1.5,3.0,확정
+49,기판,PCB,1,-,-,-,HMT500-E-301,"PCB 4층 57×23 mm, FR-4 1.6 t, ENIG (기구 Rev C 외곽)",0.8,2.0,추정
+50,센서,센서 헤드,1,-,-,IST,MK33-W mini (150138),정전용량 습도 소자 200 pF (센서 프로브 P-202에 실장),0.0,0.0,사내 단가
+51,센서,센서 헤드,1,-,-,IST,MiniSens Pt1000 F0.1,온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장),0.5,3.0,추정
+52,커넥터,P-204,1,-,-,M Connect,TBD (두텍 사용품),"M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)",2.0,10.0,TBD
+53,하네스,W-2,1,-,-,JST,GHR-08V-S,GH 1.25 mm 8핀 소켓 하우징 (M12 하네스 W-2),0.06,0.15,제안
+54,하네스,W-2,8,-,-,JST,SSHL-002T-P0.2,GH 크림프 단자 AWG 30–26,0.03,0.06,제안
+55,하네스,W-2,1,-,-,TBD,PTFE AWG28 전선,"UL1213 계열 200 °C, 8심 × 60 mm + 수축튜브 (M12 핀 납땜)",0.15,0.4,추정
+56,하네스,W-1,1,-,-,JST,SHR-04V-S,SH 1.0 mm 4핀 소켓 하우징 (센서 하네스 W-1),0.04,0.1,제안
+57,하네스,W-1,4,-,-,JST,SSH-003T-P0.2-H,SH 크림프 단자 AWG 32–28,0.03,0.06,제안
+58,하네스,W-1,1,-,-,TBD,PTFE AWG30 전선,"UL1213 계열 200 °C, 4심 × 60 mm (HTX99R 뒤 핀 납땜 + 수축튜브)",0.1,0.3,추정
+59,조립,-,1,-,-,-,SMT 양면 실장,1k 기준 조립비,2.0,4.0,추정

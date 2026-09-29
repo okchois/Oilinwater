@@ -397,7 +397,7 @@ BOX_KO = [("FIELD CONNECTOR", "현장 커넥터"), ("INPUT SURGE", "입력 서�
           ("FAULT PULL-UPS", "고장 신호 풀업·리셋"), ("SWD", "생산 프로그래밍"), ("MCU NOTES", "MCU 설정 메모"),
           ("CAPACITIVE HUMIDITY", "습도 센서 측정"), ("Pt1000", "온도 측정 (2선식)"), ("DECOUPLING", "바이패스"),
           ("ANALOG OUTPUT CH", "아날로그 출력 {ch}"), ("CH", "채널 {ch} 바이패스"), ("DAC SELECTION", "DAC 선정 (결정 #10)"),
-          ("RS-485", "RS-485 통신")]
+          ("RS-485", "RS-485 통신"), ("RESET", "리셋")]
 
 FP = {
     "R0603": "Resistor_SMD:R_0603_1608Metric", "R2512": "Resistor_SMD:R_2512_6332Metric",
@@ -438,8 +438,7 @@ S.wa(a, S.P("D1", "1"), S.P("R1", "1"))
 S.gnd_stub(S.P("D1", "2"))
 S.v2("D2", "TVS_BI", "SMBJ33CA", FP["SMB"], 49, 26, "VIN_F", "GND")
 S.v2("C1", "C", "100n 100V", FP["C0805"], 55, 26, "VIN_F", "GND")
-S.v2("C2", "C", "10u 50V", FP["C1210"], 61, 26, "VIN_F", "GND")
-for r_ in ("D2", "C1", "C2"):
+for r_ in ("D2", "C1"):
     S.gnd_stub(S.P(r_, "2"))
 S.w((45, 26), (49, 26), (55, 26), (61, 26), (66, 26))
 S.flag((66, 26))
@@ -512,9 +511,8 @@ S.wa(S.P("U1", "12"), S.P("C4", "1"))
 for r_ in ("R6", "R7", "C4"):
     S.gnd_stub(S.P(r_, "2"))
 S.v2("C5", "C", "10u 50V", FP["C1210"], 52, 20, "VIN_P", "GND")
-S.v2("C6", "C", "100n 100V", FP["C0805"], 57, 20, "VIN_P", "GND")
 S.v2("C7", "C", "2.2u 100V", FP["C1210"], 66, 20, "VIN_P", "GND")
-for r_ in ("C5", "C6", "C7"):
+for r_ in ("C5", "C7"):
     S.gnd_stub(S.P(r_, "2"))
 S.place("U2", "LMR36006", "LMR36006", "TBD:VQFN-HR-12_LMR36006", 78, 21, nets={
     "1": "VIN_P", "2": "VIN_P", "4": "BUCK_FB", "5": "GND", "7": "BUCK_BOOT", "6": "BUCK_SW",
@@ -544,8 +542,6 @@ S.gnd_stub(S.P("R9", "2"))
 S.wa(S.P("R8", "2"), S.o((99, 24)), S.o((99, 31)), S.o((69, 31)), S.o((69, 23)), S.P("U2", "4"))
 S.place("U3", "TPS7A2033", "TPS7A2033PDBVR", "Package_TO_SOT_SMD:SOT-23-5", 124, 21,
         nets={"1": "+5V", "3": "+5V", "5": "+3V3", "2": "GND"})
-S.v2("C11", "C", "1u", FP["C0603"], 113, 21, "+5V", "GND")
-S.gnd_stub(S.P("C11", "2"))
 S.wa(S.P("L2", "2"), S.o((95, 21)), S.o((101, 21)), S.o((105, 21)), S.o((109, 21)), S.o((113, 21)),
      S.o((118, 21)), S.P("U3", "1"))
 S.flag((105, 21))
@@ -572,12 +568,12 @@ S.text("Vout = 1.0 V x (1 + R8/R9) = 5.0 V   (Vref 1.0 V: VERIFY)", (64, 35.5), 
 S.box(112, 14, 153, 29, "LDO 3.3 V   TPS7A2033   +   analog rail +3V3A")
 
 # ════════════════════════════ 3. MCU ════════════════════════════
-S = Sheet("mcu.kicad_sch", "MCU", "STM32G0B1CCT3, SWD, status LED, fault pull-ups", dx=6, dy=6)
+S = Sheet("mcu.kicad_sch", "MCU", "STM32G0B1CCT3, SWD, reset, internal temperature sensor", dx=6, dy=6)
 SHEETS.append(S)
-mnet = {"4": "+3V3", "6": "+3V3", "5": "VDDA", "7": "GND", "10": "NRST",
+mnet = {"4": "+3V3", "6": "+3V3", "5": "+3V3", "7": "GND", "10": "NRST",
         "12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO", "18": "SPI_MOSI",
         "35": "SWDIO", "36": "SWCLK", "19": "CS_CDC", "20": "CS_ADC", "21": "ADC_DRDY",
-        "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "44": "STAT_LED", "30": "OUT1_FLT", "31": "OUT2_FLT",
+        "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "30": "OUT1_FLT", "31": "OUT2_FLT",
         "25": "DAC1_ALARM", "26": "DAC2_ALARM", "27": "PWR_FLT"}
 S.place("U4", "STM32G0B1CxTx", "STM32G0B1CCT3", "Package_QFP:LQFP-48_7x7mm_P0.5mm", 62, 52, nets=mnet)
 tops = [S.P("U4", n) for n in ("4", "6")]
@@ -586,7 +582,7 @@ for p in tops:
     S.wa(p, (p[0], ytop))
 S.wa(*[(p[0], ytop) for p in tops])
 S.pw("+3V3", (tops[0][0], ytop), absolute=True)
-S.sup_stub("VDDA", S.P("U4", "5"), d=2)
+S.sup_stub("+3V3", S.P("U4", "5"), d=2)          # VREF+ = VDD (MCU ADC는 내부 온도센서·진단용)
 gp = S.P("U4", "7")
 S.wa(gp, (gp[0], gp[1] + 2))
 S.pw("GND", (gp[0], gp[1] + 2), absolute=True)
@@ -604,45 +600,21 @@ right_lbl = {"12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SC
              "21": "ADC_DRDY", "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT",
              "25": "DAC1_ALARM", "26": "DAC2_ALARM", "27": "PWR_FLT"}
 for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["right"]:
-    if num == "44":
-        continue
     if num in right_lbl:
         S.gl(right_lbl[num], S.P("U4", num), "R")
     else:
         S.nc(S.P("U4", num))
-pb5 = S.P("U4", "44")
-S.h2("R16", "R", "1k", FP["R0603"], pb5[0] - S.dx + 8, pb5[1] - S.dy, "STAT_LED", "STAT_LED_A")
-S.wa(pb5, S.P("R16", "1"))
-S.v2("D3", "LED", "green", FP["LED"], pb5[0] - S.dx + 15, pb5[1] - S.dy, "GND", "STAT_LED_A", flip=True)
-S.wa(S.P("R16", "2"), S.P("D3", "2"))
-S.gnd_stub(S.P("D3", "1"))
-for i, (ref, val, fp) in enumerate([("C14", "100n", "C0603"), ("C15", "100n", "C0603"), ("C18", "4.7u", "C0805")]):
+for i, (ref, val, fp) in enumerate([("C14", "100n", "C0603"), ("C15", "100n", "C0603"), ("C20", "100n", "C0603"),
+                                   ("C18", "4.7u", "C0805")]):
     decap(S, ref, val, fp, 10 + 5 * i, 12, "+3V3")
 S.box(6, 7, 38, 21, "MCU DECOUPLING")
-S.text("100 nF at VDD and VBAT, 4.7 uF bulk", (6.5, 20.3), 1.27)
-S.h2("FB2", "FB", "600R@100MHz", FP["FB0603"], 12, 30, "+3V3", "VDDA")
-f2 = S.P("FB2", "1")
-S.wa(f2, (f2[0] - 2, f2[1]))
-S.sup_stub("+3V3", (f2[0] - 2, f2[1]))
-S.v2("C19", "C", "1u", FP["C0603"], 19, 30, "VDDA", "GND")
-S.v2("C20", "C", "100n", FP["C0603"], 24, 30, "VDDA", "GND")
-S.gnd_stub(S.P("C19", "2"))
-S.gnd_stub(S.P("C20", "2"))
-S.w((15, 30), (19, 30), (24, 30), (28, 30), (32, 30))
-S.flag((28, 30))
-S.pw("VDDA", (32, 30))
-S.box(6, 24, 38, 37, "VDDA FILTER")
-for i, (ref, net) in enumerate([("R11", "PWR_FLT"), ("R12", "OUT1_FLT"), ("R13", "OUT2_FLT"), ("R14", "DAC1_ALARM"),
-                                ("R15", "DAC2_ALARM")]):
-    x = 100 + 5 * i
-    S.v2(ref, "R", "10k", FP["R0603"], x, 12, "+3V3", net)
-    S.sup_stub("+3V3", S.P(ref, "1"))
-    S.gl(net, S.P(ref, "2"), "D", length=1)
+S.text("100 nF at VDD, VBAT, VREF+ (C20); 4.7 uF bulk", (6.5, 20.3), 1.27)
 S.v2("C21", "C", "100n", FP["C0603"], 128, 13, "NRST", "GND")
 S.gl("NRST", S.P("C21", "1"), "U", length=1)
 S.gnd_stub(S.P("C21", "2"))
-S.box(96, 7, 134, 27, "FAULT PULL-UPS  /  RESET")
-S.text("Open-drain fault lines pulled up to +3V3", (96.5, 26.3), 1.27)
+S.box(118, 7, 134, 27, "RESET")
+S.text("Fault lines: MCU pull-ups", (118.5, 24.9), 1.27)
+S.text("(PB13-15, PC6-7 internal)", (118.5, 26.3), 1.27)
 S.place("J2", "CONN_SWD", "TC2030-IDC-NL", "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical", 126, 38,
         nets={"1": "+3V3", "2": "SWDIO", "4": "SWCLK", "3": "NRST", "5": "GND"})
 v = S.P("J2", "1")
@@ -655,11 +627,12 @@ g_ = S.P("J2", "5")
 S.wa(g_, (g_[0] - 1, g_[1]))
 S.gnd_stub((g_[0] - 1, g_[1]))
 S.box(106, 31, 134, 47, "SWD  (production programming)")
-S.box(6, 62, 48, 80, "MCU NOTES (STM32G0B1)")
+S.box(6, 62, 48, 82, "MCU NOTES (STM32G0B1)")
 for i, t in enumerate(["BOOT0 shares PA14/SWCLK - no pull-down.",
                        "Option bytes: nBOOT_SEL=1, nBOOT0=1",
                        "  -> boot from flash (RS-485 bootloader 0x08000000).",
-                       "VDDA bonded to VDD in LQFP48; VREF+ via FB2.",
+                       "VDDA = VDD (LQFP48); VREF+ tied to +3V3 (C20).",
+                       "PCB temp (mid): internal sensor, ADC ch TS + TS_CAL.",
                        "Cortex-M0+: no SWO (J2 pin 6 NC).",
                        "Same die as DP2000 (G0B1CCT6); T3 = -40..125 C."]):
     S.text(t, (7, 66 + 2.3 * i), 1.27)
@@ -737,6 +710,7 @@ S.box(14, 37, 72, 62, "Pt1000 2-WIRE -> ADS1220", tdx=11.2, ko_next=True)
 S.text("ratiometric: Rref R19 on REFP0/REFN0", (25.2, 40.9), 1.27)
 S.text("IDAC1 (AIN0) -> PT+ ; sense AIN1-AIN2, split at J3 pads", (46, 57.3), 1.27)
 S.text("Lead R (harness+HTX99R+probe) removed by calibration", (46, 58.6), 1.27)
+S.text("PCB temp: ADS1220 internal sensor (TS mode)", (46, 61.2), 1.27)
 S.text("RC filter R17/R18/C27 (differential + common mode)", (50, 59.9), 1.27)
 S.box(78, 5, 93, 21, "DECOUPLING")
 S.box(78, 35, 93, 51, "DECOUPLING")
@@ -823,8 +797,8 @@ for i, t in enumerate([
 S = Sheet("rs485.kicad_sch", "RS-485", "THVD2450 +/-70V fault-protected transceiver", dx=4, dy=4, paper="A4")
 SHEETS.append(S)
 S.place("U11", "THVD2450", "THVD2450DR", "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm", 30, 21, nets={
-    "4": "RS485_TX", "1": "RS485_RX", "2": "RS485_DE", "3": "RS485_DE", "8": "+3V3", "6": "RS485_A",
-    "7": "RS485_B", "5": "GND"})
+    "4": "RS485_TX", "1": "RS485_RX", "2": "RS485_DE", "3": "RS485_DE", "8": "+3V3", "6": "RS485_A_EXT",
+    "7": "RS485_B_EXT", "5": "GND"})
 S.gl("RS485_TX", S.P("U11", "4"), "L", length=3)
 S.gl("RS485_RX", S.P("U11", "1"), "L", length=3)
 re, de = S.P("U11", "2"), S.P("U11", "3")
@@ -832,23 +806,15 @@ S.wa(re, (re[0] - 2, re[1]), (re[0] - 2, de[1]), de)
 S.gl("RS485_DE", (re[0] - 2, re[1]), "L", length=1)
 S.sup_stub("+3V3", S.P("U11", "8"), d=2)
 S.gnd_stub(S.P("U11", "5"))
-S.h2("R60", "R", "2.2R (or 0R)", FP["R0603"], 43, 20, "RS485_A", "RS485_A_EXT")
-S.h2("R61", "R", "2.2R (or 0R)", FP["R0603"], 43, 27, "RS485_B", "RS485_B_EXT")
-S.v2("D60", "TVS_BI", "SMAJ40CA (opt.)", FP["SMA"], 51, 20, "RS485_A_EXT", "GND")
-S.v2("D61", "TVS_BI", "SMAJ40CA (opt.)", FP["SMA"], 53, 27, "RS485_B_EXT", "GND")
-S.wa(S.P("U11", "6"), S.P("R60", "1"))
+S.wa(S.P("U11", "6"), S.o((60, 20)))
 bb = S.P("U11", "7")
-S.wa(bb, (bb[0] + 1, bb[1]), (bb[0] + 1, 27 + S.dy), S.P("R61", "1"))
-S.w((46, 20), (51, 20), (60, 20))
-S.w((46, 27), (53, 27), (62, 27))
+S.wa(bb, (bb[0] + 1, bb[1]), (bb[0] + 1, 27 + S.dy), S.o((62, 27)))
 S.gl("RS485_A_EXT", S.o((60, 20)), "R", length=0)
 S.gl("RS485_B_EXT", S.o((62, 27)), "R", length=0)
-S.gnd_stub(S.P("D60", "2"))
-S.gnd_stub(S.P("D61", "2"))
 decap(S, "C60", "100n", "C0603", 14, 13, "+3V3")
 S.box(8, 7, 75, 36, "RS-485  (Modbus RTU)   -   bus pins +/-70 V fault protected")
 S.text("No termination on board (fit at bus ends). Fail-safe receiver built in.", (8.5, 34.2), 1.27)
-S.text("D60/D61: fit only if surge pre-test needs them; standoff must be >= 36 V", (8.5, 35.5), 1.27)
+S.text("No series R / TVS: THVD2450 has +/-70 V bus fault and IEC ESD protection built in.", (8.5, 35.5), 1.27)
 
 # ════════════════════════════ 출력 ════════════════════════════
 ROOT = uid("root")
@@ -1152,7 +1118,7 @@ def overlap_errors(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-29") (rev "0.5") '
+    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-29") (rev "0.6") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Oil moisture transmitter HMT500 - RS-485 + 2x V/I analog output") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "VERIFY=YES parts: pin numbers LMR36006/PCAP04/DAC8760/TPS26611; TPS2660 R22"))')
@@ -1181,14 +1147,15 @@ def write_all():
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
-        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.5", 2.5, True),
+        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.6", 2.5, True),
         ("v0.5: J1 = JST GH 1.25 mm 8P side entry (SM08B-GHS-TB), harness W-2 to M12 8P; J5 chassis spring contact (was M12 shell pin).", 1.4, False),
         ("v0.4: J3 = JST SH 1.0 mm 4P (SM04B-SRSS-TB side entry, v0.5) for sensor harness W-1 direct from HTX99R (no feedthrough, mech Rev F); Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
         ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2450 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-30 V DC.", 1.4, False),
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
-        ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), VDDA, CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
+        ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
+        ("v0.6: parts cleanup (-16: pull-ups R11-15, LED D3/R16, RS-485 R60/61 D60/61, FB2 C19 C11 C2 C6); PCB temperature = ADS1220 + MCU internal sensors.", 1.4, False),
         ("VERIFY: LMR36006, PCAP04, DAC8760, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn). TPS2660: RTN link R22 to confirm.", 1.4, False),
         ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
         ("표기 규칙: 부품번호 = 굵은 글자 (R1, U4) / 부품값 = 보통 글자 (10k, DAC8760) / 전원 네트 = 기울인 글자 (+3V3, VIN_P)", 1.4, False),

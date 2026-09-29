@@ -8,7 +8,7 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 | `HMT500/HMT500.kicad_sch` | 최상위 시트 (하위 시트 6장) |
 | `HMT500/connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
 | `HMT500/power.kicad_sch` | eFuse TPS2660, 벅 LMR36006(5 V), LDO TPS7A2033(3.3 V) |
-| `HMT500/mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 상태 LED, 풀업 |
+| `HMT500/mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서 (v0.6: LED·외부 풀업 삭제) |
 | `HMT500/measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 2선) |
 | `HMT500/analog_out.kicad_sch` | DAC8760 ×2 + TPS26611 오결선 보호 + TVS |
 | `HMT500/rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
@@ -23,7 +23,7 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 
 - **흐름:** 신호는 왼쪽(입력) → 오른쪽(출력)으로 그리고, 전원은 위쪽 전원 심볼, GND는 아래쪽 GND 심볼로 표시합니다.
 - **연결:** 시트 안은 실제 배선이고, 3선 이상 만나는 곳에는 접합점을 찍었습니다. 시트 사이 신호(SPI, 고장 신호, 커넥터 신호 등)만 전역 라벨로 잇습니다.
-- **전원 심볼:** GND, +3V3, +3V3A(아날로그 3.3 V), +5V, VIN_P(보호된 입력), VDDA, CHASSIS
+- **전원 심볼:** GND, +3V3, +3V3A(아날로그 3.3 V), +5V, VIN_P(보호된 입력), CHASSIS
 - **구획:** 기능 블록마다 점선 구획, 제목, 설계 메모(설정 공식, 확인 항목)를 넣었습니다.
 - **용지:** 커넥터·RS-485 시트는 A4, 나머지는 A3입니다.
 
