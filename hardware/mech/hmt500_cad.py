@@ -95,7 +95,22 @@ def endcap():
         slab = cq.Workplane("XY").box(f1 - f0 + 0.2, 10, 40).translate(((f0 + f1) / 2, sgn * (E["flange"]["flats_af"] / 2 + 5), 0))
         s = s.cut(slab)
     s = s.cut(cyl(E["cbore"]["x"][0] - 0.1, E["cbore"]["x"][1], E["cbore"]["d"]))
+    Po = E["ports"]                                  # 몰딩 주입·공기 빠짐 구멍 M3 ×2 (축 방향, 플랜지 관통)
+    for ang in Po["angles"]:
+        a = math.radians(ang)
+        s = s.cut(axial_hole(E["cbore"]["x"][1] - 0.5, f1 + 0.1, Po["r"] * math.cos(a), Po["r"] * math.sin(a), Po["d_minor"]))
     return s.cut(cyl(E["thread"]["x"][0] - 0.1, f1 + 0.1, E["thread"]["d_minor"]))
+
+
+def potting2():
+    """하우징 안 전체 에폭시 몰딩 (PCB·부품·홀더·지지링·하네스·커넥터 뒤를 뺀 공간)."""
+    z = P.POTTING2["zones"]
+    s = cyl(*z[0][:2], z[0][2] - 0.02)
+    for x0, x1, d in z[1:]:
+        s = s.union(cyl(x0, x1, d - 0.02))
+    for fn in (pcbs, pcb_parts, pcb_holder, pcb_ring, harness, harness_plug, harness2, harness2_plug, connector):
+        s = s.cut(fn())
+    return s
 
 
 def orings():
@@ -301,6 +316,7 @@ PARTS = [
     ("M-103_housing", housing, (0.82, 0.84, 0.88)),
     ("M-104_endcap", endcap, (0.72, 0.74, 0.78)),
     ("P-209_epoxy", potting, (0.55, 0.45, 0.25)),
+    ("P-209_potting", potting2, (0.62, 0.50, 0.28)),
     ("P-202_sensor_probe", sensor_probe, (0.78, 0.66, 0.46)),
     ("P-202_elements", sensor_elements, (0.95, 0.93, 0.85)),
     ("HTX99R-SC_connector", sensor_connector, (0.15, 0.15, 0.17)),

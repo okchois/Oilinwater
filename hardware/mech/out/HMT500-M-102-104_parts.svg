@@ -153,7 +153,7 @@
 <line x1="296.000" y1="60.000" x2="296.000" y2="130.000" class="thin"/>
 <polygon points="296.000,60.000 296.900,62.600 295.100,62.600" class="arrow"/>
 <polygon points="296.000,130.000 295.100,127.400 296.900,127.400" class="arrow"/>
-<text x="295.000" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 295.000 95.000)" class="t ">M28×1-6g</text>
+<text x="295.000" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 295.000 95.000)" class="t ">M28×1-LH-6g (왼나사)</text>
 <line x1="331.750" y1="58.750" x2="331.750" y2="131.250" class="thin"/>
 <polygon points="331.750,58.750 332.650,61.350 330.850,61.350" class="arrow"/>
 <polygon points="331.750,131.250 330.850,128.650 332.650,128.650" class="arrow"/>
@@ -170,6 +170,12 @@
 <polygon points="312.500,67.500 314.121,65.277 315.149,66.755" class="arrow"/>
 <line x1="365.000" y1="31.000" x2="387.000" y2="31.000" class="thin"/>
 <text x="366.000" y="30.000" font-size="3.2" text-anchor="start" class="t ">Ø22 깊이 11</text>
+<line x1="332.500" y1="116.875" x2="347.500" y2="116.875" class="hidden"/>
+<line x1="332.500" y1="123.125" x2="347.500" y2="123.125" class="hidden"/>
+<line x1="343.750" y1="120.000" x2="365.000" y2="148.000" class="thin"/>
+<polygon points="343.750,120.000 346.039,121.527 344.605,122.615" class="arrow"/>
+<line x1="365.000" y1="148.000" x2="387.000" y2="148.000" class="thin"/>
+<text x="366.000" y="147.000" font-size="3.2" text-anchor="start" class="t ">2×M3 관통 (주입·공기 빠짐)</text>
 <line x1="327.500" y1="127.000" x2="365.000" y2="161.000" class="thin"/>
 <polygon points="327.500,127.000 330.031,128.080 328.822,129.413" class="arrow"/>
 <line x1="365.000" y1="161.000" x2="387.000" y2="161.000" class="thin"/>
@@ -229,7 +235,7 @@
 <line x1="279.500" y1="179.812" x2="308.000" y2="172.000" class="thin"/>
 <polygon points="279.500,179.812 281.770,178.257 282.245,179.993" class="arrow"/>
 <line x1="308.000" y1="172.000" x2="330.000" y2="172.000" class="thin"/>
-<text x="309.000" y="171.000" font-size="3.2" text-anchor="start" class="t ">M28×1-6H 유효 7 (양끝)</text>
+<text x="309.000" y="171.000" font-size="3.2" text-anchor="start" class="t ">앞 M28×1-6H / 뒤 M28×1-LH-6H (왼나사), 유효 7</text>
 <line x1="287.000" y1="178.250" x2="308.000" y2="196.000" class="thin"/>
 <polygon points="287.000,178.250 289.567,179.241 288.405,180.616" class="arrow"/>
 <line x1="308.000" y1="196.000" x2="330.000" y2="196.000" class="thin"/>
@@ -239,8 +245,9 @@
 <text x="18.000" y="247.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="253.200" font-size="3.0" text-anchor="start" class="t ">1. 재질 SUS316L (1.4404), 재질성적서 EN 10204 3.1, 부동태 처리 (ASTM A967).</text>
 <text x="18.000" y="259.400" font-size="3.0" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 버 제거. 지정 외 표면 Ra 1.6. 일반공차 ISO 2768-mK.</text>
-<text x="18.000" y="265.600" font-size="3.0" text-anchor="start" class="t ">3. ③–①, ③–④ 나사 결합 M28×1 (6H/6g) + O링 25×2 FKM, 밀봉 끼워맞춤 Ø29 H8/f7. 용접 없음.</text>
+<text x="18.000" y="265.600" font-size="3.0" text-anchor="start" class="t ">3. ③–① M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클: ③만 돌림) + O링 25×2 FKM, Ø29 H8/f7. 왼나사 끝에 &#x27;LH&#x27; 각인.</text>
 <text x="18.000" y="271.800" font-size="3.0" text-anchor="start" class="t ">4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 필터는 두텍 기존품 (SUS304) — 접액부 316L 통일 여부 검토.</text>
+<text x="18.000" y="278.000" font-size="3.0" text-anchor="start" class="t ">5. ④ M3 구멍 2개 (r10, 90°·270°, 플랜지 관통): 하우징 안 몰딩 주입·공기 빠짐. 경화 후 M3×3 무두나사 + 실런트로 막음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
 <text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
 <text x="85.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">2</text>

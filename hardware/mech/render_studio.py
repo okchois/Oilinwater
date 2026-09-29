@@ -125,6 +125,7 @@ EXTERIOR = [
 ]
 INTERIOR = [
     ("epoxy", M.potting, dict(color=(0.45, 0.33, 0.16), metal=0.0, rough=0.35)),
+    ("potting", M.potting2, dict(color=(0.55, 0.42, 0.22), metal=0.0, rough=0.3)),
     ("sensor_probe", M.sensor_probe, PEEK),
     ("elements", M.sensor_elements, ALUMINA),
     ("sensor_conn", M.sensor_connector, BLACK),

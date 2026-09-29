@@ -99,21 +99,27 @@ BODY = dict(
 )
 
 # ── 하우징 M-103 ── (양 끝: O링 자리 Ø29 H8 → 암나사 M28x1 → 본체 내경 Ø27)
+# 턴버클 체결: 앞(바디) M28x1 오른나사, 뒤(엔드캡) M28x1 왼나사 → 하우징만 돌리면 바디·엔드캡이 돌지 않고 당겨짐
 HOUSING = dict(x=(15.0, 75.0), od=32.0, id=27.0,
-               seal_bore=29.0, seal_len=4.0, thread="M28x1-6H", thread_d=28.0, thread_minor=26.917, thread_len=7.0)
+               seal_bore=29.0, seal_len=4.0, thread="M28x1-6H", thread_rear="M28x1-LH-6H",
+               thread_d=28.0, thread_minor=26.917, thread_len=7.0)
 
 # ── 엔드캡 M-104 ──
-ENDCAP = dict(mthread=dict(x=(64.0, 71.0), d=28.0, d_minor=26.917, thread="M28x1-6g"),
+ENDCAP = dict(mthread=dict(x=(64.0, 71.0), d=28.0, d_minor=26.917, thread="M28x1-LH-6g"),   # 왼나사 (턴버클)
               seal=dict(x=(71.0, 75.0), d=29.0, fit="f7", groove_x=(71.65, 74.35)),
               flange=dict(x=(75.0, 81.0), d=32.0, flats_af=28.0),
               cbore=dict(x=(64.0, 75.0), d=22.0),                   # 경량화·리드선 공간
-              thread=dict(x=(75.0, 81.0), d=16.0, d_minor=14.376, thread="M16x1.5-6H"))
+              thread=dict(x=(75.0, 81.0), d=16.0, d_minor=14.376, thread="M16x1.5-6H"),
+              ports=dict(r=10.0, angles=(90, 270), thread="M3", d_minor=2.5, plug="M3x3 set screw + sealant"))  # 몰딩 주입·공기 빠짐
 
 # ── 구매품 (단순 형상) ──
 SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 3869 type), steel + FKM")
 # Ø7 관통 통로(pass-through)는 케이블을 넣은 뒤 전 길이를 에폭시로 몰딩 (1차 격벽, 두텍 지시)
 # 압력 격벽: HTX99R O링 + 몰드 핀 → Ø7 × 34 에폭시 몰딩 (전선 매립). 피드스루 없음
 POTTING = dict(x=(-22.0, 12.0), d=7.0, name="Epoxy molding, Ø7 x 34 channel (W-1 embedded)")
+# 하우징 안 전체 몰딩 (2차, 같은 상온경화 에폭시): 바디 Ø22 카운터보어 + 하우징 Ø27 + 엔드캡 Ø22 (M12 뒤면까지)
+POTTING2 = dict(zones=[(12.0, 26.0, 22.0), (26.0, 64.0, 27.0), (64.0, 73.0, 22.0)],
+                material="상온경화 에폭시 1종 (통로·전자부 공통)", name="Epoxy potting, housing interior (electronics)")
 # ── PCB E-301: 축 방향 1장, 축을 지나는 평면(z=0)에 세움. 폭은 y 방향 ──
 PCB = dict(t=1.6, x=(14.5, 71.0),
            sections=[(14.5, 26.0, 18.0),    # 바디 카운터보어 Ø22 안
@@ -122,21 +128,21 @@ PCB = dict(t=1.6, x=(14.5, 71.0),
            corner_r=1.0,
            holes=[(16.25, 5.0), (16.25, -5.0)], hole_d=2.2,   # 홀더 가로 나사 M2 (x, y)
            # J3 센서 하네스 헤더: JST SH 1.0 mm 4P 옆 삽입(직각, SM04B-SRSS-TB), 윗면, 입구 = 앞(-x, 센서 쪽)
-           jst=dict(x=(22.5, 26.5), y=(-3.5, 3.5), h=2.95, side=1,
+           jst=dict(x=(30.5, 34.5), y=(-3.5, 3.5), h=2.95, side=1,   # 홀더 뒤 12.5 mm: 꽂을 공간·여유 선
                     part="JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD)"),
            # J1 M12 하네스 헤더: JST GH 1.25 mm 8P 옆 삽입(직각, SM08B-GHS-TB), 윗면, 입구 = 뒤(+x, 커넥터 쪽)
            gh=dict(x=(52.5, 58.5), y=(-6.4, 6.4), h=4.25, side=1,
                    part="JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD)"),
-           zones=[("측정", "J3 · PCAP04 · ADS1220 · 기준 C", 18.0, 34.0),
-                  ("MCU·전원", "STM32G0B1 · eFuse · 벅 · LDO", 34.0, 50.0),
+           zones=[("측정", "J3 · PCAP04 · ADS1220 · 기준 C", 18.0, 35.0),
+                  ("MCU·전원", "STM32G0B1 · eFuse · 벅 · LDO", 35.0, 50.0),
                   ("출력·보호", "J1 · DAC8760×2 · TPS26611 · THVD2450", 50.0, 71.0)],
            name="PCB 57×23 4-layer, 1 board (E-301)")
 # 표현용 주요 부품 (x, y, 가로, 세로, 높이, 면 +1/-1)
 PCB_PARTS = [
-    (24.5, 0.0, 4.0, 7.0, 2.95, 1),    # J3 JST SH 4P 헤더 (옆 삽입, 입구 -x) — 외형 개략
-    (29.0, 0.0, 4.0, 4.0, 0.9, 1),     # PCAP04 QFN24 — J3 바로 뒤 (센서선 최단)
-    (30.5, -6.0, 5.0, 6.4, 1.2, 1),    # ADS1220 TSSOP16
-    (29.0, 4.5, 2.0, 1.25, 1.0, -1),   # 기준 C (C0G)
+    (32.5, 0.0, 4.0, 7.0, 2.95, 1),    # J3 JST SH 4P 헤더 (옆 삽입, 입구 -x) — 외형 개략
+    (26.5, -5.5, 4.0, 4.0, 0.9, 1),    # PCAP04 QFN24 — J3 옆 (센서선 최단)
+    (27.2, 5.5, 6.4, 5.0, 1.2, 1),     # ADS1220 TSSOP16 (가로 배치)
+    (26.5, -5.5, 2.0, 1.25, 1.0, -1),  # 기준 C (C0G)
     (41.0, 0.0, 7.0, 7.0, 1.4, 1),     # STM32G0B1CCT3 LQFP48
     (38.0, 0.0, 5.0, 4.0, 1.0, -1),    # TPS2660 eFuse
     (45.0, 0.0, 4.0, 4.0, 3.0, -1),    # 벅 인덕터
@@ -164,7 +170,7 @@ HARNESS2 = dict(plug=dict(x=(58.5, 62.5), y=(-5.9, 5.9), z=(0.8, 4.3)),   # GHR-
                 wire="AWG 28 PTFE 절연 (UL1213 계열), 8심, 길이 60 ±2",
                 name="Field harness W-2, JST GH 1.25 mm 8P → M12 8P (pin n = pin n)")
 # 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜) → Ø7 관통 통로 (에폭시 몰딩) → JST SH 플러그 → PCB J3
-HARNESS = dict(plug=dict(x=(18.5, 22.5), y=(-2.5, 2.5), z=(0.8, 3.6)),   # SHR-04V-S 꽂힌 상태 외형 (개략), J3 앞
+HARNESS = dict(plug=dict(x=(26.5, 30.5), y=(-2.5, 2.5), z=(0.8, 3.6)),   # SHR-04V-S 꽂힌 상태 외형 (개략), J3 앞
                wire_d=0.6, pitch=1.0, gap_z=2.2, length=60.0,         # 홀더 구멍에서 곧게 플러그 뒤로
                pins=[("1", "SENS_C1", "MK33 전극 1"), ("2", "SENS_C2", "MK33 전극 2"),
                      ("3", "PT_P", "Pt1000 +"), ("4", "PT_N", "Pt1000 −")],
@@ -191,7 +197,7 @@ PARTS = [
     ("2", "390000-001100", "SUS probe oil filter (cap)", "SUS304", 1, "In-house DOTECH, M10x1.0"),
     ("3", "HMT500-M-103", "Housing tube Ø32", "SUS316L (1.4404)", 1, "Machined, M28x1 both ends, marking"),
     ("4", "HMT500-M-104", "End cap", "SUS316L (1.4404)", 1, "Machined, flats AF28"),
-    ("5", "HMT500-P-209", "Epoxy molding, Ø7 x 34 channel", "Epoxy, ≥150 °C (TBD)", 1, "Primary barrier, W-1 embedded"),
+    ("5", "HMT500-P-209", "Epoxy, RT cure (1 type)", "Epoxy (TBD)", 1, "Pour 1: Ø7 channel / 2: interior"),
     ("6", "HMT500-P-202", "Sensor probe: MK33-W mini + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
     ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500"),
@@ -205,4 +211,5 @@ PARTS = [
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
     ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "15 → J3 on 8, L60"),
     ("18", "HMT500-W-2", "Field harness, JST GH 1.25 8P", "PTFE AWG28", 1, "9 → J1 on 8, L60"),
+    ("19", "HMT500-P-210", "Set screw M3x3 + sealant", "A4 stainless", 2, "Fill / vent ports in 4"),
 ]
