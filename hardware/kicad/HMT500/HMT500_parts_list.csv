@@ -12,7 +12,7 @@
 11,측정,C22,1,220p C0G 1%,C_0603_1608Metric,Murata,GRM1885C1H221FA01D,MLCC 220 pF 50 V C0G ±1% 0603 (PCAP04 기준 C),0.01,0.04,제안
 12,수동,C27,1,10n,C_0603_1608Metric,Murata,GRM188R71H103KA01D,MLCC 10 nF 50 V X7R 0603,0.003,0.01,제안
 13,보호,C41 C51,2,1n 100V,C_0603_1608Metric,Murata,GRM188R72A102KA01D,MLCC 1 nF 100 V X7R 0603,0.004,0.01,제안
-14,수동,C42 C52,2,100n 50V,C_0805_2012Metric,Murata,GRM21BR71H104KA01L,MLCC 100 nF 50 V X7R 0805,0.01,0.03,제안
+14,수동,C42 C45 C52 C55,4,100n 50V,C_0805_2012Metric,Murata,GRM21BR71H104KA01L,MLCC 100 nF 50 V X7R 0805,0.01,0.03,제안
 15,수동,C43 C53,2,4.7u 50V,C_1210_3225Metric,Murata,GRM32ER71H475KA88L,MLCC 4.7 uF 50 V X7R 1210,0.1,0.25,제안
 16,보호,D1,1,SMDJ36CA,D_SMC,Littelfuse,SMDJ36CA,TVS 3000 W 36 V 양방향 SMC (입력 1단),0.25,0.6,제안
 17,보호,D2,1,SMBJ33CA,D_SMB,Littelfuse,SMBJ33CA,TVS 600 W 33 V 양방향 SMB (입력 2단),0.08,0.2,제안
@@ -38,23 +38,26 @@
 37,측정,R19,1,4.02k 0.01% 5ppm,R_0603_1608Metric,Vishay / Susumu,0.01% 5 ppm 박막 (품번 확인),Pt1000 기준저항 4.02 kΩ 0.01% 5 ppm/K 0603,1.0,4.0,확인 필요
 38,전원,R22,1,0R RTN link*,R_0603_1608Metric,Yageo,RC0603JR-070RL,0 Ω 링크 — TPS2660 RTN 연결 확인 후 실장 여부 결정,0.002,0.005,확인 필요
 39,보호,R30 R40,2,10R pulse,R_2512_6332Metric,Vishay,CRCW251210R0FKEGHP (확인),펄스 내성 저항 10 Ω 2512 (출력 직렬),0.05,0.15,확인 필요
-40,전원,U1,1,TPS26600PWPR,HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias,TI,TPS26600PWPR,"eFuse 60 V 2 A, 역극성·OVP·UVLO, HTSSOP-16",1.5,3.0,확정
-41,전원,U2,1,LMR36006,VQFN-HR-12_LMR36006,TI,LMR36006 (가변판 주문코드 확인),벅 60 V 0.6 A → 5 V,1.0,1.6,확인 필요
-42,전원,U3,1,TPS7A2033PDBVR,SOT-23-5,TI,TPS7A2033PDBVR,LDO 3.3 V 300 mA 저잡음 SOT-23-5,0.07,0.3,확정
-43,MCU,U4,1,STM32G0B1CCT3,LQFP-48_7x7mm_P0.5mm,ST,STM32G0B1CCT3,"MCU Cortex-M0+ 64 MHz 256 KB, LQFP48, −40~125 °C (사내 DP2000 G0B1CCT6 동일 다이)",1.5,2.5,확정
-44,측정,U5,1,PCAP04-AQFM-24,QFN-24_PCAP04,ScioSense,PCAP04-AQFM-24,정전용량-디지털 변환기 QFN24,6.5,7.1,확정
-45,측정,U6,1,ADS1220IPWR,TSSOP-16_4.4x5mm_P0.65mm,TI,ADS1220IPWR,"24-bit ADC, Pt1000 2선 (J3 패드에서 켈빈 분기), TSSOP-16",1.9,3.5,확정
-46,출력,U7 U8,2,DAC8760IPWP,HTSSOP-24_DAC8760,TI,DAC8760IPWPR,"16-bit 전압/전류 출력 DAC, HTSSOP-24. 사양 확정 후 같은 핀 대체: DAC7760(12-bit V/I), DAC8750(16-bit 전류), DAC7750(12-bit 전류)",7.8,12.4,확정
-47,출력,U9 U10,2,TPS26611,TPS26611,TI,TPS26611 (패키지·주문코드 확인),4–20 mA 출력 오결선 보호,1.2,2.5,확인 필요
-48,통신,U11,1,THVD2450DR,SOIC-8_3.9x4.9mm_P1.27mm,TI,THVD2450DR,"RS-485 트랜시버, 버스 ±70 V 내성, SOIC-8",1.5,3.0,확정
-49,기판,PCB,1,-,-,-,HMT500-E-301,"PCB 4층 57×23 mm, FR-4 1.6 t, ENIG (기구 Rev C 외곽)",0.8,2.0,추정
-50,센서,센서 헤드,1,-,-,IST,MK33-W mini (150138),정전용량 습도 소자 200 pF (센서 프로브 P-202에 실장),0.0,0.0,사내 단가
-51,센서,센서 헤드,1,-,-,IST,MiniSens Pt1000 F0.1,온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장),0.5,3.0,추정
-52,커넥터,P-204,1,-,-,M Connect,TBD (두텍 사용품),"M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)",2.0,10.0,TBD
-53,하네스,W-2,1,-,-,JST,GHR-08V-S,GH 1.25 mm 8핀 소켓 하우징 (M12 하네스 W-2),0.06,0.15,제안
-54,하네스,W-2,8,-,-,JST,SSHL-002T-P0.2,GH 크림프 단자 AWG 30–26,0.03,0.06,제안
-55,하네스,W-2,1,-,-,TBD,PTFE AWG28 전선,"UL1213 계열 200 °C, 8심 × 60 mm + 수축튜브 (M12 핀 납땜)",0.15,0.4,추정
-56,하네스,W-1,1,-,-,JST,SHR-04V-S,SH 1.0 mm 4핀 소켓 하우징 (센서 하네스 W-1),0.04,0.1,제안
-57,하네스,W-1,4,-,-,JST,SSH-003T-P0.2-H,SH 크림프 단자 AWG 32–28,0.03,0.06,제안
-58,하네스,W-1,1,-,-,TBD,PTFE AWG30 전선,"UL1213 계열 200 °C, 4심 × 60 mm (HTX99R 뒤 핀 납땜 + 수축튜브)",0.1,0.3,추정
-59,조립,-,1,-,-,-,SMT 양면 실장,1k 기준 조립비,2.0,4.0,추정
+40,출력,R32 R42,2,15k 0.1% 25ppm,R_0603_1608Metric,Yageo,RT0603BRD0715KL,저항 15 kΩ 0.1% 25 ppm/K 0603 (DAC8760 외부 ISET-R),0.02,0.06,제안
+41,수동,R33,1,100k,R_0603_1608Metric,Yageo,RC0603FR-07100KL,저항 100 kΩ 1% 0603 (DAC 데이지 체인 풀다운),0.002,0.005,제안
+42,전원,U1,1,TPS26600PWPR,HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias,TI,TPS26600PWPR,"eFuse 60 V 2 A, 역극성·OVP·UVLO, HTSSOP-16",1.5,3.0,확정
+43,전원,U2,1,LMR36006,VQFN-HR-12_LMR36006,TI,LMR36006 (가변판 주문코드 확인),벅 60 V 0.6 A → 5 V,1.0,1.6,확인 필요
+44,전원,U3,1,TPS7A2033PDBVR,SOT-23-5,TI,TPS7A2033PDBVR,LDO 3.3 V 300 mA 저잡음 SOT-23-5,0.07,0.3,확정
+45,MCU,U4,1,STM32G0B1CCT3,LQFP-48_7x7mm_P0.5mm,ST,STM32G0B1CCT3,"MCU Cortex-M0+ 64 MHz 256 KB, LQFP48, −40~125 °C (사내 DP2000 G0B1CCT6 동일 다이)",1.5,2.5,확정
+46,측정,U5,1,PCAP04-AQFM-24,QFN-24_PCAP04,ScioSense,PCAP04-AQFM-24,정전용량-디지털 변환기 QFN24,6.5,7.1,확정
+47,측정,U6,1,ADS1220IPWR,TSSOP-16_4.4x5mm_P0.65mm,TI,ADS1220IPWR,"24-bit ADC, Pt1000 2선 (J3 패드에서 켈빈 분기), TSSOP-16",1.9,3.5,확정
+48,출력,U7 U8,2,DAC8760IPWP,HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm,TI,DAC8760IPWPR,"16-bit 전압/전류 출력 DAC, HTSSOP-24. 사양 확정 후 같은 핀 대체: DAC7760(12-bit V/I), DAC8750(16-bit 전류), DAC7750(12-bit 전류)",7.8,12.4,확정
+49,출력,U9 U10,2,TPS26611,TPS26611,TI,TPS26611 (패키지·주문코드 확인),4–20 mA 출력 오결선 보호,1.2,2.5,확인 필요
+50,통신,U11,1,THVD2450DR,SOIC-8_3.9x4.9mm_P1.27mm,TI,THVD2450DR,"RS-485 트랜시버, 버스 ±70 V 내성, SOIC-8",1.5,3.0,확정
+51,출력,U12 U13,2,OPA197IDBVR,SOT-23-5,TI,OPA197IDBVR,36 V 레일투레일 연산증폭기 SOT-23-5 — DAC8760 +VSENSE 버퍼 (이득 1),0.6,1.1,제안
+52,기판,PCB,1,-,-,-,HMT500-E-301,"PCB 4층 57×23 mm, FR-4 1.6 t, ENIG (기구 Rev C 외곽)",0.8,2.0,추정
+53,센서,센서 헤드,1,-,-,IST,MK33-W mini (150138),정전용량 습도 소자 200 pF (센서 프로브 P-202에 실장),0.0,0.0,사내 단가
+54,센서,센서 헤드,1,-,-,IST,MiniSens Pt1000 F0.1,온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장),0.5,3.0,추정
+55,커넥터,P-204,1,-,-,M Connect,TBD (두텍 사용품),"M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)",2.0,10.0,TBD
+56,하네스,W-2,1,-,-,JST,GHR-08V-S,GH 1.25 mm 8핀 소켓 하우징 (M12 하네스 W-2),0.06,0.15,제안
+57,하네스,W-2,8,-,-,JST,SSHL-002T-P0.2,GH 크림프 단자 AWG 30–26,0.03,0.06,제안
+58,하네스,W-2,1,-,-,TBD,PTFE AWG28 전선,"UL1213 계열 200 °C, 8심 × 60 mm + 수축튜브 (M12 핀 납땜)",0.15,0.4,추정
+59,하네스,W-1,1,-,-,JST,SHR-04V-S,SH 1.0 mm 4핀 소켓 하우징 (센서 하네스 W-1),0.04,0.1,제안
+60,하네스,W-1,4,-,-,JST,SSH-003T-P0.2-H,SH 크림프 단자 AWG 32–28,0.03,0.06,제안
+61,하네스,W-1,1,-,-,TBD,PTFE AWG30 전선,"UL1213 계열 200 °C, 4심 × 60 mm (HTX99R 뒤 핀 납땜 + 수축튜브)",0.1,0.3,추정
+62,조립,-,1,-,-,-,SMT 양면 실장,1k 기준 조립비,2.0,4.0,추정

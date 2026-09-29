@@ -8,9 +8,9 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 | `HMT500/HMT500.kicad_sch` | 최상위 시트 (하위 시트 6장) |
 | `HMT500/connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
 | `HMT500/power.kicad_sch` | eFuse TPS2660, 벅 LMR36006(5 V), LDO TPS7A2033(3.3 V) |
-| `HMT500/mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서 (v0.6: LED·외부 풀업 삭제) |
+| `HMT500/mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서 (v0.6: LED·외부 풀업 삭제; v0.7: SPI1 = 측정, SPI2 = DAC 전용) |
 | `HMT500/measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 2선) |
-| `HMT500/analog_out.kicad_sch` | DAC8760 ×2 + TPS26611 오결선 보호 + TVS |
+| `HMT500/analog_out.kicad_sch` | DAC8760 ×2 (데이터시트 핀, SPI2 데이지 체인·공통 LATCH) + OPA197 +VSENSE 버퍼 + 외부 ISET-R 15k 0.1 % + TPS26611 오결선 보호 + TVS (v0.7) |
 | `HMT500/rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
 | `HMT500/HMT500.kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
 | `HMT500/HMT500_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
@@ -31,13 +31,13 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 
 회로도는 `gen_hmt500.py`가 생성합니다. 각 부품에 설계 의도 넷(`nets=`)을 적고 배선은 좌표로 그립니다.
 - **생성 단계 검사:** 선 중간에 걸친 핀, 연결 안 된 핀, 용지 밖, 표제란 침범이 있으면 생성이 멈춥니다.
-- **연결 검사:** `check_netlist.py`가 KiCad 넷리스트와 설계 의도를 핀 단위로 대조합니다. 현재 71넷, 오류 0입니다.
+- **연결 검사:** `check_netlist.py`가 KiCad 넷리스트와 설계 의도를 핀 단위로 대조합니다. 현재 70넷, 오류 0입니다.
 - **자동 테스트:** `tests/test_kicad_gen.py`에 포함되어 있고, kicad-cli가 있으면 넷리스트 대조까지 수행합니다.
 
 ```bash
 python3 hardware/kicad/gen_hmt500.py                     # 회로도·라이브러리·BOM 생성
 kicad-cli sch export netlist -o hmt500.net hardware/kicad/HMT500/HMT500.kicad_sch
-python3 hardware/kicad/check_netlist.py hmt500.net       # 넷리스트 = 설계 의도 검사 (현재 71넷, 오류 0)
+python3 hardware/kicad/check_netlist.py hmt500.net       # 넷리스트 = 설계 의도 검사 (현재 70넷, 오류 0)
 kicad-cli sch export pdf -o hardware/kicad/HMT500/HMT500_schematic.pdf hardware/kicad/HMT500/HMT500.kicad_sch
 ```
 
