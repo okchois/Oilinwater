@@ -124,7 +124,6 @@ EXTERIOR = [
     ("pins", connector_pins, GOLD),
 ]
 INTERIOR = [
-    ("potting", M.potting, dict(color=(0.30, 0.24, 0.16), metal=0.0, rough=0.6)),
     ("sensor_probe", M.sensor_probe, PEEK),
     ("elements", M.sensor_elements, ALUMINA),
     ("sensor_conn", M.sensor_connector, BLACK),

@@ -114,12 +114,6 @@ def seal():
     return tube(*S["x"], S["od"], S["id"])
 
 
-def potting():
-    """커넥터 뒤 핀·선 납땜부를 채우는 에폭시 (Ø7 통로 앞쪽)."""
-    Pt = P.POTTING
-    return cyl(*Pt["x"], Pt["d"] - 0.02)
-
-
 _CONN = {}
 
 
@@ -271,7 +265,6 @@ PARTS = [
     ("M-102_cap", cap, (0.80, 0.82, 0.86)),
     ("M-103_housing", housing, (0.82, 0.84, 0.88)),
     ("M-104_endcap", endcap, (0.72, 0.74, 0.78)),
-    ("P-209_potting", potting, (0.35, 0.30, 0.22)),
     ("P-202_sensor_probe", sensor_probe, (0.78, 0.66, 0.46)),
     ("P-202_elements", sensor_elements, (0.95, 0.93, 0.85)),
     ("HTX99R-SC_connector", sensor_connector, (0.15, 0.15, 0.17)),

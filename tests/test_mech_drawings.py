@@ -76,7 +76,7 @@ class MechTest(unittest.TestCase):
 
     def test_sensor_connector_fits(self):
         """Rev F: HTX99R 센서 커넥터·센서 프로브·두텍 필터 캡(390000-001100), 피드스루 없는 관통 통로."""
-        B, C, S, SP, O, Pt = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING, P.POTTING
+        B, C, S, SP, O = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING
         x = lambda y: S["x0"] - y                                    # noqa: E731
         # 플랜지: Ø11.2 자리에 앉고 뒷면이 턱에 닿음, 앞면 = 바디 앞면
         self.assertGreater(B["conn_cbore"]["d"], S["flange_d"])
@@ -89,12 +89,12 @@ class MechTest(unittest.TestCase):
         t0, t1 = sorted(x(y) for y in S["thread_lower"]["y"])
         self.assertTrue(B["conn_thread"]["x"][0] <= t0 and t1 <= B["conn_thread"]["x"][1])
         self.assertEqual(B["conn_thread"]["d_major"], S["body_d"])
-        # 관통 통로: 커넥터 뒤 → Ø22 카운터보어까지, 핀 끝·포팅은 통로 안, 플러그(대각)가 통과
+        # 관통 통로(pass-through, 포팅 없음): 커넥터 뒤 → Ø22 카운터보어까지, 핀 끝은 통로 안, 플러그(대각)가 통과
         self.assertEqual(B["channel"]["x"][0], B["conn_thread"]["x"][1])
         self.assertEqual(B["channel"]["x"][1], B["cbore"]["x"][0])
         self.assertNotIn("seat", B)
-        self.assertTrue(B["channel"]["x"][0] < x(S["pin_y"]) < Pt["x"][1] <= B["channel"]["x"][1])
-        self.assertEqual(Pt["x"][0], S["x0"])
+        self.assertTrue(B["channel"]["x"][0] < x(S["pin_y"]) < B["channel"]["x"][1])
+        self.assertFalse(hasattr(P, "POTTING"))
         pl = P.HARNESS["plug"]
         self.assertLess(math.hypot(pl["x"][1] - pl["x"][0], pl["y"][1] - pl["y"][0]), B["channel"]["d"])
         # O링 압축률 15~30 %, 늘림 < 5 %

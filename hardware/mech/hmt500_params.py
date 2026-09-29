@@ -18,7 +18,7 @@ Rev C (2026-09-26): 원형 PCB 2장 → 축 방향 긴 PCB 1장 (축을 지나�
 Rev D (2026-09-29): 센서 접속을 두텍 HTX99R 센서 커넥터(ref/ STEP)로 변경.
   교체형 센서 프로브(MK33-W mini + Pt1000, 4핀)를 커넥터 소켓에 꽂는다.
   커넥터는 바디 앞 Ø10 H8 구멍에 O링(홈 Ø8.2)으로 밀봉, 플랜지 Ø11은 바디 턱이 압력을 받고 보호캡 턱이 빠짐을 막는다.
-  커넥터 뒤 핀 → 납땜·포팅 공간 → GTMS 피드스루(압력 격벽 유지) → 전자부.
+  커넥터 뒤 핀 → 하네스 W-1 (Ø7 관통 통로, 케이블만) → 전자부 J3. (Rev F: 피드스루 없음)
   커넥터 플랜지 Ø11을 수용하려고 노출 프로브·보호캡 Ø12 → Ø16 (노출 길이 34, G1/2, 전장 144 유지).
 
 Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두텍 확인).
@@ -111,8 +111,7 @@ ENDCAP = dict(mthread=dict(x=(64.0, 71.0), d=28.0, d_minor=26.917, thread="M28x1
 
 # ── 구매품 (단순 형상) ──
 SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 3869 type), steel + FKM")
-# 커넥터 뒤 핀 납땜부 포팅 (Ø7 통로 앞쪽) — 피드스루 없음: 압력 격벽 = HTX99R 몰드 핀 + O링 + 포팅
-POTTING = dict(x=(-22.0, -14.0), d=7.0, name="Potting, epoxy (connector rear pins, Ø7 x 8)")
+# Ø7 통로는 비워 둠 (pass-through, 케이블만). 피드스루·포팅 없음: 압력 격벽 = HTX99R 몰드 핀 + O링
 # ── PCB E-301: 축 방향 1장, 축을 지나는 평면(z=0)에 세움. 폭은 y 방향 ──
 PCB = dict(t=1.6, x=(14.5, 71.0),
            sections=[(14.5, 26.0, 18.0),    # 바디 카운터보어 Ø22 안
@@ -152,7 +151,7 @@ PCB_HOLDER = dict(x=(12.2, 18.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(14.5, 
                   name="PCB holder (PEEK or PA66-GF30)")
 PCB_RING = dict(x=(59.0, 63.0), od=26.4, id=20.0, slot_w=1.7, slot_y=11.6,
                 name="PCB rear support ring (PEEK or PA66-GF30)")
-# 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜 + 포팅) → Ø7 관통 통로 → JST SH 플러그 → PCB J3
+# 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜 + 수축튜브) → Ø7 관통 통로 → JST SH 플러그 → PCB J3
 HARNESS = dict(plug=dict(x=(20.0, 23.0), y=(-2.5, 2.5), z_top=5.6),   # SHR-04V-S 꽂힌 상태 외형
                wire_d=0.6, pitch=1.0, bend_z=6.6, gap_z=2.2, length=60.0,
                pins=[("1", "SENS_C1", "MK33 전극 1"), ("2", "SENS_C2", "MK33 전극 2"),
@@ -180,7 +179,7 @@ PARTS = [
     ("2", "390000-001100", "SUS probe oil filter (cap)", "SUS304", 1, "In-house DOTECH, M10x1.0"),
     ("3", "HMT500-M-103", "Housing tube Ø32", "SUS316L (1.4404)", 1, "Machined, M28x1 both ends, marking"),
     ("4", "HMT500-M-104", "End cap", "SUS316L (1.4404)", 1, "Machined, flats AF28"),
-    ("5", "HMT500-P-209", "Potting, connector rear pins", "Epoxy (TBD)", 1, "In 1, over 15 pins"),
+    ("5", "HMT500-P-209", "Heat-shrink sleeve Ø1.5 x 6", "PTFE / PVDF", 4, "On 15 pin joints (W-1)"),
     ("6", "HMT500-P-202", "Sensor probe: MK33-W mini + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
     ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500"),
