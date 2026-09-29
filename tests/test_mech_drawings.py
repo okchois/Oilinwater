@@ -130,18 +130,21 @@ class MechTest(unittest.TestCase):
         self.assertLessEqual(J["x"][1], Pc["zones"][0][3])             # 측정 구역 안
         lim = {i: row for i, row in enumerate(D.pcb_limits())}
         self.assertLess(Pc["t"] / 2 + J["h"], lim[0][5] + Pc["t"] / 2)  # 중심 높이 한계
-        self.assertLess(W["plug"]["z_top"] - Pc["t"] / 2, lim[0][5])
-        self.assertTrue(J["x"][0] <= W["plug"]["x"][0] < W["plug"]["x"][1] <= J["x"][1])
+        self.assertLess(W["plug"]["z"][1] - Pc["t"] / 2, lim[0][5])
+        self.assertEqual(W["plug"]["x"][1], J["x"][0])                  # 옆 삽입: 플러그가 헤더 앞(-x)에 꽂힘
+        self.assertGreater(W["plug"]["x"][0], Hh["x"][1])               # 플러그는 홀더 뒤
+        zc = sum(W["plug"]["z"]) / 2
+        self.assertLess(abs(zc - W["gap_z"]), 0.3)                      # 홀더 구멍 높이 = 플러그 중심 → 굽힘 없음
         # 홀더 구멍 안 전선 묶음: 피치·높이로 본 가장 먼 전선 바깥이 구멍 반지름 안
         n = len(W["pins"])
         yk = (n - 1) / 2 * W["pitch"]
         self.assertLess(math.hypot(yk, W["gap_z"]) + W["wire_d"] / 2, Hh["hole_d"] / 2)
         self.assertGreater(W["gap_z"] - W["wire_d"] / 2, Pc["t"] / 2)   # PCB 위
         self.assertEqual(n, 4)                                          # HTX99R 4핀
-        # 경로 길이(커넥터 핀 → J3, 위로 굽힘 포함) + 조립 여유 5 ≤ 하네스 길이
+        # 경로 길이(커넥터 핀 → J3 플러그) + 조립 여유 ≤ 하네스 길이
         xp = P.SENSOR_CONN["x0"] - P.SENSOR_CONN["pin_y"]
-        route = (sum(J["x"]) / 2 - xp) + 2 * W["bend_z"]
-        self.assertLessEqual(route + 5.0, W["length"])
+        route = W["plug"]["x"][1] - xp
+        self.assertLessEqual(route + 10.0, W["length"])
         # 회로도 J3 핀 = 하네스 핀
         sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
         import gen_hmt500 as g

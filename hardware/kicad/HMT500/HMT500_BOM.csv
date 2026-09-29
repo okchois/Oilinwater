@@ -23,7 +23,7 @@ Qty,References,Symbol,Value,Footprint,Verify
 1,GDT1,GDT,GDT 230V,TBD:GDT_Bourns_2038,footprint
 1,J1,CONN_GH8,SM08B-GHS-TB,Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,
 1,J2,CONN_SWD,TC2030-IDC-NL,Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,
-1,J3,CONN_SH4,BM04B-SRSS-TB,Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,
+1,J3,CONN_SH4,SM04B-SRSS-TB,Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,
 1,J5,CONN_CH,Chassis contact,TBD:Chassis_Spring_Contact,footprint
 1,L1,CMC,CMC 2x1mH 0.3A,TBD:CMC_WE-SL,footprint
 1,L2,L,22uH,TBD:L_4x4mm,footprint

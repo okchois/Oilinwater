@@ -171,7 +171,7 @@ MCU USART2 TX/RX/DE ── THVD2450 (3.3 V) ── R5/R6 2.2Ω ──┬──�
 | 3 | PT_P | ADS1220 AIN0 (IDAC) + R17 → AIN1 | Pt1000 +, 힘/감지 분기점 = J3 패드 |
 | 4 | PT_N | R18 → AIN2 + 기준저항 R19 (REFP0) | Pt1000 −, 전류 귀환 |
 
-- 커넥터: **JST SH 1.0 mm 4핀 BM04B-SRSS-TB** (윗면 삽입 SMD), 하네스 W-1 (SHR-04V-S, PTFE AWG30 60 mm)로 HTX99R 커넥터 뒤 핀 4개와 직결 (기구 Rev F: 피드스루 없음, Ø7 관통 통로).
+- 커넥터: **JST SH 1.0 mm 4핀 SM04B-SRSS-TB** (옆 삽입·직각 SMD, 입구 앞쪽), 하네스 W-1 (SHR-04V-S, PTFE AWG30 60 mm)로 HTX99R 커넥터 뒤 핀 4개와 직결 (기구 Rev F: 피드스루 없음, Ø7 관통 통로).
 - 배치: J3는 PCB 앞 끝(홀더 뒤, 앞 끝에서 5 mm), **PCAP04는 J3 바로 뒤**에 두어 정전용량 선을 최단으로 합니다. SENS_C1/C2 좌우는 GND 가드 배선.
 - 온도 정격: JST SH는 −25 ~ +85 °C → PCB 앞 끝 온도 시험으로 확인 (미결 사항).
 

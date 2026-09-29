@@ -121,9 +121,9 @@ PCB = dict(t=1.6, x=(14.5, 71.0),
                      (64.0, 71.0, 18.0)],   # 엔드캡 카운터보어 Ø22 안
            corner_r=1.0,
            holes=[(16.25, 5.0), (16.25, -5.0)], hole_d=2.2,   # 홀더 가로 나사 M2 (x, y)
-           # J3 센서 하네스 헤더: JST SH 1.0 mm 4P 윗면 삽입 (BM04B-SRSS-TB), 윗면(+z), 외형 포함 MP 패드
-           jst=dict(x=(19.5, 23.5), y=(-3.5, 3.5), h=4.25, side=1,
-                    part="JST BM04B-SRSS-TB (SH 1.0 mm 4P, top entry, SMD)"),
+           # J3 센서 하네스 헤더: JST SH 1.0 mm 4P 옆 삽입(직각, SM04B-SRSS-TB), 윗면, 입구 = 앞(-x, 센서 쪽)
+           jst=dict(x=(22.5, 26.5), y=(-3.5, 3.5), h=2.95, side=1,
+                    part="JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD)"),
            # J1 M12 하네스 헤더: JST GH 1.25 mm 8P 옆 삽입(직각, SM08B-GHS-TB), 윗면, 입구 = 뒤(+x, 커넥터 쪽)
            gh=dict(x=(52.5, 58.5), y=(-6.4, 6.4), h=4.25, side=1,
                    part="JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD)"),
@@ -133,10 +133,10 @@ PCB = dict(t=1.6, x=(14.5, 71.0),
            name="PCB 57×23 4-layer, 1 board (E-301)")
 # 표현용 주요 부품 (x, y, 가로, 세로, 높이, 면 +1/-1)
 PCB_PARTS = [
-    (21.5, 0.0, 4.0, 7.0, 4.25, 1),    # J3 JST SH 4P 헤더 (윗면 삽입)
-    (27.0, 0.0, 4.0, 4.0, 0.9, 1),     # PCAP04 QFN24 — J3 바로 뒤 (센서선 최단)
-    (31.5, 0.0, 5.0, 6.4, 1.2, 1),     # ADS1220 TSSOP16
-    (27.0, 4.5, 2.0, 1.25, 1.0, -1),   # 기준 C (C0G)
+    (24.5, 0.0, 4.0, 7.0, 2.95, 1),    # J3 JST SH 4P 헤더 (옆 삽입, 입구 -x) — 외형 개략
+    (29.0, 0.0, 4.0, 4.0, 0.9, 1),     # PCAP04 QFN24 — J3 바로 뒤 (센서선 최단)
+    (30.5, -6.0, 5.0, 6.4, 1.2, 1),    # ADS1220 TSSOP16
+    (29.0, 4.5, 2.0, 1.25, 1.0, -1),   # 기준 C (C0G)
     (41.0, 0.0, 7.0, 7.0, 1.4, 1),     # STM32G0B1CCT3 LQFP48
     (38.0, 0.0, 5.0, 4.0, 1.0, -1),    # TPS2660 eFuse
     (45.0, 0.0, 4.0, 4.0, 3.0, -1),    # 벅 인덕터
@@ -164,8 +164,8 @@ HARNESS2 = dict(plug=dict(x=(58.5, 62.5), y=(-5.9, 5.9), z=(0.8, 4.3)),   # GHR-
                 wire="AWG 28 PTFE 절연 (UL1213 계열), 8심, 길이 60 ±2",
                 name="Field harness W-2, JST GH 1.25 mm 8P → M12 8P (pin n = pin n)")
 # 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜) → Ø7 관통 통로 (에폭시 몰딩) → JST SH 플러그 → PCB J3
-HARNESS = dict(plug=dict(x=(20.0, 23.0), y=(-2.5, 2.5), z_top=5.6),   # SHR-04V-S 꽂힌 상태 외형
-               wire_d=0.6, pitch=1.0, bend_z=6.6, gap_z=2.2, length=60.0,
+HARNESS = dict(plug=dict(x=(18.5, 22.5), y=(-2.5, 2.5), z=(0.8, 3.6)),   # SHR-04V-S 꽂힌 상태 외형 (개략), J3 앞
+               wire_d=0.6, pitch=1.0, gap_z=2.2, length=60.0,         # 홀더 구멍에서 곧게 플러그 뒤로
                pins=[("1", "SENS_C1", "MK33 전극 1"), ("2", "SENS_C2", "MK33 전극 2"),
                      ("3", "PT_P", "Pt1000 +"), ("4", "PT_N", "Pt1000 −")],
                conn_grid=2.54,              # HTX99R 뒤 핀 4개 (2.54 격자, 핀 끝 x = x0 - pin_y)

@@ -22,7 +22,7 @@
 <rect x="151.250" y="117.000" width="10.000" height="3.750" class="hatchfill2"/>
 <circle cx="44.375" cy="79.500" r="2.750" class="thick" fill="none"/>
 <circle cx="44.375" cy="104.500" r="2.750" class="thick" fill="none"/>
-<rect x="52.500" y="83.250" width="10.000" height="17.500" style="fill:#f3d9a4;stroke:#000;stroke-width:0.18"/>
+<rect x="60.000" y="83.250" width="10.000" height="17.500" style="fill:#f3d9a4;stroke:#000;stroke-width:0.18"/>
 <rect x="135.000" y="76.000" width="15.000" height="32.000" style="fill:#f3d9a4;stroke:#000;stroke-width:0.18"/>
 <rect x="49.350" y="71.500" width="38.800" height="41.000" class="hidden"/>
 <text x="68.750" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">측정</text>
@@ -30,14 +30,14 @@
 <text x="108.750" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">MCU·전원</text>
 <rect x="129.350" y="71.500" width="51.300" height="41.000" class="hidden"/>
 <text x="155.000" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">출력·보호</text>
-<text x="57.500" y="93.000" font-size="2.6" text-anchor="middle" font-weight="700" class="t ">J3</text>
-<text x="57.500" y="104.250" font-size="2.2" text-anchor="middle" class="t ">JST SH 4P</text>
+<text x="65.000" y="93.000" font-size="2.6" text-anchor="middle" font-weight="700" class="t ">J3</text>
+<text x="65.000" y="104.250" font-size="2.2" text-anchor="middle" class="t ">JST SH 4P</text>
 <line x1="40.000" y1="101.750" x2="40.000" y2="131.250" class="thin"/>
-<line x1="52.500" y1="101.750" x2="52.500" y2="131.250" class="thin"/>
-<line x1="40.000" y1="129.750" x2="52.500" y2="129.750" class="thin"/>
+<line x1="60.000" y1="101.750" x2="60.000" y2="131.250" class="thin"/>
+<line x1="40.000" y1="129.750" x2="60.000" y2="129.750" class="thin"/>
 <polygon points="40.000,129.750 42.600,128.850 42.600,130.650" class="arrow"/>
-<polygon points="52.500,129.750 49.900,130.650 49.900,128.850" class="arrow"/>
-<text x="46.250" y="128.750" font-size="3.2" text-anchor="middle" class="t ">5</text>
+<polygon points="60.000,129.750 57.400,130.650 57.400,128.850" class="arrow"/>
+<text x="50.000" y="128.750" font-size="3.2" text-anchor="middle" class="t ">8</text>
 <text x="142.500" y="93.000" font-size="2.6" text-anchor="middle" font-weight="700" class="t ">J1</text>
 <text x="142.500" y="111.500" font-size="2.2" text-anchor="middle" class="t ">JST GH 8P →</text>
 <line x1="40.000" y1="68.500" x2="40.000" y2="53.750" class="thin"/>
@@ -235,7 +235,7 @@
 <text x="18.000" y="196.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="202.000" font-size="2.9" text-anchor="start" class="t ">1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.</text>
 <text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
-<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST BM04B-SRSS-TB (SH 1.0 mm 4P, top entry, SMD), 높이 4.25. 하네스 W-1(22 mm)로 피드스루 핀 1–4와 연결. PCAP04는 J3 바로 뒤.</text>
+<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95. 하네스 W-1(22 mm)로 피드스루 핀 1–4와 연결. PCAP04는 J3 바로 뒤.</text>
 <text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. J1 = JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD), 입구 뒤쪽(+x). 하네스 W-2(60 mm)로 M12 8P. J5 샤시 접점은 가장자리(x 30). 방열: 필요 시 갭필러.</text>
 <text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>

@@ -202,7 +202,7 @@ def build():
         o.append(gr_text(en_parts, (xa + xb) / 2, -6.8, "Dwgs.User", f"zone{i}p", 0.5))
     # 패드 구역
     J = Pc["jst"]
-    for key, (xa, xb), (yb, yt), lab in (("wp", J["x"], J["y"], "J3 JST SH 4P BM04B-SRSS-TB (top, h4.25)"),
+    for key, (xa, xb), (yb, yt), lab in (("wp", J["x"], J["y"], "J3 JST SH 4P SM04B-SRSS-TB (side entry <- front)"),
                                          ("cp", Pc["gh"]["x"], Pc["gh"]["y"], "J1 JST GH 8P SM08B-GHS-TB (side entry -> rear)")):
         o.append(gr_rect(xa, yt, xb, yb, "Dwgs.User", key))
         o.append(gr_text(lab, (xa + xb) / 2, yb - 0.8, "Dwgs.User", key + "t", 0.5))

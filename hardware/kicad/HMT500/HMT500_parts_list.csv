@@ -23,7 +23,7 @@
 22,보호,GDT1,1,GDT 230V,GDT_Bourns_2038,Bourns,2038-23-SM-RPLF,GDT 230 V SMD (회로 GND–외함),0.4,1.0,확인 필요
 23,커넥터,J1,1,SM08B-GHS-TB,JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,JST,SM08B-GHS-TB,"GH 1.25 mm 8핀 헤더, 옆 삽입(직각) SMD (M12 하네스 W-2, 정격 −25~+85 °C)",0.35,0.8,제안
 24,생산,J2,1,TC2030-IDC-NL,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Tag-Connect,(PCB 패드만),SWD 기록용 패드 — 부품 실장 없음,0.0,0.0,확정
-25,커넥터,J3,1,BM04B-SRSS-TB,JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical,JST,BM04B-SRSS-TB,"SH 1.0 mm 4핀 헤더, 윗면 삽입 SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안
+25,커넥터,J3,1,SM04B-SRSS-TB,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB,"SH 1.0 mm 4핀 헤더, 옆 삽입(직각) SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안
 26,커넥터,J5,1,Chassis contact,Chassis_Spring_Contact,TBD,SMD 스프링 접점 (Würth WE-SECF 계열 등),PCB 가장자리 → 하우징 내면 샤시 접촉 (구 M12 쉘 핀 대체),0.1,0.4,TBD
 27,보호,L1,1,CMC 2x1mH 0.3A,CMC_WE-SL,Würth,WE-SL2 계열 (품번 확인),"공통모드 초크 2×1 mH, ≥0.3 A",0.3,0.8,확인 필요
 28,전원,L2,1,22uH,L_4x4mm,Coilcraft,XGL4030-223ME (확인),"파워 인덕터 22 uH, 4×4 mm, Isat ≥ 0.8 A",0.25,0.6,확인 필요

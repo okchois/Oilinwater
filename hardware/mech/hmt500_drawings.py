@@ -339,7 +339,6 @@ def draw_pcb_inside(v):
     pl = Wh["plug"]
     sh.a(f'<rect x="{v.X(pl["x"][0]):.3f}" y="{v.Yu(pl["y"][1]):.3f}" width="{v.s * (pl["x"][1] - pl["x"][0]):.3f}" '
          f'height="{v.s * pl["y"][1]:.3f}" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>')
-    xj = (Pc["jst"]["x"][0] + Pc["jst"]["x"][1]) / 2
     Pt = P.POTTING                                # ⑤ 에폭시 몰딩 (Ø7 통로 전 길이)
     sh.a(f'<rect x="{v.X(Pt["x"][0]):.3f}" y="{v.Yu(Pt["d"] / 2):.3f}" width="{v.s * (Pt["x"][1] - Pt["x"][0]):.3f}" '
          f'height="{v.s * Pt["d"] / 2:.3f}" style="fill:#d9c9a8;stroke:#000;stroke-width:0.25"/>')
@@ -354,7 +353,7 @@ def draw_pcb_inside(v):
     g = Wh["conn_grid"] / 2
     for yp, yk in ((g, 1.5), (g * 0.4, 0.5)):
         sh.poly([(v.X(xp), v.Yu(yp)), (v.X(xp + 4), v.Yu(yp * 0.8)), (v.X(P.BODY["channel"]["x"][1] - 1), v.Yu(yk)),
-                 (v.X(xj), v.Yu(yk))], "thin")
+                 (v.X(pl["x"][0]), v.Yu(yk))], "thin")
 
 
 def sheet_assembly():
@@ -447,7 +446,7 @@ def sheet_assembly():
         "6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑥·⑦·⑮·⑯). ⑯ O링이 밀봉, ⑮ 몰드 핀 + ⑤ 몰딩이 전자부 격벽.",
         "7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.",
         "8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.",
-        "9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 BM04B-SRSS-TB. 1·2 = MK33, 3·4 = Pt1000 (2선식).",
+        "9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 SM04B-SRSS-TB (옆 삽입). 1·2 = MK33, 3·4 = Pt1000 (2선식).",
         "    PTFE AWG30, 60 mm (⑮ 핀 → J3). ② = 두텍 SUS 오일 필터 390000-001100 (SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.",
         "10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 60 mm.",
         "    ⑨ 체결 회전(약 4바퀴)만큼 ⑱을 반대로 미리 꼬아 둠. 샤시: M12 쉘 대신 ⑧ J5 스프링 접점이 ③ 내면에 닿음.",

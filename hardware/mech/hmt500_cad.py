@@ -198,9 +198,8 @@ def pcb_parts():
 
 
 def harness_paths():
-    """W-1 전선 경로: HTX99R 뒤 핀 → Ø7 관통 통로 → 홀더 Ø6 구멍 (PCB 위) → 위로 굽혀 J3 플러그 윗면."""
-    W, J, S = P.HARNESS, P.PCB["jst"], P.SENSOR_CONN
-    xj = (J["x"][0] + J["x"][1]) / 2
+    """W-1 전선 경로: HTX99R 뒤 핀 → Ø7 관통 통로 → 홀더 Ø6 구멍 (PCB 위) → 곧게 J3 플러그 뒤(-x 면)."""
+    W, S = P.HARNESS, P.SENSOR_CONN
     xp = S["x0"] - S["pin_y"]                     # 커넥터 뒤 핀 끝
     g = W["conn_grid"] / 2
     pins = sorted([(-g, -g), (-g, g), (g, -g), (g, g)], key=lambda p: (p[0], p[1]))   # y 순서 = 플러그 1→4
@@ -210,8 +209,7 @@ def harness_paths():
         yk = (k - (n - 1) / 2) * W["pitch"]
         gz = W["gap_z"]
         out.append([(xp, yp, zp), (xp + 4.0, yp * 0.8, zp * 0.5 + 1.0), (P.BODY["channel"]["x"][1] - 1.0, yk, gz),
-                    (P.PCB_HOLDER["x"][1] + 0.5, yk, gz),
-                    (19.3, yk, W["bend_z"] - 0.6), (xj - 0.5, yk, W["bend_z"]), (xj, yk, W["plug"]["z_top"])])
+                    (W["plug"]["x"][0], yk, gz)])        # 옆 삽입 J3: 홀더 구멍에서 곧게 플러그로
     return out
 
 
@@ -263,11 +261,9 @@ def harness2_plug():
 
 
 def harness_plug():
-    Pl, J = P.HARNESS["plug"], P.PCB["jst"]
-    z0 = P.PCB["t"] / 2 + J["h"]
-    (x0, x1), (y0, y1) = Pl["x"], Pl["y"]
-    return cq.Workplane("XY").box(x1 - x0, y1 - y0, Pl["z_top"] - z0).translate(
-        ((x0 + x1) / 2, (y0 + y1) / 2, (z0 + Pl["z_top"]) / 2))
+    Pl = P.HARNESS["plug"]
+    (x0, x1), (y0, y1), (z0, z1) = Pl["x"], Pl["y"], Pl["z"]
+    return cq.Workplane("XY").box(x1 - x0, y1 - y0, z1 - z0).translate(((x0 + x1) / 2, (y0 + y1) / 2, (z0 + z1) / 2))
 
 
 def pcb_holder():
