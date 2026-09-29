@@ -16,7 +16,7 @@
  <pattern id="hatch" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
  <pattern id="hatch2" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
 </defs><line x1="54.000" y1="120.000" x2="234.000" y2="120.000" class="center"/>
-<polygon points="60.000,99.000 108.000,99.000 108.000,88.567 144.000,88.567 144.000,92.400 150.000,92.400 150.000,73.235 186.000,73.235 186.000,72.000 195.000,72.000 195.000,76.500 196.950,76.500 196.950,81.600 205.050,81.600 205.050,76.500 207.000,76.500 207.000,78.000 228.000,78.000 228.000,87.000 186.000,87.000 186.000,108.000 171.000,108.000 171.000,109.500 84.000,109.500 84.000,106.218 67.500,106.218 67.500,105.000 63.000,105.000 63.000,103.200 60.000,103.200" class="hatchfill"/>
+<polygon points="60.000,99.000 108.000,99.000 108.000,88.567 144.000,88.567 144.000,92.400 150.000,92.400 150.000,73.235 186.000,73.235 186.000,72.000 195.000,72.000 195.000,76.500 196.950,76.500 196.950,81.600 205.050,81.600 205.050,76.500 207.000,76.500 207.000,78.000 228.000,78.000 228.000,87.000 186.000,87.000 186.000,109.500 84.000,109.500 84.000,106.218 67.500,106.218 67.500,105.000 63.000,105.000 63.000,103.200 60.000,103.200" class="hatchfill"/>
 <line x1="60.000" y1="141.000" x2="108.000" y2="141.000" class="thick"/>
 <line x1="60.000" y1="120.000" x2="60.000" y2="141.000" class="thick"/>
 <line x1="108.000" y1="151.433" x2="144.000" y2="151.433" class="thick"/>
@@ -45,8 +45,7 @@
 <line x1="60.000" y1="136.800" x2="63.000" y2="136.800" class="hidden"/>
 <line x1="63.000" y1="135.000" x2="67.500" y2="135.000" class="hidden"/>
 <line x1="67.500" y1="133.782" x2="84.000" y2="133.782" class="hidden"/>
-<line x1="84.000" y1="130.500" x2="171.000" y2="130.500" class="hidden"/>
-<line x1="171.000" y1="132.000" x2="186.000" y2="132.000" class="hidden"/>
+<line x1="84.000" y1="130.500" x2="186.000" y2="130.500" class="hidden"/>
 <line x1="186.000" y1="153.000" x2="228.000" y2="153.000" class="hidden"/>
 <line x1="171.000" y1="141.000" x2="186.000" y2="141.000" class="hidden"/>
 <line x1="171.000" y1="147.000" x2="186.000" y2="147.000" class="hidden"/>
@@ -101,12 +100,6 @@
 <line x1="139.000" y1="171.765" x2="144.000" y2="171.765" class="thin"/>
 <line x1="150.000" y1="171.765" x2="155.000" y2="171.765" class="thin"/>
 <text x="147.000" y="170.765" font-size="3.2" text-anchor="middle" class="t ">2</text>
-<line x1="171.000" y1="107.000" x2="171.000" y2="60.500" class="thin"/>
-<line x1="186.000" y1="107.000" x2="186.000" y2="60.500" class="thin"/>
-<line x1="171.000" y1="62.000" x2="186.000" y2="62.000" class="thin"/>
-<polygon points="171.000,62.000 173.600,61.100 173.600,62.900" class="arrow"/>
-<polygon points="186.000,62.000 183.400,62.900 183.400,61.100" class="arrow"/>
-<text x="178.500" y="61.000" font-size="3.2" text-anchor="middle" class="t ">5</text>
 <line x1="195.000" y1="75.500" x2="195.000" y2="60.500" class="thin"/>
 <line x1="196.950" y1="80.600" x2="196.950" y2="60.500" class="thin"/>
 <line x1="195.000" y1="62.000" x2="196.950" y2="62.000" class="thin"/>
@@ -152,11 +145,7 @@
 <line x1="126.000" y1="109.500" x2="114.000" y2="44.000" class="thin"/>
 <polygon points="126.000,109.500 124.646,107.105 126.417,106.780" class="arrow"/>
 <line x1="114.000" y1="44.000" x2="92.000" y2="44.000" class="thin"/>
-<text x="113.000" y="43.000" font-size="3.2" text-anchor="end" class="t ">Ø7 관통 — 배선 통로</text>
-<line x1="178.500" y1="108.000" x2="126.000" y2="54.000" class="thin"/>
-<polygon points="178.500,108.000 176.042,106.763 177.333,105.508" class="arrow"/>
-<line x1="126.000" y1="54.000" x2="104.000" y2="54.000" class="thin"/>
-<text x="125.000" y="53.000" font-size="3.2" text-anchor="end" class="t ">Ø8 H7 깊이 5 — 피드스루, 뒤에서 용접</text>
+<text x="113.000" y="43.000" font-size="3.2" text-anchor="end" class="t ">Ø7 관통 — 센서 하네스 W-1 통로 (피드스루 없음)</text>
 <line x1="201.000" y1="158.400" x2="240.000" y2="174.000" class="thin"/>
 <polygon points="201.000,158.400 203.748,158.530 203.080,160.201" class="arrow"/>
 <line x1="240.000" y1="174.000" x2="262.000" y2="174.000" class="thin"/>
@@ -198,7 +187,7 @@
 <text x="18.000" y="211.200" font-size="3.1" text-anchor="start" class="t ">1. 재질 SUS316L (1.4404), 봉재 선삭. 재질성적서 EN 10204 3.1.</text>
 <text x="18.000" y="217.400" font-size="3.1" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 날카로운 모서리 제거. 지정 외 표면 Ra 1.6.</text>
 <text x="18.000" y="223.600" font-size="3.1" text-anchor="start" class="t ">3. 씰면(기준면 A) Ra 0.8, 평면도 0.02, 공구 자국 반경 방향 금지 (씰 누설 방지).</text>
-<text x="18.000" y="229.800" font-size="3.1" text-anchor="start" class="t ">4. Ø8 H7에 피드스루를 뒤(Ø22 쪽)에서 넣고 레이저 용접. Ø10 H8 Ra 0.8 (O링 밀봉면), 입구 C0.3.</text>
+<text x="18.000" y="229.800" font-size="3.1" text-anchor="start" class="t ">4. Ø7 관통 통로 양끝 C0.3·버 완전 제거 (하네스 피복 보호). Ø10 H8 Ra 0.8 (O링 밀봉면), 입구 C0.3.</text>
 <text x="18.000" y="236.000" font-size="3.1" text-anchor="start" class="t ">5. 나사 G1/2-A: ISO 228-1, 불완전 나사부는 언더컷(2)에 포함.</text>
 <text x="18.000" y="242.200" font-size="3.1" text-anchor="start" class="t ">6. M28×1-6g 끝 C0.5×30° (O링 도입부), Ø29 f7 (-0.020/-0.041) 밀봉면 Ra 0.8, 홈 바닥·측면 Ra 1.6, 버 금지.</text>
 <text x="18.000" y="248.400" font-size="3.1" text-anchor="start" class="t ">7. 전해 연마 또는 부동태 처리 (ASTM A967). 내압 설계 정격 50 bar (200 bar형 별도 검토).</text>
@@ -232,7 +221,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-101</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">E / 2026-09-29</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">F / 2026-09-29</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS316L (1.4404)</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

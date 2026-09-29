@@ -104,7 +104,7 @@ ic("STM32G0B1CxTx",
 ic("CONN_SWD", left=[("1", "VCC", P), ("2", "SWDIO", P), ("4", "SWCLK", P), ("6", "SWO", P), ("3", "NRST", P),
                      ("5", "GND", P)], w=6, prefix="J", desc="Tag-Connect TC2030 SWD")
 ic("CONN_SH4", right=[("1", "SENS_1", P), ("2", "SENS_2", P), ("3", "PT+", P), ("4", "PT-", P)], w=6, prefix="J",
-   desc="JST SH 1.0 mm 4-pin top-entry header. Sensor harness from feedthrough (MK sensor + Pt1000 2-wire)")
+   desc="JST SH 1.0 mm 4-pin top-entry header. Sensor harness W-1 direct from HTX99R connector (MK sensor + Pt1000 2-wire)")
 ic("PCAP04", left=[("6", "PC1", P), ("5", "PC0", P), ("7", "PC2", P), ("8", "PC3", P), ("9", "PC4", P),
                    ("10", "PC5", P), ("11", "PCAUX", P), ("12", "PT0REF", P), ("13", "PT1", P), ("14", "PT2", P),
                    ("15", "PT3", P), ("22", "PG0", B), ("23", "PG1", B)],
@@ -700,7 +700,7 @@ S.box(14, 0.5, 72, 28.5, "CAPACITIVE HUMIDITY SENSOR  (IST MK)  ->  PCAP04")
 S.text("Floating mode: C22 reference on PC0/PC1, sensor on PC2/PC3 (VERIFY with PCAP04 datasheet)", (14.5, 3.2), 1.27)
 S.box(14, 37, 72, 62, "Pt1000 2-WIRE  ->  ADS1220  (ratiometric)")
 S.text("IDAC1 (AIN0) -> PT+ ; sense AIN1-AIN2, split at J3 pads", (46, 57.3), 1.27)
-S.text("Lead R (harness+feedthrough+probe) removed by calibration", (46, 58.6), 1.27)
+S.text("Lead R (harness+HTX99R+probe) removed by calibration", (46, 58.6), 1.27)
 S.text("RC filter R17/R18/C27 ; Rref R19 on REFP0/REFN0", (50, 59.9), 1.27)
 S.box(78, 5, 93, 21, "DECOUPLING")
 S.box(78, 35, 93, 51, "DECOUPLING")
@@ -976,7 +976,7 @@ def write_all():
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
         ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.4", 2.5, True),
-        ("v0.4: J3 = JST SH 1.0 mm 4P (BM04B-SRSS-TB) for sensor harness W-1 from feedthrough; Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
+        ("v0.4: J3 = JST SH 1.0 mm 4P (BM04B-SRSS-TB) for sensor harness W-1 direct from HTX99R (no feedthrough, mech Rev F); Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
         ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2450 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-30 V DC.", 1.4, False),

@@ -124,7 +124,7 @@ EXTERIOR = [
     ("pins", connector_pins, GOLD),
 ]
 INTERIOR = [
-    ("header", M.header, KOVAR),
+    ("potting", M.potting, dict(color=(0.30, 0.24, 0.16), metal=0.0, rough=0.6)),
     ("sensor_probe", M.sensor_probe, PEEK),
     ("elements", M.sensor_elements, ALUMINA),
     ("sensor_conn", M.sensor_connector, BLACK),
@@ -427,12 +427,12 @@ def render(name, cam_pos, focal, rotz=0.0, cutaway=False, view_angle=24.0, up=(0
 
 SHOTS = [
     # 이름, 카메라 위치, 초점, 제품 회전(z), 절개, 화각
-    ("01_hero", (-95, -250, 120), (26, 0, -2), 0, False, 26),
+    ("01_hero", (-105, -262, 124), (18, 0, -2), 0, False, 27),
     ("02_rear", (250, -190, 95), (30, 0, -2), 0, False, 27),
-    ("03_side", (24, -330, 38), (24, 0, -1), 0, False, 25),
-    ("04_probe_closeup", (-120, -95, 45), (-22, 0, -2), 0, False, 22),
-    ("05_top", (-40, -150, 260), (24, 0, -4), -25, False, 28),
-    ("06_cutaway", (40, -260, 150), (24, 0, -2), 0, True, 26),
+    ("03_side", (17, -350, 40), (17, 0, -1), 0, False, 26),
+    ("04_probe_closeup", (-140, -100, 48), (-38, 0, -2), 0, False, 22),
+    ("05_top", (-45, -160, 275), (17, 0, -4), -25, False, 29),
+    ("06_cutaway", (35, -275, 158), (17, 0, -2), 0, True, 27),
 ]
 
 

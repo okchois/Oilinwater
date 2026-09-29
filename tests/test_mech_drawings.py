@@ -16,11 +16,11 @@ import hmt500_params as P  # noqa: E402
 
 class MechTest(unittest.TestCase):
     def test_install_dimensions(self):
-        self.assertAlmostEqual(P.BODY["gthread"]["x"][0] - P.CAP["x_tip"], 34.0)   # 노출 프로브
+        self.assertAlmostEqual(P.BODY["gthread"]["x"][0] - P.CAP["x_tip"], 48.0)   # 노출 프로브 (Rev F 필터 32)
         self.assertAlmostEqual(P.BODY["gthread"]["x"][0], -14.0)                     # 나사 14 (씰면까지)
         self.assertEqual(P.BODY["hexa"]["af"], 27.0)
         self.assertEqual(P.HOUSING["od"], 32.0)
-        self.assertAlmostEqual(P.OVERALL, 144.0)
+        self.assertAlmostEqual(P.OVERALL, 158.0)
 
     def test_fits_are_consistent(self):
         # Rev B: 나사(M28x1) + 반경 O링. 수나사·밀봉 지름이 하우징 암나사·보어와 맞는지
@@ -73,53 +73,58 @@ class MechTest(unittest.TestCase):
         self.assertLess(R["od"], P.HOUSING["thread_minor"])
         wide = [s for s in secs if s[0] <= R["x"][0] and R["x"][1] <= s[1]][0]
         self.assertTrue(R["id"] / 2 < wide[2] / 2 < R["slot_y"])
-        # 피드스루 핀은 홀더 구멍 안에서 끝남 (PCB 앞 끝과 겹치지 않음)
-        self.assertTrue(Hh["x"][0] < P.HEADER["pin_rear"] < Pc["x"][0])
 
     def test_sensor_connector_fits(self):
-        """Rev E: HTX99R 센서 커넥터(M10×0.75 ×2)·센서 프로브·보호캡·피드스루 끼워맞춤."""
-        B, C, S, SP, O, Hd = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING, P.HEADER
+        """Rev F: HTX99R 센서 커넥터·센서 프로브·두텍 필터 캡(390000-001100), 피드스루 없는 관통 통로."""
+        B, C, S, SP, O, Pt = P.BODY, P.CAP, P.SENSOR_CONN, P.SENSOR_PROBE, P.CONN_ORING, P.POTTING
         x = lambda y: S["x0"] - y                                    # noqa: E731
         # 플랜지: Ø11.2 자리에 앉고 뒷면이 턱에 닿음, 앞면 = 바디 앞면
         self.assertGreater(B["conn_cbore"]["d"], S["flange_d"])
         self.assertAlmostEqual(x(S["flange_y"][0]), B["conn_cbore"]["x"][1])
         self.assertAlmostEqual(x(S["flange_y"][1]), B["x_front"])
-        # O링 홈 구간은 Ø10 H8 밀봉면 안, 아래 나사 구간은 M10×0.75 암나사 안
+        # O링 홈 구간은 Ø10 H8 밀봉면 안, 아래 나사 구간은 M10 암나사 안
         g0, g1 = sorted(x(y) for y in S["oring_groove"]["y"])
         self.assertTrue(B["conn_land"]["x"][0] <= g0 and g1 <= B["conn_land"]["x"][1] + 1e-9)
         self.assertEqual(B["conn_land"]["d"], S["body_d"])
         t0, t1 = sorted(x(y) for y in S["thread_lower"]["y"])
         self.assertTrue(B["conn_thread"]["x"][0] <= t0 and t1 <= B["conn_thread"]["x"][1])
         self.assertEqual(B["conn_thread"]["d_major"], S["body_d"])
-        # 핀 끝은 배선 통로 안, 통로 뒤에 피드스루 (뒤에서 삽입: 통로 < 피드스루 = 턱)
-        self.assertTrue(B["channel"]["x"][0] < x(S["pin_y"]) < B["channel"]["x"][1])
-        self.assertEqual(B["channel"]["x"][1], B["seat"]["x"][0])
-        self.assertLess(B["channel"]["d"], Hd["d"])
-        self.assertEqual(B["seat"]["x"][1], B["cbore"]["x"][0])                 # 용접부는 Ø22 카운터보어 바닥
-        self.assertEqual(Hd["x"], B["seat"]["x"])
+        # 관통 통로: 커넥터 뒤 → Ø22 카운터보어까지, 핀 끝·포팅은 통로 안, 플러그(대각)가 통과
+        self.assertEqual(B["channel"]["x"][0], B["conn_thread"]["x"][1])
+        self.assertEqual(B["channel"]["x"][1], B["cbore"]["x"][0])
+        self.assertNotIn("seat", B)
+        self.assertTrue(B["channel"]["x"][0] < x(S["pin_y"]) < Pt["x"][1] <= B["channel"]["x"][1])
+        self.assertEqual(Pt["x"][0], S["x0"])
+        pl = P.HARNESS["plug"]
+        self.assertLess(math.hypot(pl["x"][1] - pl["x"][0], pl["y"][1] - pl["y"][0]), B["channel"]["d"])
         # O링 압축률 15~30 %, 늘림 < 5 %
         sq = 1 - (S["body_d"] - S["oring_groove"]["d"]) / 2 / O["cs"]
         self.assertTrue(0.15 <= sq <= 0.30, sq)
         self.assertLess(S["oring_groove"]["d"] / O["id"] - 1, 0.05)
-        # 보호캡: 커넥터 위 나사 구간에 체결, 뒷면 = 바디 앞면
+        # 필터 캡: 암나사(8.5)가 커넥터 위 나사 구간을 덮고 규격 같음, 열린 끝 = 바디 앞면(플랜지 앞면)
         u0, u1 = sorted(x(y) for y in S["thread_upper"]["y"])
-        self.assertAlmostEqual(C["thread_x"][0], u0)
-        self.assertLessEqual(C["thread_x"][1], u1 + 1e-9)
+        self.assertTrue(C["thread_x"][0] <= u0 and u1 <= C["thread_x"][1])
+        self.assertEqual(C["thread"], S["thread_upper"]["spec"])
         self.assertAlmostEqual(C["x_rear"], B["x_front"])
-        self.assertGreater(C["relief"]["d"], S["body_d"])
-        # 센서 프로브: 플러그가 소켓 면에 닿고, 핀은 소켓 깊이 안, 기판·플러그는 센서실 안
+        self.assertAlmostEqual(C["x_rear"] - C["x_tip"], 32.0)
+        self.assertLess(C["rear_relief"]["d"], B["conn_cbore"]["d"] + 2 * 0.5)
+        # 센서 프로브: 플러그가 소켓 면에 닿고, 핀은 소켓 깊이 안, 기판·플러그는 Ø8 센서실 안
         self.assertAlmostEqual(SP["plug"]["x"][1], x(S["socket_face_y"]))
         self.assertLessEqual(SP["pins"]["x"][1] - SP["pins"]["x"][0], S["sock_depth"])
-        self.assertGreater(SP["board"]["x"][0], C["x_tip"] + C["tip_wall"])
-        self.assertLess(SP["board"]["w"], C["bore"])
+        self.assertGreater(SP["board"]["x"][0], C["bore_x"][0])
+        self.assertLess(math.hypot(SP["board"]["w"] / 2, SP["board"]["t"] / 2), C["bore"] / 2)
         self.assertLess(SP["plug"]["d"], C["bore"])
-        # 튜브가 G1/2 설치 구멍(골지름)을 통과, 캡은 EE364와 같은 Ø12
+        # 센서 소자 앞에 측면 구멍 줄이 있음
+        rows = sorted({hx for hx, _ in C["holes"]})
+        self.assertTrue(any(SP["board"]["x"][0] <= r <= SP["plug"]["x"][0] for r in rows))
+        self.assertEqual(len(C["holes"]), 20)
+        # 튜브가 G1/2 설치 구멍(골지름)을 통과, 캡 Ø12
         self.assertLess(B["tube"]["d"], B["gthread"]["d_minor"])
         self.assertEqual(C["od"], 12.0)
 
     def test_sensor_harness(self):
         """W-1 하네스 + J3 JST SH 헤더: 홀더를 피하고, 높이 한계 안, 전선은 홀더 Ø6 구멍 통과."""
-        Pc, J, W, Hh, Hd = P.PCB, P.PCB["jst"], P.HARNESS, P.PCB_HOLDER, P.HEADER
+        Pc, J, W, Hh = P.PCB, P.PCB["jst"], P.HARNESS, P.PCB_HOLDER
         self.assertGreater(J["x"][0], Hh["x"][1])                       # 홀더 뒤
         self.assertLessEqual(J["x"][1], Pc["zones"][0][3])             # 측정 구역 안
         lim = {i: row for i, row in enumerate(D.pcb_limits())}
@@ -131,8 +136,11 @@ class MechTest(unittest.TestCase):
         yk = (n - 1) / 2 * W["pitch"]
         self.assertLess(math.hypot(yk, W["gap_z"]) + W["wire_d"] / 2, Hh["hole_d"] / 2)
         self.assertGreater(W["gap_z"] - W["wire_d"] / 2, Pc["t"] / 2)   # PCB 위
-        self.assertLessEqual(n, Hd["pins"])
-        self.assertEqual(len(W["ft_pins"]), n)
+        self.assertEqual(n, 4)                                          # HTX99R 4핀
+        # 경로 길이(커넥터 핀 → J3, 위로 굽힘 포함) + 조립 여유 5 ≤ 하네스 길이
+        xp = P.SENSOR_CONN["x0"] - P.SENSOR_CONN["pin_y"]
+        route = (sum(J["x"]) / 2 - xp) + 2 * W["bend_z"]
+        self.assertLessEqual(route + 5.0, W["length"])
         # 회로도 J3 핀 = 하네스 핀
         sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
         import gen_hmt500 as g

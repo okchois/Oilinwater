@@ -4,7 +4,7 @@
   (title_block
     (title "HMT500 PCB E-301 (outline & keepouts)")
     (date "2026-09-29")
-    (rev "E")
+    (rev "F")
     (company "DOTECH Co., Ltd.")
     (comment 1 "Board outline from hardware/mech/hmt500_params.py (gen_pcb_outline.py)")
   )

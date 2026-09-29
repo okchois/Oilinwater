@@ -47,7 +47,7 @@ def body():
     cham = revolve([(x0, 0), (x1, 0), (x1, r_af), (x1 - c, dc / 2 + 0.01), (x0 + c, dc / 2 + 0.01), (x0, r_af)])
     solid = solid.union(hexa.intersect(cham))
     # 내부
-    for k in ("conn_cbore", "conn_land", "conn_thread", "channel", "seat", "cbore"):
+    for k in ("conn_cbore", "conn_land", "conn_thread", "channel", "cbore"):
         solid = solid.cut(cyl(*B[k]["x"], B[k]["d"]))
     # PCB 홀더 고정 M2 탭 (카운터보어 바닥, z = ±PCD/2 — PCB 평면에 수직 방향)
     T = B["holder_taps"]
@@ -62,14 +62,9 @@ def axial_hole(x0, x1, y, z, d):
 
 
 def cap():
+    """보호캡 = 두텍 SUS 오일 필터 390000-001100 (반단면 윤곽 회전 + 측면 구멍 20개)."""
     C = P.CAP
-    x0, x1 = C["x_tip"], C["x_rear"]
-    t0, t1 = C["thread_x"]
-    outer = cyl(x0, x1, C["od"])
-    inner = cyl(x0 + C["tip_wall"], t0, C["bore"]).union(
-        cyl(t0 - 0.01, t1, C["thread_minor"])).union(
-        cyl(t1 - 0.01, x1 + 0.01, C["relief"]["d"]))
-    s = outer.cut(inner).cut(cyl(x0 - 0.1, x0 + C["tip_wall"] + 0.1, C["tip_hole"]))
+    s = revolve(C["profile"])
     for x, ang in C["holes"]:
         a = math.radians(ang)
         d = (0, math.cos(a), math.sin(a))
@@ -119,16 +114,10 @@ def seal():
     return tube(*S["x"], S["od"], S["id"])
 
 
-def header():
-    Hd = P.HEADER
-    s = cyl(*Hd["x"], Hd["d"])
-    for i in range(Hd["pins"]):
-        a = 2 * math.pi * i / Hd["pins"]
-        y, z = Hd["pcd"] / 2 * math.cos(a), Hd["pcd"] / 2 * math.sin(a)
-        pin = cq.Workplane("YZ").workplane(offset=Hd["pin_front"]).center(y, z).circle(Hd["pin_d"] / 2).extrude(
-            Hd["pin_rear"] - Hd["pin_front"])
-        s = s.union(pin)
-    return s
+def potting():
+    """커넥터 뒤 핀·선 납땜부를 채우는 에폭시 (Ø7 통로 앞쪽)."""
+    Pt = P.POTTING
+    return cyl(*Pt["x"], Pt["d"] - 0.02)
 
 
 _CONN = {}
@@ -209,20 +198,19 @@ def pcb_parts():
 
 
 def harness_paths():
-    """W-1 전선 경로: 피드스루 뒤 핀 → 홀더 Ø6 구멍 (PCB 위) → 위로 굽혀 J3 플러그 윗면."""
-    Hd, W, J = P.HEADER, P.HARNESS, P.PCB["jst"]
+    """W-1 전선 경로: HTX99R 뒤 핀 → Ø7 관통 통로 → 홀더 Ø6 구멍 (PCB 위) → 위로 굽혀 J3 플러그 윗면."""
+    W, J, S = P.HARNESS, P.PCB["jst"], P.SENSOR_CONN
     xj = (J["x"][0] + J["x"][1]) / 2
-    pins = []
-    for i in W["ft_pins"]:
-        a = 2 * math.pi * i / Hd["pins"]
-        pins.append((Hd["pcd"] / 2 * math.cos(a), Hd["pcd"] / 2 * math.sin(a)))
-    pins.sort()                                   # y 순서 = 플러그 1→4
+    xp = S["x0"] - S["pin_y"]                     # 커넥터 뒤 핀 끝
+    g = W["conn_grid"] / 2
+    pins = sorted([(-g, -g), (-g, g), (g, -g), (g, g)], key=lambda p: (p[0], p[1]))   # y 순서 = 플러그 1→4
     n = len(pins)
     out = []
     for k, (yp, zp) in enumerate(pins):
         yk = (k - (n - 1) / 2) * W["pitch"]
         gz = W["gap_z"]
-        out.append([(Hd["pin_rear"], yp, zp), (14.0, yp * 0.6, gz), (P.PCB_HOLDER["x"][1] + 0.5, yk, gz),
+        out.append([(xp, yp, zp), (xp + 4.0, yp * 0.8, zp * 0.5 + 1.0), (P.BODY["channel"]["x"][1] - 1.0, yk, gz),
+                    (P.PCB_HOLDER["x"][1] + 0.5, yk, gz),
                     (19.3, yk, W["bend_z"] - 0.6), (xj - 0.5, yk, W["bend_z"]), (xj, yk, W["plug"]["z_top"])])
     return out
 
@@ -283,7 +271,7 @@ PARTS = [
     ("M-102_cap", cap, (0.80, 0.82, 0.86)),
     ("M-103_housing", housing, (0.82, 0.84, 0.88)),
     ("M-104_endcap", endcap, (0.72, 0.74, 0.78)),
-    ("P-201_header", header, (0.85, 0.65, 0.25)),
+    ("P-209_potting", potting, (0.35, 0.30, 0.22)),
     ("P-202_sensor_probe", sensor_probe, (0.78, 0.66, 0.46)),
     ("P-202_elements", sensor_elements, (0.95, 0.93, 0.85)),
     ("HTX99R-SC_connector", sensor_connector, (0.15, 0.15, 0.17)),
