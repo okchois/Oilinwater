@@ -336,6 +336,15 @@ def draw_pcb_inside(v):
     for x, y in Pc["holes"]:
         if y > 0:
             sh.circle(v.X(x), v.Yu(y), Pc["hole_d"] / 2 * v.s, "thin", "#fff")
+    # 센서 하네스 W-1: 피드스루 뒤 핀 → 홀더 구멍 → J3 플러그 (위에서 본 투영)
+    Hd, Wh = P.HEADER, P.HARNESS
+    pl = Wh["plug"]
+    sh.a(f'<rect x="{v.X(pl["x"][0]):.3f}" y="{v.Yu(pl["y"][1]):.3f}" width="{v.s * (pl["x"][1] - pl["x"][0]):.3f}" '
+         f'height="{v.s * pl["y"][1]:.3f}" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>')
+    xj = (Pc["jst"]["x"][0] + Pc["jst"]["x"][1]) / 2
+    for yp, yk in ((Hd["pcd"] / 2, 1.5), (Hd["pcd"] / 2 * 0.5, 0.5)):
+        sh.poly([(v.X(Hd["pin_rear"]), v.Yu(yp)), (v.X(14.0), v.Yu(yp * 0.6)), (v.X(Hh["x"][1] + 0.5), v.Yu(yk)),
+                 (v.X(xj), v.Yu(yk))], "thin")
 
 
 def sheet_assembly():
@@ -383,7 +392,7 @@ def sheet_assembly():
           ("15", v.X(-34), v.Yu(4.5), v.X(-30), 46), ("16", v.X(-28.25), v.Yu(4.6), v.X(-24), 58),
           ("1", v.X(-20), v.Yu(7), v.X(-18), 46), ("7", v.X(-1), v.Yu(13.5), v.X(-6), 58),
           ("5", v.X(9.5), v.Yu(3.5), v.X(-6), 46), ("10", v.X(17), v.Yu(13.65), v.X(20), 58),
-          ("12", v.X(13.3), v.Yu(7), v.X(8), 58),
+          ("12", v.X(13.3), v.Yu(7), v.X(8), 58), ("17", v.X(21.5), v.Yu(2), v.X(25), 46),
           ("8", v.X(30), v.Yu(10), v.X(34), 46), ("3", v.X(45), v.Yu(R_OD), v.X(50), 58),
           ("13", v.X(61), v.Yu(12.4), v.X(60), 46),
           ("4", v.X(78), v.Yu(R_OD), v.X(70), 46), ("11", v.X(82), v.Yu(10), v.X(84), 58),
@@ -406,9 +415,9 @@ def sheet_assembly():
     sh.a(f'<rect x="{v.X(0) - 3:.2f}" y="{yb + 1.2:.2f}" width="4.6" height="5" class="thin" fill="none"/>')
     sh.text(v.X(0) - 4.5, yb + 5, "씰면 = 기준면", 2.8, "end")
     # 부품표
-    tx, ty = W - 190, 170
+    tx, ty = W - 190, 166
     cols = [(0, 9, "No"), (9, 30, "도번"), (39, 45, "품명"), (84, 36, "재질"), (120, 8, "수량"), (128, 52, "비고")]
-    rh = 4.2
+    rh = 4.0
     sh.a(f'<rect x="{tx}" y="{ty}" width="180" height="{rh * (len(P.PARTS) + 1)}" class="thick" fill="#fff"/>')
     for c0, cw, lab in cols:
         sh.text(tx + c0 + 1, ty + 3.4, lab, 2.5, bold=True)
@@ -426,11 +435,14 @@ def sheet_assembly():
         "2. ①–③, ③–④ 나사 결합 M28×1 + O링 ⑩ (반경 밀봉, Ø29 H8/f7). 용접 없음 → 분해·수리 가능.",
         "3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF28 로 고정.",
         "4. O링 FKM 75, 조립 전 실리콘 그리스 얇게 도포. 나사·모서리 통과 시 O링 손상 주의 (C0.5 도입부).",
-        "5. 조립: ⑮ 핀에 선 4가닥 납땜·포팅 → ⑯ 끼워 ⑮를 ①에 체결(맞변 7, 선 끝 자유) → 선을 뒤로 빼 ⑤ 핀에 납땜 → ⑤ 뒤에서 삽입·용접",
-        "    → ⑦ → ⑫ → ⑤ 뒤 핀–⑧ → ⑧ → ⑬ → ③ → 커넥터 리드 납땜 → ④ → ⑨(⑪) → ⑥ 센서 프로브를 ⑮에 꽂고 ②를 ⑮ 위 나사에 체결.",
+        "5. 조립: ⑮ 핀에 선 4가닥 납땜·포팅 → ⑯ 끼워 ⑮를 ①에 체결(맞변 7, 선 끝 자유) → 선을 뒤로 빼 ⑤ 앞 핀에 납땜 → ⑤ 뒤에서 삽입·용접 → ⑦",
+        "    → ⑰ 전선 끝을 ⑫ Ø6 구멍에 통과 → ⑤ 뒤 핀 1–4에 납땜·수축튜브 → ⑫ 체결 → ⑧ 장착 → ⑰ 플러그를 ⑧ J3에 꽂음 → ⑬ → ③ → 커넥터 리드 납땜",
+        "    → ④ → ⑨(⑪) → ⑥ 센서 프로브를 ⑮에 꽂고 ②를 ⑮ 위 나사에 체결.",
         "6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑤·⑥·⑦·⑮·⑯). ⑮ O링은 1차 밀봉, ⑤가 압력 격벽.",
         "7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.",
         "8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.",
+        "9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 BM04B-SRSS-TB. 1·2 = MK33, 3·4 = Pt1000 (2선식).",
+        "    PTFE AWG30, 22 mm. ⑤ 핀 5·6 예비. JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인 (초과 시 고온 1.0 mm 커넥터로 교체).",
     ]
     for i, n in enumerate(notes):
         sh.text(18, 186 + i * 5.8, n, 2.9 if i else 3.6, bold=(i == 0))
@@ -633,13 +645,15 @@ def sheet_pcb():
     for x, y in Pc["holes"]:
         sh.circle(X(x), Y(y), Pc["hole_d"] / 2 * s, "thick")
     # 패드 구역
-    for (xa, xb), lab in ((Pc["wire_pads_x"], "피드스루 패드 6"), (Pc["conn_pads_x"], "커넥터 패드 8")):
-        sh.a(f'<rect x="{X(xa):.3f}" y="{Y(3.5):.3f}" width="{s * (xb - xa):.3f}" height="{s * 7:.3f}" fill="#f3d9a4" class="thin"/>')
+    for (xa, xb), (ya, yb) in ((Pc["jst"]["x"], Pc["jst"]["y"]), (Pc["conn_pads_x"], (-3.5, 3.5))):
+        sh.a(f'<rect x="{X(xa):.3f}" y="{Y(yb):.3f}" width="{s * (xb - xa):.3f}" height="{s * (yb - ya):.3f}" style="fill:#f3d9a4;stroke:#000;stroke-width:0.18"/>')
     # 배치 구역 (점선) + 이름
     for i, (name, parts, xa, xb) in enumerate(Pc["zones"]):
         sh.a(f'<rect x="{X(xa) + 0.6:.3f}" y="{Y(8.2):.3f}" width="{s * (xb - xa) - 1.2:.3f}" height="{s * 16.4:.3f}" class="hidden"/>')
         sh.text((X(xa) + X(xb)) / 2, Y(-11.5) + 7 if i != 1 else Y(-11.5) + 7, name, 3.0, "middle", bold=True)
-    sh.text((X(Pc["wire_pads_x"][0]) + X(Pc["wire_pads_x"][1])) / 2, Y(-3.5) + 3.5, "피드스루 패드", 2.2, "middle")
+    sh.text((X(Pc["jst"]["x"][0]) + X(Pc["jst"]["x"][1])) / 2, Y(0) + 1, "J3", 2.6, "middle", bold=True)
+    sh.text((X(Pc["jst"]["x"][0]) + X(Pc["jst"]["x"][1])) / 2, Y(-3.5) + 3.5, "JST SH 4P", 2.2, "middle")
+    sh.dim_h(X(f), Y(-3.5), X(Pc["jst"]["x"][0]), Y(-3.5), Y(-11.5) + 9, f"{Pc['jst']['x'][0] - f:g}")
     sh.text((X(Pc["conn_pads_x"][0]) + X(Pc["conn_pads_x"][1])) / 2, Y(-3.5) + 3.5, "커넥터 패드", 2.2, "middle")
     # 치수
     yt = Y(11.5) - 8
@@ -701,7 +715,7 @@ def sheet_pcb():
     sh.leader(cx + 5, cyh - Hh["screw_pcd"] / 2 * s3 - 3, cx + 22, cyh - rO - 14,
               f"2×Ø{Hh['screw_d']} 관통, 카운터보어 Ø{Hh['cbore_d']:g} 깊이 {Hh['cbore_depth']:g} (M2×6 → 바디)")
     sh.leader(cx + rO - 3, cyh + sw, cx - 6, cyh + rO + 18, f"홈 폭 {Hh['slot_w']} (+0.1/0) 깊이 {s1 - s0:g}, 전폭")
-    sh.leader(cx - rH * 0.7, cyh + rH * 0.7, cx - 18, cyh + rO + 10, f"Ø{Hh['hole_d']:g} 관통 (피드스루 배선)")
+    sh.leader(cx - rH * 0.7, cyh + rH * 0.7, cx - 18, cyh + rO + 10, f"Ø{Hh['hole_d']:g} 관통 (하네스 W-1 통과)")
     sh.text(cx - 50, cyh + rO + 26, "2×M2 가로 탭 (숨은선, 홈에 수직) — PCB 관통 고정 M2×12", 2.8)
     # 측면 (홈에 수직 방향에서 봄)
     L = (Hh["x"][1] - Hh["x"][0]) * s3
@@ -741,7 +755,7 @@ def sheet_pcb():
     notes = ["주기 (NOTES)",
              "1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.",
              "2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.",
-             "3. 피드스루 핀 6개는 PCB 앞 끝 패드에 ≤ 10 mm 선으로 연결 (정전용량 측정선은 최단).",
+             f"3. J3 = {Pc['jst']['part']}, 높이 {Pc['jst']['h']:g}. 하네스 W-1(22 mm)로 피드스루 핀 1–4와 연결. PCAP04는 J3 바로 뒤.",
              "4. 커넥터 리드 8가닥(약 40 mm)은 뒤쪽 패드에 납땜. 방열: 필요 시 DAC 아래 갭필러로 하우징 접촉.",
              "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음."]
     for i, n in enumerate(notes):

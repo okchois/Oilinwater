@@ -114,17 +114,20 @@ PCB = dict(t=1.6, x=(14.5, 71.0),
                      (64.0, 71.0, 18.0)],   # 엔드캡 카운터보어 Ø22 안
            corner_r=1.0,
            holes=[(16.25, 5.0), (16.25, -5.0)], hole_d=2.2,   # 홀더 가로 나사 M2 (x, y)
-           wire_pads_x=(19.0, 22.0),                           # 피드스루 연결 패드 (양면)
+           # J3 센서 하네스 헤더: JST SH 1.0 mm 4P 윗면 삽입 (BM04B-SRSS-TB), 윗면(+z), 외형 포함 MP 패드
+           jst=dict(x=(19.5, 23.5), y=(-3.5, 3.5), h=4.25, side=1,
+                    part="JST BM04B-SRSS-TB (SH 1.0 mm 4P, top entry, SMD)"),
            conn_pads_x=(66.0, 70.0),                           # 커넥터 리드선 패드
-           zones=[("측정", "PCAP04 · ADS1220 · 기준 C", 18.0, 33.0),
-                  ("MCU·전원", "STM32G0B1 · eFuse · 벅 · LDO", 33.0, 50.0),
+           zones=[("측정", "J3 · PCAP04 · ADS1220 · 기준 C", 18.0, 34.0),
+                  ("MCU·전원", "STM32G0B1 · eFuse · 벅 · LDO", 34.0, 50.0),
                   ("출력·보호", "DAC8760×2 · TPS26611 · THVD2450 · TVS", 50.0, 71.0)],
            name="PCB 57×23 4-layer, 1 board (E-301)")
 # 표현용 주요 부품 (x, y, 가로, 세로, 높이, 면 +1/-1)
 PCB_PARTS = [
-    (23.0, 0.0, 4.0, 4.0, 0.9, 1),     # PCAP04 QFN24
-    (29.0, 0.0, 5.0, 6.4, 1.2, 1),     # ADS1220 TSSOP16
-    (23.0, 4.5, 2.0, 1.25, 1.0, -1),   # 기준 C (C0G)
+    (21.5, 0.0, 4.0, 7.0, 4.25, 1),    # J3 JST SH 4P 헤더 (윗면 삽입)
+    (27.0, 0.0, 4.0, 4.0, 0.9, 1),     # PCAP04 QFN24 — J3 바로 뒤 (센서선 최단)
+    (31.5, 0.0, 5.0, 6.4, 1.2, 1),     # ADS1220 TSSOP16
+    (27.0, 4.5, 2.0, 1.25, 1.0, -1),   # 기준 C (C0G)
     (41.0, 0.0, 7.0, 7.0, 1.4, 1),     # STM32G0B1CCT3 LQFP48
     (38.0, 0.0, 5.0, 4.0, 1.0, -1),    # TPS2660 eFuse
     (45.0, 0.0, 4.0, 4.0, 3.0, -1),    # 벅 인덕터
@@ -137,12 +140,21 @@ PCB_PARTS = [
     (67.5, 0.0, 5.0, 4.0, 2.0, -1),    # CM 초크
 ]
 
-PCB_HOLDER = dict(x=(12.2, 18.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(14.5, 18.0),
+PCB_HOLDER = dict(x=(12.2, 18.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(14.5, 18.0),   # Ø6: 하네스 W-1 전선 통과
                   screw_pcd=16.0, screw_d=2.2, cbore_d=4.0, cbore_depth=1.8,
                   cross=dict(x=16.25, y=(5.0, -5.0), d=2.2, tap="M2"),
                   name="PCB holder (PEEK or PA66-GF30)")
 PCB_RING = dict(x=(59.0, 63.0), od=26.4, id=20.0, slot_w=1.7, slot_y=11.6,
                 name="PCB rear support ring (PEEK or PA66-GF30)")
+# 센서 하네스 W-1: 피드스루 뒤 핀 1~4 (납땜 + 수축튜브) → JST SH 플러그 → PCB J3
+HARNESS = dict(plug=dict(x=(20.0, 23.0), y=(-2.5, 2.5), z_top=5.6),   # SHR-04V-S 꽂힌 상태 외형
+               wire_d=0.6, pitch=1.0, bend_z=6.6, gap_z=2.2, length=22.0,
+               pins=[("1", "SENS_C1", "MK33 전극 1"), ("2", "SENS_C2", "MK33 전극 2"),
+                     ("3", "PT_P", "Pt1000 +"), ("4", "PT_N", "Pt1000 −")],
+               ft_pins=(0, 1, 2, 3),        # 피드스루 핀 번호(0부터). 4·5 예비
+               housing="JST SHR-04V-S", contact="JST SSH-003T-P0.2-H ×4 (AWG 32–28)",
+               wire="AWG 30 PTFE 절연 (UL1213 계열, 200 °C), 4심, 길이 22 ±2",
+               name="Sensor harness W-1, JST SH 1.0 mm 4P")
 CONNECTOR = dict(body=dict(x=(81.0, 85.0), d=20.0), thread=dict(x=(85.0, 96.0), d=12.0),
                  inner=dict(x=(73.0, 81.0), d=15.9),
                  name="M Connect 8P male, front mount M16x1.5 (P/N TBD)")
@@ -174,4 +186,5 @@ PARTS = [
     ("14", "HMT500-P-207", "Screw M2x6 (2) + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
     ("15", "HTX99R-SC", "Sensor connector 4P, M10x0.75 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
+    ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "5 → J3 on 8, L22"),
 ]

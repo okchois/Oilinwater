@@ -103,9 +103,8 @@ ic("STM32G0B1CxTx",
    w=20, toff=1, desc="STM32G0B1CCT3 LQFP48, -40..125C (pinout from KiCad library STM32G0B1C_B-C-E_Tx)")
 ic("CONN_SWD", left=[("1", "VCC", P), ("2", "SWDIO", P), ("4", "SWCLK", P), ("6", "SWO", P), ("3", "NRST", P),
                      ("5", "GND", P)], w=6, prefix="J", desc="Tag-Connect TC2030 SWD")
-ic("CONN_PROBE", right=[("1", "SENS_1", P), ("2", "SENS_2", P), ("3", "PT_F+", P), ("4", "PT_S+", P),
-                        ("5", "PT_S-", P), ("6", "PT_F-", P)], w=6, prefix="J",
-   desc="Pressure feedthrough to sensor head (MK capacitive sensor + Pt1000 4-wire)")
+ic("CONN_SH4", right=[("1", "SENS_1", P), ("2", "SENS_2", P), ("3", "PT+", P), ("4", "PT-", P)], w=6, prefix="J",
+   desc="JST SH 1.0 mm 4-pin top-entry header. Sensor harness from feedthrough (MK sensor + Pt1000 2-wire)")
 ic("PCAP04", left=[("6", "PC1", P), ("5", "PC0", P), ("7", "PC2", P), ("8", "PC3", P), ("9", "PC4", P),
                    ("10", "PC5", P), ("11", "PCAUX", P), ("12", "PT0REF", P), ("13", "PT1", P), ("14", "PT2", P),
                    ("15", "PT3", P), ("22", "PG0", B), ("23", "PG1", B)],
@@ -631,14 +630,14 @@ for i, t in enumerate(["BOOT0 shares PA14/SWCLK - no pull-down.",
     S.text(t, (7, 66 + 2.3 * i), 1.27)
 
 # ════════════════════════════ 4. 측정 ════════════════════════════
-S = Sheet("measurement.kicad_sch", "Measurement", "Capacitive humidity sensor (PCAP04) and Pt1000 4-wire (ADS1220)",
+S = Sheet("measurement.kicad_sch", "Measurement", "Capacitive humidity sensor (PCAP04) and Pt1000 2-wire (ADS1220)",
           dx=4, dy=10)
 SHEETS.append(S)
-S.place("J3", "CONN_PROBE", "Feedthrough 6P", "TBD:Feedthrough_6P", 6, 32, nets={
-    "1": "SENS_C1", "2": "SENS_C2", "3": "PT_FP", "4": "PT_SP", "5": "PT_SN", "6": "REF_P"})
+S.place("J3", "CONN_SH4", "BM04B-SRSS-TB", "Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical",
+        6, 31, nets={"1": "SENS_C1", "2": "SENS_C2", "3": "PT_P", "4": "PT_N"})
 S.text("SENSOR HEAD", (2, 25.8), 1.6, True)
-S.text("via pressure", (2, 37.8), 1.27)
-S.text("feedthrough", (2, 39.1), 1.27)
+S.text("harness W-1", (2, 37.8), 1.27)
+S.text("JST SH 1.0", (2, 39.1), 1.27)
 S.place("U5", "PCAP04", "PCAP04-AQFM-24", "TBD:QFN-24_PCAP04", 44, 18, nets={
     "6": "CREF_B", "5": "CREF_A", "7": "SENS_C1", "8": "SENS_C2", "16": "CS_CDC", "17": "SPI_SCK",
     "18": "SPI_MOSI", "19": "SPI_MISO", "20": "CDC_INT", "21": "GND", "1": "+3V3A", "2": "CDC_V18D",
@@ -665,22 +664,23 @@ S.gnd_stub(S.P("C26", "2"))
 S.gnd_stub(S.P("U5", "4"))
 S.gnd_stub(S.P("U5", "24"))
 S.place("U6", "ADS1220", "ADS1220IPWR", "Package_SO:TSSOP-16_4.4x5mm_P0.65mm", 47, 45, nets={
-    "11": "PT_FP", "10": "PT_SP_F", "7": "PT_SN_F", "1": "SPI_SCK", "2": "CS_ADC", "16": "SPI_MOSI",
-    "15": "SPI_MISO", "14": "ADC_DRDY", "3": "GND", "12": "+3V3A", "13": "+3V3", "9": "REF_P", "8": "REF_N",
+    "11": "PT_P", "10": "PT_SP_F", "7": "PT_SN_F", "1": "SPI_SCK", "2": "CS_ADC", "16": "SPI_MOSI",
+    "15": "SPI_MISO", "14": "ADC_DRDY", "3": "GND", "12": "+3V3A", "13": "+3V3", "9": "PT_N", "8": "REF_N",
     "5": "GND", "4": "GND"})
-S.h2("R17", "R", "1k", FP["R0603"], 27, 44, "PT_SP", "PT_SP_F")
-S.h2("R18", "R", "1k", FP["R0603"], 27, 47, "PT_SN", "PT_SN_F")
+S.h2("R17", "R", "1k", FP["R0603"], 27, 44, "PT_P", "PT_SP_F")
+S.h2("R18", "R", "1k", FP["R0603"], 27, 47, "PT_N", "PT_SN_F")
 S.v2("C27", "C", "10n", FP["C0603"], 33, 44, "PT_SP_F", "PT_SN_F")
-S.wa(S.P("J3", "3"), S.o((24, 32)), S.o((24, 43)), S.P("U6", "11"))
-S.wa(S.P("J3", "4"), S.o((22, 33)), S.o((22, 44)), S.P("R17", "1"))
-S.wa(S.P("J3", "5"), S.o((20, 34)), S.o((20, 47)), S.P("R18", "1"))
+S.wa(S.P("J3", "3"), S.o((24, 32)), S.o((24, 43)), S.P("U6", "11"))   # 2선식: J3 패드에서 힘/감지 분기
+S.wa(S.o((24, 43)), S.o((24, 44)), S.P("R17", "1"))
+S.wa(S.P("J3", "4"), S.o((20, 33)), S.o((20, 47)), S.P("R18", "1"))
+S.wa(S.o((20, 47)), S.o((20, 53)))
 S.wa(S.P("R17", "2"), S.o((33, 44)), S.P("U6", "10"))
 S.wa(S.P("R18", "2"), S.o((33, 47)), S.o((36, 47)), S.o((36, 45)), S.P("U6", "7"))
 S.nc(S.P("U6", "6"))
-S.v2("R19", "R", "4.02k 0.01% 5ppm", FP["R0603"], 44, 53, "REF_P", "REF_N")
+S.v2("R19", "R", "4.02k 0.01% 5ppm", FP["R0603"], 44, 53, "PT_N", "REF_N")
 S.v2("R20", "R", "1k", FP["R0603"], 44, 56, "REF_N", "GND")
 S.gnd_stub(S.P("R20", "2"))
-S.wa(S.P("J3", "6"), S.o((18, 35)), S.o((18, 53)), S.o((44, 53)))
+S.wa(S.o((20, 53)), S.o((44, 53)))
 S.wa(S.P("U6", "9"), S.o((44, 53)))
 S.wa(S.P("R19", "2"), S.o((46, 56)), S.P("U6", "8"))
 S.gnd_stub(S.P("U6", "5"))
@@ -698,8 +698,9 @@ decap(S, "C28", "100n", "C0603", 82, 42, "+3V3")
 decap(S, "C29", "100n", "C0603", 87, 42, "+3V3A")
 S.box(14, 0.5, 72, 28.5, "CAPACITIVE HUMIDITY SENSOR  (IST MK)  ->  PCAP04")
 S.text("Floating mode: C22 reference on PC0/PC1, sensor on PC2/PC3 (VERIFY with PCAP04 datasheet)", (14.5, 3.2), 1.27)
-S.box(14, 37, 72, 62, "Pt1000 4-WIRE  ->  ADS1220  (ratiometric)")
-S.text("IDAC1 (AIN0) -> PT_F+ ; sense AIN1-AIN2", (50, 58.6), 1.27)
+S.box(14, 37, 72, 62, "Pt1000 2-WIRE  ->  ADS1220  (ratiometric)")
+S.text("IDAC1 (AIN0) -> PT+ ; sense AIN1-AIN2, split at J3 pads", (46, 57.3), 1.27)
+S.text("Lead R (harness+feedthrough+probe) removed by calibration", (46, 58.6), 1.27)
 S.text("RC filter R17/R18/C27 ; Rref R19 on REFP0/REFN0", (50, 59.9), 1.27)
 S.box(78, 5, 93, 21, "DECOUPLING")
 S.box(78, 35, 93, 51, "DECOUPLING")
@@ -945,7 +946,7 @@ def validate(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-26") (rev "0.3") '
+    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-29") (rev "0.4") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Oil moisture transmitter HMT500 - RS-485 + 2x V/I analog output") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "VERIFY=YES parts: pin numbers LMR36006/PCAP04/DAC8760/TPS26611; TPS2660 R22"))')
@@ -974,14 +975,15 @@ def write_all():
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
-        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.3", 2.5, True),
+        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.4", 2.5, True),
+        ("v0.4: J3 = JST SH 1.0 mm 4P (BM04B-SRSS-TB) for sensor harness W-1 from feedthrough; Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
         ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2450 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-30 V DC.", 1.4, False),
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), VDDA, CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("VERIFY: LMR36006, PCAP04, DAC8760, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn). TPS2660: RTN link R22 to confirm.", 1.4, False),
-        ("TBD footprints: M Connect 8P, CMC, GDT, feedthrough, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
+        ("TBD footprints: M Connect 8P, CMC, GDT, buck inductor, LMR36006, PCAP04, DAC8760, TPS26611.", 1.4, False),
     ]
     y = 88
     for i, (t, size, bold) in enumerate(notes):

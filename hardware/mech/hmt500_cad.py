@@ -208,6 +208,47 @@ def pcb_parts():
     return out
 
 
+def harness_paths():
+    """W-1 전선 경로: 피드스루 뒤 핀 → 홀더 Ø6 구멍 (PCB 위) → 위로 굽혀 J3 플러그 윗면."""
+    Hd, W, J = P.HEADER, P.HARNESS, P.PCB["jst"]
+    xj = (J["x"][0] + J["x"][1]) / 2
+    pins = []
+    for i in W["ft_pins"]:
+        a = 2 * math.pi * i / Hd["pins"]
+        pins.append((Hd["pcd"] / 2 * math.cos(a), Hd["pcd"] / 2 * math.sin(a)))
+    pins.sort()                                   # y 순서 = 플러그 1→4
+    n = len(pins)
+    out = []
+    for k, (yp, zp) in enumerate(pins):
+        yk = (k - (n - 1) / 2) * W["pitch"]
+        gz = W["gap_z"]
+        out.append([(Hd["pin_rear"], yp, zp), (14.0, yp * 0.6, gz), (P.PCB_HOLDER["x"][1] + 0.5, yk, gz),
+                    (19.3, yk, W["bend_z"] - 0.6), (xj - 0.5, yk, W["bend_z"]), (xj, yk, W["plug"]["z_top"])])
+    return out
+
+
+def harness():
+    W = P.HARNESS
+    r = W["wire_d"] / 2
+    out = None
+    for path in harness_paths():
+        for p0, p1 in zip(path, path[1:]):
+            v0, v1 = cq.Vector(*p0), cq.Vector(*p1)
+            seg = cq.Solid.makeCylinder(r, (v1 - v0).Length, v0, v1 - v0)
+            out = seg if out is None else out.fuse(seg)
+        for p_ in path[1:-1]:
+            out = out.fuse(cq.Solid.makeSphere(r, cq.Vector(*p_), angleDegrees1=-90, angleDegrees2=90))
+    return cq.Workplane("XY").newObject([out.clean()])
+
+
+def harness_plug():
+    Pl, J = P.HARNESS["plug"], P.PCB["jst"]
+    z0 = P.PCB["t"] / 2 + J["h"]
+    (x0, x1), (y0, y1) = Pl["x"], Pl["y"]
+    return cq.Workplane("XY").box(x1 - x0, y1 - y0, Pl["z_top"] - z0).translate(
+        ((x0 + x1) / 2, (y0 + y1) / 2, (z0 + Pl["z_top"]) / 2))
+
+
 def pcb_holder():
     Hh = P.PCB_HOLDER
     x0, x1 = Hh["x"]
@@ -251,6 +292,8 @@ PARTS = [
     ("P-205_orings", orings, (0.10, 0.10, 0.10)),
     ("E-301_pcb", pcbs, (0.10, 0.45, 0.20)),
     ("E-301_parts", pcb_parts, (0.15, 0.15, 0.17)),
+    ("W-1_harness", harness, (0.92, 0.92, 0.90)),
+    ("W-1_plug", harness_plug, (0.93, 0.90, 0.80)),
     ("M-105_holder", pcb_holder, (0.85, 0.72, 0.45)),
     ("M-106_ring", pcb_ring, (0.85, 0.72, 0.45)),
     ("P-204_connector", connector, (0.35, 0.35, 0.38)),

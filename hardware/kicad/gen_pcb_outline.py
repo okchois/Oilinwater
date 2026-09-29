@@ -22,7 +22,7 @@ OX, OY = 100.0, 100.0
 F0 = P.PCB["x"][0]
 
 
-ZONES_EN = [("MEASUREMENT", "PCAP04, ADS1220, Cref"),
+ZONES_EN = [("MEASUREMENT", "J3, PCAP04, ADS1220, Cref"),
             ("MCU + POWER", "STM32G0B1, eFuse, buck, LDO"),
             ("OUTPUT + PROTECTION", "DAC8760x2, TPS26611, THVD2450, TVS")]
 
@@ -201,10 +201,11 @@ def build():
         o.append(gr_text(en, (xa + xb) / 2, 6.8, "Dwgs.User", f"zone{i}t", 1.0))
         o.append(gr_text(en_parts, (xa + xb) / 2, -6.8, "Dwgs.User", f"zone{i}p", 0.5))
     # 패드 구역
-    for key, (xa, xb), lab in (("wp", Pc["wire_pads_x"], "FEEDTHRU PADS x6 (both sides)"),
-                               ("cp", Pc["conn_pads_x"], "CONNECTOR PADS x8")):
-        o.append(gr_rect(xa, 3.5, xb, -3.5, "Dwgs.User", key))
-        o.append(gr_text(lab, (xa + xb) / 2, -4.3, "Dwgs.User", key + "t", 0.5))
+    J = Pc["jst"]
+    for key, (xa, xb), (yb, yt), lab in (("wp", J["x"], J["y"], "J3 JST SH 4P BM04B-SRSS-TB (top, h4.25)"),
+                                         ("cp", Pc["conn_pads_x"], (-3.5, 3.5), "CONNECTOR PADS x8")):
+        o.append(gr_rect(xa, yt, xb, yb, "Dwgs.User", key))
+        o.append(gr_text(lab, (xa + xb) / 2, yb - 0.8, "Dwgs.User", key + "t", 0.5))
     # 부품 높이 한계 (Cmts.User)
     y = -14.0
     o.append(gr_text("Component height limit per side (incl. 0.5 margin):", F0 + 20, y, "Cmts.User", "hl0", 0.8))

@@ -22,15 +22,22 @@
 <rect x="151.250" y="117.000" width="10.000" height="3.750" class="hatchfill2"/>
 <circle cx="44.375" cy="79.500" r="2.750" class="thick" fill="none"/>
 <circle cx="44.375" cy="104.500" r="2.750" class="thick" fill="none"/>
-<rect x="51.250" y="83.250" width="7.500" height="17.500" fill="#f3d9a4" class="thin"/>
-<rect x="168.750" y="83.250" width="10.000" height="17.500" fill="#f3d9a4" class="thin"/>
-<rect x="49.350" y="71.500" width="36.300" height="41.000" class="hidden"/>
-<text x="67.500" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">측정</text>
-<rect x="86.850" y="71.500" width="41.300" height="41.000" class="hidden"/>
-<text x="107.500" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">MCU·전원</text>
+<rect x="52.500" y="83.250" width="10.000" height="17.500" style="fill:#f3d9a4;stroke:#000;stroke-width:0.18"/>
+<rect x="168.750" y="83.250" width="10.000" height="17.500" style="fill:#f3d9a4;stroke:#000;stroke-width:0.18"/>
+<rect x="49.350" y="71.500" width="38.800" height="41.000" class="hidden"/>
+<text x="68.750" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">측정</text>
+<rect x="89.350" y="71.500" width="38.800" height="41.000" class="hidden"/>
+<text x="108.750" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">MCU·전원</text>
 <rect x="129.350" y="71.500" width="51.300" height="41.000" class="hidden"/>
 <text x="155.000" y="127.750" font-size="3.0" text-anchor="middle" font-weight="700" class="t ">출력·보호</text>
-<text x="55.000" y="104.250" font-size="2.2" text-anchor="middle" class="t ">피드스루 패드</text>
+<text x="57.500" y="93.000" font-size="2.6" text-anchor="middle" font-weight="700" class="t ">J3</text>
+<text x="57.500" y="104.250" font-size="2.2" text-anchor="middle" class="t ">JST SH 4P</text>
+<line x1="40.000" y1="101.750" x2="40.000" y2="131.250" class="thin"/>
+<line x1="52.500" y1="101.750" x2="52.500" y2="131.250" class="thin"/>
+<line x1="40.000" y1="129.750" x2="52.500" y2="129.750" class="thin"/>
+<polygon points="40.000,129.750 42.600,128.850 42.600,130.650" class="arrow"/>
+<polygon points="52.500,129.750 49.900,130.650 49.900,128.850" class="arrow"/>
+<text x="46.250" y="128.750" font-size="3.2" text-anchor="middle" class="t ">5</text>
 <text x="173.750" y="104.250" font-size="2.2" text-anchor="middle" class="t ">커넥터 패드</text>
 <line x1="40.000" y1="68.500" x2="40.000" y2="53.750" class="thin"/>
 <line x1="68.750" y1="68.500" x2="68.750" y2="53.750" class="thin"/>
@@ -172,7 +179,7 @@
 <line x1="243.700" y1="96.300" x2="232.000" y2="132.400" class="thin"/>
 <polygon points="243.700,96.300 243.755,99.051 242.042,98.496" class="arrow"/>
 <line x1="232.000" y1="132.400" x2="210.000" y2="132.400" class="thin"/>
-<text x="231.000" y="131.400" font-size="3.2" text-anchor="end" class="t ">Ø6 관통 (피드스루 배선)</text>
+<text x="231.000" y="131.400" font-size="3.2" text-anchor="end" class="t ">Ø6 관통 (하네스 W-1 통과)</text>
 <text x="200.000" y="148.400" font-size="2.8" text-anchor="start" class="t ">2×M2 가로 탭 (숨은선, 홈에 수직) — PCB 관통 고정 M2×12</text>
 <rect x="302.000" y="57.600" width="17.400" height="64.800" class="thick" fill="none"/>
 <line x1="308.900" y1="57.600" x2="308.900" y2="122.400" class="hidden"/>
@@ -227,7 +234,7 @@
 <text x="18.000" y="196.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="202.000" font-size="2.9" text-anchor="start" class="t ">1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.</text>
 <text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
-<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. 피드스루 핀 6개는 PCB 앞 끝 패드에 ≤ 10 mm 선으로 연결 (정전용량 측정선은 최단).</text>
+<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST BM04B-SRSS-TB (SH 1.0 mm 4P, top entry, SMD), 높이 4.25. 하네스 W-1(22 mm)로 피드스루 핀 1–4와 연결. PCAP04는 J3 바로 뒤.</text>
 <text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. 커넥터 리드 8가닥(약 40 mm)은 뒤쪽 패드에 납땜. 방열: 필요 시 DAC 아래 갭필러로 하우징 접촉.</text>
 <text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>

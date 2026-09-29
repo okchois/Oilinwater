@@ -117,6 +117,28 @@ class MechTest(unittest.TestCase):
         self.assertLess(B["tube"]["d"], B["gthread"]["d_minor"])
         self.assertEqual(C["od"], 12.0)
 
+    def test_sensor_harness(self):
+        """W-1 하네스 + J3 JST SH 헤더: 홀더를 피하고, 높이 한계 안, 전선은 홀더 Ø6 구멍 통과."""
+        Pc, J, W, Hh, Hd = P.PCB, P.PCB["jst"], P.HARNESS, P.PCB_HOLDER, P.HEADER
+        self.assertGreater(J["x"][0], Hh["x"][1])                       # 홀더 뒤
+        self.assertLessEqual(J["x"][1], Pc["zones"][0][3])             # 측정 구역 안
+        lim = {i: row for i, row in enumerate(D.pcb_limits())}
+        self.assertLess(Pc["t"] / 2 + J["h"], lim[0][5] + Pc["t"] / 2)  # 중심 높이 한계
+        self.assertLess(W["plug"]["z_top"] - Pc["t"] / 2, lim[0][5])
+        self.assertTrue(J["x"][0] <= W["plug"]["x"][0] < W["plug"]["x"][1] <= J["x"][1])
+        # 홀더 구멍 안 전선 묶음: 피치·높이로 본 가장 먼 전선 바깥이 구멍 반지름 안
+        n = len(W["pins"])
+        yk = (n - 1) / 2 * W["pitch"]
+        self.assertLess(math.hypot(yk, W["gap_z"]) + W["wire_d"] / 2, Hh["hole_d"] / 2)
+        self.assertGreater(W["gap_z"] - W["wire_d"] / 2, Pc["t"] / 2)   # PCB 위
+        self.assertLessEqual(n, Hd["pins"])
+        self.assertEqual(len(W["ft_pins"]), n)
+        # 회로도 J3 핀 = 하네스 핀
+        sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
+        import gen_hmt500 as g
+        j3 = next(S.nets["J3"] for S in g.SHEETS if "J3" in S.nets)
+        self.assertEqual({k: v for k, v, _ in W["pins"]}, j3)
+
     def test_svg_valid(self):
         for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small, D.sheet_pcb):
             with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False, encoding="utf-8") as f:

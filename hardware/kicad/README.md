@@ -9,7 +9,7 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 | `HMT500/connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
 | `HMT500/power.kicad_sch` | eFuse TPS2660, 벅 LMR36006(5 V), LDO TPS7A2033(3.3 V) |
 | `HMT500/mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 상태 LED, 풀업 |
-| `HMT500/measurement.kicad_sch` | PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 4선) |
+| `HMT500/measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 2선) |
 | `HMT500/analog_out.kicad_sch` | DAC8760 ×2 + TPS26611 오결선 보호 + TVS |
 | `HMT500/rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
 | `HMT500/HMT500.kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
@@ -50,7 +50,7 @@ KiCad 8 이상에서는 `kicad-cli sch erc`로 ERC도 실행할 수 있습니다
   - 이 환경에서 제조사 데이터시트 사이트가 막혀 있어 **핀 번호를 가번호로** 넣었습니다. 핀 이름과 연결(넷)은 설계서대로입니다.
   - 데이터시트를 보고 심볼 핀 번호만 고치면 됩니다.
   - 확인한 부품: STM32G0B1CCT3(LQFP48, KiCad 공식 심볼 STM32G0B1C_B-C-E_Tx 기준), ADS1220(TSSOP-16), THVD2450(SOIC-8), TPS7A2033(SOT-23-5). 이 넷도 데이터시트로 한 번 더 대조하십시오.
-- **풋프린트 TBD:** M Connect 8핀, 공통모드 초크, GDT, 피드스루, 벅 인덕터, 가번호 IC 5종.
+- **풋프린트 TBD:** M Connect 8핀, 공통모드 초크, GDT, 벅 인덕터, 가번호 IC 5종. (J3는 KiCad 표준 `Connector_JST:JST_SH_BM04B-SRSS-TB_1x04-1MP_P1.00mm_Vertical`)
 - **확인할 회로 사항:**
   - DAC8760 VOUT/IOUT 결합과 DVDD-EN 극성
   - TPS26611 전압 모드 통과 여부
