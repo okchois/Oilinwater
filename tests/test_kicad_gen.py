@@ -50,6 +50,15 @@ class KicadGenTest(unittest.TestCase):
         self.assertEqual(nets & (refs | vals | syms), set())
         self.assertEqual([n for n in nets if re.fullmatch(r"(R|C|L|U|D|J|FB|Q|GDT)\d+", n)], [])
 
+    def test_wiring_straight(self):
+        """작도 규칙: 시트당 꺾임 1개 이하, 분기점은 실제 3갈래 노드만 (전체 35개 이하)."""
+        total_j = 0
+        for S in g.SHEETS:
+            bends, js = g.wire_metrics(S)
+            self.assertLessEqual(bends, 1, S.file)
+            total_j += js
+        self.assertLessEqual(total_j, 35)
+
     def test_hangul_uses_truetype_face(self):
         """한글이 들어간 글자는 트루타입 글꼴(face)을 지정해야 깨지지 않는다."""
         g.write_all()
