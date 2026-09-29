@@ -92,7 +92,7 @@ class KicadGenTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             net = os.path.join(d, "hmt500.net")
             subprocess.run(["kicad-cli", "sch", "export", "netlist", "-o", net,
-                            os.path.join(g.OUT, "HMT500.kicad_sch")], check=True, capture_output=True)
+                            os.path.join(g.OUT, g.PROJECT + ".kicad_sch")], check=True, capture_output=True)
             self.assertEqual(check_netlist.main(net), 0)
 
 

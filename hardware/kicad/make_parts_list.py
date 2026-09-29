@@ -1,9 +1,9 @@
-"""HMT500 구매용 부품리스트 생성 (회로도 BOM + 제조사 품번·단가 가정).
+"""HMT500(260313A) 구매용 부품리스트 생성 (회로도 BOM + 제조사 품번·단가 가정).
 
-  python3 hardware/kicad/gen_hmt500.py        # 먼저 회로도·HMT500_BOM.csv 생성
-  python3 hardware/kicad/make_parts_list.py   # → HMT500/HMT500_parts_list.xlsx, .csv
+  python3 hardware/kicad/gen_hmt500.py        # 먼저 회로도·HMT500(260313A)_BOM.csv 생성
+  python3 hardware/kicad/make_parts_list.py   # → HMT500(260313A)/HMT500(260313A)_parts_list.xlsx, .csv
 
-- 회로도 부품(참조번호·수량·값·풋프린트)은 HMT500_BOM.csv 에서 그대로 읽는다. 여기서는 품번과 단가만 붙인다.
+- 회로도 부품(참조번호·수량·값·풋프린트)은 HMT500(260313A)_BOM.csv 에서 그대로 읽는다. 여기서는 품번과 단가만 붙인다.
 - 수동소자 품번은 "제안" (동등품 대체 가능). 단가는 1k 기준 추정값이며 견적으로 확정한다.
 - 회로도에 없지만 1대분에 필요한 전자 부품(PCB, 센서, 커넥터 등)은 EXTRA 로 덧붙인다.
 """
@@ -12,7 +12,8 @@ import csv
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUTD = os.path.join(HERE, "HMT500")
+PROJECT = "HMT500(260313A)"   # 파일명 = 프로젝트 번호
+OUTD = os.path.join(HERE, PROJECT)
 FX = 1400  # 원/달러 가정
 
 # (심볼, 값) → (분류, 제조사, 품번, 설명, 단가 USD 하한, 상한, 상태)
@@ -76,7 +77,7 @@ MAP = {
 
 # 회로도에는 없지만 1대분 전자부에 필요한 것
 EXTRA = [
-    ("기판", "PCB", "-", "HMT500-E-301", "PCB 4층 57×23 mm, FR-4 1.6 t, ENIG (기구 Rev C 외곽)", "-", 1, 0.80, 2.00, "추정"),
+    ("기판", "PCB", "-", "HMT500(260313A) (E-301)", "PCB 4층 57×23 mm, FR-4 1.6 t, ENIG (기구 Rev C 외곽)", "-", 1, 0.80, 2.00, "추정"),
     ("센서", "센서 헤드", "IST", "MK33-W mini (150138)", "정전용량 습도 소자 200 pF (센서 프로브 P-202에 실장)", "-", 1, 0.0, 0.0, "사내 단가"),
     ("센서", "센서 헤드", "IST", "MiniSens Pt1000 F0.1", "온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장)", "-", 1, 0.50, 3.00, "추정"),
     ("커넥터", "P-204", "M Connect", "TBD (두텍 사용품)", "M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)", "-", 1, 2.0, 10.0, "TBD"),
@@ -92,7 +93,7 @@ EXTRA = [
 
 def build_rows():
     rows = []
-    with open(os.path.join(OUTD, "HMT500_BOM.csv"), encoding="utf-8") as f:
+    with open(os.path.join(OUTD, PROJECT + "_BOM.csv"), encoding="utf-8") as f:
         for r in csv.DictReader(f):
             key = (r["Symbol"], r["Value"])
             if key not in MAP:
@@ -105,7 +106,7 @@ def build_rows():
 
 
 def write_csv(rows):
-    p = os.path.join(OUTD, "HMT500_parts_list.csv")
+    p = os.path.join(OUTD, PROJECT + "_parts_list.csv")
     with open(p, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["No", "분류", "참조번호", "수량", "값", "풋프린트", "제조사", "품번", "설명", "단가USD_하한", "단가USD_상한", "상태"])
@@ -183,7 +184,7 @@ def write_xlsx(rows):
                                      "MCU는 두텍 구매 이력(G0B1CCT6 2,060원/100개). 대리점 견적으로 확정.", "HMT500")
 
     # ── 요약 시트 ──
-    sm["A1"] = "HMT500 전자부 부품리스트 — 요약"
+    sm["A1"] = PROJECT + " 전자부 부품리스트 — 요약"
     sm["A1"].font = Font(name=F, size=14, bold=True)
     sm["A2"] = "회로도 v0.3 (KiCad) 기준 · 1대분 · 단가는 1k 추정 (파란 글씨 = 입력값)"
     sm["A2"].font = Font(name=F, size=10, italic=True, color="595959")
@@ -241,7 +242,7 @@ def write_xlsx(rows):
         cell.font = bold if i == 0 else Font(name=F, size=10)
     for c, wdt in zip("ABCDEF", (16, 10, 16, 16, 16, 16)):
         sm.column_dimensions[c].width = wdt
-    p = os.path.join(OUTD, "HMT500_parts_list.xlsx")
+    p = os.path.join(OUTD, PROJECT + "_parts_list.xlsx")
     wb.save(p)
     return p
 

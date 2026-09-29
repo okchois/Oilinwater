@@ -2,15 +2,18 @@
 
 오일(유압유·윤활유·절연유·연료) 속 수분을 온라인으로 측정하는 트랜스미터 개발 프로젝트.
 
+**프로젝트: HMT500(260313)** — 회로·PCB·거버 파일명과 PCB 마킹은 **HMT500(260313A)** (결정 #25).
+
 - [결정 기록](docs/decision-log.md) — 확정 사항과 미결 사항 (MCU, DAC 대체 계획 등)
 - [조사 보고서](docs/research-report.md) — 측정 원리, 경쟁 제품, 센서 소자, 회로/기구/펌웨어 설계, 교정, 인증, 로드맵
 - [시장 조사 종합](docs/market/00-summary.md) — 세계 시장, 경쟁 제품·가격, 국내 시장, 포지셔닝 제안
 - [E+E EE364 원문 요약](docs/reference/ee364-summary.md) — 구조 참고 제품의 치수, 사양, 핀맵, Modbus 맵
 - [IST MK33 스터디](docs/reference/ist-mk33-study.md) — 데이터시트·응용노트·백서: 이슬점 95 °C 한계, 온도 보정식, DC 없는 교류 구동, 취급·교정 지침
-- [HMT500 기구 설계 Rev F](hardware/mech/README.md) — 제작 도면 PDF(조립도·부품도 4장), 3D STEP, 렌더 (두텍 SUS 오일 필터 캡 390000-001100 + HTX99R 센서 커넥터 + 교체형 센서 프로브, 피드스루 없이 Ø7 관통 + JST SH 하네스, 나사 M28×1 + O링, PCB 1장)
+- [HMT500(260313) 기구 설계 Rev F](hardware/mech/README.md) — 제작 도면 PDF(조립도·부품도 4장), 3D STEP, 렌더 (두텍 SUS 오일 필터 캡 390000-001100 + HTX99R 센서 커넥터 + 교체형 센서 프로브, 피드스루 없이 Ø7 관통 + JST SH 하네스, 나사 M28×1 + O링, PCB 1장)
 - [HMT500 기구설계 견적 요청서 (PDF)](docs/mech/HMT500_RFQ.pdf) · [도면 HMT500-M-000](docs/mech/HMT500-M-000.pdf)
 - [기구 설계안](docs/mech/mechanical-design.md) — EE364형 일체형 구조도, 압력 격벽, 밀봉, 열, 원가
-- [KiCad 회로도 HMT500](hardware/kicad/README.md) — 계층 시트 6장, 심볼 라이브러리, BOM, PDF
+- [KiCad 회로도 HMT500(260313A)](hardware/kicad/README.md) — 계층 시트 6장, 심볼 라이브러리, BOM, PDF
+- [회로도 검토 HMT500(260313A)](docs/hw/schematic-review-260313A.md) — 심볼·데이터시트 대조, 최적화 계획 (승인 대기)
 - [회로 설계서 (서지·오결선 보호)](docs/hw/circuit-design.md) — 전원 eFuse, 출력 보호, RS-485 ±70 V, 접지, MCU 핀 할당
 - [하드웨어 블록 설계](docs/hw/hardware-block-design.md) — 회로 블록도, 부품 선정, 아날로그 2ch + RS-485
 - [MCU 선정 검토](docs/hw/mcu-selection.md) — STM32L431 재검토, 후보 비교, 교차 검토 질문지

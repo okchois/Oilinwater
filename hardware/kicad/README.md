@@ -1,22 +1,24 @@
-# HMT500 KiCad 회로도 v0.2
+# HMT500(260313A) KiCad 회로도 v0.7
 
-DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 내용은 [회로 설계서](../../docs/hw/circuit-design.md)를 따릅니다.
+DOTECH HMT500(260313) 오일 수분 트랜스미터의 KiCad 회로도입니다.
+
+**파일명·프로젝트 번호 = HMT500(260313A)** (결정 #25): 회로도·심볼·BOM·부품리스트·PDF, PCB 파일, 거버(`HMT500(260313A)-F_Cu.gtl` 등, 묶음 `HMT500(260313A).zip`), PCB 실크 마킹(아랫면 가운데) 모두 같은 이름을 씁니다. 거버 출력: `sh hardware/kicad/export_gerbers.sh`. 설계 내용은 [회로 설계서](../../docs/hw/circuit-design.md)를 따릅니다.
 
 | 파일 | 내용 |
 |---|---|
-| `HMT500/HMT500.kicad_pro` | 프로젝트 (KiCad 7 형식 — KiCad 8/9에서 열면 자동 변환) |
-| `HMT500/HMT500.kicad_sch` | 최상위 시트 (하위 시트 6장) |
-| `HMT500/connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
-| `HMT500/power.kicad_sch` | eFuse TPS2660, 벅 LMR36006(5 V), LDO TPS7A2033(3.3 V) |
-| `HMT500/mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서 (v0.6: LED·외부 풀업 삭제; v0.7: SPI1 = 측정, SPI2 = DAC 전용) |
-| `HMT500/measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 2선) |
-| `HMT500/analog_out.kicad_sch` | DAC8760 ×2 (데이터시트 핀, SPI2 데이지 체인·공통 LATCH) + OPA197 +VSENSE 버퍼 + 외부 ISET-R 15k 0.1 % + TPS26611 오결선 보호 + TVS (v0.7) |
-| `HMT500/rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
-| `HMT500/HMT500.kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
-| `HMT500/HMT500_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
-| `HMT500/HMT500_schematic.pdf` | 회로도 PDF (7쪽) |
-| `HMT500/HMT500_parts_list.xlsx`, `.csv` | **구매용 부품리스트**: 회로도 부품 + 제조사·품번·1k 추정 단가·상태, 분류별 요약(환율 입력 시 원화 자동 계산). `make_parts_list.py`로 생성 |
-| `HMT500/HMT500.kicad_pcb` | 보드 외곽(57 × 23, 기구 Rev C), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), 배치 구역·부품 높이 한계 표기. 부품 배치·배선 전 |
+| `HMT500(260313A)/HMT500(260313A).kicad_pro` | 프로젝트 (KiCad 7 형식 — KiCad 8/9에서 열면 자동 변환) |
+| `HMT500(260313A)/HMT500(260313A).kicad_sch` | 최상위 시트 (하위 시트 6장) |
+| `HMT500(260313A)/HMT500(260313A)_connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
+| `HMT500(260313A)/HMT500(260313A)_power.kicad_sch` | eFuse TPS2660, 벅 LMR36006(5 V), LDO TPS7A2033(3.3 V) |
+| `HMT500(260313A)/HMT500(260313A)_mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서 (v0.6: LED·외부 풀업 삭제; v0.7: SPI1 = 측정, SPI2 = DAC 전용) |
+| `HMT500(260313A)/HMT500(260313A)_measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 2선) |
+| `HMT500(260313A)/HMT500(260313A)_analog_out.kicad_sch` | DAC8760 ×2 (데이터시트 핀, SPI2 데이지 체인·공통 LATCH) + OPA197 +VSENSE 버퍼 + 외부 ISET-R 15k 0.1 % + TPS26611 오결선 보호 + TVS (v0.7) |
+| `HMT500(260313A)/HMT500(260313A)_rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
+| `HMT500(260313A)/HMT500(260313A).kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
+| `HMT500(260313A)/HMT500(260313A)_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
+| `HMT500(260313A)/HMT500(260313A)_schematic.pdf` | 회로도 PDF (7쪽) |
+| `HMT500(260313A)/HMT500(260313A)_parts_list.xlsx`, `.csv` | **구매용 부품리스트**: 회로도 부품 + 제조사·품번·1k 추정 단가·상태, 분류별 요약(환율 입력 시 원화 자동 계산). `make_parts_list.py`로 생성 |
+| `HMT500(260313A)/HMT500(260313A).kicad_pcb` | 보드 외곽(57 × 23, 기구 Rev C), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), 배치 구역·부품 높이 한계 표기. 부품 배치·배선 전 |
 | `gen_pcb_outline.py` | 위 보드 파일 생성기. 치수는 `hardware/mech/hmt500_params.py`에서 읽습니다 |
 
 ## 도면 스타일 (v0.2)
@@ -36,9 +38,9 @@ DOTECH HMT500 오일 수분 트랜스미터의 KiCad 회로도입니다. 설계 
 
 ```bash
 python3 hardware/kicad/gen_hmt500.py                     # 회로도·라이브러리·BOM 생성
-kicad-cli sch export netlist -o hmt500.net hardware/kicad/HMT500/HMT500.kicad_sch
+kicad-cli sch export netlist -o hmt500.net hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch
 python3 hardware/kicad/check_netlist.py hmt500.net       # 넷리스트 = 설계 의도 검사 (현재 70넷, 오류 0)
-kicad-cli sch export pdf -o hardware/kicad/HMT500/HMT500_schematic.pdf hardware/kicad/HMT500/HMT500.kicad_sch
+kicad-cli sch export pdf -o hardware/kicad/HMT500(260313A)/HMT500(260313A)_schematic.pdf hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch
 ```
 
 KiCad 8 이상에서는 `kicad-cli sch erc`로 ERC도 실행할 수 있습니다(KiCad 7 CLI에는 ERC가 없음).

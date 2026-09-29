@@ -237,7 +237,7 @@
 <text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
 <text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95, 홀더 뒤 12.5 (꽂을 공간). W-1(60 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.</text>
 <text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. J1 = JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD), 입구 뒤쪽(+x). 하네스 W-2(60 mm)로 M12 8P. J5 샤시 접점은 가장자리(x 30). 방열: 필요 시 갭필러.</text>
-<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음.</text>
+<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
 <text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
 <text x="85.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">2</text>
@@ -261,7 +261,7 @@
 <line x1="290.000" y1="255.000" x2="290.000" y2="287.000" class="thin"/>
 <line x1="350.000" y1="255.000" x2="350.000" y2="287.000" class="thin"/>
 <text x="233.000" y="252.000" font-size="4.2" text-anchor="start" font-weight="700" class="t ">(주)두텍  DOTECH Co., Ltd.</text>
-<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500 오일 수분 트랜스미터</text>
+<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500(260313) 오일 수분 트랜스미터</text>
 <text x="231.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">품명</text>
 <text x="231.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">PCB 홀더 · 지지링 · PCB 외곽</text>
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>

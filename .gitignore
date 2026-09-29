@@ -2,3 +2,7 @@ firmware/build/
 __pycache__/
 *.pyc
 hardware/mech/out/studio/_tex/
+
+# 거버 출력 (export_gerbers.sh) — 배선 완료 전에는 커밋하지 않음
+hardware/kicad/*/gerber/
+hardware/kicad/*/*.zip

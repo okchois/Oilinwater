@@ -122,7 +122,7 @@ V+ (15–30 V) → 입력 보호 → ┬→ V+ 레일 → AD5422 ×2 AVDD (출�
 ## 2. PCB 구성 (원통 하우징)
 
 - **축 방향 긴 보드 1장(57 × 23 mm, 4층)** 을 씁니다(기구 Rev C). 처음 안이었던 원형 2장은 쓰지 않습니다.
-  - 외곽선, 금지 구역, 부품 높이 한계는 [기구 도면 HMT500-M-105~106](../../hardware/mech/README.md)과 `hardware/kicad/HMT500/HMT500.kicad_pcb`에 있습니다.
+  - 외곽선, 금지 구역, 부품 높이 한계는 [기구 도면 HMT500-M-105~106](../../hardware/mech/README.md)과 `hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb`에 있습니다.
   - 앞쪽(피드스루 쪽): 측정부(PCAP04, ADS1220, 기준소자). 피드스루까지 선이 짧아야 합니다.
   - 가운데: MCU, eFuse, 벅, LDO.
   - 뒤쪽(커넥터 쪽): 아날로그 출력(DAC ×2, TPS26611), RS-485, TVS 등 입력 보호.

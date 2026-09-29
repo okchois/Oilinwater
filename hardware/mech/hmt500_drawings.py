@@ -115,7 +115,7 @@ class Sheet:
         self.line(x0 + 60, y0 + 10, x0 + 60, y0 + h, "thin")
         self.line(x0 + 120, y0 + 10, x0 + 120, y0 + h, "thin")
         self.text(x0 + 3, y0 + 7, "(주)두텍  DOTECH Co., Ltd.", 4.2, bold=True)
-        self.text(x0 + w - 3, y0 + 7, "HMT500 오일 수분 트랜스미터", 3.4, "end")
+        self.text(x0 + w - 3, y0 + 7, "HMT500(260313) 오일 수분 트랜스미터", 3.4, "end")
         cells = [("품명", self.title, x0, rows[0]), ("도번", self.dwg_no, x0 + 60, rows[0]),
                  ("Rev / 일자", f"{P.DRAWING_REV} / {P.DATE}", x0 + 120, rows[0]),
                  ("재질", self.material, x0, rows[1]), ("척도", self.scale_txt, x0 + 60, rows[1]),
@@ -775,7 +775,7 @@ def sheet_pcb():
              "2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.",
              f"3. J3 = {Pc['jst']['part']}, 높이 {Pc['jst']['h']:g}, 홀더 뒤 12.5 (꽂을 공간). W-1(60 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.",
              f"4. J1 = {Pc['gh']['part']}, 입구 뒤쪽(+x). 하네스 W-2(60 mm)로 M12 8P. J5 샤시 접점은 가장자리(x 30). 방열: 필요 시 갭필러.",
-             "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500/HMT500.kicad_pcb 와 같음."]
+             "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음."]
     for i, n in enumerate(notes):
         sh.text(18, 196 + i * 6.0, n, 2.9 if i else 3.6, bold=(i == 0))
     sh.frame()

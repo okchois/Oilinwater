@@ -1,6 +1,6 @@
-"""DOTECH HMT500 KiCad 회로도 생성기 v0.3 — 배치·배선된 정식 회로도.
+"""DOTECH HMT500(260313) KiCad 회로도 생성기 (파일명·프로젝트 번호 HMT500(260313A)) v0.3 — 배치·배선된 정식 회로도.
 
-python3 hardware/kicad/gen_hmt500.py  →  hardware/kicad/HMT500/
+python3 hardware/kicad/gen_hmt500.py  →  hardware/kicad/HMT500(260313A)/
 
 - 좌표 단위 u = 2.54 mm(100 mil). 모든 핀·선은 1.27 mm 격자 위.
 - 신호는 왼쪽→오른쪽, 전원은 위(전원 심볼), GND는 아래(GND 심볼).
@@ -14,8 +14,10 @@ import json
 import os
 import uuid
 
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "HMT500")
-PROJECT = LIB = "HMT500"
+PROJECT = "HMT500(260313A)"      # 회로·PCB·거버 파일명 = 프로젝트 번호
+PRODUCT = "HMT500(260313)"       # 제품(프로젝트) 이름
+LIB = "HMT500_260313A"           # 심볼 라이브러리 별칭 (lib_id에 괄호를 넣지 않음)
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), PROJECT)
 NS = uuid.UUID("6f1c0a52-8d7e-4c1a-9a53-4d2f0b7e1a10")
 U = 2.54
 
@@ -286,7 +288,7 @@ PWR_COUNT = [0]
 
 class Sheet:
     def __init__(self, file, title, desc, dx=0, dy=0, paper="A3"):
-        self.file, self.title, self.desc, self.dx, self.dy, self.paper = file, title, desc, dx, dy, paper
+        self.file, self.title, self.desc, self.dx, self.dy, self.paper = f"{PROJECT}_{file}", title, desc, dx, dy, paper
         self.parts = {}      # ref -> dict
         self.order = []
         self.wires = []      # ((x1,y1),(x2,y2))
@@ -1265,8 +1267,8 @@ def wire_metrics(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q("HMT500  " + title)}) (date "2026-09-29") (rev "0.7") '
-            f'(company "DOTECH Co., Ltd.") (comment 1 "Oil moisture transmitter HMT500 - RS-485 + 2x V/I analog output") '
+    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-09-29") (rev "0.7") '
+            f'(company "DOTECH Co., Ltd.") (comment 1 "Project No. {PROJECT}  -  {PRODUCT} oil moisture transmitter, RS-485 + 2x V/I output") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "VERIFY=YES parts: pin numbers LMR36006/PCAP04/TPS26611; TPS2660 R22"))')
 
@@ -1294,7 +1296,8 @@ def write_all():
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
-        ("DOTECH HMT500  -  Oil Moisture Transmitter  -  Schematic v0.7", 2.5, True),
+        (f"DOTECH {PRODUCT}  -  Oil Moisture Transmitter  -  Schematic v0.7  -  Project No. {PROJECT}", 2.5, True),
+        (f"File names (schematic, PCB, Gerber) = {PROJECT}.*   PCB silkscreen marking = {PROJECT}", 1.4, False),
         ("v0.5: J1 = JST GH 1.25 mm 8P side entry (SM08B-GHS-TB), harness W-2 to M12 8P; J5 chassis spring contact (was M12 shell pin).", 1.4, False),
         ("v0.4: J3 = JST SH 1.0 mm 4P (SM04B-SRSS-TB side entry, v0.5) for sensor harness W-1 direct from HTX99R (no feedthrough, mech Rev F); Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
         ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
@@ -1320,10 +1323,10 @@ def write_all():
         "(lib_symbols)\n" + "\n".join(items) + '\n(sheet_instances (path "/" (page "1")))\n)\n')
     # 라이브러리, 프로젝트
     body = "\n".join(lib_symbol(n, False) for n in SYM)
-    open(os.path.join(OUT, LIB + ".kicad_sym"), "w", encoding="utf-8").write(
+    open(os.path.join(OUT, PROJECT + ".kicad_sym"), "w", encoding="utf-8").write(
         f"(kicad_symbol_lib (version 20220914) (generator kicad_symbol_editor)\n{body}\n)\n")
     open(os.path.join(OUT, "sym-lib-table"), "w").write(
-        f'(sym_lib_table\n  (lib (name "{LIB}")(type "KiCad")(uri "${{KIPRJMOD}}/{LIB}.kicad_sym")(options "")(descr "HMT500 project symbols"))\n)\n')
+        f'(sym_lib_table\n  (lib (name "{LIB}")(type "KiCad")(uri "${{KIPRJMOD}}/{PROJECT}.kicad_sym")(options "")(descr "{PROJECT} project symbols"))\n)\n')
     pro = {"meta": {"filename": PROJECT + ".kicad_pro", "version": 1},
            "sheets": [[ROOT, "Root"]] + [[u_, S.title] for S, u_ in zip(SHEETS, uuids)]}
     open(os.path.join(OUT, PROJECT + ".kicad_pro"), "w").write(json.dumps(pro, indent=2) + "\n")

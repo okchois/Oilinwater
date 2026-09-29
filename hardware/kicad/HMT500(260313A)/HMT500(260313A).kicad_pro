@@ -1,6 +1,6 @@
 {
   "meta": {
-    "filename": "HMT500.kicad_pro",
+    "filename": "HMT500(260313A).kicad_pro",
     "version": 1
   },
   "sheets": [
@@ -9,27 +9,27 @@
       "Root"
     ],
     [
-      "d8924d4b-0329-5e79-8dd6-1c12c7722a4b",
+      "0bab42be-b4c8-521d-bf46-bb41b4d8556f",
       "Connector & input protection"
     ],
     [
-      "aba38c96-ce06-5d7f-8bcf-9698fcc08aeb",
+      "46694ae9-b4a0-5ccf-8a01-030cc0ff3464",
       "Power"
     ],
     [
-      "0c4bf7d4-9d5c-53b1-9acd-02d419e0823f",
+      "830cc970-0977-5b18-8aa0-756d399279ac",
       "MCU"
     ],
     [
-      "3db4a209-237d-57e2-bca4-a1eda7d94116",
+      "c2b6f59b-84fc-5243-aa02-a63f04edae17",
       "Measurement"
     ],
     [
-      "41cd7a48-3e3d-5ed7-a9e3-c51ab363ff56",
+      "23c364ca-e469-50c6-9e59-9f71efac1021",
       "Analog outputs"
     ],
     [
-      "45f1df26-d453-5179-997b-24dddad436e5",
+      "b3f5f306-1882-5a8c-be50-8be0fd5d4bd3",
       "RS-485"
     ]
   ]

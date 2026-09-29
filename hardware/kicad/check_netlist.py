@@ -1,7 +1,7 @@
 """그린 회로도(KiCad 넷리스트)가 설계 의도(gen_hmt500.py의 nets=...)와 같은지 검사한다.
 
 KiCad 7 CLI에는 ERC가 없어서 이 검사로 연결을 검증한다.
-  kicad-cli sch export netlist -o hmt500.net hardware/kicad/HMT500/HMT500.kicad_sch
+  kicad-cli sch export netlist -o hmt500.net "hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch"
   python3 hardware/kicad/check_netlist.py hmt500.net
 
 비교 방법: 핀을 넷으로 나눈 분할(partition)이 같아야 한다.

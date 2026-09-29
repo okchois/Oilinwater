@@ -200,7 +200,7 @@ PARTS = [
     ("5", "HMT500-P-209", "Epoxy, RT cure (1 type)", "Epoxy (TBD)", 1, "Pour 1: Ø7 channel / 2: interior"),
     ("6", "HMT500-P-202", "Sensor probe: MK33-W mini + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
-    ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500"),
+    ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500(260313A)"),
     ("9", "HMT500-P-204", "M12 8P male (M Connect), M16x1.5", "-", 1, "Front mount, leads → W-2, P/N TBD"),
     ("10", "HMT500-P-205", "O-ring 25 x 2", "FKM 75", 2, "1-3 and 3-4 seal"),
     ("11", "HMT500-P-206", "O-ring for connector", "FKM", 1, "Per connector spec"),

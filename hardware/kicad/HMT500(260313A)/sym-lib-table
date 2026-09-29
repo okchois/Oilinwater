@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "HMT500_260313A")(type "KiCad")(uri "${KIPRJMOD}/HMT500(260313A).kicad_sym")(options "")(descr "HMT500(260313A) project symbols"))
+)
