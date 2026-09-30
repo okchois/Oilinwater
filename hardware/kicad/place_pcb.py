@@ -48,7 +48,7 @@ HEIGHT = {
     "C_1206": 1.8, "SOIC-8": 1.75, "LQFP-48": 1.6, "SOT-23": 1.45, "HTSSOP": 1.2, "TSSOP": 1.2,
     "C_0805": 1.35, "VSSOP": 1.0, "Texas_DRB": 1.0, "Texas_RNX": 1.0, "QFN-24": 0.9,
     "R_2512": 0.7, "_0603_": 0.95, "Tag-Connect": 0.0, "SolderWire": 0.0,
-    "R_1206": 0.7,
+    "R_1206": 0.7, "D_SOD-123F": 1.1, "_0402_": 0.6,
 }
 
 
@@ -238,6 +238,8 @@ PLAN = [
     ("R40", "T", ("at", 54.75, 9.3), dict(rots=(0,))),      # 10R 2512: J1 옆구리
     ("R30", "T", ("at", 54.75, -9.3), dict(rots=(0,))),
     ("U11", "T", ("at", 46.75, -8.4), dict(rots=(0, 180))), # RS-485: J1 A/B 핀·MCU USART 핀 사이
+    ("D60", "TB", ("near", "U11", "RS485_A_EXT"), {}),   # 외부 검수 H02: 버스 TVS (A/B 핀 바로 옆)
+    ("D61", "TB", ("near", "U11", "RS485_B_EXT"), {}),
     ("U14", "T", ("at", 49.6, 8.6), {}),                    # DAC SCLK 게이트: MCU SPI2 핀 옆 윗면
     ("C36", "T", ("near", "U14", "+3V3"), {}),
     # LDO + 페라이트 (앞쪽 윗면 — +3V3A 를 측정부에 바로)
@@ -296,9 +298,10 @@ PLAN = [
     # eFuse: 방열 비아 → 윗면에도 RTN 동박 패드가 생김 → 윗면 부품이 없는 J3 플러그 통로 바로 아래
     ("U1", "B", ("at", 26.6, 0.0), dict(rots=(0, 180))),
     # v0.9: 입력 2단 TVS·입력 C는 eFuse IN 옆 (SLVSDG2G 11.1·12.1)
-    ("D2", "B", ("near", "U1", "VIN_F"), dict(rots=(0, 90, 180, 270))),
-    ("C2", "B", ("near", "U1", "VIN_F"), {}),
-    ("C1", "B", ("near", "U1", "VIN_F"), {}),
+    ("D2", "B", ("near", "U1", "VIN_D"), dict(rots=(0, 90, 180, 270))),   # D2(VIN_F) → D3 → U1 IN(VIN_D)
+    ("C2", "B", ("near", "U1", "VIN_D"), {}),
+    ("D3", "B", ("near", "D2", "VIN_F"), {}),              # 외부 검수 H01: 직렬 쇼트키 D2 → D3 → U1 IN
+    ("C1", "B", ("near", "D2", "VIN_F"), {}),
     # 벅·LDO (앞쪽 — +3V3A 를 측정부 가까이, 발열 적음)
     ("U2", "B", ("at", 21.5, 4.5), dict(rots=(180,))),   # BOOT·VCC 핀(4·5)이 J5 금지 구역 반대쪽 → C8·C9 핀 옆
     # v0.9: 벅 입력 220 nF·BOOT·VCC 콘덴서를 U2 핀에 먼저 (SNVSB48C 11.1)
@@ -318,7 +321,6 @@ PLAN = [
     ("R9", "B", ("near", "U2", "BUCK_FB"), {}),
     ("C11", "B", ("near", "R8", "BUCK_FB"), {}),
     # eFuse 분압·설정 부품
-    ("C7", "B", ("near", "U1", "VIN_P"), {}),
     ("R3", "B", ("near", "U1", "UV_DIV"), {}),
     ("R4", "B", ("near", "U1", "OV_DIV"), {}),
     ("R5", "B", ("near", "U1", "OV_DIV"), {}),
@@ -448,7 +450,7 @@ def build():
             if math.hypot(dx_, dy_) < J5_KO:
                 return False
         for r, q in placed.items():
-            g_ = CH_GAP if (r in CHASSIS_PARTS) != (ref in CHASSIS_PARTS) else GAP
+            g_ = CH_GAP if (r in CHASSIS_PARTS) or (ref in CHASSIS_PARTS) else GAP   # 샤시 부품끼리도 (CHASSIS–GND 패드, DRC)
             if q["side"] == side and overlap(box, q["crt"], g_):
                 return False
             if q["side"] != side and any(overlap(box, hb, 0.0) for hb in q["holes"]):
