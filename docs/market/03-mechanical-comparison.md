@@ -4,6 +4,12 @@
 
 > **자료 출처와 신뢰도:** E+E EE364는 사용자가 준 원문 데이터시트 v1.13(`docs/reference/ee364-summary.md`)입니다. Vaisala MMT162·MMP8과 E+E EE381은 웹 검색으로 본 데이터시트 요약이며, 제조사 PDF 원문은 이 작업 환경에서 열리지 않았습니다. **(확인 필요)** 값은 원문으로 다시 확인해야 합니다. 찾지 못한 값은 "–"로 두었습니다.
 
+## 0. 외형 비교 도면
+
+![외형 비교](outline-comparison.png)
+
+같은 축척, 설치 기준면(씰면) 정렬. 실선은 설계값·원문 데이터시트, 점선(MMT162)은 검색 치수로 배치한 추정입니다. EE364·MMT162의 육각 길이는 10으로 가정했습니다. 생성: `python docs/market/make_outline_comparison.py`
+
 ## 1. 한 줄 비교
 
 | | **HMT500(260313)** | E+E **EE364** | Vaisala **MMT162** | Vaisala **MMP8** | E+E **EE381** |
