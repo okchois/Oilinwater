@@ -42,7 +42,8 @@ TOUCH = 0.6          # 붙은 면 하나당 가점 (mm)
 # ── 부품 높이 (mm, 데이터시트 최대값) — 풋프린트 이름으로 ──
 HEIGHT = {
     "JST_GH_SM08B": 4.25, "JST_SH_SM04B": 2.95, "SpringContact_Harwin_S1941-46R": 7.25,
-    "L_CommonMode_Wuerth_WE-SL2": 5.0, "GDT_Bourns_2035": 5.0, "L_Coilcraft_XAL4030": 3.1,
+    "L_CommonMode_Wuerth_WE-SL2": 5.3, "GDT_Bourns_2035": 5.0, "L_Coilcraft_XAL4030": 3.1,
+    "L_Coilcraft_XAL4040": 4.0,   # v0.9 LCSC: L1 SRF0905 5.3, L2 XGL4040 4.0
     "C_1210": 2.5, "D_SMC": 2.62, "D_SMB": 2.3, "R_MELF_MMB-0207": 2.2, "C_1812": 2.0,
     "C_1206": 1.8, "SOIC-8": 1.75, "LQFP-48": 1.6, "SOT-23": 1.45, "HTSSOP": 1.2, "TSSOP": 1.2,
     "C_0805": 1.35, "VSSOP": 1.0, "Texas_DRB": 1.0, "Texas_RNX": 1.0, "QFN-24": 0.9,
@@ -270,7 +271,7 @@ PLAN = [
     # 입력 보호·샤시 (뒤쪽: J1 VIN/GND 아래 → 링·엔드캡 구역)
     ("L1", "B", ("at", 61.07, 0.0), dict(rots=(90,))),      # 링 구역 가운데 (높이 5 → |y| ≤ 7.7)
     ("D1", "B", ("at", 54.28, 6.28), dict(rots=(90,))),
-    ("R1", "B", ("at", 66.01, 4.93), dict(rots=(90,))),     # 엔드캡 구역
+    ("R1", "B", ("at", 66.01, 4.93), dict(rots=(90, 0))),  # 엔드캡 구역 (v0.9 LCSC: MELF → 2512)
 
     # 전류 출력 DAC 2개 (가운데 — 발열을 센서 쪽에서 멀리)
     # v0.9: DAC(최악 0.73 W씩)를 측정부(PCAP04·ADS1220 윗면 x 29–37) 밑에서 뒤쪽으로

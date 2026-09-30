@@ -273,8 +273,10 @@ def main():
     write_csv(os.path.join(d_3d, "order_jlc3d.csv"), ["Part", "Name", "File", "Material", "Qty", "Note"], rows)
     write_csv(os.path.join(d_mc, "order_jlcmc.csv"), ["Item", "Description", "Qty/set", "Qty total", "Use", "JLCMC P/N"],
               [[i, dsc, q, q * SETS, use, "(검색 후 기입)"] for i, dsc, q, use in MC])
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "hardware", "kicad"))
+    from make_parts_list import EXTRA_LCSC as PL_LCSC   # JST 하네스 부품 LCSC 번호 (결정 #34)
     write_csv(os.path.join(d_lc, "order_lcsc_harness.csv"), ["Harness", "Description", "Qty/set", "LCSC P/N"],
-              [[h, dsc, q, "(조회 후 기입)"] for h, dsc, q in LC])
+              [[h, dsc, q, next((v for k, v in PL_LCSC.items() if k in dsc), "(조회 후 기입)")] for h, dsc, q in LC])
     print("jlccnc", len(CNC), "jlc3d", len(PRINT), "jlcmc", len(MC), "lcsc", len(LC))
 
 

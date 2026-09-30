@@ -502,7 +502,7 @@ S.pw("GND", g, absolute=True)
 S.flag((g[0] + 1, g[1]), absolute=True)
 a = S.P("L1", "4")
 S.v2("D1", "TVS_BI", "SMDJ36CA", FP["SMC"], 40, 26, "VIN_L", "GND")
-S.h2("R1", "R", "4.7R 1W pulse", FP["RMELF"], 45, 26, "VIN_L", "VIN_F")
+S.h2("R1", "R", "4.7R 1W pulse", FP["R2512"], 45, 26, "VIN_L", "VIN_F")
 S.wa(a, S.P("D1", "1"), S.P("R1", "1"))
 S.gnd_stub(S.P("D1", "2"))
 S.v2("D2", "TVS3301", "TVS3301DRBR", "HMT500_260313A:Texas_DRB0008A_PadFloat", 52, 26, "VIN_F", "GND")
@@ -519,8 +519,8 @@ S.nc(S.P("J1", "7"))
 S.place("J5", "CONN_CH", "CHASSIS wire", "HMT500_260313A:SolderWire_Chassis_D0.6mm", 16, 43, nets={"1": "CHASSIS"})
 sh = S.P("J5", "1")
 S.v2("R2", "R", "1M HV", FP["R1206"], 36, 44, "CHASSIS", "GND")
-S.v2("C3", "C", "4.7n 2kV Y2", FP["C1812"], 42, 44, "CHASSIS", "GND")
-S.place("GDT1", "GDT", "2035-23-SM", "HMT500_260313A:GDT_Bourns_2035-xx-SM", 52, 45.5, nets={"1": "CHASSIS", "2": "GND"})
+S.v2("C3", "C", "4.7n 2kV", FP["C1812"], 42, 44, "CHASSIS", "GND")
+S.place("GDT1", "GDT", "2035-25-SM", "HMT500_260313A:GDT_Bourns_2035-xx-SM", 52, 45.5, nets={"1": "CHASSIS", "2": "GND"})
 S.wa(sh, S.o((24, 43)))                          # J5 핀 = 샤시 선 높이 → 곧게
 S.w((24, 43), (36, 43), (42, 43), (52, 43), (60, 43))
 for r_ in ("R2", "C3", "GDT1"):
@@ -541,12 +541,12 @@ S.text("PCB-housing creepage >= 2 mm", (56, 50), 1.27)
 
 part_table(S, 6, 58, [
     ("J1", "SM08B-GHS-TB", "현장 커넥터 연결", "JST GH 1.25 mm 8P 옆 삽입, 하네스 W-2 → M12 8P, 핀 n = M12 핀 n"),
-    ("L1", "CMC 1mH 0.8A", "전원선 공통모드 노이즈 차단", "Würth WE-SL2 744222, 2 × 1 mH, 0.8 A, 9.2 × 6 × 5 mm — 전도 방출·내성 대책"),
+    ("L1", "CMC 1mH 0.8A", "전원선 공통모드 노이즈 차단", "Bourns SRF0905-102Y (LCSC, 744222 동등), 2 × 1 mH, 0.8 A, 9.2 × 6 × 5.3 mm — 전도 방출·내성 대책"),
     ("D1", "SMDJ36CA", "입력 서지 1단 흡수", "TVS 양방향 3000 W, 36 V — −30 V 오결선에 도통 안 함"),
-    ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "MELF 1 W 펄스 내량 저항"),
+    ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "2512 1 W 펄스 내성 (CRCW-HP, JLC 글로벌 소싱)"),
     ("D2", "TVS3301DRBR", "입력 서지 2단 클램프", "TI 평탄 클램프 ±33 V, 42.5 V @ 27 A — 음(−) 서지에서 eFuse IN–OUT을 −70 V/10 ms 이내로 (전원 ≤ 28 V, 여유 작음 → 몰딩 전 서지 시험). DC 입력 33 V 초과 금지 (v0.9, 이전 SMBJ33CA)"),
-    ("GDT1", "2035-23-SM", "회로 GND–외함 서지 방전", "Bourns 2전극 SMD GDT 230 V, Ø5 × 4.4 mm — 선–대지 서지 때만 도통"),
-    ("C3, R2", "4.7n Y2 / 1M HV", "GND–외함 고주파 결합", "Y2 안전 콘덴서 + 1 MΩ 고전압 칩 저항 1206 (사용 전압 ≥ 1 kV — GDT 방전 전 임펄스를 견딤, 몰딩 안)"),
+    ("GDT1", "2035-25-SM", "회로 GND–외함 서지 방전", "Bourns 2전극 SMD GDT 250 V (LCSC), Ø5 × 4.4 mm — 선–대지 서지 때만 도통"),
+    ("C3, R2", "4.7n 2kV / 1M HV", "GND–외함 고주파 결합", "4.7 nF 2 kV X7R 1812 + 1 MΩ 서지용 칩 저항 1206 (500 V, GDT 방전 전 임펄스, 몰딩 안)"),
     ("J5", "CHASSIS wire", "PCB–바디 접지 선", "AWG 28 선 약 25 mm → M2 링 단자 → PCB 홀더 축 나사(금속 바디 탭). 조립 시뮬레이션 결과 스프링 접점 대체"),
 ])
 
@@ -608,7 +608,7 @@ for n_ in ("6", "1", "11"):
     S.gnd_stub(S.P("U2", n_))
 bt = S.P("U2", "4")
 S.v2("C8", "C", "100n", FP["C0603"], bt[0] - S.dx, bt[1] - S.dy - 3, "BUCK_SW", "BUCK_BOOT")
-S.h2("L2", "L", "15uH", "Inductor_SMD:L_Coilcraft_XAL4030-XXX", 83, 21, "BUCK_SW", "+5V")
+S.h2("L2", "L", "15uH", "Inductor_SMD:L_Coilcraft_XAL4040-XXX", 83, 21, "BUCK_SW", "+5V")
 sw, c8t = S.P("U2", "12"), S.P("C8", "1")
 S.wa(sw, (81 + S.dx, sw[1]))
 S.wa((81 + S.dx, sw[1]), S.P("L2", "1"))
@@ -623,8 +623,8 @@ l2o = S.P("L2", "2")
 S.wa(l2o, (l2o[0] + 1, l2o[1]))
 S.flag((l2o[0] + 1, l2o[1]), absolute=True)
 S.sup_stub("+5V", (l2o[0] + 1, l2o[1]))
-decap(S, "C10", "22u 25V", "C1206", 90, 22, "+5V")
-decap(S, "C6", "22u 25V", "C1206", 95, 22, "+5V")
+decap(S, "C10", "22u 25V", "C1210", 90, 22, "+5V")
+decap(S, "C6", "22u 25V", "C1210", 95, 22, "+5V")
 S.v2("C11", "C", "20p C0G", FP["C0603"], 100, 22, "+5V", "BUCK_FB")
 S.v2("R8", "R", "100k 1%", FP["R0603"], 105, 22, "+5V", "BUCK_FB")
 S.v2("R9", "R", "24.9k 1%", FP["R0603"], 105, 25, "BUCK_FB", "GND")
@@ -651,8 +651,8 @@ S.flag((fo[0] + 1, fo[1]), absolute=True)
 S.sup_stub("+3V3A", (fo[0] + 1, fo[1]))
 decap(S, "C13", "10u", "C1206", 146, 22, "+3V3A")
 # v0.9: 벅 입력 220 nF × 2 (U2 핀 옆) + 벌크 = C5 10 µF를 U2 옆에 배치, LDO 입력 1 µF (U3 옆) — SNVSB48C 9.2.1.2.6, SBVS338H 5.3
-decap(S, "C16", "220n 100V", "C0603", 121, 38.5, "VIN_P")
-decap(S, "C17", "220n 100V", "C0603", 129, 38.5, "VIN_P")
+decap(S, "C16", "220n 100V", "C0805", 121, 38.5, "VIN_P")
+decap(S, "C17", "220n 100V", "C0805", 129, 38.5, "VIN_P")
 decap(S, "C26", "1u", "C0603", 147, 38.5, "+5V")
 S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 32.6 V  /  UVLO 8.9 V")
 S.text("UVLO = 1.19 V x (R3+R4+R5)/(R4+R5) = 8.9 V   OVP rise 1.19 V x (R3+R4+R5)/R5 = 32.6 V (31.5-34.2), fall 30.1 V", (6.5, 35.5), 1.27)

@@ -6,8 +6,8 @@
     -> manufacturing/jlc/jlcpcb/jlc_parts_map.csv             value/footprint -> LCSC number (filled in after lookup)
 
 - The CPL comes straight from the KiCad placement (same coordinates as the Gerbers, absolute KiCad coordinates).
-- LCSC numbers come from jlc_parts_map.csv. Leave the lcsc column empty for parts not ordered yet; the BOM
-  still lists them with an empty LCSC column. JLC's parts matching page shows them as unmatched.
+- LCSC numbers come from make_parts_list.LCSC (decision #34). Parts marked "글로벌 소싱" have an empty LCSC column:
+  on JLC's parts matching page pick them through Global Sourcing (JLC buys the exact MPN) or supply them.
 - Board-only footprints are left out: J2 (Tag-Connect pads) and J5 (chassis wire solder hole).
 - Rotation: KiCad values. JLC's rotation origin differs for some packages, so check them in JLC's
   placement preview before ordering. Put fixes in the rot_offset column of the map.
@@ -56,9 +56,12 @@ def load_map():
             continue
         _, mfr, mpn, *_ = PL.MAP[key]
         o = old.get(key, {})
+        lcsc, jt, note = o.get("lcsc", ""), o.get("jlc_type", ""), o.get("note", "")
+        if key in PL.LCSC:                           # 결정 #34: 부품리스트의 LCSC 품번이 기준
+            mfr, mpn, lcsc, jt, note = PL.LCSC[key]
         rows.append(dict(symbol=key[0], value=key[1], footprint=b["Footprint"].split(":")[-1], refs=" ".join(refs),
-                         qty=len(refs), mfr=mfr, mpn=mpn, lcsc=o.get("lcsc", ""), jlc_type=o.get("jlc_type", ""),
-                         rot_offset=o.get("rot_offset", ""), note=o.get("note", "")))
+                         qty=len(refs), mfr=mfr, mpn=mpn, lcsc=lcsc, jlc_type=jt,
+                         rot_offset=o.get("rot_offset", ""), note=note))
     return rows
 
 
