@@ -136,7 +136,7 @@ ic("CONN_SH4", right=[("1", "SENS_1", P), ("2", "SENS_2", P), ("3", "PT+", P), (
    desc="JST SH 1.0 mm 4-pin side-entry (right angle) header. Sensor harness W-1 direct from HTX99R connector (MK sensor + Pt1000 2-wire)")
 ic("PCAP04", left=[("24", "PC2", P), ("1", "PC3", P), ("22", "PC0", P), ("20", "PC4", P), ("21", "PC5", P),
                    ("23", "PC1", P), ("19", "PCAUX", P), ("6", "PT0REF", P), ("5", "PT1", P), ("7", "PTOUT", P)],
-   right=[("9", "SSN", I), ("16", "SCK", I), ("15", "MOSI", I), ("10", "MISO", T), ("11", "PG5", B),
+   right=[("9", "SSN", I), ("16", "SCK", I), ("15", "MOSI", I), ("10", "MISO", T), ("11", "PG5", O),
           ("12", "PG2", B), ("17", "PG3", B), ("18", "PG4", B), ("3", "VDD18", P), ("13", "IIC_EN", I)],
    top=[("4", "VDD33", PI), ("14", "VDD33", PI)], ts=3, bottom=[("2", "GND", PI), ("8", "GND", PI), ("25", "EP", P)],
    w=10, rows=12, desc="ScioSense PCAP04 capacitance-to-digital, QFN24 4x4 (datasheet SC-001050-DS-6). VDD18 >= 4.7 uF, VDD33 >= 10 uF; INTN on PG5")
@@ -314,6 +314,7 @@ class Sheet:
         self.order = []
         self.wires = []      # ((x1,y1),(x2,y2))
         self.labels = []     # (net, (x,y), ang, kind)
+        self.label_src = []  # 라벨을 그은 시작점 (보통 핀 끝) — 라벨 방향 판정용
         self.ncs = []
         self.texts = []
         self.boxes = []
@@ -407,6 +408,7 @@ class Sheet:
         if length:
             self.wa(pt, e)
         self.labels.append((net, e, {"R": 0, "L": 180, "U": 90, "D": 270}[d], "global"))
+        self.label_src.append(pt)
 
     def nc(self, pt):
         self.ncs.append(pt)
@@ -1022,9 +1024,10 @@ def sheet_items(S, sheet_uuid):
                      f" {pu} (instances (project {q(PROJECT)} (path {q(path)} (reference {q(ref)}) (unit 1)))))")
     for i, (a, b) in enumerate(S.wires):
         items.append(f"(wire (pts (xy {mm(a[0])} {mm(a[1])}) (xy {mm(b[0])} {mm(b[1])})) (stroke (width 0) (type default)) (uuid {uid(S.file, 'w', i)}))")
+    shapes = label_shapes(S)
     for i, (net, pt, ang, kind) in enumerate(S.labels):
         just = {0: "left", 180: "right", 90: "left", 270: "right"}[ang]
-        items.append(f"(global_label {q(net)} (shape passive) (at {mm(pt[0])} {mm(pt[1])} {ang}) (fields_autoplaced) "
+        items.append(f"(global_label {q(net)} (shape {shapes[i]}) (at {mm(pt[0])} {mm(pt[1])} {ang}) (fields_autoplaced) "
                      f"(effects (font (size 1.27 1.27)) (justify {just})) (uuid {uid(S.file, 'gl', i)}) "
                      f'(property "Intersheetrefs" "${{INTERSHEET_REFS}}" (at {mm(pt[0])} {mm(pt[1])} 0) {HIDE}))')
     for i, pt in enumerate(S.ncs):
@@ -1048,6 +1051,54 @@ def all_pins(S):
         for num, nm, t, px, py, ang in pins_of(p["sym"]):
             rx, ry = rot(px, py, p["r"])
             out.append(((round(p["x"] + rx, 3), round(p["y"] - ry, 3)), ref, num, t))
+    return out
+
+
+DRV_T = ("output", "tri_state", "open_collector", "power_out")
+
+
+def net_roles():
+    """넷별 (주는 쪽, 받는 쪽) 핀 집합 {(시트 파일, ref, 핀)}.
+    출력·3상태·오픈드레인 핀이 있으면 그것이 주는 쪽, 입력·양방향(MCU)이 받는 쪽.
+    출력이 없고 입력과 양방향(MCU GPIO)만 있으면 MCU가 주는 쪽. 수동 소자만 있으면 방향 없음."""
+    ends = {}
+    for S in SHEETS:
+        for ref, m in S.nets.items():
+            types = {pn: ty for pn, nm, ty, *_ in pins_of(S.parts[ref]["sym"])}
+            for pin, net in m.items():
+                ends.setdefault(net, []).append(((S.file, ref, pin), types.get(pin, P)))
+    roles = {}
+    for net, es in ends.items():
+        drv = {k for k, ty in es if ty in DRV_T}
+        rcv = {k for k, ty in es if ty in (I, B)}
+        if not drv and any(ty == I for _, ty in es) and any(ty == B for _, ty in es):
+            drv = {k for k, ty in es if ty == B}
+            rcv = {k for k, ty in es if ty == I}
+        roles[net] = (drv, (rcv - drv) if drv else set(), any(ty == B for _, ty in es))
+    return roles
+
+
+def label_shapes(S):
+    """라벨마다 KiCad 모양: 주는 쪽 = output, 받는 쪽 = input, 양방향 = bidirectional, 그 밖 = passive."""
+    roles = net_roles()
+    at = {}
+    for pt, ref, num, _ in all_pins(S):
+        at.setdefault(pt, []).append((S.file, ref, num))
+    out = []
+    for (net, pt, ang, kind), src in zip(S.labels, S.label_src):
+        drv, rcv, bi = roles.get(net, (set(), set(), False))
+        here = at.get(rp(src), [])
+        if any(k in drv for k in here):
+            sh = "output"
+        elif any(k in rcv for k in here):
+            sh = "input"
+        elif any(k[0] == S.file for k in drv):
+            sh = "output"
+        elif any(k[0] == S.file for k in rcv):
+            sh = "input"
+        else:
+            sh = "bidirectional" if bi else "passive"
+        out.append(sh)
     return out
 
 
@@ -1386,6 +1437,7 @@ def write_all():
         ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor L2, LMR36006 (RNX0012A 2x3 mm, not in KiCad lib).", 1.4, False),
         ("표기 규칙: 부품번호 = 굵은 글자 (R1, U4) / 부품값 = 보통 글자 (10k, DAC8760) / 전원 네트 = 기울인 글자 (+3V3, VIN_P)", 1.4, False),
         ("         신호 네트 = 테두리 있는 라벨 (SPI_SCK, OUT1_EXT) - 네트 이름은 부품번호·부품명과 겹치지 않게 지음", 1.4, False),
+        ("         라벨 모양 = 신호 방향: 뾰족한 쪽이 밖 = 이 시트에서 내보냄(출력), 안 = 받음(입력), 양쪽 = 양방향, 네모 = 아날로그·수동", 1.4, False),
         ("글자 겹침: 생성기가 부품 몸체·핀·선·라벨·메모와 겹치지 않는 자리에 자동 배치하고, 겹치면 생성 실패로 처리", 1.4, False),
     ]
     y = 77

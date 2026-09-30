@@ -50,6 +50,20 @@ class KicadGenTest(unittest.TestCase):
         self.assertEqual(nets & (refs | vals | syms), set())
         self.assertEqual([n for n in nets if re.fullmatch(r"(R|C|L|U|D|J|FB|Q|GDT)\d+", n)], [])
 
+    def test_label_direction(self):
+        """라벨 모양이 신호 방향을 나타냄: MCU가 주는 선은 MCU 쪽 output, 받는 쪽 input."""
+        sh = {}
+        for S in g.SHEETS:
+            for (net, *_), s in zip(S.labels, g.label_shapes(S)):
+                sh.setdefault((S.file.split("_", 1)[1], net), set()).add(s)
+        self.assertEqual(sh[("mcu.kicad_sch", "DAC_MOSI")], {"output"})
+        self.assertEqual(sh[("analog_out.kicad_sch", "DAC_MOSI")], {"input"})
+        self.assertEqual(sh[("mcu.kicad_sch", "DAC_MISO")], {"input"})
+        self.assertEqual(sh[("analog_out.kicad_sch", "DAC_ALARM")], {"output"})
+        self.assertEqual(sh[("rs485.kicad_sch", "RS485_RX")], {"output"})
+        self.assertEqual(sh[("connector.kicad_sch", "RS485_A_EXT")], {"bidirectional"})
+        self.assertEqual(sh[("measurement.kicad_sch", "PT_P")], {"passive"})
+
     def test_wiring_straight(self):
         """작도 규칙: 시트당 꺾임 1개 이하, 분기점은 실제 3갈래 노드만 (전체 35개 이하)."""
         total_j = 0
