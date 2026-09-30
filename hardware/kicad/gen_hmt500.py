@@ -154,7 +154,7 @@ ic("DAC8760", left=[("9", "DIN", I), ("8", "SCLK", I), ("7", "LATCH", I), ("10",
    bottom=[("1", "AVSS", PI), ("4", "GND", PI), ("11", "GND", PI), ("12", "GND", PI), ("25", "EP", PI),
            ("23", "-VSENSE", I), ("6", "CLR", I), ("5", "CLR-SEL", I), ("16", "DVDD-EN", I), ("13", "ISET-R", P)],
    w=20, rows=10, desc="TI DAC8760 16-bit V/I output DAC, HTSSOP-24 PWP (pinout: datasheet SBAS528D, as VibrationSensor IVS320)")
-ic("OPA197", left=[("3", "+IN", I)], right=[("1", "OUT", O), ("4", "-IN", I)], top=[("5", "V+", PI)],
+ic("OPA197", left=[("1", "OUT", O), ("4", "-IN", I)], right=[("3", "+IN", I)], top=[("5", "V+", PI)],
    bottom=[("2", "V-", PI)], w=6,
    desc="TI OPA197 36 V rail-to-rail op amp, SOT-23-5 DBV (1 OUT, 2 V-, 3 +IN, 4 -IN, 5 V+). +VSENSE unity-gain buffer")
 ic("TPS26611", left=[("4", "IN", P)], right=[("5", "OUT", P), ("7", "EN", I)],
@@ -864,14 +864,14 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.w((73, yr), (77, yr), (83, yr), (87, yr))
     S.gl(f"OUT{ch}_EXT", S.o((87, yr)), "R", length=0)
     # +VSENSE 버퍼 (OPA197, 이득 1): 단자 전압 감지, 전류 모드에서 +VSENSE 내부 60k 누설 없음
-    yb = y0 + 19
-    S.h2(f"R{21 + 10 * ch}", "R", "10k", FP["R0603"], 71, yb, f"OUT{ch}_EXT", f"OUT{ch}_SNS")
-    S.gl(f"OUT{ch}_EXT", S.P(f"R{21 + 10 * ch}", "1"), "L", length=1)
-    S.place(Bf, "OPA197", "OPA197IDBVR", "Package_TO_SOT_SMD:SOT-23-5", 81, yb, nets={
+    yb = y0 + 19                                          # 신호 흐름: 단자(오른쪽) → 버퍼 → +VSENSE(왼쪽)
+    S.place(Bf, "OPA197", "OPA197IDBVR", "Package_TO_SOT_SMD:SOT-23-5", 76, yb, nets={
         "3": f"OUT{ch}_SNS", "1": f"DAC{ch}_SENSE", "4": f"DAC{ch}_SENSE", "5": "VIN_P", "2": "GND"})
-    S.wa(S.P(f"R{21 + 10 * ch}", "2"), S.P(Bf, "3"))
+    ip_ = S.P(Bf, "3")
+    S.h2(f"R{21 + 10 * ch}", "R", "10k", FP["R0603"], ip_[0] - S.dx, yb, f"OUT{ch}_SNS", f"OUT{ch}_EXT")
+    S.gl(f"OUT{ch}_EXT", S.P(f"R{21 + 10 * ch}", "2"), "R", length=1)
     S.wa(S.P(Bf, "1"), S.P(Bf, "4"))                      # OUT = -IN (전압 추종기)
-    S.gl(f"DAC{ch}_SENSE", S.P(Bf, "1"), "R", length=1)
+    S.gl(f"DAC{ch}_SENSE", S.P(Bf, "1"), "L", length=1)
     S.sup_stub("VIN_P", S.P(Bf, "5"))
     S.gnd_stub(S.P(Bf, "2"))
     # 바이패스: DAC AVDD(10 Ω 뒤) 100n, +3V3 100n, OPA197 V+ 100n, VIN_P 벌크 4.7u는 CH1에만 (두 채널 공용)
