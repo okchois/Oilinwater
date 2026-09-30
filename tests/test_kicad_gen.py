@@ -179,8 +179,10 @@ class PcbPlacementTest(unittest.TestCase):
             if p["side"] != "T" or p["ref"] in ("J3", "J1"):
                 continue
             x0, y0, x1, y1 = p["crt"]
-            self.assertFalse(x0 < 30.5 and y1 > -3.5 and y0 < 3.5, p["ref"])     # W-1
-            self.assertFalse(x1 > 58.5 and y1 > -6.4 and y0 < 6.4, p["ref"])     # W-2
+            for (a, b, w, hmax) in self.d["meta"]["harness_bands_top"]:
+                if x0 < b and x1 > a and y0 < w and y1 > -w:
+                    self.assertIsNotNone(hmax, p["ref"])
+                    self.assertLessEqual(p["h"], hmax, p["ref"])
 
     def test_pad_nets_match_schematic(self):
         nets = g.intended_nets()

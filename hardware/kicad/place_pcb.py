@@ -62,8 +62,17 @@ X0, X1 = P.PCB["x"]
 SLOT_X1 = P.PCB_HOLDER["slot_x"][1]                  # 18.0
 RING = P.PCB_RING
 RING_KO = (RING["x"][0] - 0.3, RING["x"][1] + 0.3, RING["id"] / 2 - 0.3)   # x0, x1, |y| 한계
-W1_BAND = (X0, 30.5, 3.5)        # 윗면: J3 플러그(|y| ≤ 2.5) + 앞쪽으로 가는 센서선 (z ≈ 2.2)
-W2_BAND = (58.5, X1, 6.4)        # 윗면: J1 플러그(|y| ≤ 5.9) + 뒤쪽 M12로 가는 선
+# 윗면 하네스 통로 (x0, x1, |y| 한계, 허용 부품 높이 — None = 부품 금지)
+#  - 플러그 몸체 + 꽂는 거리·잡는 공간(약 4 mm)은 완전히 비움
+#  - 전선만 지나가는 곳은 낮은 부품 허용: W-1 선 중심 z 2.2, 굵기 0.6 → 선 아래 1.9 → 부품 ≤ 1.0 (여유 0.9)
+#    W-2 선은 z 3.3에서 M12 핀(축 반지름 2.5)으로 내려가며 보드 끝(x 71)을 넘어가므로 끝 2 mm는 비움
+HARNESS_BANDS = [
+    (X0, 22.5, 3.5, 1.0),          # W-1 선 (홀더 구멍 → 플러그)
+    (22.5, 30.5, 3.5, None),       # W-1 플러그(x 26.5–30.5) + 꽂는 거리·잡는 공간
+    (58.5, 64.5, 6.4, None),       # W-2 플러그(x 58.5–62.5) + 잡는 공간
+    (64.5, 69.0, 6.4, 1.0),        # W-2 선 (M12 쪽으로 내려감)
+    (69.0, X1, 6.4, None),         # W-2 선이 보드 끝을 넘어가는 곳
+]
 
 
 def half_width(xa, xb):
@@ -152,8 +161,8 @@ def region_ok(side, box, h, check_h=True):
     if xb > RING_KO[0] and xa < RING_KO[1] and (ya < -RING_KO[2] or yb > RING_KO[2]):
         return False
     if side == "T":
-        for (a, b, w) in (W1_BAND, W2_BAND):
-            if xb > a and xa < b and yb > -w and ya < w:
+        for (a, b, w, hmax) in HARNESS_BANDS:
+            if xb > a and xa < b and yb > -w and ya < w and (hmax is None or h > hmax):
                 return False
     if check_h and h > h_allow(xa, xb, max(abs(ya), abs(yb))):
         return False
@@ -218,12 +227,19 @@ PLAN = [
     ("J1", "T", ("fix", None, None), dict(rot=90)),
     ("U4", "T", ("fix", 42.8, 0.0), dict(rot=0)),
     # ════ 윗면: 큰 부품 자리 (코트야드 크기로 계산한 칸) ════
-    ("J2", "T", ("at", 22.6, 6.15), dict(rots=(0,))),       # SWD Tag-Connect: 앞쪽 윗면 (프로그래밍은 조립 전). 구멍 3개는 아랫면도 막음
+    ("J2", "T", ("at", 20.4, 0.0), dict(rots=(90,))),       # SWD Tag-Connect: 높이 0 → W-1 선 아래 (프로그래밍은 하네스 꽂기 전). 구멍 3개는 아랫면도 막음
     ("D40", "T", ("at", 50.15, 2.08), dict(rots=(0,))),     # 출력 TVS: J1 OUT 핀 바로 앞 (서지 경로 최단)
     ("D30", "T", ("at", 50.15, -2.08), dict(rots=(0,))),
     ("R40", "T", ("at", 54.75, 9.3), dict(rots=(0,))),      # 10R 2512: J1 옆구리
     ("R30", "T", ("at", 54.75, -9.3), dict(rots=(0,))),
     ("U11", "T", ("at", 46.75, -8.4), dict(rots=(0, 180))), # RS-485: J1 A/B 핀·MCU USART 핀 사이
+    ("U14", "T", ("at", 49.6, 8.6), {}),                    # DAC SCLK 게이트: MCU SPI2 핀 옆 윗면
+    ("C36", "T", ("near", "U14", "+3V3"), {}),
+    # LDO + 페라이트 (앞쪽 윗면 — +3V3A 를 측정부에 바로)
+    ("U3", "T", ("at", 23.0, 6.0), {}),
+    ("C12", "T", ("near", "U3", "+3V3"), {}),
+    ("FB1", "T", ("near", "U3", "+3V3"), {}),
+    ("C13", "T", ("near", "FB1", "+3V3A"), {}),
     # 측정 (J3 옆 — 센서선 최단)
     ("U5", "T", ("near", "J3", "SENS_C1"), {}),
     ("U6", "T", ("near", "J3", "PT_P"), {}),
@@ -247,9 +263,7 @@ PLAN = [
     ("C18", "T", ("near", "U4", "+3V3"), {}),
     ("C21", "T", ("near", "U4", "NRST"), {}),
     ("C60", "T", ("near", "U11", "+3V3"), {}),
-    ("U14", "T", ("at", 49.6, 8.6), {}),                    # DAC SCLK 게이트: MCU SPI2 핀 옆 윗면
-    ("C36", "T", ("near", "U14", "+3V3"), {}),
-    ("R33", "TB", ("near", "U4", "DAC_ALARM"), {}),
+    ("R33", "T", ("near", "U4", "DAC_ALARM"), {}),
     # ════ 아랫면: 큰 부품 자리 ════
     # 입력 보호·샤시 (뒤쪽: J1 VIN/GND 아래 → 링·엔드캡 구역)
     ("L1", "B", ("at", 61.07, 0.0), dict(rots=(90,))),      # 링 구역 가운데 (높이 5 → |y| ≤ 7.7)
@@ -264,8 +278,19 @@ PLAN = [
     # 전류 출력 DAC 2개 (가운데 — 발열을 센서 쪽에서 멀리)
     ("U7", "B", ("at", 38.5, -6.6), dict(rots=(0, 180))),
     ("U8", "B", ("at", 38.5, 6.6), dict(rots=(0, 180))),
-    # eFuse (DAC 앞)
-    ("U1", "B", ("at", 30.4, 5.2), dict(rots=(0, 180))),
+    # eFuse: 방열 비아 → 윗면에도 RTN 동박 패드가 생김 → 윗면 부품이 없는 J3 플러그 통로 바로 아래
+    ("U1", "B", ("at", 26.6, 0.0), dict(rots=(0, 180))),
+    # 벅·LDO (앞쪽 — +3V3A 를 측정부 가까이, 발열 적음)
+    ("U2", "B", ("at", 21.5, 4.5), {}),
+    ("L2", "B", ("near", "U2", "BUCK_SW"), {}),
+    ("C10", "B", ("near", "L2", "+5V"), {}),
+    ("C6", "B", ("near", "L2", "+5V"), {}),
+    ("C8", "B", ("near", "U2", "BUCK_BOOT"), {}),
+    ("C9", "B", ("near", "U2", "BUCK_VCC"), {}),
+    ("R8", "B", ("near", "U2", "BUCK_FB"), {}),
+    ("R9", "B", ("near", "U2", "BUCK_FB"), {}),
+    ("C11", "B", ("near", "R8", "BUCK_FB"), {}),
+    # eFuse 분압·설정 부품
     ("C5", "B", ("near", "U1", "VIN_P"), {}),
     ("C7", "B", ("near", "U1", "VIN_P"), {}),
     ("R3", "B", ("near", "U1", "UV_DIV"), {}),
@@ -273,20 +298,6 @@ PLAN = [
     ("R5", "B", ("near", "U1", "OV_DIV"), {}),
     ("R6", "B", ("near", "U1", "EF_ILIM"), {}),
     ("C4", "B", ("near", "U1", "EF_DVDT"), {}),
-    # 벅·LDO (앞쪽 — +3V3A 를 측정부 가까이, 발열 적음)
-    ("U2", "B", ("at", 22.0, 3.0), {}),
-    ("L2", "B", ("near", "U2", "BUCK_SW"), {}),
-    ("C8", "B", ("near", "U2", "BUCK_BOOT"), {}),
-    ("C9", "B", ("near", "U2", "BUCK_VCC"), {}),
-    ("C10", "B", ("near", "L2", "+5V"), {}),
-    ("C6", "B", ("near", "L2", "+5V"), {}),
-    ("R8", "B", ("near", "U2", "BUCK_FB"), {}),
-    ("R9", "B", ("near", "U2", "BUCK_FB"), {}),
-    ("C11", "B", ("near", "R8", "BUCK_FB"), {}),
-    ("U3", "B", ("near", "C10", "+5V"), {}),
-    ("C12", "B", ("near", "U3", "+3V3"), {}),
-    ("FB1", "B", ("near", "U3", "+3V3"), {}),
-    ("C13", "B", ("near", "FB1", "+3V3A"), {}),
     # 출력 스위치·센스 앰프 (DAC 뒤 → R30/R40 쪽)
     ("U9", "B", ("near", "U7", "DAC1_OUT"), {}),
     ("U10", "B", ("near", "U8", "DAC2_OUT"), {}),
@@ -499,6 +510,7 @@ def main():
             for s in "TB"}
     meta = dict(project=O.PROJECT, coords="mech: x axial (rear +), y lateral, z top +; KiCad = (100 + x - 14.5, 100 - y)",
                 side={"T": "F.Cu (z+)", "B": "B.Cu (z-)"}, courtyard_area=area,
+                harness_bands_top=[list(b) for b in HARNESS_BANDS],   # x0, x1, |y|, 허용 높이(None = 금지)
                 counts={s: sum(1 for r in rows if r["side"] == s) for s in "TB"},
                 unplaced=UNPLACED)
     json.dump(dict(meta=meta, parts=rows), open(JSON_OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

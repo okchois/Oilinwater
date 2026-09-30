@@ -52,7 +52,7 @@ def outline(ax):
         ax.add_patch(Circle((x, y), P.PCB["hole_d"] / 2, fill=False, color="k", lw=0.8))
 
 
-def zones(ax, side):
+def zones(ax, side, bands):
     s0, s1 = P.PCB_HOLDER["slot_x"]
     ax.add_patch(Rectangle((s0, -9), s1 - s0, 18, color="#bbbbbb", alpha=0.5, lw=0))
     ax.text((s0 + s1) / 2, 0, "holder\nslot", ha="center", va="center", fontsize=6)
@@ -62,15 +62,18 @@ def zones(ax, side):
     ax.add_patch(Rectangle((r0, -11.5), r1 - r0, 23, fill=False, ls=":", color="#666666", lw=0.6))
     ax.text((r0 + r1) / 2, 11.9, "ring", ha="center", fontsize=6)
     if side == "T":
-        for (xa, xb, w, t) in ((14.5, 30.5, 3.5, "W-1 plug + wires (z<=3.6)"), (58.5, 71.0, 6.4, "W-2 plug + wires")):
-            ax.add_patch(Rectangle((xa, -w), xb - xa, 2 * w, color="#ffd27f", alpha=0.35, lw=0))
-            ax.text((xa + xb) / 2 + (2 if xa < 20 else 0), 0, t, ha="center", va="center", fontsize=5.5,
-                    color="#a06000", rotation=0)
+        for (xa, xb, w, hmax) in bands:
+            ax.add_patch(Rectangle((xa, -w), xb - xa, 2 * w, color="#ffd27f" if hmax is None else "#fff0c8",
+                                   alpha=0.45, lw=0, hatch=None if hmax is None else "..."))
+            ax.text((xa + xb) / 2, -w + 0.4, "no parts" if hmax is None else f"h<={hmax:g}", ha="center",
+                    fontsize=5, color="#a06000")
+        ax.text(22.0, 3.9, "W-1 wires z~2.2", fontsize=5.5, color="#a06000", ha="center")
+        ax.text(64.5, 6.8, "W-2 plug / wires", fontsize=5.5, color="#a06000", ha="center")
 
 
-def draw(ax, parts, side, title):
+def draw(ax, parts, side, title, bands):
     outline(ax)
-    zones(ax, side)
+    zones(ax, side, bands)
     for r in parts:
         if r["side"] != side:
             continue
@@ -99,8 +102,9 @@ def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, PROJECT, "placement.png")
     fig, axs = plt.subplots(2, 1, figsize=(12, 11))
     m = d["meta"]
-    draw(axs[0], parts, "T", f"TOP (F, z+) — {m['counts']['T']} parts   front = sensor (x 14.5) ... rear = M12 (x 71)")
-    draw(axs[1], parts, "B", f"BOTTOM (B, z-), seen through from top — {m['counts']['B']} parts")
+    draw(axs[0], parts, "T", f"TOP (F, z+) — {m['counts']['T']} parts   front = sensor (x 14.5) ... rear = M12 (x 71)",
+         m["harness_bands_top"])
+    draw(axs[1], parts, "B", f"BOTTOM (B, z-), seen through from top — {m['counts']['B']} parts", [])
     hs = [plt.Line2D([], [], color=c, lw=3) for c in GCOL]
     axs[0].legend(hs, GNAME, fontsize=7, loc="lower left", ncol=6, bbox_to_anchor=(0, 1.06))
     un = m.get("unplaced") or []
