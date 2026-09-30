@@ -492,7 +492,7 @@ def sheet_body():
                     (18.7, R_SEAL, "Ø29 f7"), (23, R_MT, "M28×1-6g")):
         sh.dim_v(X(x), v.Yu(r), v.Yl(r), t)
     sh.leader(X(-28), v.Yu(5.0), X(-12), 30, "Ø11.2 깊이 1 / Ø10 H8 (+0.022/0) 깊이 2.5, Ra 0.8 (O링 면)")
-    sh.leader(X(-24.5), v.Yu(4.8), X(-12), 37, "M10×0.75-6H 깊이 8 — HTX99R 센서 커넥터 체결")
+    sh.leader(X(-24.5), v.Yu(4.8), X(-12), 37, f"M10×0.75-6H 나사 길이 {B['conn_thread']['x'][1] - B['conn_thread']['x'][0]:g} (앞면에서 {B['conn_thread']['x'][1] - B['x_front']:g}) — HTX99R 체결")
     sh.leader(X(-8), v.Yu(3.5), X(-12), 44, "Ø7 관통 — 센서 하네스 W-1 통로 (피드스루 없음)")
     sh.leader(X(17), v.Yl(R_GRV), X(30), v.Yl(RM) + 6, "O링 홈 Ø25.6 h9 (0/-0.052), R0.2 — O링 25×2")
     sh.leader(X(25), v.Yu(11), X(32), v.Yu(RM) - 22, "Ø22 깊이 14")

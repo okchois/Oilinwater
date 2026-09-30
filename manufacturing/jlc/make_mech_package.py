@@ -70,7 +70,8 @@ CNC_EN = {
     "HMT500-M-101": dict(
         material="Stainless steel 316L (1.4404); 316 acceptable (wetted part)",
         finish="As machined, deburr, passivation (ASTM A967)",
-        threads="G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, depth 5.5; "
+        threads="G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, thread length 5.5 "
+                "(ends 8.0 from front face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); "
                 "2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16",
         tol="O-ring seat dia 29 f7; connector seal bore dia 10 H8; sealing faces Ra 0.8; others ISO 2768-mK",
         note="Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer."),
@@ -83,7 +84,8 @@ CNC_EN = {
     "HMT500-M-104": dict(
         material="Stainless steel 316L (1.4404); 304 acceptable",
         finish="As machined, deburr, passivation",
-        threads="M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal (connector); 2x M3 through (fill/vent ports, r10 at 90/270 deg)",
+        threads="M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal through (connector, TENTATIVE - will be confirmed "
+                "with the connector part number; please quote as M16x1.5); 2x M3 through (fill/vent ports, r10 at 90/270 deg)",
         tol="O-ring seat dia 29 f7 with groove, Ra 0.8; wrench flats AF28; others ISO 2768-mK",
         note="LEFT hand external thread. Please confirm."),
     "HMT500-M-105": dict(
@@ -99,6 +101,8 @@ CNC_EN = {
         tol="OD 26.4 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4",
         note="Drawing sheet M-105~106 (ring at right)."),
 }
+TAG = {"HMT500-M-101": "SUS316L", "HMT500-M-103": "SUS316L", "HMT500-M-104": "SUS316L",
+       "HMT500-M-105": "PEEK", "HMT500-M-106": "PEEK"}
 NAME_EN = {"HMT500-M-101": "Process body", "HMT500-M-103": "Housing tube", "HMT500-M-104": "End cap",
            "HMT500-M-105": "PCB holder", "HMT500-M-106": "PCB rear support ring"}
 
@@ -108,6 +112,9 @@ Company: DOTECH Co., Ltd.
 Drawing revision: {rev}   Date: {date}
 Quantity: {sets} sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
 
+MATERIAL: NOT aluminium. The file names carry the material (SUS316L / PEEK). Please set it per part:
+  M-101, M-103, M-104 = stainless steel 316L;  M-105, M-106 = PEEK (POM acceptable for this prototype lot).
+
 Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
 and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
 Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
@@ -116,7 +123,8 @@ Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
 
 General:
 - Unspecified tolerances ISO 2768-mK. Break sharp edges 0.2-0.5 unless noted.
-- Threads are modelled as plain cylinders in the STEP files; please cut threads per the callouts above.
+- Threads are NOT modelled in the STEP files (cosmetic): internal threads are modelled at the minor diameter,
+  external threads at the major diameter. Please cut threads per the callouts above and on the drawings.
 - IMPORTANT: M-103 rear thread and M-104 thread are LEFT hand (M28x1-LH). M-103 front and M-101 are RIGHT hand.
 - Fine / pipe threads: G1/2-A, M28x1, M10x0.75, M16x1.5. If a thread is not in your standard list, please advise.
 - O-ring sealing surfaces (dia 29 f7 / H8, dia 10 H8): Ra 0.8, no tool marks across the seal.
@@ -175,19 +183,23 @@ def main():
     d_cnc, d_3d, d_mc, d_lc = (os.path.join(HERE, x) for x in ("jlccnc", "jlc3d", "jlcmc", "lcsc"))
     for d in (d_cnc, d_3d, d_mc, d_lc):
         os.makedirs(d, exist_ok=True)
+    for f in os.listdir(d_cnc):                      # 이전 이름 파일 정리
+        if f.endswith((".step", ".pdf")):
+            os.remove(os.path.join(d_cnc, f))
     rows = []
     for c in CNC:
-        shutil.copy(os.path.join(MECH, "out", c["step"]), os.path.join(d_cnc, c["step"]))
-        pdf = f"{c['part']}_drawing_rev{REV}.pdf"
+        c["step"] = c["step"].replace(".step", f"_{TAG[c['part']]}.step")    # 파일 이름에 재질 (JLCCNC 기본값 알루미늄 방지)
+        shutil.copy(os.path.join(MECH, "out", c["step"].replace(f"_{TAG[c['part']]}", "")), os.path.join(d_cnc, c["step"]))
+        pdf = f"{c['part']}_drawing_rev{REV}_{TAG[c['part']]}.pdf"
         pdf_page(DWG_PAGE[c["part"].replace("HMT500-", "")], os.path.join(d_cnc, pdf))
         rows.append([c["part"], c["name"], c["step"], pdf, c["material"], c["alt"], c["finish"], c["threads"], c["tol"],
                      SETS, c["note"]])
     rows_en, parts_txt = [], []
     for c in CNC:
         e = CNC_EN[c["part"]]
-        rows_en.append([c["part"], NAME_EN[c["part"]], c["step"], f"{c['part']}_drawing_rev{REV}.pdf", e["material"],
+        rows_en.append([c["part"], NAME_EN[c["part"]], c["step"], f"{c['part']}_drawing_rev{REV}_{TAG[c['part']]}.pdf", e["material"],
                         e["finish"], e["threads"], e["tol"], SETS, e["note"]])
-        parts_txt.append(f"{c['part']}  {NAME_EN[c['part']]}  x{SETS}\n  3D: {c['step']}   2D: {c['part']}_drawing_rev{REV}.pdf\n"
+        parts_txt.append(f"{c['part']}  {NAME_EN[c['part']]}  x{SETS}\n  3D: {c['step']}   2D: {c['part']}_drawing_rev{REV}_{TAG[c['part']]}.pdf\n"
                          f"  Material: {e['material']}\n  Finish: {e['finish']}\n  Threads: {e['threads']}\n"
                          f"  Tolerances: {e['tol']}\n  Note: {e['note']}")
     write_csv(os.path.join(d_cnc, "order_jlccnc_EN.csv"),

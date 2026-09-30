@@ -141,7 +141,7 @@
 <line x1="76.500" y1="105.600" x2="114.000" y2="37.000" class="thin"/>
 <polygon points="76.500,105.600 76.957,102.887 78.537,103.750" class="arrow"/>
 <line x1="114.000" y1="37.000" x2="136.000" y2="37.000" class="thin"/>
-<text x="115.000" y="36.000" font-size="3.2" text-anchor="start" class="t ">M10×0.75-6H 깊이 8 — HTX99R 센서 커넥터 체결</text>
+<text x="115.000" y="36.000" font-size="3.2" text-anchor="start" class="t ">M10×0.75-6H 나사 길이 5.5 (앞면에서 8) — HTX99R 체결</text>
 <line x1="126.000" y1="109.500" x2="114.000" y2="44.000" class="thin"/>
 <polygon points="126.000,109.500 124.646,107.105 126.417,106.780" class="arrow"/>
 <line x1="114.000" y1="44.000" x2="92.000" y2="44.000" class="thin"/>
