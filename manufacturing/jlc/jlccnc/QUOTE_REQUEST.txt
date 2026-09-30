@@ -4,15 +4,22 @@ Company: DOTECH Co., Ltd.
 Drawing revision: G   Date: 2026-09-30
 Quantity: 5 sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
 
-MATERIAL: NOT aluminium. The file names carry the material (SUS316L / PEEK). Please set it per part:
-  M-101, M-103, M-104 = stainless steel 316L;  M-105, M-106 = PEEK (POM acceptable for this prototype lot).
+TOLERANCE: the online option is +/-0.05 mm. The fit diameters in these STEP files are already set to the middle of
+the ISO fit band, so machining to the STEP within +/-0.05 is acceptable:
+  seal spigots dia 28.94 (M-101, M-104), seal bores dia 29.06 (M-103), O-ring grooves dia 25.8,
+  connector seal bore dia 10.05 (M-101), holder dia 21.55 / slot 1.75, ring dia 26.35 / slot 1.75.
+  (The Korean drawings show the ISO fit symbols f7/H8 on nominal 29 / 10.)
+
+MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
+  M-101, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
+  M-105, M-106 = POM (White) for this prototype lot (PEEK not offered online).
 
 Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
 and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
 Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
 
 HMT500-M-101  Process body  x5
-  3D: HMT500-M-101_body_SUS316L.step   2D: HMT500-M-101_drawing_revG_SUS316L.pdf
+  3D: HMT500-M-101_body_SUS304.step   2D: HMT500-M-101_drawing_revG_SUS304.pdf
   Material: Stainless steel 316L (1.4404); 316 acceptable (wetted part)
   Finish: As machined, deburr, passivation (ASTM A967)
   Threads: G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, thread length 5.5 (ends 8.0 from front face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); 2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16
@@ -20,7 +27,7 @@ HMT500-M-101  Process body  x5
   Note: Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer.
 
 HMT500-M-103  Housing tube  x5
-  3D: HMT500-M-103_housing_SUS316L.step   2D: HMT500-M-103_drawing_revG_SUS316L.pdf
+  3D: HMT500-M-103_housing_SUS304.step   2D: HMT500-M-103_drawing_revG_SUS304.pdf
   Material: Stainless steel 316L (1.4404); 304 acceptable (not wetted)
   Finish: As machined, deburr, passivation; outer laser marking if available (text supplied later)
   Threads: Front: M28x1-6H internal, RIGHT hand, length 7; Rear: M28x1-LH-6H internal, LEFT hand, length 7
@@ -28,7 +35,7 @@ HMT500-M-103  Housing tube  x5
   Note: Turnbuckle tube: front thread RIGHT hand, rear thread LEFT hand. Please confirm.
 
 HMT500-M-104  End cap  x5
-  3D: HMT500-M-104_endcap_SUS316L.step   2D: HMT500-M-104_drawing_revG_SUS316L.pdf
+  3D: HMT500-M-104_endcap_SUS304.step   2D: HMT500-M-104_drawing_revG_SUS304.pdf
   Material: Stainless steel 316L (1.4404); 304 acceptable
   Finish: As machined, deburr, passivation
   Threads: M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal through (connector, TENTATIVE - will be confirmed with the connector part number; please quote as M16x1.5); 2x M3 through (fill/vent ports, r10 at 90/270 deg)
@@ -36,7 +43,7 @@ HMT500-M-104  End cap  x5
   Note: LEFT hand external thread. Please confirm.
 
 HMT500-M-105  PCB holder  x5
-  3D: HMT500-M-105_holder_PEEK.step   2D: HMT500-M-105_drawing_revG_PEEK.pdf
+  3D: HMT500-M-105_holder_POM-White.step   2D: HMT500-M-105_drawing_revG_POM-White.pdf
   Material: PEEK natural; POM acceptable for this prototype lot
   Finish: As machined, deburr
   Threads: 2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2
@@ -44,7 +51,7 @@ HMT500-M-105  PCB holder  x5
   Note: Drawing sheet M-105~106 (holder at top right).
 
 HMT500-M-106  PCB rear support ring  x5
-  3D: HMT500-M-106_ring_PEEK.step   2D: HMT500-M-106_drawing_revG_PEEK.pdf
+  3D: HMT500-M-106_ring_POM-White.step   2D: HMT500-M-106_drawing_revG_POM-White.pdf
   Material: PEEK natural; POM acceptable for this prototype lot
   Finish: As machined, deburr
   Threads: -

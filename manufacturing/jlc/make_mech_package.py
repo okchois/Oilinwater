@@ -101,8 +101,8 @@ CNC_EN = {
         tol="OD 26.4 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4",
         note="Drawing sheet M-105~106 (ring at right)."),
 }
-TAG = {"HMT500-M-101": "SUS316L", "HMT500-M-103": "SUS316L", "HMT500-M-104": "SUS316L",
-       "HMT500-M-105": "PEEK", "HMT500-M-106": "PEEK"}
+TAG = {"HMT500-M-101": "SUS304", "HMT500-M-103": "SUS304", "HMT500-M-104": "SUS304",      # 이번 시제품: JLCCNC 온라인 선택지
+       "HMT500-M-105": "POM-White", "HMT500-M-106": "POM-White"}
 NAME_EN = {"HMT500-M-101": "Process body", "HMT500-M-103": "Housing tube", "HMT500-M-104": "End cap",
            "HMT500-M-105": "PCB holder", "HMT500-M-106": "PCB rear support ring"}
 
@@ -112,8 +112,15 @@ Company: DOTECH Co., Ltd.
 Drawing revision: {rev}   Date: {date}
 Quantity: {sets} sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
 
-MATERIAL: NOT aluminium. The file names carry the material (SUS316L / PEEK). Please set it per part:
-  M-101, M-103, M-104 = stainless steel 316L;  M-105, M-106 = PEEK (POM acceptable for this prototype lot).
+TOLERANCE: the online option is +/-0.05 mm. The fit diameters in these STEP files are already set to the middle of
+the ISO fit band, so machining to the STEP within +/-0.05 is acceptable:
+  seal spigots dia 28.94 (M-101, M-104), seal bores dia 29.06 (M-103), O-ring grooves dia 25.8,
+  connector seal bore dia 10.05 (M-101), holder dia 21.55 / slot 1.75, ring dia 26.35 / slot 1.75.
+  (The Korean drawings show the ISO fit symbols f7/H8 on nominal 29 / 10.)
+
+MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
+  M-101, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
+  M-105, M-106 = POM (White) for this prototype lot (PEEK not offered online).
 
 Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
 and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
@@ -166,6 +173,30 @@ LC = [
 ]
 
 
+# JLCCNC 온라인 견적의 가장 엄격한 공차는 ±0.05 → 끼워맞춤 지름을 공차 범위 가운데 값으로 옮긴 JLC 전용 STEP.
+#  O링 자리: 축 Ø28.94 / 구멍 Ø29.06 (±0.05 → 틈 0.02–0.22), 홈 Ø25.8 (압축 약 16–22 %, O링 25 × 2 늘림 3 %)
+#  커넥터 밀봉면 Ø10.05 (±0.05 → 10.00–10.10, O링 8 × 1.2 압축 약 21–25 %)
+#  홀더 Ø21.55, 홈 폭 1.75, 창 5.65 × 3.25 / 링 Ø26.35, 홈 폭 1.75, 홈 바닥 사이 23.3
+JLC_NOMINAL = [
+    (P.BODY["seal"], "d", 28.94), (P.ENDCAP["seal"], "d", 28.94), (P.HOUSING, "seal_bore", 29.06),
+    (P.ORING, "groove_d", 25.8), (P.BODY["conn_land"], "d", 10.05),
+    (P.PCB_HOLDER, "d", 21.55), (P.PCB_HOLDER, "slot_w", 1.75), (P.PCB_HOLDER["window"], "wy", 5.65),
+    (P.PCB_HOLDER["window"], "z", (0.85, 4.10)),
+    (P.PCB_RING, "od", 26.35), (P.PCB_RING, "slot_w", 1.75), (P.PCB_RING, "slot_y", 11.65),
+]
+
+
+class jlc_nominal:
+    def __enter__(self):
+        self.old = [(d, k, d[k]) for d, k, _ in JLC_NOMINAL]
+        for d, k, v in JLC_NOMINAL:
+            d[k] = v
+
+    def __exit__(self, *a):
+        for d, k, v in self.old:
+            d[k] = v
+
+
 def write_csv(path, header, rows):
     with open(path, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
@@ -189,7 +220,8 @@ def main():
     rows = []
     for c in CNC:
         c["step"] = c["step"].replace(".step", f"_{TAG[c['part']]}.step")    # 파일 이름에 재질 (JLCCNC 기본값 알루미늄 방지)
-        shutil.copy(os.path.join(MECH, "out", c["step"].replace(f"_{TAG[c['part']]}", "")), os.path.join(d_cnc, c["step"]))
+        with jlc_nominal():                                                   # ±0.05 공차용 가운데 값 지름
+            cq.exporters.export(c["fn"](), os.path.join(d_cnc, c["step"]))
         pdf = f"{c['part']}_drawing_rev{REV}_{TAG[c['part']]}.pdf"
         pdf_page(DWG_PAGE[c["part"].replace("HMT500-", "")], os.path.join(d_cnc, pdf))
         rows.append([c["part"], c["name"], c["step"], pdf, c["material"], c["alt"], c["finish"], c["threads"], c["tol"],
