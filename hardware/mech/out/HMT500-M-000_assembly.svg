@@ -115,14 +115,31 @@
 <rect x="278.000" y="78.000" width="18.000" height="22.000" style="fill:#f3e7c9;stroke:none"/>
 <polygon points="174.400,78.400 179.000,78.400 179.000,94.000 174.400,94.000" class="part2"/>
 <polygon points="268.000,73.600 276.000,73.600 276.000,76.800 268.000,76.800" class="part2"/>
-<polygon points="179.000,100.000 179.000,82.000 202.000,82.000 202.000,77.000 278.000,77.000 278.000,82.000 292.000,82.000 292.000,100.000" class="green"/>
-<rect x="211.000" y="93.000" width="8.000" height="7.000" fill="#333" stroke="none"/>
-<rect x="198.000" y="84.000" width="12.800" height="10.000" fill="#333" stroke="none"/>
-<rect x="225.000" y="93.000" width="14.000" height="7.000" fill="#333" stroke="none"/>
-<rect x="255.000" y="87.200" width="12.000" height="12.800" fill="#333" stroke="none"/>
-<rect x="240.000" y="81.000" width="14.000" height="12.000" fill="#333" stroke="none"/>
-<rect x="279.000" y="94.000" width="12.000" height="6.000" fill="#333" stroke="none"/>
-<rect x="207.000" y="77.000" width="6.000" height="4.000" fill="#333" stroke="none"/>
+<polygon points="179.000,100.000 179.000,82.000 202.000,82.000 202.000,77.000 276.800,77.000 276.800,82.000 292.000,82.000 292.000,100.000" class="green"/>
+<rect x="193.000" y="86.800" width="6.000" height="3.400" fill="#333" stroke="none"/>
+<rect x="200.700" y="84.024" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="201.400" y="89.824" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="204.376" y="79.500" width="1.848" height="3.400" fill="#333" stroke="none"/>
+<rect x="205.076" y="85.374" width="4.200" height="2.700" fill="#333" stroke="none"/>
+<rect x="210.526" y="78.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
+<rect x="211.850" y="86.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="211.000" y="93.900" width="8.700" height="6.100" fill="#333" stroke="none"/>
+<rect x="217.550" y="78.224" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="215.650" y="82.400" width="8.200" height="8.200" fill="#333" stroke="none"/>
+<rect x="225.900" y="83.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
+<rect x="226.676" y="78.650" width="4.200" height="2.700" fill="#333" stroke="none"/>
+<rect x="231.076" y="86.600" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="231.076" y="83.100" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="228.500" y="92.900" width="14.200" height="7.100" fill="#333" stroke="none"/>
+<rect x="236.876" y="84.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="237.400" y="80.252" width="3.400" height="1.848" fill="#333" stroke="none"/>
+<rect x="240.800" y="86.940" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="243.300" y="79.000" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="246.600" y="79.900" width="4.200" height="4.800" fill="#333" stroke="none"/>
+<rect x="247.800" y="89.260" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="247.200" y="92.740" width="6.200" height="6.200" fill="#333" stroke="none"/>
+<rect x="253.100" y="78.100" width="12.800" height="6.600" fill="#333" stroke="none"/>
+<rect x="258.700" y="86.650" width="8.300" height="13.350" fill="#333" stroke="none"/>
 <circle cx="182.500" cy="90.000" r="2.200" class="thin" fill="#fff"/>
 <rect x="203.000" y="95.000" width="8.000" height="5.000" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>
 <rect x="106.000" y="93.000" width="68.000" height="7.000" style="fill:#d9c9a8;stroke:#000;stroke-width:0.25"/>
@@ -258,18 +275,18 @@
 <text x="149.000" y="138.200" font-size="3.5" text-anchor="middle" font-weight="700" class="t ">A</text>
 <rect x="147.00" y="134.40" width="4.6" height="5" class="thin" fill="none"/>
 <text x="145.500" y="138.200" font-size="2.8" text-anchor="end" class="t ">씰면 = 기준면</text>
-<rect x="230.0" y="165.5" width="180" height="76.0" class="thick" fill="#fff"/>
+<rect x="230.0" y="165.5" width="180" height="79.8" class="thick" fill="#fff"/>
 <text x="231.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">No</text>
 <text x="240.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">도번</text>
-<line x1="239.000" y1="165.500" x2="239.000" y2="241.500" class="thin"/>
+<line x1="239.000" y1="165.500" x2="239.000" y2="245.300" class="thin"/>
 <text x="270.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">품명</text>
-<line x1="269.000" y1="165.500" x2="269.000" y2="241.500" class="thin"/>
+<line x1="269.000" y1="165.500" x2="269.000" y2="245.300" class="thin"/>
 <text x="315.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">재질</text>
-<line x1="314.000" y1="165.500" x2="314.000" y2="241.500" class="thin"/>
+<line x1="314.000" y1="165.500" x2="314.000" y2="245.300" class="thin"/>
 <text x="351.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">수량</text>
-<line x1="350.000" y1="165.500" x2="350.000" y2="241.500" class="thin"/>
+<line x1="350.000" y1="165.500" x2="350.000" y2="245.300" class="thin"/>
 <text x="359.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">비고</text>
-<line x1="358.000" y1="165.500" x2="358.000" y2="241.500" class="thin"/>
+<line x1="358.000" y1="165.500" x2="358.000" y2="245.300" class="thin"/>
 <line x1="230.000" y1="169.300" x2="410.000" y2="169.300" class="thin"/>
 <text x="231.000" y="172.700" font-size="2.5" text-anchor="start" class="t ">1</text>
 <text x="240.000" y="172.700" font-size="2.5" text-anchor="start" class="t ">HMT500-M-101</text>
@@ -364,7 +381,7 @@
 <line x1="230.000" y1="218.700" x2="410.000" y2="218.700" class="thin"/>
 <text x="231.000" y="222.100" font-size="2.5" text-anchor="start" class="t ">14</text>
 <text x="240.000" y="222.100" font-size="2.5" text-anchor="start" class="t ">HMT500-P-207</text>
-<text x="270.000" y="222.100" font-size="2.2" text-anchor="start" class="t ">Screw M2x6 (2) + M2x12 (2)</text>
+<text x="270.000" y="222.100" font-size="2.2" text-anchor="start" class="t ">Screw M2x6 + M2x8 + M2x12 (2)</text>
 <text x="315.000" y="222.100" font-size="2.5" text-anchor="start" class="t ">A4 stainless</text>
 <text x="351.000" y="222.100" font-size="2.5" text-anchor="start" class="t ">4</text>
 <text x="359.000" y="222.100" font-size="2.5" text-anchor="start" class="t ">ISO 14580 / 7380</text>
@@ -395,7 +412,7 @@
 <text x="270.000" y="237.300" font-size="2.2" text-anchor="start" class="t ">Field harness, JST GH 1.25 8P</text>
 <text x="315.000" y="237.300" font-size="2.5" text-anchor="start" class="t ">PTFE AWG28</text>
 <text x="351.000" y="237.300" font-size="2.5" text-anchor="start" class="t ">1</text>
-<text x="359.000" y="237.300" font-size="2.5" text-anchor="start" class="t ">9 → J1 on 8, L60</text>
+<text x="359.000" y="237.300" font-size="2.5" text-anchor="start" class="t ">9 → J1 on 8, L40</text>
 <line x1="230.000" y1="237.700" x2="410.000" y2="237.700" class="thin"/>
 <text x="231.000" y="241.100" font-size="2.5" text-anchor="start" class="t ">19</text>
 <text x="240.000" y="241.100" font-size="2.5" text-anchor="start" class="t ">HMT500-P-210</text>
@@ -403,22 +420,31 @@
 <text x="315.000" y="241.100" font-size="2.5" text-anchor="start" class="t ">A4 stainless</text>
 <text x="351.000" y="241.100" font-size="2.5" text-anchor="start" class="t ">2</text>
 <text x="359.000" y="241.100" font-size="2.2" text-anchor="start" class="t ">Fill / vent ports in 4</text>
+<line x1="230.000" y1="241.500" x2="410.000" y2="241.500" class="thin"/>
+<text x="231.000" y="244.900" font-size="2.5" text-anchor="start" class="t ">20</text>
+<text x="240.000" y="244.900" font-size="2.5" text-anchor="start" class="t ">HMT500-W-3</text>
+<text x="270.000" y="244.900" font-size="2.2" text-anchor="start" class="t ">Chassis wire + M2 ring terminal</text>
+<text x="315.000" y="244.900" font-size="2.5" text-anchor="start" class="t ">PTFE AWG28</text>
+<text x="351.000" y="244.900" font-size="2.5" text-anchor="start" class="t ">1</text>
+<text x="359.000" y="244.900" font-size="2.2" text-anchor="start" class="t ">8 J5 → 12 top screw, L25</text>
 <text x="18.000" y="186.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="191.800" font-size="2.9" text-anchor="start" class="t ">1. 피드스루 없음. 압력 격벽 = ⑯ O링 + ⑮ 몰드 핀 + ⑤ 몰딩. ⑤ 상온경화 에폭시 1종: 1차 = ① Ø7 통로(34), 2차 = 하우징 안 전체 (약 25 cm³, ④ 안까지).</text>
 <text x="18.000" y="197.600" font-size="2.9" text-anchor="start" class="t ">2. ①–③ M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클) + O링 ⑩ (Ø29 H8/f7). ③만 돌려 체결 → ①·④·⑧·⑨·⑰·⑱은 돌지 않음 (하네스 꼬임 없음).</text>
 <text x="18.000" y="203.400" font-size="2.9" text-anchor="start" class="t ">3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF28 을 고정하고 ③을 돌림.</text>
 <text x="18.000" y="209.200" font-size="2.9" text-anchor="start" class="t ">4. O링 FKM 75, 조립 전 실리콘 그리스 얇게 도포. 나사·모서리 통과 시 O링 손상 주의 (C0.5 도입부).</text>
-<text x="18.000" y="215.000" font-size="2.9" text-anchor="start" class="t ">5. 조립: ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화) → ⑦ → ⑫ (플러그 Ø6 통과)</text>
-<text x="18.000" y="220.800" font-size="2.9" text-anchor="start" class="t ">    → ⑧ 장착 → ⑰을 J3에 꽂음 → ⑬ → ⑨에 ⑱ 납땜 후 ⑨를 ④에 체결 → ③을 ⑧ 위로 씌움 (나사 걸기 전) → ⑱ 플러그를 ③ 뒤 입구로 넣어 J1에 꽂음</text>
-<text x="18.000" y="226.600" font-size="2.9" text-anchor="start" class="t ">    → ①·④를 잡고 ③만 돌려 양쪽 동시 체결 → 2차 몰딩: ⑨를 위로 세워 ④ M3 구멍 하나로 진공 주입, 다른 하나로 공기 빠짐 → ⑲로 막음</text>
-<text x="18.000" y="232.400" font-size="2.9" text-anchor="start" class="t ">    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 필터를 ⑮ 위 나사(M10×1.0)에 체결. 몰딩 후 전자부 분해·수리 불가 (센서 프로브·필터만 교체).</text>
-<text x="18.000" y="238.200" font-size="2.9" text-anchor="start" class="t ">6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑥·⑦·⑮·⑯). ⑯ O링이 밀봉, ⑮ 몰드 핀 + ⑤ 몰딩이 전자부 격벽.</text>
-<text x="18.000" y="244.000" font-size="2.9" text-anchor="start" class="t ">7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.</text>
-<text x="18.000" y="249.800" font-size="2.9" text-anchor="start" class="t ">8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.</text>
-<text x="18.000" y="255.600" font-size="2.9" text-anchor="start" class="t ">9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 SM04B-SRSS-TB (옆 삽입). 1·2 = MK33, 3·4 = Pt1000 (2선식).</text>
-<text x="18.000" y="261.400" font-size="2.9" text-anchor="start" class="t ">    PTFE AWG30, 60 mm (⑮ 핀 → J3). ② = 두텍 SUS 오일 필터 390000-001100 (SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.</text>
-<text x="18.000" y="267.200" font-size="2.9" text-anchor="start" class="t ">10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 60 mm.</text>
-<text x="18.000" y="273.000" font-size="2.9" text-anchor="start" class="t ">    샤시: ⑧ J5 스프링 접점이 ③ 내면에 닿음. 몰딩 전 SWD 기록·기능 검사·1차 교정, 최종 교정은 2차 몰딩 경화 뒤.</text>
+<text x="18.000" y="215.000" font-size="2.9" text-anchor="start" class="t ">5. 조립 (조립 시뮬레이션 반영): ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화) → ⑦</text>
+<text x="18.000" y="220.800" font-size="2.9" text-anchor="start" class="t ">    → [벤치] ⑧을 ⑫ 홈에 끼우고 가로 나사 M2×12 ×2, ⑳ 샤시 선을 ⑧ J5에 납땜, SWD 기록·기능 검사 → ⑰ 플러그를 ⑫ 창으로 꿰고 ⑫+⑧을 ①에 넣음</text>
+<text x="18.000" y="226.600" font-size="2.9" text-anchor="start" class="t ">    → ⑫ 축 나사 M2×6 (아래) + M2×8 (위, ⑳ 링 단자 함께)를 뒤에서 조임 → ⑰을 J3에 꽂음 → ⑬ → ⑨에 ⑱ 납땜 후 ⑨를 ④에 체결</text>
+<text x="18.000" y="232.400" font-size="2.9" text-anchor="start" class="t ">    → ③을 ⑧ 위로 씌움 (턴버클 시작 위치, 7 mm 뒤) → ④를 옆으로 비켜 들고 공구 T-001로 ⑱ 플러그를 ③ 뒤 입구로 밀어 J1에 꽂음</text>
+<text x="18.000" y="238.200" font-size="2.9" text-anchor="start" class="t ">    → ①·④를 잡고 ③만 7바퀴 돌려 양쪽 동시 체결 (④가 14 mm 다가오며 ⑱이 ④ 안에서 접힘) → 2차 몰딩: ⑨ 위, ④ M3 구멍으로 진공 주입 → ⑲로 막음</text>
+<text x="18.000" y="244.000" font-size="2.9" text-anchor="start" class="t ">    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 필터를 ⑮ 위 나사(M10×1.0)에 체결. 몰딩 후 전자부 분해·수리 불가 (센서 프로브·필터만 교체).</text>
+<text x="18.000" y="249.800" font-size="2.9" text-anchor="start" class="t ">6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑥·⑦·⑮·⑯). ⑯ O링이 밀봉, ⑮ 몰드 핀 + ⑤ 몰딩이 전자부 격벽.</text>
+<text x="18.000" y="255.600" font-size="2.9" text-anchor="start" class="t ">7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.</text>
+<text x="18.000" y="261.400" font-size="2.9" text-anchor="start" class="t ">8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.</text>
+<text x="18.000" y="267.200" font-size="2.9" text-anchor="start" class="t ">9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 SM04B-SRSS-TB (옆 삽입). 1·2 = MK33, 3·4 = Pt1000 (2선식).</text>
+<text x="18.000" y="273.000" font-size="2.9" text-anchor="start" class="t ">    PTFE AWG30, 60 mm (⑮ 핀 → J3). ② = 두텍 SUS 오일 필터 390000-001100 (SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.</text>
+<text x="18.000" y="278.800" font-size="2.9" text-anchor="start" class="t ">10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 40 mm.</text>
+<text x="18.000" y="284.600" font-size="2.9" text-anchor="start" class="t ">    샤시: ⑳ AWG28 선 25 mm (⑧ J5 → M2 링 단자 → ⑫ 위 축 나사 → ① 금속 탭). 몰딩 전 SWD 기록·기능 검사·1차 교정, 최종 교정은 2차 몰딩 경화 뒤.</text>
 <text x="18.000" y="22.000" font-size="5" text-anchor="start" font-weight="700" class="t ">HMT500 조립도  —  반단면 (위: 단면, 아래: 외형)</text>
 <text x="18.000" y="29.000" font-size="3.0" text-anchor="start" class="t muted">오일 측(프로브)  ←                                                                                 →  하우징·커넥터</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
@@ -450,7 +476,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-000</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">F / 2026-09-29</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">G / 2026-09-30</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">부품표 참조</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

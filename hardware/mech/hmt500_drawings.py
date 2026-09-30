@@ -330,7 +330,7 @@ def draw_pcb_inside(v):
         pts += [(v.X(x0), v.Yu(w / 2)), (v.X(x1), v.Yu(w / 2))]
     pts += [(v.X(Pc["x"][1]), v.oy)]
     sh.poly(pts, "green", close=True)
-    for x, y, a, b, h, side in P.PCB_PARTS:
+    for x, y, a, b, h, side in P.pcb_part_boxes():
         if side > 0 and y + b / 2 > 0:
             y0 = max(0.0, y - b / 2)
             sh.a(f'<rect x="{v.X(x - a / 2):.3f}" y="{v.Yu(y + b / 2):.3f}" width="{v.s * a:.3f}" height="{v.s * (y + b / 2 - y0):.3f}" fill="#333" stroke="none"/>')
@@ -442,17 +442,19 @@ def sheet_assembly():
         "2. ①–③ M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클) + O링 ⑩ (Ø29 H8/f7). ③만 돌려 체결 → ①·④·⑧·⑨·⑰·⑱은 돌지 않음 (하네스 꼬임 없음).",
         "3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF28 을 고정하고 ③을 돌림.",
         "4. O링 FKM 75, 조립 전 실리콘 그리스 얇게 도포. 나사·모서리 통과 시 O링 손상 주의 (C0.5 도입부).",
-        "5. 조립: ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화) → ⑦ → ⑫ (플러그 Ø6 통과)",
-        "    → ⑧ 장착 → ⑰을 J3에 꽂음 → ⑬ → ⑨에 ⑱ 납땜 후 ⑨를 ④에 체결 → ③을 ⑧ 위로 씌움 (나사 걸기 전) → ⑱ 플러그를 ③ 뒤 입구로 넣어 J1에 꽂음",
-        "    → ①·④를 잡고 ③만 돌려 양쪽 동시 체결 → 2차 몰딩: ⑨를 위로 세워 ④ M3 구멍 하나로 진공 주입, 다른 하나로 공기 빠짐 → ⑲로 막음",
+        "5. 조립 (조립 시뮬레이션 반영): ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화) → ⑦",
+        "    → [벤치] ⑧을 ⑫ 홈에 끼우고 가로 나사 M2×12 ×2, ⑳ 샤시 선을 ⑧ J5에 납땜, SWD 기록·기능 검사 → ⑰ 플러그를 ⑫ 창으로 꿰고 ⑫+⑧을 ①에 넣음",
+        "    → ⑫ 축 나사 M2×6 (아래) + M2×8 (위, ⑳ 링 단자 함께)를 뒤에서 조임 → ⑰을 J3에 꽂음 → ⑬ → ⑨에 ⑱ 납땜 후 ⑨를 ④에 체결",
+        "    → ③을 ⑧ 위로 씌움 (턴버클 시작 위치, 7 mm 뒤) → ④를 옆으로 비켜 들고 공구 T-001로 ⑱ 플러그를 ③ 뒤 입구로 밀어 J1에 꽂음",
+        "    → ①·④를 잡고 ③만 7바퀴 돌려 양쪽 동시 체결 (④가 14 mm 다가오며 ⑱이 ④ 안에서 접힘) → 2차 몰딩: ⑨ 위, ④ M3 구멍으로 진공 주입 → ⑲로 막음",
         "    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 필터를 ⑮ 위 나사(M10×1.0)에 체결. 몰딩 후 전자부 분해·수리 불가 (센서 프로브·필터만 교체).",
         "6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑥·⑦·⑮·⑯). ⑯ O링이 밀봉, ⑮ 몰드 핀 + ⑤ 몰딩이 전자부 격벽.",
         "7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.",
         "8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.",
         "9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 SM04B-SRSS-TB (옆 삽입). 1·2 = MK33, 3·4 = Pt1000 (2선식).",
         "    PTFE AWG30, 60 mm (⑮ 핀 → J3). ② = 두텍 SUS 오일 필터 390000-001100 (SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.",
-        "10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 60 mm.",
-        "    샤시: ⑧ J5 스프링 접점이 ③ 내면에 닿음. 몰딩 전 SWD 기록·기능 검사·1차 교정, 최종 교정은 2차 몰딩 경화 뒤.",
+        "10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 40 mm.",
+        "    샤시: ⑳ AWG28 선 25 mm (⑧ J5 → M2 링 단자 → ⑫ 위 축 나사 → ① 금속 탭). 몰딩 전 SWD 기록·기능 검사·1차 교정, 최종 교정은 2차 몰딩 경화 뒤.",
     ]
     for i, n in enumerate(notes):
         sh.text(18, 186 + i * 5.8, n, 2.9 if i else 3.6, bold=(i == 0))
@@ -721,6 +723,11 @@ def sheet_pcb():
         yy = cyh + sgn * Hh["screw_pcd"] / 2 * s3
         sh.circle(cx, yy, Hh["screw_d"] / 2 * s3, "thick")
         sh.circle(cx, yy, Hh["cbore_d"] / 2 * s3, "thin")
+    w = Hh["window"]                    # W-1 플러그 창 (PCB 윗면 위, 앞뒤 관통)
+    sh.a(f'<rect x="{cx - w["wy"] / 2 * s3:.3f}" y="{cyh - w["z"][1] * s3:.3f}" width="{w["wy"] * s3:.3f}" '
+         f'height="{(w["z"][1] - w["z"][0]) * s3:.3f}" fill="#fff" class="thick"/>')
+    sh.leader(cx - w["wy"] / 2 * s3, cyh - w["z"][1] * s3 + 2, cx + 6, cyh + rO + 32,
+              f"창 {w['wy']:g} × {w['z'][1] - w['z'][0]:g} 관통 (홈 위 {w['z'][0]:g}–{w['z'][1]:g}) — PCB 끼운 뒤 W-1 플러그 통과")
     for y in Hh["cross"]["y"]:          # 가로 나사 (z 방향, 슬롯에 수직) — 숨은선
         xh = cx + y * s3
         for dx in (-1, 1):
@@ -731,7 +738,7 @@ def sheet_pcb():
     sh.dim_v_ext(cx, cx - rO - 9, cyh - Hh["screw_pcd"] / 2 * s3, cyh + Hh["screw_pcd"] / 2 * s3, f"PCD {Hh['screw_pcd']:g}")
     sh.dim_h(cx - Hh["cross"]["y"][0] * s3, cyh - rO + 6, cx + Hh["cross"]["y"][0] * s3, cyh - rO + 6, cyh - rO - 6, "10")
     sh.leader(cx + 5, cyh - Hh["screw_pcd"] / 2 * s3 - 3, cx + 22, cyh - rO - 14,
-              f"2×Ø{Hh['screw_d']} 관통, 카운터보어 Ø{Hh['cbore_d']:g} 깊이 {Hh['cbore_depth']:g} (M2×6 → 바디)")
+              f"2×Ø{Hh['screw_d']} 관통, 카운터보어 Ø{Hh['cbore_d']:g} 깊이 {Hh['cbore_depth']:g} (M2 → 바디, 위쪽은 링 단자 함께)")
     sh.leader(cx + rO - 3, cyh + sw, cx - 6, cyh + rO + 18, f"홈 폭 {Hh['slot_w']} (+0.1/0) 깊이 {s1 - s0:g}, 전폭")
     sh.leader(cx - rH * 0.7, cyh + rH * 0.7, cx - 18, cyh + rO + 10, f"Ø{Hh['hole_d']:g} 관통 (하네스 W-1 통과)")
     sh.text(cx - 50, cyh + rO + 26, "2×M2 가로 탭 (숨은선, 홈에 수직) — PCB 관통 고정 M2×12", 2.8)
@@ -774,7 +781,8 @@ def sheet_pcb():
              "1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.",
              "2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.",
              f"3. J3 = {Pc['jst']['part']}, 높이 {Pc['jst']['h']:g}, 홀더 뒤 12.5 (꽂을 공간). W-1(60 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.",
-             f"4. J1 = {Pc['gh']['part']}, 입구 뒤쪽(+x). 하네스 W-2(60 mm)로 M12 8P. J5 샤시 접점은 가장자리(x 30). 방열: 필요 시 갭필러.",
+             f"4. J1 = {Pc['gh']['part']}, 입구 뒤쪽(+x). 하네스 W-2({P.HARNESS2['length']:g} mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).",
+             "   PCB 폭 23 구간은 x 63.4에서 끝 (턴버클 끝 엔드캡 앞면 x 64와 틈 0.6). 링 뒤(x ≥ 59) 부품은 Ø20 안 (링을 뒤에서 끼움).",
              "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음."]
     for i, n in enumerate(notes):
         sh.text(18, 196 + i * 6.0, n, 2.9 if i else 3.6, bold=(i == 0))

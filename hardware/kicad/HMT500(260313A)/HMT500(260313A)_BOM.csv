@@ -23,7 +23,7 @@ Qty,References,Symbol,Value,Footprint,Verify
 1,J1,CONN_GH8,SM08B-GHS-TB,Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,
 1,J2,CONN_SWD,TC2030-IDC-NL,Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,
 1,J3,CONN_SH4,SM04B-SRSS-TB,Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,
-1,J5,CONN_CH,S1941-46R,Connector:SpringContact_Harwin_S1941-46R,
+1,J5,CONN_CH,CHASSIS wire,HMT500_260313A:SolderWire_Chassis_D0.6mm,
 1,L1,CMC,CMC 1mH 0.8A,Inductor_SMD:L_CommonMode_Wuerth_WE-SL2,
 1,L2,L,15uH,Inductor_SMD:L_Coilcraft_XAL4030-XXX,
 1,R1,R,4.7R 1W pulse,Resistor_SMD:R_MELF_MMB-0207,

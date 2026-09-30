@@ -205,11 +205,43 @@ def pcbs():
 def pcb_parts():
     out = None
     t = P.PCB["t"]
-    for x, y, a, b, h, side in P.PCB_PARTS:
+    for x, y, a, b, h, side in P.pcb_part_boxes():
         z = side * (t / 2 + h / 2)
         bx = cq.Workplane("XY").box(a, b, h).translate((x, y, z))
         out = bx if out is None else out.union(bx)
     return out
+
+
+def chassis_wire():
+    """샤시 선: PCB J5 구멍 (윗면) → 위로 → 홀더 위쪽 축 나사 머리 밑 링 단자 (x 18, y 0, z 8)."""
+    C = P.CHASSIS_WIRE
+    xp, yp = C["pad"]
+    if os.path.exists(P.PLACEMENT):
+        import json
+        for p in json.load(open(P.PLACEMENT, encoding="utf-8"))["parts"]:
+            if p["ref"] == "J5":
+                xp, yp = p["pads"][0]["xy"]
+    x_face = P.PCB_HOLDER["x"][1]
+    z = C["screw_z"]
+    path = [(xp, yp, P.PCB["t"] / 2), (xp, yp, 3.0), (x_face + 2.5, yp * 0.4, z - 1.5), (x_face + 0.9, 0, z - 2.2)]
+    w = _wires([path], 0.6)
+    lug = cq.Workplane("YZ").workplane(offset=x_face).center(0, z).circle(2.25).circle(1.1).extrude(0.8)
+    tab = cq.Workplane("XY").box(0.8, 2.4, 3.0).translate((x_face + 0.4, 0, z - 3.2))
+    return w.union(lug).union(tab)
+
+
+def push_tool():
+    """조립 공구 T-001: W-2 플러그 밀대. 끝(−x)이 GH 플러그 뒷면 양쪽 턱을 밀고, 가운데 홈으로 선 8가닥이 지나감.
+    그림 위치: 플러그를 J1에 다 밀어 넣은 순간 (x = 플러그 뒷면 62.5부터 뒤로)."""
+    T_ = P.PUSH_TOOL
+    x0 = P.HARNESS2["plug"]["x"][1]
+    zc = (P.HARNESS2["plug"]["z"][0] + P.HARNESS2["plug"]["z"][1]) / 2
+    bar = cq.Workplane("XY").box(T_["length"], T_["width"], T_["t"]).translate((x0 + T_["tip_len"] + T_["length"] / 2, 0, zc))
+    tip = cq.Workplane("XY").box(T_["tip_len"], T_["tip_w"], T_["tip_t"]).translate((x0 + T_["tip_len"] / 2, 0, zc))
+    s = bar.union(tip)
+    slot = cq.Workplane("XY").box(T_["slot_len"] + T_["tip_len"], T_["slot_w"], 10).translate(
+        (x0 + (T_["slot_len"] + T_["tip_len"]) / 2 - 0.01, 0, zc))
+    return s.cut(slot)
 
 
 def harness_paths():
@@ -290,6 +322,9 @@ def pcb_holder():
     for sgn in (1, -1):   # 바디 고정 나사 구멍 + 머리 자리
         s = s.cut(axial_hole(x0 - 0.1, x1 + 0.1, 0, sgn * Hh["screw_pcd"] / 2, Hh["screw_d"]))
         s = s.cut(axial_hole(x1 - Hh["cbore_depth"], x1 + 0.1, 0, sgn * Hh["screw_pcd"] / 2, Hh["cbore_d"]))
+    w = Hh["window"]          # W-1 플러그 통로 창 (PCB 윗면 위) — 홀더+PCB 먼저 조립 후 플러그 통과
+    s = s.cut(cq.Workplane("XY").box(x1 - x0 + 0.2, w["wy"], w["z"][1] - w["z"][0])
+              .translate(((x0 + x1) / 2, 0, (w["z"][0] + w["z"][1]) / 2)))
     c = Hh["cross"]
     for y in c["y"]:      # PCB 가로 고정 나사 (z 방향)
         s = s.cut(cq.Workplane("XY").center(c["x"], y).circle(c["d"] * 0.8 / 2).extrude(30).translate((0, 0, -15)))
@@ -331,6 +366,7 @@ PARTS = [
     ("W-2_plug", harness2_plug, (0.93, 0.90, 0.80)),
     ("M-105_holder", pcb_holder, (0.85, 0.72, 0.45)),
     ("M-106_ring", pcb_ring, (0.85, 0.72, 0.45)),
+    ("W-3_chassis_wire", chassis_wire, (0.30, 0.65, 0.25)),
     ("P-204_connector", connector, (0.35, 0.35, 0.38)),
 ]
 
@@ -346,6 +382,7 @@ def main():
             cq.exporters.export(s, os.path.join(OUT, f"HMT500-{name}.step"))
         asm.add(s, name=name, color=cq.Color(*col))
     asm.save(os.path.join(OUT, "HMT500_assembly.step"))
+    cq.exporters.export(push_tool(), os.path.join(OUT, "HMT500-T-001_push_tool.step"))   # 조립 공구 (제품 아님)
     comp = cq.Workplane("XY").newObject([cq.Compound.makeCompound([s.val() for s in shapes.values()])])
     bb = comp.val().BoundingBox()
     print(f"assembly bbox x {bb.xmin:.1f}..{bb.xmax:.1f} (length {bb.xlen:.1f}), dia {bb.ylen:.1f}")

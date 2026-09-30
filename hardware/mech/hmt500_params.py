@@ -28,8 +28,8 @@ Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두
   → 피드스루를 바디 뒤쪽(Ø22 카운터보어 바닥) Ø8 H7 자리에 뒤에서 넣고 뒤에서 레이저 용접.
 """
 
-DRAWING_REV = "F"
-DATE = "2026-09-29"
+DRAWING_REV = "G"
+DATE = "2026-09-30"
 
 # ── 보호캡 = 두텍 SUS PROBE OIL FILTER (품번 390000-001100, 도면 2020-06-08, SUS304) ──
 # 원 도면 좌표(끝 0 → 열린 끝 32)를 제품 x로: x = x_tip + xf. 열린 끝이 커넥터 플랜지 앞면(x=-30)에 닿음
@@ -123,8 +123,8 @@ POTTING2 = dict(zones=[(12.0, 26.0, 22.0), (26.0, 64.0, 27.0), (64.0, 73.0, 22.0
 # ── PCB E-301: 축 방향 1장, 축을 지나는 평면(z=0)에 세움. 폭은 y 방향 ──
 PCB = dict(t=1.6, x=(14.5, 71.0),
            sections=[(14.5, 26.0, 18.0),    # 바디 카운터보어 Ø22 안
-                     (26.0, 64.0, 23.0),    # 하우징 Ø27 안
-                     (64.0, 71.0, 18.0)],   # 엔드캡 카운터보어 Ø22 안
+                     (26.0, 63.4, 23.0),    # 하우징 Ø27 안 (끝 63.4: 턴버클 끝 엔드캡 앞면 x 64와 틈 0.6 — 조립 시뮬레이션 ③)
+                     (63.4, 71.0, 18.0)],   # 엔드캡 카운터보어 Ø22 안
            corner_r=1.0,
            holes=[(16.25, 5.0), (16.25, -5.0)], hole_d=2.2,   # 홀더 가로 나사 M2 (x, y)
            # J3 센서 하네스 헤더: JST SH 1.0 mm 4P 옆 삽입(직각, SM04B-SRSS-TB), 윗면, 입구 = 앞(-x, 센서 쪽)
@@ -154,20 +154,46 @@ PCB_PARTS = [
     (61.5, -4.5, 3.0, 3.0, 1.0, -1),   # TPS26611
     (61.5, 5.5, 5.0, 6.0, 1.7, -1),    # THVD2450 SOIC8
     (67.5, 0.0, 5.0, 4.0, 2.0, -1),    # CM 초크
-    (30.0, 10.5, 3.0, 2.0, 1.5, 1),    # J5 샤시 스프링 접점 (가장자리 → 하우징 Ø27 내면)
 ]
+PLACEMENT = __import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)),
+                                       "..", "kicad", "HMT500(260313A)", "placement.json")
+
+
+def pcb_part_boxes():
+    """PCB 부품 외형 (x, y, 가로, 세로, 높이, 면): KiCad 실제 배치(placement.json)가 있으면 그것, 없으면 PCB_PARTS 개략."""
+    import json
+    import os
+    if not os.path.exists(PLACEMENT):
+        return PCB_PARTS
+    out = []
+    with open(PLACEMENT, encoding="utf-8") as f:
+        parts = json.load(f)["parts"]
+    for p in parts:
+        if p["h"] > 0:
+            x0, y0, x1, y1 = p["fab"]
+            out.append(((x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0, p["h"], 1 if p["side"] == "T" else -1))
+    return out
 
 PCB_HOLDER = dict(x=(12.2, 18.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(14.5, 18.0),   # Ø6: 하네스 W-1 전선 통과
-                  screw_pcd=16.0, screw_d=2.2, cbore_d=4.0, cbore_depth=1.8,
+                  # 창: PCB를 먼저 끼운 상태에서 W-1 플러그(5.0 × 2.8)가 지나가는 통로 (PCB 윗면 위, 조립 시뮬레이션 ①②)
+                  window=dict(wy=5.6, z=(0.85, 4.05)),
+                  # 축 나사 자리: Ø5.2 × 2.2 — 위쪽 나사는 샤시 선 M2 링 단자(바깥 Ø4.5, 두께 0.8)를 함께 조임
+                  screw_pcd=16.0, screw_d=2.2, cbore_d=5.2, cbore_depth=2.2,
                   cross=dict(x=16.25, y=(5.0, -5.0), d=2.2, tap="M2"),
                   name="PCB holder (PEEK or PA66-GF30)")
+# 샤시 접지 선: PCB J5 납땜 구멍 → AWG 28 PTFE → M2 링 단자 → 홀더 위쪽 축 나사 (금속 바디 탭). 스프링 접점 J5 대체
+CHASSIS_WIRE = dict(pad=(19.5, 0.0), screw_z=8.0, length=25.0, wire="AWG 28 PTFE (UL1213 계열), 녹/황 또는 녹색",
+                    terminal="M2 링 단자 (절연 없음, AWG 28–22, 바깥 Ø4.5 이하, 두께 0.8 이하)", screw="M2×8 (링 단자 쪽)")
+# 조립 공구: W-2 플러그 밀대 (하우징 뒤 입구 → J1, 깊이 약 20 mm). 3D 프린트
+PUSH_TOOL = dict(length=70.0, width=14.0, t=2.4, slot_w=10.4, slot_len=55.0, tip_w=12.4, tip_t=3.0, tip_len=4.0,
+                 name="Assembly tool T-001: W-2 plug push bar (3D print, PA12 or resin)")
 PCB_RING = dict(x=(59.0, 63.0), od=26.4, id=20.0, slot_w=1.7, slot_y=11.6,
                 name="PCB rear support ring (PEEK or PA66-GF30)")
 # M12 하네스 W-2: J1 GH 플러그 (입구 +x) → 엔드캡 카운터보어 → M12 커넥터 뒤 핀 8개 (납땜 + 수축튜브)
 HARNESS2 = dict(plug=dict(x=(58.5, 62.5), y=(-5.9, 5.9), z=(0.8, 4.3)),   # GHR-08V-S 꽂힌 상태 외형 (개략)
-                wire_d=0.6, pitch=1.25, wire_z=3.3, conn_pcd=5.0, length=60.0,
+                wire_d=0.6, pitch=1.25, wire_z=3.3, conn_pcd=5.0, length=40.0,   # 40: 꽂을 때 약 35 필요 (조립 시뮬레이션 ⑥)
                 housing="JST GHR-08V-S", contact="JST SSHL-002T-P0.2 ×8 (AWG 30–26)",
-                wire="AWG 28 PTFE 절연 (UL1213 계열), 8심, 길이 60 ±2",
+                wire="AWG 28 PTFE 절연 (UL1213 계열), 8심, 길이 40 ±2",
                 name="Field harness W-2, JST GH 1.25 mm 8P → M12 8P (pin n = pin n)")
 # 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜) → Ø7 관통 통로 (에폭시 몰딩) → JST SH 플러그 → PCB J3
 HARNESS = dict(plug=dict(x=(26.5, 30.5), y=(-2.5, 2.5), z=(0.8, 3.6)),   # SHR-04V-S 꽂힌 상태 외형 (개략), J3 앞
@@ -206,10 +232,11 @@ PARTS = [
     ("11", "HMT500-P-206", "O-ring for connector", "FKM", 1, "Per connector spec"),
     ("12", "HMT500-M-105", "PCB holder", "PEEK / PA66-GF30", 1, "Machined or molded"),
     ("13", "HMT500-M-106", "PCB rear support ring", "PEEK / PA66-GF30", 1, "Machined or molded"),
-    ("14", "HMT500-P-207", "Screw M2x6 (2) + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
+    ("14", "HMT500-P-207", "Screw M2x6 + M2x8 + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
     ("15", "HTX99R-SC", "Sensor connector 4P, M10x0.75 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
     ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "15 → J3 on 8, L60"),
-    ("18", "HMT500-W-2", "Field harness, JST GH 1.25 8P", "PTFE AWG28", 1, "9 → J1 on 8, L60"),
+    ("18", "HMT500-W-2", "Field harness, JST GH 1.25 8P", "PTFE AWG28", 1, "9 → J1 on 8, L40"),
     ("19", "HMT500-P-210", "Set screw M3x3 + sealant", "A4 stainless", 2, "Fill / vent ports in 4"),
+    ("20", "HMT500-W-3", "Chassis wire + M2 ring terminal", "PTFE AWG28", 1, "8 J5 → 12 top screw, L25"),
 ]

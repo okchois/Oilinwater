@@ -163,7 +163,10 @@ class MechTest(unittest.TestCase):
         self.assertLess(G["h"], lim[1][5])
         self.assertLess(math.hypot(G["y"][1], Pc["t"] / 2 + G["h"]), P.HOUSING["id"] / 2)
         route = (P.CONNECTOR["inner"]["x"][0] - pl["x"][1]) + 2 * W["wire_z"] + W["conn_pcd"]
-        self.assertLessEqual(route + 30.0, W["length"])                # 엔드캡 구멍으로 꽂을 여유
+        self.assertLessEqual(route, W["length"])                         # 체결 후 경로
+        # 꽂을 때: 하우징 턴버클 시작 위치(체결 길이만큼 뒤) 뒤 끝까지 + 엔드캡을 옆으로 비켜 들 15 mm
+        x_rear_pre = P.HOUSING["x"][1] + P.HOUSING["thread_len"]
+        self.assertLessEqual(x_rear_pre - pl["x"][1] + 15.0, W["length"])
         sys.path.insert(0, os.path.join(ROOT, "hardware", "kicad"))
         import gen_hmt500 as g
         j1 = next(S.nets["J1"] for S in g.SHEETS if "J1" in S.nets)

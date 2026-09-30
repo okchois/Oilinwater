@@ -103,7 +103,7 @@ ic("CONN_GH8", right=[("8", "V+", P), ("6", "GND", P), ("4", "OUT1", P), ("5", "
                       ("2", "RS485_B", P), ("1", "NC", P), ("7", "NC", P)],
    w=6, prefix="J", desc="JST GH 1.25 mm 8-pin side-entry header. Harness W-2 to M12 8P field connector (pin n = M12 pin n)")
 ic("CONN_CH", right=[("1", "CHASSIS", P)], w=6, prefix="J",
-   desc="PCB-to-housing chassis contact: Harwin S1941-46R SMT spring contact (7.25 mm free height)")
+   desc="Chassis wire solder hole: AWG 28 wire to an M2 ring terminal under a PCB-holder screw (metal body)")
 ic("CMC", left=[("1", "", P), ("2", "", P)], right=[("4", "", P), ("3", "", P)], w=4, prefix="L",
    desc="2-line common mode choke")
 ic("TPS2660", left=[("1", "IN", PI), ("2", "IN", P), ("7", "~{SHDN}", I), ("3", "UVLO", I), ("4", "NC", NC),
@@ -505,7 +505,7 @@ for num, net in (("4", "OUT1_EXT"), ("5", "OUT2_EXT"), ("3", "RS485_A_EXT"), ("2
     S.gl(net, S.P("J1", num), "R", length=1)
 S.nc(S.P("J1", "1"))
 S.nc(S.P("J1", "7"))
-S.place("J5", "CONN_CH", "S1941-46R", "Connector:SpringContact_Harwin_S1941-46R", 16, 43, nets={"1": "CHASSIS"})
+S.place("J5", "CONN_CH", "CHASSIS wire", "HMT500_260313A:SolderWire_Chassis_D0.6mm", 16, 43, nets={"1": "CHASSIS"})
 sh = S.P("J5", "1")
 S.v2("R2", "R", "1M", FP["R0603"], 36, 44, "CHASSIS", "GND")
 S.v2("C3", "C", "4.7n 2kV Y2", FP["C1812"], 42, 44, "CHASSIS", "GND")
@@ -536,7 +536,7 @@ part_table(S, 6, 58, [
     ("D2", "SMBJ33CA", "입력 서지 2단 클램프", "TVS 양방향 600 W, 33 V — eFuse 정격 이하로 제한"),
     ("GDT1", "2035-23-SM", "회로 GND–외함 서지 방전", "Bourns 2전극 SMD GDT 230 V, Ø5 × 4.4 mm — 선–대지 서지 때만 도통"),
     ("C3, R2", "4.7n Y2 / 1M", "GND–외함 고주파 결합", "Y2 안전 콘덴서 + 1 MΩ 정전기 방전 경로"),
-    ("J5", "S1941-46R", "PCB–하우징 접지 접점", "Harwin SMT 스프링 접점 (자유 높이 7.25 mm), PCB 가장자리 → 하우징 Ø27 내면"),
+    ("J5", "CHASSIS wire", "PCB–바디 접지 선", "AWG 28 선 약 25 mm → M2 링 단자 → PCB 홀더 축 나사(금속 바디 탭). 조립 시뮬레이션 결과 스프링 접점 대체"),
 ])
 
 # ════════════════════════════ 2. 전원 ════════════════════════════

@@ -23,7 +23,7 @@
 22,커넥터,J1,1,SM08B-GHS-TB,JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,JST,SM08B-GHS-TB,"GH 1.25 mm 8핀 헤더, 옆 삽입(직각) SMD (M12 하네스 W-2, 정격 −25~+85 °C)",0.35,0.8,제안
 23,생산,J2,1,TC2030-IDC-NL,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Tag-Connect,(PCB 패드만),SWD 기록용 패드 — 부품 실장 없음,0.0,0.0,확정
 24,커넥터,J3,1,SM04B-SRSS-TB,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB,"SH 1.0 mm 4핀 헤더, 옆 삽입(직각) SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안
-25,커넥터,J5,1,S1941-46R,SpringContact_Harwin_S1941-46R,Harwin,S1941-46R,"SMT 스프링 접점, 자유 높이 7.25 mm — PCB 가장자리 → 하우징 Ø27 내면 (압축량은 조립 시뮬레이션으로 확인)",0.15,0.4,제안
+25,커넥터,J5,1,CHASSIS wire,SolderWire_Chassis_D0.6mm,-,PCB 납땜 구멍 (부품 없음),샤시 선 AWG 28 PTFE 약 25 mm + M2 링 단자 → 홀더 축 나사. 선·단자는 기구 부품표(JLCMC),0.0,0.0,확정
 26,보호,L1,1,CMC 1mH 0.8A,L_CommonMode_Wuerth_WE-SL2,Würth,744222,"WE-SL2 공통모드 초크 2 × 1 mH, 0.8 A, 310 mΩ, 9.2 × 6 × 5 mm (권선 1–4, 2–3: 데이터시트로 확인)",0.8,1.5,제안
 27,전원,L2,1,15uH,L_Coilcraft_XAL4030-XXX,Coilcraft,XGL4030-153MEC,"파워 인덕터 15 µH, 4 × 4 × 3.1 mm (XAL4030 풋프린트) — LMR36006 5 V·1 MHz 권장값",0.3,0.7,제안
 28,보호,R1,1,4.7R 1W pulse,R_MELF_MMB-0207,Vishay,MMB02070C4708FB200,"MELF 0207 박막 4.7 Ω 1% 1 W, AEC-Q200 (입력 직렬, 1단·2단 서지 분담)",0.1,0.3,확정

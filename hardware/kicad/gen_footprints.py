@@ -7,6 +7,7 @@
   - Texas_RNX0012A_VQFN-HR-12_2x3mm : LMR36006 (TI SNVSB48C, RNX0012A Example Board Layout)
   - GDT_Bourns_2035-xx-SM           : 2전극 SMD GDT Ø5 × 4.4 (Bourns 2035-xx-SM 권장 패드 4.0 피치, 1.3 × 5.6)
   - Texas_DRB0008A_PadFloat          : TVS3301 — 방열 패드는 떠 있어야 함 (데이터시트 표 7-1) → 비아·뒷면 패드 제거 (9번 패드는 심볼 핀이 없어 넷 없음)
+  - SolderWire_Chassis_D0.6mm        : 샤시 선(AWG 28–26) 납땜 구멍 1개 — 홀더 축 나사의 링 단자로 가는 선
 """
 
 import os
@@ -119,7 +120,28 @@ def drb_padfloat():
     return fp
 
 
+def solder_wire():
+    """샤시 선 납땜 PTH 1개: 드릴 0.6 (AWG 26 도체 0.40 / AWG 28 0.32 + 여유), 패드 Ø1.6."""
+    fp = new_fp("SolderWire_Chassis_D0.6mm", "Single solder hole for chassis wire AWG 28-26 (drill 0.6, pad 1.6)")
+    fp.SetAttributes(pcbnew.FP_THROUGH_HOLE)
+    p = pcbnew.PAD(fp)
+    p.SetNumber("1")
+    p.SetAttribute(pcbnew.PAD_ATTRIB_PTH)
+    p.SetShape(pcbnew.PAD_SHAPE_CIRCLE)
+    p.SetSize(vec(1.6, 1.6))
+    p.SetDrillSize(vec(0.6, 0.6))
+    p.SetPosition(vec(0, 0))
+    p.SetPos0(vec(0, 0))
+    p.SetLayerSet(pcbnew.PAD.PTHMask())
+    fp.Add(p)
+    rect(fp, pcbnew.F_CrtYd, -1.3, -1.3, 1.3, 1.3, 0.05)
+    rect(fp, pcbnew.F_Fab, -0.8, -0.8, 0.8, 0.8, 0.1)
+    fp.Reference().SetPosition(vec(0, -2.0))
+    fp.Value().SetPosition(vec(0, 2.0))
+    return fp
+
+
 if __name__ == "__main__":
-    for f in (rnx0012a(), gdt_2035(), drb_padfloat()):
+    for f in (rnx0012a(), gdt_2035(), drb_padfloat(), solder_wire()):
         pcbnew.FootprintSave(LIB, f)
         print(f.GetFPID().GetLibItemName(), len(f.Pads()), "pads")
