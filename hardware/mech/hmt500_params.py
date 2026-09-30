@@ -21,7 +21,10 @@ Rev D (2026-09-29): 센서 접속을 두텍 HTX99R 센서 커넥터(ref/ STEP)�
   커넥터 뒤 핀 → 하네스 W-1 (Ø7 관통 통로, 케이블만) → 전자부 J3. (Rev F: 피드스루 없음)
   커넥터 플랜지 Ø11을 수용하려고 노출 프로브·보호캡 Ø12 → Ø16 (노출 길이 34, G1/2, 전장 144 유지).
 
-Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두텍 확인).
+Rev G (2026-09-30): HTX99R 위·아래 나사 모두 M10×1.0 (두텍 확인, 아래 Rev E의 M10×0.75 정정) → 바디 암나사 M10×1.0-6H.
+  조립 시뮬레이션 반영(A–F): 홀더 창, PCB 계단 63.4, 샤시 선, W-2 40 mm, 밀대 T-001.
+
+Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두텍 확인 — Rev G에서 M10×1.0으로 정정).
   아래 나사 → 바디 앞 M10×0.75 암나사에 체결 (O링은 나사–플랜지 사이 홈, Ø10 H8 밀봉면). 맞변 7로 잡고 조임.
   위 나사 → 보호캡 체결 (캡 Ø12로 복귀, EE364와 같은 외경). 바디 앞 튜브는 플랜지 자리 때문에 Ø14.
   배선 꼬임 방지: 커넥터 핀에 선을 먼저 납땜 → 커넥터 체결(선 끝 자유) → 선을 뒤로 빼 피드스루에 납땜
@@ -62,7 +65,7 @@ CAP["profile"] = [
 SENSOR_CONN = dict(step="ref/HTX99R_Sensor_Probe_Sensor_Connector.STEP", x0=-22.0,
                    body_d=10.0, flange_d=11.0, flange_y=(7.0, 8.0), len=15.0, pin_y=-3.0,
                    oring_groove=dict(d=8.2, y=(5.5, 7.0)), socket_face_y=15.0, sock_depth=7.9,
-                   thread_lower=dict(y=(0.5, 5.5), spec="M10x0.75"),   # → 바디 암나사
+                   thread_lower=dict(y=(0.5, 5.5), spec="M10x1.0"),    # → 바디 암나사 (두텍 확인 2026-09-30: 위·아래 모두 M10×1.0)
                    thread_upper=dict(y=(9.5, 15.0), spec="M10x1.0"),   # → 필터 캡 (390000-001100 도면 M10x1.0)
                    name="HTX99R sensor connector 4P (DOTECH)")
 CONN_ORING = dict(id=8.0, cs=1.2, name="O-ring 8 x 1.2 FKM (connector seal in Ø10 H8)")
@@ -92,7 +95,7 @@ BODY = dict(
     # 내부
     conn_cbore=dict(x=(-30.0, -29.0), d=11.2),                      # 커넥터 플랜지 자리
     conn_land=dict(x=(-29.0, -27.5), d=10.0, fit="H8"),              # O링 밀봉면 (커넥터 홈 Ø8.2)
-    conn_thread=dict(x=(-27.5, -22.0), d=9.188, d_major=10.0, thread="M10x0.75-6H"),   # 커넥터 아래 나사
+    conn_thread=dict(x=(-27.5, -22.0), d=8.917, d_major=10.0, thread="M10x1.0-6H"),    # 커넥터 아래 나사 (M10×1.0, 골지름 8.917)
     channel=dict(x=(-22.0, 12.0), d=7.0),                            # 관통 — 센서 하네스 W-1만 지나감 (Rev F)
     cbore=dict(x=(12.0, 26.0), d=22.0),
     holder_taps=dict(n=2, d=2.0, depth=5.0, pcd=16.0, thread="M2-6H"),   # 홀더 고정 나사 (카운터보어 바닥 x=12)
@@ -233,7 +236,7 @@ PARTS = [
     ("12", "HMT500-M-105", "PCB holder", "PEEK / PA66-GF30", 1, "Machined or molded"),
     ("13", "HMT500-M-106", "PCB rear support ring", "PEEK / PA66-GF30", 1, "Machined or molded"),
     ("14", "HMT500-P-207", "Screw M2x6 + M2x8 + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
-    ("15", "HTX99R-SC", "Sensor connector 4P, M10x0.75 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
+    ("15", "HTX99R-SC", "Sensor connector 4P, M10x1.0 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
     ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "15 → J3 on 8, L60"),
     ("18", "HMT500-W-2", "Field harness, JST GH 1.25 8P", "PTFE AWG28", 1, "9 → J1 on 8, L40"),

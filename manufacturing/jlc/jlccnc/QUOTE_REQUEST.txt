@@ -11,24 +11,32 @@ the ISO fit band, so machining to the STEP within +/-0.05 is acceptable:
   (The Korean drawings show the ISO fit symbols f7/H8 on nominal 29 / 10.)
 
 MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
-  M-101, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
+  M-101, M-102, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
   M-105, M-106 = POM (White) for this prototype lot (PEEK not offered online).
 
 Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
-and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
+and in order_jlccnc_EN.csv. Sheet M-102~104 carries three parts: cap M-102 (top), housing M-103, end cap M-104.
 Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
 
 HMT500-M-101  Process body  x5
   3D: HMT500-M-101_body_SUS304.step   2D: HMT500-M-101_drawing_revG_SUS304.pdf
-  Material: Stainless steel 316L (1.4404); 316 acceptable (wetted part)
+  Material: Stainless steel SUS304 for this prototype lot (316L for production)
   Finish: As machined, deburr, passivation (ASTM A967)
-  Threads: G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, thread length 5.5 (ends 8.0 from front face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); 2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16
+  Threads: G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x1.0-6H internal, thread length 5.5 (ends 8.0 from front face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); 2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16
   Tolerances: O-ring seat dia 29 f7; connector seal bore dia 10 H8; sealing faces Ra 0.8; others ISO 2768-mK
   Note: Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer.
 
+HMT500-M-102  Sensor protection cap  x5
+  3D: HMT500-M-102_cap_SUS304.step   2D: HMT500-M-102_drawing_revG_SUS304.pdf
+  Material: Stainless steel SUS304 (wetted, oil)
+  Finish: As machined, deburr inside and outside of all holes, passivation
+  Threads: M10x1.0-6H internal (fine pitch 1.0), depth 8.5 from the open end
+  Tolerances: OD 12; bore dia 8; 20x dia 3 radial holes (4 rows at 6/11/16/21 mm from the tip x 5 holes at 72 deg, same angles each row); tip hole dia 3; tip chamfer C1; open-end relief dia 11 x 1; others ISO 2768-mK
+  Note: Filter cap screwed onto the sensor connector. Drawing sheet M-102~104 (cap at top).
+
 HMT500-M-103  Housing tube  x5
   3D: HMT500-M-103_housing_SUS304.step   2D: HMT500-M-103_drawing_revG_SUS304.pdf
-  Material: Stainless steel 316L (1.4404); 304 acceptable (not wetted)
+  Material: Stainless steel SUS304
   Finish: As machined, deburr, passivation; outer laser marking if available (text supplied later)
   Threads: Front: M28x1-6H internal, RIGHT hand, length 7; Rear: M28x1-LH-6H internal, LEFT hand, length 7
   Tolerances: O-ring bores dia 29 H8 at both ends (length 4), Ra 0.8, C0.5 lead-in chamfers; others ISO 2768-mK
@@ -36,7 +44,7 @@ HMT500-M-103  Housing tube  x5
 
 HMT500-M-104  End cap  x5
   3D: HMT500-M-104_endcap_SUS304.step   2D: HMT500-M-104_drawing_revG_SUS304.pdf
-  Material: Stainless steel 316L (1.4404); 304 acceptable
+  Material: Stainless steel SUS304
   Finish: As machined, deburr, passivation
   Threads: M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal through (connector, TENTATIVE - will be confirmed with the connector part number; please quote as M16x1.5); 2x M3 through (fill/vent ports, r10 at 90/270 deg)
   Tolerances: O-ring seat dia 29 f7 with groove, Ra 0.8; wrench flats AF28; others ISO 2768-mK
@@ -44,7 +52,7 @@ HMT500-M-104  End cap  x5
 
 HMT500-M-105  PCB holder  x5
   3D: HMT500-M-105_holder_POM-White.step   2D: HMT500-M-105_drawing_revG_POM-White.pdf
-  Material: PEEK natural; POM acceptable for this prototype lot
+  Material: POM (White) for this prototype lot (PEEK for production)
   Finish: As machined, deburr
   Threads: 2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2
   Tolerances: OD 21.6 (0/-0.1); slot width 1.7 (+0.1/0) depth 3.5; window 5.6 x 3.2 (+0.1/0); others ISO 2768-mK
@@ -52,7 +60,7 @@ HMT500-M-105  PCB holder  x5
 
 HMT500-M-106  PCB rear support ring  x5
   3D: HMT500-M-106_ring_POM-White.step   2D: HMT500-M-106_drawing_revG_POM-White.pdf
-  Material: PEEK natural; POM acceptable for this prototype lot
+  Material: POM (White) for this prototype lot (PEEK for production)
   Finish: As machined, deburr
   Threads: -
   Tolerances: OD 26.4 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4
@@ -63,7 +71,7 @@ General:
 - Threads are NOT modelled in the STEP files (cosmetic): internal threads are modelled at the minor diameter,
   external threads at the major diameter. Please cut threads per the callouts above and on the drawings.
 - IMPORTANT: M-103 rear thread and M-104 thread are LEFT hand (M28x1-LH). M-103 front and M-101 are RIGHT hand.
-- Fine / pipe threads: G1/2-A, M28x1, M10x0.75, M16x1.5. If a thread is not in your standard list, please advise.
+- Fine / pipe threads: G1/2-A, M28x1, M10x1.0, M16x1.5. If a thread is not in your standard list, please advise.
 - O-ring sealing surfaces (dia 29 f7 / H8, dia 10 H8): Ra 0.8, no tool marks across the seal.
 - Material certificate EN 10204 3.1 for 316L (M-101 wetted part) if available.
 - Please send DFM questions before machining.

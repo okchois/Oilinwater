@@ -27,38 +27,44 @@ import hmt500_params as P  # noqa: E402
 SETS = 5                       # 시제품 세트 수 (가정)
 REV = P.DRAWING_REV
 DWG_PDF = os.path.join(MECH, "out", "HMT500_mechanical_drawings.pdf")
-DWG_PAGE = {"M-101": 2, "M-103": 3, "M-104": 3, "M-105": 4, "M-106": 4}   # 도면 PDF 쪽 번호
+DWG_PAGE = {"M-101": 2, "M-102": 3, "M-103": 3, "M-104": 3, "M-105": 4, "M-106": 4}   # 도면 PDF 쪽 번호
 
-B, H, E, Hh, R = P.BODY, P.HOUSING, P.ENDCAP, P.PCB_HOLDER, P.PCB_RING
+B, H, E, Hh, R, C = P.BODY, P.HOUSING, P.ENDCAP, P.PCB_HOLDER, P.PCB_RING, P.CAP
 
 # ── JLCCNC: 가공품 ──
 CNC = [
     dict(part="HMT500-M-101", name="Process body", fn=M.body, step="HMT500-M-101_body.step",
-         material="SUS316L (1.4404)", alt="SUS316 — 접액부이므로 316 계열 유지", finish="As machined + 부동태화 (ASTM A967), 버 제거",
+         material="SUS304 (이번 시제품, JLCCNC 온라인 선택지)", alt="양산: SUS316L (1.4404) — 접액부", finish="As machined + 부동태화 (ASTM A967), 버 제거",
          threads=f"{B['gthread']['thread']} 수나사 (x −14~−2); {B['mthread']['thread']} 수나사; "
                  f"{B['conn_thread']['thread']} 암나사 깊이 {B['conn_thread']['x'][1] - B['conn_thread']['x'][0]:g}; "
                  f"2×{B['holder_taps']['thread']} 깊이 {B['holder_taps']['depth']:g} (카운터보어 바닥, PCD {B['holder_taps']['pcd']:g})",
          tol="O링 자리 Ø29 f7, 커넥터 밀봉면 Ø10 H8, 나머지 ISO 2768-mK, 밀봉면 Ra 0.8",
          note="Ø7 관통 통로 길이 34 (깊은 구멍). 육각 AF27. 1개/세트"),
+    dict(part="HMT500-M-102", name="Sensor protection cap (oil filter)", fn=M.cap, step="HMT500-M-102_cap.step",
+         material="SUS304 (두텍 원도면 390000-001100 재질)", alt="SUS316L (접액부 통일 시)", finish="As machined + 부동태화, 버 제거 (구멍 안쪽 포함)",
+         threads=f"{C['thread']} 암나사 깊이 {C['thread_x'][1] - C['thread_x'][0]:g} (HTX99R 위 나사, 두텍 확인)",
+         tol=f"외경 Ø{C['od']:g}, 센서실 Ø{C['bore']:g}, 측면 {len(C['holes'])}×Ø{C['hole_d']:g} (4줄 × 5개, 72°), 끝 Ø{C['tip_hole']:g}, "
+             f"끝 C{C['chamfer']:g}, 열린 끝 Ø{C['rear_relief']['d']:g} × 1, 나머지 ISO 2768-mK",
+         note="두텍 기존품 390000-001100 (도면 2020-06-08)과 같은 형상. 1개/세트"),
     dict(part="HMT500-M-103", name="Housing tube", fn=M.housing, step="HMT500-M-103_housing.step",
-         material="SUS316L (1.4404)", alt="SUS304 (비접액부) 가능", finish="As machined + 부동태화, 외면 레이저 마킹 (문안 별도)",
+         material="SUS304 (이번 시제품)", alt="양산: SUS316L 또는 SUS304 (비접액부)", finish="As machined + 부동태화, 외면 레이저 마킹 (문안 별도)",
          threads=f"앞 {H['thread']} (오른나사) 암나사 길이 {H['thread_len']:g}; 뒤 {H['thread_rear']} (왼나사 LH) 암나사 길이 {H['thread_len']:g}",
          tol="O링 자리 Ø29 H8 양 끝 (길이 4), 나머지 ISO 2768-mK",
          note="턴버클: 앞 오른나사 / 뒤 왼나사 — 주문 메모에 반드시 표기. 1개/세트"),
     dict(part="HMT500-M-104", name="End cap", fn=M.endcap, step="HMT500-M-104_endcap.step",
-         material="SUS316L (1.4404)", alt="SUS304 가능", finish="As machined + 부동태화",
+         material="SUS304 (이번 시제품)", alt="양산: SUS316L 또는 SUS304", finish="As machined + 부동태화",
          threads=f"{E['mthread']['thread']} (왼나사 LH) 수나사; {E['thread']['thread']} 암나사 (M12 커넥터); "
                  f"2×{E['ports']['thread']} 관통 (r {E['ports']['r']:g}, 90°·270°)",
          tol="O링 자리 Ø29 f7 + 홈, 맞변 AF28, 나머지 ISO 2768-mK",
          note="왼나사 표기 필수. 1개/세트"),
     dict(part="HMT500-M-105", name="PCB holder", fn=M.pcb_holder, step="HMT500-M-105_holder.step",
-         material="PEEK (자연색)", alt="시제품: POM (연속 약 100 °C) — 양산은 PEEK", finish="As machined, 버 제거",
+         material="POM White (이번 시제품, JLCCNC 온라인)", alt="양산: PEEK", finish="As machined, 버 제거",
          threads=f"2×M2 가로 탭 (PCB 고정, 홈에 수직); 2×Ø{Hh['screw_d']} 관통 + 카운터보어 Ø{Hh['cbore_d']:g} 깊이 {Hh['cbore_depth']:g}",
          tol=f"Ø{Hh['d']:g} (0/−0.1), 홈 폭 {Hh['slot_w']} (+0.1/0) 깊이 3.5, 창 {Hh['window']['wy']:g} × "
              f"{Hh['window']['z'][1] - Hh['window']['z'][0]:g} (+0.1/0)",
          note="Rev G: W-1 플러그 창 추가. 1개/세트"),
     dict(part="HMT500-M-106", name="PCB rear support ring", fn=M.pcb_ring, step="HMT500-M-106_ring.step",
-         material="PEEK (자연색)", alt="시제품: POM", finish="As machined",
+         material="POM White (이번 시제품)", alt="양산: PEEK", finish="As machined",
          threads="-",
          tol=f"Ø{R['od']:g} (0/−0.1), Ø{R['id']:g}, 홈 폭 {R['slot_w']} (+0.1/0) ×2, 홈 바닥 사이 {2 * R['slot_y']:g} (+0.2/0)",
          note="1개/세트"),
@@ -68,42 +74,50 @@ CNC = [
 # English order data for JLCCNC (the drawings are in Korean — this sheet and QUOTE_REQUEST.txt carry the key specs)
 CNC_EN = {
     "HMT500-M-101": dict(
-        material="Stainless steel 316L (1.4404); 316 acceptable (wetted part)",
+        material="Stainless steel SUS304 for this prototype lot (316L for production)",
         finish="As machined, deburr, passivation (ASTM A967)",
-        threads="G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, thread length 5.5 "
+        threads="G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x1.0-6H internal, thread length 5.5 "
                 "(ends 8.0 from front face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); "
                 "2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16",
         tol="O-ring seat dia 29 f7; connector seal bore dia 10 H8; sealing faces Ra 0.8; others ISO 2768-mK",
         note="Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer."),
+    "HMT500-M-102": dict(
+        material="Stainless steel SUS304 (wetted, oil)",
+        finish="As machined, deburr inside and outside of all holes, passivation",
+        threads=f"{C['thread']}-6H internal (fine pitch 1.0), depth {C['thread_x'][1] - C['thread_x'][0]:g} from the open end",
+        tol=f"OD {C['od']:g}; bore dia {C['bore']:g}; {len(C['holes'])}x dia {C['hole_d']:g} radial holes "
+            "(4 rows at 6/11/16/21 mm from the tip x 5 holes at 72 deg, same angles each row); tip hole dia 3; tip chamfer C1; "
+            "open-end relief dia 11 x 1; others ISO 2768-mK",
+        note="Filter cap screwed onto the sensor connector. Drawing sheet M-102~104 (cap at top)."),
     "HMT500-M-103": dict(
-        material="Stainless steel 316L (1.4404); 304 acceptable (not wetted)",
+        material="Stainless steel SUS304",
         finish="As machined, deburr, passivation; outer laser marking if available (text supplied later)",
         threads="Front: M28x1-6H internal, RIGHT hand, length 7; Rear: M28x1-LH-6H internal, LEFT hand, length 7",
         tol="O-ring bores dia 29 H8 at both ends (length 4), Ra 0.8, C0.5 lead-in chamfers; others ISO 2768-mK",
         note="Turnbuckle tube: front thread RIGHT hand, rear thread LEFT hand. Please confirm."),
     "HMT500-M-104": dict(
-        material="Stainless steel 316L (1.4404); 304 acceptable",
+        material="Stainless steel SUS304",
         finish="As machined, deburr, passivation",
         threads="M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal through (connector, TENTATIVE - will be confirmed "
                 "with the connector part number; please quote as M16x1.5); 2x M3 through (fill/vent ports, r10 at 90/270 deg)",
         tol="O-ring seat dia 29 f7 with groove, Ra 0.8; wrench flats AF28; others ISO 2768-mK",
         note="LEFT hand external thread. Please confirm."),
     "HMT500-M-105": dict(
-        material="PEEK natural; POM acceptable for this prototype lot",
+        material="POM (White) for this prototype lot (PEEK for production)",
         finish="As machined, deburr",
         threads="2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2",
         tol="OD 21.6 (0/-0.1); slot width 1.7 (+0.1/0) depth 3.5; window 5.6 x 3.2 (+0.1/0); others ISO 2768-mK",
         note="Drawing sheet M-105~106 (holder at top right)."),
     "HMT500-M-106": dict(
-        material="PEEK natural; POM acceptable for this prototype lot",
+        material="POM (White) for this prototype lot (PEEK for production)",
         finish="As machined, deburr",
         threads="-",
         tol="OD 26.4 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4",
         note="Drawing sheet M-105~106 (ring at right)."),
 }
-TAG = {"HMT500-M-101": "SUS304", "HMT500-M-103": "SUS304", "HMT500-M-104": "SUS304",      # 이번 시제품: JLCCNC 온라인 선택지
+TAG = {"HMT500-M-101": "SUS304", "HMT500-M-102": "SUS304", "HMT500-M-103": "SUS304", "HMT500-M-104": "SUS304",      # 이번 시제품: JLCCNC 온라인 선택지
        "HMT500-M-105": "POM-White", "HMT500-M-106": "POM-White"}
-NAME_EN = {"HMT500-M-101": "Process body", "HMT500-M-103": "Housing tube", "HMT500-M-104": "End cap",
+NAME_EN = {"HMT500-M-101": "Process body", "HMT500-M-102": "Sensor protection cap", "HMT500-M-103": "Housing tube", "HMT500-M-104": "End cap",
            "HMT500-M-105": "PCB holder", "HMT500-M-106": "PCB rear support ring"}
 
 RFQ = """Request for quotation - CNC machining (JLCCNC)
@@ -119,11 +133,11 @@ the ISO fit band, so machining to the STEP within +/-0.05 is acceptable:
   (The Korean drawings show the ISO fit symbols f7/H8 on nominal 29 / 10.)
 
 MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
-  M-101, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
+  M-101, M-102, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
   M-105, M-106 = POM (White) for this prototype lot (PEEK not offered online).
 
 Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
-and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
+and in order_jlccnc_EN.csv. Sheet M-102~104 carries three parts: cap M-102 (top), housing M-103, end cap M-104.
 Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
 
 {parts}
@@ -133,7 +147,7 @@ General:
 - Threads are NOT modelled in the STEP files (cosmetic): internal threads are modelled at the minor diameter,
   external threads at the major diameter. Please cut threads per the callouts above and on the drawings.
 - IMPORTANT: M-103 rear thread and M-104 thread are LEFT hand (M28x1-LH). M-103 front and M-101 are RIGHT hand.
-- Fine / pipe threads: G1/2-A, M28x1, M10x0.75, M16x1.5. If a thread is not in your standard list, please advise.
+- Fine / pipe threads: G1/2-A, M28x1, M10x1.0, M16x1.5. If a thread is not in your standard list, please advise.
 - O-ring sealing surfaces (dia 29 f7 / H8, dia 10 H8): Ra 0.8, no tool marks across the seal.
 - Material certificate EN 10204 3.1 for 316L (M-101 wetted part) if available.
 - Please send DFM questions before machining.
