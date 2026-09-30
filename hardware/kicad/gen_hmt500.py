@@ -482,22 +482,23 @@ S.place("L1", "CMC", "CMC 2x1mH 0.3A", "TBD:CMC_WE-SL", 32.5, 26,
         nets={"1": "VIN_EXT", "2": "VIN_L", "3": "GND_IN", "4": "GND"})
 S.wa(S.P("J1", "8"), S.P("L1", "1"))
 S.wa(S.P("J1", "6"), S.P("L1", "3"))
-b = S.P("L1", "4")
-S.wa(b, (b[0] + 1.5, b[1]))
-S.flag((b[0] + 1.5, b[1]), absolute=True)
-S.gnd_stub((b[0] + 1.5, b[1]))
+b = S.P("L1", "4")                          # GND 출력: 핀에서 바로 아래로 GND, PWR_FLAG는 옆 짧은 선 끝
+g = (b[0], b[1] + 2)
+S.wa(b, g, (g[0] + 1, g[1]))
+S.pw("GND", g, absolute=True)
+S.flag((g[0] + 1, g[1]), absolute=True)
 a = S.P("L1", "2")
-S.v2("D1", "TVS_BI", "SMDJ36CA", FP["SMC"], 37, 26, "VIN_L", "GND")
-S.h2("R1", "R", "4.7R 1W pulse", FP["RMELF"], 42, 26, "VIN_L", "VIN_F")
+S.v2("D1", "TVS_BI", "SMDJ36CA", FP["SMC"], 40, 26, "VIN_L", "GND")
+S.h2("R1", "R", "4.7R 1W pulse", FP["RMELF"], 45, 26, "VIN_L", "VIN_F")
 S.wa(a, S.P("D1", "1"), S.P("R1", "1"))
 S.gnd_stub(S.P("D1", "2"))
-S.v2("D2", "TVS_BI", "SMBJ33CA", FP["SMB"], 49, 26, "VIN_F", "GND")
-S.v2("C1", "C", "100n 100V", FP["C0805"], 55, 26, "VIN_F", "GND")
+S.v2("D2", "TVS_BI", "SMBJ33CA", FP["SMB"], 52, 26, "VIN_F", "GND")
+S.v2("C1", "C", "100n 100V", FP["C0805"], 58, 26, "VIN_F", "GND")
 for r_ in ("D2", "C1"):
     S.gnd_stub(S.P(r_, "2"))
-S.w((45, 26), (49, 26), (55, 26), (61, 26), (66, 26))
-S.flag((66, 26))
-S.gl("VIN_F", S.o((66, 26)), "R")
+S.w((48, 26), (52, 26), (58, 26), (64, 26), (68, 26))
+S.flag((68, 26))
+S.gl("VIN_F", S.o((68, 26)), "R")
 for num, net in (("4", "OUT1_EXT"), ("5", "OUT2_EXT"), ("3", "RS485_A_EXT"), ("2", "RS485_B_EXT")):
     S.gl(net, S.P("J1", num), "R", length=1)
 S.nc(S.P("J1", "1"))
@@ -1308,6 +1309,18 @@ def overlap_errors(S):
         for b, nb in R:
             if nb == na or nb.startswith(("wire", "label", "nc", "body #")):
                 continue
+            if _hit(a, b, pad=-0.02):
+                errs.append(f"{na} overlaps {nb}")
+    # 선이 부품 몸체를 지나가면 안 됨 (핀 끝에서 닿는 것은 허용: 몸체를 0.15 줄여서 판정)
+    wires = [((min(p_[0], q_[0]), min(p_[1], q_[1]), max(p_[0], q_[0]), max(p_[1], q_[1])), (p_, q_)) for p_, q_ in S.wires]
+    for a, na in bodies:
+        inner = (a[0] + 0.15, a[1] + 0.15, a[2] - 0.15, a[3] - 0.15)
+        for w_, seg in wires:
+            if inner[0] < inner[2] and inner[1] < inner[3] and _hit(w_, inner, pad=0):
+                errs.append(f"wire {seg} crosses {na}")
+    # 전원 기호·PWR_FLAG가 다른 부품 몸체와 겹치면 안 됨
+    for a, na in [(r_, n) for r_, n in R if n.startswith("body #")]:
+        for b, nb in bodies:
             if _hit(a, b, pad=-0.02):
                 errs.append(f"{na} overlaps {nb}")
     return errs
