@@ -11,7 +11,7 @@ Qty,References,Symbol,Value,Footprint,Verify
 2,C13 C25,C,10u,Capacitor_SMD:C_1206_3216Metric,
 2,C16 C17,C,220n 100V,Capacitor_SMD:C_0603_1608Metric,
 1,C18,C,4.7u,Capacitor_SMD:C_0805_2012Metric,
-1,C22,C,220p C0G 1%,Capacitor_SMD:C_0603_1608Metric,
+1,C22,C,330p C0G 1%,Capacitor_SMD:C_0603_1608Metric,
 1,C24,C,22u 10V,Capacitor_SMD:C_1206_3216Metric,
 1,C27,C,10n C0G,Capacitor_SMD:C_0603_1608Metric,
 2,C41 C51,C,1n 100V,Capacitor_SMD:C_0603_1608Metric,
