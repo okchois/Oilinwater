@@ -1469,9 +1469,11 @@ def write_all():
         f'(sym_lib_table\n  (lib (name "{LIB}")(type "KiCad")(uri "${{KIPRJMOD}}/{PROJECT}.kicad_sym")(options "")(descr "{PROJECT} project symbols"))\n)\n')
     open(os.path.join(OUT, "fp-lib-table"), "w").write(         # 프로젝트 풋프린트 (KiCad 7.0.11 복사본 + 자체 3종)
         f'(fp_lib_table\n  (lib (name "{LIB}")(type "KiCad")(uri "${{KIPRJMOD}}/../lib/{LIB}.pretty")(options "")(descr "{PROJECT} footprints"))\n)\n')
-    pro = {"meta": {"filename": PROJECT + ".kicad_pro", "version": 1},
-           "sheets": [[ROOT, "Root"]] + [[u_, S.title] for S, u_ in zip(SHEETS, uuids)]}
-    open(os.path.join(OUT, PROJECT + ".kicad_pro"), "w").write(json.dumps(pro, indent=2) + "\n")
+    pro_path = os.path.join(OUT, PROJECT + ".kicad_pro")
+    pro = json.load(open(pro_path)) if os.path.exists(pro_path) else {}   # PCB 설계 규칙(place_pcb.py)은 유지
+    pro.update({"meta": {"filename": PROJECT + ".kicad_pro", "version": 1},
+                "sheets": [[ROOT, "Root"]] + [[u_, S.title] for S, u_ in zip(SHEETS, uuids)]})
+    open(pro_path, "w").write(json.dumps(pro, indent=2) + "\n")
     # BOM
     groups = {}
     for S in SHEETS:

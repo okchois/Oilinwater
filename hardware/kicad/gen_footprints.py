@@ -6,7 +6,7 @@
 여기서 만드는 것:
   - Texas_RNX0012A_VQFN-HR-12_2x3mm : LMR36006 (TI SNVSB48C, RNX0012A Example Board Layout)
   - GDT_Bourns_2035-xx-SM           : 2전극 SMD GDT Ø5 × 4.4 (Bourns 2035-xx-SM 권장 패드 4.0 피치, 1.3 × 5.6)
-  - Texas_DRB0008A_PadFloat          : TVS3301 — 방열 패드는 떠 있어야 함 (데이터시트 표 7-1) → 비아·뒷면 패드 제거
+  - Texas_DRB0008A_PadFloat          : TVS3301 — 방열 패드는 떠 있어야 함 (데이터시트 표 7-1) → 비아·뒷면 패드 제거 (9번 패드는 심볼 핀이 없어 넷 없음)
 """
 
 import os
@@ -43,6 +43,7 @@ def pad(fp, num, x, y, w, h, shape=pcbnew.PAD_SHAPE_ROUNDRECT, rr=0.2, layers=("
         p.SetRoundRectRadiusRatio(rr)
     p.SetSize(vec(w, h))
     p.SetPosition(vec(x, y))
+    p.SetPos0(vec(x, y))                     # KiCad 7: 저장은 로컬 좌표(pos0)
     ls = pcbnew.LSET()
     for n in layers:
         ls.AddLayer({"F.Cu": pcbnew.F_Cu, "F.Paste": pcbnew.F_Paste, "F.Mask": pcbnew.F_Mask}[n])
@@ -54,8 +55,9 @@ def rect(fp, layer, x0, y0, x1, y1, width):
     for (a, b) in (((x0, y0), (x1, y0)), ((x1, y0), (x1, y1)), ((x1, y1), (x0, y1)), ((x0, y1), (x0, y0))):
         s = pcbnew.FP_SHAPE(fp)
         s.SetShape(pcbnew.SHAPE_T_SEGMENT)
-        s.SetStart(vec(*a))
-        s.SetEnd(vec(*b))
+        s.SetStart0(vec(*a))
+        s.SetEnd0(vec(*b))
+        s.SetDrawCoord()
         s.SetLayer(layer)
         s.SetWidth(MM(width))
         fp.Add(s)
@@ -64,8 +66,9 @@ def rect(fp, layer, x0, y0, x1, y1, width):
 def line(fp, layer, a, b, width):
     s = pcbnew.FP_SHAPE(fp)
     s.SetShape(pcbnew.SHAPE_T_SEGMENT)
-    s.SetStart(vec(*a))
-    s.SetEnd(vec(*b))
+    s.SetStart0(vec(*a))
+    s.SetEnd0(vec(*b))
+    s.SetDrawCoord()
     s.SetLayer(layer)
     s.SetWidth(MM(width))
     fp.Add(s)
@@ -107,13 +110,12 @@ def drb_padfloat():
     src = pcbnew.FootprintLoad(LIB, "Texas_DRB0008A")
     fp = pcbnew.FOOTPRINT(src)
     fp.SetFPID(pcbnew.LIB_ID("HMT500_260313A", "Texas_DRB0008A_PadFloat"))
-    fp.SetDescription("TI DRB0008A for TVS3301: exposed pad must float (no vias, no B.Cu pad, no pin number)")
+    fp.SetDescription("TI DRB0008A for TVS3301: exposed pad must float (no vias, no B.Cu pad; pad 9 has no symbol pin)")
     for p in list(fp.Pads()):
         if p.GetNumber() == "9":
             if p.GetAttribute() == pcbnew.PAD_ATTRIB_PTH or p.IsOnLayer(pcbnew.B_Cu):
                 fp.Remove(p)
-            else:
-                p.SetNumber("")                                  # 넷을 받을 수 없게
+            # 남은 앞면 패드 조각은 번호 9 유지: 심볼에 9번 핀이 없으므로 어떤 넷에도 연결되지 않음
     return fp
 
 

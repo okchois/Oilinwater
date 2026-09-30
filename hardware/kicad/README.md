@@ -22,8 +22,12 @@ DOTECH HMT500(260313) 오일 수분 트랜스미터의 KiCad 회로도입니다.
 | `HMT500(260313A)/HMT500(260313A)_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
 | `HMT500(260313A)/HMT500(260313A)_schematic.pdf` | 회로도 PDF (7쪽) |
 | `HMT500(260313A)/HMT500(260313A)_parts_list.xlsx`, `.csv` | **구매용 부품리스트**: 회로도 부품 + 제조사·품번·1k 추정 단가·상태, 분류별 요약(환율 입력 시 원화 자동 계산). `make_parts_list.py`로 생성 |
-| `HMT500(260313A)/HMT500(260313A).kicad_pcb` | 보드 외곽(57 × 23, 기구 Rev C), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), 배치 구역·부품 높이 한계 표기. 부품 배치·배선 전 |
-| `gen_pcb_outline.py` | 위 보드 파일 생성기. 치수는 `hardware/mech/hmt500_params.py`에서 읽습니다 |
+| `HMT500(260313A)/HMT500(260313A).kicad_pcb` | 보드 외곽(57 × 23, 4층), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), **부품 84개 배치·넷 지정 완료 (배선 전, 승인 대기)**. 설계 규칙: 간격·선폭 0.15, 비아 0.45/0.2, 가장자리 0.3 |
+| `HMT500(260313A)/placement.png`, `placement.json` | 배치 그림(윗면/아랫면, 색 = 기능 블록, 숫자 = 부품 높이)과 배치 표(기구 좌표) — 조립 시뮬레이션 입력 |
+| `gen_pcb_outline.py` | 외곽·금지 구역 생성기. 치수는 `hardware/mech/hmt500_params.py`에서 읽습니다 |
+| `place_pcb.py` | 부품 배치 (pcbnew). 고정 부품 + 큰 부품 자리표 + 작은 부품은 부모 패드 옆 빈 자리 탐색. 보드·금지 구역·하네스 플러그 통로·높이(보어) 조건 검사. `python3 place_pcb.py` |
+| `plot_placement.py` | 배치 그림 (matplotlib) |
+| `gen_footprints.py`, `lib/HMT500_260313A.pretty` | 프로젝트 풋프린트 (KiCad 7.0.11 복사본 + 자체 3종) |
 
 ## 도면 스타일 (v0.2)
 

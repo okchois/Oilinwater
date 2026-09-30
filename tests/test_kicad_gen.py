@@ -145,5 +145,50 @@ class PcbOutlineTest(unittest.TestCase):
             self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
 
+class PcbPlacementTest(unittest.TestCase):
+    """place_pcb.py 결과(placement.json) — pcbnew 없이 검사."""
+
+    @classmethod
+    def setUpClass(cls):
+        import json
+        cls.d = json.load(open(os.path.join(ROOT, "hardware", "kicad", g.PROJECT, "placement.json"), encoding="utf-8"))
+        cls.parts = {p["ref"]: p for p in cls.d["parts"]}
+
+    def test_all_parts_placed(self):
+        want = {r for S in g.SHEETS for r in S.order if not r.startswith("#")}
+        self.assertEqual(set(self.parts), want)
+        self.assertEqual(self.d["meta"]["unplaced"], [])
+
+    def test_no_courtyard_overlap(self):
+        ps = list(self.parts.values())
+        for i, a in enumerate(ps):
+            for b in ps[i + 1:]:
+                if a["side"] != b["side"]:
+                    continue
+                A, B = a["crt"], b["crt"]
+                hit = A[0] < B[2] and B[0] < A[2] and A[1] < B[3] and B[1] < A[3]
+                self.assertFalse(hit, (a["ref"], b["ref"]))
+
+    def test_heights_fit_bore(self):
+        for p in self.parts.values():
+            if p["ref"] != "J5":          # 샤시 접점: 하우징 내면까지 닿는지는 조립 검토 항목
+                self.assertLessEqual(p["h"], p["h_allow"], p["ref"])
+
+    def test_harness_plug_paths_clear_on_top(self):
+        for p in self.parts.values():
+            if p["side"] != "T" or p["ref"] in ("J3", "J1"):
+                continue
+            x0, y0, x1, y1 = p["crt"]
+            self.assertFalse(x0 < 30.5 and y1 > -3.5 and y0 < 3.5, p["ref"])     # W-1
+            self.assertFalse(x1 > 58.5 and y1 > -6.4 and y0 < 6.4, p["ref"])     # W-2
+
+    def test_pad_nets_match_schematic(self):
+        nets = g.intended_nets()
+        for net, nodes in nets.items():
+            for ref, pin in nodes:
+                got = {q["net"] for q in self.parts[ref]["pads"] if q["n"] == pin}
+                self.assertEqual(got, {net}, (ref, pin))
+
+
 if __name__ == "__main__":
     unittest.main()

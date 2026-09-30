@@ -1,0 +1,514 @@
+"""HMT500(260313A) PCB 부품 배치 (배선 전 승인용).
+
+  python3 hardware/kicad/place_pcb.py
+    → HMT500(260313A)/HMT500(260313A).kicad_pcb   (외곽선·금지 구역 + 부품 84개, 넷 지정, 배선 없음)
+    → HMT500(260313A)/placement.json               (배치 결과: 기구 좌표 — 조립 시뮬레이션·그림용)
+
+좌표는 기구 좌표(x 축 방향 뒤쪽 +, y 폭 방향, z 윗면 +)로 계산하고 KiCad 좌표로 바꿔 넣는다 (gen_pcb_outline.K).
+윗면 = F (z+), 아랫면 = B.
+
+배치 방법: 고정 부품(J3·J1·U4)을 먼저 놓고, 나머지는 표 PLAN 순서대로
+"기준점(부모 부품의 같은 넷 패드) 가까운 빈 자리"를 0.25 mm 격자에서 찾는다.
+자리 조건 = 보드 안(가장자리 0.3 mm), 홀더 홈·지지링 홈 금지 구역, 하네스 플러그·전선 통로(윗면),
+높이 한계(보어 − 판 두께/2 − 0.5 mm), 같은 면 코트야드 겹침 없음(J2 Tag-Connect는 구멍 때문에 양면).
+"""
+
+import json
+import math
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+os.environ.setdefault("HMT_DRAFT", "1")
+
+import pcbnew  # noqa: E402
+
+import gen_hmt500 as G  # noqa: E402
+import gen_pcb_outline as O  # noqa: E402
+
+P = O.P
+LIB = os.path.join(HERE, "lib", "HMT500_260313A.pretty")
+OUT = O.OUT
+JSON_OUT = os.path.join(os.path.dirname(OUT), "placement.json")
+MM, TOMM = pcbnew.FromMM, pcbnew.ToMM
+
+EDGE = 0.25          # 코트야드 ~ 보드 가장자리
+GAP = 0.1            # 코트야드 사이
+STEP = 0.25          # 탐색 격자
+SLACK = 1.5          # 기준점 거리 여유 (이 안에서 붙는 자리 우선)
+TOUCH = 0.6          # 붙은 면 하나당 가점 (mm)
+
+# ── 부품 높이 (mm, 데이터시트 최대값) — 풋프린트 이름으로 ──
+HEIGHT = {
+    "JST_GH_SM08B": 4.25, "JST_SH_SM04B": 2.95, "SpringContact_Harwin_S1941-46R": 7.25,
+    "L_CommonMode_Wuerth_WE-SL2": 5.0, "GDT_Bourns_2035": 5.0, "L_Coilcraft_XAL4030": 3.1,
+    "C_1210": 2.5, "D_SMC": 2.62, "D_SMB": 2.3, "R_MELF_MMB-0207": 2.2, "C_1812": 2.0,
+    "C_1206": 1.8, "SOIC-8": 1.75, "LQFP-48": 1.6, "SOT-23": 1.45, "HTSSOP": 1.2, "TSSOP": 1.2,
+    "C_0805": 1.35, "VSSOP": 1.0, "Texas_DRB": 1.0, "Texas_RNX": 1.0, "QFN-24": 0.9,
+    "R_2512": 0.7, "_0603_": 0.95, "Tag-Connect": 0.0,
+}
+
+
+def height(fp):
+    for k, h in HEIGHT.items():
+        if k in fp:
+            return h
+    raise KeyError(fp)
+
+
+# ── 기구 조건 ──
+X0, X1 = P.PCB["x"]
+SLOT_X1 = P.PCB_HOLDER["slot_x"][1]                  # 18.0
+RING = P.PCB_RING
+RING_KO = (RING["x"][0] - 0.3, RING["x"][1] + 0.3, RING["id"] / 2 - 0.3)   # x0, x1, |y| 한계
+W1_BAND = (X0, 30.5, 3.5)        # 윗면: J3 플러그(|y| ≤ 2.5) + 앞쪽으로 가는 센서선 (z ≈ 2.2)
+W2_BAND = (58.5, X1, 6.4)        # 윗면: J1 플러그(|y| ≤ 5.9) + 뒤쪽 M12로 가는 선
+
+
+def half_width(xa, xb):
+    """x 구간 전체에서 보드 반폭."""
+    return min(w / 2 for (s0, s1, w) in P.PCB["sections"] if xb > s0 and xa < s1)
+
+
+def corners_convex():
+    """볼록 모서리(필렛 R) 중심들: 앞·뒤 끝 4개 + 넓은 구간의 계단 4개."""
+    r = P.PCB["corner_r"]
+    out = []
+    secs = P.PCB["sections"]
+    for i, (s0, s1, w) in enumerate(secs):
+        h = w / 2
+        wl = secs[i - 1][2] / 2 if i > 0 else 0.0
+        wr = secs[i + 1][2] / 2 if i + 1 < len(secs) else 0.0
+        if h > wl:
+            out += [(s0 + r, h - r), (s0 + r, -(h - r))]
+        if h > wr:
+            out += [(s1 - r, h - r), (s1 - r, -(h - r))]
+    return out
+
+
+CORNERS = corners_convex()
+
+
+def corners_concave():
+    """오목 모서리(계단 안쪽) 필렛 중심: 필렛이 보드 재료를 더하므로 가장자리가 부품 쪽으로 나온다."""
+    r = P.PCB["corner_r"]
+    out = []
+    secs = P.PCB["sections"]
+    for i in range(len(secs) - 1):
+        (a0, a1, wa), (b0, b1, wb) = secs[i], secs[i + 1]
+        x = a1
+        if wa < wb:          # 좁음 → 넓음: 안쪽 모서리 (x, wa/2), 필렛 중심은 좁은 쪽 바깥
+            out += [(x - r, wa / 2 + r), (x - r, -(wa / 2 + r))]
+        elif wa > wb:
+            out += [(x + r, wb / 2 + r), (x + r, -(wb / 2 + r))]
+    return out
+
+
+CONCAVE = corners_concave()
+
+
+def corner_ok(box):
+    r = P.PCB["corner_r"] - EDGE
+    xa, ya, xb, yb = box
+    for (cx, cy) in CORNERS:
+        for (px, py) in ((xa, ya), (xa, yb), (xb, ya), (xb, yb)):
+            # 필렛 중심 바깥쪽 사분면에 있는 꼭짓점만 검사
+            if (px - cx) * (1 if cx > 40 else -1) > 0 and (py - cy) * (1 if cy > 0 else -1) > 0:
+                if math.hypot(px - cx, py - cy) > r:
+                    return False
+    rr = P.PCB["corner_r"] + EDGE
+    for (cx, cy) in CONCAVE:
+        dx = max(xa - cx, 0.0, cx - xb)
+        dy = max(ya - cy, 0.0, cy - yb)
+        if math.hypot(dx, dy) < rr:
+            return False
+    return True
+
+
+def bore(x):
+    if x < 26.0:
+        return P.BODY["cbore"]["d"]            # 22
+    if RING["x"][0] <= x <= RING["x"][1]:
+        return RING["id"]                      # 20
+    if x > 64.0:
+        return P.BODY["cbore"]["d"]            # 엔드캡 카운터보어 22
+    return P.HOUSING["id"]                     # 27
+
+
+def h_allow(xa, xb, ymax):
+    b = min(bore(x) for x in (xa, (xa + xb) / 2, xb, *[x for x in (26.0, 59.0, 63.0, 64.0) if xa <= x <= xb]))
+    r = b / 2
+    return -1.0 if ymax >= r else math.sqrt(r * r - ymax * ymax) - P.PCB["t"] / 2 - 0.5
+
+
+def region_ok(side, box, h, check_h=True):
+    xa, ya, xb, yb = box
+    if xa < SLOT_X1 + EDGE or xb > X1 - EDGE:
+        return False
+    hw = half_width(xa, xb) - EDGE
+    if ya < -hw or yb > hw or not corner_ok(box):
+        return False
+    if xb > RING_KO[0] and xa < RING_KO[1] and (ya < -RING_KO[2] or yb > RING_KO[2]):
+        return False
+    if side == "T":
+        for (a, b, w) in (W1_BAND, W2_BAND):
+            if xb > a and xa < b and yb > -w and ya < w:
+                return False
+    if check_h and h > h_allow(xa, xb, max(abs(ya), abs(yb))):
+        return False
+    return True
+
+
+OFFSETS = sorted((math.hypot(i * STEP, j * STEP), i * STEP, j * STEP)
+                 for i in range(-160, 161) for j in range(-100, 101))
+
+
+def overlap(a, b, gap=GAP):
+    return a[0] < b[2] + gap and b[0] < a[2] + gap and a[1] < b[3] + gap and b[1] < a[3] + gap
+
+
+# ── KiCad ↔ 기구 좌표 ──
+def to_k(x, y):
+    return pcbnew.VECTOR2I(MM(O.OX + (x - O.F0)), MM(O.OY - y))
+
+
+def from_k(v):
+    return (TOMM(v.x) - O.OX + O.F0, O.OY - TOMM(v.y))
+
+
+def layer_box(fp, layers):
+    xs, ys = [], []
+    for it in fp.GraphicalItems():
+        if it.GetLayer() in layers and not isinstance(it, pcbnew.FP_TEXT):
+            b = it.GetBoundingBox()
+            (x0, y0), (x1, y1) = from_k(pcbnew.VECTOR2I(b.GetLeft(), b.GetBottom())), \
+                from_k(pcbnew.VECTOR2I(b.GetRight(), b.GetTop()))
+            xs += [x0, x1]
+            ys += [y0, y1]
+    return (min(xs), min(ys), max(xs), max(ys)) if xs else None
+
+
+def set_pose(fp, side, x, y, rot):
+    if fp.IsFlipped():
+        fp.Flip(fp.GetPosition(), False)
+    fp.SetOrientationDegrees(0)
+    fp.SetPosition(to_k(x, y))
+    fp.SetOrientationDegrees(rot)
+    if side == "B":
+        fp.Flip(fp.GetPosition(), False)      # 위아래 뒤집기 (KiCad 기본)
+
+
+# ── 부품·넷 ──
+PARTS = {}          # ref -> dict(fp, val, nets)
+for S in G.SHEETS:
+    for ref in S.order:
+        if ref.startswith("#"):
+            continue
+        p = S.parts[ref]
+        PARTS[ref] = dict(fp=p["fp"], val=p["val"], nets=dict(S.nets.get(ref, {})))
+
+
+# ── 배치 계획 ──
+# (ref, 면, 기준) — 기준: (x, y) 고정 좌표 | ("near", 부모, 넷) | ("at", x, y) 탐색 시작점
+# 면 "T"/"B", "TB" = 윗면 우선·안 되면 아랫면, "BT" 반대. rots: 허용 회전.
+PLAN = [
+    # ── 고정: 하네스 헤더 두 개, MCU ──
+    ("J3", "T", ("fix", None, None), dict(rot=-90)),
+    ("J1", "T", ("fix", None, None), dict(rot=90)),
+    ("U4", "T", ("fix", 42.8, 0.0), dict(rot=0)),
+    # ════ 윗면: 큰 부품 자리 (코트야드 크기로 계산한 칸) ════
+    ("J2", "T", ("at", 22.6, 6.15), dict(rots=(0,))),       # SWD Tag-Connect: 앞쪽 윗면 (프로그래밍은 조립 전). 구멍 3개는 아랫면도 막음
+    ("D40", "T", ("at", 50.15, 2.08), dict(rots=(0,))),     # 출력 TVS: J1 OUT 핀 바로 앞 (서지 경로 최단)
+    ("D30", "T", ("at", 50.15, -2.08), dict(rots=(0,))),
+    ("R40", "T", ("at", 54.75, 9.3), dict(rots=(0,))),      # 10R 2512: J1 옆구리
+    ("R30", "T", ("at", 54.75, -9.3), dict(rots=(0,))),
+    ("U11", "T", ("at", 46.75, -8.4), dict(rots=(0, 180))), # RS-485: J1 A/B 핀·MCU USART 핀 사이
+    # 측정 (J3 옆 — 센서선 최단)
+    ("U5", "T", ("near", "J3", "SENS_C1"), {}),
+    ("U6", "T", ("near", "J3", "PT_P"), {}),
+    ("C22", "T", ("near", "U5", "CREF_A"), {}),
+    ("C25", "T", ("near", "U5", "CDC_V18"), {}),
+    ("C29", "T", ("near", "U5", "+3V3A"), {}),
+    ("R17", "T", ("near", "U6", "PT_SP_F"), {}),
+    ("R18", "T", ("near", "U6", "PT_SN_F"), {}),
+    ("C27", "T", ("near", "U6", "PT_SP_F"), {}),
+    ("R19", "T", ("near", "U6", "REF_N"), {}),
+    ("R20", "T", ("near", "R19", "REF_N"), {}),
+    ("C23", "T", ("near", "U6", "+3V3A"), {}),
+    ("C28", "T", ("near", "U6", "+3V3"), {}),
+    ("C24", "T", ("near", "U5", "+3V3A"), {}),
+    # 출력 TVS 옆 C, MCU 주변, RS-485 C
+    ("C41", "T", ("near", "D30", "OUT1_EXT"), {}),
+    ("C51", "T", ("near", "D40", "OUT2_EXT"), {}),
+    ("C14", "T", ("near", "U4", "+3V3"), {}),
+    ("C15", "T", ("near", "U4", "+3V3"), {}),
+    ("C20", "T", ("near", "U4", "+3V3"), {}),
+    ("C18", "T", ("near", "U4", "+3V3"), {}),
+    ("C21", "T", ("near", "U4", "NRST"), {}),
+    ("C60", "T", ("near", "U11", "+3V3"), {}),
+    ("U14", "T", ("at", 49.6, 8.6), {}),                    # DAC SCLK 게이트: MCU SPI2 핀 옆 윗면
+    ("C36", "T", ("near", "U14", "+3V3"), {}),
+    ("R33", "TB", ("near", "U4", "DAC_ALARM"), {}),
+    # ════ 아랫면: 큰 부품 자리 ════
+    # 입력 보호·샤시 (뒤쪽: J1 VIN/GND 아래 → 링·엔드캡 구역)
+    ("L1", "B", ("at", 61.07, 0.0), dict(rots=(90,))),      # 링 구역 가운데 (높이 5 → |y| ≤ 7.7)
+    ("J5", "B", ("at", 54.42, -7.83), dict(rots=(0,))),     # 가장자리 → 하우징 내면 (접촉 여부는 조립 검토)
+    ("D1", "B", ("at", 54.28, 6.28), dict(rots=(90,))),
+    ("D2", "B", ("at", 53.97, -2.05), dict(rots=(0,))),
+    ("R1", "B", ("at", 66.01, 4.93), dict(rots=(90,))),     # 엔드캡 구역
+    ("GDT1", "B", ("at", 67.34, -5.65), dict(rots=(0,))),
+    ("C3", "B", ("at", 61.07, 7.2), dict(rots=(0,))),       # 링 구역 L1 위 (높이 2.0 ≤ 2.66)
+    ("C1", "B", ("near", "D2", "VIN_F"), {}),
+    ("R2", "B", ("near", "C3", "CHASSIS"), {}),
+    # 전류 출력 DAC 2개 (가운데 — 발열을 센서 쪽에서 멀리)
+    ("U7", "B", ("at", 38.5, -6.6), dict(rots=(0, 180))),
+    ("U8", "B", ("at", 38.5, 6.6), dict(rots=(0, 180))),
+    # eFuse (DAC 앞)
+    ("U1", "B", ("at", 30.4, 5.2), dict(rots=(0, 180))),
+    ("C5", "B", ("near", "U1", "VIN_P"), {}),
+    ("C7", "B", ("near", "U1", "VIN_P"), {}),
+    ("R3", "B", ("near", "U1", "UV_DIV"), {}),
+    ("R4", "B", ("near", "U1", "OV_DIV"), {}),
+    ("R5", "B", ("near", "U1", "OV_DIV"), {}),
+    ("R6", "B", ("near", "U1", "EF_ILIM"), {}),
+    ("C4", "B", ("near", "U1", "EF_DVDT"), {}),
+    # 벅·LDO (앞쪽 — +3V3A 를 측정부 가까이, 발열 적음)
+    ("U2", "B", ("at", 22.0, 3.0), {}),
+    ("L2", "B", ("near", "U2", "BUCK_SW"), {}),
+    ("C8", "B", ("near", "U2", "BUCK_BOOT"), {}),
+    ("C9", "B", ("near", "U2", "BUCK_VCC"), {}),
+    ("C10", "B", ("near", "L2", "+5V"), {}),
+    ("C6", "B", ("near", "L2", "+5V"), {}),
+    ("R8", "B", ("near", "U2", "BUCK_FB"), {}),
+    ("R9", "B", ("near", "U2", "BUCK_FB"), {}),
+    ("C11", "B", ("near", "R8", "BUCK_FB"), {}),
+    ("U3", "B", ("near", "C10", "+5V"), {}),
+    ("C12", "B", ("near", "U3", "+3V3"), {}),
+    ("FB1", "B", ("near", "U3", "+3V3"), {}),
+    ("C13", "B", ("near", "FB1", "+3V3A"), {}),
+    # 출력 스위치·센스 앰프 (DAC 뒤 → R30/R40 쪽)
+    ("U9", "B", ("near", "U7", "DAC1_OUT"), {}),
+    ("U10", "B", ("near", "U8", "DAC2_OUT"), {}),
+    ("U12", "B", ("near", "U7", "DAC1_SENSE"), {}),
+    ("U13", "B", ("near", "U8", "DAC2_SENSE"), {}),
+    ("C43", "B", ("near", "U9", "VIN_P"), {}),
+    ("C45", "B", ("near", "U9", "VIN_P"), {}),
+    ("C55", "B", ("near", "U10", "VIN_P"), {}),
+    ("R31", "B", ("near", "U12", "OUT1_SNS"), {}),
+    ("R41", "B", ("near", "U13", "OUT2_SNS"), {}),
+    ("R32", "B", ("near", "U7", "DAC1_ISET"), {}),
+    ("C40", "B", ("near", "U7", "DAC1_REF"), {}),
+    ("R34", "B", ("near", "U7", "DAC1_AVDD"), {}),
+    ("C42", "B", ("near", "U7", "DAC1_AVDD"), {}),
+    ("C44", "B", ("near", "U7", "+3V3"), {}),
+    ("R42", "B", ("near", "U8", "DAC2_ISET"), {}),
+    ("C50", "B", ("near", "U8", "DAC2_REF"), {}),
+    ("R44", "B", ("near", "U8", "DAC2_AVDD"), {}),
+    ("C52", "B", ("near", "U8", "DAC2_AVDD"), {}),
+    ("C54", "B", ("near", "U8", "+3V3"), {}),
+]
+
+# 하네스 헤더 고정: 몸체 앞면(J3) / 뒷면(J1)을 기구 도면 값에 맞춘다
+J3_FRONT = P.PCB["jst"]["x"][0]         # 30.5 — 플러그가 앞(-x)에서 꽂힘
+J1_REAR = P.HARNESS2["plug"]["x"][0]     # 58.5 — 플러그가 뒤(+x)에서 꽂힘
+
+
+UNPLACED = []
+
+# 4층 기판 설계 규칙 (일반 4층 공정: 선폭·간격 0.1 mm 급, 최소 드릴 0.2 mm 가능 — 여유 두고 설정)
+#  - 간격 0.15: SOT-23-8(0.65 피치) 패드 사이 0.15, TPS2660 방열 비아 드릴 0.2
+RULES = dict(min_through_hole_diameter=0.2, min_via_diameter=0.4, min_hole_clearance=0.2,
+             min_copper_edge_clearance=0.3)
+NETCLASS = dict(clearance=0.15, track_width=0.15, via_diameter=0.45, via_drill=0.2)
+
+
+def set_rules(pro_path, keep):
+    """pcbnew 저장이 .kicad_pro 를 기본값으로 다시 쓰므로: 회로도 시트 목록을 되살리고 설계 규칙을 넣는다."""
+    pro = json.load(open(pro_path))
+    pro["sheets"] = keep.get("sheets", pro.get("sheets", []))
+    pro["board"]["design_settings"]["rules"].update(RULES)
+    for c in pro["net_settings"]["classes"]:
+        if c["name"] == "Default":
+            c.update(NETCLASS)
+    open(pro_path, "w").write(json.dumps(pro, indent=2) + "\n")
+
+
+def build():
+    open(OUT, "w", encoding="utf-8").write(O.build())
+    board = pcbnew.LoadBoard(OUT)
+    nets = {}
+    for ref, p in PARTS.items():
+        for n in p["nets"].values():
+            if n and n not in nets:
+                ni = pcbnew.NETINFO_ITEM(board, n)
+                board.Add(ni)
+                nets[n] = ni
+
+    placed = {}     # ref -> dict(side, x, y, rot, crt, fab, fp)
+
+    scratch = pcbnew.BOARD()          # 뒤집기(Flip)는 보드에 올린 풋프린트만 가능
+
+    def make(ref, tmp=False):
+        p = PARTS[ref]
+        fp = pcbnew.FootprintLoad(LIB, p["fp"].split(":")[1])
+        (scratch if tmp else board).Add(fp)
+        if tmp:
+            return fp
+        fp.SetFPID(pcbnew.LIB_ID(*p["fp"].split(":")))
+        fp.SetReference(ref)
+        fp.SetValue(p["val"])
+        for pad in fp.Pads():
+            n = p["nets"].get(pad.GetNumber())
+            if n:
+                pad.SetNet(nets[n])
+        return fp
+
+    def crt(fp):
+        return layer_box(fp, (pcbnew.F_CrtYd, pcbnew.B_CrtYd))
+
+    def pad_xy(ref, net):
+        fp = placed[ref]["fp"]
+        pts = [from_k(pd.GetPosition()) for pd in fp.Pads() if PARTS[ref]["nets"].get(pd.GetNumber()) == net]
+        return (sum(a for a, _ in pts) / len(pts), sum(b for _, b in pts) / len(pts))
+
+    def holes(fp):
+        """관통 구멍(NPTH/PTH) → 반대 면도 막는 사각형들 (구멍 + 0.3)."""
+        out = []
+        for pd in fp.Pads():
+            if pd.GetAttribute() in (pcbnew.PAD_ATTRIB_NPTH, pcbnew.PAD_ATTRIB_PTH):
+                (x, y), r = from_k(pd.GetPosition()), TOMM(max(pd.GetSize().x, pd.GetSize().y)) / 2 + 0.3
+                out.append((x - r, y - r, x + r, y + r))
+        return out
+
+    def free(side, box, ref, own_holes=()):
+        for r, q in placed.items():
+            if q["side"] == side and overlap(box, q["crt"]):
+                return False
+            if q["side"] != side and any(overlap(box, hb, 0.0) for hb in q["holes"]):
+                return False
+            if q["side"] != side and any(overlap(hb, q["crt"], 0.0) for hb in own_holes):
+                return False
+        return True
+
+    def commit(ref, fp, side, x, y, rot):
+        placed[ref] = dict(side=side, x=x, y=y, rot=rot, crt=crt(fp), holes=holes(fp),
+                           fab=layer_box(fp, (pcbnew.F_Fab, pcbnew.B_Fab)), fp=fp)
+
+    # 부품 중심 → 코트야드 (면·회전별) 캐시
+    shape = {}
+
+    def local_box(ref, side, rot):
+        k = (PARTS[ref]["fp"], side, rot)
+        if k not in shape:
+            fp = make(ref, tmp=True)
+            set_pose(fp, side, 0.0, 0.0, rot)
+            shape[k] = (crt(fp), holes(fp))
+        return shape[k]
+
+    for ref, sides, how, opt in PLAN:
+        fp = make(ref)
+        h = height(PARTS[ref]["fp"])
+        if how[0] == "fix":
+            side, rot = sides, opt["rot"]
+            if ref in ("J3", "J1"):
+                set_pose(fp, side, 0.0, 0.0, rot)
+                fab = layer_box(fp, (pcbnew.F_Fab,))
+                x = J3_FRONT - fab[0] if ref == "J3" else J1_REAR - fab[2]
+                y = 0.0
+            else:
+                x, y = how[1], how[2]
+            set_pose(fp, side, x, y, rot)
+            assert free(side, crt(fp), ref), ref
+            if ref == "U4":                       # J3·J1 은 플러그 통로를 정의하는 쪽
+                assert region_ok(side, crt(fp), h, check_h=False), ref
+            commit(ref, fp, side, x, y, rot)
+            continue
+        if how[0] == "near" and how[1] not in placed:
+            UNPLACED.append(ref)
+            board.Remove(fp)
+            continue
+        ax, ay = (how[1], how[2]) if how[0] == "at" else pad_xy(how[1], how[2])
+        rots = opt.get("rots", (0, 90, 180, 270))
+        # 1) 기준점에서 가장 가까운 빈 자리 거리 dmin, 2) dmin + SLACK 안의 후보 중
+        #    사방이 막힌(다른 부품·가장자리에 붙은) 자리를 우선 → 틈이 덜 생김
+        cands, dmin = [], None
+        for si, side in enumerate(sides):
+            pen = 3.0 * si                          # 두 번째 면은 3 mm 벌점
+            for rot in rots:
+                bx, hl = local_box(ref, side, rot)
+                for d0, dx, dy in OFFSETS:
+                    d = d0 + pen
+                    if dmin is not None and d > dmin + SLACK:
+                        break
+                    x, y = round(ax + dx, 3), round(ay + dy, 3)
+                    box = (x + bx[0], y + bx[1], x + bx[2], y + bx[3])
+                    own = [(x + a, y + b, x + c, y + d) for (a, b, c, d) in hl]
+                    if region_ok(side, box, h) and free(side, box, ref, own):
+                        dmin = d if dmin is None else min(dmin, d)
+                        touch = 0
+                        for (ex, ey) in ((-0.3, 0), (0.3, 0), (0, -0.3), (0, 0.3)):
+                            b2 = (box[0] + ex, box[1] + ey, box[2] + ex, box[3] + ey)
+                            if not (region_ok(side, b2, h) and free(side, b2, ref)):
+                                touch += 1
+                        cands.append((d - TOUCH * touch, d, side, x, y, rot))
+        best = min((c for c in cands if c[1] <= dmin + SLACK), default=None)
+        if not best:
+            UNPLACED.append(ref)
+            board.Remove(fp)
+            continue
+        _, _, side, x, y, rot = best
+        set_pose(fp, side, x, y, rot)
+        commit(ref, fp, side, x, y, rot)
+
+    board.BuildConnectivity()
+    pro_path = OUT[:-len(".kicad_pcb")] + ".kicad_pro"
+    keep = json.load(open(pro_path))
+    pcbnew.SaveBoard(OUT, board)
+    set_rules(pro_path, keep)
+    prl = OUT[:-len(".kicad_pcb")] + ".kicad_prl"
+    if os.path.exists(prl):
+        os.remove(prl)                          # 사용자 로컬 설정 파일 — 저장소에 넣지 않음
+    return board, placed
+
+
+def report(placed):
+    rows, err = [], []
+    for ref, q in sorted(placed.items(), key=lambda kv: (kv[1]["side"], kv[1]["x"])):
+        fp = PARTS[ref]["fp"]
+        h = height(fp)
+        c = q["crt"]
+        ymax = max(abs(c[1]), abs(c[3]))
+        ha = h_allow(c[0], c[2], ymax)
+        pads = [dict(n=pd.GetNumber(), xy=[round(v, 3) for v in from_k(pd.GetPosition())],
+                     net=PARTS[ref]["nets"].get(pd.GetNumber(), ""))
+                for pd in q["fp"].Pads() if pd.GetNumber()]
+        rows.append(dict(ref=ref, val=PARTS[ref]["val"], fp=fp.split(":")[1], side=q["side"],
+                         x=round(q["x"], 3), y=round(q["y"], 3), rot=q["rot"], h=h,
+                         crt=[round(v, 3) for v in c], fab=[round(v, 3) for v in (q["fab"] or c)],
+                         h_allow=round(ha, 2), pads=pads))
+        if h > ha and ref != "J5":
+            err.append(f"{ref}: height {h} > allowed {ha:.2f}")
+    return rows, err
+
+
+def main():
+    board, placed = build()
+    rows, err = report(placed)
+    area = {s: sum((r["crt"][2] - r["crt"][0]) * (r["crt"][3] - r["crt"][1]) for r in rows if r["side"] == s)
+            for s in "TB"}
+    meta = dict(project=O.PROJECT, coords="mech: x axial (rear +), y lateral, z top +; KiCad = (100 + x - 14.5, 100 - y)",
+                side={"T": "F.Cu (z+)", "B": "B.Cu (z-)"}, courtyard_area=area,
+                counts={s: sum(1 for r in rows if r["side"] == s) for s in "TB"},
+                unplaced=UNPLACED)
+    json.dump(dict(meta=meta, parts=rows), open(JSON_OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(OUT)
+    print("parts", len(rows), meta["counts"], "courtyard mm2", {k: round(v) for k, v in area.items()})
+    err += [f"{r}: no free place" for r in UNPLACED]
+    for e in err:
+        print("ERROR", e)
+    return 1 if err else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
