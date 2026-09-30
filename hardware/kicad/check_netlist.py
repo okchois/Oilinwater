@@ -39,6 +39,9 @@ def main(path):
             if not gname.startswith(("Net-", "unconnected-")) and gname != name:
                 print(f"NAME MISMATCH: intended {name} drawn as {gname}")
                 errors += 1
+            if gname.startswith("unconnected-"):          # 핀에 no-connect 표시가 붙었는데 실제로는 연결됨 (ERC 오류)
+                print(f"NO-CONNECT ON CONNECTED PIN: {name} drawn as {gname}")
+                errors += 1
             continue
         # 어느 넷에 섞였는지 보고
         hits = {k: v & nodes for k, v in got.items() if v & nodes}
@@ -58,4 +61,7 @@ def main(path):
 
 
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print(__doc__)
+        sys.exit(2)
     sys.exit(main(sys.argv[1]))

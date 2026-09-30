@@ -200,6 +200,23 @@
         "via_diameter": 0.45,
         "via_drill": 0.2,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 1.0,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "CHASSIS",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.5,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -207,7 +224,12 @@
     },
     "net_colors": null,
     "netclass_assignments": null,
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "CHASSIS",
+        "pattern": "CHASSIS"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
@@ -252,6 +274,10 @@
     [
       "b3f5f306-1882-5a8c-be50-8be0fd5d4bd3",
       "RS-485"
+    ],
+    [
+      "9bec11d4-af3f-589d-9a1b-a61588aa3856",
+      "Aux"
     ]
   ],
   "text_variables": {}

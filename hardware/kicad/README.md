@@ -13,16 +13,17 @@ DOTECH HMT500(260313) 오일 수분 트랜스미터의 KiCad 회로도입니다.
 | `HMT500(260313A)/HMT500(260313A).kicad_pro` | 프로젝트 (KiCad 7 형식 — KiCad 8/9에서 열면 자동 변환) |
 | `HMT500(260313A)/HMT500(260313A).kicad_sch` | 최상위 시트 (하위 시트 6장) |
 | `HMT500(260313A)/HMT500(260313A)_connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
-| `HMT500(260313A)/HMT500(260313A)_power.kicad_sch` | eFuse TPS2660 (RTN은 GND와 분리, OVP 29 V → 전원 12–28 V), 벅 LMR36006BRNXR(5 V, L 15 µH·CFF 20 pF), LDO TPS7A2033(3.3 V) (v0.8) |
+| `HMT500(260313A)/HMT500(260313A)_power.kicad_sch` | eFuse TPS2660 (RTN은 GND와 분리, OVP 32.6 V / 복귀 30.1 V → 전원 12–28 V, v0.9), 벅 LMR36006BRNXR(5 V, L 15 µH·CFF 20 pF), LDO TPS7A2033(3.3 V) (v0.8) |
 | `HMT500(260313A)/HMT500(260313A)_mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서. SPI1 = ADS1220, SPI2 = DAC(모드 3), SPI3 = PCAP04 (v0.8) |
 | `HMT500(260313A)/HMT500(260313A)_measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(QFN24 실제 핀, DC 없는 플로팅 모드) + 기준 C, ADS1220(Pt1000 2선) |
 | `HMT500(260313A)/HMT500(260313A)_analog_out.kicad_sch` | DAC8760 ×2 (SCLK 게이트 U14, AVDD 10 Ω, ALARM wired-OR) + OPA197 +VSENSE 버퍼 + 외부 ISET-R + TPS26611DDFR 오결선 보호 + TVS3301 (v0.8) |
-| `HMT500(260313A)/HMT500(260313A)_rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
+| `HMT500(260313A)/HMT500(260313A)_rs485.kicad_sch` | THVD2410 (±70 V), DE 10 k 풀다운 (v0.9) |
+| `HMT500(260313A)/HMT500(260313A)_aux.kicad_sch` | v0.9 보조: TPS26611 +Vs 27 V 클램프, VIN 전압 감시, PCB에 넣지 못한 선택 사항 메모 |
 | `HMT500(260313A)/HMT500(260313A).kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
 | `HMT500(260313A)/HMT500(260313A)_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
 | `HMT500(260313A)/HMT500(260313A)_schematic.pdf` | 회로도 PDF (7쪽) |
 | `HMT500(260313A)/HMT500(260313A)_parts_list.xlsx`, `.csv` | **구매용 부품리스트**: 회로도 부품 + 제조사·품번·1k 추정 단가·상태, 분류별 요약(환율 입력 시 원화 자동 계산). `make_parts_list.py`로 생성 |
-| `HMT500(260313A)/HMT500(260313A).kicad_pcb` | 보드 외곽(57 × 23, 4층), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), **부품 84개 배치·넷 지정 완료 (배선 전, 승인 대기)**. 설계 규칙: 간격·선폭 0.15, 비아 0.45/0.2, 가장자리 0.3 |
+| `HMT500(260313A)/HMT500(260313A).kicad_pcb` | 보드 외곽(57 × 23, 4층), 고정 구멍 2개, 금지 구역(홀더 홈·지지링 홈), **회로도 v0.9 부품 102개 배치·넷 지정 완료 (배선 전, 승인 대기)**. 설계 규칙: 간격·선폭 0.15, 비아 0.45/0.2, 가장자리 0.3, 넷클래스 CHASSIS 간격 1.0·선폭 0.5, J5 둘레 3.3 mm 부품 금지 |
 | `HMT500(260313A)/placement.png`, `placement.json` | 배치 그림(윗면/아랫면, 색 = 기능 블록, 숫자 = 부품 높이)과 배치 표(기구 좌표) — 조립 시뮬레이션 입력 |
 | `gen_pcb_outline.py` | 외곽·금지 구역 생성기. 치수는 `hardware/mech/hmt500_params.py`에서 읽습니다 |
 | `place_pcb.py` | 부품 배치 (pcbnew). 고정 부품 + 큰 부품 자리표 + 작은 부품은 부모 패드 옆 빈 자리 탐색. 보드·금지 구역·하네스 플러그 통로·높이(보어) 조건 검사. `python3 place_pcb.py` |

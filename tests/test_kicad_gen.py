@@ -66,13 +66,13 @@ class KicadGenTest(unittest.TestCase):
 
     def test_wiring_straight(self):
         """작도 규칙: 가까운 같은 시트 연결은 라벨 대신 선으로 (꺾임은 연결당 2개 이하, 시트당 6개 이하),
-        분기점은 실제 3갈래 노드만 (전체 40개 이하)."""
+        분기점은 실제 3갈래 노드만 (전체 55개 이하 — v0.9 부품 84 → 114개, 보조 시트 추가)."""
         total_j = 0
         for S in g.SHEETS:
             bends, js = g.wire_metrics(S)
             self.assertLessEqual(bends, 6, S.file)
             total_j += js
-        self.assertLessEqual(total_j, 40)
+        self.assertLessEqual(total_j, 55)
 
     def test_near_labels_wired(self):
         """같은 시트에서 라벨로만 잇는 넷은 멀리 떨어진 것만 허용 (가까운 것은 선으로)."""

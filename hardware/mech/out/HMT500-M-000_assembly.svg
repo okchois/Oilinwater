@@ -117,23 +117,18 @@
 <polygon points="170.400,78.400 175.000,78.400 175.000,94.000 170.400,94.000" class="part2"/>
 <polygon points="264.000,75.500 272.000,75.500 272.000,76.800 264.000,76.800" class="part2"/>
 <polygon points="175.000,100.000 175.000,82.000 198.000,82.000 198.000,77.000 272.800,77.000 272.800,82.000 288.000,82.000 288.000,100.000" class="green"/>
-<rect x="189.000" y="86.800" width="6.000" height="3.400" fill="#333" stroke="none"/>
-<rect x="196.700" y="84.024" width="1.800" height="3.400" fill="#333" stroke="none"/>
-<rect x="197.400" y="89.824" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="200.376" y="79.500" width="1.848" height="3.400" fill="#333" stroke="none"/>
-<rect x="201.076" y="85.374" width="4.200" height="2.700" fill="#333" stroke="none"/>
-<rect x="206.526" y="78.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
-<rect x="207.850" y="86.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="193.000" y="86.800" width="6.000" height="3.400" fill="#333" stroke="none"/>
+<rect x="200.200" y="79.024" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="200.600" y="88.076" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="203.700" y="81.524" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="207.050" y="88.600" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="207.400" y="79.350" width="3.400" height="6.600" fill="#333" stroke="none"/>
 <rect x="207.000" y="93.900" width="8.700" height="6.100" fill="#333" stroke="none"/>
-<rect x="213.550" y="78.224" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="211.650" y="82.400" width="8.200" height="8.200" fill="#333" stroke="none"/>
-<rect x="221.900" y="83.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
-<rect x="222.676" y="78.650" width="4.200" height="2.700" fill="#333" stroke="none"/>
-<rect x="227.076" y="86.600" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="227.076" y="83.100" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="213.150" y="79.900" width="8.200" height="8.200" fill="#333" stroke="none"/>
+<rect x="223.350" y="78.924" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="224.076" y="84.800" width="6.600" height="3.400" fill="#333" stroke="none"/>
+<rect x="227.450" y="79.800" width="6.600" height="3.400" fill="#333" stroke="none"/>
 <rect x="224.500" y="92.900" width="14.200" height="7.100" fill="#333" stroke="none"/>
-<rect x="232.876" y="84.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
-<rect x="233.400" y="80.252" width="3.400" height="1.848" fill="#333" stroke="none"/>
 <rect x="236.800" y="86.940" width="3.400" height="1.800" fill="#333" stroke="none"/>
 <rect x="239.300" y="79.000" width="1.800" height="3.400" fill="#333" stroke="none"/>
 <rect x="242.600" y="79.900" width="4.200" height="4.800" fill="#333" stroke="none"/>
@@ -141,6 +136,8 @@
 <rect x="243.200" y="92.740" width="6.200" height="6.200" fill="#333" stroke="none"/>
 <rect x="249.100" y="78.100" width="12.800" height="6.600" fill="#333" stroke="none"/>
 <rect x="254.700" y="86.650" width="8.300" height="13.350" fill="#333" stroke="none"/>
+<rect x="265.676" y="82.476" width="1.848" height="3.400" fill="#333" stroke="none"/>
+<rect x="269.274" y="82.000" width="1.850" height="3.400" fill="#333" stroke="none"/>
 <circle cx="178.500" cy="90.000" r="2.200" class="thin" fill="#fff"/>
 <rect x="199.000" y="95.000" width="8.000" height="5.000" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>
 <rect x="145.000" y="93.000" width="25.000" height="7.000" style="fill:#d9c9a8;stroke:#000;stroke-width:0.25"/>

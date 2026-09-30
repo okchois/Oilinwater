@@ -47,6 +47,7 @@ HEIGHT = {
     "C_1206": 1.8, "SOIC-8": 1.75, "LQFP-48": 1.6, "SOT-23": 1.45, "HTSSOP": 1.2, "TSSOP": 1.2,
     "C_0805": 1.35, "VSSOP": 1.0, "Texas_DRB": 1.0, "Texas_RNX": 1.0, "QFN-24": 0.9,
     "R_2512": 0.7, "_0603_": 0.95, "Tag-Connect": 0.0, "SolderWire": 0.0,
+    "R_1206": 0.7,
 }
 
 
@@ -221,7 +222,7 @@ for S in G.SHEETS:
 
 
 # ── 배치 계획 ──
-# (ref, 면, 기준) — 기준: (x, y) 고정 좌표 | ("near", 부모, 넷) | ("at", x, y) 탐색 시작점
+# (ref, 면, 기준) — 기준: (x, y) 고정 좌표 | ("near", 부모, 넷) | ("pin", 부모, 핀번호) | ("at", x, y) 탐색 시작점
 # 면 "T"/"B", "TB" = 윗면 우선·안 되면 아랫면, "BT" 반대. rots: 허용 회전.
 PLAN = [
     # ── 고정: 하네스 헤더 두 개, MCU ──
@@ -229,7 +230,7 @@ PLAN = [
     ("J1", "T", ("fix", None, None), dict(rot=90)),
     ("U4", "T", ("fix", 42.8, 0.0), dict(rot=0)),
     # ════ 윗면: 큰 부품 자리 (코트야드 크기로 계산한 칸) ════
-    ("J5", "T", ("at", 19.4, 4.9), {}),                      # 샤시 선 구멍: 홀더 위 축 나사(y 0, z 8) 바로 뒤 (조립 시뮬레이션 ⑤ → D안)
+    ("J5", "T", ("at", 18.8, 7.4), {}),                      # 샤시 선 구멍: 홀더 위 축 나사(y 0, z 8) 바로 뒤 (조립 시뮬레이션 ⑤ → D안)
     ("J2", "T", ("at", 20.4, 0.0), dict(rots=(90,))),       # SWD Tag-Connect: 높이 0 → W-1 선 아래 (프로그래밍은 하네스 꽂기 전). 구멍 3개는 아랫면도 막음
     ("D40", "T", ("at", 50.15, 2.08), dict(rots=(0,))),     # 출력 TVS: J1 OUT 핀 바로 앞 (서지 경로 최단)
     ("D30", "T", ("at", 50.15, -2.08), dict(rots=(0,))),
@@ -240,6 +241,7 @@ PLAN = [
     ("C36", "T", ("near", "U14", "+3V3"), {}),
     # LDO + 페라이트 (앞쪽 윗면 — +3V3A 를 측정부에 바로)
     ("U3", "T", ("at", 23.0, 6.0), {}),
+    ("C26", "T", ("near", "U3", "+5V"), {}),
     ("C12", "T", ("near", "U3", "+3V3"), {}),
     ("FB1", "T", ("near", "U3", "+3V3"), {}),
     ("C13", "T", ("near", "FB1", "+3V3A"), {}),
@@ -260,9 +262,6 @@ PLAN = [
     # 출력 TVS 옆 C, MCU 주변, RS-485 C
     ("C41", "T", ("near", "D30", "OUT1_EXT"), {}),
     ("C51", "T", ("near", "D40", "OUT2_EXT"), {}),
-    ("C14", "T", ("near", "U4", "+3V3"), {}),
-    ("C15", "T", ("near", "U4", "+3V3"), {}),
-    ("C20", "T", ("near", "U4", "+3V3"), {}),
     ("C18", "T", ("near", "U4", "+3V3"), {}),
     ("C21", "T", ("near", "U4", "NRST"), {}),
     ("C60", "T", ("near", "U11", "+3V3"), {}),
@@ -271,26 +270,53 @@ PLAN = [
     # 입력 보호·샤시 (뒤쪽: J1 VIN/GND 아래 → 링·엔드캡 구역)
     ("L1", "B", ("at", 61.07, 0.0), dict(rots=(90,))),      # 링 구역 가운데 (높이 5 → |y| ≤ 7.7)
     ("D1", "B", ("at", 54.28, 6.28), dict(rots=(90,))),
-    ("D2", "B", ("at", 53.97, -2.05), dict(rots=(0,))),
     ("R1", "B", ("at", 66.01, 4.93), dict(rots=(90,))),     # 엔드캡 구역
-    ("C1", "B", ("near", "D2", "VIN_F"), {}),
+
     # 전류 출력 DAC 2개 (가운데 — 발열을 센서 쪽에서 멀리)
-    ("U7", "B", ("at", 38.5, -6.6), dict(rots=(0, 180))),
-    ("U8", "B", ("at", 38.5, 6.6), dict(rots=(0, 180))),
+    # v0.9: DAC(최악 0.73 W씩)를 측정부(PCAP04·ADS1220 윗면 x 29–37) 밑에서 뒤쪽으로
+    ("U7", "B", ("at", 46.5, -6.6), dict(rots=(0, 180))),
+    ("U8", "B", ("at", 46.5, 6.6), dict(rots=(180,))),      # U7과 대칭: ISET·REF 핀(13·14)이 안쪽 → R42·C50 핀 옆
+    # v0.9: DAC 핀에 붙어야 하는 부품 (ISET-R, REF C, AVDD R·C, +3V3 C) — DAC 다음 바로
+    ("R32", "B", ("pin", "U7", "13"), {}),
+    ("C40", "B", ("pin", "U7", "14"), {}),
+    ("R42", "B", ("pin", "U8", "13"), {}),
+    ("C50", "B", ("pin", "U8", "14"), {}),
+    ("C44", "B", ("pin", "U7", "2"), {}),
+    ("C54", "B", ("pin", "U8", "2"), {}),
+    ("R34", "B", ("near", "U7", "DAC1_AVDD"), {}),
+    ("C42", "B", ("near", "U7", "DAC1_AVDD"), {}),
+    ("R44", "B", ("near", "U8", "DAC2_AVDD"), {}),
+    ("C52", "B", ("near", "U8", "DAC2_AVDD"), {}),
+    ("C43", "B", ("near", "U7", "DAC1_AVDD"), {}),
+    # v0.9: MCU 전원 핀 4–7 디커플링 — 윗면은 J3 하네스 통로라 바로 아래 아랫면 (비아 1개 거리)
+    ("C14", "BT", ("pin", "U4", "4"), {}),
+    ("C20", "BT", ("pin", "U4", "5"), {}),
+    ("C15", "BT", ("pin", "U4", "6"), {}),
     # eFuse: 방열 비아 → 윗면에도 RTN 동박 패드가 생김 → 윗면 부품이 없는 J3 플러그 통로 바로 아래
     ("U1", "B", ("at", 26.6, 0.0), dict(rots=(0, 180))),
+    # v0.9: 입력 2단 TVS·입력 C는 eFuse IN 옆 (SLVSDG2G 11.1·12.1)
+    ("D2", "B", ("near", "U1", "VIN_F"), dict(rots=(0, 90, 180, 270))),
+    ("C2", "B", ("near", "U1", "VIN_F"), {}),
+    ("C1", "B", ("near", "U1", "VIN_F"), {}),
     # 벅·LDO (앞쪽 — +3V3A 를 측정부 가까이, 발열 적음)
-    ("U2", "B", ("at", 21.5, 4.5), {}),
+    ("U2", "B", ("at", 21.5, 4.5), dict(rots=(180,))),   # BOOT·VCC 핀(4·5)이 J5 금지 구역 반대쪽 → C8·C9 핀 옆
+    # v0.9: 벅 입력 220 nF·BOOT·VCC 콘덴서를 U2 핀에 먼저 (SNVSB48C 11.1)
+    ("C16", "B", ("pin", "U2", "10"), {}),
+    ("C17", "B", ("pin", "U2", "2"), {}),
+    ("C5", "B", ("near", "U2", "VIN_P"), {}),              # 벌크 CIN (eFuse 출력 겸용)
+    ("C8", "B", ("pin", "U2", "4"), {}),
+    ("C9", "B", ("pin", "U2", "5"), {}),
+    # v0.9 재검토: 샤시 부품은 벅 핀 콘덴서 직후에 J5 옆 자리를 먼저 차지 (MCU·측정부에서 떨어뜨림)
+    ("GDT1", "TB", ("near", "J5", "CHASSIS"), {}),
+    ("C3", "TB", ("near", "J5", "CHASSIS"), {}),
+    ("R2", "TB", ("near", "J5", "CHASSIS"), {}),
     ("L2", "B", ("near", "U2", "BUCK_SW"), {}),
     ("C10", "B", ("near", "L2", "+5V"), {}),
     ("C6", "B", ("near", "L2", "+5V"), {}),
-    ("C8", "B", ("near", "U2", "BUCK_BOOT"), {}),
-    ("C9", "B", ("near", "U2", "BUCK_VCC"), {}),
     ("R8", "B", ("near", "U2", "BUCK_FB"), {}),
     ("R9", "B", ("near", "U2", "BUCK_FB"), {}),
     ("C11", "B", ("near", "R8", "BUCK_FB"), {}),
     # eFuse 분압·설정 부품
-    ("C5", "B", ("near", "U1", "VIN_P"), {}),
     ("C7", "B", ("near", "U1", "VIN_P"), {}),
     ("R3", "B", ("near", "U1", "UV_DIV"), {}),
     ("R4", "B", ("near", "U1", "OV_DIV"), {}),
@@ -298,29 +324,33 @@ PLAN = [
     ("R6", "B", ("near", "U1", "EF_ILIM"), {}),
     ("C4", "B", ("near", "U1", "EF_DVDT"), {}),
     # 샤시 부품: 접지선 구멍 J5 옆 (서지가 GDT → 샤시로 바로). 앞쪽 전원부 다음에 남는 자리
-    ("GDT1", "TB", ("near", "J5", "CHASSIS"), {}),
-    ("C3", "TB", ("near", "J5", "CHASSIS"), {}),
-    ("R2", "TB", ("near", "J5", "CHASSIS"), {}),
+    # v0.9: 샤시 부품은 J5 바로 옆 (선–대지 서지가 측정부를 지나지 않게, 검토 D2)
+    # 벅 입력 C: VIN–PGND 핀 바로 옆 (SNVSB48C 9.2.1.2.6), LDO 입력 C
     # 출력 스위치·센스 앰프 (DAC 뒤 → R30/R40 쪽)
     ("U9", "B", ("near", "U7", "DAC1_OUT"), {}),
     ("U10", "B", ("near", "U8", "DAC2_OUT"), {}),
     ("U12", "B", ("near", "U7", "DAC1_SENSE"), {}),
     ("U13", "B", ("near", "U8", "DAC2_SENSE"), {}),
-    ("C43", "B", ("near", "U9", "VIN_P"), {}),
-    ("C45", "B", ("near", "U9", "VIN_P"), {}),
-    ("C55", "B", ("near", "U10", "VIN_P"), {}),
+    ("C45", "B", ("near", "U12", "DAC1_AVDD"), {}),
+    ("C55", "B", ("near", "U13", "DAC2_AVDD"), {}),
+    # v0.9: TPS26611 +Vs 클램프 (+Vs 핀 옆 100n)
+    ("C46", "B", ("near", "U9", "VS_CLAMP"), {}),
+    ("C56", "B", ("near", "U10", "VS_CLAMP"), {}),
+    ("Q1", "B", ("near", "C46", "VS_CLAMP"), {}),        # 이미터 폴로워 (VS_CLAMP = 이미터)
+    ("C53", "B", ("near", "Q1", "VS_CLAMP"), {}),
+    ("R50", "B", ("near", "Q1", "VS_BASE"), {}),
+    ("D50", "B", ("near", "Q1", "VS_BASE"), {}),
     ("R31", "B", ("near", "U12", "OUT1_SNS"), {}),
     ("R41", "B", ("near", "U13", "OUT2_SNS"), {}),
-    ("R32", "B", ("near", "U7", "DAC1_ISET"), {}),
-    ("C40", "B", ("near", "U7", "DAC1_REF"), {}),
-    ("R34", "B", ("near", "U7", "DAC1_AVDD"), {}),
-    ("C42", "B", ("near", "U7", "DAC1_AVDD"), {}),
-    ("C44", "B", ("near", "U7", "+3V3"), {}),
-    ("R42", "B", ("near", "U8", "DAC2_ISET"), {}),
-    ("C50", "B", ("near", "U8", "DAC2_REF"), {}),
-    ("R44", "B", ("near", "U8", "DAC2_AVDD"), {}),
-    ("C52", "B", ("near", "U8", "DAC2_AVDD"), {}),
-    ("C54", "B", ("near", "U8", "+3V3"), {}),
+    # v0.9: 풀업·감시·RS-485 DE 풀다운
+    ("R60", "TB", ("near", "U11", "RS485_DE"), {}),
+    ("R10", "TB", ("near", "U14", "DAC1_LATCH"), {}),
+    ("R11", "TB", ("near", "U14", "DAC2_LATCH"), {}),
+    ("R12", "TB", ("near", "U6", "CS_ADC"), {}),
+    ("R13", "TB", ("near", "U5", "CS_CDC"), {}),
+    ("R14", "TB", ("near", "U4", "VIN_SENSE"), {}),
+    ("R15", "TB", ("near", "R14", "VIN_SENSE"), {}),
+    ("C30", "TB", ("near", "R14", "VIN_SENSE"), {}),
 ]
 
 # 하네스 헤더 고정: 몸체 앞면(J3) / 뒷면(J1)을 기구 도면 값에 맞춘다
@@ -329,12 +359,16 @@ J1_REAR = P.HARNESS2["plug"]["x"][0]     # 58.5 — 플러그가 뒤(+x)에서 �
 
 
 UNPLACED = []
+CHASSIS_PARTS = {"GDT1", "C3", "R2"}     # v0.9: 샤시 부품 ~ 회로 부품 코트야드 0.5 mm (+ 넷클래스 CHASSIS 동박 간격 1.0 — 에폭시 몰딩 안, 검토 D2)
+CH_GAP = 0.5
+J5_KO = 3.3          # J5 구멍 중심 ~ 다른 부품 코트야드 (양면). 패드 Ø1.6 + 코트야드 여유 → 코트야드 간격 ≥ 2 mm (재검토)
 
 # 4층 기판 설계 규칙 (일반 4층 공정: 선폭·간격 0.1 mm 급, 최소 드릴 0.2 mm 가능 — 여유 두고 설정)
 #  - 간격 0.15: SOT-23-8(0.65 피치) 패드 사이 0.15, TPS2660 방열 비아 드릴 0.2
 RULES = dict(min_through_hole_diameter=0.2, min_via_diameter=0.4, min_hole_clearance=0.2,
              min_copper_edge_clearance=0.3)
 NETCLASS = dict(clearance=0.15, track_width=0.15, via_diameter=0.45, via_drill=0.2)
+CHASSIS_CLASS = dict(clearance=1.0, track_width=0.5, via_diameter=0.8, via_drill=0.4)
 
 
 def set_rules(pro_path, keep):
@@ -342,9 +376,15 @@ def set_rules(pro_path, keep):
     pro = json.load(open(pro_path))
     pro["sheets"] = keep.get("sheets", pro.get("sheets", []))
     pro["board"]["design_settings"]["rules"].update(RULES)
-    for c in pro["net_settings"]["classes"]:
+    ns = pro["net_settings"]
+    for c in ns["classes"]:
         if c["name"] == "Default":
             c.update(NETCLASS)
+    # v0.9: 샤시 넷은 다른 넷과 1.0 mm (몰딩 안), 선폭 0.5 (서지 전류, 검토 D2)
+    base = next(c for c in ns["classes"] if c["name"] == "Default")
+    ns["classes"] = [c for c in ns["classes"] if c["name"] != "CHASSIS"] + [dict(base, name="CHASSIS", **CHASSIS_CLASS)]
+    ns["netclass_patterns"] = [p_ for p_ in ns.get("netclass_patterns") or [] if p_.get("netclass") != "CHASSIS"] + \
+        [{"netclass": "CHASSIS", "pattern": "CHASSIS"}]
     open(pro_path, "w").write(json.dumps(pro, indent=2) + "\n")
 
 
@@ -386,6 +426,10 @@ def build():
         pts = [from_k(pd.GetPosition()) for pd in fp.Pads() if PARTS[ref]["nets"].get(pd.GetNumber()) == net]
         return (sum(a for a, _ in pts) / len(pts), sum(b for _, b in pts) / len(pts))
 
+    def pin_xy(ref, num):
+        pts = [from_k(pd.GetPosition()) for pd in placed[ref]["fp"].Pads() if pd.GetNumber() == num]
+        return pts[0]
+
     def holes(fp):
         """관통 구멍(NPTH/PTH) → 반대 면도 막는 사각형들 (구멍 + 0.3)."""
         out = []
@@ -396,8 +440,15 @@ def build():
         return out
 
     def free(side, box, ref, own_holes=()):
+        if "J5" in placed and ref != "J5":            # v0.9: 샤시 선 납땜 구멍 둘레 양면 금지 (손납땜 브리지 방지)
+            j = placed["J5"]
+            dx_ = max(box[0] - j["x"], 0.0, j["x"] - box[2])
+            dy_ = max(box[1] - j["y"], 0.0, j["y"] - box[3])
+            if math.hypot(dx_, dy_) < J5_KO:
+                return False
         for r, q in placed.items():
-            if q["side"] == side and overlap(box, q["crt"]):
+            g_ = CH_GAP if (r in CHASSIS_PARTS) != (ref in CHASSIS_PARTS) else GAP
+            if q["side"] == side and overlap(box, q["crt"], g_):
                 return False
             if q["side"] != side and any(overlap(box, hb, 0.0) for hb in q["holes"]):
                 return False
@@ -438,11 +489,16 @@ def build():
                 assert region_ok(side, crt(fp), h, check_h=False), ref
             commit(ref, fp, side, x, y, rot)
             continue
-        if how[0] == "near" and how[1] not in placed:
+        if how[0] in ("near", "pin") and how[1] not in placed:
             UNPLACED.append(ref)
             board.Remove(fp)
             continue
-        ax, ay = (how[1] + DX, how[2]) if how[0] == "at" else pad_xy(how[1], how[2])
+        if how[0] == "at":
+            ax, ay = how[1] + DX, how[2]
+        elif how[0] == "pin":                     # v0.9: 특정 핀 바로 옆 (디커플링 C → 해당 전원 핀)
+            ax, ay = pin_xy(how[1], how[2])
+        else:
+            ax, ay = pad_xy(how[1], how[2])
         rots = opt.get("rots", (0, 90, 180, 270))
         # 1) 기준점에서 가장 가까운 빈 자리 거리 dmin, 2) dmin + SLACK 안의 후보 중
         #    사방이 막힌(다른 부품·가장자리에 붙은) 자리를 우선 → 틈이 덜 생김

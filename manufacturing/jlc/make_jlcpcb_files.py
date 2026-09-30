@@ -30,6 +30,9 @@ BOARD_ONLY = {"J2", "J5"}              # no part placed (pads / hole only)
 MAP_FIELDS = ["symbol", "value", "footprint", "refs", "qty", "mfr", "mpn", "lcsc", "jlc_type", "rot_offset", "note"]
 
 
+DNP = set()
+
+
 def bom_rows():
     with open(os.path.join(KICAD, PROJECT, PROJECT + "_BOM.csv"), encoding="utf-8") as f:
         return list(csv.DictReader(f))
@@ -45,6 +48,9 @@ def load_map():
     rows = []
     for b in bom_rows():
         key = (b["Symbol"], b["Value"])
+        if key[1].startswith("DNP"):                 # 미실장: BOM·CPL에서 뺌 (풋프린트만 PCB에)
+            DNP.update(b["References"].split())
+            continue
         refs = [r for r in b["References"].split() if r not in BOARD_ONLY]
         if not refs:
             continue
@@ -88,7 +94,7 @@ def main():
         w.writerow(["Designator", "Mid X", "Mid Y", "Layer", "Rotation"])
         for p in positions():
             ref = p["Ref"]
-            if ref in BOARD_ONLY:
+            if ref in BOARD_ONLY or ref in DNP:
                 continue
             layer = "Top" if p["Side"].lower().startswith("top") else "Bottom"
             w.writerow([ref, f"{float(p['PosX']):.3f}mm", f"{float(p['PosY']):.3f}mm", layer,
