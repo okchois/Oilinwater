@@ -1,0 +1,4 @@
+﻿Part,Name,File,Material,Qty,Note
+HMT500-T-001,W-2 plug push bar (assembly tool),HMT500-T-001_W-2_plug_push_bar_assembly_tool.stl,SLA 레진 (예: 8001) 또는 MJF PA12,2,"조립 공구 (제품 아님). 끝 두께 3.0, 가운데 홈 10.4"
+HMT500-M-105,PCB holder — fit check,HMT500-M-105_PCB_holder.stl,SLA 레진 (고정밀),2,선택: PEEK 가공 전 PCB·플러그 끼움 확인용
+HMT500-M-106,Support ring — fit check,HMT500-M-106_Support_ring.stl,SLA 레진 (고정밀),2,선택: 가공 전 끼움 확인용
