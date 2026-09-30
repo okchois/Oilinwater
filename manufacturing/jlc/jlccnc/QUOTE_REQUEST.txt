@@ -1,0 +1,58 @@
+Request for quotation - CNC machining (JLCCNC)
+Project: HMT500(260313) oil moisture transmitter, prototype lot
+Company: DOTECH Co., Ltd.
+Drawing revision: G   Date: 2026-09-30
+Quantity: 5 sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
+
+Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
+and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
+Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
+
+HMT500-M-101  Process body  x5
+  3D: HMT500-M-101_body.step   2D: HMT500-M-101_drawing_revG.pdf
+  Material: Stainless steel 316L (1.4404); 316 acceptable (wetted part)
+  Finish: As machined, deburr, passivation (ASTM A967)
+  Threads: G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, depth 5.5; 2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16
+  Tolerances: O-ring seat dia 29 f7; connector seal bore dia 10 H8; sealing faces Ra 0.8; others ISO 2768-mK
+  Note: Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer.
+
+HMT500-M-103  Housing tube  x5
+  3D: HMT500-M-103_housing.step   2D: HMT500-M-103_drawing_revG.pdf
+  Material: Stainless steel 316L (1.4404); 304 acceptable (not wetted)
+  Finish: As machined, deburr, passivation; outer laser marking if available (text supplied later)
+  Threads: Front: M28x1-6H internal, RIGHT hand, length 7; Rear: M28x1-LH-6H internal, LEFT hand, length 7
+  Tolerances: O-ring bores dia 29 H8 at both ends (length 4), Ra 0.8, C0.5 lead-in chamfers; others ISO 2768-mK
+  Note: Turnbuckle tube: front thread RIGHT hand, rear thread LEFT hand. Please confirm.
+
+HMT500-M-104  End cap  x5
+  3D: HMT500-M-104_endcap.step   2D: HMT500-M-104_drawing_revG.pdf
+  Material: Stainless steel 316L (1.4404); 304 acceptable
+  Finish: As machined, deburr, passivation
+  Threads: M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal (connector); 2x M3 through (fill/vent ports, r10 at 90/270 deg)
+  Tolerances: O-ring seat dia 29 f7 with groove, Ra 0.8; wrench flats AF28; others ISO 2768-mK
+  Note: LEFT hand external thread. Please confirm.
+
+HMT500-M-105  PCB holder  x5
+  3D: HMT500-M-105_holder.step   2D: HMT500-M-105_drawing_revG.pdf
+  Material: PEEK natural; POM acceptable for this prototype lot
+  Finish: As machined, deburr
+  Threads: 2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2
+  Tolerances: OD 21.6 (0/-0.1); slot width 1.7 (+0.1/0) depth 3.5; window 5.6 x 3.2 (+0.1/0); others ISO 2768-mK
+  Note: Drawing sheet M-105~106 (holder at top right).
+
+HMT500-M-106  PCB rear support ring  x5
+  3D: HMT500-M-106_ring.step   2D: HMT500-M-106_drawing_revG.pdf
+  Material: PEEK natural; POM acceptable for this prototype lot
+  Finish: As machined, deburr
+  Threads: -
+  Tolerances: OD 26.4 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4
+  Note: Drawing sheet M-105~106 (ring at right).
+
+General:
+- Unspecified tolerances ISO 2768-mK. Break sharp edges 0.2-0.5 unless noted.
+- Threads are modelled as plain cylinders in the STEP files; please cut threads per the callouts above.
+- IMPORTANT: M-103 rear thread and M-104 thread are LEFT hand (M28x1-LH). M-103 front and M-101 are RIGHT hand.
+- Fine / pipe threads: G1/2-A, M28x1, M10x0.75, M16x1.5. If a thread is not in your standard list, please advise.
+- O-ring sealing surfaces (dia 29 f7 / H8, dia 10 H8): Ra 0.8, no tool marks across the seal.
+- Material certificate EN 10204 3.1 for 316L (M-101 wetted part) if available.
+- Please send DFM questions before machining.

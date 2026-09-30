@@ -64,6 +64,66 @@ CNC = [
          note="1개/세트"),
 ]
 
+
+# English order data for JLCCNC (the drawings are in Korean — this sheet and QUOTE_REQUEST.txt carry the key specs)
+CNC_EN = {
+    "HMT500-M-101": dict(
+        material="Stainless steel 316L (1.4404); 316 acceptable (wetted part)",
+        finish="As machined, deburr, passivation (ASTM A967)",
+        threads="G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x0.75-6H internal, depth 5.5; "
+                "2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16",
+        tol="O-ring seat dia 29 f7; connector seal bore dia 10 H8; sealing faces Ra 0.8; others ISO 2768-mK",
+        note="Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer."),
+    "HMT500-M-103": dict(
+        material="Stainless steel 316L (1.4404); 304 acceptable (not wetted)",
+        finish="As machined, deburr, passivation; outer laser marking if available (text supplied later)",
+        threads="Front: M28x1-6H internal, RIGHT hand, length 7; Rear: M28x1-LH-6H internal, LEFT hand, length 7",
+        tol="O-ring bores dia 29 H8 at both ends (length 4), Ra 0.8, C0.5 lead-in chamfers; others ISO 2768-mK",
+        note="Turnbuckle tube: front thread RIGHT hand, rear thread LEFT hand. Please confirm."),
+    "HMT500-M-104": dict(
+        material="Stainless steel 316L (1.4404); 304 acceptable",
+        finish="As machined, deburr, passivation",
+        threads="M28x1-LH-6g external, LEFT hand; M16x1.5-6H internal (connector); 2x M3 through (fill/vent ports, r10 at 90/270 deg)",
+        tol="O-ring seat dia 29 f7 with groove, Ra 0.8; wrench flats AF28; others ISO 2768-mK",
+        note="LEFT hand external thread. Please confirm."),
+    "HMT500-M-105": dict(
+        material="PEEK natural; POM acceptable for this prototype lot",
+        finish="As machined, deburr",
+        threads="2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2",
+        tol="OD 21.6 (0/-0.1); slot width 1.7 (+0.1/0) depth 3.5; window 5.6 x 3.2 (+0.1/0); others ISO 2768-mK",
+        note="Drawing sheet M-105~106 (holder at top right)."),
+    "HMT500-M-106": dict(
+        material="PEEK natural; POM acceptable for this prototype lot",
+        finish="As machined, deburr",
+        threads="-",
+        tol="OD 26.4 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4",
+        note="Drawing sheet M-105~106 (ring at right)."),
+}
+NAME_EN = {"HMT500-M-101": "Process body", "HMT500-M-103": "Housing tube", "HMT500-M-104": "End cap",
+           "HMT500-M-105": "PCB holder", "HMT500-M-106": "PCB rear support ring"}
+
+RFQ = """Request for quotation - CNC machining (JLCCNC)
+Project: HMT500(260313) oil moisture transmitter, prototype lot
+Company: DOTECH Co., Ltd.
+Drawing revision: {rev}   Date: {date}
+Quantity: {sets} sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
+
+Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
+and in order_jlccnc_EN.csv. Sheet M-102~104 also shows the filter cap M-102, which is NOT ordered.
+Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
+
+{parts}
+
+General:
+- Unspecified tolerances ISO 2768-mK. Break sharp edges 0.2-0.5 unless noted.
+- Threads are modelled as plain cylinders in the STEP files; please cut threads per the callouts above.
+- IMPORTANT: M-103 rear thread and M-104 thread are LEFT hand (M28x1-LH). M-103 front and M-101 are RIGHT hand.
+- Fine / pipe threads: G1/2-A, M28x1, M10x0.75, M16x1.5. If a thread is not in your standard list, please advise.
+- O-ring sealing surfaces (dia 29 f7 / H8, dia 10 H8): Ra 0.8, no tool marks across the seal.
+- Material certificate EN 10204 3.1 for 316L (M-101 wetted part) if available.
+- Please send DFM questions before machining.
+"""
+
 # ── JLC3D: 3D 프린트 ──
 PRINT = [
     dict(part="HMT500-T-001", name="W-2 plug push bar (assembly tool)", fn=M.push_tool, qty=2,
@@ -122,6 +182,18 @@ def main():
         pdf_page(DWG_PAGE[c["part"].replace("HMT500-", "")], os.path.join(d_cnc, pdf))
         rows.append([c["part"], c["name"], c["step"], pdf, c["material"], c["alt"], c["finish"], c["threads"], c["tol"],
                      SETS, c["note"]])
+    rows_en, parts_txt = [], []
+    for c in CNC:
+        e = CNC_EN[c["part"]]
+        rows_en.append([c["part"], NAME_EN[c["part"]], c["step"], f"{c['part']}_drawing_rev{REV}.pdf", e["material"],
+                        e["finish"], e["threads"], e["tol"], SETS, e["note"]])
+        parts_txt.append(f"{c['part']}  {NAME_EN[c['part']]}  x{SETS}\n  3D: {c['step']}   2D: {c['part']}_drawing_rev{REV}.pdf\n"
+                         f"  Material: {e['material']}\n  Finish: {e['finish']}\n  Threads: {e['threads']}\n"
+                         f"  Tolerances: {e['tol']}\n  Note: {e['note']}")
+    write_csv(os.path.join(d_cnc, "order_jlccnc_EN.csv"),
+              ["Part", "Name", "3D (STEP)", "2D (PDF)", "Material", "Finish", "Threads", "Tolerance", "Qty", "Note"], rows_en)
+    with open(os.path.join(d_cnc, "QUOTE_REQUEST.txt"), "w", encoding="utf-8") as f:
+        f.write(RFQ.format(rev=REV, date=P.DATE, sets=SETS, parts="\n\n".join(parts_txt)))
     write_csv(os.path.join(d_cnc, "order_jlccnc.csv"),
               ["Part", "Name", "3D (STEP)", "2D (PDF)", "Material", "Alternative", "Finish", "Threads", "Tolerance",
                "Qty", "Note"], rows)
