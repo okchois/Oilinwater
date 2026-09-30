@@ -1,18 +1,22 @@
-# HMT500(260313A) KiCad 회로도 v0.7
+# HMT500(260313A) KiCad 회로도 v0.8
 
 DOTECH HMT500(260313) 오일 수분 트랜스미터의 KiCad 회로도입니다.
 
-**파일명·프로젝트 번호 = HMT500(260313A)** (결정 #25): 회로도·심볼·BOM·부품리스트·PDF, PCB 파일, 거버(`HMT500(260313A)-F_Cu.gtl` 등, 묶음 `HMT500(260313A).zip`), PCB 실크 마킹(아랫면 가운데) 모두 같은 이름을 씁니다. 거버 출력: `sh hardware/kicad/export_gerbers.sh`. 설계 내용은 [회로 설계서](../../docs/hw/circuit-design.md)를 따릅니다.
+**파일명·프로젝트 번호 = HMT500(260313A)** (결정 #25): 회로도·심볼·BOM·부품리스트·PDF, PCB 파일, 거버(`HMT500(260313A)-F_Cu.gtl` 등, 묶음 `HMT500(260313A).zip`), PCB 실크 마킹(아랫면 가운데) 모두 같은 이름을 씁니다. 거버 출력: `sh hardware/kicad/export_gerbers.sh`.
+
+**v0.8 (결정 #26):** 모든 IC 핀을 제조사 데이터시트 원문으로 대조하고 반영했습니다 — [검토 문서](../../docs/hw/schematic-review-260313A.md).
+
+설계 내용은 [회로 설계서](../../docs/hw/circuit-design.md)를 따릅니다.
 
 | 파일 | 내용 |
 |---|---|
 | `HMT500(260313A)/HMT500(260313A).kicad_pro` | 프로젝트 (KiCad 7 형식 — KiCad 8/9에서 열면 자동 변환) |
 | `HMT500(260313A)/HMT500(260313A).kicad_sch` | 최상위 시트 (하위 시트 6장) |
 | `HMT500(260313A)/HMT500(260313A)_connector.kicad_sch` | 커넥터, 입력 서지 보호(TVS 2단, CM 초크), 하우징 접지(1 MΩ, 4.7 nF, GDT) |
-| `HMT500(260313A)/HMT500(260313A)_power.kicad_sch` | eFuse TPS2660, 벅 LMR36006(5 V), LDO TPS7A2033(3.3 V) |
-| `HMT500(260313A)/HMT500(260313A)_mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서 (v0.6: LED·외부 풀업 삭제; v0.7: SPI1 = 측정, SPI2 = DAC 전용) |
-| `HMT500(260313A)/HMT500(260313A)_measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(정전용량) + 기준 C, ADS1220(Pt1000 2선) |
-| `HMT500(260313A)/HMT500(260313A)_analog_out.kicad_sch` | DAC8760 ×2 (데이터시트 핀, SPI2 데이지 체인·공통 LATCH) + OPA197 +VSENSE 버퍼 + 외부 ISET-R 15k 0.1 % + TPS26611 오결선 보호 + TVS (v0.7) |
+| `HMT500(260313A)/HMT500(260313A)_power.kicad_sch` | eFuse TPS2660 (RTN은 GND와 분리, OVP 29 V → 전원 12–28 V), 벅 LMR36006BRNXR(5 V, L 15 µH·CFF 20 pF), LDO TPS7A2033(3.3 V) (v0.8) |
+| `HMT500(260313A)/HMT500(260313A)_mcu.kicad_sch` | STM32G0B1CCT3 (LQFP48, −40~125 °C), SWD(TC2030), 리셋, 내부 온도센서. SPI1 = ADS1220, SPI2 = DAC(모드 3), SPI3 = PCAP04 (v0.8) |
+| `HMT500(260313A)/HMT500(260313A)_measurement.kicad_sch` | J3 센서 하네스 커넥터(JST SH 1.0 4핀), PCAP04(QFN24 실제 핀, DC 없는 플로팅 모드) + 기준 C, ADS1220(Pt1000 2선) |
+| `HMT500(260313A)/HMT500(260313A)_analog_out.kicad_sch` | DAC8760 ×2 (SCLK 게이트 U14, AVDD 10 Ω, ALARM wired-OR) + OPA197 +VSENSE 버퍼 + 외부 ISET-R + TPS26611DDFR 오결선 보호 + TVS3301 (v0.8) |
 | `HMT500(260313A)/HMT500(260313A)_rs485.kicad_sch` | THVD2450 (±70 V) + 선택 TVS |
 | `HMT500(260313A)/HMT500(260313A).kicad_sym`, `sym-lib-table` | 프로젝트 심볼 라이브러리 |
 | `HMT500(260313A)/HMT500(260313A)_BOM.csv` | 부품표 (값·풋프린트별 묶음) |
@@ -33,13 +37,13 @@ DOTECH HMT500(260313) 오일 수분 트랜스미터의 KiCad 회로도입니다.
 
 회로도는 `gen_hmt500.py`가 생성합니다. 각 부품에 설계 의도 넷(`nets=`)을 적고 배선은 좌표로 그립니다.
 - **생성 단계 검사:** 선 중간에 걸친 핀, 연결 안 된 핀, 용지 밖, 표제란 침범이 있으면 생성이 멈춥니다.
-- **연결 검사:** `check_netlist.py`가 KiCad 넷리스트와 설계 의도를 핀 단위로 대조합니다. 현재 70넷, 오류 0입니다.
+- **연결 검사:** `check_netlist.py`가 KiCad 넷리스트와 설계 의도를 핀 단위로 대조합니다. 현재 74넷, 오류 0입니다.
 - **자동 테스트:** `tests/test_kicad_gen.py`에 포함되어 있고, kicad-cli가 있으면 넷리스트 대조까지 수행합니다.
 
 ```bash
 python3 hardware/kicad/gen_hmt500.py                     # 회로도·라이브러리·BOM 생성
 kicad-cli sch export netlist -o hmt500.net hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch
-python3 hardware/kicad/check_netlist.py hmt500.net       # 넷리스트 = 설계 의도 검사 (현재 70넷, 오류 0)
+python3 hardware/kicad/check_netlist.py hmt500.net       # 넷리스트 = 설계 의도 검사 (현재 74넷, 오류 0)
 kicad-cli sch export pdf -o hardware/kicad/HMT500(260313A)/HMT500(260313A)_schematic.pdf hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch
 ```
 

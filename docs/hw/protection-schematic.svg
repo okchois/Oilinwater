@@ -58,8 +58,8 @@
 <rect class="ic" x="700" y="120" width="190" height="95" rx="6"/>
 <text x="708" y="138" class="t" font-weight="700">U1 TPS2660 eFuse</text>
 <text x="708" y="155" class="s">±60 V 내성, 역극성 차단</text>
-<text x="708" y="170" class="s">OVP 33 V · UVLO 9 V</text>
-<text x="708" y="185" class="s">ILIM 150 mA · FLT→MCU</text>
+<text x="708" y="170" class="s">OVP 29 V · UVLO 8.6 V (v0.8)</text>
+<text x="708" y="185" class="s">ILIM 149 mA · FLT→MCU</text>
 <path class="w" d="M795,215 L795,270"/>
 <circle cx="795" cy="270" r="3.2" fill="#0f172a"/>
 <path class="w" d="M890,150 L1080,150"/>
@@ -95,7 +95,7 @@
 <path d="M501,548.5 L519,548.5 L510,532.5 Z" fill="#fee2e2" stroke="#b91c1c" stroke-width="1.6"/>
 <path d="M499,529.5 L501,532.5 L519,532.5 L521,535.5" stroke="#b91c1c" stroke-width="1.8" fill="none"/>
 <text x="524" y="530.5" class="t">D3</text>
-<text x="524" y="544.5" class="s">SMAJ33CA</text>
+<text x="524" y="544.5" class="s">TVS3301</text>
 <path class="w" d="M595,480 L595,528.5"/>
 <path class="w" d="M595,536.5 L595,585"/>
 <path class="w" d="M585,528.5 L605,528.5"/>

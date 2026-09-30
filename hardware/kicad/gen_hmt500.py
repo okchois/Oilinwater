@@ -71,8 +71,9 @@ def ic(name, left=(), right=(), top=(), bottom=(), w=8, prefix="U", verify=False
                      w=w, prefix=prefix, verify=verify, desc=desc, ts=ts, toff=toff, bs=bs, rows=rows)
 
 
-def two(name, prefix, draw, desc):
-    SYM[name] = dict(kind="two", prefix=prefix, draw=draw, desc=desc)
+def two(name, prefix, draw, desc, pnum=("1", "2"), stack=None):
+    """2단자 심볼. pnum = (위/왼쪽, 아래/오른쪽) 핀 번호, stack = {핀: [같은 자리에 겹친 핀들]} (다핀 패키지용)."""
+    SYM[name] = dict(kind="two", prefix=prefix, draw=draw, desc=desc, pnum=pnum, stack=stack or {})
 
 
 def pwr(name, style, desc):
@@ -85,11 +86,14 @@ two("L", "L", "ind", "Inductor")
 two("FB", "FB", "ferrite", "Ferrite bead")
 two("TVS_BI", "D", "tvs", "Bidirectional TVS diode")
 two("GDT", "GDT", "gdt", "Gas discharge tube")
+two("TVS3301", "D", "tvs", "TI TVS3301 33 V bidirectional flat-clamp TVS, SON-8 DRB (IN = 1-4, GND = 5-8, pad floating)",
+    pnum=("1", "5"), stack={"1": ["2", "3", "4"], "5": ["6", "7", "8"]})
 two("LED", "D", "led", "LED (pin1 = K, pin2 = A)")
 SYM["PWR_FLAG"] = dict(kind="flag", prefix="#FLG", desc="Power flag")
 for n in ("+3V3", "+3V3A", "+5V", "VIN_P", "VDDA"):
     pwr(n, "up", f"Power symbol {n}")
 pwr("GND", "gnd", "Ground")
+pwr("EF_RTN", "rtn", "TPS2660 RTN reference (local, NOT connected to GND)")
 pwr("CHASSIS", "chassis", "Chassis / housing (earth via process pipe)")
 
 B, I, O, P, PI, PO, OC, T, NC = ("bidirectional", "input", "output", "passive", "power_in", "power_out",
@@ -106,11 +110,12 @@ ic("TPS2660", left=[("1", "IN", PI), ("2", "IN", P), ("3", "UVLO", I), ("7", "~{
                    ("5", "OVP", I), ("6", "MODE", I)],
    right=[("15", "OUT", PO), ("16", "OUT", P), ("14", "~{FLT}", OC), ("11", "ILIM", P), ("10", "IMON", P),
           ("12", "dVdT", P), ("13", "NC", NC)],
-   bottom=[("9", "GND", PI), ("8", "RTN", P), ("17", "EP", P)], w=12, verify=True,
-   desc="TI TPS26600PWP 60V eFuse, HTSSOP-16 (pinout: KiCad TPS26600PWP). VERIFY RTN/GND wiring for reverse polarity")
-ic("LMR36006", left=[("1", "VIN", PI), ("2", "EN", I), ("3", "PG", OC)], top=[("7", "BOOT", P)],
-   right=[("6", "SW", PO), ("4", "FB", I), ("8", "VCC", P)], bottom=[("5", "AGND", PI), ("9", "PGND", PI)],
-   w=8, verify=True, desc="TI LMR36006 60V 0.6A buck. PIN NUMBERS ARE PLACEHOLDERS")
+   bottom=[("9", "GND", PI), ("8", "RTN", P), ("17", "RTN", P)], w=12,
+   desc="TI TPS26600PWP 60V eFuse, HTSSOP-16 (datasheet SLVSDG2G). RTN = device reference, never tied to GND (reverse-polarity block between RTN and GND); PowerPAD = RTN")
+ic("LMR36006", left=[("2", "VIN", PI), ("10", "VIN", P), ("9", "EN", I), ("8", "PG", OC)], top=[("4", "BOOT", P)],
+   right=[("12", "SW", PO), ("7", "FB", I), ("5", "VCC", P), ("3", "NC", NC)],
+   bottom=[("6", "AGND", PI), ("1", "PGND", PI), ("11", "PGND", P)],
+   w=8, rows=6, desc="TI LMR36006 60V 0.6A sync buck, VQFN-HR-12 RNX 2x3 mm (datasheet SNVSB48C). VFB = 1.0 V")
 ic("TPS7A2033", left=[("1", "IN", PI), ("3", "EN", I)], right=[("5", "OUT", PO), ("4", "NC", NC)],
    bottom=[("2", "GND", PI)], w=6, desc="TI TPS7A2033 3.3V LDO, SOT-23-5")
 ic("STM32G0B1CxTx",
@@ -129,13 +134,12 @@ ic("CONN_SWD", left=[("1", "VCC", P), ("2", "SWDIO", P), ("4", "SWCLK", P), ("6"
                      ("5", "GND", P)], w=6, prefix="J", desc="Tag-Connect TC2030 SWD")
 ic("CONN_SH4", right=[("1", "SENS_1", P), ("2", "SENS_2", P), ("3", "PT+", P), ("4", "PT-", P)], w=6, prefix="J",
    desc="JST SH 1.0 mm 4-pin side-entry (right angle) header. Sensor harness W-1 direct from HTX99R connector (MK sensor + Pt1000 2-wire)")
-ic("PCAP04", left=[("7", "PC2", P), ("8", "PC3", P), ("5", "PC0", P), ("9", "PC4", P), ("10", "PC5", P),
-                   ("6", "PC1", P), ("11", "PCAUX", P), ("12", "PT0REF", P), ("13", "PT1", P), ("14", "PT2", P),
-                   ("15", "PT3", P), ("22", "PG0", B), ("23", "PG1", B)],
-   right=[("16", "SSN", I), ("17", "SCK", I), ("18", "MOSI", I), ("19", "MISO", T), ("20", "INTN", O),
-          ("2", "VDD18_D", P), ("3", "VDD18_A", P), ("21", "IIC_EN", I)],
-   top=[("1", "VDD", PI)], bottom=[("4", "VSS", PI), ("24", "VSS", PI)],
-   w=10, verify=True, desc="ScioSense PCAP04 capacitance-to-digital. PIN NUMBERS ARE PLACEHOLDERS")
+ic("PCAP04", left=[("24", "PC2", P), ("1", "PC3", P), ("22", "PC0", P), ("20", "PC4", P), ("21", "PC5", P),
+                   ("23", "PC1", P), ("19", "PCAUX", P), ("6", "PT0REF", P), ("5", "PT1", P), ("7", "PTOUT", P)],
+   right=[("9", "SSN", I), ("16", "SCK", I), ("15", "MOSI", I), ("10", "MISO", T), ("11", "PG5", B),
+          ("12", "PG2", B), ("17", "PG3", B), ("18", "PG4", B), ("3", "VDD18", P), ("13", "IIC_EN", I)],
+   top=[("4", "VDD33", PI), ("14", "VDD33", PI)], ts=3, bottom=[("2", "GND", PI), ("8", "GND", PI), ("25", "EP", P)],
+   w=10, rows=12, desc="ScioSense PCAP04 capacitance-to-digital, QFN24 4x4 (datasheet SC-001050-DS-6). VDD18 >= 4.7 uF, VDD33 >= 10 uF; INTN on PG5")
 ic("ADS1220", left=[("10", "AIN1", P), ("11", "AIN0/REFP1", P), ("6", "AIN3/REFN1", P), ("7", "AIN2", P)],
    right=[("1", "SCLK", I), ("2", "~{CS}", I), ("16", "DIN", I), ("15", "DOUT/~{DRDY}", T), ("14", "~{DRDY}", O),
           ("3", "CLK", I)],
@@ -153,9 +157,11 @@ ic("DAC8760", left=[("9", "DIN", I), ("8", "SCLK", I), ("7", "LATCH", I), ("10",
 ic("OPA197", left=[("3", "+IN", I)], right=[("1", "OUT", O), ("4", "-IN", I)], top=[("5", "V+", PI)],
    bottom=[("2", "V-", PI)], w=6,
    desc="TI OPA197 36 V rail-to-rail op amp, SOT-23-5 DBV (1 OUT, 2 V-, 3 +IN, 4 -IN, 5 V+). +VSENSE unity-gain buffer")
-ic("TPS26611", left=[("1", "IN", P)], right=[("4", "OUT", P), ("6", "MODE", I)],
-   top=[("2", "VDD", PI)], bottom=[("3", "VSS", PI), ("5", "~{FLT}", OC)], w=10, rows=4, verify=True,
-   desc="TI TPS26611 analog I/O miswiring protector. PIN NUMBERS ARE PLACEHOLDERS")
+ic("TPS26611", left=[("4", "IN", P)], right=[("5", "OUT", P), ("7", "EN", I)],
+   top=[("6", "+Vs", PI)], bottom=[("1", "GND", PI), ("3", "-Vs", PI), ("2", "MODE", I), ("8", "SGOOD", O)],
+   w=10, rows=4, desc="TI TPS26611 +/-50 V current-loop / analog output protector, SOT-23-8 DDF (datasheet SLVSFE3C). +Vs <= 30 V")
+ic("74LVC2G32", left=[("1", "1A", I), ("2", "1B", I), ("5", "2A", I), ("6", "2B", I)], right=[("7", "1Y", O), ("3", "2Y", O)],
+   top=[("8", "VCC", PI)], bottom=[("4", "GND", PI)], w=6, desc="Dual 2-input OR gate (SCLK gating per DAC8760 datasheet 8.5.1.5)")
 ic("THVD2450", left=[("4", "D", I), ("1", "R", O), ("2", "~{RE}", I), ("3", "DE", I)],
    right=[("6", "A", B), ("7", "B", B)], top=[("8", "VCC", PI)], bottom=[("5", "GND", PI)], w=8,
    desc="TI THVD2450 +/-70V fault-protected RS-485, SOIC-8")
@@ -186,7 +192,12 @@ def pins_of(name):
     if s["kind"] in ("pwr", "flag"):
         return [("1", name if s["kind"] == "pwr" else "pwr", "power_in" if s["kind"] == "pwr" else "power_out", 0, 0,
                  90 if s.get("style") == "up" or s["kind"] == "flag" else 270)]
-    return [("1", "~", P, 0, 1.5, 270), ("2", "~", P, 0, -1.5, 90)]
+    a, b = s.get("pnum", ("1", "2"))
+    out = [(a, "~", P, 0, 1.5, 270), (b, "~", P, 0, -1.5, 90)]
+    for base, extra in s.get("stack", {}).items():
+        bx = [o for o in out if o[0] == base][0]
+        out += [(n, "~", P, bx[3], bx[4], bx[5]) for n in extra]
+    return out
 
 
 def graphics(name):
@@ -207,7 +218,7 @@ def graphics(name):
         if s["style"] == "up":
             return [f"(polyline (pts (xy 0 0) (xy 0 1.27)) {ST} (fill (type none)))",
                     f"(polyline (pts (xy -0.762 0.762) (xy 0 1.27) (xy 0.762 0.762)) {ST} (fill (type none)))"]
-        if s["style"] == "gnd":
+        if s["style"] in ("gnd", "rtn"):
             return [f"(polyline (pts (xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)) {ST} (fill (type none)))"]
         return [f"(polyline (pts (xy 0 0) (xy 0 -1.27)) {ST} (fill (type none)))",
                 f"(polyline (pts (xy -1.905 -1.27) (xy 1.905 -1.27)) {ST} (fill (type none)))",
@@ -286,6 +297,16 @@ def rot(px, py, r):
 PWR_COUNT = [0]
 
 
+def two_nets(sym, n1, n2):
+    """2단자 부품의 핀→넷 (핀 번호·겹친 핀 포함)."""
+    s = SYM[sym]
+    a, b = s.get("pnum", ("1", "2"))
+    m = {a: n1, b: n2}
+    for base, extra in s.get("stack", {}).items():
+        m.update({n: m[base] for n in extra})
+    return m
+
+
 class Sheet:
     def __init__(self, file, title, desc, dx=0, dy=0, paper="A3"):
         self.file, self.title, self.desc, self.dx, self.dy, self.paper = f"{PROJECT}_{file}", title, desc, dx, dy, paper
@@ -324,13 +345,13 @@ class Sheet:
         r = 180 if flip else 0
         self.parts[ref] = dict(sym=sym, val=val, fp=fp, x=x + self.dx, y=ytop + 1.5 + self.dy, r=r, kw=kw)
         self.order.append(ref)
-        self.nets[ref] = {"1": n1, "2": n2}
+        self.nets[ref] = two_nets(sym, n1, n2)
         return ref
 
     def h2(self, ref, sym, val, fp, xleft, y, n1, n2, **kw):
         self.parts[ref] = dict(sym=sym, val=val, fp=fp, x=xleft + 1.5 + self.dx, y=y + self.dy, r=90, kw=kw)
         self.order.append(ref)
-        self.nets[ref] = {"1": n1, "2": n2}
+        self.nets[ref] = two_nets(sym, n1, n2)
         return ref
 
     # 배선
@@ -368,6 +389,11 @@ class Sheet:
         e = (pt[0], pt[1] + d)
         self.wa(pt, e)
         self.pw("GND", e, absolute=True)
+
+    def rtn_stub(self, pt, d=1):  # TPS2660 RTN 기준 (GND 아님)
+        e = (pt[0], pt[1] + d)
+        self.wa(pt, e)
+        self.pw("EF_RTN", e, absolute=True)
 
     def sup_stub(self, net, pt, d=1):
         e = (pt[0], pt[1] - d)
@@ -515,104 +541,108 @@ S = Sheet("power.kicad_sch", "Power", "eFuse (reverse/OV/UV), 60V buck to 5V, LD
 SHEETS.append(S)
 S.place("U1", "TPS2660", "TPS26600PWPR",
         "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias", 30, 23, nets={
-    "1": "VIN_F", "2": "VIN_F", "3": "UV_DIV", "5": "OV_DIV", "6": "GND", "9": "GND", "8": "EF_RTN", "17": "EF_RTN",
-    "15": "VIN_P", "16": "VIN_P", "14": "PWR_FLT", "11": "EF_ILIM", "10": "EF_IMON", "12": "EF_DVDT"})
+    "1": "VIN_F", "2": "VIN_F", "3": "UV_DIV", "5": "OV_DIV", "6": "EF_RTN", "9": "GND", "8": "EF_RTN", "17": "EF_RTN",
+    "15": "VIN_P", "16": "VIN_P", "14": "PWR_FLT", "11": "EF_ILIM", "12": "EF_DVDT"})
 # 입력: VIN_F 라벨을 핀마다, 분압 R3–R5는 한 줄 세로, 탭은 UVLO·OVP 핀과 같은 높이 → 직선
 S.gl("VIN_F", S.P("U1", "1"), "L", length=2)
 S.gl("VIN_F", S.P("U1", "2"), "L", length=2)
 S.v2("R3", "R", "866k 1%", FP["R0603"], 14, 19, "VIN_F", "UV_DIV")
 S.v2("R4", "R", "97.6k 1%", FP["R0603"], 14, 22, "UV_DIV", "OV_DIV")
-S.v2("R5", "R", "36.5k 1%", FP["R0603"], 14, 25, "OV_DIV", "GND")
+S.v2("R5", "R", "41.2k 1%", FP["R0603"], 14, 25, "OV_DIV", "EF_RTN")
 S.gl("VIN_F", S.P("R3", "1"), "U", length=1)
 S.wa(S.P("R3", "2"), S.P("U1", "3"))
 S.wa(S.P("R5", "1"), S.P("U1", "5"))
-S.gnd_stub(S.P("R5", "2"))
-S.nc(S.P("U1", "7"))
+S.rtn_stub(S.P("R5", "2"))
+S.nc(S.P("U1", "7"))                      # SHDN 개방 = 켜짐 (내부 2.7 V)
 S.nc(S.P("U1", "4"))
 S.nc(S.P("U1", "13"))
-S.gnd_stub(S.P("U1", "6"))
+S.nc(S.P("U1", "10"))                     # IMON 미사용 → 개방 (데이터시트 허용)
+S.gl("EF_RTN", S.P("U1", "6"), "L", length=2)     # MODE = RTN: 전류 제한 + 자동 재시도
 S.gnd_stub(S.P("U1", "9"))
 r8, r17 = S.P("U1", "8"), S.P("U1", "17")
-S.v2("R22", "R", "0R RTN link*", FP["R0603"], r8[0] - S.dx, r8[1] - S.dy, "EF_RTN", "GND")
 S.wa(r17, r8)
-S.gnd_stub(S.P("R22", "2"))
-S.text("*R22 RTN link: verify vs TPS2660 datasheet - RTN tied to GND disables reverse-polarity protection", (6, 40), 1.27)
-# 출력 쪽: OUT 두 핀은 핀 끝끼리, 나머지 설정 부품은 계단식으로 직선
+S.rtn_stub(r8)
+# 출력 쪽: OUT 두 핀은 핀 끝끼리, 나머지 설정 부품은 계단식으로 직선 (모두 RTN 기준)
 o15, o16 = S.P("U1", "15"), S.P("U1", "16")
 S.wa(o16, o15)
 S.sup_stub("VIN_P", o15)
 S.gl("PWR_FLT", S.P("U1", "14"), "R", length=2)
-S.v2("C4", "C", "22n", FP["C0603"], 38, 25, "EF_DVDT", "GND")
-S.v2("R7", "R", "10k", FP["R0603"], 42, 24, "EF_IMON", "GND")
-S.v2("R6", "R", "R_ILIM *", FP["R0603"], 46, 23, "EF_ILIM", "GND")
+S.v2("C4", "C", "22n", FP["C0603"], 42, 25, "EF_DVDT", "EF_RTN")
+S.v2("R6", "R", "80.6k 1%", FP["R0603"], 46, 23, "EF_ILIM", "EF_RTN")
 S.wa(S.P("U1", "12"), S.P("C4", "1"))
-S.wa(S.P("U1", "10"), S.P("R7", "1"))
 S.wa(S.P("U1", "11"), S.P("R6", "1"))
-for r_ in ("R6", "R7", "C4"):
-    S.gnd_stub(S.P(r_, "2"))
+for r_ in ("R6", "C4"):
+    S.rtn_stub(S.P(r_, "2"))
 decap(S, "C5", "10u 50V", "C1210", 53, 22, "VIN_P")
 decap(S, "C7", "2.2u 100V", "C1210", 58, 22, "VIN_P")
 # 벅: 전원 핀마다 전원 심볼, BOOT 콘덴서는 위로, FB·SW는 라벨
-S.place("U2", "LMR36006", "LMR36006", "TBD:VQFN-HR-12_LMR36006", 72, 22, nets={
-    "1": "VIN_P", "2": "VIN_P", "4": "BUCK_FB", "5": "GND", "7": "BUCK_BOOT", "6": "BUCK_SW",
-    "8": "BUCK_VCC", "9": "GND"})
-vi, en = S.P("U2", "1"), S.P("U2", "2")
-S.wa(en, vi)
+S.place("U2", "LMR36006", "LMR36006BRNXR", "TBD:Texas_RNX0012A_VQFN-HR-12_2x3mm", 72, 23, nets={
+    "2": "VIN_P", "10": "VIN_P", "9": "VIN_P", "7": "BUCK_FB", "6": "GND", "1": "GND", "11": "GND",
+    "4": "BUCK_BOOT", "12": "BUCK_SW", "5": "BUCK_VCC"})
+vi, vi2, en = S.P("U2", "2"), S.P("U2", "10"), S.P("U2", "9")
+S.wa(en, vi2, vi)                          # EN = VIN (데이터시트 허용)
 S.sup_stub("VIN_P", vi)
+S.nc(S.P("U2", "8"))                       # PG 미사용 → 개방 허용
 S.nc(S.P("U2", "3"))
-S.gnd_stub(S.P("U2", "5"))
-S.gnd_stub(S.P("U2", "9"))
-bt = S.P("U2", "7")
+for n_ in ("6", "1", "11"):
+    S.gnd_stub(S.P("U2", n_))
+bt = S.P("U2", "4")
 S.v2("C8", "C", "100n", FP["C0603"], bt[0] - S.dx, bt[1] - S.dy - 3, "BUCK_SW", "BUCK_BOOT")
-S.h2("L2", "L", "22uH", "TBD:L_4x4mm", 84, 21, "BUCK_SW", "+5V")
-sw, c8t = S.P("U2", "6"), S.P("C8", "1")
+S.h2("L2", "L", "15uH", "TBD:L_4x4mm", 83, 21, "BUCK_SW", "+5V")
+sw, c8t = S.P("U2", "12"), S.P("C8", "1")
 S.wa(sw, (81 + S.dx, sw[1]))
 S.wa((81 + S.dx, sw[1]), S.P("L2", "1"))
 S.wa(c8t, (81 + S.dx, c8t[1]), (81 + S.dx, sw[1]))       # 부트스트랩: C8 위 → SW 선 (1 꺾임)
-S.gl("BUCK_FB", S.P("U2", "4"), "R", length=1)
-S.v2("C9", "C", "1u", FP["C0603"], 86, 23, "BUCK_VCC", "GND")
-S.wa(S.P("U2", "8"), S.P("C9", "1"))
+S.gl("BUCK_FB", S.P("U2", "7"), "R", length=1)
+vcc = S.P("U2", "5")
+S.v2("C9", "C", "1u", FP["C0603"], 80, vcc[1] - S.dy, "BUCK_VCC", "GND")
+S.wa(vcc, S.P("C9", "1"))
 S.gnd_stub(S.P("C9", "2"))
 l2o = S.P("L2", "2")
 S.wa(l2o, (l2o[0] + 1, l2o[1]))
 S.flag((l2o[0] + 1, l2o[1]), absolute=True)
 S.sup_stub("+5V", (l2o[0] + 1, l2o[1]))
-decap(S, "C10", "22u 10V", "C0805", 94, 22, "+5V")
-S.v2("R8", "R", "100k 1%", FP["R0603"], 99, 22, "+5V", "BUCK_FB")
-S.v2("R9", "R", "24.9k 1%", FP["R0603"], 99, 25, "BUCK_FB", "GND")
+decap(S, "C10", "22u 25V", "C1206", 90, 22, "+5V")
+decap(S, "C6", "22u 25V", "C1206", 95, 22, "+5V")
+S.v2("C11", "C", "20p C0G", FP["C0603"], 100, 22, "+5V", "BUCK_FB")
+S.v2("R8", "R", "100k 1%", FP["R0603"], 105, 22, "+5V", "BUCK_FB")
+S.v2("R9", "R", "24.9k 1%", FP["R0603"], 105, 25, "BUCK_FB", "GND")
+S.sup_stub("+5V", S.P("C11", "1"))
 S.sup_stub("+5V", S.P("R8", "1"))
-S.gl("BUCK_FB", S.P("R8", "2"), "R", length=1)
+S.wa(S.P("R8", "2"), S.P("C11", "2"))
+S.gl("BUCK_FB", S.P("C11", "2"), "D", length=0)
 S.gnd_stub(S.P("R9", "2"))
 # LDO + 아날로그 레일
-S.place("U3", "TPS7A2033", "TPS7A2033PDBVR", "Package_TO_SOT_SMD:SOT-23-5", 120, 21,
+S.place("U3", "TPS7A2033", "TPS7A2033PDBVR", "Package_TO_SOT_SMD:SOT-23-5", 122, 21,
         nets={"1": "+5V", "3": "+5V", "5": "+3V3", "2": "GND"})
 ui, ue = S.P("U3", "1"), S.P("U3", "3")
-S.wa(ue, ui)
+S.wa(ue, ui)                               # EN = IN (내부 500k 풀다운이라 필수)
 S.sup_stub("+5V", ui)
 S.gnd_stub(S.P("U3", "2"))
 S.nc(S.P("U3", "4"))
 S.sup_stub("+3V3", S.P("U3", "5"))
-decap(S, "C12", "1u", "C0603", 128, 22, "+3V3")
-S.h2("FB1", "FB", "600R@100MHz", FP["FB0603"], 134, 21, "+3V3", "+3V3A")
+decap(S, "C12", "1u", "C0603", 130, 22, "+3V3")
+S.h2("FB1", "FB", "600R@100MHz", FP["FB0603"], 136, 21, "+3V3", "+3V3A")
 S.sup_stub("+3V3", S.P("FB1", "1"))
 fo = S.P("FB1", "2")
 S.wa(fo, (fo[0] + 1, fo[1]))
 S.flag((fo[0] + 1, fo[1]), absolute=True)
 S.sup_stub("+3V3A", (fo[0] + 1, fo[1]))
-decap(S, "C13", "10u", "C0805", 144, 22, "+3V3A")
-S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 33 V  /  UVLO 9 V")
-S.text("UVLO = 1.2 V x (R3+R4+R5)/(R4+R5) = 8.9 V", (6.5, 35.5), 1.27)
-S.text("OVP  = 1.2 V x (R3+R4+R5)/R5 = 32.9 V   (Vref 1.2 V: VERIFY)", (6.5, 37), 1.27)
-S.text("* R6 sets current limit 150 mA (formula in TPS2660 datasheet)", (6.5, 38.5), 1.27)
-S.box(64, 12, 106, 33, "BUCK 5 V   LMR36006  (4.2-60 V in, 0.6 A)")
-S.text("Vout = 1.0 V x (1 + R8/R9) = 5.0 V   (Vref 1.0 V: VERIFY)", (64, 35.5), 1.27)
-S.box(108, 12, 153, 33, "LDO 3.3 V   TPS7A2033   +   analog rail +3V3A")
+decap(S, "C13", "10u", "C0805", 146, 22, "+3V3A")
+S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 29 V  /  UVLO 8.6 V")
+S.text("UVLO = 1.19 V x (R3+R4+R5)/(R4+R5) = 8.6 V      OVP = 1.19 V x (R3+R4+R5)/R5 = 29.0 V (28.5-29.9)", (6.5, 35.5), 1.27)
+S.text("I_OL = 12 / R6[kohm] = 149 mA.   Supply range 12-28 V: TPS26611 +Vs max 30 V (U9/U10 powered from VIN_P).", (6.5, 37), 1.27)
+S.text("EF_RTN = TPS2660 RTN reference: R5, R6, C4, MODE, PowerPAD. NEVER connect to GND (datasheet 9.3.5.5).", (6.5, 38.5), 1.27)
+S.box(64, 12, 111.5, 33, "BUCK 5 V   LMR36006  (4.2-60 V in, 0.6 A)")
+S.text("Vout = 1.0 V x (1 + R8/R9) = 5.0 V.  1 MHz: L 15 uH, COUT 2 x 22 uF, CFF 20 pF (datasheet Table 1)", (64, 35.5 + 3), 1.27)
+S.box(112.5, 12, 155, 33, "LDO 3.3 V   TPS7A2033   +   analog rail +3V3A")
 
 part_table(S, 6, 46, [
-    ("U1", "TPS26600PWPR", "전자 퓨즈 (입력 보호)", "역극성 −60 V 차단, 과전압 33 V·저전압 9 V (R3–R5), 전류 제한 (R6)*, 돌입 제한 (C4), 고장 출력 FLT"),
-    ("U2", "LMR36006", "5 V 강압 전원 (벅)", "입력 4.2–60 V, 출력 0.6 A 동기식, 무부하 소비전류 작음*, 출력 = 1 V × (1 + R8/R9)*"),
-    ("L2", "22uH", "벅 출력 인덕터", "4 × 4 mm 차폐형, 포화 전류 0.8 A 이상으로 선정"),
-    ("U3", "TPS7A2033PDBVR", "3.3 V 저잡음 레귤레이터", "300 mA, 저잡음·높은 PSRR* → 벅 리플 제거, SOT-23-5"),
+    ("U1", "TPS26600PWPR", "전자 퓨즈 (입력 보호)", "역극성 −60 V 차단, 과전압 29 V·저전압 8.6 V (R3–R5), 전류 제한 149 mA (R6), 돌입 제한 (C4), 고장 출력 FLT"),
+    ("EF_RTN", "(기준 접지)", "TPS2660 내부 기준", "R5·R6·C4·MODE·방열 패드는 RTN에 연결. GND와 연결 금지 — 역극성 보호 무효·손상"),
+    ("U2", "LMR36006BRNXR", "5 V 강압 전원 (벅)", "입력 4.2–60 V, 0.6 A 동기식, 1 MHz, 출력 = 1 V × (1 + R8/R9)"),
+    ("L2, C6, C10, C11", "15uH / 22u×2 / 20p", "벅 출력 필터·보상", "데이터시트 권장값 (5 V, 1 MHz). L2 4 × 4 mm 차폐형, 포화 0.8 A 이상"),
+    ("U3", "TPS7A2033PDBVR", "3.3 V 저잡음 레귤레이터", "300 mA, 저잡음·높은 PSRR → 벅 리플 제거, SOT-23-5"),
     ("FB1", "600R@100MHz", "아날로그 전원 +3V3A 분리", "페라이트 비드 + C13 10 µF → PCAP04·ADS1220 전원"),
 ])
 
@@ -622,8 +652,9 @@ SHEETS.append(S)
 mnet = {"4": "+3V3", "6": "+3V3", "5": "+3V3", "7": "GND", "10": "NRST",
         "12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO", "18": "SPI_MOSI",
         "35": "SWDIO", "36": "SWCLK", "19": "CS_CDC", "20": "CS_ADC", "21": "ADC_DRDY",
-        "22": "DAC_LATCH", "23": "DAC1_ALARM", "24": "CDC_INT", "30": "OUT1_FLT", "31": "OUT2_FLT",
-        "25": "DAC_SCK", "26": "DAC_MISO", "27": "DAC_MOSI", "42": "DAC2_ALARM", "43": "PWR_FLT"}
+        "42": "CDC_SCK", "43": "CDC_MISO", "44": "CDC_MOSI", "45": "DAC_ALARM", "46": "PWR_FLT",
+        "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "30": "OUT1_SGOOD", "31": "OUT2_SGOOD",
+        "25": "DAC_SCK", "26": "DAC_MISO", "27": "DAC_MOSI"}
 S.place("U4", "STM32G0B1CxTx", "STM32G0B1CCT3", "Package_QFP:LQFP-48_7x7mm_P0.5mm", 62, 52, nets=mnet)
 for n in ("4", "6", "5"):                        # VBAT, VDD, VREF+(= VDD) 각각 +3V3 심볼
     S.sup_stub("+3V3", S.P("U4", n), d=2)
@@ -631,7 +662,7 @@ gp = S.P("U4", "7")
 S.wa(gp, (gp[0], gp[1] + 2))
 S.pw("GND", (gp[0], gp[1] + 2), absolute=True)
 S.gl("NRST", S.P("U4", "10"), "L")
-left_lbl = {"30": "OUT1_FLT", "31": "OUT2_FLT"}
+left_lbl = {"30": "OUT1_SGOOD", "31": "OUT2_SGOOD"}
 for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["left"]:
     if num == "10":
         continue
@@ -639,10 +670,7 @@ for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["left"]:
         S.gl(left_lbl[num], S.P("U4", num), "L")
     else:
         S.nc(S.P("U4", num))
-right_lbl = {"12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO",
-             "18": "SPI_MOSI", "35": "SWDIO", "36": "SWCLK", "19": "CS_CDC", "20": "CS_ADC",
-             "21": "ADC_DRDY", "22": "DAC_LATCH", "23": "DAC1_ALARM", "24": "CDC_INT",
-             "25": "DAC_SCK", "26": "DAC_MISO", "27": "DAC_MOSI", "42": "DAC2_ALARM", "43": "PWR_FLT"}
+right_lbl = {k: v for k, v in mnet.items() if k not in ("4", "6", "5", "7", "10", "30", "31")}
 for num, nm, t, *_ in SYM["STM32G0B1CxTx"]["right"]:
     if num in right_lbl:
         S.gl(right_lbl[num], S.P("U4", num), "R")
@@ -657,8 +685,8 @@ S.v2("C21", "C", "100n", FP["C0603"], 128, 13, "NRST", "GND")
 S.gl("NRST", S.P("C21", "1"), "U", length=1)
 S.gnd_stub(S.P("C21", "2"))
 S.box(118, 7, 134, 27, "RESET")
-S.text("Fault lines: MCU pull-ups", (118.5, 24.9), 1.27)
-S.text("(PB3-4, PB11, PC6-7 internal)", (118.5, 26.3), 1.27)
+S.text("PWR_FLT: internal pull-up (PB7)", (118.5, 24.9), 1.27)
+S.text("SGOOD push-pull, low = OK", (118.5, 26.3), 1.27)
 S.place("J2", "CONN_SWD", "TC2030-IDC-NL", "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical", 126, 38,
         nets={"1": "+3V3", "2": "SWDIO", "4": "SWCLK", "3": "NRST", "5": "GND"})
 S.sup_stub("+3V3", S.P("J2", "1"))
@@ -678,7 +706,7 @@ for i, t in enumerate(["BOOT0 shares PA14/SWCLK - no pull-down.",
     S.text(t, (7, 66 + 2.3 * i), 1.27)
 
 part_table(S, 6, 86, [
-    ("U4", "STM32G0B1CCT3", "제어·통신·보정 연산", "Cortex-M0+ 64 MHz, 플래시 256 KB, RAM 144 KB, −40–125 °C, LQFP48, 내부 온도센서 (PCB 온도), SPI1 = 측정 · SPI2 = DAC 전용"),
+    ("U4", "STM32G0B1CCT3", "제어·통신·보정 연산", "Cortex-M0+ 64 MHz, 플래시 256 KB, RAM 144 KB, −40–125 °C, LQFP48, 내부 온도센서 (PCB 온도). SPI1 = ADS1220, SPI2 = DAC (모드 3, SCLK 게이트), SPI3 = PCAP04"),
     ("J2", "TC2030-IDC-NL", "생산 때 펌웨어 기록 (SWD)", "PCB 패드만 (부품 없음). 이후 업데이트는 RS-485 부트로더"),
     ("C21", "100n", "리셋 노이즈 필터", "NRST 핀, 몰딩 후 EMC 여유"),
 ])
@@ -694,33 +722,32 @@ for num, net in (("1", "SENS_C1"), ("2", "SENS_C2"), ("3", "PT_P"), ("4", "PT_N"
 S.box(2, 37, 21, 52, "SENSOR HEAD  J3")
 S.text("harness W-1 from HTX99R, JST SH 1.0", (2.5, 50.8), 1.27)
 # ── PCAP04: 센서선은 라벨, 기준 C22는 PC0·PC1에 곧게 ──
-S.place("U5", "PCAP04", "PCAP04-AQFM-24", "TBD:QFN-24_PCAP04", 52, 19, nets={
-    "6": "CREF_B", "5": "CREF_A", "7": "SENS_C1", "8": "SENS_C2", "16": "CS_CDC", "17": "SPI_SCK",
-    "18": "SPI_MOSI", "19": "SPI_MISO", "20": "CDC_INT", "21": "GND", "1": "+3V3A", "2": "CDC_V18D",
-    "3": "CDC_V18A", "4": "GND", "24": "GND"})
-S.gl("SENS_C1", S.P("U5", "7"), "L", length=1)
-S.gl("SENS_C2", S.P("U5", "8"), "L", length=1)
-pc0 = S.P("U5", "5")
+S.place("U5", "PCAP04", "PCAP04-AQFM-24", "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm", 52, 19, nets={
+    "22": "CREF_A", "23": "CREF_B", "24": "SENS_C1", "1": "SENS_C2", "9": "CS_CDC", "16": "CDC_SCK",
+    "15": "CDC_MOSI", "10": "CDC_MISO", "11": "CDC_INT", "13": "GND", "4": "+3V3A", "14": "+3V3A", "3": "CDC_V18",
+    "2": "GND", "8": "GND", "25": "GND"})
+S.gl("SENS_C1", S.P("U5", "24"), "L", length=1)
+S.gl("SENS_C2", S.P("U5", "1"), "L", length=1)
+pc0 = S.P("U5", "22")
 S.v2("C22", "C", "220p C0G 1%", FP["C0603"], pc0[0] - S.dx - 3, pc0[1] - S.dy, "CREF_A", "CREF_B")
 S.wa(S.P("C22", "1"), pc0)
-S.wa(S.P("C22", "2"), S.P("U5", "6"))
-for num in ("9", "10", "11", "12", "13", "14", "15", "22", "23"):
+S.wa(S.P("C22", "2"), S.P("U5", "23"))
+for num in ("20", "21", "19", "6", "5", "7", "12", "17", "18"):   # 미사용: PC4·PC5·PCAUX·PT·PG2–4 개방
     S.nc(S.P("U5", num))
-for num, net in (("16", "CS_CDC"), ("17", "SPI_SCK"), ("18", "SPI_MOSI"), ("19", "SPI_MISO"), ("20", "CDC_INT")):
+for num, net in (("9", "CS_CDC"), ("16", "CDC_SCK"), ("15", "CDC_MOSI"), ("10", "CDC_MISO"), ("11", "CDC_INT")):
     S.gl(net, S.P("U5", num), "R")
-S.sup_stub("+3V3A", S.P("U5", "1"))
-S.gnd_stub(S.P("U5", "4"))
-S.gnd_stub(S.P("U5", "24"))
-S.gnd_stub(S.P("U5", "21"))
-vd, va = S.P("U5", "2"), S.P("U5", "3")
-S.v2("C25", "C", "1u", FP["C0603"], 66, vd[1] - S.dy, "CDC_V18D", "GND")     # 계단식: 먼 줄이 먼 쪽
-S.v2("C26", "C", "1u", FP["C0603"], 62, va[1] - S.dy, "CDC_V18A", "GND")
+S.sup_stub("+3V3A", S.P("U5", "4"))
+S.sup_stub("+3V3A", S.P("U5", "14"))
+for num in ("2", "8", "25"):
+    S.gnd_stub(S.P("U5", num))
+ie = S.P("U5", "13")
+S.gnd_stub(ie)                               # IIC_EN = 0 → SPI
+vd = S.P("U5", "3")
+S.v2("C25", "C", "4.7u", FP["C0805"], vd[0] - S.dx + 4, vd[1] - S.dy, "CDC_V18", "GND")
 S.wa(vd, S.P("C25", "1"))
-S.wa(va, S.P("C26", "1"))
 S.gnd_stub(S.P("C25", "2"))
-S.gnd_stub(S.P("C26", "2"))
 S.box(28, 5, 74, 34, "CAPACITIVE HUMIDITY SENSOR  (IST MK)  ->  PCAP04")
-S.text("Floating mode: C22 on PC0/PC1, sensor on PC2/PC3 (VERIFY)", (28.5, 33.3), 1.27)
+S.text("Floating single mode (DC-free, datasheet 7.2): C22 on PC0/PC1, sensor on PC2/PC3. Own SPI3.", (28.5, 33.3), 1.27)
 # ── ADS1220: 필터 R17·R18은 입력 핀에 곧게, 기준저항 R19는 REFP0–REFN0 사이에 곧게 ──
 S.place("U6", "ADS1220", "ADS1220IPWR", "Package_SO:TSSOP-16_4.4x5mm_P0.65mm", 52, 56, nets={
     "11": "PT_P", "10": "PT_SP_F", "7": "PT_SN_F", "1": "SPI_SCK", "2": "CS_ADC", "16": "SPI_MOSI",
@@ -753,7 +780,7 @@ S.gnd_stub(S.P("U6", "3"))
 S.sup_stub("+3V3A", S.P("U6", "12"))
 S.sup_stub("+3V3", S.P("U6", "13"))
 decap(S, "C23", "100n", "C0603", 84, 12, "+3V3A")
-decap(S, "C24", "1u", "C0603", 89, 12, "+3V3A")
+decap(S, "C24", "10u", "C0805", 89, 12, "+3V3A")
 decap(S, "C28", "100n", "C0603", 84, 50, "+3V3")
 decap(S, "C29", "100n", "C0603", 89, 50, "+3V3A")
 S.box(22, 40, 74, 76, "Pt1000 2-WIRE -> ADS1220  (ratiometric)")
@@ -765,9 +792,10 @@ S.box(80, 43, 95, 59, "DECOUPLING")
 
 part_table(S, 22, 78, [
     ("J3", "SM04B-SRSS-TB", "센서 하네스 W-1 연결", "JST SH 1.0 mm 4P 옆 삽입, 1·2 = MK33, 3·4 = Pt1000"),
-    ("U5", "PCAP04-AQFM-24", "습도 센서 정전용량 측정", "정전용량–디지털 변환, 기준 C와 비율 측정, 내부 DSP, SPI*"),
+    ("U5", "PCAP04-AQFM-24", "습도 센서 정전용량 측정", "정전용량–디지털 변환, 기준 C와 비율 측정(방전 시간), DC 없는 구동, 내부 DSP, 전용 SPI3 (모드 1)"),
+    ("C25, C24", "4.7u / 10u", "PCAP04 전원 버퍼", "VDD18 ≥ 4.7 µF, VDD33 ≥ 10 µF (데이터시트 표 2)"),
     ("C22", "220p C0G 1%", "PCAP04 기준 용량", "MK33-W mini (200 pF)와 비슷한 값, C0G (온도 변화 거의 없음)"),
-    ("U6", "ADS1220IPWR", "Pt1000 온도 측정", "24비트 ADC, PGA, 여기 전류 IDAC, 50/60 Hz 제거, 내부 온도센서 (PCB 온도)"),
+    ("U6", "ADS1220IPWR", "Pt1000 온도 측정", "24비트 ADC, 50/60 Hz 제거, 내부 온도센서 (PCB 온도). 설정 한계: IDAC ≤ 250 µA, PGA ≤ 2 (SPI1 모드 1)"),
     ("R19", "4.02k 0.01% 5ppm", "Pt1000 비율 측정 기준저항", "IDAC 전류 오차 상쇄, 온도계수 5 ppm/°C"),
     ("R17, R18, C27", "1k / 10n", "입력 RC 필터", "차동·공통모드 노이즈 제거"),
 ])
@@ -778,13 +806,13 @@ S = Sheet("analog_out.kicad_sch", "Analog outputs", "2x DAC8760 V/I output with 
 SHEETS.append(S)
 for ch, y0 in ((1, 10), (2, 46)):
     D, Pr, Bf = f"U{6 + ch}", f"U{8 + ch}", f"U{11 + ch}"
-    din, sdo = ("DAC_MOSI", "DAC_DAISY") if ch == 1 else ("DAC_DAISY", "DAC_MISO")   # 데이지 체인
     S.place(D, "DAC8760", "DAC8760IPWP", "Package_SO:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm", 30, y0 + 10, nets={
-        "9": din, "8": "DAC_SCK", "7": "DAC_LATCH", "10": sdo, "3": f"DAC{ch}_ALARM",
+        "9": "DAC_MOSI", "8": f"DAC{ch}_SCLK", "7": f"DAC{ch}_LATCH", "10": "DAC_MISO", "3": "DAC_ALARM",
         "21": f"DAC{ch}_OUT", "19": f"DAC{ch}_OUT", "22": f"DAC{ch}_SENSE", "14": f"DAC{ch}_REF", "15": f"DAC{ch}_REF",
-        "24": "VIN_P", "2": "+3V3", "1": "GND", "4": "GND", "11": "GND", "12": "GND", "25": "GND", "23": "GND",
+        "24": f"DAC{ch}_AVDD", "2": "+3V3", "1": "GND", "4": "GND", "11": "GND", "12": "GND", "25": "GND", "23": "GND",
         "6": "GND", "5": "GND", "16": "GND", "13": f"DAC{ch}_ISET"})
-    for num, net in (("9", din), ("8", "DAC_SCK"), ("7", "DAC_LATCH"), ("10", sdo), ("3", f"DAC{ch}_ALARM")):
+    for num, net in (("9", "DAC_MOSI"), ("8", f"DAC{ch}_SCLK"), ("7", f"DAC{ch}_LATCH"), ("10", "DAC_MISO"),
+                     ("3", "DAC_ALARM")):
         S.gl(net, S.P(D, num), "L")
     S.nc(S.P(D, "18"))
     for num in ("1", "4", "11", "12", "25", "23", "6", "5", "16"):   # GND 핀은 아래쪽에서 각자 GND
@@ -795,7 +823,13 @@ for ch, y0 in ((1, 10), (2, 46)):
          f"DAC{ch}_ISET", "GND")
     S.wa(ip, S.P(f"R{22 + 10 * ch}", "1"))
     S.gnd_stub(S.P(f"R{22 + 10 * ch}", "2"))
-    S.sup_stub("VIN_P", S.P(D, "24"))
+    # AVDD: 10 Ω 직렬 (데이터시트 10장 — 전원 상승 1 V/ns 이하)
+    ap = S.P(D, "24")
+    S.v2(f"R{24 + 10 * ch}", "R", "10R", FP["R0603"], ap[0] - S.dx, ap[1] - S.dy - 5, "VIN_P", f"DAC{ch}_AVDD")
+    S.sup_stub("VIN_P", S.P(f"R{24 + 10 * ch}", "1"))
+    am = (ap[0], ap[1] - 1)
+    S.wa(S.P(f"R{24 + 10 * ch}", "2"), am, ap)
+    S.gl(f"DAC{ch}_AVDD", am, "L", length=0)
     S.sup_stub("+3V3", S.P(D, "2"))
     vo, io = S.P(D, "21"), S.P(D, "19")
     S.wa(io, vo)                                          # VOUT·IOUT 합침 (datasheet 9.1.1.3)
@@ -807,21 +841,24 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.gnd_stub(S.P(f"C{30 + 10 * ch}", "2"))
     for num in ("20", "17"):
         S.nc(S.P(D, num))
-    # 오결선 보호: IN이 VOUT 줄과 같은 높이 → 곧게
-    S.place(Pr, "TPS26611", "TPS26611", "TBD:TPS26611", 62, vo[1] - S.dy + 1, nets={
-        "1": f"DAC{ch}_OUT", "2": "VIN_P", "3": "GND", "4": f"OUT{ch}_P", "5": f"OUT{ch}_FLT", "6": "GND"})
-    S.wa(vo, S.P(Pr, "1"))
-    S.sup_stub("VIN_P", S.P(Pr, "2"))
-    S.gnd_stub(S.P(Pr, "3"))
-    S.gnd_stub(S.P(Pr, "6"))
-    S.gl(f"OUT{ch}_FLT", S.P(Pr, "5"), "D", length=1)
-    op = S.P(Pr, "4")
+    # 오결선 보호 TPS26611: IN이 VOUT 줄과 같은 높이 → 곧게
+    S.place(Pr, "TPS26611", "TPS26611DDFR", "Package_TO_SOT_SMD:Texas_DDF0008A_SOT-8_1.6x2.9mm_P0.65mm",
+            62, vo[1] - S.dy + 1, nets={
+        "4": f"DAC{ch}_OUT", "6": "VIN_P", "1": "GND", "3": "GND", "2": "GND", "5": f"OUT{ch}_P", "8": f"OUT{ch}_SGOOD"})
+    S.wa(vo, S.P(Pr, "4"))
+    S.sup_stub("VIN_P", S.P(Pr, "6"))
+    for num in ("1", "3", "2"):                           # GND, -Vs = GND (단전원), MODE = GND
+        S.gnd_stub(S.P(Pr, num))
+    S.nc(S.P(Pr, "7"))                                    # EN 개방 = 켜짐 (내부 풀업)
+    S.gl(f"OUT{ch}_SGOOD", S.P(Pr, "8"), "D", length=1)
+    op = S.P(Pr, "5")
     yr = op[1] - S.dy
     S.h2(f"R{20 + 10 * ch}", "R", "10R pulse", FP["R2512"], 70, yr, f"OUT{ch}_P", f"OUT{ch}_EXT")
     S.wa(op, S.P(f"R{20 + 10 * ch}", "1"))
-    S.v2(f"D{20 + 10 * ch}", "TVS_BI", "SMAJ33CA", FP["SMA"], 77, yr, f"OUT{ch}_EXT", "GND")
+    S.v2(f"D{20 + 10 * ch}", "TVS3301", "TVS3301DRBR", "Package_DFN_QFN:Texas_DRB0008A", 77, yr,
+         f"OUT{ch}_EXT", "GND")
     S.v2(f"C{31 + 10 * ch}", "C", "1n 100V", FP["C0603"], 83, yr, f"OUT{ch}_EXT", "GND")
-    S.gnd_stub(S.P(f"D{20 + 10 * ch}", "2"))
+    S.gnd_stub(S.P(f"D{20 + 10 * ch}", "5"))
     S.gnd_stub(S.P(f"C{31 + 10 * ch}", "2"))
     S.w((73, yr), (77, yr), (83, yr), (87, yr))
     S.gl(f"OUT{ch}_EXT", S.o((87, yr)), "R", length=0)
@@ -836,17 +873,22 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.gl(f"DAC{ch}_SENSE", S.P(Bf, "1"), "R", length=1)
     S.sup_stub("VIN_P", S.P(Bf, "5"))
     S.gnd_stub(S.P(Bf, "2"))
-    for j, (val, fp, net) in enumerate((("100n 50V", "C0805", "VIN_P"), ("4.7u 50V", "C1210", "VIN_P"),
-                                        ("100n", "C0603", "+3V3"))):
-        decap(S, f"C{32 + j + 10 * ch}", val, fp, 97 + 7 * j, y0, net)
+    # 바이패스: DAC AVDD(10 Ω 뒤) 100n, +3V3 100n, OPA197 V+ 100n, VIN_P 벌크 4.7u는 CH1에만 (두 채널 공용)
+    ca = f"C{32 + 10 * ch}"
+    S.v2(ca, "C", "100n 50V", FP["C0805"], 97, y0, f"DAC{ch}_AVDD", "GND")
+    S.gl(f"DAC{ch}_AVDD", S.P(ca, "1"), "R", length=1)
+    S.gnd_stub(S.P(ca, "2"))
+    decap(S, f"C{34 + 10 * ch}", "100n", "C0603", 107, y0, "+3V3")
+    if ch == 1:
+        decap(S, "C43", "4.7u 50V", "C1210", 113, y0, "VIN_P")
     decap(S, f"C{35 + 10 * ch}", "100n 50V", "C0805", 97, y0 + 9, "VIN_P")     # OPA197 V+
     S.box(8, y0 - 6, 94, y0 + 28, f"ANALOG OUTPUT CH{ch}  -  V/I selectable, miswiring protected  ->  connector pin {3 + ch}")
     S.text(f"VOUT + IOUT one terminal (datasheet 9.1.1.3). +VSENSE = {Bf} OPA197 follower of terminal OUT{ch}_EXT "
            f"(after R{20 + 10 * ch}) via R{21 + 10 * ch}:", (8.5, y0 + 25.6), 1.27)
     S.text("  no +VSENSE 60k leakage in current mode, series-R drop corrected in voltage mode.  "
-           f"ISET-R = R{22 + 10 * ch} external 15k 0.1%.", (8.5, y0 + 27.0), 1.27)
+           f"ISET-R = R{22 + 10 * ch} 15k 0.1%.  SGOOD low = OK.", (8.5, y0 + 27.0), 1.27)
     S.box(95, y0 - 6, 120, y0 + 16, f"CH{ch} DECOUPLING")
-    S.text(f"C{35 + 10 * ch}: {Bf} OPA197 V+", (104, y0 + 15), 1.27)
+    S.text(f"C{35 + 10 * ch}: {Bf} V+" + ("   C43: VIN_P bulk (both CH)" if ch == 1 else ""), (95.5, y0 + 15), 1.27)
 S.box(121, 4, 156, 24, "DAC SELECTION  (decision #10)")
 for i, t_ in enumerate([
         "U7/U8 fitted: DAC8760 (16-bit, I + V output).",
@@ -858,31 +900,44 @@ for i, t_ in enumerate([
         "  check pin handling before fitting (VERIFY).",
 ]):
     S.text(t_, (121.5, 8.2 + 2.2 * i), 1.27)
-S.box(121, 27, 156, 52, "DAC SPI  -  SPI2 daisy chain")
+S.box(121, 27, 156, 74, "DAC SPI  -  SPI2, SCLK gated per DAC")
 for i, t_ in enumerate([
-        "SPI2 for the DACs only (PB13 SCK, PB14 MISO, PB15 MOSI).",
-        "DAC_MOSI -> U7 DIN,  U7 SDO -> DAC_DAISY -> U8 DIN,",
-        "U8 SDO -> DAC_MISO (readback / fault status).",
-        "One 48-bit frame (U8 word first), then one DAC_LATCH",
-        "(PB10) edge: both channels update together.",
-        "Init: set DCEN in U7 (24-bit), then in U8 (48-bit).",
-        "R33: U8 shifts in NOP (0x00) until U7 SDO is enabled.",
+        "DAC8760 rev D: daisy chain removed; multiple devices",
+        "need gated SCLK (datasheet 8.5.1.5, Fig. 8-9).",
+        "SPI2 mode 3 (CPOL 1, CPHA 1): SCK idles high, so the",
+        "OR gate gives no extra edge at LATCH low/high.",
+        "DACn_SCLK = DAC_SCK OR DACn_LATCH (PB10 / PB11).",
+        "DIN and SDO shared (SDO 3-state after LATCH).",
+        "ALARM: open drain, wired-OR, R33 10k pull-up;",
+        "  which channel -> read status register.",
 ]):
     S.text(t_, (121.5, 31.2 + 2.2 * i), 1.27)
-S.h2("R33", "R", "100k", FP["R0603"], 136, 48, "DAC_DAISY", "GND")
-S.gl("DAC_DAISY", S.P("R33", "1"), "L", length=1)
-S.gnd_stub(S.P("R33", "2"))
+S.place("U14", "74LVC2G32", "SN74LVC2G32DCUR", "Package_SO:VSSOP-8_2.3x2mm_P0.5mm", 135, 56, nets={
+    "1": "DAC_SCK", "2": "DAC1_LATCH", "5": "DAC_SCK", "6": "DAC2_LATCH", "7": "DAC1_SCLK", "3": "DAC2_SCLK",
+    "8": "+3V3", "4": "GND"})
+for num, net in (("1", "DAC_SCK"), ("2", "DAC1_LATCH"), ("5", "DAC_SCK"), ("6", "DAC2_LATCH")):
+    S.gl(net, S.P("U14", num), "L")
+for num, net in (("7", "DAC1_SCLK"), ("3", "DAC2_SCLK")):
+    S.gl(net, S.P("U14", num), "R")
+S.sup_stub("+3V3", S.P("U14", "8"))
+S.gnd_stub(S.P("U14", "4"))
+decap(S, "C36", "100n", "C0603", 124, 64, "+3V3")
+S.v2("R33", "R", "10k", FP["R0603"], 146, 64, "+3V3", "DAC_ALARM")
+S.sup_stub("+3V3", S.P("R33", "1"))
+S.gl("DAC_ALARM", S.P("R33", "2"), "D", length=1)
 
 part_table(S, 8, 78, [
     ("U7, U8", "DAC8760IPWP", "아날로그 출력 1·2", "16비트, 4–20 / 0–20 / 0–24 mA · 0–5 / 0–10 V 선택, 내부 기준, 고장 알람 — 대체 DAC7760/8750/7750"),
-    ("U9, U10", "TPS26611", "출력 오결선 보호", "출력 단자 과전압·역전압 차단, 전류 제한, 고장 출력 FLT*"),
+    ("U9, U10", "TPS26611DDFR", "출력 오결선 보호", "±50 V, 단자 > +Vs 또는 < −0.2 V면 5 µs 차단·자동 복귀, 전류 제한 32 mA, RON 7.5 Ω, SGOOD Low = 정상"),
     ("R30, R40", "10R pulse (2512)", "서지 전류 제한", "출력 보호기와 TVS 사이 직렬"),
-    ("D30, D40", "SMAJ33CA", "출력 서지 클램프", "TVS 양방향 400 W, 33 V"),
+    ("D30, D40", "TVS3301DRBR", "출력 서지 클램프", "TI 평탄 클램프 33 V 양방향, 40 V @ 27 A — TPS26611 ±55 V 보호 (데이터시트 권장)"),
     ("C41, C51", "1n 100V", "출력 고주파 필터", "케이블로 들어오는 RF 억제"),
-    ("U12, U13", "OPA197IDBVR", "+VSENSE 버퍼 (이득 1)", "36 V, 입출력 레일투레일, 오프셋 100 µV* — 단자 전압을 +VSENSE로, 전류 모드 누설 0"),
+    ("U12, U13", "OPA197IDBVR", "+VSENSE 버퍼 (이득 1)", "36 V, 입출력 레일투레일 — 단자 전압을 +VSENSE로, 전류 모드 누설 0"),
     ("R31, R41", "10k", "버퍼 입력 보호", "R30·R40 뒤 단자 전압을 OPA197 + 입력으로 (서지 전류 제한)"),
-    ("R32, R42", "15k 0.1% 25ppm", "외부 ISET-R (전류 기준)", "내부 저항보다 온도 드리프트 작음 → 전류 출력 정확도"),
-    ("R33", "100k", "데이지 체인 풀다운", "U7 SDO 켜기 전 U8에 NOP (0x00) 입력"),
+    ("R32, R42", "15k 0.1% 25ppm", "외부 ISET-R (전류 기준)", "내부 저항보다 온도 드리프트 작음 (REXT 비트 설정)"),
+    ("R34, R44", "10R", "DAC AVDD 직렬", "전원 상승 속도 제한 (데이터시트 10장)"),
+    ("U14", "SN74LVC2G32DCUR", "DAC별 SCLK 게이트", "OR 2회로: DACn_SCLK = SCK OR LATCHn (SPI2 모드 3)"),
+    ("R33", "10k", "ALARM 풀업", "오픈 드레인 ALARM 두 개를 한 선으로 (데이터시트: 외부 10 kΩ)"),
 ])
 
 # ════════════════════════════ 6. RS-485 ════════════════════════════
@@ -927,6 +982,8 @@ def prop_pos(p):
     if s["kind"] in ("pwr", "flag"):
         if s["kind"] == "flag" or s.get("style") == "up":
             return (x, y - 3.2, "center"), (x, y - 2.3, "center")
+        if s.get("style") == "rtn":                  # 이름을 기호 오른쪽에 (GND와 구별)
+            return (x, y + 0.6, "left"), (x + 0.8, y + 0.7, "left")
         return (x, y + 2.5, "center"), (x, y + 3.0, "center")
     if r in (0, 180):
         return (x + 1.2, y - 0.3, "left"), (x + 1.2, y + 0.7, "left")
@@ -1002,7 +1059,7 @@ def junctions(S):
     for a, b in S.wires:
         for e in (rp(a), rp(b)):
             cnt[e] = cnt.get(e, 0) + 1
-    for pt, *_ in all_pins(S):
+    for pt, ref in {(pt, ref) for pt, ref, *_ in all_pins(S)}:   # 겹친 핀(같은 부품)은 한 번만
         if pt in cnt:
             cnt[pt] += 1
     return sorted(pt for pt, c in cnt.items() if c >= 3)
@@ -1045,7 +1102,11 @@ def validate(S):
             errs.append(f"title-block collision {(x, y)}")
     errs += place_props(S) + overlap_errors(S) + pin_name_errors()
     if errs:
-        raise SystemExit(f"{S.file}:\n  " + "\n  ".join(sorted(set(errs))[:60]))
+        msg = f"{S.file}:\n  " + "\n  ".join(sorted(set(errs))[:60])
+        if os.environ.get("HMT_DRAFT"):          # 작도 확인용: 오류를 보여 주고 파일은 씀
+            print(msg)
+        else:
+            raise SystemExit(msg)
 
 
 # ════════════════════════════ 글자 배치·겹침 검사 ════════════════════════════
@@ -1085,7 +1146,7 @@ def part_rects(p):
         st = s["style"]
         if st == "up":
             return [(x - 0.35, y - 0.55, x + 0.35, y)]
-        if st == "gnd":
+        if st in ("gnd", "rtn"):
             return [(x - 0.55, y, x + 0.55, y + 1.05)]
         return [(x - 1.05, y, x + 0.8, y + 1.05)]
     if k == "flag":
@@ -1267,10 +1328,10 @@ def wire_metrics(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-09-29") (rev "0.7") '
-            f'(company "DOTECH Co., Ltd.") (comment 1 "Project No. {PROJECT}  -  {PRODUCT} oil moisture transmitter, RS-485 + 2x V/I output") '
+    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-09-30") (rev "0.8") '
+            f'(company "DOTECH Co., Ltd.") (comment 1 "Project No. {PROJECT}  -  {PRODUCT} oil moisture transmitter") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
-            f'(comment 3 "VERIFY=YES parts: pin numbers LMR36006/PCAP04/TPS26611; TPS2660 R22"))')
+            f'(comment 3 "Pinouts checked vs manufacturer datasheets 2026-09-30 (STM32: KiCad lib)"))')
 
 
 def write_all():
@@ -1296,19 +1357,20 @@ def write_all():
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
         items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
     notes = [
-        (f"DOTECH {PRODUCT}  -  Oil Moisture Transmitter  -  Schematic v0.7  -  Project No. {PROJECT}", 2.5, True),
+        (f"DOTECH {PRODUCT}  -  Oil Moisture Transmitter  -  Schematic v0.8  -  Project No. {PROJECT}", 2.5, True),
         (f"File names (schematic, PCB, Gerber) = {PROJECT}.*   PCB silkscreen marking = {PROJECT}", 1.4, False),
         ("v0.5: J1 = JST GH 1.25 mm 8P side entry (SM08B-GHS-TB), harness W-2 to M12 8P; J5 chassis spring contact (was M12 shell pin).", 1.4, False),
         ("v0.4: J3 = JST SH 1.0 mm 4P (SM04B-SRSS-TB side entry, v0.5) for sensor harness W-1 direct from HTX99R (no feedthrough, mech Rev F); Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
         ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2450 -> J1", 1.4, False),
-        ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-30 V DC.", 1.4, False),
+        ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-28 V DC.", 1.4, False),
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("v0.6: parts cleanup (-16: pull-ups R11-15, LED D3/R16, RS-485 R60/61 D60/61, FB2 C19 C11 C2 C6); PCB temperature = ADS1220 + MCU internal sensors.", 1.4, False),
         ("v0.7: DAC8760 datasheet pinout (HTSSOP-24 PWP); +VSENSE via OPA197 follower (U12/U13); external ISET-R 15k 0.1%; DACs on SPI2 daisy chain, common DAC_LATCH.", 1.4, False),
-        ("VERIFY: LMR36006, PCAP04, TPS26611 pin numbers are placeholders (datasheets not accessible when drawn). TPS2660: RTN link R22 to confirm.", 1.4, False),
-        ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor, LMR36006, PCAP04, TPS26611.", 1.4, False),
+        ("v0.8: datasheet review (docs/hw/schematic-review-260313A.md): real pinouts LMR36006/PCAP04/TPS26611; TPS2660 RTN isolated from GND; OVP 29 V (supply 12-28 V);", 1.4, False),
+        ("      DAC SPI = gated SCLK (daisy chain removed in DAC8760 rev D); DAC AVDD 10R; ALARM wired-OR + 10k; TVS3301 outputs; PCAP04 on SPI3; buck L/C per datasheet.", 1.4, False),
+        ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor L2, LMR36006 (RNX0012A 2x3 mm, not in KiCad lib).", 1.4, False),
         ("표기 규칙: 부품번호 = 굵은 글자 (R1, U4) / 부품값 = 보통 글자 (10k, DAC8760) / 전원 네트 = 기울인 글자 (+3V3, VIN_P)", 1.4, False),
         ("         신호 네트 = 테두리 있는 라벨 (SPI_SCK, OUT1_EXT) - 네트 이름은 부품번호·부품명과 겹치지 않게 지음", 1.4, False),
         ("글자 겹침: 생성기가 부품 몸체·핀·선·라벨·메모와 겹치지 않는 자리에 자동 배치하고, 겹치면 생성 실패로 처리", 1.4, False),

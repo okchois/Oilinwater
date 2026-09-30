@@ -106,7 +106,7 @@
 - 출력: DAC8760 ×2 (SPI, 전압/전류 선택), RS-485 Modbus RTU (THVD2450)
 - RS-485로 펌웨어를 업데이트하는 자체 부트로더 (플래시 맵: BL 32K, 앱 208K, 설정 8K, 교정 8K, 2 KB 페이지)
 - 계산: ppm = aw × 10^(A + B/T), 약 1 Hz
-- 전원 12~30 V, 전자부 발열 약 1.3 W, 오일 온도 최대 120 °C
+- 전원 12~28 V (v0.8), 전자부 발열 약 1.3 W, 오일 온도 최대 120 °C
 - PCB: 57 × 23 mm 1장, 원통 하우징 안. 부품 높이 한 면 5~12 mm
 - 참고 파일: docs/hw/mcu-selection.md, docs/hw/hardware-block-design.md,
   docs/hw/circuit-design.md, docs/rs485-bootloader-design.md, firmware/bootloader/
