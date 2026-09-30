@@ -103,8 +103,8 @@ ic("CONN_GH8", right=[("8", "V+", P), ("6", "GND", P), ("4", "OUT1", P), ("5", "
                       ("2", "RS485_B", P), ("1", "NC", P), ("7", "NC", P)],
    w=6, prefix="J", desc="JST GH 1.25 mm 8-pin side-entry header. Harness W-2 to M12 8P field connector (pin n = M12 pin n)")
 ic("CONN_CH", right=[("1", "CHASSIS", P)], w=6, prefix="J",
-   desc="PCB-to-housing chassis contact (spring finger on PCB edge). P/N TBD")
-ic("CMC", left=[("1", "", P), ("3", "", P)], right=[("2", "", P), ("4", "", P)], w=4, prefix="L",
+   desc="PCB-to-housing chassis contact: Harwin S1941-46R SMT spring contact (7.25 mm free height)")
+ic("CMC", left=[("1", "", P), ("2", "", P)], right=[("4", "", P), ("3", "", P)], w=4, prefix="L",
    desc="2-line common mode choke")
 ic("TPS2660", left=[("1", "IN", PI), ("2", "IN", P), ("7", "~{SHDN}", I), ("3", "UVLO", I), ("4", "NC", NC),
                    ("6", "MODE", I), ("5", "OVP", I)],
@@ -480,16 +480,16 @@ SHEETS.append(S)
 S.place("J1", "CONN_GH8", "SM08B-GHS-TB", "Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal",
         16, 29, nets={"8": "VIN_EXT", "6": "GND_IN", "4": "OUT1_EXT", "5": "OUT2_EXT", "3": "RS485_A_EXT",
                       "2": "RS485_B_EXT"})
-S.place("L1", "CMC", "CMC 2x1mH 0.3A", "TBD:CMC_WE-SL", 32.5, 26,
-        nets={"1": "VIN_EXT", "2": "VIN_L", "3": "GND_IN", "4": "GND"})
+S.place("L1", "CMC", "CMC 1mH 0.8A", "Inductor_SMD:L_CommonMode_Wuerth_WE-SL2", 32.5, 26,
+        nets={"1": "VIN_EXT", "4": "VIN_L", "2": "GND_IN", "3": "GND"})     # WE-SL2: 권선 1–4, 2–3
 S.wa(S.P("J1", "8"), S.P("L1", "1"))
-S.wa(S.P("J1", "6"), S.P("L1", "3"))
-b = S.P("L1", "4")                          # GND 출력: 핀에서 바로 아래로 GND, PWR_FLAG는 옆 짧은 선 끝
+S.wa(S.P("J1", "6"), S.P("L1", "2"))
+b = S.P("L1", "3")                          # GND 출력: 핀에서 바로 아래로 GND, PWR_FLAG는 옆 짧은 선 끝
 g = (b[0], b[1] + 2)
 S.wa(b, g, (g[0] + 1, g[1]))
 S.pw("GND", g, absolute=True)
 S.flag((g[0] + 1, g[1]), absolute=True)
-a = S.P("L1", "2")
+a = S.P("L1", "4")
 S.v2("D1", "TVS_BI", "SMDJ36CA", FP["SMC"], 40, 26, "VIN_L", "GND")
 S.h2("R1", "R", "4.7R 1W pulse", FP["RMELF"], 45, 26, "VIN_L", "VIN_F")
 S.wa(a, S.P("D1", "1"), S.P("R1", "1"))
@@ -505,11 +505,11 @@ for num, net in (("4", "OUT1_EXT"), ("5", "OUT2_EXT"), ("3", "RS485_A_EXT"), ("2
     S.gl(net, S.P("J1", num), "R", length=1)
 S.nc(S.P("J1", "1"))
 S.nc(S.P("J1", "7"))
-S.place("J5", "CONN_CH", "Chassis contact", "TBD:Chassis_Spring_Contact", 16, 43, nets={"1": "CHASSIS"})
+S.place("J5", "CONN_CH", "S1941-46R", "Connector:SpringContact_Harwin_S1941-46R", 16, 43, nets={"1": "CHASSIS"})
 sh = S.P("J5", "1")
 S.v2("R2", "R", "1M", FP["R0603"], 36, 44, "CHASSIS", "GND")
 S.v2("C3", "C", "4.7n 2kV Y2", FP["C1812"], 42, 44, "CHASSIS", "GND")
-S.place("GDT1", "GDT", "GDT 230V", "TBD:GDT_Bourns_2038", 52, 45.5, nets={"1": "CHASSIS", "2": "GND"})
+S.place("GDT1", "GDT", "2035-23-SM", "HMT500_260313A:GDT_Bourns_2035-xx-SM", 52, 45.5, nets={"1": "CHASSIS", "2": "GND"})
 S.wa(sh, S.o((24, 43)))                          # J5 핀 = 샤시 선 높이 → 곧게
 S.w((24, 43), (36, 43), (42, 43), (52, 43), (60, 43))
 for r_ in ("R2", "C3", "GDT1"):
@@ -530,20 +530,20 @@ S.text("PCB-housing creepage >= 2 mm", (56, 50), 1.27)
 
 part_table(S, 6, 58, [
     ("J1", "SM08B-GHS-TB", "현장 커넥터 연결", "JST GH 1.25 mm 8P 옆 삽입, 하네스 W-2 → M12 8P, 핀 n = M12 핀 n"),
-    ("L1", "CMC 2x1mH 0.3A", "전원선 공통모드 노이즈 차단", "2 × 1 mH, 0.3 A — 전도 방출·전도 내성 대책"),
+    ("L1", "CMC 1mH 0.8A", "전원선 공통모드 노이즈 차단", "Würth WE-SL2 744222, 2 × 1 mH, 0.8 A, 9.2 × 6 × 5 mm — 전도 방출·내성 대책"),
     ("D1", "SMDJ36CA", "입력 서지 1단 흡수", "TVS 양방향 3000 W, 36 V — −30 V 오결선에 도통 안 함"),
     ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "MELF 1 W 펄스 내량 저항"),
     ("D2", "SMBJ33CA", "입력 서지 2단 클램프", "TVS 양방향 600 W, 33 V — eFuse 정격 이하로 제한"),
-    ("GDT1", "GDT 230V", "회로 GND–외함 서지 방전", "230 V 방전관, 선–대지 서지 때만 도통 (평소 절연)"),
+    ("GDT1", "2035-23-SM", "회로 GND–외함 서지 방전", "Bourns 2전극 SMD GDT 230 V, Ø5 × 4.4 mm — 선–대지 서지 때만 도통"),
     ("C3, R2", "4.7n Y2 / 1M", "GND–외함 고주파 결합", "Y2 안전 콘덴서 + 1 MΩ 정전기 방전 경로"),
-    ("J5", "Chassis contact", "PCB–하우징 접지 접점", "SMD 스프링 접점, PCB 가장자리 → 하우징 Ø27 내면"),
+    ("J5", "S1941-46R", "PCB–하우징 접지 접점", "Harwin SMT 스프링 접점 (자유 높이 7.25 mm), PCB 가장자리 → 하우징 Ø27 내면"),
 ])
 
 # ════════════════════════════ 2. 전원 ════════════════════════════
 S = Sheet("power.kicad_sch", "Power", "eFuse (reverse/OV/UV), 60V buck to 5V, LDO 3.3V", dx=4, dy=14)
 SHEETS.append(S)
 S.place("U1", "TPS2660", "TPS26600PWPR",
-        "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.66x2.46mm_ThermalVias", 30, 23, nets={
+        "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.46x2.31mm_ThermalVias", 30, 23, nets={
     "1": "VIN_F", "2": "VIN_F", "3": "UV_DIV", "5": "OV_DIV", "6": "EF_RTN", "9": "GND", "8": "EF_RTN", "17": "EF_RTN",
     "15": "VIN_P", "16": "VIN_P", "14": "PWR_FLT", "11": "EF_ILIM", "12": "EF_DVDT"})
 # 입력: VIN_F 라벨을 핀마다, 분압 R3–R5는 한 줄 세로, 탭은 UVLO·OVP 핀과 같은 높이 → 직선
@@ -581,7 +581,7 @@ for r_ in ("R6", "C4"):
 decap(S, "C5", "10u 50V", "C1210", 53, 22, "VIN_P")
 decap(S, "C7", "2.2u 100V", "C1210", 58, 22, "VIN_P")
 # 벅: 전원 핀마다 전원 심볼, BOOT 콘덴서는 위로, FB·SW는 라벨
-S.place("U2", "LMR36006", "LMR36006BRNXR", "TBD:Texas_RNX0012A_VQFN-HR-12_2x3mm", 72, 23, nets={
+S.place("U2", "LMR36006", "LMR36006BRNXR", "HMT500_260313A:Texas_RNX0012A_VQFN-HR-12_2x3mm", 72, 23, nets={
     "2": "VIN_P", "10": "VIN_P", "9": "VIN_P", "7": "BUCK_FB", "6": "GND", "1": "GND", "11": "GND",
     "4": "BUCK_BOOT", "12": "BUCK_SW", "5": "BUCK_VCC"})
 vi, vi2, en = S.P("U2", "2"), S.P("U2", "10"), S.P("U2", "9")
@@ -593,7 +593,7 @@ for n_ in ("6", "1", "11"):
     S.gnd_stub(S.P("U2", n_))
 bt = S.P("U2", "4")
 S.v2("C8", "C", "100n", FP["C0603"], bt[0] - S.dx, bt[1] - S.dy - 3, "BUCK_SW", "BUCK_BOOT")
-S.h2("L2", "L", "15uH", "TBD:L_4x4mm", 83, 21, "BUCK_SW", "+5V")
+S.h2("L2", "L", "15uH", "Inductor_SMD:L_Coilcraft_XAL4030-XXX", 83, 21, "BUCK_SW", "+5V")
 sw, c8t = S.P("U2", "12"), S.P("C8", "1")
 S.wa(sw, (81 + S.dx, sw[1]))
 S.wa((81 + S.dx, sw[1]), S.P("L2", "1"))
@@ -646,7 +646,7 @@ part_table(S, 6, 46, [
     ("U1", "TPS26600PWPR", "전자 퓨즈 (입력 보호)", "역극성 −60 V 차단, 과전압 29 V·저전압 8.6 V (R3–R5), 전류 제한 149 mA (R6), 돌입 제한 (C4), 고장 출력 FLT"),
     ("EF_RTN", "(기준 접지)", "TPS2660 내부 기준", "R5·R6·C4·MODE·방열 패드는 RTN에 연결. GND와 연결 금지 — 역극성 보호 무효·손상"),
     ("U2", "LMR36006BRNXR", "5 V 강압 전원 (벅)", "입력 4.2–60 V, 0.6 A 동기식, 1 MHz, 출력 = 1 V × (1 + R8/R9)"),
-    ("L2, C6, C10, C11", "15uH / 22u×2 / 20p", "벅 출력 필터·보상", "데이터시트 권장값 (5 V, 1 MHz). L2 4 × 4 mm 차폐형, 포화 0.8 A 이상"),
+    ("L2, C6, C10, C11", "15uH / 22u×2 / 20p", "벅 출력 필터·보상", "데이터시트 권장값 (5 V, 1 MHz). L2 Coilcraft XGL4030-153, 4 × 4 × 3.1 mm"),
     ("U3", "TPS7A2033PDBVR", "3.3 V 저잡음 레귤레이터", "300 mA, 저잡음·높은 PSRR → 벅 리플 제거, SOT-23-5"),
     ("FB1", "600R@100MHz", "아날로그 전원 +3V3A 분리", "페라이트 비드 + C13 10 µF → PCAP04·ADS1220 전원"),
 ])
@@ -772,7 +772,7 @@ S.gl("PT_N", S.P("R18", "1"), "L", length=1)
 S.gl("PT_P", S.P("U6", "11"), "L", length=1)
 S.nc(S.P("U6", "6"))
 rp0, rn0 = S.P("U6", "9"), S.P("U6", "8")
-S.v2("R19", "R", "4.02k 0.01% 5ppm", FP["R0603"], rp0[0] - S.dx, rp0[1] - S.dy, "PT_N", "REF_N")
+S.v2("R19", "R", "4.02k 0.02% 5ppm", FP["R0603"], rp0[0] - S.dx, rp0[1] - S.dy, "PT_N", "REF_N")
 S.v2("R20", "R", "1k", FP["R0603"], rn0[0] - S.dx, rn0[1] - S.dy + 3, "REF_N", "GND")
 S.wa(rn0, S.P("R20", "1"))                 # REFN0 → 아래로 곧게 → R20
 S.wa(S.P("R19", "2"), S.P("R20", "1"))    # R19 아래 끝 → 옆으로 곧게
@@ -802,7 +802,7 @@ part_table(S, 22, 78, [
     ("C25, C24", "4.7u / 10u", "PCAP04 전원 버퍼", "VDD18 ≥ 4.7 µF, VDD33 ≥ 10 µF (데이터시트 표 2)"),
     ("C22", "220p C0G 1%", "PCAP04 기준 용량", "MK33-W mini (200 pF)와 비슷한 값, C0G (온도 변화 거의 없음)"),
     ("U6", "ADS1220IPWR", "Pt1000 온도 측정", "24비트 ADC, 50/60 Hz 제거, 내부 온도센서 (PCB 온도). 설정 한계: IDAC ≤ 250 µA, PGA ≤ 2 (SPI1 모드 1)"),
-    ("R19", "4.02k 0.01% 5ppm", "Pt1000 비율 측정 기준저항", "IDAC 전류 오차 상쇄, 온도계수 5 ppm/°C"),
+    ("R19", "4.02k 0.02% 5ppm", "Pt1000 비율 측정 기준저항", "IDAC 전류 오차 상쇄, 온도계수 5 ppm/°C"),
     ("R17, R18, C27", "1k / 10n", "입력 RC 필터", "차동·공통모드 노이즈 제거"),
 ])
 
@@ -847,7 +847,7 @@ for ch, y0 in ((1, 10), (2, 46)):
     for num in ("20", "17"):
         S.nc(S.P(D, num))
     # 오결선 보호 TPS26611: IN이 VOUT 줄과 같은 높이 → 곧게
-    S.place(Pr, "TPS26611", "TPS26611DDFR", "Package_TO_SOT_SMD:Texas_DDF0008A_SOT-8_1.6x2.9mm_P0.65mm",
+    S.place(Pr, "TPS26611", "TPS26611DDFR", "Package_TO_SOT_SMD:SOT-23-8",
             62, vo[1] - S.dy + 1, nets={
         "4": f"DAC{ch}_OUT", "6": "VIN_P", "1": "GND", "3": "GND", "2": "GND", "5": f"OUT{ch}_P", "8": f"OUT{ch}_SGOOD"})
     S.wa(vo, S.P(Pr, "4"))
@@ -860,7 +860,7 @@ for ch, y0 in ((1, 10), (2, 46)):
     yr = op[1] - S.dy
     S.h2(f"R{20 + 10 * ch}", "R", "10R pulse", FP["R2512"], 70, yr, f"OUT{ch}_P", f"OUT{ch}_EXT")
     S.wa(op, S.P(f"R{20 + 10 * ch}", "1"))
-    S.v2(f"D{20 + 10 * ch}", "TVS3301", "TVS3301DRBR", "Package_DFN_QFN:Texas_DRB0008A", 77, yr,
+    S.v2(f"D{20 + 10 * ch}", "TVS3301", "TVS3301DRBR", "HMT500_260313A:Texas_DRB0008A_PadFloat", 77, yr,
          f"OUT{ch}_EXT", "GND")
     S.v2(f"C{31 + 10 * ch}", "C", "1n 100V", FP["C0603"], 83, yr, f"OUT{ch}_EXT", "GND")
     S.gnd_stub(S.P(f"D{20 + 10 * ch}", "5"))
@@ -1447,7 +1447,7 @@ def write_all():
         ("v0.7: DAC8760 datasheet pinout (HTSSOP-24 PWP); +VSENSE via OPA197 follower (U12/U13); external ISET-R 15k 0.1%; DACs on SPI2 daisy chain, common DAC_LATCH.", 1.4, False),
         ("v0.8: datasheet review (docs/hw/schematic-review-260313A.md): real pinouts LMR36006/PCAP04/TPS26611; TPS2660 RTN isolated from GND; OVP 29 V (supply 12-28 V);", 1.4, False),
         ("      DAC SPI = gated SCLK (daisy chain removed in DAC8760 rev D); DAC AVDD 10R; ALARM wired-OR + 10k; TVS3301 outputs; PCAP04 on SPI3; buck L/C per datasheet.", 1.4, False),
-        ("TBD footprints: J5 chassis contact, CMC, GDT, buck inductor L2, LMR36006 (RNX0012A 2x3 mm, not in KiCad lib).", 1.4, False),
+        ("Footprints: KiCad 7.0.11 library + project library HMT500_260313A (LMR36006 RNX0012A, GDT Bourns 2035-xx-SM, TVS3301 pad floating).", 1.4, False),
         ("표기 규칙: 부품번호 = 굵은 글자 (R1, U4) / 부품값 = 보통 글자 (10k, DAC8760) / 전원 네트 = 기울인 글자 (+3V3, VIN_P)", 1.4, False),
         ("         신호 네트 = 테두리 있는 라벨 (SPI_SCK, OUT1_EXT) - 네트 이름은 부품번호·부품명과 겹치지 않게 지음", 1.4, False),
         ("         라벨 모양 = 신호 방향: 뾰족한 쪽이 밖 = 이 시트에서 내보냄(출력), 안 = 받음(입력), 양쪽 = 양방향, 네모 = 아날로그·수동", 1.4, False),
@@ -1467,6 +1467,8 @@ def write_all():
         f"(kicad_symbol_lib (version 20220914) (generator kicad_symbol_editor)\n{body}\n)\n")
     open(os.path.join(OUT, "sym-lib-table"), "w").write(
         f'(sym_lib_table\n  (lib (name "{LIB}")(type "KiCad")(uri "${{KIPRJMOD}}/{PROJECT}.kicad_sym")(options "")(descr "{PROJECT} project symbols"))\n)\n')
+    open(os.path.join(OUT, "fp-lib-table"), "w").write(         # 프로젝트 풋프린트 (KiCad 7.0.11 복사본 + 자체 3종)
+        f'(fp_lib_table\n  (lib (name "{LIB}")(type "KiCad")(uri "${{KIPRJMOD}}/../lib/{LIB}.pretty")(options "")(descr "{PROJECT} footprints"))\n)\n')
     pro = {"meta": {"filename": PROJECT + ".kicad_pro", "version": 1},
            "sheets": [[ROOT, "Root"]] + [[u_, S.title] for S, u_ in zip(SHEETS, uuids)]}
     open(os.path.join(OUT, PROJECT + ".kicad_pro"), "w").write(json.dumps(pro, indent=2) + "\n")
