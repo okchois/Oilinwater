@@ -97,10 +97,10 @@
 <polygon points="32.000,69.500 32.900,72.100 31.100,72.100" class="arrow"/>
 <polygon points="32.000,114.500 31.100,111.900 32.900,111.900" class="arrow"/>
 <text x="31.000" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 31.000 92.000)" class="t ">18</text>
-<line x1="116.250" y1="63.250" x2="116.250" y2="120.750" class="thin"/>
-<polygon points="116.250,63.250 117.150,65.850 115.350,65.850" class="arrow"/>
-<polygon points="116.250,120.750 115.350,118.150 117.150,118.150" class="arrow"/>
-<text x="115.250" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 115.250 92.000)" class="t ">23</text>
+<line x1="121.250" y1="63.250" x2="121.250" y2="120.750" class="thin"/>
+<polygon points="121.250,63.250 122.150,65.850 120.350,65.850" class="arrow"/>
+<polygon points="121.250,120.750 120.350,118.150 122.150,118.150" class="arrow"/>
+<text x="120.250" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 120.250 92.000)" class="t ">23</text>
 <line x1="182.250" y1="69.500" x2="190.750" y2="69.500" class="thin"/>
 <line x1="182.250" y1="114.500" x2="190.750" y2="114.500" class="thin"/>
 <line x1="189.250" y1="69.500" x2="189.250" y2="114.500" class="thin"/>
@@ -130,8 +130,8 @@
 <line x1="18.000" y1="170.800" x2="196.000" y2="170.800" class="thin"/>
 <text x="19.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">11.5 ~ 48.9</text>
 <text x="61.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">23</text>
-<text x="77.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">Ø27 (하우징)</text>
-<text x="107.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">가장자리 5.8 / 중심 12.2 mm</text>
+<text x="77.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">Ø24.92 (하우징)</text>
+<text x="107.200" y="174.700" font-size="2.7" text-anchor="start" class="t ">가장자리 3.5 / 중심 11.2 mm</text>
 <line x1="18.000" y1="176.200" x2="196.000" y2="176.200" class="thin"/>
 <text x="19.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">48.9 ~ 56.5</text>
 <text x="61.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">18</text>
@@ -209,28 +209,28 @@
 <text x="302.000" y="127.400" font-size="2.6" text-anchor="start" class="t muted">← 앞(바디 쪽)</text>
 <text x="215.000" y="26.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-105  PCB 홀더 (3:1)</text>
 <text x="215.000" y="32.000" font-size="2.8" text-anchor="start" class="t muted">왼쪽: 뒤(PCB 쪽)에서 본 끝면 / 오른쪽: 측면</text>
-<circle cx="370.000" cy="200.000" r="26.400" class="thick" fill="none"/>
+<circle cx="370.000" cy="200.000" r="24.500" class="thick" fill="none"/>
 <circle cx="370.000" cy="200.000" r="20.000" class="thick" fill="none"/>
 <rect x="389.928" y="198.300" width="3.272" height="3.400" fill="#fff" class="thick"/>
 <rect x="346.800" y="198.300" width="3.272" height="3.400" fill="#fff" class="thick"/>
-<line x1="338.600" y1="200.000" x2="401.400" y2="200.000" class="center"/>
-<line x1="370.000" y1="168.600" x2="370.000" y2="231.400" class="center"/>
-<line x1="397.400" y1="173.600" x2="406.900" y2="173.600" class="thin"/>
-<line x1="397.400" y1="226.400" x2="406.900" y2="226.400" class="thin"/>
-<line x1="405.400" y1="173.600" x2="405.400" y2="226.400" class="thin"/>
-<polygon points="405.400,173.600 406.300,176.200 404.500,176.200" class="arrow"/>
-<polygon points="405.400,226.400 404.500,223.800 406.300,223.800" class="arrow"/>
-<text x="404.400" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 404.400 200.000)" class="t ">Ø26.4 (0/-0.1)</text>
+<line x1="340.500" y1="200.000" x2="399.500" y2="200.000" class="center"/>
+<line x1="370.000" y1="170.500" x2="370.000" y2="229.500" class="center"/>
+<line x1="395.500" y1="175.500" x2="405.000" y2="175.500" class="thin"/>
+<line x1="395.500" y1="224.500" x2="405.000" y2="224.500" class="thin"/>
+<line x1="403.500" y1="175.500" x2="403.500" y2="224.500" class="thin"/>
+<polygon points="403.500,175.500 404.400,178.100 402.600,178.100" class="arrow"/>
+<polygon points="403.500,224.500 402.600,221.900 404.400,221.900" class="arrow"/>
+<text x="402.500" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 402.500 200.000)" class="t ">Ø24.5 (0/-0.1)</text>
 <line x1="362.000" y1="180.000" x2="362.000" y2="220.000" class="thin"/>
 <polygon points="362.000,180.000 362.900,182.600 361.100,182.600" class="arrow"/>
 <polygon points="362.000,220.000 361.100,217.400 362.900,217.400" class="arrow"/>
 <text x="361.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 361.000 200.000)" class="t ">Ø20</text>
-<line x1="346.800" y1="203.000" x2="346.800" y2="235.900" class="thin"/>
-<line x1="393.200" y1="203.000" x2="393.200" y2="235.900" class="thin"/>
-<line x1="346.800" y1="234.400" x2="393.200" y2="234.400" class="thin"/>
-<polygon points="346.800,234.400 349.400,233.500 349.400,235.300" class="arrow"/>
-<polygon points="393.200,234.400 390.600,235.300 390.600,233.500" class="arrow"/>
-<text x="370.000" y="238.400" font-size="3.2" text-anchor="middle" class="t ">23.2 (+0.2/0)  홈 바닥 사이</text>
+<line x1="346.800" y1="203.000" x2="346.800" y2="234.000" class="thin"/>
+<line x1="393.200" y1="203.000" x2="393.200" y2="234.000" class="thin"/>
+<line x1="346.800" y1="232.500" x2="393.200" y2="232.500" class="thin"/>
+<polygon points="346.800,232.500 349.400,231.600 349.400,233.400" class="arrow"/>
+<polygon points="393.200,232.500 390.600,233.400 390.600,231.600" class="arrow"/>
+<text x="370.000" y="236.500" font-size="3.2" text-anchor="middle" class="t ">23.2 (+0.2/0)  홈 바닥 사이</text>
 <line x1="347.800" y1="201.700" x2="336.000" y2="210.000" class="thin"/>
 <polygon points="347.800,201.700 346.191,203.932 345.156,202.460" class="arrow"/>
 <line x1="336.000" y1="210.000" x2="314.000" y2="210.000" class="thin"/>
@@ -242,7 +242,7 @@
 <text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
 <text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95, 홀더 뒤 12.5 (꽂을 공간). W-1(40 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.</text>
 <text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. J1 = JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD), 입구 뒤쪽(+x). 하네스 W-2(40 mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).</text>
-<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">   PCB 폭 23 구간은 x 63.4에서 끝 (턴버클 끝 엔드캡 앞면 x 64와 틈 0.6). 링 뒤(x ≥ 59) 부품은 Ø20 안 (링을 뒤에서 끼움).</text>
+<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">   PCB 폭 23 구간은 x 61.4에서 끝 (턴버클 끝 엔드캡 앞면 x 62와 틈 0.6). 링 뒤(x ≥ 57) 부품은 Ø20 안 (링을 뒤에서 끼움).</text>
 <text x="18.000" y="232.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
 <text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
@@ -273,7 +273,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-105~106</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">G / 2026-09-30</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">H / 2026-09-30</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">PEEK / PA66-GF30</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

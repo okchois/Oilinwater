@@ -91,7 +91,7 @@ def endcap():
     g0, g1 = E["seal"]["groove_x"]
     s = s.cut(tube(g0, g1, E["seal"]["d"] + 1, P.ORING["groove_d"]))
     f0, f1 = E["flange"]["x"]
-    for sgn in (1, -1):   # 렌치 평면 AF28
+    for sgn in (1, -1):   # 렌치 평면 (Rev H AF27)
         slab = cq.Workplane("XY").box(f1 - f0 + 0.2, 10, 40).translate(((f0 + f1) / 2, sgn * (E["flange"]["flats_af"] / 2 + 5), 0))
         s = s.cut(slab)
     s = s.cut(cyl(E["cbore"]["x"][0] - 0.1, E["cbore"]["x"][1], E["cbore"]["d"]))

@@ -2,7 +2,7 @@
 
   python docs/market/make_outline_comparison.py  →  docs/market/outline-comparison.png / .svg
 
-- HMT500: hardware/mech/hmt500_params.py (기구 Rev G) 그대로.
+- HMT500: hardware/mech/hmt500_params.py (기구 Rev H) 그대로.
 - EE364: 원문 데이터시트 v1.13 치수(전장 140, 노출 34, 나사 14, 씰면~하우징 끝 77, 커넥터 15, Ø30, AF27).
   육각 길이는 도면에 없어 10으로 가정.
 - MMT162: 웹 검색으로 본 데이터시트 치수(127.5, 119.5, 76, 43.5, 30.5, Ø33, AF30, M8)를
@@ -28,16 +28,16 @@ G_HALF = 20.955 / 2          # G½ 바깥지름
 
 def hmt500():
     C, B, H, E, Cn = P.CAP, P.BODY, P.HOUSING, P.ENDCAP, P.CONNECTOR
-    seg = [(C["x_tip"], B["gthread"]["x"][0], C["od"] / 2, "필터 캡 Ø12 (뿌리 3.5는 G½ 안)"),
+    seg = [(C["x_tip"], B["gthread"]["x"][0], C["od"] / 2, "보호캡 Ø12 (뿌리 3.5는 G½ 안)"),
            (*B["gthread"]["x"], G_HALF, "G½"),
            (*B["relief"]["x"], B["relief"]["d"] / 2, ""),
            (*B["hexa"]["x"], B["hexa"]["af"] / 2, "AF27"),
            (*B["collar"]["x"], B["collar"]["d"] / 2, ""),
-           (B["collar"]["x"][1], H["x"][1], H["od"] / 2, "하우징 Ø32"),
-           (*E["flange"]["x"], E["flange"]["flats_af"] / 2, "AF28"),
+           (B["collar"]["x"][1], H["x"][1], H["od"] / 2, f"하우징 Ø{H['od']:g}"),
+           (*E["flange"]["x"], E["flange"]["flats_af"] / 2, f"AF{E['flange']['flats_af']:g}"),
            (*Cn["body"]["x"], Cn["body"]["d"] / 2, ""),
            (*Cn["thread"]["x"], Cn["thread"]["d"] / 2, "M12")]
-    return dict(name="HMT500(260313)  — 기구 Rev G", seg=seg, tip=C["x_tip"], end=Cn["thread"]["x"][1],
+    return dict(name="HMT500(260313)  — 기구 Rev " + P.DRAWING_REV, seg=seg, tip=C["x_tip"], end=Cn["thread"]["x"][1],
                 thread=B["gthread"]["x"], od=H["od"], note="G½ ISO 228 + 본디드 씰, M12 8핀 (전면 장착, 품번 미정)",
                 color="#1f77b4", conf="설계값")
 

@@ -15,7 +15,7 @@
 <defs>
  <pattern id="hatch" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
  <pattern id="hatch2" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
-</defs><line x1="59.000" y1="100.000" x2="348.000" y2="100.000" class="center"/>
+</defs><line x1="48.000" y1="100.000" x2="340.000" y2="100.000" class="center"/>
 <rect x="146.000" y="71.300" width="4.000" height="7.200" class="green"/>
 <rect x="146.000" y="121.500" width="4.000" height="7.200" class="green"/>
 <polygon points="115.000,90.000 126.000,90.000 126.000,91.900 129.000,91.900 129.000,89.000 131.000,89.000 131.000,91.800 134.000,91.800 134.000,90.000 145.000,90.000 145.000,93.000 131.000,93.000 131.000,100.000 115.000,100.000" class="buy"/>
@@ -25,49 +25,51 @@
 <rect x="96.400" y="94.000" width="13.600" height="6.000" class="green"/>
 <rect x="97.000" y="94.600" width="10.000" height="3.800" fill="#555" stroke="none"/>
 <text x="102.000" y="99.400" font-size="1.6" text-anchor="middle" class="t muted">MK33</text>
-<rect x="294.000" y="84.100" width="18.000" height="15.900" class="buy"/>
-<rect x="312.000" y="80.000" width="8.000" height="20.000" class="buy"/>
-<rect x="312.000" y="100.000" width="8.000" height="20.000" class="buy"/>
-<rect x="320.000" y="88.000" width="22.000" height="12.000" class="buy"/>
-<rect x="320.000" y="100.000" width="22.000" height="12.000" class="buy"/>
-<polygon points="122.000,79.045 146.000,79.045 146.000,81.600 150.000,81.600 150.000,68.823 174.000,68.823 174.000,68.000 180.000,68.000 180.000,71.000 181.300,71.000 181.300,74.400 186.700,74.400 186.700,71.000 188.000,71.000 188.000,72.000 202.000,72.000 202.000,78.000 174.000,78.000 174.000,93.000 145.000,93.000 145.000,91.083 134.000,91.083 134.000,90.000 131.000,90.000 131.000,88.800 129.000,88.800 129.000,87.700 122.000,87.700" class="hatchfill"/>
+<rect x="292.000" y="84.100" width="12.000" height="15.900" class="buy"/>
+<rect x="304.000" y="80.000" width="8.000" height="20.000" class="buy"/>
+<rect x="304.000" y="100.000" width="8.000" height="20.000" class="buy"/>
+<rect x="312.000" y="88.000" width="22.000" height="12.000" class="buy"/>
+<rect x="312.000" y="100.000" width="22.000" height="12.000" class="buy"/>
+<polygon points="122.000,79.045 146.000,79.045 146.000,81.600 150.000,81.600 150.000,68.823 170.000,68.823 170.000,70.000 176.000,70.000 176.000,73.000 177.900,73.000 177.900,75.400 182.100,75.400 182.100,73.000 184.000,73.000 184.000,74.000 198.000,74.000 198.000,78.000 170.000,78.000 170.000,93.000 145.000,93.000 145.000,91.083 134.000,91.083 134.000,90.000 131.000,90.000 131.000,88.800 129.000,88.800 129.000,87.700 122.000,87.700" class="hatchfill"/>
 <line x1="122.000" y1="120.955" x2="146.000" y2="120.955" class="thick"/>
 <line x1="122.000" y1="100.000" x2="122.000" y2="120.955" class="thick"/>
 <line x1="146.000" y1="118.400" x2="150.000" y2="118.400" class="thick"/>
 <line x1="146.000" y1="100.000" x2="146.000" y2="120.955" class="thick"/>
-<line x1="150.000" y1="131.177" x2="174.000" y2="131.177" class="thick"/>
+<line x1="150.000" y1="131.177" x2="170.000" y2="131.177" class="thick"/>
 <line x1="150.000" y1="100.000" x2="150.000" y2="131.177" class="thick"/>
-<line x1="174.000" y1="132.000" x2="180.000" y2="132.000" class="thick"/>
-<line x1="174.000" y1="100.000" x2="174.000" y2="132.000" class="thick"/>
-<line x1="180.000" y1="129.000" x2="181.300" y2="129.000" class="thick"/>
-<line x1="180.000" y1="100.000" x2="180.000" y2="132.000" class="thick"/>
-<line x1="181.300" y1="125.600" x2="186.700" y2="125.600" class="thick"/>
-<line x1="181.300" y1="100.000" x2="181.300" y2="129.000" class="thick"/>
-<line x1="186.700" y1="129.000" x2="188.000" y2="129.000" class="thick"/>
-<line x1="186.700" y1="100.000" x2="186.700" y2="129.000" class="thick"/>
-<line x1="188.000" y1="128.000" x2="202.000" y2="128.000" class="thick"/>
-<line x1="188.000" y1="100.000" x2="188.000" y2="129.000" class="thick"/>
-<line x1="202.000" y1="100.000" x2="202.000" y2="128.000" class="thick"/>
-<line x1="150.000" y1="115.588" x2="174.000" y2="115.588" class="thick"/>
+<line x1="170.000" y1="130.000" x2="176.000" y2="130.000" class="thick"/>
+<line x1="170.000" y1="100.000" x2="170.000" y2="131.177" class="thick"/>
+<line x1="176.000" y1="127.000" x2="177.900" y2="127.000" class="thick"/>
+<line x1="176.000" y1="100.000" x2="176.000" y2="130.000" class="thick"/>
+<line x1="177.900" y1="124.600" x2="182.100" y2="124.600" class="thick"/>
+<line x1="177.900" y1="100.000" x2="177.900" y2="127.000" class="thick"/>
+<line x1="182.100" y1="127.000" x2="184.000" y2="127.000" class="thick"/>
+<line x1="182.100" y1="100.000" x2="182.100" y2="127.000" class="thick"/>
+<line x1="184.000" y1="126.000" x2="198.000" y2="126.000" class="thick"/>
+<line x1="184.000" y1="100.000" x2="184.000" y2="127.000" class="thick"/>
+<line x1="198.000" y1="100.000" x2="198.000" y2="126.000" class="thick"/>
+<line x1="150.000" y1="115.588" x2="170.000" y2="115.588" class="thick"/>
 <line x1="122.000" y1="118.631" x2="146.000" y2="118.631" class="thin"/>
 <line x1="122.000" y1="81.369" x2="146.000" y2="81.369" class="thin"/>
 <line x1="134.000" y1="90.000" x2="145.000" y2="90.000" class="thin"/>
-<line x1="188.000" y1="126.757" x2="202.000" y2="126.757" class="thin"/>
-<line x1="188.000" y1="73.243" x2="202.000" y2="73.243" class="thin"/>
+<line x1="184.000" y1="124.757" x2="198.000" y2="124.757" class="thin"/>
+<line x1="184.000" y1="75.243" x2="198.000" y2="75.243" class="thin"/>
 <line x1="122.000" y1="112.300" x2="129.000" y2="112.300" class="hidden"/>
 <line x1="129.000" y1="111.200" x2="131.000" y2="111.200" class="hidden"/>
 <line x1="131.000" y1="110.000" x2="134.000" y2="110.000" class="hidden"/>
 <line x1="134.000" y1="108.917" x2="145.000" y2="108.917" class="hidden"/>
-<line x1="145.000" y1="107.000" x2="174.000" y2="107.000" class="hidden"/>
-<line x1="174.000" y1="122.000" x2="202.000" y2="122.000" class="hidden"/>
-<line x1="164.000" y1="114.000" x2="174.000" y2="114.000" class="hidden"/>
-<line x1="164.000" y1="118.000" x2="174.000" y2="118.000" class="hidden"/>
-<line x1="164.000" y1="114.000" x2="164.000" y2="118.000" class="hidden"/>
-<polygon points="65.000,97.000 65.000,90.000 67.000,88.000 127.000,88.000 127.000,89.000 129.000,89.000 129.000,91.083 112.000,91.083 111.400,92.000 71.000,92.000 66.000,97.000" class="hatchfill2"/>
-<polyline points="65.000,100.000 65.000,103.000 65.000,110.000 67.000,112.000 127.000,112.000 127.000,111.000 129.000,111.000 129.000,100.000" class="thick"/>
-<line x1="67.000" y1="100.000" x2="67.000" y2="112.000" class="thick"/>
+<line x1="145.000" y1="107.000" x2="170.000" y2="107.000" class="hidden"/>
+<line x1="170.000" y1="122.000" x2="198.000" y2="122.000" class="hidden"/>
+<line x1="160.000" y1="114.000" x2="170.000" y2="114.000" class="hidden"/>
+<line x1="160.000" y1="118.000" x2="170.000" y2="118.000" class="hidden"/>
+<line x1="160.000" y1="114.000" x2="160.000" y2="118.000" class="hidden"/>
+<polygon points="54.000,97.000 54.000,90.000 56.000,88.000 127.000,88.000 127.000,89.000 129.000,89.000 129.000,91.083 112.000,91.083 111.400,92.000 60.000,92.000 55.000,97.000" class="hatchfill2"/>
+<polyline points="54.000,100.000 54.000,103.000 54.000,110.000 56.000,112.000 127.000,112.000 127.000,111.000 129.000,111.000 129.000,100.000" class="thick"/>
+<line x1="56.000" y1="100.000" x2="56.000" y2="112.000" class="thick"/>
 <line x1="127.000" y1="100.000" x2="127.000" y2="112.000" class="thick"/>
 <line x1="112.000" y1="90.000" x2="129.000" y2="90.000" class="thin"/>
+<rect x="64.000" y="88.000" width="6.000" height="4.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
+<circle cx="67.000" cy="100.000" r="3.000" class="thin" fill="none"/>
 <rect x="74.000" y="88.000" width="6.000" height="4.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
 <circle cx="77.000" cy="100.000" r="3.000" class="thin" fill="none"/>
 <rect x="84.000" y="88.000" width="6.000" height="4.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
@@ -76,181 +78,181 @@
 <circle cx="97.000" cy="100.000" r="3.000" class="thin" fill="none"/>
 <rect x="104.000" y="88.000" width="6.000" height="4.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
 <circle cx="107.000" cy="100.000" r="3.000" class="thin" fill="none"/>
-<polygon points="278.000,72.000 292.000,72.000 292.000,71.000 293.300,71.000 293.300,74.400 298.700,74.400 298.700,71.000 300.000,71.000 300.000,68.000 312.000,68.000 312.000,85.624 300.000,85.624 300.000,78.000 278.000,78.000" class="hatchfill"/>
-<line x1="278.000" y1="128.000" x2="292.000" y2="128.000" class="thick"/>
-<line x1="278.000" y1="100.000" x2="278.000" y2="128.000" class="thick"/>
-<line x1="292.000" y1="129.000" x2="293.300" y2="129.000" class="thick"/>
-<line x1="292.000" y1="100.000" x2="292.000" y2="129.000" class="thick"/>
-<line x1="293.300" y1="125.600" x2="298.700" y2="125.600" class="thick"/>
-<line x1="293.300" y1="100.000" x2="293.300" y2="129.000" class="thick"/>
-<line x1="298.700" y1="129.000" x2="300.000" y2="129.000" class="thick"/>
-<line x1="298.700" y1="100.000" x2="298.700" y2="129.000" class="thick"/>
-<line x1="300.000" y1="132.000" x2="312.000" y2="132.000" class="thick"/>
-<line x1="300.000" y1="100.000" x2="300.000" y2="132.000" class="thick"/>
-<line x1="312.000" y1="100.000" x2="312.000" y2="132.000" class="thick"/>
-<line x1="278.000" y1="126.757" x2="292.000" y2="126.757" class="thin"/>
-<line x1="278.000" y1="73.243" x2="292.000" y2="73.243" class="thin"/>
-<line x1="300.000" y1="84.000" x2="312.000" y2="84.000" class="thin"/>
-<line x1="300.000" y1="128.000" x2="312.000" y2="128.000" class="thick"/>
-<line x1="278.000" y1="122.000" x2="300.000" y2="122.000" class="hidden"/>
-<line x1="300.000" y1="114.376" x2="312.000" y2="114.376" class="hidden"/>
+<polygon points="274.000,74.000 288.000,74.000 288.000,73.000 289.900,73.000 289.900,75.400 294.100,75.400 294.100,73.000 296.000,73.000 296.000,70.000 304.000,70.000 304.000,85.624 292.000,85.624 292.000,78.000 274.000,78.000" class="hatchfill"/>
+<line x1="274.000" y1="126.000" x2="288.000" y2="126.000" class="thick"/>
+<line x1="274.000" y1="100.000" x2="274.000" y2="126.000" class="thick"/>
+<line x1="288.000" y1="127.000" x2="289.900" y2="127.000" class="thick"/>
+<line x1="288.000" y1="100.000" x2="288.000" y2="127.000" class="thick"/>
+<line x1="289.900" y1="124.600" x2="294.100" y2="124.600" class="thick"/>
+<line x1="289.900" y1="100.000" x2="289.900" y2="127.000" class="thick"/>
+<line x1="294.100" y1="127.000" x2="296.000" y2="127.000" class="thick"/>
+<line x1="294.100" y1="100.000" x2="294.100" y2="127.000" class="thick"/>
+<line x1="296.000" y1="130.000" x2="304.000" y2="130.000" class="thick"/>
+<line x1="296.000" y1="100.000" x2="296.000" y2="130.000" class="thick"/>
+<line x1="304.000" y1="100.000" x2="304.000" y2="130.000" class="thick"/>
+<line x1="274.000" y1="124.757" x2="288.000" y2="124.757" class="thin"/>
+<line x1="274.000" y1="75.243" x2="288.000" y2="75.243" class="thin"/>
+<line x1="292.000" y1="84.000" x2="304.000" y2="84.000" class="thin"/>
+<line x1="292.000" y1="127.000" x2="304.000" y2="127.000" class="thick"/>
+<line x1="274.000" y1="122.000" x2="292.000" y2="122.000" class="hidden"/>
+<line x1="292.000" y1="114.376" x2="304.000" y2="114.376" class="hidden"/>
 <circle cx="132.500" cy="90.900" r="1.200" style="fill:#000;stroke:none"/>
-<rect x="180.000" y="100.300" width="120.000" height="32.000" fill="#fff" stroke="none"/>
-<polygon points="180.000,68.000 300.000,68.000 300.000,71.000 292.000,71.000 292.000,73.083 278.000,73.083 278.000,73.000 202.000,73.000 202.000,73.083 188.000,73.083 188.000,71.000 180.000,71.000" class="hatchfill2"/>
-<line x1="180.000" y1="132.000" x2="300.000" y2="132.000" class="thick"/>
-<line x1="180.000" y1="100.000" x2="180.000" y2="132.000" class="thick"/>
-<line x1="300.000" y1="100.000" x2="300.000" y2="132.000" class="thick"/>
-<line x1="188.000" y1="72.000" x2="202.000" y2="72.000" class="thin"/>
-<line x1="278.000" y1="72.000" x2="292.000" y2="72.000" class="thin"/>
-<line x1="180.000" y1="129.000" x2="188.000" y2="129.000" class="hidden"/>
-<line x1="188.000" y1="126.917" x2="202.000" y2="126.917" class="hidden"/>
-<line x1="202.000" y1="127.000" x2="278.000" y2="127.000" class="hidden"/>
-<line x1="278.000" y1="126.917" x2="292.000" y2="126.917" class="hidden"/>
-<line x1="292.000" y1="129.000" x2="300.000" y2="129.000" class="hidden"/>
-<circle cx="184.000" cy="72.700" r="2.000" style="fill:#000;stroke:none"/>
-<circle cx="296.000" cy="72.700" r="2.000" style="fill:#000;stroke:none"/>
-<rect x="174.000" y="78.000" width="28.000" height="22.000" style="fill:#f3e7c9;stroke:none"/>
-<rect x="202.000" y="73.000" width="76.000" height="27.000" style="fill:#f3e7c9;stroke:none"/>
-<rect x="278.000" y="78.000" width="18.000" height="22.000" style="fill:#f3e7c9;stroke:none"/>
-<polygon points="174.400,78.400 179.000,78.400 179.000,94.000 174.400,94.000" class="part2"/>
-<polygon points="268.000,73.600 276.000,73.600 276.000,76.800 268.000,76.800" class="part2"/>
-<polygon points="179.000,100.000 179.000,82.000 202.000,82.000 202.000,77.000 276.800,77.000 276.800,82.000 292.000,82.000 292.000,100.000" class="green"/>
-<rect x="193.000" y="86.800" width="6.000" height="3.400" fill="#333" stroke="none"/>
-<rect x="200.700" y="84.024" width="1.800" height="3.400" fill="#333" stroke="none"/>
-<rect x="201.400" y="89.824" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="204.376" y="79.500" width="1.848" height="3.400" fill="#333" stroke="none"/>
-<rect x="205.076" y="85.374" width="4.200" height="2.700" fill="#333" stroke="none"/>
-<rect x="210.526" y="78.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
-<rect x="211.850" y="86.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
-<rect x="211.000" y="93.900" width="8.700" height="6.100" fill="#333" stroke="none"/>
-<rect x="217.550" y="78.224" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="215.650" y="82.400" width="8.200" height="8.200" fill="#333" stroke="none"/>
-<rect x="225.900" y="83.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
-<rect x="226.676" y="78.650" width="4.200" height="2.700" fill="#333" stroke="none"/>
-<rect x="231.076" y="86.600" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="231.076" y="83.100" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="228.500" y="92.900" width="14.200" height="7.100" fill="#333" stroke="none"/>
-<rect x="236.876" y="84.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
-<rect x="237.400" y="80.252" width="3.400" height="1.848" fill="#333" stroke="none"/>
-<rect x="240.800" y="86.940" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="243.300" y="79.000" width="1.800" height="3.400" fill="#333" stroke="none"/>
-<rect x="246.600" y="79.900" width="4.200" height="4.800" fill="#333" stroke="none"/>
-<rect x="247.800" y="89.260" width="3.400" height="1.800" fill="#333" stroke="none"/>
-<rect x="247.200" y="92.740" width="6.200" height="6.200" fill="#333" stroke="none"/>
-<rect x="253.100" y="78.100" width="12.800" height="6.600" fill="#333" stroke="none"/>
-<rect x="258.700" y="86.650" width="8.300" height="13.350" fill="#333" stroke="none"/>
-<circle cx="182.500" cy="90.000" r="2.200" class="thin" fill="#fff"/>
-<rect x="203.000" y="95.000" width="8.000" height="5.000" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>
-<rect x="145.000" y="93.000" width="29.000" height="7.000" style="fill:#d9c9a8;stroke:#000;stroke-width:0.25"/>
-<rect x="267.000" y="88.200" width="8.000" height="11.800" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>
-<polyline points="275.000,91.250 282.000,93.000 292.800,96.062 296.000,96.062" class="thin"/>
-<polyline points="275.000,96.250 282.000,97.000 292.800,98.312 296.000,98.312" class="thin"/>
-<polyline points="151.000,97.460 159.000,97.968 172.000,97.000 203.000,97.000" class="thin"/>
-<polyline points="151.000,98.984 159.000,99.187 172.000,99.000 203.000,99.000" class="thin"/>
+<rect x="176.000" y="100.300" width="120.000" height="30.000" fill="#fff" stroke="none"/>
+<polygon points="176.000,70.000 296.000,70.000 296.000,73.000 288.000,73.000 288.000,75.083 274.000,75.083 274.000,75.000 198.000,75.000 198.000,75.083 184.000,75.083 184.000,73.000 176.000,73.000" class="hatchfill2"/>
+<line x1="176.000" y1="130.000" x2="296.000" y2="130.000" class="thick"/>
+<line x1="176.000" y1="100.000" x2="176.000" y2="130.000" class="thick"/>
+<line x1="296.000" y1="100.000" x2="296.000" y2="130.000" class="thick"/>
+<line x1="184.000" y1="74.000" x2="198.000" y2="74.000" class="thin"/>
+<line x1="274.000" y1="74.000" x2="288.000" y2="74.000" class="thin"/>
+<line x1="176.000" y1="127.000" x2="184.000" y2="127.000" class="hidden"/>
+<line x1="184.000" y1="124.917" x2="198.000" y2="124.917" class="hidden"/>
+<line x1="198.000" y1="125.000" x2="274.000" y2="125.000" class="hidden"/>
+<line x1="274.000" y1="124.917" x2="288.000" y2="124.917" class="hidden"/>
+<line x1="288.000" y1="127.000" x2="296.000" y2="127.000" class="hidden"/>
+<circle cx="180.000" cy="74.200" r="1.500" style="fill:#000;stroke:none"/>
+<circle cx="292.000" cy="74.200" r="1.500" style="fill:#000;stroke:none"/>
+<rect x="170.000" y="78.000" width="28.000" height="22.000" style="fill:#f3e7c9;stroke:none"/>
+<rect x="198.000" y="75.000" width="76.000" height="25.000" style="fill:#f3e7c9;stroke:none"/>
+<rect x="274.000" y="78.000" width="14.000" height="22.000" style="fill:#f3e7c9;stroke:none"/>
+<polygon points="170.400,78.400 175.000,78.400 175.000,94.000 170.400,94.000" class="part2"/>
+<polygon points="264.000,75.500 272.000,75.500 272.000,76.800 264.000,76.800" class="part2"/>
+<polygon points="175.000,100.000 175.000,82.000 198.000,82.000 198.000,77.000 272.800,77.000 272.800,82.000 288.000,82.000 288.000,100.000" class="green"/>
+<rect x="189.000" y="86.800" width="6.000" height="3.400" fill="#333" stroke="none"/>
+<rect x="196.700" y="84.024" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="197.400" y="89.824" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="200.376" y="79.500" width="1.848" height="3.400" fill="#333" stroke="none"/>
+<rect x="201.076" y="85.374" width="4.200" height="2.700" fill="#333" stroke="none"/>
+<rect x="206.526" y="78.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
+<rect x="207.850" y="86.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="207.000" y="93.900" width="8.700" height="6.100" fill="#333" stroke="none"/>
+<rect x="213.550" y="78.224" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="211.650" y="82.400" width="8.200" height="8.200" fill="#333" stroke="none"/>
+<rect x="221.900" y="83.900" width="2.700" height="4.200" fill="#333" stroke="none"/>
+<rect x="222.676" y="78.650" width="4.200" height="2.700" fill="#333" stroke="none"/>
+<rect x="227.076" y="86.600" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="227.076" y="83.100" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="224.500" y="92.900" width="14.200" height="7.100" fill="#333" stroke="none"/>
+<rect x="232.876" y="84.300" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="233.400" y="80.252" width="3.400" height="1.848" fill="#333" stroke="none"/>
+<rect x="236.800" y="86.940" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="239.300" y="79.000" width="1.800" height="3.400" fill="#333" stroke="none"/>
+<rect x="242.600" y="79.900" width="4.200" height="4.800" fill="#333" stroke="none"/>
+<rect x="243.800" y="89.260" width="3.400" height="1.800" fill="#333" stroke="none"/>
+<rect x="243.200" y="92.740" width="6.200" height="6.200" fill="#333" stroke="none"/>
+<rect x="249.100" y="78.100" width="12.800" height="6.600" fill="#333" stroke="none"/>
+<rect x="254.700" y="86.650" width="8.300" height="13.350" fill="#333" stroke="none"/>
+<circle cx="178.500" cy="90.000" r="2.200" class="thin" fill="#fff"/>
+<rect x="199.000" y="95.000" width="8.000" height="5.000" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>
+<rect x="145.000" y="93.000" width="25.000" height="7.000" style="fill:#d9c9a8;stroke:#000;stroke-width:0.25"/>
+<rect x="263.000" y="88.200" width="8.000" height="11.800" style="fill:#eee6cc;stroke:#000;stroke-width:0.18"/>
+<polyline points="271.000,91.250 282.000,93.000 288.800,96.062 292.000,96.062" class="thin"/>
+<polyline points="271.000,96.250 282.000,97.000 288.800,98.312 292.000,98.312" class="thin"/>
+<polyline points="151.000,97.460 159.000,97.968 168.000,97.000 199.000,97.000" class="thin"/>
+<polyline points="151.000,98.984 159.000,99.187 168.000,99.000 199.000,99.000" class="thin"/>
 <line x1="99.000" y1="88.000" x2="99.000" y2="46.000" class="thin"/>
 <circle cx="99.000" cy="88.000" r="0.600" class="thin" fill="#000"/>
 <circle cx="99.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
 <text x="99.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">2</text>
-<line x1="103.000" y1="97.000" x2="113.000" y2="58.000" class="thin"/>
+<line x1="103.000" y1="97.000" x2="102.000" y2="58.000" class="thin"/>
 <circle cx="103.000" cy="97.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="113.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="113.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">6</text>
-<line x1="121.000" y1="91.000" x2="129.000" y2="46.000" class="thin"/>
+<circle cx="102.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="102.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">6</text>
+<line x1="121.000" y1="91.000" x2="120.000" y2="46.000" class="thin"/>
 <circle cx="121.000" cy="91.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="129.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="129.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">15</text>
-<line x1="132.500" y1="90.800" x2="142.000" y2="58.000" class="thin"/>
+<circle cx="120.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="120.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">15</text>
+<line x1="132.500" y1="90.800" x2="146.000" y2="58.000" class="thin"/>
 <circle cx="132.500" cy="90.800" r="0.600" class="thin" fill="#000"/>
-<circle cx="142.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="142.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">16</text>
-<line x1="134.000" y1="79.000" x2="126.000" y2="58.000" class="thin"/>
+<circle cx="146.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="146.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">16</text>
+<line x1="134.000" y1="79.000" x2="119.000" y2="58.000" class="thin"/>
 <circle cx="134.000" cy="79.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="126.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="126.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">1</text>
-<line x1="148.000" y1="73.000" x2="138.000" y2="58.000" class="thin"/>
+<circle cx="119.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="119.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">1</text>
+<line x1="148.000" y1="73.000" x2="133.000" y2="58.000" class="thin"/>
 <circle cx="148.000" cy="73.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="138.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="138.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">7</text>
-<line x1="146.000" y1="94.800" x2="138.000" y2="46.000" class="thin"/>
+<circle cx="133.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="133.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">7</text>
+<line x1="146.000" y1="94.800" x2="142.000" y2="46.000" class="thin"/>
 <circle cx="146.000" cy="94.800" r="0.600" class="thin" fill="#000"/>
-<circle cx="138.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="138.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">5</text>
-<line x1="184.000" y1="72.700" x2="190.000" y2="58.000" class="thin"/>
-<circle cx="184.000" cy="72.700" r="0.600" class="thin" fill="#000"/>
-<circle cx="190.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="190.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">10</text>
-<line x1="176.600" y1="86.000" x2="166.000" y2="58.000" class="thin"/>
-<circle cx="176.600" cy="86.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="166.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="166.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">12</text>
-<line x1="193.000" y1="96.000" x2="200.000" y2="46.000" class="thin"/>
-<circle cx="193.000" cy="96.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="200.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="200.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">17</text>
-<line x1="210.000" y1="80.000" x2="218.000" y2="46.000" class="thin"/>
-<circle cx="210.000" cy="80.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="218.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="218.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">8</text>
-<line x1="240.000" y1="68.000" x2="250.000" y2="58.000" class="thin"/>
-<circle cx="240.000" cy="68.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="250.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="250.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">3</text>
-<line x1="272.000" y1="75.200" x2="270.000" y2="46.000" class="thin"/>
-<circle cx="272.000" cy="75.200" r="0.600" class="thin" fill="#000"/>
-<circle cx="270.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="270.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">13</text>
-<line x1="306.000" y1="68.000" x2="290.000" y2="46.000" class="thin"/>
-<circle cx="306.000" cy="68.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="290.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="290.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">4</text>
-<line x1="314.000" y1="80.000" x2="318.000" y2="58.000" class="thin"/>
-<circle cx="314.000" cy="80.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="318.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="318.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">11</text>
-<line x1="330.000" y1="88.000" x2="340.000" y2="46.000" class="thin"/>
-<circle cx="330.000" cy="88.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="340.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
-<text x="340.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">9</text>
-<line x1="271.000" y1="92.000" x2="282.000" y2="58.000" class="thin"/>
-<circle cx="271.000" cy="92.000" r="0.600" class="thin" fill="#000"/>
-<circle cx="282.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
-<text x="282.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">18</text>
-<line x1="65.000" y1="113.000" x2="65.000" y2="164.700" class="thin"/>
-<line x1="342.000" y1="113.000" x2="342.000" y2="164.700" class="thin"/>
-<line x1="65.000" y1="163.200" x2="342.000" y2="163.200" class="thin"/>
-<polygon points="65.000,163.200 67.600,162.300 67.600,164.100" class="arrow"/>
-<polygon points="342.000,163.200 339.400,164.100 339.400,162.300" class="arrow"/>
-<text x="203.500" y="162.200" font-size="3.2" text-anchor="middle" class="t ">138</text>
-<line x1="65.000" y1="113.000" x2="65.000" y2="144.700" class="thin"/>
-<line x1="122.000" y1="115.000" x2="122.000" y2="144.700" class="thin"/>
-<line x1="65.000" y1="143.200" x2="122.000" y2="143.200" class="thin"/>
-<polygon points="65.000,143.200 67.600,142.300 67.600,144.100" class="arrow"/>
-<polygon points="122.000,143.200 119.400,144.100 119.400,142.300" class="arrow"/>
-<text x="93.500" y="142.200" font-size="3.2" text-anchor="middle" class="t ">28.5  (노출 프로브)</text>
-<line x1="122.000" y1="122.000" x2="122.000" y2="144.700" class="thin"/>
-<line x1="150.000" y1="132.177" x2="150.000" y2="144.700" class="thin"/>
-<line x1="122.000" y1="143.200" x2="150.000" y2="143.200" class="thin"/>
-<polygon points="122.000,143.200 124.600,142.300 124.600,144.100" class="arrow"/>
-<polygon points="150.000,143.200 147.400,144.100 147.400,142.300" class="arrow"/>
-<text x="136.000" y="142.200" font-size="3.2" text-anchor="middle" class="t ">14</text>
-<line x1="150.000" y1="132.177" x2="150.000" y2="154.700" class="thin"/>
-<line x1="312.000" y1="133.000" x2="312.000" y2="154.700" class="thin"/>
-<line x1="150.000" y1="153.200" x2="312.000" y2="153.200" class="thin"/>
-<polygon points="150.000,153.200 152.600,152.300 152.600,154.100" class="arrow"/>
-<polygon points="312.000,153.200 309.400,154.100 309.400,152.300" class="arrow"/>
-<text x="231.000" y="152.200" font-size="3.2" text-anchor="middle" class="t ">81</text>
-<line x1="150.000" y1="132.177" x2="150.000" y2="144.700" class="thin"/>
-<line x1="342.000" y1="113.000" x2="342.000" y2="144.700" class="thin"/>
-<line x1="150.000" y1="143.200" x2="342.000" y2="143.200" class="thin"/>
-<polygon points="150.000,143.200 152.600,142.300 152.600,144.100" class="arrow"/>
-<polygon points="342.000,143.200 339.400,144.100 339.400,142.300" class="arrow"/>
-<text x="246.000" y="142.200" font-size="3.2" text-anchor="middle" class="t ">96</text>
-<line x1="239.000" y1="68.000" x2="238.500" y2="68.000" class="thin"/>
-<line x1="239.000" y1="132.000" x2="238.500" y2="132.000" class="thin"/>
-<line x1="240.000" y1="68.000" x2="240.000" y2="132.000" class="thin"/>
-<polygon points="240.000,68.000 240.900,70.600 239.100,70.600" class="arrow"/>
-<polygon points="240.000,132.000 239.100,129.400 240.900,129.400" class="arrow"/>
-<text x="239.000" y="100.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 239.000 100.000)" class="t ">Ø32</text>
+<circle cx="142.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="142.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">5</text>
+<line x1="180.000" y1="74.200" x2="186.000" y2="58.000" class="thin"/>
+<circle cx="180.000" cy="74.200" r="0.600" class="thin" fill="#000"/>
+<circle cx="186.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="186.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">10</text>
+<line x1="172.600" y1="86.000" x2="162.000" y2="58.000" class="thin"/>
+<circle cx="172.600" cy="86.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="162.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="162.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">12</text>
+<line x1="189.000" y1="96.000" x2="196.000" y2="46.000" class="thin"/>
+<circle cx="189.000" cy="96.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="196.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="196.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">17</text>
+<line x1="206.000" y1="80.000" x2="214.000" y2="46.000" class="thin"/>
+<circle cx="206.000" cy="80.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="214.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="214.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">8</text>
+<line x1="236.000" y1="70.000" x2="246.000" y2="58.000" class="thin"/>
+<circle cx="236.000" cy="70.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="246.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="246.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">3</text>
+<line x1="268.000" y1="76.400" x2="266.000" y2="46.000" class="thin"/>
+<circle cx="268.000" cy="76.400" r="0.600" class="thin" fill="#000"/>
+<circle cx="266.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="266.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">13</text>
+<line x1="300.000" y1="70.000" x2="286.000" y2="46.000" class="thin"/>
+<circle cx="300.000" cy="70.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="286.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="286.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">4</text>
+<line x1="306.000" y1="80.000" x2="310.000" y2="58.000" class="thin"/>
+<circle cx="306.000" cy="80.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="310.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="310.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">11</text>
+<line x1="322.000" y1="88.000" x2="332.000" y2="46.000" class="thin"/>
+<circle cx="322.000" cy="88.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="332.000" cy="46.000" r="4.200" class="thick" fill="#fff"/>
+<text x="332.000" y="47.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">9</text>
+<line x1="267.000" y1="92.000" x2="278.000" y2="58.000" class="thin"/>
+<circle cx="267.000" cy="92.000" r="0.600" class="thin" fill="#000"/>
+<circle cx="278.000" cy="58.000" r="4.200" class="thick" fill="#fff"/>
+<text x="278.000" y="59.400" font-size="4.0" text-anchor="middle" font-weight="700" class="t ">18</text>
+<line x1="54.000" y1="113.000" x2="54.000" y2="162.700" class="thin"/>
+<line x1="334.000" y1="113.000" x2="334.000" y2="162.700" class="thin"/>
+<line x1="54.000" y1="161.200" x2="334.000" y2="161.200" class="thin"/>
+<polygon points="54.000,161.200 56.600,160.300 56.600,162.100" class="arrow"/>
+<polygon points="334.000,161.200 331.400,162.100 331.400,160.300" class="arrow"/>
+<text x="194.000" y="160.200" font-size="3.2" text-anchor="middle" class="t ">140</text>
+<line x1="54.000" y1="113.000" x2="54.000" y2="142.700" class="thin"/>
+<line x1="122.000" y1="115.000" x2="122.000" y2="142.700" class="thin"/>
+<line x1="54.000" y1="141.200" x2="122.000" y2="141.200" class="thin"/>
+<polygon points="54.000,141.200 56.600,140.300 56.600,142.100" class="arrow"/>
+<polygon points="122.000,141.200 119.400,142.100 119.400,140.300" class="arrow"/>
+<text x="88.000" y="140.200" font-size="3.2" text-anchor="middle" class="t ">34  (노출 프로브)</text>
+<line x1="122.000" y1="122.000" x2="122.000" y2="142.700" class="thin"/>
+<line x1="150.000" y1="132.177" x2="150.000" y2="142.700" class="thin"/>
+<line x1="122.000" y1="141.200" x2="150.000" y2="141.200" class="thin"/>
+<polygon points="122.000,141.200 124.600,140.300 124.600,142.100" class="arrow"/>
+<polygon points="150.000,141.200 147.400,142.100 147.400,140.300" class="arrow"/>
+<text x="136.000" y="140.200" font-size="3.2" text-anchor="middle" class="t ">14</text>
+<line x1="150.000" y1="132.177" x2="150.000" y2="152.700" class="thin"/>
+<line x1="304.000" y1="131.000" x2="304.000" y2="152.700" class="thin"/>
+<line x1="150.000" y1="151.200" x2="304.000" y2="151.200" class="thin"/>
+<polygon points="150.000,151.200 152.600,150.300 152.600,152.100" class="arrow"/>
+<polygon points="304.000,151.200 301.400,152.100 301.400,150.300" class="arrow"/>
+<text x="227.000" y="150.200" font-size="3.2" text-anchor="middle" class="t ">77</text>
+<line x1="150.000" y1="132.177" x2="150.000" y2="142.700" class="thin"/>
+<line x1="334.000" y1="113.000" x2="334.000" y2="142.700" class="thin"/>
+<line x1="150.000" y1="141.200" x2="334.000" y2="141.200" class="thin"/>
+<polygon points="150.000,141.200 152.600,140.300 152.600,142.100" class="arrow"/>
+<polygon points="334.000,141.200 331.400,142.100 331.400,140.300" class="arrow"/>
+<text x="242.000" y="140.200" font-size="3.2" text-anchor="middle" class="t ">92</text>
+<line x1="239.000" y1="70.000" x2="238.500" y2="70.000" class="thin"/>
+<line x1="239.000" y1="130.000" x2="238.500" y2="130.000" class="thin"/>
+<line x1="240.000" y1="70.000" x2="240.000" y2="130.000" class="thin"/>
+<polygon points="240.000,70.000 240.900,72.600 239.100,72.600" class="arrow"/>
+<polygon points="240.000,130.000 239.100,127.400 240.900,127.400" class="arrow"/>
+<text x="239.000" y="100.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 239.000 100.000)" class="t ">Ø30</text>
 <line x1="69.400" y1="88.000" x2="68.900" y2="88.000" class="thin"/>
 <line x1="69.400" y1="112.000" x2="68.900" y2="112.000" class="thin"/>
 <line x1="70.400" y1="88.000" x2="70.400" y2="112.000" class="thin"/>
@@ -265,9 +267,9 @@
 <polygon points="158.000,131.177 160.728,131.535 159.923,133.145" class="arrow"/>
 <line x1="182.000" y1="143.177" x2="204.000" y2="143.177" class="thin"/>
 <text x="183.000" y="142.177" font-size="3.2" text-anchor="start" class="t ">육각 AF27</text>
-<text x="149.000" y="138.200" font-size="3.5" text-anchor="middle" font-weight="700" class="t ">A</text>
-<rect x="147.00" y="134.40" width="4.6" height="5" class="thin" fill="none"/>
-<text x="145.500" y="138.200" font-size="2.8" text-anchor="end" class="t ">씰면 = 기준면</text>
+<text x="149.000" y="136.200" font-size="3.5" text-anchor="middle" font-weight="700" class="t ">A</text>
+<rect x="147.00" y="132.40" width="4.6" height="5" class="thin" fill="none"/>
+<text x="145.500" y="136.200" font-size="2.8" text-anchor="end" class="t ">씰면 = 기준면</text>
 <rect x="230.0" y="165.5" width="180" height="79.8" class="thick" fill="#fff"/>
 <text x="231.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">No</text>
 <text x="240.000" y="168.900" font-size="2.5" text-anchor="start" font-weight="700" class="t ">도번</text>
@@ -289,25 +291,25 @@
 <text x="359.000" y="172.700" font-size="2.5" text-anchor="start" class="t ">Machined</text>
 <line x1="230.000" y1="173.100" x2="410.000" y2="173.100" class="thin"/>
 <text x="231.000" y="176.500" font-size="2.5" text-anchor="start" class="t ">2</text>
-<text x="240.000" y="176.500" font-size="2.5" text-anchor="start" class="t ">390000-001100</text>
-<text x="270.000" y="176.500" font-size="2.2" text-anchor="start" class="t ">SUS probe oil filter (cap)</text>
+<text x="240.000" y="176.500" font-size="2.5" text-anchor="start" class="t ">HMT500-M-102</text>
+<text x="270.000" y="176.500" font-size="2.2" text-anchor="start" class="t ">Sensor cap (ex 390000-001100)</text>
 <text x="315.000" y="176.500" font-size="2.5" text-anchor="start" class="t ">SUS304</text>
 <text x="351.000" y="176.500" font-size="2.5" text-anchor="start" class="t ">1</text>
-<text x="359.000" y="176.500" font-size="2.2" text-anchor="start" class="t ">In-house DOTECH, M10x1.0</text>
+<text x="359.000" y="176.500" font-size="2.2" text-anchor="start" class="t ">Machined, M10x1.0, 25 holes</text>
 <line x1="230.000" y1="176.900" x2="410.000" y2="176.900" class="thin"/>
 <text x="231.000" y="180.300" font-size="2.5" text-anchor="start" class="t ">3</text>
 <text x="240.000" y="180.300" font-size="2.5" text-anchor="start" class="t ">HMT500-M-103</text>
-<text x="270.000" y="180.300" font-size="2.5" text-anchor="start" class="t ">Housing tube Ø32</text>
+<text x="270.000" y="180.300" font-size="2.5" text-anchor="start" class="t ">Housing tube Ø30</text>
 <text x="315.000" y="180.300" font-size="2.5" text-anchor="start" class="t ">SUS316L (1.4404)</text>
 <text x="351.000" y="180.300" font-size="2.5" text-anchor="start" class="t ">1</text>
-<text x="359.000" y="180.300" font-size="2.2" text-anchor="start" class="t ">Machined, M28x1 both ends, marking</text>
+<text x="359.000" y="180.300" font-size="2.2" text-anchor="start" class="t ">Machined, M26x1 R/LH ends, marking</text>
 <line x1="230.000" y1="180.700" x2="410.000" y2="180.700" class="thin"/>
 <text x="231.000" y="184.100" font-size="2.5" text-anchor="start" class="t ">4</text>
 <text x="240.000" y="184.100" font-size="2.5" text-anchor="start" class="t ">HMT500-M-104</text>
 <text x="270.000" y="184.100" font-size="2.5" text-anchor="start" class="t ">End cap</text>
 <text x="315.000" y="184.100" font-size="2.5" text-anchor="start" class="t ">SUS316L (1.4404)</text>
 <text x="351.000" y="184.100" font-size="2.5" text-anchor="start" class="t ">1</text>
-<text x="359.000" y="184.100" font-size="2.2" text-anchor="start" class="t ">Machined, flats AF28</text>
+<text x="359.000" y="184.100" font-size="2.2" text-anchor="start" class="t ">Machined, flats AF27</text>
 <line x1="230.000" y1="184.500" x2="410.000" y2="184.500" class="thin"/>
 <text x="231.000" y="187.900" font-size="2.5" text-anchor="start" class="t ">5</text>
 <text x="240.000" y="187.900" font-size="2.5" text-anchor="start" class="t ">HMT500-P-209</text>
@@ -346,7 +348,7 @@
 <line x1="230.000" y1="203.500" x2="410.000" y2="203.500" class="thin"/>
 <text x="231.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">10</text>
 <text x="240.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">HMT500-P-205</text>
-<text x="270.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">O-ring 25 x 2</text>
+<text x="270.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">O-ring 24 x 1.5</text>
 <text x="315.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">FKM 75</text>
 <text x="351.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">2</text>
 <text x="359.000" y="206.900" font-size="2.5" text-anchor="start" class="t ">1-3 and 3-4 seal</text>
@@ -421,21 +423,21 @@
 <text x="351.000" y="244.900" font-size="2.5" text-anchor="start" class="t ">1</text>
 <text x="359.000" y="244.900" font-size="2.2" text-anchor="start" class="t ">8 J5 → 12 top screw, L25</text>
 <text x="18.000" y="186.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
-<text x="18.000" y="191.800" font-size="2.9" text-anchor="start" class="t ">1. 피드스루 없음. 압력 격벽 = ⑯ O링 + ⑮ 몰드 핀 + ⑤ 몰딩. ⑤ 상온경화 에폭시 1종: 1차 = ① Ø7 통로(14.5), 2차 = 하우징 안 전체 (약 25 cm³, ④ 안까지).</text>
-<text x="18.000" y="197.600" font-size="2.9" text-anchor="start" class="t ">2. ①–③ M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클) + O링 ⑩ (Ø29 H8/f7). ③만 돌려 체결 → ①·④·⑧·⑨·⑰·⑱은 돌지 않음 (하네스 꼬임 없음).</text>
-<text x="18.000" y="203.400" font-size="2.9" text-anchor="start" class="t ">3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF28 을 고정하고 ③을 돌림.</text>
+<text x="18.000" y="191.800" font-size="2.9" text-anchor="start" class="t ">1. 피드스루 없음. 압력 격벽 = ⑯ O링 + ⑮ 몰드 핀 + ⑤ 몰딩. ⑤ 상온경화 에폭시 1종: 1차 = ① Ø7 통로(12.5), 2차 = 하우징 안 전체 (약 25 cm³, ④ 안까지).</text>
+<text x="18.000" y="197.600" font-size="2.9" text-anchor="start" class="t ">2. ①–③ M26×1 오른나사, ③–④ M26×1 왼나사 (턴버클) + O링 ⑩ (Ø27 H8/f7). ③만 돌려 체결 → ①·④·⑧·⑨·⑰·⑱은 돌지 않음 (하네스 꼬임 없음).</text>
+<text x="18.000" y="203.400" font-size="2.9" text-anchor="start" class="t ">3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF27 을 고정하고 ③을 돌림.</text>
 <text x="18.000" y="209.200" font-size="2.9" text-anchor="start" class="t ">4. O링 FKM 75, 조립 전 실리콘 그리스 얇게 도포. 나사·모서리 통과 시 O링 손상 주의 (C0.5 도입부).</text>
-<text x="18.000" y="215.000" font-size="2.9" text-anchor="start" class="t ">5. 조립 (조립 시뮬레이션 반영): ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화) → ⑦</text>
+<text x="18.000" y="215.000" font-size="2.9" text-anchor="start" class="t ">5. 조립 (조립 시뮬레이션 반영): ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화)</text>
 <text x="18.000" y="220.800" font-size="2.9" text-anchor="start" class="t ">    → [벤치] ⑧을 ⑫ 홈에 끼우고 가로 나사 M2×12 ×2, ⑳ 샤시 선을 ⑧ J5에 납땜, SWD 기록·기능 검사 → ⑰ 플러그를 ⑫ 창으로 꿰고 ⑫+⑧을 ①에 넣음</text>
 <text x="18.000" y="226.600" font-size="2.9" text-anchor="start" class="t ">    → ⑫ 축 나사 M2×6 (아래) + M2×8 (위, ⑳ 링 단자 함께)를 뒤에서 조임 → ⑰을 J3에 꽂음 → ⑬ → ⑨에 ⑱ 납땜 후 ⑨를 ④에 체결</text>
 <text x="18.000" y="232.400" font-size="2.9" text-anchor="start" class="t ">    → ③을 ⑧ 위로 씌움 (턴버클 시작 위치, 7 mm 뒤) → ④를 옆으로 비켜 들고 공구 T-001로 ⑱ 플러그를 ③ 뒤 입구로 밀어 J1에 꽂음</text>
 <text x="18.000" y="238.200" font-size="2.9" text-anchor="start" class="t ">    → ①·④를 잡고 ③만 7바퀴 돌려 양쪽 동시 체결 (④가 14 mm 다가오며 ⑱이 ④ 안에서 접힘) → 2차 몰딩: ⑨ 위, ④ M3 구멍으로 진공 주입 → ⑲로 막음</text>
-<text x="18.000" y="244.000" font-size="2.9" text-anchor="start" class="t ">    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 필터를 ⑮ 위 나사(M10×1.0)에 체결. 몰딩 후 전자부 분해·수리 불가 (센서 프로브·필터만 교체).</text>
+<text x="18.000" y="244.000" font-size="2.9" text-anchor="start" class="t ">    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 보호캡을 ⑮ 위 나사(M10×1.0)에 체결 → ⑦. 상세 = 조립 시방서 HMT500-A-001. 몰딩 후 전자부 수리 불가.</text>
 <text x="18.000" y="249.800" font-size="2.9" text-anchor="start" class="t ">6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑥·⑦·⑮·⑯). ⑯ O링이 밀봉, ⑮ 몰드 핀 + ⑤ 몰딩이 전자부 격벽.</text>
 <text x="18.000" y="255.600" font-size="2.9" text-anchor="start" class="t ">7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.</text>
 <text x="18.000" y="261.400" font-size="2.9" text-anchor="start" class="t ">8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.</text>
 <text x="18.000" y="267.200" font-size="2.9" text-anchor="start" class="t ">9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 SM04B-SRSS-TB (옆 삽입). 1·2 = MK33, 3·4 = Pt1000 (2선식).</text>
-<text x="18.000" y="273.000" font-size="2.9" text-anchor="start" class="t ">    PTFE AWG30, 40 mm (⑮ 핀 → J3). ② = 두텍 SUS 오일 필터 390000-001100 (SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.</text>
+<text x="18.000" y="273.000" font-size="2.9" text-anchor="start" class="t ">    PTFE AWG30, 40 mm (⑮ 핀 → J3). ② = 보호캡 M-102 (두텍 390000-001100 기반, 끝 5.5 연장, SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.</text>
 <text x="18.000" y="278.800" font-size="2.9" text-anchor="start" class="t ">10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 40 mm.</text>
 <text x="18.000" y="284.600" font-size="2.9" text-anchor="start" class="t ">    샤시: ⑳ AWG28 선 25 mm (⑧ J5 → M2 링 단자 → ⑫ 위 축 나사 → ① 금속 탭). 몰딩 전 SWD 기록·기능 검사·1차 교정, 최종 교정은 2차 몰딩 경화 뒤.</text>
 <text x="18.000" y="22.000" font-size="5" text-anchor="start" font-weight="700" class="t ">HMT500 조립도  —  반단면 (위: 단면, 아래: 외형)</text>
@@ -469,7 +471,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-000</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">G / 2026-09-30</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">H / 2026-09-30</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">부품표 참조</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

@@ -201,11 +201,17 @@ def segs(*pairs):
 B, C, E, Hs, O = P.BODY, P.CAP, P.ENDCAP, P.HOUSING, P.ORING
 D = P.FRONT_SHIFT                        # Rev G: 커넥터·캡·프로브를 G½ 안쪽으로 옮긴 거리
 HEX_R = P.hex_corner_d(B["hexa"]["af"]) / 2
-R_OD = Hs["od"] / 2                     # 16.0
-R_SEAL = B["seal"]["d"] / 2             # 14.5
-R_GRV = O["groove_d"] / 2               # 12.8
-R_MT = B["mthread"]["d"] / 2            # 14.0 (M28 바깥지름)
-R_MTm = B["mthread"]["d_minor"] / 2     # 13.4585 (M28x1 암나사 안지름)
+R_OD = Hs["od"] / 2                     # 15.0 (Rev H Ø30)
+R_SEAL = B["seal"]["d"] / 2             # 13.5
+R_GRV = O["groove_d"] / 2               # 12.3
+R_MT = B["mthread"]["d"] / 2            # 13.0 (M26 바깥지름)
+R_MTm = B["mthread"]["d_minor"] / 2     # 12.4585 (M26x1 암나사 안지름)
+MT = B["mthread"]["thread"].replace("x", "×")          # M26×1-6g
+MTH = Hs["thread"].replace("x", "×")                    # M26×1-6H
+MTL = E["mthread"]["thread"].replace("x", "×")          # M26×1-LH-6g
+ORT = f"O링 {O['id']:g}×{O['cs']:g}"
+DS, DSB = f"Ø{B['seal']['d']:g}", f"Ø{Hs['seal_bore']:g}"
+AFE = f"AF{E['flange']['flats_af']:g}"
 BODY_OUT = [(*B["gthread"]["x"], B["gthread"]["d"] / 2),
             (*B["relief"]["x"], B["relief"]["d"] / 2), (*B["hexa"]["x"], HEX_R), (*B["collar"]["x"], R_OD),
             (B["seal"]["x"][0], B["seal"]["groove_x"][0], R_SEAL), (*B["seal"]["groove_x"], R_GRV),
@@ -379,7 +385,7 @@ def sheet_assembly():
     sh.a(f'<rect x="{v.X(SP["board"]["x"][0] + 0.3):.3f}" y="{v.Yu(2.7):.3f}" width="{s * mk["l"]:.3f}" height="{s * 1.9:.3f}" fill="#555" stroke="none"/>')
     sh.text(v.X(SP["board"]["x"][0] + 0.3 + mk["l"] / 2), v.Yu(0.3), "MK33", 1.6, "middle", cls="muted")
     f1 = E["flange"]["x"][1]
-    buy_rect(v, f1 - 9, f1, 0, 7.95, lower=False)      # 커넥터 M16 나사부 (엔드캡에 체결)
+    buy_rect(v, *Cn["inner"]["x"], 0, 7.95, lower=False)      # 커넥터 M16 나사부 (엔드캡에 체결)
     buy_rect(v, *Cn["body"]["x"], 0, Cn["body"]["d"] / 2)
     buy_rect(v, *Cn["thread"]["x"], 0, Cn["thread"]["d"] / 2)
     # 가공품
@@ -396,15 +402,15 @@ def sheet_assembly():
         oring_xsec(v, gx)
     draw_pcb_inside(v)
     # 풍선
-    bl = [("2", v.X(-45 + D), v.Yu(R_CAP), v.X(-45 + D), 46), ("6", v.X(-43 + D), v.Yu(1.5), v.X(-38 + D), 58),
-          ("15", v.X(-34 + D), v.Yu(4.5), v.X(-30 + D), 46), ("16", v.X(-8.75), v.Yu(4.6), v.X(-4), 58),
-          ("1", v.X(-8), v.Yu(10.5), v.X(-12), 58), ("7", v.X(-1), v.Yu(13.5), v.X(-6), 58),
-          ("5", v.X(-2), v.Yu(2.6), v.X(-6), 46), ("10", v.X(17), v.Yu(13.65), v.X(20), 58),
-          ("12", v.X(13.3), v.Yu(7), v.X(8), 58), ("17", v.X(21.5), v.Yu(2), v.X(25), 46),
-          ("8", v.X(30), v.Yu(10), v.X(34), 46), ("3", v.X(45), v.Yu(R_OD), v.X(50), 58),
-          ("13", v.X(61), v.Yu(12.4), v.X(60), 46),
-          ("4", v.X(78), v.Yu(R_OD), v.X(70), 46), ("11", v.X(82), v.Yu(10), v.X(84), 58),
-          ("9", v.X(90), v.Yu(6), v.X(95), 46), ("18", v.X(60.5), v.Yu(4), v.X(66), 58)]
+    bl = [("2", v.X(-45 + D), v.Yu(R_CAP), v.X(-45 + D), 46), ("6", v.X(-43 + D), v.Yu(1.5), v.X(-24), 58),
+          ("15", v.X(-34 + D), v.Yu(4.5), v.X(-15), 46), ("16", v.X(-8.75), v.Yu(4.6), v.X(-2), 58),
+          ("1", v.X(-8), v.Yu(10.5), v.X(-15.5), 58), ("7", v.X(-1), v.Yu(13.5), v.X(-8.5), 58),
+          ("5", v.X(-2), v.Yu(2.6), v.X(-4), 46), ("10", v.X(15), v.Yu((R_GRV + R_SEAL) / 2), v.X(18), 58),
+          ("12", v.X(11.3), v.Yu(7), v.X(6), 58), ("17", v.X(19.5), v.Yu(2), v.X(23), 46),
+          ("8", v.X(28), v.Yu(10), v.X(32), 46), ("3", v.X(43), v.Yu(R_OD), v.X(48), 58),
+          ("13", v.X(59), v.Yu(11.8), v.X(58), 46),
+          ("4", v.X(75), v.Yu(R_OD), v.X(68), 46), ("11", v.X(78), v.Yu(10), v.X(80), 58),
+          ("9", v.X(86), v.Yu(6), v.X(91), 46), ("18", v.X(58.5), v.Yu(4), v.X(64), 58)]
     for n, x, y, bx, by in bl:
         sh.balloon(x, y, bx, by, n)
     # 치수 (아래쪽)
@@ -414,7 +420,7 @@ def sheet_assembly():
     sh.dim_h(v.X(-14), v.Yl(10.5), v.X(0), v.Yl(HEX_R), yb + 10, "14")
     sh.dim_h(v.X(0), v.Yl(HEX_R), v.X(f1), v.Yl(R_OD), yb + 20, f"{f1:.0f}")
     sh.dim_h(v.X(0), v.Yl(HEX_R), v.X(P.END_X), v.Yl(6), yb + 10, f"{P.END_X:.0f}")
-    sh.dim_v_ext(v.X(45), v.X(45), v.Yu(R_OD), v.Yl(R_OD), "Ø32")
+    sh.dim_v_ext(v.X(45), v.X(45), v.Yu(R_OD), v.Yl(R_OD), f"Ø{Hs['od']:g}")
     sh.dim_v_ext(v.X(-59.3 + D), v.X(-59.3 + D), v.Yu(R_CAP), v.Yl(R_CAP), "Ø12")
     sh.leader(v.X(-8), v.Yl(10.5), v.X(-24), v.Yl(10.5) + 14, "G1/2-A (ISO 228-1), 안쪽 Ø12.3 × 3.5 캡 칼라")
     sh.leader(v.X(4), v.Yl(HEX_R), v.X(16), v.Yl(HEX_R) + 12, "육각 AF27")
@@ -438,21 +444,21 @@ def sheet_assembly():
     # 주기
     notes = [
         "주기 (NOTES)",
-        "1. 피드스루 없음. 압력 격벽 = ⑯ O링 + ⑮ 몰드 핀 + ⑤ 몰딩. ⑤ 상온경화 에폭시 1종: 1차 = ① Ø7 통로(14.5), 2차 = 하우징 안 전체 (약 25 cm³, ④ 안까지).",
-        "2. ①–③ M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클) + O링 ⑩ (Ø29 H8/f7). ③만 돌려 체결 → ①·④·⑧·⑨·⑰·⑱은 돌지 않음 (하네스 꼬임 없음).",
-        "3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 AF28 을 고정하고 ③을 돌림.",
+        "1. 피드스루 없음. 압력 격벽 = ⑯ O링 + ⑮ 몰드 핀 + ⑤ 몰딩. ⑤ 상온경화 에폭시 1종: 1차 = ① Ø7 통로(" + f"{B['channel']['x'][1] - B['channel']['x'][0]:g}" + "), 2차 = 하우징 안 전체 (약 25 cm³, ④ 안까지).",
+        f"2. ①–③ {MTH[:-3]} 오른나사, ③–④ {MTH[:-3]} 왼나사 (턴버클) + O링 ⑩ ({DSB} H8/f7). ③만 돌려 체결 → ①·④·⑧·⑨·⑰·⑱은 돌지 않음 (하네스 꼬임 없음).",
+        "3. 나사 고정제 중강도(Loctite 243 급), 체결 토크 5 N·m (TBD). ① 육각 AF27 / ④ 평면 " + AFE + " 을 고정하고 ③을 돌림.",
         "4. O링 FKM 75, 조립 전 실리콘 그리스 얇게 도포. 나사·모서리 통과 시 O링 손상 주의 (C0.5 도입부).",
-        "5. 조립 (조립 시뮬레이션 반영): ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화) → ⑦",
+        "5. 조립 (조립 시뮬레이션 반영): ⑰을 ⑮ 뒤 핀에 납땜 → ⑯ → ⑰ 플러그를 Ø7 통로로 뒤로 뺌 → ⑮를 ①에 체결 → 1차 몰딩 (프로브 아래, 뒤에서 주입·경화)",
         "    → [벤치] ⑧을 ⑫ 홈에 끼우고 가로 나사 M2×12 ×2, ⑳ 샤시 선을 ⑧ J5에 납땜, SWD 기록·기능 검사 → ⑰ 플러그를 ⑫ 창으로 꿰고 ⑫+⑧을 ①에 넣음",
         "    → ⑫ 축 나사 M2×6 (아래) + M2×8 (위, ⑳ 링 단자 함께)를 뒤에서 조임 → ⑰을 J3에 꽂음 → ⑬ → ⑨에 ⑱ 납땜 후 ⑨를 ④에 체결",
         "    → ③을 ⑧ 위로 씌움 (턴버클 시작 위치, 7 mm 뒤) → ④를 옆으로 비켜 들고 공구 T-001로 ⑱ 플러그를 ③ 뒤 입구로 밀어 J1에 꽂음",
         "    → ①·④를 잡고 ③만 7바퀴 돌려 양쪽 동시 체결 (④가 14 mm 다가오며 ⑱이 ④ 안에서 접힘) → 2차 몰딩: ⑨ 위, ④ M3 구멍으로 진공 주입 → ⑲로 막음",
-        "    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 필터를 ⑮ 위 나사(M10×1.0)에 체결. 몰딩 후 전자부 분해·수리 불가 (센서 프로브·필터만 교체).",
+        "    → ⑥ 센서 프로브를 ⑮에 꽂고 ② 보호캡을 ⑮ 위 나사(M10×1.0)에 체결 → ⑦. 상세 = 조립 시방서 HMT500-A-001. 몰딩 후 전자부 수리 불가.",
         "6. 내압 시험: 정격 50 bar → 75 bar 유지, 누설 없음 (접액부 = ①·②·⑥·⑦·⑮·⑯). ⑯ O링이 밀봉, ⑮ 몰드 핀 + ⑤ 몰딩이 전자부 격벽.",
         "7. ③ 외면 레이저 마킹: 모델명·출력·전원·핀맵·시리얼. 접액부 1.4404, EN 10204 3.1.",
         "8. ⑧ PCB는 ①에 고정(⑫)되어 ③·④ 체결 시 함께 돌지 않음. PCB 외곽·부품 높이: HMT500-M-105~106 / E-301.",
         "9. ⑰ 센서 하네스: JST SH 1.0 mm 4P (SHR-04V-S + SSH-003T-P0.2-H) ↔ ⑧ J3 SM04B-SRSS-TB (옆 삽입). 1·2 = MK33, 3·4 = Pt1000 (2선식).",
-        f"    PTFE AWG30, {P.HARNESS['length']:g} mm (⑮ 핀 → J3). ② = 두텍 SUS 오일 필터 390000-001100 (SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.",
+        f"    PTFE AWG30, {P.HARNESS['length']:g} mm (⑮ 핀 → J3). ② = 보호캡 M-102 (두텍 390000-001100 기반, 끝 5.5 연장, SUS304). JST SH 정격 −25~+85 °C → ⑧ 앞 끝 온도 시험으로 확인.",
         "10. ⑱ M12 하네스: JST GH 1.25 mm 8P (GHR-08V-S + SSHL-002T-P0.2) ↔ ⑧ J1 SM08B-GHS-TB (옆 삽입, 입구 뒤쪽). 핀 n = M12 핀 n, PTFE AWG28 40 mm.",
         "    샤시: ⑳ AWG28 선 25 mm (⑧ J5 → M2 링 단자 → ⑫ 위 축 나사 → ① 금속 탭). 몰딩 전 SWD 기록·기능 검사·1차 교정, 최종 교정은 2차 몰딩 경화 뒤.",
     ]
@@ -469,27 +475,28 @@ def sheet_body():
     sh = Sheet("HMT500-M-101", "프로세스 바디 (Process body)", "3 : 1", "SUS316L (1.4404)", "2/4")
     s = 3.0
     v = View(sh, 150, 120, s)
-    v.axis(B["gthread"]["x"][0], 26)
+    v.axis(B["gthread"]["x"][0], B["mthread"]["x"][1])
     draw_body(v)
     X = v.X
     RM = max(HEX_R, R_OD)
     # 길이 치수 (아래 사슬)
     y1 = v.Yl(RM) + 12
-    chain = [(-14, 0, 10.5, HEX_R, "14"),
-             (0, 12, HEX_R, HEX_R, "12"), (12, 15, R_OD, R_OD, "3"), (15, 19, R_SEAL, R_SEAL, "4"),
-             (19, 26, R_MT, R_MT, "7")]
-    for xa, xb, ra, rb, t in chain:
-        sh.dim_h(X(xa), v.Yl(ra), X(xb), v.Yl(rb), y1, t)
-    sh.dim_h(X(-14), v.Yl(10.5), X(26), v.Yl(R_MT), y1 + 11, "40")
+    xg, xe = B["gthread"]["x"][0], B["mthread"]["x"][1]
+    chain = [(xg, 0, 10.5, HEX_R), (*B["hexa"]["x"], HEX_R, HEX_R), (*B["collar"]["x"], R_OD, R_OD),
+             (*B["seal"]["x"], R_SEAL, R_SEAL), (*B["mthread"]["x"], R_MT, R_MT)]
+    for xa, xb, ra, rb in chain:
+        sh.dim_h(X(xa), v.Yl(ra), X(xb), v.Yl(rb), y1, f"{xb - xa:g}")
+    sh.dim_h(X(xg), v.Yl(10.5), X(xe), v.Yl(R_MT), y1 + 11, f"{xe - xg:g}")
     sh.dim_h(X(-2), v.Yl(9.2), X(0), v.Yl(HEX_R), v.Yl(HEX_R) + 5, "2", above=True)
     # 내부·홈 치수 (위)
     yt = v.Yu(RM) - 10
     g0, g1 = B["seal"]["groove_x"]
-    sh.dim_h(X(15), v.Yu(R_SEAL), X(g0), v.Yu(R_GRV), yt, f"{g0 - 15:.2f}")
+    s0_ = B["seal"]["x"][0]
+    sh.dim_h(X(s0_), v.Yu(R_SEAL), X(g0), v.Yu(R_GRV), yt, f"{g0 - s0_:.2f}")
     sh.dim_h(X(g0), v.Yu(R_GRV), X(g1), v.Yu(R_GRV), yt - 8, f"{g1 - g0:.1f} (+0.1/0)")
     # 지름
-    for x, r, t in ((-1, 9.2, "Ø18.4"), (13.5, R_OD, "Ø32"),
-                    (18.7, R_SEAL, "Ø29 f7"), (23, R_MT, "M28×1-6g")):
+    for x, r, t in ((-1, 9.2, "Ø18.4"), (sum(B["collar"]["x"]) / 2, B["collar"]["d"] / 2, f"Ø{B['collar']['d']:g}"),
+                    (B["seal"]["x"][1] - 0.3, R_SEAL, f"{DS} f7"), (B["mthread"]["x"][1] - 3, R_MT, MT)):
         sh.dim_v(X(x), v.Yu(r), v.Yl(r), t)
     sl = B["cap_sleeve"]
     sh.leader(X(sl["x"][0] + 1), v.Yu(sl["d"] / 2), X(-12), 30,
@@ -497,8 +504,9 @@ def sheet_body():
     sh.leader(X(B["conn_land"]["x"][0] + 0.5), v.Yu(5.0), X(-12), 37, "Ø11.2 깊이 1 / Ø10 H8 (+0.022/0) 깊이 1.5, Ra 0.8 (O링 면)")
     sh.leader(X(sum(B["conn_thread"]["x"]) / 2), v.Yu(4.8), X(-12), 44, f"{B['conn_thread']['thread'].replace('x', '×')} 나사 길이 {B['conn_thread']['x'][1] - B['conn_thread']['x'][0]:g} (커넥터 자리 면에서 {B['conn_thread']['x'][1] - B['x_front']:g}) — HTX99R 체결")
     sh.leader(X(6), v.Yu(3.5), X(-12), 51, f"Ø7 관통 {B['channel']['x'][1] - B['channel']['x'][0]:g} — 센서 하네스 W-1 통로 (피드스루 없음)")
-    sh.leader(X(17), v.Yl(R_GRV), X(30), v.Yl(RM) + 6, "O링 홈 Ø25.6 h9 (0/-0.052), R0.2 — O링 25×2")
-    sh.leader(X(25), v.Yu(11), X(32), v.Yu(RM) - 22, "Ø22 깊이 14")
+    sh.leader(X(sum(B["seal"]["groove_x"]) / 2), v.Yl(R_GRV), X(28), v.Yl(RM) + 6, f"O링 홈 Ø{O['groove_d']:g} h9 (0/-0.052), R0.2 — {ORT}")
+    cb = B["cbore"]
+    sh.leader(X(cb["x"][1] - 1), v.Yu(11), X(30), v.Yu(RM) - 22, f"Ø{cb['d']:g} 깊이 {cb['x'][1] - cb['x'][0]:g}")
     # 기준면 A, 거칠기, 기하공차
     sh.a(f'<rect x="{X(0) - 2.3:.2f}" y="{v.Yu(HEX_R) - 12:.2f}" width="4.6" height="5" class="thin" fill="none"/>')
     sh.text(X(0), v.Yu(HEX_R) - 8.2, "A", 3.5, "middle", bold=True)
@@ -523,7 +531,7 @@ def sheet_body():
     af = B["hexa"]["af"] / 2 * 2.2
     sh.dim_v_ext(cx + 10, cx + R + 10, cy - af, cy + af, "AF27 (0/-0.3)")
     sh.text(cx, cy + R + 12, "화살표 방향에서 본 육각 끝면 (2.2:1)", 3.0, "middle")
-    sh.text(cx, cy + R + 17, "모따기 30° 양쪽 / 숨은선 = 칼라 Ø32", 3.0, "middle")
+    sh.text(cx, cy + R + 17, f"모따기 30° 양쪽 / 숨은선 = 칼라 Ø{B['collar']['d']:g}", 3.0, "middle")
     T = B["holder_taps"]
     for sgn in (1, -1):
         sh.circle(cx, cy + sgn * T["pcd"] / 2 * 2.2, T["d"] / 2 * 2.2, "hidden")
@@ -535,7 +543,7 @@ def sheet_body():
              "3. 씰면(기준면 A) Ra 0.8, 평면도 0.02, 공구 자국 반경 방향 금지 (씰 누설 방지).",
              "4. Ø7 관통 통로 양끝 C0.3·버 완전 제거 (하네스 피복 보호). Ø10 H8 Ra 0.8 (O링 밀봉면), 입구 C0.3.",
              "5. 나사 G1/2-A: ISO 228-1, 불완전 나사부는 언더컷(2)에 포함.",
-             "6. M28×1-6g 끝 C0.5×30° (O링 도입부), Ø29 f7 (-0.020/-0.041) 밀봉면 Ra 0.8, 홈 바닥·측면 Ra 1.6, 버 금지.",
+             f"6. {MT} 끝 C0.5×30° (O링 도입부), {DS} f7 (-0.020/-0.041) 밀봉면 Ra 0.8, 홈 바닥·측면 Ra 1.6, 버 금지.",
              "7. 전해 연마 또는 부동태 처리 (ASTM A967). 내압 설계 정격 50 bar (200 bar형 별도 검토)."]
     for i, n in enumerate(notes):
         sh.text(18, 205 + i * 6.2, n, 3.1 if i else 3.6, bold=(i == 0))
@@ -569,9 +577,9 @@ def sheet_small():
     sh.leader(X(-30.5 + D), v.Yl(5.5), X(-24 + D), v.Yl(R_CAP) + 20, f"Ø{C['rear_relief']['d']:g}")
     sh.leader(X(xt) + 0.3, v.oy - 1, X(xt) + 4, v.Yu(R_CAP) - 16, f"Ø{C['tip_hole']:g} 끝단 구멍")
     sh.leader(X(xt + 0.5), v.Yl(5.5), X(xt) - 2, v.Yl(R_CAP) + 20, f"C{C['chamfer']:g}")
-    sh.leader(X(rows[1]), v.Yl(1.5), X(-40 + D), v.Yl(R_CAP) + 26, f"{len(C['holes'])}×Ø{C['hole_d']:g} 관통 (4줄 × 5개, 72°)")
-    sh.text(40, 30, f"HMT500-M-102 → 두텍 {C['part_no']}  SUS PROBE 오일 필터 (3.5:1, 참고)", 4.4, bold=True)
-    sh.text(40, 36, f"원 도면: 두텍 SUS PROBE / OIL FILTER (2020-06-08), 재질 {C['material']}, 소재 Ø12×32. 치수는 원 도면 기준", 2.8, cls="muted")
+    sh.leader(X(rows[1]), v.Yl(1.5), X(-40 + D), v.Yl(R_CAP) + 26, f"{len(C['holes'])}×Ø{C['hole_d']:g} 관통 ({len(rows)}줄 × 5개, 72°)")
+    sh.text(40, 30, f"HMT500-M-102  센서 보호캡 (3.5:1) — 두텍 {C['part_no']} 기반", 4.4, bold=True)
+    sh.text(40, 36, f"Rev H: 원 도면(2020-06-08, 소재 Ø12×32)에서 끝 쪽 {P.CAP_EXT:g} 연장 + 옆 구멍 1줄 추가. 재질 {C['material']}, 소재 Ø12×{xr - xt:g}", 2.8, cls="muted")
     # ── 엔드캡 (2.5:1), 오른쪽 위 ──
     s = 2.5
     e0, e1 = E["mthread"]["x"][0], E["flange"]["x"][1]
@@ -581,23 +589,25 @@ def sheet_small():
     draw_endcap(v)
     X = v.X
     yd = v.Yl(R_OD) + 8
-    sh.dim_h(X(64), v.Yl(R_MT), X(71), v.Yl(R_SEAL), yd, "7")
-    sh.dim_h(X(71), v.Yl(R_SEAL), X(75), v.Yl(R_OD), yd, "4")
-    sh.dim_h(X(75), v.Yl(R_OD), X(81), v.Yl(R_OD), yd, "6")
-    sh.dim_h(X(64), v.Yl(R_MT), X(81), v.Yl(R_OD), yd + 9, "17")
+    em, es, ef = E["mthread"]["x"], E["seal"]["x"], E["flange"]["x"]
+    sh.dim_h(X(em[0]), v.Yl(R_MT), X(em[1]), v.Yl(R_SEAL), yd, f"{em[1] - em[0]:g}")
+    sh.dim_h(X(es[0]), v.Yl(R_SEAL), X(es[1]), v.Yl(R_OD), yd, f"{es[1] - es[0]:g}")
+    sh.dim_h(X(ef[0]), v.Yl(R_OD), X(ef[1]), v.Yl(R_OD), yd, f"{ef[1] - ef[0]:g}")
+    sh.dim_h(X(em[0]), v.Yl(R_MT), X(ef[1]), v.Yl(R_OD), yd + 9, f"{ef[1] - em[0]:g}")
     g0, g1 = E["seal"]["groove_x"]
     sh.dim_h(X(g0), v.Yu(R_GRV), X(g1), v.Yu(R_GRV), v.Yu(R_OD) - 6, f"{g1 - g0:.1f} (+0.1/0)")
-    sh.dim_v_ext(X(64), X(64) - 9, v.Yu(R_MT), v.Yl(R_MT), "M28×1-LH-6g (왼나사)")
-    sh.dim_v(X(74.7), v.Yu(R_SEAL), v.Yl(R_SEAL), "Ø29 f7")
-    sh.dim_v(X(81) + 9, v.Yu(R_OD), v.Yl(R_OD), "Ø32")
-    sh.leader(X(79), v.Yu(E["thread"]["d"] / 2), X(88), v.Yu(R_OD) - 16, "M16×1.5-6H 관통")
-    sh.leader(X(67), v.Yu(11), X(88), v.Yu(R_OD) - 24, "Ø22 깊이 11")
+    sh.dim_v_ext(X(em[0]), X(em[0]) - 9, v.Yu(R_MT), v.Yl(R_MT), f"{MTL} (왼나사)")
+    sh.dim_v(X(es[1] - 0.3), v.Yu(R_SEAL), v.Yl(R_SEAL), f"{DS} f7")
+    sh.dim_v(X(ef[1]) + 9, v.Yu(R_OD), v.Yl(R_OD), f"Ø{E['flange']['d']:g}")
+    et, ec = E["thread"]["x"], E["cbore"]["x"]
+    sh.leader(X(et[1] - 2), v.Yu(E["thread"]["d"] / 2), X(ef[1] + 7), v.Yu(R_OD) - 16, f"M16×1.5-6H 관통 (길이 {et[1] - et[0]:g})")
+    sh.leader(X(ec[0] + 3), v.Yu(11), X(ef[1] + 7), v.Yu(R_OD) - 24, f"Ø{E['cbore']['d']:g} 깊이 {ec[1] - ec[0]:g}")
     Po = E["ports"]                                  # 몰딩 주입·공기 빠짐 구멍 (외형 쪽 숨은선)
     for rr in (Po["r"] - Po["d_minor"] / 2, Po["r"] + Po["d_minor"] / 2):
-        sh.line(X(E["cbore"]["x"][1]), v.Yl(rr), X(81), v.Yl(rr), "hidden")
-    sh.leader(X(79.5), v.Yl(Po["r"]), X(88), v.Yl(R_OD) + 13, f"2×{Po['thread']} 관통 (주입·공기 빠짐)")
-    sh.leader(X(73), v.Yl(R_GRV), X(88), v.Yl(R_OD) + 26, "O링 홈 Ø25.6 h9 (O링 25×2)")
-    sh.leader(X(78), v.Yl(E["flange"]["flats_af"] / 2), X(88), v.Yl(R_OD) + 3, "평면 AF28 (2면)")
+        sh.line(X(E["cbore"]["x"][1]), v.Yl(rr), X(ef[1]), v.Yl(rr), "hidden")
+    sh.leader(X(ef[1] - 1.5), v.Yl(Po["r"]), X(ef[1] + 7), v.Yl(R_OD) + 13, f"2×{Po['thread']} 관통 (주입·공기 빠짐)")
+    sh.leader(X(sum(E["seal"]["groove_x"]) / 2), v.Yl(R_GRV), X(ef[1] + 7), v.Yl(R_OD) + 26, f"O링 홈 Ø{O['groove_d']:g} h9 ({ORT})")
+    sh.leader(X(sum(ef) / 2), v.Yl(E["flange"]["flats_af"] / 2), X(ef[1] + 7), v.Yl(R_OD) + 3, f"평면 {AFE} (2면)")
     sh.text(250, 30, "HMT500-M-104  엔드캡 (2.5:1)", 4.6, bold=True)
     sh.text(250, 36, "커넥터 O링 면 Ra 0.8 / 커넥터 P/N 확정 후 M16 규격 재확인", 2.8, cls="muted")
     # ── 하우징 (1.5:1), 가운데 아래 ──
@@ -610,18 +620,18 @@ def sheet_small():
     sh.dim_h(X(h0), v.Yl(R_OD), X(h1), v.Yl(R_OD), v.Yl(R_OD) + 9, f"{h1 - h0:.0f}")
     sh.dim_h(X(h0), v.Yu(R_OD), X(h0 + _sl), v.Yu(R_OD), v.Yu(R_OD) - 6, f"{_sl:.0f}")
     sh.dim_h(X(h0 + _sl), v.Yu(R_OD), X(h0 + _sl + _tl), v.Yu(R_OD), v.Yu(R_OD) - 6, f"{_tl:.0f}")
-    sh.dim_v(X(h1) + 9, v.Yu(R_OD), v.Yl(R_OD), "Ø32")
-    sh.dim_v(X(45), v.Yu(Hs["id"] / 2), v.Yl(Hs["id"] / 2), "Ø27")
-    sh.dim_v_ext(X(h0), X(h0) - 10, v.Yu(Hs["seal_bore"] / 2), v.Yl(Hs["seal_bore"] / 2), "Ø29 H8 (+0.033/0)")
-    sh.leader(X(h1 - _sl - 3), v.Yu(R_MTm), X(h1) + 18, v.Yu(R_OD) - 4, "앞 M28×1-6H / 뒤 M28×1-LH-6H (왼나사), 유효 7")
-    sh.leader(X(h1 - 2), v.Yu(Hs["seal_bore"] / 2), X(h1) + 18, v.oy - 4, "Ø29 H8 깊이 4 (양끝), Ra 0.8")
+    sh.dim_v(X(h1) + 9, v.Yu(R_OD), v.Yl(R_OD), f"Ø{Hs['od']:g}")
+    sh.dim_v(X(45), v.Yu(Hs["id"] / 2), v.Yl(Hs["id"] / 2), f"Ø{Hs['id']:g}")
+    sh.dim_v_ext(X(h0), X(h0) - 10, v.Yu(Hs["seal_bore"] / 2), v.Yl(Hs["seal_bore"] / 2), f"{DSB} H8 (+0.033/0)")
+    sh.leader(X(h1 - _sl - 3), v.Yu(R_MTm), X(h1) + 18, v.Yu(R_OD) - 4, f"앞 {MTH} / 뒤 {Hs['thread_rear'].replace('x', '×')} (왼나사), 유효 {_tl:g}")
+    sh.leader(X(h1 - 2), v.Yu(Hs["seal_bore"] / 2), X(h1) + 18, v.oy - 4, f"{DSB} H8 깊이 {_sl:g} (양끝), Ra 0.8")
     sh.text(190, 152, "HMT500-M-103  하우징 (1.5:1)", 4.6, bold=True)
     sh.text(190, 158, "양 끝 C0.5×15° (O링 도입부) / 외면 Ra 0.8 헤어라인 또는 비드 / 레이저 마킹 영역 45×20", 2.8, cls="muted")
     notes = ["주기 (NOTES)",
              "1. 재질 SUS316L (1.4404), 재질성적서 EN 10204 3.1, 부동태 처리 (ASTM A967).",
              "2. 지정 없는 모서리 C0.3, 버 제거. 지정 외 표면 Ra 1.6. 일반공차 ISO 2768-mK.",
-             "3. ③–① M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클: ③만 돌림) + O링 25×2 FKM, Ø29 H8/f7. 왼나사 끝에 'LH' 각인.",
-             "4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 필터는 두텍 기존품 (SUS304) — 접액부 316L 통일 여부 검토.",
+             f"3. ③–① {MTH[:-3]} 오른나사, ③–④ {MTH[:-3]} 왼나사 (턴버클: ③만 돌림) + {ORT} FKM, {DSB} H8/f7. 왼나사 끝에 'LH' 각인.",
+             "4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 보호캡은 SUS304 (두텍 필터 기반) — 접액부 316L 통일 여부 검토.",
              f"5. ④ M3 구멍 2개 (r{E['ports']['r']:g}, 90°·270°, 플랜지 관통): 하우징 안 몰딩 주입·공기 빠짐. 경화 후 M3×3 무두나사 + 실런트로 막음."]
     for i, n in enumerate(notes):
         sh.text(18, 247 + i * 6.2, n, 3.0 if i else 3.6, bold=(i == 0))
@@ -635,7 +645,7 @@ def pcb_limits():
     Pc = P.PCB
     out = []
     for x0, x1, w in Pc["sections"]:
-        bore = Hs["id"] if w > 20 else B["cbore"]["d"]
+        bore = min(Hs["id"], Hs["thread_minor"]) if w > 20 else B["cbore"]["d"]
         R = bore / 2
         edge = math.sqrt(R ** 2 - (w / 2) ** 2) - Pc["t"] / 2 - 0.5
         out.append((x0, x1, w, bore, edge, R - Pc["t"] / 2 - 0.5))
@@ -709,7 +719,7 @@ def sheet_pcb():
         y = ty + 5.4 * (i + 1)
         sh.line(tx, y, tx + sum(cw), y, "thin")
         where = "바디 카운터보어" if i == 0 else ("하우징" if i == 1 else "엔드캡 카운터보어")
-        vals = [f"{x0 - f:g} ~ {x1 - f:g}", f"{w:g}", f"Ø{bore:g} ({where})", f"가장자리 {edge:.1f} / 중심 {ctr:.1f} mm"]
+        vals = [f"{x0 - f:g} ~ {x1 - f:g}", f"{w:g}", f"Ø{bore:.4g} ({where})", f"가장자리 {edge:.1f} / 중심 {ctr:.1f} mm"]
         xx = tx
         for c, val in zip(cw, vals):
             sh.text(xx + 1.2, y + 3.9, val, 2.7)
@@ -785,7 +795,8 @@ def sheet_pcb():
              "2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.",
              f"3. J3 = {Pc['jst']['part']}, 높이 {Pc['jst']['h']:g}, 홀더 뒤 12.5 (꽂을 공간). W-1({P.HARNESS['length']:g} mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.",
              f"4. J1 = {Pc['gh']['part']}, 입구 뒤쪽(+x). 하네스 W-2({P.HARNESS2['length']:g} mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).",
-             "   PCB 폭 23 구간은 x 63.4에서 끝 (턴버클 끝 엔드캡 앞면 x 64와 틈 0.6). 링 뒤(x ≥ 59) 부품은 Ø20 안 (링을 뒤에서 끼움).",
+             f"   PCB 폭 23 구간은 x {Pc['sections'][1][1]:g}에서 끝 (턴버클 끝 엔드캡 앞면 x {E['mthread']['x'][0]:g}와 틈 {E['mthread']['x'][0] - Pc['sections'][1][1]:.1f}). "
+             f"링 뒤(x ≥ {R['x'][0]:g}) 부품은 Ø{R['id']:g} 안 (링을 뒤에서 끼움).",
              "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음."]
     for i, n in enumerate(notes):
         sh.text(18, 196 + i * 6.0, n, 2.9 if i else 3.6, bold=(i == 0))

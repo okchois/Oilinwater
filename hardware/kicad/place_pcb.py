@@ -59,6 +59,9 @@ def height(fp):
 
 # ── 기구 조건 ──
 X0, X1 = P.PCB["x"]
+# 아래 배치 계획·하네스 통로의 x 값은 Rev G 기구 좌표(PCB 앞 끝 x 14.5) 기준. Rev H(육각 10)에서 PCB가 x −2 → DX로 옮김.
+# KiCad 좌표는 PCB 앞 끝 기준이라 변하지 않는다.
+DX = X0 - 14.5
 SLOT_X1 = P.PCB_HOLDER["slot_x"][1]                  # 18.0
 RING = P.PCB_RING
 RING_KO = (RING["x"][0] - 0.3, RING["x"][1] + 0.3, RING["id"] / 2 - 0.3)   # x0, x1, |y| 한계
@@ -67,9 +70,9 @@ RING_KO = (RING["x"][0] - 0.3, RING["x"][1] + 0.3, RING["id"] / 2 - 0.3)   # x0,
 #  - 전선만 지나가는 곳은 낮은 부품 허용: W-1 선 중심 z 2.2, 굵기 0.6 → 선 아래 1.9 → 부품 ≤ 1.0 (여유 0.9)
 #    W-2는 턴버클로 엔드캡이 14 mm 다가오며 남는 선(약 29 mm)이 플러그 뒤에서 접히므로 J1 뒤는 전부 비움
 HARNESS_BANDS = [
-    (X0, 22.5, 3.5, 1.0),          # W-1 선 (홀더 구멍 → 플러그)
-    (22.5, 30.5, 3.5, None),       # W-1 플러그(x 26.5–30.5) + 꽂는 거리·잡는 공간
-    (58.5, X1, 6.4, None),         # W-2 플러그(x 58.5–62.5) + 잡는 공간 + 남는 선이 접히는 곳 (조립 시뮬레이션 ⑥)
+    (X0, 22.5 + DX, 3.5, 1.0),             # W-1 선 (홀더 구멍 → 플러그)
+    (22.5 + DX, 30.5 + DX, 3.5, None),     # W-1 플러그(Rev G x 26.5–30.5) + 꽂는 거리·잡는 공간
+    (58.5 + DX, X1, 6.4, None),         # W-2 플러그(x 58.5–62.5) + 잡는 공간 + 남는 선이 접히는 곳 (조립 시뮬레이션 ⑥)
 ]
 
 
@@ -136,15 +139,16 @@ def corner_ok(box):
 def bore(x):
     """부품이 지나가거나 놓이는 가장 좁은 안지름.
     링(안지름 Ø20)은 PCB 뒤 끝(x 71)부터 끼워 x 59–63까지 가므로 x ≥ 59 부품은 모두 Ø20 안 (조립 시뮬레이션 ④)."""
-    if x < 26.0:
+    if x < P.BODY["cbore"]["x"][1]:
         return P.BODY["cbore"]["d"]            # 22
     if x >= RING["x"][0]:
         return RING["id"]                      # 20
-    return P.HOUSING["id"]                     # 27
+    return min(P.HOUSING["id"], P.HOUSING["thread_minor"])   # Rev H: 25 / 나사 골지름 24.917 (하우징이 PCB 위로 지나감)
 
 
 def h_allow(xa, xb, ymax):
-    b = min(bore(x) for x in (xa, (xa + xb) / 2, xb, *[x for x in (26.0, 59.0, 63.0, 64.0) if xa <= x <= xb]))
+    b = min(bore(x) for x in (xa, (xa + xb) / 2, xb, *[x for x in (P.BODY["cbore"]["x"][1], RING["x"][0], RING["x"][1], P.ENDCAP["mthread"]["x"][0])
+                                               if xa <= x <= xb]))
     r = b / 2
     return -1.0 if ymax >= r else math.sqrt(r * r - ymax * ymax) - P.PCB["t"] / 2 - 0.5
 
@@ -427,7 +431,7 @@ def build():
                 x = J3_FRONT - fab[0] if ref == "J3" else J1_REAR - fab[2]
                 y = 0.0
             else:
-                x, y = how[1], how[2]
+                x, y = how[1] + DX, how[2]
             set_pose(fp, side, x, y, rot)
             assert free(side, crt(fp), ref), ref
             if ref == "U4":                       # J3·J1 은 플러그 통로를 정의하는 쪽
@@ -438,7 +442,7 @@ def build():
             UNPLACED.append(ref)
             board.Remove(fp)
             continue
-        ax, ay = (how[1], how[2]) if how[0] == "at" else pad_xy(how[1], how[2])
+        ax, ay = (how[1] + DX, how[2]) if how[0] == "at" else pad_xy(how[1], how[2])
         rots = opt.get("rots", (0, 90, 180, 270))
         # 1) 기준점에서 가장 가까운 빈 자리 거리 dmin, 2) dmin + SLACK 안의 후보 중
         #    사방이 막힌(다른 부품·가장자리에 붙은) 자리를 우선 → 틈이 덜 생김
@@ -507,7 +511,7 @@ def main():
     rows, err = report(placed)
     area = {s: sum((r["crt"][2] - r["crt"][0]) * (r["crt"][3] - r["crt"][1]) for r in rows if r["side"] == s)
             for s in "TB"}
-    meta = dict(project=O.PROJECT, coords="mech: x axial (rear +), y lateral, z top +; KiCad = (100 + x - 14.5, 100 - y)",
+    meta = dict(project=O.PROJECT, coords="mech: x axial (rear +), y lateral, z top +; KiCad = (100 + x - " + f"{X0:g}, 100 - y)",
                 side={"T": "F.Cu (z+)", "B": "B.Cu (z-)"}, courtyard_area=area,
                 harness_bands_top=[list(b) for b in HARNESS_BANDS],   # x0, x1, |y|, 허용 높이(None = 금지)
                 counts={s: sum(1 for r in rows if r["side"] == s) for s in "TB"},

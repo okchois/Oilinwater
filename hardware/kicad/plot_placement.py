@@ -102,7 +102,7 @@ def main():
     out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, PROJECT, "placement.png")
     fig, axs = plt.subplots(2, 1, figsize=(12, 11))
     m = d["meta"]
-    draw(axs[0], parts, "T", f"TOP (F, z+) — {m['counts']['T']} parts   front = sensor (x 14.5) ... rear = M12 (x 71)",
+    draw(axs[0], parts, "T", f"TOP (F, z+) — {m['counts']['T']} parts   front = sensor (x {P.PCB['x'][0]:g}) ... rear = M12 (x {P.PCB['x'][1]:g})",
          m["harness_bands_top"])
     draw(axs[1], parts, "B", f"BOTTOM (B, z-), seen through from top — {m['counts']['B']} parts", [])
     hs = [plt.Line2D([], [], color=c, lw=3) for c in GCOL]

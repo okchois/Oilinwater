@@ -109,16 +109,18 @@ def panel_c(ax):
     ax.add_patch(Polygon(pts, closed=True, fc=PCBC, alpha=0.25, ec=PCBC))
     E = P.ENDCAP
     for s in (1, -1):
-        ax.add_patch(Rectangle((E["mthread"]["x"][0], s * E["cbore"]["d"] / 2), 17, s * 3, color=STEEL))
+        ax.add_patch(Rectangle((E["mthread"]["x"][0], s * E["cbore"]["d"] / 2), E["flange"]["x"][1] - E["mthread"]["x"][0],
+                               s * (E["seal"]["d"] - E["cbore"]["d"]) / 2, color=STEEL))
     R = P.PCB_RING
     for s in (1, -1):
         ax.add_patch(Rectangle((R["x"][0], s * R["id"] / 2), R["x"][1] - R["x"][0], s * (R["od"] - R["id"]) / 2, color=PEEK))
     x_step = secs[1][1]
-    arrow(ax, (x_step, 12.3), (64, 12.3), GOOD, 1.2)
-    arrow(ax, (64, 12.3), (x_step, 12.3), GOOD, 1.2)
-    ax.text(63.7, 13.0, "틈 %.1f" % (64 - x_step), color=GOOD, ha="center", fontsize=8)
-    ax.text(52.5, -14.2, "B: PCB 폭 23 구간 끝 x %g (엔드캡 앞면 x 64)" % x_step, fontsize=8, color=GOOD)
-    ax.set_xlim(52, 76)
+    xe = E["mthread"]["x"][0]
+    arrow(ax, (x_step, 12.3), (xe, 12.3), GOOD, 1.2)
+    arrow(ax, (xe, 12.3), (x_step, 12.3), GOOD, 1.2)
+    ax.text(xe - 0.3, 13.0, "틈 %.1f" % (xe - x_step), color=GOOD, ha="center", fontsize=8)
+    ax.text(xe - 11.5, -14.2, "B: PCB 폭 23 구간 끝 x %g (엔드캡 앞면 x %g)" % (x_step, xe), fontsize=8, color=GOOD)
+    ax.set_xlim(xe - 12, xe + 12)
     ax.set_ylim(-15, 15)
     ax.set_aspect("equal")
     ax.set_title("③ B: 턴버클 끝 — 엔드캡과 PCB 틈 0.6 (z = 0 평면)", fontsize=9)
@@ -130,7 +132,7 @@ def panel_d(ax):
     """④ 지지링이 지나가는 단면 (x 59–71 부품을 y–z로 투영) vs 링 안지름 Ø20."""
     ax.add_patch(Circle((0, 0), P.PCB_RING["id"] / 2, fill=False, ec=PEEK, lw=2))
     ax.add_patch(Rectangle((-9, -T / 2), 18, T, color=PCBC))
-    for p, x0, x1, y0, y1, z0, z1 in parts_z(xa=P.PCB_RING["x"][0], xb=71):
+    for p, x0, x1, y0, y1, z0, z1 in parts_z(xa=P.PCB_RING["x"][0], xb=P.PCB["x"][1]):
         ax.add_patch(Rectangle((y0, min(z0, z1)), y1 - y0, abs(z1 - z0), fill=False, ec=PART, lw=1.2))
         ax.text((y0 + y1) / 2, (z0 + z1) / 2, p["ref"], ha="center", va="center", fontsize=6.5)
     ax.text(0, 10.4, "링 안지름 Ø20 (x 71 -> 59로 지나감)", ha="center", fontsize=7, color="#8a6d1f")
@@ -185,7 +187,7 @@ def panel_e(ax):
 
 def panel_f(ax):
     """⑥ 하네스 길이: 꽂을 때와 체결 후."""
-    rows = [("W-1 (센서) 60 mm", 60, 31, 14.5, "통로 끝에서 창 꿰기에 24 mm 필요 -> 유지"),
+    rows = [("W-1 (센서) 60 mm", 60, 31, P.BODY["channel"]["x"][1] - P.BODY["channel"]["x"][0], "통로 끝에서 창 꿰기에 24 mm 필요 -> 유지"),
             ("W-2 (M12) 40 mm", P.HARNESS2["length"], 0, 10.8, "꽂을 때 약 34 mm 필요 (하우징 안 20 + 옆 15)")]
     y = 0
     for name, L, fixed, span, note in rows:

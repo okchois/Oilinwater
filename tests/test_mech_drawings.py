@@ -16,11 +16,28 @@ import hmt500_params as P  # noqa: E402
 
 class MechTest(unittest.TestCase):
     def test_install_dimensions(self):
-        self.assertAlmostEqual(P.BODY["gthread"]["x"][0] - P.CAP["x_tip"], 28.5)   # 노출 프로브 (Rev G: 캡 32 중 3.5가 G½ 안)
+        # Rev H: E+E EE364와 부위별로 같은 외형 (원문 데이터시트 v1.13)
+        self.assertAlmostEqual(P.BODY["gthread"]["x"][0] - P.CAP["x_tip"], 34.0)   # 노출 프로브 34 (캡 37.5 중 3.5가 G½ 안)
+        self.assertEqual(P.CAP["od"], 12.0)
         self.assertAlmostEqual(P.BODY["gthread"]["x"][0], -14.0)                     # 나사 14 (씰면까지)
         self.assertEqual(P.BODY["hexa"]["af"], 27.0)
-        self.assertEqual(P.HOUSING["od"], 32.0)
-        self.assertAlmostEqual(P.OVERALL, 138.5)                                   # Rev G: Ø14 튜브 삭제
+        self.assertAlmostEqual(P.BODY["hexa"]["x"][1] - P.BODY["hexa"]["x"][0], 10.0)
+        self.assertEqual(P.HOUSING["od"], 30.0)
+        self.assertEqual(P.BODY["collar"]["d"], 30.0)
+        self.assertEqual(P.ENDCAP["flange"]["d"], 30.0)
+        self.assertAlmostEqual(P.ENDCAP["flange"]["x"][1], 77.0)                    # 씰면 ~ 하우징(엔드캡) 끝 77
+        self.assertAlmostEqual(P.END_X - P.ENDCAP["flange"]["x"][1], 15.0)          # M12 15
+        self.assertAlmostEqual(P.OVERALL, 140.0)
+        # 하우징 벽: 나사 바깥 ≥ 2, O링 자리 ≥ 1.5, 가운데 ≥ 2.5
+        H = P.HOUSING
+        self.assertGreaterEqual((H["od"] - H["thread_d"]) / 2, 2.0)
+        self.assertGreaterEqual((H["od"] - H["seal_bore"]) / 2, 1.5)
+        self.assertGreaterEqual((H["od"] - H["id"]) / 2, 2.5)
+        # O링 홈 바닥과 바디·엔드캡 카운터보어 사이 벽 ≥ 1.2
+        for part in (P.BODY, P.ENDCAP):
+            self.assertGreaterEqual((P.ORING["groove_d"] - part["cbore"]["d"]) / 2, 1.2)
+        # 지지링은 하우징 나사 골지름을 지나감
+        self.assertLess(P.PCB_RING["od"], H["thread_minor"] - 0.3)
 
     def test_fits_are_consistent(self):
         # Rev B: 나사(M28x1) + 반경 O링. 수나사·밀봉 지름이 하우징 암나사·보어와 맞는지
@@ -57,10 +74,11 @@ class MechTest(unittest.TestCase):
             if x1 > P.ENDCAP["cbore"]["x"][0]:
                 bores.append(P.ENDCAP["cbore"]["d"])
             if x1 > P.BODY["cbore"]["x"][1] and x0 < P.ENDCAP["cbore"]["x"][0]:
-                bores.append(P.HOUSING["id"])
+                bores.append(min(P.HOUSING["id"], P.HOUSING["thread_minor"]))
             bore = min(bores)
             edge = math.sqrt((bore / 2) ** 2 - (w / 2) ** 2) - Pc["t"] / 2
-            self.assertGreater(edge, 5.0, (x0, x1, w, bore))
+            # Rev H: 하우징 나사 골 Ø24.9에서 폭 23 가장자리 여유 3.9 (실제 부품 높이는 placement.json h_allow 로 검사)
+            self.assertGreater(edge, 3.9, (x0, x1, w, bore))
         # 앞 끝은 홀더 홈 안, 뒤 끝은 커넥터 안쪽 나사부와 떨어짐
         self.assertTrue(Hh["slot_x"][0] <= Pc["x"][0] < Hh["slot_x"][1])
         self.assertLess(Pc["x"][1], P.CONNECTOR["inner"]["x"][0])
@@ -107,7 +125,7 @@ class MechTest(unittest.TestCase):
         self.assertTrue(C["thread_x"][0] <= u0 and u1 <= C["thread_x"][1])
         self.assertEqual(C["thread"], S["thread_upper"]["spec"])
         self.assertAlmostEqual(C["x_rear"], B["x_front"])
-        self.assertAlmostEqual(C["x_rear"] - C["x_tip"], 32.0)
+        self.assertAlmostEqual(C["x_rear"] - C["x_tip"], 32.0 + P.CAP_EXT)       # Rev H: 원 도면 32 + 연장 5.5
         self.assertLess(C["rear_relief"]["d"], B["conn_cbore"]["d"] + 2 * 0.5)
         # 센서 프로브: 플러그가 소켓 면에 닿고, 핀은 소켓 깊이 안, 기판·플러그는 Ø8 센서실 안
         self.assertAlmostEqual(SP["plug"]["x"][1], x(S["socket_face_y"]))
@@ -118,7 +136,7 @@ class MechTest(unittest.TestCase):
         # 센서 소자 앞에 측면 구멍 줄이 있음
         rows = sorted({hx for hx, _ in C["holes"]})
         self.assertTrue(any(SP["board"]["x"][0] <= r <= SP["plug"]["x"][0] for r in rows))
-        self.assertEqual(len(C["holes"]), 20)
+        self.assertEqual(len(C["holes"]), 25)                    # Rev H: 5줄 × 5개 (연장부 1줄 추가)
         # 튜브가 G1/2 설치 구멍(골지름)을 통과, 캡 Ø12
         # 캡 보호 칼라: 캡 뿌리를 3 mm 이상 감싸고, 캡과 틈 0.1–0.2, HTX99R 맞변 평면(스패너)은 밖에 남음
         sl = B["cap_sleeve"]

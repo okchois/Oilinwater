@@ -15,74 +15,76 @@
 <defs>
  <pattern id="hatch" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
  <pattern id="hatch2" width="2.2" height="2.2" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><line x1="0" y1="0" x2="0" y2="2.2" stroke="#000" stroke-width="0.18"/></pattern>
-</defs><line x1="34.000" y1="92.000" x2="158.000" y2="92.000" class="center"/>
-<polygon points="40.000,86.750 40.000,74.500 43.500,71.000 148.500,71.000 148.500,72.750 152.000,72.750 152.000,76.395 122.250,76.395 121.200,78.000 50.500,78.000 41.750,86.750" class="hatchfill2"/>
-<polyline points="40.000,92.000 40.000,97.250 40.000,109.500 43.500,113.000 148.500,113.000 148.500,111.250 152.000,111.250 152.000,92.000" class="thick"/>
+</defs><line x1="34.000" y1="92.000" x2="177.250" y2="92.000" class="center"/>
+<polygon points="40.000,86.750 40.000,74.500 43.500,71.000 167.750,71.000 167.750,72.750 171.250,72.750 171.250,76.395 141.500,76.395 140.450,78.000 50.500,78.000 41.750,86.750" class="hatchfill2"/>
+<polyline points="40.000,92.000 40.000,97.250 40.000,109.500 43.500,113.000 167.750,113.000 167.750,111.250 171.250,111.250 171.250,92.000" class="thick"/>
 <line x1="43.500" y1="92.000" x2="43.500" y2="113.000" class="thick"/>
-<line x1="148.500" y1="92.000" x2="148.500" y2="113.000" class="thick"/>
-<line x1="122.250" y1="74.500" x2="152.000" y2="74.500" class="thin"/>
-<rect x="55.750" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
-<circle cx="61.000" cy="92.000" r="5.250" class="thin" fill="none"/>
-<rect x="73.250" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
-<circle cx="78.500" cy="92.000" r="5.250" class="thin" fill="none"/>
-<rect x="90.750" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
-<circle cx="96.000" cy="92.000" r="5.250" class="thin" fill="none"/>
-<rect x="108.250" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
-<circle cx="113.500" cy="92.000" r="5.250" class="thin" fill="none"/>
+<line x1="167.750" y1="92.000" x2="167.750" y2="113.000" class="thick"/>
+<line x1="141.500" y1="74.500" x2="171.250" y2="74.500" class="thin"/>
+<rect x="57.500" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
+<circle cx="62.750" cy="92.000" r="5.250" class="thin" fill="none"/>
+<rect x="75.000" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
+<circle cx="80.250" cy="92.000" r="5.250" class="thin" fill="none"/>
+<rect x="92.500" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
+<circle cx="97.750" cy="92.000" r="5.250" class="thin" fill="none"/>
+<rect x="110.000" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
+<circle cx="115.250" cy="92.000" r="5.250" class="thin" fill="none"/>
+<rect x="127.500" y="71.000" width="10.500" height="7.000" style="fill:#fff;stroke:#000;stroke-width:0.25"/>
+<circle cx="132.750" cy="92.000" r="5.250" class="thin" fill="none"/>
 <line x1="40.000" y1="114.000" x2="40.000" y2="121.500" class="thin"/>
-<line x1="61.000" y1="98.250" x2="61.000" y2="121.500" class="thin"/>
-<line x1="40.000" y1="120.000" x2="61.000" y2="120.000" class="thin"/>
+<line x1="62.750" y1="98.250" x2="62.750" y2="121.500" class="thin"/>
+<line x1="40.000" y1="120.000" x2="62.750" y2="120.000" class="thin"/>
 <polygon points="40.000,120.000 42.600,119.100 42.600,120.900" class="arrow"/>
-<polygon points="61.000,120.000 58.400,120.900 58.400,119.100" class="arrow"/>
-<text x="50.500" y="119.000" font-size="3.2" text-anchor="middle" class="t ">6</text>
-<line x1="61.000" y1="98.250" x2="61.000" y2="121.500" class="thin"/>
-<line x1="113.500" y1="98.250" x2="113.500" y2="121.500" class="thin"/>
-<line x1="61.000" y1="120.000" x2="113.500" y2="120.000" class="thin"/>
-<polygon points="61.000,120.000 63.600,119.100 63.600,120.900" class="arrow"/>
-<polygon points="113.500,120.000 110.900,120.900 110.900,119.100" class="arrow"/>
-<text x="87.250" y="119.000" font-size="3.2" text-anchor="middle" class="t ">3×5=15</text>
-<line x1="148.500" y1="114.000" x2="148.500" y2="121.500" class="thin"/>
-<line x1="152.000" y1="112.250" x2="152.000" y2="121.500" class="thin"/>
-<line x1="148.500" y1="120.000" x2="152.000" y2="120.000" class="thin"/>
-<polygon points="148.500,120.000 145.900,120.900 145.900,119.100" class="arrow"/>
-<polygon points="152.000,120.000 154.600,119.100 154.600,120.900" class="arrow"/>
-<line x1="143.500" y1="120.000" x2="148.500" y2="120.000" class="thin"/>
-<line x1="152.000" y1="120.000" x2="157.000" y2="120.000" class="thin"/>
-<text x="150.250" y="119.000" font-size="3.2" text-anchor="middle" class="t ">1</text>
+<polygon points="62.750,120.000 60.150,120.900 60.150,119.100" class="arrow"/>
+<text x="51.375" y="119.000" font-size="3.2" text-anchor="middle" class="t ">6.5</text>
+<line x1="62.750" y1="98.250" x2="62.750" y2="121.500" class="thin"/>
+<line x1="132.750" y1="98.250" x2="132.750" y2="121.500" class="thin"/>
+<line x1="62.750" y1="120.000" x2="132.750" y2="120.000" class="thin"/>
+<polygon points="62.750,120.000 65.350,119.100 65.350,120.900" class="arrow"/>
+<polygon points="132.750,120.000 130.150,120.900 130.150,119.100" class="arrow"/>
+<text x="97.750" y="119.000" font-size="3.2" text-anchor="middle" class="t ">4×5=20</text>
+<line x1="167.750" y1="114.000" x2="167.750" y2="121.500" class="thin"/>
+<line x1="171.250" y1="112.250" x2="171.250" y2="121.500" class="thin"/>
+<line x1="167.750" y1="120.000" x2="171.250" y2="120.000" class="thin"/>
+<polygon points="167.750,120.000 165.150,120.900 165.150,119.100" class="arrow"/>
+<polygon points="171.250,120.000 173.850,119.100 173.850,120.900" class="arrow"/>
+<line x1="162.750" y1="120.000" x2="167.750" y2="120.000" class="thin"/>
+<line x1="171.250" y1="120.000" x2="176.250" y2="120.000" class="thin"/>
+<text x="169.500" y="119.000" font-size="3.2" text-anchor="middle" class="t ">1</text>
 <line x1="40.000" y1="114.000" x2="40.000" y2="130.500" class="thin"/>
-<line x1="152.000" y1="112.250" x2="152.000" y2="130.500" class="thin"/>
-<line x1="40.000" y1="129.000" x2="152.000" y2="129.000" class="thin"/>
+<line x1="171.250" y1="112.250" x2="171.250" y2="130.500" class="thin"/>
+<line x1="40.000" y1="129.000" x2="171.250" y2="129.000" class="thin"/>
 <polygon points="40.000,129.000 42.600,128.100 42.600,129.900" class="arrow"/>
-<polygon points="152.000,129.000 149.400,129.900 149.400,128.100" class="arrow"/>
-<text x="96.000" y="128.000" font-size="3.2" text-anchor="middle" class="t ">32</text>
-<line x1="122.250" y1="73.500" x2="122.250" y2="62.500" class="thin"/>
-<line x1="152.000" y1="73.500" x2="152.000" y2="62.500" class="thin"/>
-<line x1="122.250" y1="64.000" x2="152.000" y2="64.000" class="thin"/>
-<polygon points="122.250,64.000 124.850,63.100 124.850,64.900" class="arrow"/>
-<polygon points="152.000,64.000 149.400,64.900 149.400,63.100" class="arrow"/>
-<text x="137.125" y="63.000" font-size="3.2" text-anchor="middle" class="t ">8.5</text>
+<polygon points="171.250,129.000 168.650,129.900 168.650,128.100" class="arrow"/>
+<text x="105.625" y="128.000" font-size="3.2" text-anchor="middle" class="t ">37.5</text>
+<line x1="141.500" y1="73.500" x2="141.500" y2="62.500" class="thin"/>
+<line x1="171.250" y1="73.500" x2="171.250" y2="62.500" class="thin"/>
+<line x1="141.500" y1="64.000" x2="171.250" y2="64.000" class="thin"/>
+<polygon points="141.500,64.000 144.100,63.100 144.100,64.900" class="arrow"/>
+<polygon points="171.250,64.000 168.650,64.900 168.650,63.100" class="arrow"/>
+<text x="156.375" y="63.000" font-size="3.2" text-anchor="middle" class="t ">8.5</text>
 <line x1="40.000" y1="70.000" x2="40.000" y2="62.500" class="thin"/>
 <line x1="50.500" y1="77.000" x2="50.500" y2="62.500" class="thin"/>
 <line x1="40.000" y1="64.000" x2="50.500" y2="64.000" class="thin"/>
 <polygon points="40.000,64.000 42.600,63.100 42.600,64.900" class="arrow"/>
 <polygon points="50.500,64.000 47.900,64.900 47.900,63.100" class="arrow"/>
 <text x="45.250" y="63.000" font-size="3.2" text-anchor="middle" class="t ">3</text>
-<line x1="161.000" y1="71.000" x2="161.000" y2="113.000" class="thin"/>
-<polygon points="161.000,71.000 161.900,73.600 160.100,73.600" class="arrow"/>
-<polygon points="161.000,113.000 160.100,110.400 161.900,110.400" class="arrow"/>
-<text x="160.000" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 160.000 92.000)" class="t ">Ø12</text>
-<line x1="99.500" y1="78.000" x2="103.000" y2="55.000" class="thin"/>
-<polygon points="99.500,78.000 99.001,75.294 100.781,75.565" class="arrow"/>
-<line x1="103.000" y1="55.000" x2="125.000" y2="55.000" class="thin"/>
-<text x="104.000" y="54.000" font-size="3.2" text-anchor="start" class="t ">Ø8 (센서실)</text>
-<line x1="138.000" y1="75.900" x2="145.000" y2="55.000" class="thin"/>
-<polygon points="138.000,75.900 137.972,73.149 139.679,73.720" class="arrow"/>
-<line x1="145.000" y1="55.000" x2="167.000" y2="55.000" class="thin"/>
-<text x="146.000" y="54.000" font-size="3.2" text-anchor="start" class="t ">M10×1.0 깊이 8.5 — HTX99R 위 나사</text>
-<line x1="150.250" y1="111.250" x2="173.000" y2="133.000" class="thin"/>
-<polygon points="150.250,111.250 152.751,112.396 151.507,113.697" class="arrow"/>
-<line x1="173.000" y1="133.000" x2="195.000" y2="133.000" class="thin"/>
-<text x="174.000" y="132.000" font-size="3.2" text-anchor="start" class="t ">Ø11</text>
+<line x1="180.250" y1="71.000" x2="180.250" y2="113.000" class="thin"/>
+<polygon points="180.250,71.000 181.150,73.600 179.350,73.600" class="arrow"/>
+<polygon points="180.250,113.000 179.350,110.400 181.150,110.400" class="arrow"/>
+<text x="179.250" y="92.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 179.250 92.000)" class="t ">Ø12</text>
+<line x1="118.750" y1="78.000" x2="122.250" y2="55.000" class="thin"/>
+<polygon points="118.750,78.000 118.251,75.294 120.031,75.565" class="arrow"/>
+<line x1="122.250" y1="55.000" x2="144.250" y2="55.000" class="thin"/>
+<text x="123.250" y="54.000" font-size="3.2" text-anchor="start" class="t ">Ø8 (센서실)</text>
+<line x1="157.250" y1="75.900" x2="164.250" y2="55.000" class="thin"/>
+<polygon points="157.250,75.900 157.222,73.149 158.929,73.720" class="arrow"/>
+<line x1="164.250" y1="55.000" x2="186.250" y2="55.000" class="thin"/>
+<text x="165.250" y="54.000" font-size="3.2" text-anchor="start" class="t ">M10×1.0 깊이 8.5 — HTX99R 위 나사</text>
+<line x1="169.500" y1="111.250" x2="192.250" y2="133.000" class="thin"/>
+<polygon points="169.500,111.250 172.001,112.396 170.757,113.697" class="arrow"/>
+<line x1="192.250" y1="133.000" x2="214.250" y2="133.000" class="thin"/>
+<text x="193.250" y="132.000" font-size="3.2" text-anchor="start" class="t ">Ø11</text>
 <line x1="40.300" y1="91.000" x2="44.000" y2="55.000" class="thin"/>
 <polygon points="40.300,91.000 39.671,88.322 41.461,88.506" class="arrow"/>
 <line x1="44.000" y1="55.000" x2="66.000" y2="55.000" class="thin"/>
@@ -91,162 +93,162 @@
 <polygon points="41.750,111.250 42.195,113.965 40.421,113.659" class="arrow"/>
 <line x1="38.000" y1="133.000" x2="16.000" y2="133.000" class="thin"/>
 <text x="37.000" y="132.000" font-size="3.2" text-anchor="end" class="t ">C1</text>
-<line x1="78.500" y1="97.250" x2="117.000" y2="139.000" class="thin"/>
-<polygon points="78.500,97.250 80.924,98.551 79.601,99.771" class="arrow"/>
-<line x1="117.000" y1="139.000" x2="139.000" y2="139.000" class="thin"/>
-<text x="118.000" y="138.000" font-size="3.2" text-anchor="start" class="t ">20×Ø3 관통 (4줄 × 5개, 72°)</text>
-<text x="40.000" y="30.000" font-size="4.4" text-anchor="start" font-weight="700" class="t ">HMT500-M-102 → 두텍 390000-001100  SUS PROBE 오일 필터 (3.5:1, 참고)</text>
-<text x="40.000" y="36.000" font-size="2.8" text-anchor="start" class="t muted">원 도면: 두텍 SUS PROBE / OIL FILTER (2020-06-08), 재질 SUS304, 소재 Ø12×32. 치수는 원 도면 기준</text>
-<line x1="299.000" y1="95.000" x2="353.500" y2="95.000" class="center"/>
-<polygon points="305.000,60.000 322.500,60.000 322.500,58.750 324.125,58.750 324.125,63.000 330.875,63.000 330.875,58.750 332.500,58.750 332.500,55.000 347.500,55.000 347.500,77.030 332.500,77.030 332.500,67.500 305.000,67.500" class="hatchfill"/>
-<line x1="305.000" y1="130.000" x2="322.500" y2="130.000" class="thick"/>
-<line x1="305.000" y1="95.000" x2="305.000" y2="130.000" class="thick"/>
-<line x1="322.500" y1="131.250" x2="324.125" y2="131.250" class="thick"/>
-<line x1="322.500" y1="95.000" x2="322.500" y2="131.250" class="thick"/>
-<line x1="324.125" y1="127.000" x2="330.875" y2="127.000" class="thick"/>
-<line x1="324.125" y1="95.000" x2="324.125" y2="131.250" class="thick"/>
-<line x1="330.875" y1="131.250" x2="332.500" y2="131.250" class="thick"/>
-<line x1="330.875" y1="95.000" x2="330.875" y2="131.250" class="thick"/>
-<line x1="332.500" y1="135.000" x2="347.500" y2="135.000" class="thick"/>
-<line x1="332.500" y1="95.000" x2="332.500" y2="135.000" class="thick"/>
-<line x1="347.500" y1="95.000" x2="347.500" y2="135.000" class="thick"/>
-<line x1="305.000" y1="128.446" x2="322.500" y2="128.446" class="thin"/>
-<line x1="305.000" y1="61.554" x2="322.500" y2="61.554" class="thin"/>
-<line x1="332.500" y1="75.000" x2="347.500" y2="75.000" class="thin"/>
-<line x1="332.500" y1="130.000" x2="347.500" y2="130.000" class="thick"/>
-<line x1="305.000" y1="122.500" x2="332.500" y2="122.500" class="hidden"/>
-<line x1="332.500" y1="112.970" x2="347.500" y2="112.970" class="hidden"/>
-<line x1="305.000" y1="131.000" x2="305.000" y2="144.500" class="thin"/>
-<line x1="322.500" y1="132.250" x2="322.500" y2="144.500" class="thin"/>
-<line x1="305.000" y1="143.000" x2="322.500" y2="143.000" class="thin"/>
-<polygon points="305.000,143.000 307.600,142.100 307.600,143.900" class="arrow"/>
-<polygon points="322.500,143.000 319.900,143.900 319.900,142.100" class="arrow"/>
-<text x="313.750" y="142.000" font-size="3.2" text-anchor="middle" class="t ">7</text>
-<line x1="322.500" y1="132.250" x2="322.500" y2="144.500" class="thin"/>
-<line x1="332.500" y1="136.000" x2="332.500" y2="144.500" class="thin"/>
-<line x1="322.500" y1="143.000" x2="332.500" y2="143.000" class="thin"/>
-<polygon points="322.500,143.000 325.100,142.100 325.100,143.900" class="arrow"/>
-<polygon points="332.500,143.000 329.900,143.900 329.900,142.100" class="arrow"/>
-<text x="327.500" y="142.000" font-size="3.2" text-anchor="middle" class="t ">4</text>
-<line x1="332.500" y1="136.000" x2="332.500" y2="144.500" class="thin"/>
-<line x1="347.500" y1="136.000" x2="347.500" y2="144.500" class="thin"/>
-<line x1="332.500" y1="143.000" x2="347.500" y2="143.000" class="thin"/>
-<polygon points="332.500,143.000 335.100,142.100 335.100,143.900" class="arrow"/>
-<polygon points="347.500,143.000 344.900,143.900 344.900,142.100" class="arrow"/>
-<text x="340.000" y="142.000" font-size="3.2" text-anchor="middle" class="t ">6</text>
-<line x1="305.000" y1="131.000" x2="305.000" y2="153.500" class="thin"/>
-<line x1="347.500" y1="136.000" x2="347.500" y2="153.500" class="thin"/>
-<line x1="305.000" y1="152.000" x2="347.500" y2="152.000" class="thin"/>
-<polygon points="305.000,152.000 307.600,151.100 307.600,152.900" class="arrow"/>
-<polygon points="347.500,152.000 344.900,152.900 344.900,151.100" class="arrow"/>
-<text x="326.250" y="151.000" font-size="3.2" text-anchor="middle" class="t ">17</text>
-<line x1="324.125" y1="62.000" x2="324.125" y2="47.500" class="thin"/>
-<line x1="330.875" y1="62.000" x2="330.875" y2="47.500" class="thin"/>
-<line x1="324.125" y1="49.000" x2="330.875" y2="49.000" class="thin"/>
-<polygon points="324.125,49.000 321.525,49.900 321.525,48.100" class="arrow"/>
-<polygon points="330.875,49.000 333.475,48.100 333.475,49.900" class="arrow"/>
-<line x1="319.125" y1="49.000" x2="324.125" y2="49.000" class="thin"/>
-<line x1="330.875" y1="49.000" x2="335.875" y2="49.000" class="thin"/>
-<text x="327.500" y="48.000" font-size="3.2" text-anchor="middle" class="t ">2.7 (+0.1/0)</text>
-<line x1="304.000" y1="60.000" x2="294.500" y2="60.000" class="thin"/>
-<line x1="304.000" y1="130.000" x2="294.500" y2="130.000" class="thin"/>
-<line x1="296.000" y1="60.000" x2="296.000" y2="130.000" class="thin"/>
-<polygon points="296.000,60.000 296.900,62.600 295.100,62.600" class="arrow"/>
-<polygon points="296.000,130.000 295.100,127.400 296.900,127.400" class="arrow"/>
-<text x="295.000" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 295.000 95.000)" class="t ">M28×1-LH-6g (왼나사)</text>
-<line x1="331.750" y1="58.750" x2="331.750" y2="131.250" class="thin"/>
-<polygon points="331.750,58.750 332.650,61.350 330.850,61.350" class="arrow"/>
-<polygon points="331.750,131.250 330.850,128.650 332.650,128.650" class="arrow"/>
-<text x="330.750" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 330.750 95.000)" class="t ">Ø29 f7</text>
-<line x1="356.500" y1="55.000" x2="356.500" y2="135.000" class="thin"/>
-<polygon points="356.500,55.000 357.400,57.600 355.600,57.600" class="arrow"/>
-<polygon points="356.500,135.000 355.600,132.400 357.400,132.400" class="arrow"/>
-<text x="355.500" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 355.500 95.000)" class="t ">Ø32</text>
-<line x1="342.500" y1="75.000" x2="365.000" y2="39.000" class="thin"/>
-<polygon points="342.500,75.000 343.115,72.318 344.641,73.272" class="arrow"/>
-<line x1="365.000" y1="39.000" x2="387.000" y2="39.000" class="thin"/>
-<text x="366.000" y="38.000" font-size="3.2" text-anchor="start" class="t ">M16×1.5-6H 관통</text>
-<line x1="312.500" y1="67.500" x2="365.000" y2="31.000" class="thin"/>
-<polygon points="312.500,67.500 314.121,65.277 315.149,66.755" class="arrow"/>
-<line x1="365.000" y1="31.000" x2="387.000" y2="31.000" class="thin"/>
-<text x="366.000" y="30.000" font-size="3.2" text-anchor="start" class="t ">Ø22 깊이 11</text>
-<line x1="332.500" y1="116.875" x2="347.500" y2="116.875" class="hidden"/>
-<line x1="332.500" y1="123.125" x2="347.500" y2="123.125" class="hidden"/>
-<line x1="343.750" y1="120.000" x2="365.000" y2="148.000" class="thin"/>
-<polygon points="343.750,120.000 346.039,121.527 344.605,122.615" class="arrow"/>
-<line x1="365.000" y1="148.000" x2="387.000" y2="148.000" class="thin"/>
-<text x="366.000" y="147.000" font-size="3.2" text-anchor="start" class="t ">2×M3 관통 (주입·공기 빠짐)</text>
-<line x1="327.500" y1="127.000" x2="365.000" y2="161.000" class="thin"/>
-<polygon points="327.500,127.000 330.031,128.080 328.822,129.413" class="arrow"/>
-<line x1="365.000" y1="161.000" x2="387.000" y2="161.000" class="thin"/>
-<text x="366.000" y="160.000" font-size="3.2" text-anchor="start" class="t ">O링 홈 Ø25.6 h9 (O링 25×2)</text>
-<line x1="340.000" y1="130.000" x2="365.000" y2="138.000" class="thin"/>
-<polygon points="340.000,130.000 342.751,129.935 342.202,131.650" class="arrow"/>
-<line x1="365.000" y1="138.000" x2="387.000" y2="138.000" class="thin"/>
-<text x="366.000" y="137.000" font-size="3.2" text-anchor="start" class="t ">평면 AF28 (2면)</text>
+<line x1="80.250" y1="97.250" x2="136.250" y2="139.000" class="thin"/>
+<polygon points="80.250,97.250 82.872,98.082 81.797,99.526" class="arrow"/>
+<line x1="136.250" y1="139.000" x2="158.250" y2="139.000" class="thin"/>
+<text x="137.250" y="138.000" font-size="3.2" text-anchor="start" class="t ">25×Ø3 관통 (5줄 × 5개, 72°)</text>
+<text x="40.000" y="30.000" font-size="4.4" text-anchor="start" font-weight="700" class="t ">HMT500-M-102  센서 보호캡 (3.5:1) — 두텍 390000-001100 기반</text>
+<text x="40.000" y="36.000" font-size="2.8" text-anchor="start" class="t muted">Rev H: 원 도면(2020-06-08, 소재 Ø12×32)에서 끝 쪽 5.5 연장 + 옆 구멍 1줄 추가. 재질 SUS304, 소재 Ø12×37.5</text>
+<line x1="299.000" y1="95.000" x2="348.500" y2="95.000" class="center"/>
+<polygon points="305.000,62.500 322.500,62.500 322.500,61.250 324.875,61.250 324.875,64.250 330.125,64.250 330.125,61.250 332.500,61.250 332.500,57.500 342.500,57.500 342.500,77.030 327.500,77.030 327.500,67.500 305.000,67.500" class="hatchfill"/>
+<line x1="305.000" y1="127.500" x2="322.500" y2="127.500" class="thick"/>
+<line x1="305.000" y1="95.000" x2="305.000" y2="127.500" class="thick"/>
+<line x1="322.500" y1="128.750" x2="324.875" y2="128.750" class="thick"/>
+<line x1="322.500" y1="95.000" x2="322.500" y2="128.750" class="thick"/>
+<line x1="324.875" y1="125.750" x2="330.125" y2="125.750" class="thick"/>
+<line x1="324.875" y1="95.000" x2="324.875" y2="128.750" class="thick"/>
+<line x1="330.125" y1="128.750" x2="332.500" y2="128.750" class="thick"/>
+<line x1="330.125" y1="95.000" x2="330.125" y2="128.750" class="thick"/>
+<line x1="332.500" y1="132.500" x2="342.500" y2="132.500" class="thick"/>
+<line x1="332.500" y1="95.000" x2="332.500" y2="132.500" class="thick"/>
+<line x1="342.500" y1="95.000" x2="342.500" y2="132.500" class="thick"/>
+<line x1="305.000" y1="125.946" x2="322.500" y2="125.946" class="thin"/>
+<line x1="305.000" y1="64.054" x2="322.500" y2="64.054" class="thin"/>
+<line x1="327.500" y1="75.000" x2="342.500" y2="75.000" class="thin"/>
+<line x1="327.500" y1="128.750" x2="342.500" y2="128.750" class="thick"/>
+<line x1="305.000" y1="122.500" x2="327.500" y2="122.500" class="hidden"/>
+<line x1="327.500" y1="112.970" x2="342.500" y2="112.970" class="hidden"/>
+<line x1="305.000" y1="128.500" x2="305.000" y2="142.000" class="thin"/>
+<line x1="322.500" y1="129.750" x2="322.500" y2="142.000" class="thin"/>
+<line x1="305.000" y1="140.500" x2="322.500" y2="140.500" class="thin"/>
+<polygon points="305.000,140.500 307.600,139.600 307.600,141.400" class="arrow"/>
+<polygon points="322.500,140.500 319.900,141.400 319.900,139.600" class="arrow"/>
+<text x="313.750" y="139.500" font-size="3.2" text-anchor="middle" class="t ">7</text>
+<line x1="322.500" y1="129.750" x2="322.500" y2="142.000" class="thin"/>
+<line x1="332.500" y1="133.500" x2="332.500" y2="142.000" class="thin"/>
+<line x1="322.500" y1="140.500" x2="332.500" y2="140.500" class="thin"/>
+<polygon points="322.500,140.500 325.100,139.600 325.100,141.400" class="arrow"/>
+<polygon points="332.500,140.500 329.900,141.400 329.900,139.600" class="arrow"/>
+<text x="327.500" y="139.500" font-size="3.2" text-anchor="middle" class="t ">4</text>
+<line x1="332.500" y1="133.500" x2="332.500" y2="142.000" class="thin"/>
+<line x1="342.500" y1="133.500" x2="342.500" y2="142.000" class="thin"/>
+<line x1="332.500" y1="140.500" x2="342.500" y2="140.500" class="thin"/>
+<polygon points="332.500,140.500 335.100,139.600 335.100,141.400" class="arrow"/>
+<polygon points="342.500,140.500 339.900,141.400 339.900,139.600" class="arrow"/>
+<text x="337.500" y="139.500" font-size="3.2" text-anchor="middle" class="t ">4</text>
+<line x1="305.000" y1="128.500" x2="305.000" y2="151.000" class="thin"/>
+<line x1="342.500" y1="133.500" x2="342.500" y2="151.000" class="thin"/>
+<line x1="305.000" y1="149.500" x2="342.500" y2="149.500" class="thin"/>
+<polygon points="305.000,149.500 307.600,148.600 307.600,150.400" class="arrow"/>
+<polygon points="342.500,149.500 339.900,150.400 339.900,148.600" class="arrow"/>
+<text x="323.750" y="148.500" font-size="3.2" text-anchor="middle" class="t ">15</text>
+<line x1="324.875" y1="63.250" x2="324.875" y2="50.000" class="thin"/>
+<line x1="330.125" y1="63.250" x2="330.125" y2="50.000" class="thin"/>
+<line x1="324.875" y1="51.500" x2="330.125" y2="51.500" class="thin"/>
+<polygon points="324.875,51.500 322.275,52.400 322.275,50.600" class="arrow"/>
+<polygon points="330.125,51.500 332.725,50.600 332.725,52.400" class="arrow"/>
+<line x1="319.875" y1="51.500" x2="324.875" y2="51.500" class="thin"/>
+<line x1="330.125" y1="51.500" x2="335.125" y2="51.500" class="thin"/>
+<text x="327.500" y="50.500" font-size="3.2" text-anchor="middle" class="t ">2.1 (+0.1/0)</text>
+<line x1="304.000" y1="62.500" x2="294.500" y2="62.500" class="thin"/>
+<line x1="304.000" y1="127.500" x2="294.500" y2="127.500" class="thin"/>
+<line x1="296.000" y1="62.500" x2="296.000" y2="127.500" class="thin"/>
+<polygon points="296.000,62.500 296.900,65.100 295.100,65.100" class="arrow"/>
+<polygon points="296.000,127.500 295.100,124.900 296.900,124.900" class="arrow"/>
+<text x="295.000" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 295.000 95.000)" class="t ">M26×1-LH-6g (왼나사)</text>
+<line x1="331.750" y1="61.250" x2="331.750" y2="128.750" class="thin"/>
+<polygon points="331.750,61.250 332.650,63.850 330.850,63.850" class="arrow"/>
+<polygon points="331.750,128.750 330.850,126.150 332.650,126.150" class="arrow"/>
+<text x="330.750" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 330.750 95.000)" class="t ">Ø27 f7</text>
+<line x1="351.500" y1="57.500" x2="351.500" y2="132.500" class="thin"/>
+<polygon points="351.500,57.500 352.400,60.100 350.600,60.100" class="arrow"/>
+<polygon points="351.500,132.500 350.600,129.900 352.400,129.900" class="arrow"/>
+<text x="350.500" y="95.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 350.500 95.000)" class="t ">Ø30</text>
+<line x1="337.500" y1="75.000" x2="360.000" y2="41.500" class="thin"/>
+<polygon points="337.500,75.000 338.203,72.340 339.697,73.343" class="arrow"/>
+<line x1="360.000" y1="41.500" x2="382.000" y2="41.500" class="thin"/>
+<text x="361.000" y="40.500" font-size="3.2" text-anchor="start" class="t ">M16×1.5-6H 관통 (길이 6)</text>
+<line x1="312.500" y1="67.500" x2="360.000" y2="33.500" class="thin"/>
+<polygon points="312.500,67.500 314.090,65.255 315.138,66.719" class="arrow"/>
+<line x1="360.000" y1="33.500" x2="382.000" y2="33.500" class="thin"/>
+<text x="361.000" y="32.500" font-size="3.2" text-anchor="start" class="t ">Ø22 깊이 9</text>
+<line x1="327.500" y1="116.875" x2="342.500" y2="116.875" class="hidden"/>
+<line x1="327.500" y1="123.125" x2="342.500" y2="123.125" class="hidden"/>
+<line x1="338.750" y1="120.000" x2="360.000" y2="145.500" class="thin"/>
+<polygon points="338.750,120.000 341.106,121.421 339.723,122.574" class="arrow"/>
+<line x1="360.000" y1="145.500" x2="382.000" y2="145.500" class="thin"/>
+<text x="361.000" y="144.500" font-size="3.2" text-anchor="start" class="t ">2×M3 관통 (주입·공기 빠짐)</text>
+<line x1="327.500" y1="125.750" x2="360.000" y2="158.500" class="thin"/>
+<polygon points="327.500,125.750 329.970,126.962 328.693,128.229" class="arrow"/>
+<line x1="360.000" y1="158.500" x2="382.000" y2="158.500" class="thin"/>
+<text x="361.000" y="157.500" font-size="3.2" text-anchor="start" class="t ">O링 홈 Ø24.6 h9 (O링 24×1.5)</text>
+<line x1="337.500" y1="128.750" x2="360.000" y2="135.500" class="thin"/>
+<polygon points="337.500,128.750 340.249,128.635 339.732,130.359" class="arrow"/>
+<line x1="360.000" y1="135.500" x2="382.000" y2="135.500" class="thin"/>
+<text x="361.000" y="134.500" font-size="3.2" text-anchor="start" class="t ">평면 AF27 (2면)</text>
 <text x="250.000" y="30.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-104  엔드캡 (2.5:1)</text>
 <text x="250.000" y="36.000" font-size="2.8" text-anchor="start" class="t muted">커넥터 O링 면 Ra 0.8 / 커넥터 P/N 확정 후 M16 규격 재확인</text>
 <line x1="194.000" y1="200.000" x2="296.000" y2="200.000" class="center"/>
-<polygon points="200.000,176.000 290.000,176.000 290.000,178.250 284.000,178.250 284.000,179.812 273.500,179.812 273.500,179.750 216.500,179.750 216.500,179.812 206.000,179.812 206.000,178.250 200.000,178.250" class="hatchfill2"/>
-<line x1="200.000" y1="224.000" x2="290.000" y2="224.000" class="thick"/>
-<line x1="200.000" y1="200.000" x2="200.000" y2="224.000" class="thick"/>
-<line x1="290.000" y1="200.000" x2="290.000" y2="224.000" class="thick"/>
-<line x1="206.000" y1="179.000" x2="216.500" y2="179.000" class="thin"/>
-<line x1="273.500" y1="179.000" x2="284.000" y2="179.000" class="thin"/>
-<line x1="200.000" y1="221.750" x2="206.000" y2="221.750" class="hidden"/>
-<line x1="206.000" y1="220.188" x2="216.500" y2="220.188" class="hidden"/>
-<line x1="216.500" y1="220.250" x2="273.500" y2="220.250" class="hidden"/>
-<line x1="273.500" y1="220.188" x2="284.000" y2="220.188" class="hidden"/>
-<line x1="284.000" y1="221.750" x2="290.000" y2="221.750" class="hidden"/>
-<line x1="200.000" y1="225.000" x2="200.000" y2="234.500" class="thin"/>
-<line x1="290.000" y1="225.000" x2="290.000" y2="234.500" class="thin"/>
-<line x1="200.000" y1="233.000" x2="290.000" y2="233.000" class="thin"/>
-<polygon points="200.000,233.000 202.600,232.100 202.600,233.900" class="arrow"/>
-<polygon points="290.000,233.000 287.400,233.900 287.400,232.100" class="arrow"/>
-<text x="245.000" y="232.000" font-size="3.2" text-anchor="middle" class="t ">60</text>
-<line x1="200.000" y1="175.000" x2="200.000" y2="168.500" class="thin"/>
-<line x1="206.000" y1="175.000" x2="206.000" y2="168.500" class="thin"/>
-<line x1="200.000" y1="170.000" x2="206.000" y2="170.000" class="thin"/>
-<polygon points="200.000,170.000 197.400,170.900 197.400,169.100" class="arrow"/>
-<polygon points="206.000,170.000 208.600,169.100 208.600,170.900" class="arrow"/>
-<line x1="195.000" y1="170.000" x2="200.000" y2="170.000" class="thin"/>
-<line x1="206.000" y1="170.000" x2="211.000" y2="170.000" class="thin"/>
-<text x="203.000" y="169.000" font-size="3.2" text-anchor="middle" class="t ">4</text>
-<line x1="206.000" y1="175.000" x2="206.000" y2="168.500" class="thin"/>
-<line x1="216.500" y1="175.000" x2="216.500" y2="168.500" class="thin"/>
-<line x1="206.000" y1="170.000" x2="216.500" y2="170.000" class="thin"/>
-<polygon points="206.000,170.000 208.600,169.100 208.600,170.900" class="arrow"/>
-<polygon points="216.500,170.000 213.900,170.900 213.900,169.100" class="arrow"/>
-<text x="211.250" y="169.000" font-size="3.2" text-anchor="middle" class="t ">7</text>
-<line x1="299.000" y1="176.000" x2="299.000" y2="224.000" class="thin"/>
-<polygon points="299.000,176.000 299.900,178.600 298.100,178.600" class="arrow"/>
-<polygon points="299.000,224.000 298.100,221.400 299.900,221.400" class="arrow"/>
-<text x="298.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 298.000 200.000)" class="t ">Ø32</text>
-<line x1="245.000" y1="179.750" x2="245.000" y2="220.250" class="thin"/>
-<polygon points="245.000,179.750 245.900,182.350 244.100,182.350" class="arrow"/>
-<polygon points="245.000,220.250 244.100,217.650 245.900,217.650" class="arrow"/>
-<text x="244.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 244.000 200.000)" class="t ">Ø27</text>
-<line x1="199.000" y1="178.250" x2="188.500" y2="178.250" class="thin"/>
-<line x1="199.000" y1="221.750" x2="188.500" y2="221.750" class="thin"/>
-<line x1="190.000" y1="178.250" x2="190.000" y2="221.750" class="thin"/>
-<polygon points="190.000,178.250 190.900,180.850 189.100,180.850" class="arrow"/>
-<polygon points="190.000,221.750 189.100,219.150 190.900,219.150" class="arrow"/>
-<text x="189.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 189.000 200.000)" class="t ">Ø29 H8 (+0.033/0)</text>
-<line x1="279.500" y1="179.812" x2="308.000" y2="172.000" class="thin"/>
-<polygon points="279.500,179.812 281.770,178.257 282.245,179.993" class="arrow"/>
-<line x1="308.000" y1="172.000" x2="330.000" y2="172.000" class="thin"/>
-<text x="309.000" y="171.000" font-size="3.2" text-anchor="start" class="t ">앞 M28×1-6H / 뒤 M28×1-LH-6H (왼나사), 유효 7</text>
-<line x1="287.000" y1="178.250" x2="308.000" y2="196.000" class="thin"/>
-<polygon points="287.000,178.250 289.567,179.241 288.405,180.616" class="arrow"/>
+<polygon points="200.000,177.500 290.000,177.500 290.000,179.750 284.000,179.750 284.000,181.312 273.500,181.312 273.500,181.250 216.500,181.250 216.500,181.312 206.000,181.312 206.000,179.750 200.000,179.750" class="hatchfill2"/>
+<line x1="200.000" y1="222.500" x2="290.000" y2="222.500" class="thick"/>
+<line x1="200.000" y1="200.000" x2="200.000" y2="222.500" class="thick"/>
+<line x1="290.000" y1="200.000" x2="290.000" y2="222.500" class="thick"/>
+<line x1="206.000" y1="180.500" x2="216.500" y2="180.500" class="thin"/>
+<line x1="273.500" y1="180.500" x2="284.000" y2="180.500" class="thin"/>
+<line x1="200.000" y1="220.250" x2="206.000" y2="220.250" class="hidden"/>
+<line x1="206.000" y1="218.688" x2="216.500" y2="218.688" class="hidden"/>
+<line x1="216.500" y1="218.750" x2="273.500" y2="218.750" class="hidden"/>
+<line x1="273.500" y1="218.688" x2="284.000" y2="218.688" class="hidden"/>
+<line x1="284.000" y1="220.250" x2="290.000" y2="220.250" class="hidden"/>
+<line x1="200.000" y1="223.500" x2="200.000" y2="233.000" class="thin"/>
+<line x1="290.000" y1="223.500" x2="290.000" y2="233.000" class="thin"/>
+<line x1="200.000" y1="231.500" x2="290.000" y2="231.500" class="thin"/>
+<polygon points="200.000,231.500 202.600,230.600 202.600,232.400" class="arrow"/>
+<polygon points="290.000,231.500 287.400,232.400 287.400,230.600" class="arrow"/>
+<text x="245.000" y="230.500" font-size="3.2" text-anchor="middle" class="t ">60</text>
+<line x1="200.000" y1="176.500" x2="200.000" y2="170.000" class="thin"/>
+<line x1="206.000" y1="176.500" x2="206.000" y2="170.000" class="thin"/>
+<line x1="200.000" y1="171.500" x2="206.000" y2="171.500" class="thin"/>
+<polygon points="200.000,171.500 197.400,172.400 197.400,170.600" class="arrow"/>
+<polygon points="206.000,171.500 208.600,170.600 208.600,172.400" class="arrow"/>
+<line x1="195.000" y1="171.500" x2="200.000" y2="171.500" class="thin"/>
+<line x1="206.000" y1="171.500" x2="211.000" y2="171.500" class="thin"/>
+<text x="203.000" y="170.500" font-size="3.2" text-anchor="middle" class="t ">4</text>
+<line x1="206.000" y1="176.500" x2="206.000" y2="170.000" class="thin"/>
+<line x1="216.500" y1="176.500" x2="216.500" y2="170.000" class="thin"/>
+<line x1="206.000" y1="171.500" x2="216.500" y2="171.500" class="thin"/>
+<polygon points="206.000,171.500 208.600,170.600 208.600,172.400" class="arrow"/>
+<polygon points="216.500,171.500 213.900,172.400 213.900,170.600" class="arrow"/>
+<text x="211.250" y="170.500" font-size="3.2" text-anchor="middle" class="t ">7</text>
+<line x1="299.000" y1="177.500" x2="299.000" y2="222.500" class="thin"/>
+<polygon points="299.000,177.500 299.900,180.100 298.100,180.100" class="arrow"/>
+<polygon points="299.000,222.500 298.100,219.900 299.900,219.900" class="arrow"/>
+<text x="298.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 298.000 200.000)" class="t ">Ø30</text>
+<line x1="248.000" y1="181.250" x2="248.000" y2="218.750" class="thin"/>
+<polygon points="248.000,181.250 248.900,183.850 247.100,183.850" class="arrow"/>
+<polygon points="248.000,218.750 247.100,216.150 248.900,216.150" class="arrow"/>
+<text x="247.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 247.000 200.000)" class="t ">Ø25</text>
+<line x1="199.000" y1="179.750" x2="188.500" y2="179.750" class="thin"/>
+<line x1="199.000" y1="220.250" x2="188.500" y2="220.250" class="thin"/>
+<line x1="190.000" y1="179.750" x2="190.000" y2="220.250" class="thin"/>
+<polygon points="190.000,179.750 190.900,182.350 189.100,182.350" class="arrow"/>
+<polygon points="190.000,220.250 189.100,217.650 190.900,217.650" class="arrow"/>
+<text x="189.000" y="200.000" font-size="3.2" text-anchor="middle" transform="rotate(-90 189.000 200.000)" class="t ">Ø27 H8 (+0.033/0)</text>
+<line x1="279.500" y1="181.312" x2="308.000" y2="173.500" class="thin"/>
+<polygon points="279.500,181.312 281.770,179.757 282.245,181.493" class="arrow"/>
+<line x1="308.000" y1="173.500" x2="330.000" y2="173.500" class="thin"/>
+<text x="309.000" y="172.500" font-size="3.2" text-anchor="start" class="t ">앞 M26×1-6H / 뒤 M26×1-LH-6H (왼나사), 유효 7</text>
+<line x1="287.000" y1="179.750" x2="308.000" y2="196.000" class="thin"/>
+<polygon points="287.000,179.750 289.607,180.629 288.505,182.053" class="arrow"/>
 <line x1="308.000" y1="196.000" x2="330.000" y2="196.000" class="thin"/>
-<text x="309.000" y="195.000" font-size="3.2" text-anchor="start" class="t ">Ø29 H8 깊이 4 (양끝), Ra 0.8</text>
+<text x="309.000" y="195.000" font-size="3.2" text-anchor="start" class="t ">Ø27 H8 깊이 4 (양끝), Ra 0.8</text>
 <text x="190.000" y="152.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-103  하우징 (1.5:1)</text>
 <text x="190.000" y="158.000" font-size="2.8" text-anchor="start" class="t muted">양 끝 C0.5×15° (O링 도입부) / 외면 Ra 0.8 헤어라인 또는 비드 / 레이저 마킹 영역 45×20</text>
 <text x="18.000" y="247.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="253.200" font-size="3.0" text-anchor="start" class="t ">1. 재질 SUS316L (1.4404), 재질성적서 EN 10204 3.1, 부동태 처리 (ASTM A967).</text>
 <text x="18.000" y="259.400" font-size="3.0" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 버 제거. 지정 외 표면 Ra 1.6. 일반공차 ISO 2768-mK.</text>
-<text x="18.000" y="265.600" font-size="3.0" text-anchor="start" class="t ">3. ③–① M28×1 오른나사, ③–④ M28×1 왼나사 (턴버클: ③만 돌림) + O링 25×2 FKM, Ø29 H8/f7. 왼나사 끝에 &#x27;LH&#x27; 각인.</text>
-<text x="18.000" y="271.800" font-size="3.0" text-anchor="start" class="t ">4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 필터는 두텍 기존품 (SUS304) — 접액부 316L 통일 여부 검토.</text>
+<text x="18.000" y="265.600" font-size="3.0" text-anchor="start" class="t ">3. ③–① M26×1 오른나사, ③–④ M26×1 왼나사 (턴버클: ③만 돌림) + O링 24×1.5 FKM, Ø27 H8/f7. 왼나사 끝에 &#x27;LH&#x27; 각인.</text>
+<text x="18.000" y="271.800" font-size="3.0" text-anchor="start" class="t ">4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 보호캡은 SUS304 (두텍 필터 기반) — 접액부 316L 통일 여부 검토.</text>
 <text x="18.000" y="278.000" font-size="3.0" text-anchor="start" class="t ">5. ④ M3 구멍 2개 (r10, 90°·270°, 플랜지 관통): 하우징 안 몰딩 주입·공기 빠짐. 경화 후 M3×3 무두나사 + 실런트로 막음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
 <text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
@@ -277,7 +279,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-102~104</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">G / 2026-09-30</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">H / 2026-09-30</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS316L (1.4404)</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

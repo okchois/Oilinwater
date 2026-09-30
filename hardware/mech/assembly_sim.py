@@ -141,7 +141,7 @@ def main():
     inside = [p for p in PL["parts"] if p["fab"][0] < Bd["cbore"]["x"][1]]
     worst = max((part_rmax(p), p["ref"]) for p in inside) if inside else (0, "-")
     v = vol(holder.union(board), body)
-    check("4 홀더+PCB → 카운터보어 Ø22", "앞쪽(x < 26) 부품 최대 반경 vs 11, 형상 교차", v < 1e-3 and worst[0] < 10.8,
+    check("4 홀더+PCB → 카운터보어 Ø22", f"앞쪽(x < {Bd['cbore']['x'][1]:g}) 부품 최대 반경 vs {Bd['cbore']['d'] / 2:g}, 형상 교차", v < 1e-3 and worst[0] < 10.8,
           f"{worst[0]:.2f} mm ({worst[1]}), 겹침 {v:.3f} mm³")
 
     # ════ 5. 홀더 축 나사 M2 (뒤에서) — 위쪽은 샤시 선 링 단자 함께 ════
@@ -183,11 +183,11 @@ def main():
           f"{in_channel:.0f} / {span:.1f} / {Lw1 - in_channel - span:.1f} mm (L {Lw1:g})",
           f"창에 꿸 때 통로 끝에서 {need:.0f} mm 필요 → 60 유지. 남는 선은 PCB 앞 윗면 고리 (아래는 높이 0 부품 J2)")
 
-    # ════ 7. 지지링을 PCB 뒤에서 끼움 (x 71 → 59) ════
+    # ════ 7. 지지링을 PCB 뒤에서 끼움 (PCB 뒤 끝 → 링 자리) ════
     r_in = Rg["id"] / 2
     rear = parts_in(Rg["x"][0], P.PCB["x"][1])
     worst = max((part_rmax(p), p["ref"]) for p in rear)
-    check("7 지지링 끼움 (Ø20이 x 71 → 59로 지나감)", "뒤쪽 부품 최대 반경 vs 10 (외형 상자)", worst[0] < r_in - 0.3,
+    check(f"7 지지링 끼움 (Ø{Rg['id']:g}이 x {P.PCB['x'][1]:g} → {Rg['x'][0]:g}로 지나감)", "뒤쪽 부품 최대 반경 vs 10 (외형 상자)", worst[0] < r_in - 0.3,
           f"{worst[0]:.2f} mm ({worst[1]})", "배치 규칙 C: 링 뒤 부품은 Ø20 기준")
     sweep = union([ring.translate((dx, 0, 0)) for dx in (8.0, 4.0, 0.0)])
     v = vol(sweep, board)
@@ -198,7 +198,7 @@ def main():
     r_b = Hs["thread_minor"] / 2
     worst = max((part_rmax(p), p["ref"]) for p in PL["parts"] if p["fab"][2] > Hs["x"][0])
     check("8 하우징 씌움 (뒤에서 앞으로)", "부품 최대 반경 vs 하우징 최소 반경 %.2f" % r_b, worst[0] < r_b - 0.2,
-          f"{worst[0]:.2f} mm ({worst[1]}), 링 바깥 {Rg['od'] / 2:.2f}", "링 Ø26.4 vs 나사 골 Ø26.92: 반경 여유 0.26")
+          f"{worst[0]:.2f} mm ({worst[1]}), 링 바깥 {Rg['od'] / 2:.2f}", f"링 Ø{Rg['od']:g} vs 나사 골 Ø{Hs['thread_minor']:.2f}: 반경 여유 {(Hs['thread_minor'] - Rg['od']) / 2:.2f}")
 
     # ════ 9. W-2 플러그를 밀대 T-001로 하우징 뒤 입구에서 J1에 꽂음 ════
     h_pre = housing.translate((tl, 0, 0))
@@ -230,14 +230,15 @@ def main():
         v = vol(e, board_all)
         d = dist(e, board_all)
         check("10 턴버클 (엔드캡 이동)", f"엔드캡 {dx:>4g} mm 앞 → PCB·부품·링", v < 1e-3 and d >= 0.3,
-              f"최소 거리 {d:.2f} mm, 겹침 {v:.2f} mm³", "제안 B: PCB 계단 x 63.4" if dx == 0 else "")
+              f"최소 거리 {d:.2f} mm, 겹침 {v:.2f} mm³", f"제안 B: PCB 계단 x {P.PCB['sections'][1][1]:g}" if dx == 0 else "")
     hv = vol(housing, board_all)
     hd = dist(housing, board_all)
     check("10 턴버클 (체결 후)", "하우징 vs PCB·부품·링", hv < 1e-3, f"최소 거리 {hd:.2f} mm")
 
     # ════ 11. 2차 몰딩 ════
     check("11 2차 몰딩 (M12 위, M3 구멍 주입)", "흐름 경로", True,
-          "엔드캡 Ø22 → 링 안(Ø20) → 하우징 Ø27 → 홀더 뒤. 링 바깥 0.3 mm 틈은 좁아 공기 빼기는 링 안쪽으로",
+          f"엔드캡 Ø{P.ENDCAP['cbore']['d']:g} → 링 안(Ø{Rg['id']:g}) → 하우징 Ø{Hs['id']:g} → 홀더 뒤. "
+          f"링 바깥 {(Hs['id'] - Rg['od']) / 2:.2f} mm 틈은 좁아 공기 빼기는 링 안쪽으로",
           "PCB가 세로로 서 있어 양면이 같이 참. J1·J3 플러그 몸체 안 오목한 곳은 진공 주입 권장", level="OK")
 
     json.dump(dict(placement=PL["meta"]["project"], results=results), open(os.path.join(OUT, "report.json"), "w"),
