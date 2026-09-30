@@ -269,7 +269,7 @@
 <line x1="70.000" y1="148.000" x2="120.000" y2="148.000" class="thin"/>
 <polygon points="70.000,148.000 72.600,147.100 72.600,148.900" class="arrow"/>
 <polygon points="120.000,148.000 117.400,148.900 117.400,147.100" class="arrow"/>
-<text x="95.000" y="147.000" font-size="3.2" text-anchor="middle" class="t ">M10×1.0 (하우징 체결)</text>
+<text x="95.000" y="147.000" font-size="3.2" text-anchor="middle" class="t ">M10×1.0 (바디 체결)</text>
 <line x1="72.707" y1="122.500" x2="72.707" y2="97.500" class="thin"/>
 <line x1="117.293" y1="122.500" x2="117.293" y2="97.500" class="thin"/>
 <line x1="72.707" y1="77.500" x2="72.707" y2="50.000" class="thin"/>

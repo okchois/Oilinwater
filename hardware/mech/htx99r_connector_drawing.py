@@ -191,7 +191,7 @@ def main():
     dim_y(sh, vf, F["flats_af"] / 2, xr - 4, F["flats_y"][0], F["flats_y"][1], "3")
     # 지름
     yb = vf.P(0, F["pin_y"][0])[1] + 8
-    dim_x(sh, vf, -R, R, 2.5, 2.5, yb, f"{F['thread']} (하우징 체결)")
+    dim_x(sh, vf, -R, R, 2.5, 2.5, yb, f"{F['thread']} (바디 체결)")
     for (y0, y1) in (F["thread_lower"], F["thread_upper"]):                  # 나사 골지름 (가는 선)
         for xs in (-F["thread_minor"] / 2, F["thread_minor"] / 2):
             a_, b_ = vf.P(xs, y0), vf.P(xs, y1)
