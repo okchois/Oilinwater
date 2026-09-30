@@ -1,35 +1,68 @@
-# HMT500(260313A) 회로도 검토 — 심볼 대조 · 최적화 계획 (승인 대기)
+# HMT500(260313A) 회로도 검토 — 데이터시트 대조 · 최적화 계획 (승인 대기)
 
-작성 2026-09-29 · 대상 회로도 v0.7 (82 부품, 70 넷)
+작성 2026-09-30 · 대상 회로도 v0.7 (82 부품, 70 넷)
 
-## 1. 심볼 대조 결과
+## 1. 대조 자료
 
-대조 자료: KiCad 공식 심볼 라이브러리(gitlab kicad-symbols, 제조사 데이터시트 기준으로 작성됨), VibrationSensor IVS320, 공개 하드웨어 PCAP04 보드(github NautyXie/pcap04-capacitance-readout), TI 데이터시트 검색 결과. ti.com·mouser 등 데이터시트 원문 사이트는 이 환경에서 막혀 있어, PDF 원문 대조는 못 했음.
+제조사 데이터시트 원문 (다운로드해 대조, 저장소에는 넣지 않음):
 
-| 부품 | 결과 | 근거 |
+| 부품 | 문서 |
+|---|---|
+| LMR36006 | TI SNVSB48C (2019-10) |
+| TPS2660 | TI SLVSDG2G (2019-12) |
+| TPS2661x | TI SLVSFE3C (2021-12) |
+| DAC8760 | TI SBAS528D (2021-12) |
+| ADS1220 | TI SBAS501D |
+| THVD2450 | TI SLLSF20B |
+| TPS7A20 | TI 데이터시트 |
+| OPA197 | TI SBOS737C |
+| PCAP04 | ScioSense SC-001050-DS-6 (2023-09) |
+| STM32G0B1 | st.com 접속 불가 → KiCad 공식 심볼 STM32G0B1C_B-C-E_Tx로 대조 |
+
+## 2. 핀 대조 결과
+
+| 부품 | 결과 |
+|---|---|
+| STM32G0B1CCT3, ADS1220, TPS7A2033, OPA197, THVD2450, DAC8760 | ✅ 일치 |
+| TPS2660 | ⚠ 핀 번호 일치. 17번 = PowerPAD → **RTN 면에 연결** (이름 EP → RTN) |
+| LMR36006 | ❌ 임시 핀 → 실제 VQFN-HR 12핀: 1 PGND, 2 VIN, 3 NC, 4 BOOT, 5 VCC, 6 AGND, 7 FB, 8 PG, 9 EN, 10 VIN, 11 PGND, 12 SW |
+| TPS26611 | ❌ 임시 핀 → 실제 SOT-23-8: 1 GND, 2 MODE, 3 −Vs, 4 IN, 5 OUT, 6 +Vs, 7 EN, 8 SGOOD |
+| PCAP04 | ❌ 임시 핀 → 실제 QFN24: 1 PC3, 2 GND, 3 VDD18, 4 VDD33, 5 PT1, 6 PT0REF, 7 PTOUT, 8 GND, 9 SSN, 10 MISO, 11 PG5, 12 PG2, 13 IIC_EN, 14 VDD33, 15 MOSI, 16 SCK, 17 PG3, 18 PG4, 19 PCAUX, 20 PC4, 21 PC5, 22 PC0, 23 PC1, 24 PC2 |
+
+## 3. 데이터시트로 새로 드러난 문제
+
+| # | 부품 | 데이터시트 내용 | 현재 회로 | 판정 |
+|---|---|---|---|---|
+| 1 | **TPS2660** | "RTN을 GND에 연결하면 역극성 보호가 꺼지고, 역극성 때 **영구 손상**" (9.3.5.5). R3–R5·ILIM·dVdT·IMON·MODE는 **RTN 기준** | R22 0 Ω으로 RTN–GND 연결. R5·R6·R7·C4·MODE를 GND에 연결 | **치명** |
+| 2 | **TPS26611** | +Vs 권장 **최대 30 V**, 절대최대 32 V | +Vs = VIN_P. OVP 32.6 V(기준 1.19 V로 재계산)까지 올라감 | **정격 초과** |
+| 3 | **DAC8760** | Rev D에서 **데이지 체인 기능 삭제**. 여러 개를 한 버스에 쓰려면 **SCLK 게이트** 필요 (8.5.1.5, Fig. 8-9) | v0.7 데이지 체인 | **지원 안 됨** |
+| 4 | DAC8760 | AVDD 상승 속도 1 V/ns 이하 → **AVDD에 10 Ω 직렬** 권장 (10장 CAUTION) | 없음 | 추가 |
+| 5 | DAC8760 | ALARM은 오픈 드레인, **외부 10 kΩ 풀업 필요** | MCU 내부 풀업 | 추가 |
+| 6 | PCAP04 | VDD18 **≥ 4.7 µF**, VDD33 **≥ 10 µF**. VDD18은 1핀 | 1 µF 두 개 (VDD18_D/A 가정) | 수정 |
+| 7 | LMR36006 | 5 V·1 MHz 권장값: L = **15 µH**, COUT = 2 × 15 µF, CFF = **20 pF** | L2 22 µH, C10 22 µF 0805 1개, CFF 없음 | 수정 |
+| 8 | TPS2660 | I_OL = 12 / R_ILIM(kΩ) → 150 mA = **80.6 kΩ**. IMON은 쓰지 않으면 개방 가능 | R6 값 미정, R7 10 k | 확정·삭제 |
+| 9 | PCAP04 | 단일 플로팅·접지 모드는 **DC 없음** ("other modes are DC free") | — | MK33 DC 없는 구동 **미결 해소** |
+
+## 4. 최적화 계획
+
+| # | 내용 | 부품 수 |
 |---|---|---|
-| U4 STM32G0B1CCT3 | ✅ 일치 (Tx 핀배치. TxN 변형은 PC6/PC7이 전원 → 해당 없음). SPI2 = PB13/14/15, USART2_DE = PA1 확인 | KiCad STM32G0B1C_B-C-E_Tx |
-| U6 ADS1220 | ✅ 일치 | KiCad ADS1120-PW (같은 핀) |
-| U3 TPS7A2033 | ✅ 일치 | KiCad TPS7A20xxxDBV |
-| U12/U13 OPA197 | ✅ 일치 | KiCad OPA197xDBV |
-| U7/U8 DAC8760 | ✅ 일치 (v0.7) | SBAS528D, IVS320 |
-| U11 THVD2450 | ✅ 표준 SOIC-8 RS-485 배치 (1 R, 2 /RE, 3 DE, 4 D, 5 GND, 6 A, 7 B, 8 VCC) | KiCad THVD1450D·MAX481 동일 배치 |
-| U1 TPS26600PWP | ⚠ 핀 번호 일치. **17번(EP)은 이름이 RTN** — 넷은 이미 EF_RTN(연결 맞음), 심볼 이름만 수정 | KiCad TPS26600PWP |
-| U2 LMR36006 | ❌ **전부 틀림** (임시 핀). 실제 VQFN-HR 12핀 RNX: 1 PGND, 2 VIN, 3 NC, 4 BOOT, 5 VCC, 6 AGND, 7 FB, 8 PG, 9 EN, 10 VIN, 11 PGND, 12 SW | TI 데이터시트 검색 결과 |
-| U9/U10 TPS26611 | ❌ **전부 틀림** (임시 핀, 핀 수도 다름). 실제 SOT-23-8 DDF: 1 GND, 2 MODE, 3 −Vs, 4 IN, 5 OUT, 6 +Vs, 7 EN, 8 SGOOD(Low = 정상) | TI 데이터시트 검색 결과 (출처 3개 중 2개 일치 → PDF 확인 필요) |
-| U5 PCAP04 | ❌ **전부 틀림** (임시 핀). 실제 QFN24: 1 PC3, 2 GND, 3 VDD18(1개), 4 VDD33A, 5 PT1, 6 PT0REF, 7 PTOUT, 8 GND, 9 SSN, 10 MISO, 11 PG5/IRQ, 12 PG2, 13 IIC_EN, 14 VDD33B, 15 MOSI, 16 SCK, 17 PG3, 18 PG4, 19 PCAUX, 20 PC4, 21 PC5, 22 PC0, 23 PC1, 24 PC2, 25 EP=GND | 공개 PCAP04 보드 심볼 + 검색(24 = PC2, 1 = PC3 일치) |
+| A | LMR36006·TPS26611·PCAP04 실제 핀·풋프린트로 교체. LMR36006 = **LMR36006BRNXR** (1 MHz, 조정형 — 고정 출력형 없음). TPS2660 17번 = RTN | 0 |
+| B | **TPS2660 RTN 정정:** R22 삭제, R5·R6·C4·MODE → RTN, R7 삭제(IMON 개방), R6 = 80.6 k 1 % (150 mA) | −2 |
+| C | **전원 범위 12–28 V로 조정:** R5 36.5 k → 41.2 k → OVP 29.0 V (28.5–29.9 V), UVLO 8.6 V. TPS26611 +Vs 30 V 이내, EE364 전원(10–28 V)과도 맞음 | 0 |
+| D | **DAC SPI를 SCLK 게이트 방식으로** (TI Fig. 8-9, IVS320과 같음): 74LVC2G32 1개 + 100 nF, LATCH1 = PB10, LATCH2 = PB11, DIN·SDO 공유(SDO는 LATCH 뒤 3-state). R33·DCEN 삭제 | +1 |
+| E | DAC AVDD 10 Ω 직렬 ×2 | +2 |
+| F | ALARM 두 개를 한 선으로 묶고 10 kΩ 풀업 1개 → PB3. 어느 채널인지는 상태 레지스터로 확인 | +1 |
+| G | TPS26611: −Vs = GND, EN 개방(내부 풀업), MODE = GND (32 mA 제한, 100 ms 후 차단, 800 ms 재시도), SGOOD(0–3 V 출력, **Low = 정상**) → MCU. 넷 이름 OUTn_SGOOD | 0 |
+| H | PCAP04: VDD18 4.7 µF 1개 (C26 삭제), VDD33 10 µF, IIC_EN = GND, INTN → PG5(11번, 레지스터로 설정), PTOUT·PT·PCAUX 미사용 개방. 중앙 패드는 GND 외 연결 금지 | −1 |
+| I | 벅: L2 15 µH, C10 → 22 µF ×2 (1206 25 V), CFF 20 pF 추가 | +2 |
+| J | VIN_P 벌크 4.7 µF 두 개(C43·C53) → 하나 | −1 |
+| K | 문서: 전압 모드 오차 예산에 채널 간 GND 공유분 추가, 발열 대책(최소 부하 250 Ω 권장, 미사용 채널 출력 끔, DAC 간격·방열) | 0 |
 
-## 2. 최적화 계획
+합계: 82 → 84개 (안전·정격 문제 수정으로 부품이 약간 늘어남).
 
-| # | 항목 | 내용 | 부품 수 |
-|---|---|---|---|
-| A | 핀 수정 (필수) | LMR36006·TPS26611·PCAP04 실제 핀으로 교체, 풋프린트 확정(LMR36006 = VQFN-HR RNX, TPS26611 = SOT-23-8, PCAP04 = QFN-24 4×4), TPS2660 17번 RTN 이름 | 0 |
-| B | TPS26611 연결 정리 | −Vs = GND, EN = 연결 안 함(내부 풀업), SGOOD → MCU (Low = 정상. 넷 이름 OUTn_FLT → OUTn_SGOOD, 펌웨어 논리 반전), MODE = 전류 제한 선택 | 0 |
-| C | PCAP04 전원 정리 | VDD33A·VDD33B 두 핀 = +3V3A, VDD18 한 핀 → C25/C26 두 개를 한 개로. PG·PT·PCAUX 미사용 핀 처리 확정 | −1 (C26) |
-| D | VIN_P 벌크 통합 | 채널별 4.7 µF/50 V(C43·C53) → 1개 공통 | −1 (C53) |
-| E | TPS2660 IMON (R7) | MCU가 IMON을 읽지 않음 → 데이터시트에서 IMON 개방 허용 확인 후 R7 삭제 | −1 (확인 후) |
-| F | 보류·유지 | 입력 2단 TVS(D2·R1) 유지(TPS2660 60 V 절대정격 여유), ADS1220 유지(PCAP04 내장 RDC로 Pt1000 측정 가능하나 F0.1급 정확도에 불리), 출력 보호 통일(#24 ⑤) 보류 유지 | 0 |
+유지: 입력 2단 TVS, ADS1220 (Pt1000 정확도), TPS26611 보호 방식 (#24 ⑤ 보류).
 
-합계: 82 → 79개 (E 포함). 수정 후 넷리스트 대조·작도 규칙·겹침 검사·테스트 통과 확인.
-
-미해결(데이터시트 원문 필요): TPS2660 RTN–GND 연결(R22), TPS26611 핀 PDF 재확인, TPS26611의 0–10 V 통과 여부.
+남은 확인:
+- HART-IN 미사용 처리: 데이터시트에 지시 없음. 내부 35 kΩ이고 AC 결합 입력이라 개방 유지 (IVS320과 같음).
+- STM32 데이터시트 원문 대조 (st.com 허용 필요. KiCad 심볼로는 확인됨).
