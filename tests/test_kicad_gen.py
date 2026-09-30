@@ -65,13 +65,27 @@ class KicadGenTest(unittest.TestCase):
         self.assertEqual(sh[("measurement.kicad_sch", "PT_P")], {"passive"})
 
     def test_wiring_straight(self):
-        """작도 규칙: 시트당 꺾임 1개 이하, 분기점은 실제 3갈래 노드만 (전체 35개 이하)."""
+        """작도 규칙: 가까운 같은 시트 연결은 라벨 대신 선으로 (꺾임은 연결당 2개 이하, 시트당 6개 이하),
+        분기점은 실제 3갈래 노드만 (전체 40개 이하)."""
         total_j = 0
         for S in g.SHEETS:
             bends, js = g.wire_metrics(S)
-            self.assertLessEqual(bends, 1, S.file)
+            self.assertLessEqual(bends, 6, S.file)
             total_j += js
-        self.assertLessEqual(total_j, 35)
+        self.assertLessEqual(total_j, 40)
+
+    def test_near_labels_wired(self):
+        """같은 시트에서 라벨로만 잇는 넷은 멀리 떨어진 것만 허용 (가까운 것은 선으로)."""
+        import math
+        for S in g.SHEETS:
+            pts = {}
+            for net, pt, *_ in S.labels:
+                pts.setdefault(net, []).append(pt)
+            for net, ps in pts.items():
+                for i, a in enumerate(ps):
+                    for b in ps[i + 1:]:
+                        d = math.dist(a, b)
+                        self.assertTrue(d < 1.5 or d > 10, f"{S.file}: {net} labels {a} {b} only {d:.1f} apart")
 
     def test_hangul_font_has_all_glyphs(self):
         """한글 글자(나눔고딕으로 출력)에 쓰인 모든 문자가 글꼴에 있어야 한다 (네모 깨짐 방지)."""

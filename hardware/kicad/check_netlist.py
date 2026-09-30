@@ -30,12 +30,13 @@ def parse(path):
 def main(path):
     got = parse(path)
     want = {k: frozenset(v) for k, v in g.intended_nets().items()}
-    got_sets = {v: k for k, v in got.items() if not k.startswith("unconnected-")}
+    real = lambda k: not k.startswith("unconnected-") or len(got[k]) > 1   # 이름 없는 2핀 이상 넷도 실제 연결
+    got_sets = {v: k for k, v in got.items() if real(k)}
     errors = 0
     for name, nodes in sorted(want.items()):
         if nodes in got_sets:
             gname = got_sets[nodes]
-            if not gname.startswith("Net-") and gname != name:
+            if not gname.startswith(("Net-", "unconnected-")) and gname != name:
                 print(f"NAME MISMATCH: intended {name} drawn as {gname}")
                 errors += 1
             continue
@@ -47,12 +48,12 @@ def main(path):
         errors += 1
     want_sets = set(want.values())
     for k, v in got.items():
-        if k.startswith("unconnected-"):
+        if not real(k):
             continue
         if v not in want_sets:
             print(f"EXTRA/WRONG NET {k}: {sorted(v)}")
             errors += 1
-    print(f"intended nets: {len(want)}, drawn nets: {sum(1 for k in got if not k.startswith('unconnected-'))}, errors: {errors}")
+    print(f"intended nets: {len(want)}, drawn nets: {sum(1 for k in got if real(k))}, errors: {errors}")
     return 1 if errors else 0
 
 
