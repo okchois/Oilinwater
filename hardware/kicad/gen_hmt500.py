@@ -1506,7 +1506,7 @@ def wire_metrics(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-09-30") (rev "0.8") '
+    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-09-30") (rev "0.9") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Project No. {PROJECT}  -  {PRODUCT} oil moisture transmitter") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "Pinouts checked vs manufacturer datasheets 2026-09-30 (STM32: KiCad lib)"))')
@@ -1527,27 +1527,29 @@ def write_all():
     # 최상위 시트
     items = []
     for i, (S, su) in enumerate(zip(SHEETS, uuids)):
-        sx, sy = 12 + (i % 3) * 50, 22 + (i // 3) * 30
-        items.append(f"(sheet (at {mm(sx)} {mm(sy)}) (size {mm(42)} {mm(18)}) (fields_autoplaced) "
+        sx, sy = 8 + (i % 4) * 38, 14 + (i // 4) * 24     # v0.9: 7장 → 4열 2줄 (메모가 용지 안에 들어가게)
+        items.append(f"(sheet (at {mm(sx)} {mm(sy)}) (size {mm(34)} {mm(16)}) (fields_autoplaced) "
                      f"(stroke (width 0.1524) (type solid)) (fill (color 0 0 0 0.0000)) (uuid {su}) "
                      f'(property "Sheetname" {q(f"{i + 1}. {S.title}")} (at {mm(sx)} {mm(sy - 0.3)} 0) (effects (font (size 1.8 1.8) bold) (justify left bottom))) '
-                     f'(property "Sheetfile" {q(S.file)} (at {mm(sx)} {mm(sy + 18.3)} 0) (effects (font (size 1.27 1.27)) (justify left top))) '
+                     f'(property "Sheetfile" {q(S.file)} (at {mm(sx)} {mm(sy + 16.3)} 0) (effects (font (size 1.27 1.27)) (justify left top))) '
                      f'(instances (project {q(PROJECT)} (path {q("/" + ROOT)} (page {q(str(i + 2))})))))')
-        items.append(f"(text {q(S.desc)} (at {mm(sx + 1)} {mm(sy + 9)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i)}))")
+        lines, cur = [], ""
+        for w in S.desc.split(" "):                      # 상자 폭(34)에 맞게 줄바꿈
+            if cur and len(cur) + 1 + len(w) > 38:
+                lines.append(cur); cur = w
+            else:
+                cur = (cur + " " + w).strip()
+        lines.append(cur)
+        for k, t in enumerate(lines):
+            items.append(f"(text {q(t)} (at {mm(sx + 1)} {mm(sy + 6 + 2.2 * k)} 0) (effects (font (size 1.4 1.4)) (justify left bottom)) (uuid {uid('rootdesc', i * 10 + k)}))")
     notes = [
         (f"DOTECH {PRODUCT}  -  Oil Moisture Transmitter  -  Schematic v0.9  -  Project No. {PROJECT}", 2.5, True),
         (f"File names (schematic, PCB, Gerber) = {PROJECT}.*   PCB silkscreen marking = {PROJECT}", 1.4, False),
-        ("v0.5: J1 = JST GH 1.25 mm 8P side entry (SM08B-GHS-TB), harness W-2 to M12 8P; J5 chassis spring contact (was M12 shell pin).", 1.4, False),
-        ("v0.4: J3 = JST SH 1.0 mm 4P (SM04B-SRSS-TB side entry, v0.5) for sensor harness W-1 direct from HTX99R (no feedthrough, mech Rev F); Pt1000 2-wire (Kelvin split at J3 pads).", 1.4, False),
-        ("v0.3: MCU STM32G0B1CCT3 (LQFP48, -40..125 C, in-house part); TPS26600PWP official pinout; single axial PCB 57x23 (mech Rev C).", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2410 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-28 V DC.", 1.4, False),
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
-        ("v0.6: parts cleanup (-16: pull-ups R11-15, LED D3/R16, RS-485 R60/61 D60/61, FB2 C19 C11 C2 C6); PCB temperature = ADS1220 + MCU internal sensors.", 1.4, False),
-        ("v0.7: DAC8760 datasheet pinout (HTSSOP-24 PWP); +VSENSE via OPA197 follower (U12/U13); external ISET-R 15k 0.1%; DACs on SPI2 daisy chain, common DAC_LATCH.", 1.4, False),
-        ("v0.8: datasheet review (docs/hw/schematic-review-260313A.md): real pinouts LMR36006/PCAP04/TPS26611; TPS2660 RTN isolated from GND; OVP 29 V (supply 12-28 V);", 1.4, False),
-        ("      DAC SPI = gated SCLK (daisy chain removed in DAC8760 rev D); DAC AVDD 10R; ALARM wired-OR + 10k; TVS3301 outputs; PCAP04 on SPI3; buck L/C per datasheet.", 1.4, False),
+        ("History v0.3-v0.8 (MCU G0B1, JST harness, DAC8760/TPS26611 datasheet pinouts, RTN isolation, gated DAC SCLK ...): docs/decision-log.md #9-#26.", 1.4, False),
         ("v0.9: 3-pass review (docs/hw/final-review-260313A.md): OVP 32.6 V (R5 36.5k) + TPS26611 +Vs follower clamp ~26.4 V; D2 -> TVS3301; eFuse IN C2; buck CIN;", 1.4, False),
         ("      RS485_DE 10k pull-down (in-house bootloader, dec. #31); THVD2410; X7R only; R2 HV 1206; SGOOD -> PA0/PA4; CS_CDC -> PA15; VIN_SENSE PB0;", 1.4, False),
         ("      LATCH/CS pull-ups; OPA197 V+ = DAC AVDD; R31/R41 100k; SWD no-connect flags removed; sheet Aux: +Vs clamp, VIN monitor (DAC boost / HSE / sensor ESD: no room, dec. #32).", 1.4, False),
@@ -1557,7 +1559,7 @@ def write_all():
         ("         라벨 모양 = 신호 방향: 뾰족한 쪽이 밖 = 이 시트에서 내보냄(출력), 안 = 받음(입력), 양쪽 = 양방향, 네모 = 아날로그·수동", 1.4, False),
         ("글자 겹침: 생성기가 부품 몸체·핀·선·라벨·메모와 겹치지 않는 자리에 자동 배치하고, 겹치면 생성 실패로 처리", 1.4, False),
     ]
-    y = 77
+    y = 58
     for i, (t, size, bold) in enumerate(notes):
         face = f' (face "{HANGUL_FACE}")' if has_hangul(t) else ""
         items.append(f"(text {q(t)} (at {mm(12)} {mm(y)} 0) (effects (font{face} (size {size} {size}){' bold' if bold else ''}) (justify left bottom)) (uuid {uid('note', i)}))")
