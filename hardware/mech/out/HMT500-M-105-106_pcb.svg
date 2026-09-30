@@ -240,7 +240,7 @@
 <text x="18.000" y="196.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
 <text x="18.000" y="202.000" font-size="2.9" text-anchor="start" class="t ">1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.</text>
 <text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
-<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95, 홀더 뒤 12.5 (꽂을 공간). W-1(60 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.</text>
+<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95, 홀더 뒤 12.5 (꽂을 공간). W-1(40 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.</text>
 <text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. J1 = JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD), 입구 뒤쪽(+x). 하네스 W-2(40 mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).</text>
 <text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">   PCB 폭 23 구간은 x 63.4에서 끝 (턴버클 끝 엔드캡 앞면 x 64와 틈 0.6). 링 뒤(x ≥ 59) 부품은 Ø20 안 (링을 뒤에서 끼움).</text>
 <text x="18.000" y="232.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음.</text>

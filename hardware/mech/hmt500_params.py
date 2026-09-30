@@ -21,7 +21,8 @@ Rev D (2026-09-29): 센서 접속을 두텍 HTX99R 센서 커넥터(ref/ STEP)�
   커넥터 뒤 핀 → 하네스 W-1 (Ø7 관통 통로, 케이블만) → 전자부 J3. (Rev F: 피드스루 없음)
   커넥터 플랜지 Ø11을 수용하려고 노출 프로브·보호캡 Ø12 → Ø16 (노출 길이 34, G1/2, 전장 144 유지).
 
-Rev G (2026-09-30): HTX99R 위·아래 나사 모두 M10×1.0 (두텍 확인, 아래 Rev E의 M10×0.75 정정) → 바디 암나사 M10×1.0-6H.
+Rev G (2026-09-30): 바디 앞 캡 보호 칼라 Ø12.3 × 3.5 (튜브 Ø16) — 보호캡이 꺾일 때 HTX99R 보호.
+  HTX99R 위·아래 나사 모두 M10×1.0 (두텍 확인, 아래 Rev E의 M10×0.75 정정) → 바디 암나사 M10×1.0-6H.
   조립 시뮬레이션 반영(A–F): 홀더 창, PCB 계단 63.4, 샤시 선, W-2 40 mm, 밀대 T-001.
 
 Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두텍 확인 — Rev G에서 M10×1.0으로 정정).
@@ -36,17 +37,19 @@ DATE = "2026-09-30"
 
 # ── 보호캡 = 두텍 SUS PROBE OIL FILTER (품번 390000-001100, 도면 2020-06-08, SUS304) ──
 # 원 도면 좌표(끝 0 → 열린 끝 32)를 제품 x로: x = x_tip + xf. 열린 끝이 커넥터 플랜지 앞면(x=-30)에 닿음
-_CT = -62.0
+# Rev G: Ø14 튜브를 없애고 HTX99R·보호캡·센서 프로브를 G½ 나사부 안쪽으로 19.5 mm 넣음 (캡 뿌리 3.5 mm를 나사부가 감쌈)
+FRONT_SHIFT = 19.5
+_CT = -62.0 + FRONT_SHIFT
 CAP = dict(
     part_no="390000-001100", src="DOTECH SUS PROBE / OIL FILTER dwg 2020-06-08 (A3 2:1)", material="SUS304",
     x_tip=_CT,            # 프로브 끝
-    x_rear=-30.0,         # 열린 끝 = 커넥터 플랜지 앞면
+    x_rear=-30.0 + FRONT_SHIFT,   # 열린 끝 = 커넥터 플랜지 앞면 (바디 칼라 바닥)
     od=12.0,
     chamfer=1.0,          # 끝 C1
     rear_relief=dict(x=(_CT + 31, _CT + 32), d=11.0),     # 열린 끝 1 mm Ø11
     tip_hole=3.0, tip_hole_depth=0.5,                     # 끝단 Ø3 (드릴 끝 원뿔로 Ø8 보어와 이어짐)
     bore=8.0, bore_x=(_CT + 3.0, _CT + 23.2),             # 센서실 Ø8
-    thread="M10x1.0", thread_x=(_CT + 23.5, -30.0),       # 암나사 8.5 (도면 M10x1.0)
+    thread="M10x1.0", thread_x=(_CT + 23.5, -30.0 + FRONT_SHIFT),       # 암나사 8.5 (도면 M10x1.0)
     thread_minor=8.917,
     hole_d=3.0,
     # 측면 구멍 Ø3: 4줄(끝에서 6, 11, 16, 21) × 5개(72° 간격, 줄마다 같은 각도)
@@ -62,7 +65,7 @@ CAP["profile"] = [
 
 # ── 센서 커넥터 HTX99R-SC (두텍 기존 부품, ref/ STEP) ──
 # 커넥터 좌표 y(축) → 제품 x = CONN_X0 - y (소켓 면 y=15 이 프로브 끝 쪽)
-SENSOR_CONN = dict(step="ref/HTX99R_Sensor_Probe_Sensor_Connector.STEP", x0=-22.0,
+SENSOR_CONN = dict(step="ref/HTX99R_Sensor_Probe_Sensor_Connector.STEP", x0=-22.0 + FRONT_SHIFT,
                    body_d=10.0, flange_d=11.0, flange_y=(7.0, 8.0), len=15.0, pin_y=-3.0,
                    oring_groove=dict(d=8.2, y=(5.5, 7.0)), socket_face_y=15.0, sock_depth=7.9,
                    thread_lower=dict(y=(0.5, 5.5), spec="M10x1.0"),    # → 바디 암나사 (두텍 확인 2026-09-30: 위·아래 모두 M10×1.0)
@@ -71,9 +74,9 @@ SENSOR_CONN = dict(step="ref/HTX99R_Sensor_Probe_Sensor_Connector.STEP", x0=-22.
 CONN_ORING = dict(id=8.0, cs=1.2, name="O-ring 8 x 1.2 FKM (connector seal in Ø10 H8)")
 
 # ── 교체형 센서 프로브 (MK33-W mini + Pt1000 MiniSens) ──
-SENSOR_PROBE = dict(plug=dict(x=(-39.5, -37.0), d=7.6),   # 필터 Ø8 센서실 안          # 수지 플러그 (PEEK)
-                    pins=dict(x=(-37.0, -32.0), d=1.0, pitch=2.54),  # 소켓에 꽂히는 핀 4개 (규격 확인)
-                    board=dict(x=(-46.3, -39.5), w=6.0, t=0.8),    # 센서 기판 (세라믹 또는 FR-4)
+SENSOR_PROBE = dict(plug=dict(x=(-39.5 + FRONT_SHIFT, -37.0 + FRONT_SHIFT), d=7.6),   # 필터 Ø8 센서실 안          # 수지 플러그 (PEEK)
+                    pins=dict(x=(-37.0 + FRONT_SHIFT, -32.0 + FRONT_SHIFT), d=1.0, pitch=2.54),  # 소켓에 꽂히는 핀 4개 (규격 확인)
+                    board=dict(x=(-46.3 + FRONT_SHIFT, -39.5 + FRONT_SHIFT), w=6.0, t=0.8),    # 센서 기판 (세라믹 또는 FR-4)
                     mk33=dict(l=5.0, w=3.81, t=0.4),              # IST MK33-W mini (150138)
                     pt1000=dict(l=1.6, w=1.2, t=0.5),             # IST MiniSens Pt1000 F0.1
                     name="Sensor probe insert: MK33-W mini + Pt1000, 4 pins")
@@ -84,8 +87,11 @@ ORING = dict(id=25.0, cs=2.0, groove_d=25.6, groove_w=2.7, bore=29.0,
 
 # ── 프로세스 바디 M-101 (SUS316L 일체 선삭) ──
 BODY = dict(
-    x_front=-30.0,
-    tube=dict(x=(-30.0, -14.0), d=14.0),                            # 노출 프로브 (캡 뒤, 커넥터 수용)
+    x_front=-30.0 + FRONT_SHIFT,   # 커넥터 자리 면 (= 캡 칼라 바닥). 바디 맨 앞면은 G½ 나사 시작 x −14
+    # 캡 보호 칼라 (Rev G): Ø14 튜브 없음. G½ 나사부 안쪽을 Ø12.3 × 3.5 파서 보호캡 뿌리를 감쌈
+    # → 캡이 상하좌우로 힘을 받으면 금속 바디가 받고 HTX99R(수지)에 굽힘이 안 감.
+    # 깊이 3.5 = 캡 Ø11 릴리프 1 + Ø12 부분 2.5. HTX99R 맞변 7 평면과 0.5 떨어짐 (스패너 들어감)
+    cap_sleeve=dict(x=(-14.0, -10.5), d=12.3),
     gthread=dict(x=(-14.0, -2.0), d=20.955, d_minor=18.631, thread="G1/2-A (ISO 228-1)"),
     relief=dict(x=(-2.0, 0.0), d=18.4),                              # 나사 언더컷
     hexa=dict(x=(0.0, 12.0), af=27.0, chamfer_angle=30),
@@ -93,10 +99,10 @@ BODY = dict(
     seal=dict(x=(15.0, 19.0), d=29.0, fit="f7", groove_x=(15.65, 18.35)),   # O링 자리
     mthread=dict(x=(19.0, 26.0), d=28.0, d_minor=26.917, thread="M28x1-6g"),  # 하우징 체결 수나사
     # 내부
-    conn_cbore=dict(x=(-30.0, -29.0), d=11.2),                      # 커넥터 플랜지 자리
-    conn_land=dict(x=(-29.0, -27.5), d=10.0, fit="H8"),              # O링 밀봉면 (커넥터 홈 Ø8.2)
-    conn_thread=dict(x=(-27.5, -22.0), d=8.917, d_major=10.0, thread="M10x1.0-6H"),    # 커넥터 아래 나사 (M10×1.0, 골지름 8.917)
-    channel=dict(x=(-22.0, 12.0), d=7.0),                            # 관통 — 센서 하네스 W-1만 지나감 (Rev F)
+    conn_cbore=dict(x=(-10.5, -9.5), d=11.2),                      # 커넥터 플랜지 자리
+    conn_land=dict(x=(-9.5, -8.0), d=10.0, fit="H8"),              # O링 밀봉면 (커넥터 홈 Ø8.2)
+    conn_thread=dict(x=(-8.0, -2.5), d=8.917, d_major=10.0, thread="M10x1.0-6H"),    # 커넥터 아래 나사 (M10×1.0, 골지름 8.917)
+    channel=dict(x=(-2.5, 12.0), d=7.0),                             # 관통 — 센서 하네스 W-1만 지나감 (Rev G: 14.5 길이)
     cbore=dict(x=(12.0, 26.0), d=22.0),
     holder_taps=dict(n=2, d=2.0, depth=5.0, pcd=16.0, thread="M2-6H"),   # 홀더 고정 나사 (카운터보어 바닥 x=12)
 )
@@ -119,7 +125,7 @@ ENDCAP = dict(mthread=dict(x=(64.0, 71.0), d=28.0, d_minor=26.917, thread="M28x1
 SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 3869 type), steel + FKM")
 # Ø7 관통 통로(pass-through)는 케이블을 넣은 뒤 전 길이를 에폭시로 몰딩 (1차 격벽, 두텍 지시)
 # 압력 격벽: HTX99R O링 + 몰드 핀 → Ø7 × 34 에폭시 몰딩 (전선 매립). 피드스루 없음
-POTTING = dict(x=(-22.0, 12.0), d=7.0, name="Epoxy molding, Ø7 x 34 channel (W-1 embedded)")
+POTTING = dict(x=(-2.5, 12.0), d=7.0, name="Epoxy molding, Ø7 x 14.5 channel (W-1 embedded)")
 # 하우징 안 전체 몰딩 (2차, 같은 상온경화 에폭시): 바디 Ø22 카운터보어 + 하우징 Ø27 + 엔드캡 Ø22 (M12 뒤면까지)
 POTTING2 = dict(zones=[(12.0, 26.0, 22.0), (26.0, 64.0, 27.0), (64.0, 73.0, 22.0)],
                 material="상온경화 에폭시 1종 (통로·전자부 공통)", name="Epoxy potting, housing interior (electronics)")
@@ -200,12 +206,12 @@ HARNESS2 = dict(plug=dict(x=(58.5, 62.5), y=(-5.9, 5.9), z=(0.8, 4.3)),   # GHR-
                 name="Field harness W-2, JST GH 1.25 mm 8P → M12 8P (pin n = pin n)")
 # 센서 하네스 W-1: HTX99R 뒤 핀 4개 (납땜) → Ø7 관통 통로 (에폭시 몰딩) → JST SH 플러그 → PCB J3
 HARNESS = dict(plug=dict(x=(26.5, 30.5), y=(-2.5, 2.5), z=(0.8, 3.6)),   # SHR-04V-S 꽂힌 상태 외형 (개략), J3 앞
-               wire_d=0.6, pitch=1.0, gap_z=2.2, length=60.0,         # 홀더 구멍에서 곧게 플러그 뒤로
+               wire_d=0.6, pitch=1.0, gap_z=2.2, length=40.0,   # Rev G: 통로 34 → 14.5로 줄어 60 → 40 (창에 꿸 때 36 필요)         # 홀더 구멍에서 곧게 플러그 뒤로
                pins=[("1", "SENS_C1", "MK33 전극 1"), ("2", "SENS_C2", "MK33 전극 2"),
                      ("3", "PT_P", "Pt1000 +"), ("4", "PT_N", "Pt1000 −")],
                conn_grid=2.54,              # HTX99R 뒤 핀 4개 (2.54 격자, 핀 끝 x = x0 - pin_y)
                housing="JST SHR-04V-S", contact="JST SSH-003T-P0.2-H ×4 (AWG 32–28)",
-               wire="AWG 30 PTFE 절연 (UL1213 계열, 200 °C), 4심, 길이 60 ±2",
+               wire="AWG 30 PTFE 절연 (UL1213 계열, 200 °C), 4심, 길이 40 ±2",
                name="Sensor harness W-1, JST SH 1.0 mm 4P")
 CONNECTOR = dict(body=dict(x=(81.0, 85.0), d=20.0), thread=dict(x=(85.0, 96.0), d=12.0),
                  inner=dict(x=(73.0, 81.0), d=15.9),
@@ -238,7 +244,7 @@ PARTS = [
     ("14", "HMT500-P-207", "Screw M2x6 + M2x8 + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
     ("15", "HTX99R-SC", "Sensor connector 4P, M10x1.0 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),
-    ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "15 → J3 on 8, L60"),
+    ("17", "HMT500-W-1", "Sensor harness, JST SH 1.0 4P", "PTFE AWG30", 1, "15 → J3 on 8, L40"),
     ("18", "HMT500-W-2", "Field harness, JST GH 1.25 8P", "PTFE AWG28", 1, "9 → J1 on 8, L40"),
     ("19", "HMT500-P-210", "Set screw M3x3 + sealant", "A4 stainless", 2, "Fill / vent ports in 4"),
     ("20", "HMT500-W-3", "Chassis wire + M2 ring terminal", "PTFE AWG28", 1, "8 J5 → 12 top screw, L25"),

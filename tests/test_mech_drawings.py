@@ -16,11 +16,11 @@ import hmt500_params as P  # noqa: E402
 
 class MechTest(unittest.TestCase):
     def test_install_dimensions(self):
-        self.assertAlmostEqual(P.BODY["gthread"]["x"][0] - P.CAP["x_tip"], 48.0)   # 노출 프로브 (Rev F 필터 32)
+        self.assertAlmostEqual(P.BODY["gthread"]["x"][0] - P.CAP["x_tip"], 28.5)   # 노출 프로브 (Rev G: 캡 32 중 3.5가 G½ 안)
         self.assertAlmostEqual(P.BODY["gthread"]["x"][0], -14.0)                     # 나사 14 (씰면까지)
         self.assertEqual(P.BODY["hexa"]["af"], 27.0)
         self.assertEqual(P.HOUSING["od"], 32.0)
-        self.assertAlmostEqual(P.OVERALL, 158.0)
+        self.assertAlmostEqual(P.OVERALL, 138.5)                                   # Rev G: Ø14 튜브 삭제
 
     def test_fits_are_consistent(self):
         # Rev B: 나사(M28x1) + 반경 O링. 수나사·밀봉 지름이 하우징 암나사·보어와 맞는지
@@ -120,7 +120,15 @@ class MechTest(unittest.TestCase):
         self.assertTrue(any(SP["board"]["x"][0] <= r <= SP["plug"]["x"][0] for r in rows))
         self.assertEqual(len(C["holes"]), 20)
         # 튜브가 G1/2 설치 구멍(골지름)을 통과, 캡 Ø12
-        self.assertLess(B["tube"]["d"], B["gthread"]["d_minor"])
+        # 캡 보호 칼라: 캡 뿌리를 3 mm 이상 감싸고, 캡과 틈 0.1–0.2, HTX99R 맞변 평면(스패너)은 밖에 남음
+        sl = B["cap_sleeve"]
+        self.assertAlmostEqual(sl["x"][1], C["x_rear"])
+        self.assertGreaterEqual(sl["x"][1] - sl["x"][0], 3.0)
+        self.assertTrue(0.1 <= (sl["d"] - C["od"]) / 2 <= 0.2)
+        self.assertGreaterEqual((B["gthread"]["d_minor"] - sl["d"]) / 2, 3.0)   # G½ 골지름 안 벽 두께
+        self.assertAlmostEqual(sl["x"][0], B["gthread"]["x"][0])                  # Ø14 튜브 없음: 칼라가 바디 맨 앞
+        S = P.SENSOR_CONN
+        self.assertLess(S["x0"] - 12.0, sl["x"][0])            # 맞변 평면 시작(커넥터 y 12) 앞에서 칼라가 끝남
         self.assertEqual(C["od"], 12.0)
 
     def test_sensor_harness(self):

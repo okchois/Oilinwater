@@ -77,10 +77,12 @@ CNC_EN = {
         material="Stainless steel SUS304 for this prototype lot (316L for production)",
         finish="As machined, deburr, passivation (ASTM A967)",
         threads="G1/2-A (ISO 228-1) external; M28x1-6g external (right hand); M10x1.0-6H internal, thread length 5.5 "
-                "(ends 8.0 from front face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); "
+                "(ends 8.0 behind the connector seat face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); "
                 "2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16",
         tol="O-ring seat dia 29 f7; connector seal bore dia 10 H8; sealing faces Ra 0.8; others ISO 2768-mK",
-        note="Through channel dia 7 x 34 long (deep hole). Hex AF27 with 30 deg chamfer."),
+        note="No front tube: the part starts with the G1/2 thread. Front sleeve bore dia 12.3 (+0.1/0) x 3.5 deep, "
+             "machined into the G1/2 front face (holds the cap root against side load; connector seat face at its bottom). "
+             "Through channel dia 7 x 14.5 long. Hex AF27 with 30 deg chamfer."),
     "HMT500-M-102": dict(
         material="Stainless steel SUS304 (wetted, oil)",
         finish="As machined, deburr inside and outside of all holes, passivation",

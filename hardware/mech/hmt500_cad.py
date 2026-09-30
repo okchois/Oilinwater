@@ -31,7 +31,7 @@ def tube(x0, x1, d_out, d_in):
 
 def body():
     B = P.BODY
-    solid = cyl(*B["tube"]["x"], B["tube"]["d"])
+    solid = cyl(*B["gthread"]["x"], B["gthread"]["d"])
     for k in ("gthread", "relief", "collar", "seal", "mthread"):
         solid = solid.union(cyl(*B[k]["x"], B[k]["d"]))
     g0, g1 = B["seal"]["groove_x"]
@@ -47,7 +47,7 @@ def body():
     cham = revolve([(x0, 0), (x1, 0), (x1, r_af), (x1 - c, dc / 2 + 0.01), (x0 + c, dc / 2 + 0.01), (x0, r_af)])
     solid = solid.union(hexa.intersect(cham))
     # 내부
-    for k in ("conn_cbore", "conn_land", "conn_thread", "channel", "cbore"):
+    for k in ("cap_sleeve", "conn_cbore", "conn_land", "conn_thread", "channel", "cbore"):
         solid = solid.cut(cyl(*B[k]["x"], B[k]["d"]))
     # PCB 홀더 고정 M2 탭 (카운터보어 바닥, z = ±PCD/2 — PCB 평면에 수직 방향)
     T = B["holder_taps"]

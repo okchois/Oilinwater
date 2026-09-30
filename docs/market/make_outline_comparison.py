@@ -28,9 +28,7 @@ G_HALF = 20.955 / 2          # G½ 바깥지름
 
 def hmt500():
     C, B, H, E, Cn = P.CAP, P.BODY, P.HOUSING, P.ENDCAP, P.CONNECTOR
-    seg = [(C["x_tip"], C["x_rear"] - 1, C["od"] / 2, "필터 캡 Ø12"),
-           (C["x_rear"] - 1, C["x_rear"], C["rear_relief"]["d"] / 2, ""),
-           (*B["tube"]["x"], B["tube"]["d"] / 2, "Ø14"),
+    seg = [(C["x_tip"], B["gthread"]["x"][0], C["od"] / 2, "필터 캡 Ø12 (뿌리 3.5는 G½ 안)"),
            (*B["gthread"]["x"], G_HALF, "G½"),
            (*B["relief"]["x"], B["relief"]["d"] / 2, ""),
            (*B["hexa"]["x"], B["hexa"]["af"] / 2, "AF27"),
@@ -101,9 +99,9 @@ def main():
         ax.text(-78, yc - 2, f"몸통 Ø{p['od']:g}", fontsize=9, ha="left")
         ax.text(-78, yc - 6, p["note"], fontsize=7.5, ha="left", color="#444444", wrap=True)
     ax.axvline(0, color="k", lw=1.0, ls="--")
-    ax.text(0.8, -2 * gap - 25, "설치 기준면 (씰면)   <- 오일 쪽 | 하우징 쪽 ->", fontsize=9)
+    ax.text(0.8, 28.5, "설치 기준면 (씰면)   <- 오일 쪽 | 하우징 쪽 ->", fontsize=9)
     ax.set_xlim(-80, 102)
-    ax.set_ylim(-2 * gap - 28, 32)
+    ax.set_ylim(-2 * gap - 28, 33)
     ax.set_aspect("equal")
     ax.set_xticks(range(-70, 101, 10))
     ax.grid(ls=":", lw=0.3)

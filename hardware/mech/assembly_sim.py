@@ -111,7 +111,7 @@ def main():
     diag = math.hypot(PLUG1["wy"], PLUG1["hz"]) / 2
     r_min = min(Bd["channel"]["d"], Bd["conn_thread"]["d"]) / 2
     moving = union([box(x - PLUG1["lx"] / 2, x + PLUG1["lx"] / 2, -PLUG1["wy"] / 2, PLUG1["wy"] / 2,
-                        -PLUG1["hz"] / 2, PLUG1["hz"] / 2) for x in range(-30, 13, 3)])
+                        -PLUG1["hz"] / 2, PLUG1["hz"] / 2) for x in range(int(Bd["gthread"]["x"][0]), 13, 3)])
     v = vol(moving, body)
     check("1 W-1 플러그 → Ø7 통로", "플러그 대각 반경 vs 최소 통로 반경", v < 1e-3,
           f"{diag:.2f} / {r_min:.2f} mm (여유 {r_min - diag:.2f}), 겹침 {v:.3f} mm³",
