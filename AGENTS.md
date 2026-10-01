@@ -21,16 +21,16 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#40 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#41 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-01)
 
 | 단계 | 상태 |
 |---|---|
 | 기구 Rev I, 도면, STEP, 조립 시방서 HMT500-A-001, JLCCNC 주문 패키지 | 형상 개선 완료, 실제 품번·가공성·압력·온도 확인 전 주문 보류 |
-| 회로도 v0.9 (부품 110, 넷 81, 넷리스트 일치) | 완료 — 외부 검수 H01–H11 반영(결정 #35), DAC 확정(#37), JLC 부품(#38·#39) |
+| 회로도 v0.10 (부품 110, 넷 81, 넷리스트 일치) | 완료 — 외부 검수 H01–H11 반영(결정 #35), DAC 확정(#37), JLC 부품(#38·#39) |
 | PCB 배치 (110개 전부, 4층 57 × 23 mm, pcbnew DRC 간격 오류 0) | 완료 — **배선 전** |
-| JLC BOM·CPL (60줄 중 58줄 LCSC) | 완료 — 남은 2줄: 2.2 µF 50 V X7R 0805(C61), 22.1k 1 % 0402(R9·R52) |
+| JLC BOM·CPL (61줄 중 59줄 LCSC) | 완료 — 남은 2줄: 2.2 µF 50 V X7R 0805(C61), 22.1k 1 % 0402(R9·R52) |
 | **PCB 배선 → 거버 → JLCPCB 주문** | **다음 할 일** |
 | 앱 펌웨어 (Modbus, PCAP04, ADS1220, DAC8760, 부트로더 STM32 포팅) | 미착수 |
 | 시제품 시험 (시험 계획 T1–T7) | 기판 수령 후 |
@@ -38,7 +38,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 ## 4. 확정 사항 (바꾸려면 두텍 승인 필요 — `docs/decision-log.md`)
 
 - 전원 **12–28 V DC (최대 28 V)**, 입력 DC 절대 최대 33 V(TVS3301 한계). 전류 출력 부하 **RL ≤ 500 Ω** (전원 ≥ 18 V) — #36
-- 오결선 **±30 V** 아무 핀 쌍에 견딤 → TVS는 동작 전압 ≥ 30 V(TVS3301) 유지 — 보호 목표
+- AO D30/D40 = **TVS1401DRBR (±14 V)** — #41. AO ±28/30 V 지속 오결선 무손상 보장 제외. 입력/RS-485 TVS3301 유지.
 - 입력: SMDJ(1단) → R1 → TVS3301(2단) → **D3 직렬 쇼트키** → eFuse TPS2660 (RTN은 GND와 분리) — #35
 - 5 V: **LMR51606** 벅(U2) → 3.3 V LDO TPS7A2033 — #38
 - 아날로그 출력: DAC8760 ×2 + TPS26611 보호 + OPA197 +VSENSE 버퍼. **DAC 전원 VAO 16.1 V 벅(U15 LMR51606)**, CMP 4.7 nF + 100 pF, 출력 클램프 BAS70-04 — #37 (사내 VibrationSensor IVS320 AO rev 1.0과 같은 방식)
@@ -65,7 +65,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#41부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#42부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.

@@ -6068,7 +6068,7 @@
   },
   {
    "ref": "D40",
-   "val": "TVS3301DRBR",
+   "val": "TVS1401DRBR",
    "fp": "Texas_DRB0008A_PadFloat",
    "side": "T",
    "x": 48.15,
@@ -6197,7 +6197,7 @@
   },
   {
    "ref": "D30",
-   "val": "TVS3301DRBR",
+   "val": "TVS1401DRBR",
    "fp": "Texas_DRB0008A_PadFloat",
    "side": "T",
    "x": 48.15,

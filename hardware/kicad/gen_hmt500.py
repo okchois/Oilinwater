@@ -88,6 +88,8 @@ two("TVS_BI", "D", "tvs", "Bidirectional TVS diode")
 two("GDT", "GDT", "gdt", "Gas discharge tube")
 two("TVS3301", "D", "tvs", "TI TVS3301 33 V bidirectional flat-clamp TVS, SON-8 DRB (IN = 1-4, GND = 5-8, pad floating)",
     pnum=("1", "5"), stack={"1": ["2", "3", "4"], "5": ["6", "7", "8"]})
+two("TVS1401", "D", "tvs", "TI TVS1401 14 V bidirectional flat-clamp TVS, SON-8 DRB (IN = 1-4, GND = 5-8, pad floating)",
+    pnum=("1", "5"), stack={"1": ["2", "3", "4"], "5": ["6", "7", "8"]})
 two("LED", "D", "led", "LED (pin1 = K, pin2 = A)")
 two("ZENER", "D", "zener", "Zener diode SOT-23 (pin 3 = K, pin 1 = A, pin 2 NC)", pnum=("3", "1"))
 two("SCHOTTKY", "D", "schottky", "Schottky diode SOD-123F/W (pin 1 = K, pin 2 = A)", pnum=("2", "1"))
@@ -901,7 +903,7 @@ for ch, y0 in ((1, 10), (2, 46)):
     yr = op[1] - S.dy
     S.h2(f"R{20 + 10 * ch}", "R", "10R pulse", FP["R2512"], 70, yr, f"OUT{ch}_P", f"OUT{ch}_EXT")
     S.wa(op, S.P(f"R{20 + 10 * ch}", "1"))
-    S.v2(f"D{20 + 10 * ch}", "TVS3301", "TVS3301DRBR", "HMT500_260313A:Texas_DRB0008A_PadFloat", 77, yr,
+    S.v2(f"D{20 + 10 * ch}", "TVS1401", "TVS1401DRBR", "HMT500_260313A:Texas_DRB0008A_PadFloat", 77, yr,
          f"OUT{ch}_EXT", "GND")
     S.v2(f"C{31 + 10 * ch}", "C", "1n 100V", FP["C0603"], 83, yr, f"OUT{ch}_EXT", "GND")
     S.gnd_stub(S.P(f"D{20 + 10 * ch}", "5"))
@@ -944,7 +946,7 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.v2(cb, "C", "100n 50V", FP["C0805"], 97, y0 + 10.5, f"DAC{ch}_AVDD", "GND")
     S.gl(f"DAC{ch}_AVDD", S.P(cb, "1"), "R", length=1)
     S.gnd_stub(S.P(cb, "2"))
-    S.box(8, y0 - 6, 94, y0 + 28, f"ANALOG OUTPUT CH{ch}  -  V/I selectable, miswiring protected  ->  connector pin {3 + ch}")
+    S.box(8, y0 - 6, 94, y0 + 28, f"ANALOG OUTPUT CH{ch}  -  V/I selectable, TVS +/-14 V  ->  connector pin {3 + ch}")
     S.text(f"VOUT + IOUT one terminal (datasheet 9.1.1.3). +VSENSE = {Bf} OPA197 follower of terminal OUT{ch}_EXT "
            f"(after R{20 + 10 * ch}) via R{21 + 10 * ch}:", (8.5, y0 + 25.6), 1.27)
     S.text("  no +VSENSE 60k leakage in current mode, series-R drop corrected in voltage mode.  "
@@ -993,7 +995,7 @@ part_table(S, 8, 78, [
     ("U7, U8", "DAC8760IPWP", "아날로그 출력 1·2", "16비트, 4–20 / 0–20 / 0–24 mA · 0–5 / 0–10 V 선택, 내부 기준, 고장 알람 — 대체 DAC7760/8750/7750"),
     ("U9, U10", "TPS26611DDFR", "출력 오결선 보호", "±50 V, 단자 > +Vs 또는 < −0.2 V면 5 µs 차단·자동 복귀, 전류 제한 32 mA, RON 7.5 Ω, SGOOD Low = 정상. +Vs = VAO 16.1 V (벅, 시트 Aux, 결정 #37)"),
     ("R30, R40", "10R pulse (2512)", "서지 전류 제한", "출력 보호기와 TVS 사이 직렬"),
-    ("D30, D40", "TVS3301DRBR", "출력 서지 클램프", "TI 평탄 클램프 33 V 양방향, 40 V @ 27 A — TPS26611 ±55 V 보호 (데이터시트 권장)"),
+    ("D30, D40", "TVS1401DRBR", "출력 서지 클램프", "±14 V 동작, 클램프 최대 23.55 V @ 30 A/125 C. AO ±28/30 V 지속 오결선 보장 제외 (#41)"),
     ("C41, C51", "1n 100V", "출력 고주파 필터", "케이블로 들어오는 RF 억제"),
     ("U12, U13", "OPA197IDBVR", "+VSENSE 버퍼 (이득 1)", "36 V, 입출력 레일투레일 — 단자 전압을 +VSENSE로, 전류 모드 누설 0. V+ = DAC AVDD"),
     ("R31, R41", "100k", "버퍼 입력 보호", "R30·R40 뒤 단자 전압을 OPA197 + 입력으로 (서지 전류 제한, ±30 V 오배선 9 mW, v0.9)"),
@@ -1545,7 +1547,7 @@ def wire_metrics(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-09-30") (rev "0.9") '
+    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-10-01") (rev "0.10") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Project No. {PROJECT}  -  {PRODUCT} oil moisture transmitter") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "Pinouts checked vs manufacturer datasheets 2026-09-30 (STM32: KiCad lib)"))')
@@ -1586,7 +1588,7 @@ def write_all():
         (f"File names (schematic, PCB, Gerber) = {PROJECT}.*   PCB silkscreen marking = {PROJECT}", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2410 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-28 V DC.", 1.4, False),
-        ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
+        ("v0.10: AO D30/D40 TVS1401 +/-14 V. AO +/-28/30 V continuous miswiring is NOT guaranteed (#41).", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("History v0.3-v0.8 (MCU G0B1, JST harness, DAC8760/TPS26611 datasheet pinouts, RTN isolation, gated DAC SCLK ...): docs/decision-log.md #9-#26.", 1.4, False),
         ("v0.9: 3-pass review (docs/hw/final-review-260313A.md): OVP 32.6 V (R5 36.5k); AO supply VAO 16.1 V buck U15 (DAC AVDD, TPS26611 +Vs; dec. #37, IVS320 AO); D3 series Schottky; RS-485 TVS D60/D61; D2 -> TVS3301; eFuse IN C2; buck CIN;", 1.4, False),
