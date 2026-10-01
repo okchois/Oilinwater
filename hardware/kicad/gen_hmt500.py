@@ -92,7 +92,7 @@ two("LED", "D", "led", "LED (pin1 = K, pin2 = A)")
 two("ZENER", "D", "zener", "Zener diode SOT-23 (pin 3 = K, pin 1 = A, pin 2 NC)", pnum=("3", "1"))
 two("SCHOTTKY", "D", "schottky", "Schottky diode SOD-123F/W (pin 1 = K, pin 2 = A)", pnum=("2", "1"))
 SYM["PWR_FLAG"] = dict(kind="flag", prefix="#FLG", desc="Power flag")
-for n in ("+3V3", "+3V3A", "+5V", "VIN_P", "VDDA"):
+for n in ("+3V3", "+3V3A", "+5V", "VIN_P", "VDDA", "VAO"):
     pwr(n, "up", f"Power symbol {n}")
 pwr("GND", "gnd", "Ground")
 pwr("EF_RTN", "rtn", "TPS2660 RTN reference (local, NOT connected to GND)")
@@ -118,6 +118,10 @@ ic("LMR36006", left=[("2", "VIN", PI), ("10", "VIN", P), ("9", "EN", I), ("8", "
    right=[("12", "SW", PO), ("7", "FB", I), ("5", "VCC", P), ("3", "NC(SW)", P)],
    bottom=[("6", "AGND", PI), ("1", "PGND", PI), ("11", "PGND", P)],
    w=8, rows=6, desc="TI LMR36006 60V 0.6A sync buck, VQFN-HR-12 RNX 2x3 mm (datasheet SNVSB48C). VFB = 1.0 V")
+ic("LMR51606", left=[("5", "VIN", PI), ("4", "EN", I)], right=[("1", "CB", P), ("6", "SW", PO), ("3", "FB", I)],
+   bottom=[("2", "GND", PI)], w=6, desc="TI LMR51606YFDBVR 4-65 V 0.6 A buck, 1.1 MHz FPWM, SOT-23-6 (SLUSEY1B: 1 CB, 2 GND, 3 FB, 4 EN, 5 VIN, 6 SW)")
+ic("BAS70-04", left=[("3", "COM", P)], right=[("2", "K", P), ("1", "A", P)], w=4, prefix="D",
+   desc="Dual series Schottky 70 V SOT-23 (1 = A of D1, 2 = K of D2, 3 = common)")
 ic("NPN_SOT23", left=[("1", "B", I)], top=[("3", "C", P)], bottom=[("2", "E", P)], w=4, prefix="Q",
    desc="NPN transistor SOT-23 (1 = B, 2 = E, 3 = C)")
 ic("TPS7A2033", left=[("1", "IN", PI), ("3", "EN", I)], right=[("5", "OUT", PO), ("4", "NC", NC)],
@@ -464,7 +468,7 @@ FP = {
     "SMA": "Diode_SMD:D_SMA", "SMB": "Diode_SMD:D_SMB", "SMC": "Diode_SMD:D_SMC",
     "FB0603": "Inductor_SMD:L_0603_1608Metric", "LED": "LED_SMD:LED_0603_1608Metric",
     "R1206": "Resistor_SMD:R_1206_3216Metric", "SOT23": "Package_TO_SOT_SMD:SOT-23",
-    "SOD123F": "Diode_SMD:D_SOD-123F",
+    "SOD123F": "Diode_SMD:D_SOD-123F", "SOT236": "Package_TO_SOT_SMD:SOT-23-6",
     "C0402": "Capacitor_SMD:C_0402_1005Metric", "R0402": "Resistor_SMD:R_0402_1005Metric",   # 외부 검수 반영: 자리 확보 (결정 #35)
 }
 
@@ -605,7 +609,7 @@ S.wa(S.P("U1", "12"), S.P("C4", "1"))
 S.wa(S.P("U1", "11"), S.P("R6", "1"))
 for r_ in ("R6", "C4"):
     S.rtn_stub(S.P(r_, "2"))
-decap(S, "C5", "10u 50V", "C1210", 53, 22, "VIN_P")
+decap(S, "C5", "10u 50V", "C1206", 53, 22, "VIN_P")
 # 벅: 전원 핀마다 전원 심볼, BOOT 콘덴서는 위로, FB·SW는 라벨
 S.place("U2", "LMR36006", "LMR36006BRNXR", "HMT500_260313A:Texas_RNX0012A_VQFN-HR-12_2x3mm", 72, 23, nets={
     "2": "VIN_P", "10": "VIN_P", "9": "VIN_P", "7": "BUCK_FB", "6": "GND", "1": "GND", "11": "GND",
@@ -864,7 +868,7 @@ for ch, y0 in ((1, 10), (2, 46)):
         "9": "DAC_MOSI", "8": f"DAC{ch}_SCLK", "7": f"DAC{ch}_LATCH", "10": "DAC_MISO", "3": "DAC_ALARM",
         "21": f"DAC{ch}_OUT", "19": f"DAC{ch}_OUT", "22": f"DAC{ch}_SENSE", "14": f"DAC{ch}_REF", "15": f"DAC{ch}_REF",
         "24": f"DAC{ch}_AVDD", "2": "+3V3", "1": "GND", "4": "GND", "11": "GND", "12": "GND", "25": "GND", "23": "GND",
-        "6": "GND", "5": "GND", "16": "GND", "13": f"DAC{ch}_ISET"})
+        "6": "GND", "5": "GND", "16": "GND", "13": f"DAC{ch}_ISET", "17": f"DAC{ch}_CMP"})
     for num, net in (("9", "DAC_MOSI"), ("8", f"DAC{ch}_SCLK"), ("7", f"DAC{ch}_LATCH"), ("10", "DAC_MISO"),
                      ("3", "DAC_ALARM")):
         S.gl(net, S.P(D, num), "L")
@@ -879,8 +883,8 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.gnd_stub(S.P(f"R{22 + 10 * ch}", "2"))
     # AVDD: 10 Ω 직렬 (데이터시트 10장 — 전원 상승 1 V/ns 이하)
     ap = S.P(D, "24")
-    S.v2(f"R{24 + 10 * ch}", "R", "10R", FP["R0402"], ap[0] - S.dx, ap[1] - S.dy - 5, "VIN_P", f"DAC{ch}_AVDD")
-    S.sup_stub("VIN_P", S.P(f"R{24 + 10 * ch}", "1"))
+    S.v2(f"R{24 + 10 * ch}", "R", "10R", FP["R0402"], ap[0] - S.dx, ap[1] - S.dy - 5, "VAO", f"DAC{ch}_AVDD")
+    S.sup_stub("VAO", S.P(f"R{24 + 10 * ch}", "1"))          # v0.9 (IVS320 AO rev 1.0): AVDD = VAO 16.1 V 벅 (시트 Aux)
     am = (ap[0], ap[1] - 1)
     S.wa(S.P(f"R{24 + 10 * ch}", "2"), am, ap)
     S.gl(f"DAC{ch}_AVDD", am, "L", length=0)
@@ -892,14 +896,15 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.v2(f"C{30 + 10 * ch}", "C", "100n", FP["C0402"], ri[0] - S.dx + 10, ri[1] - S.dy, f"DAC{ch}_REF", "GND")
     S.wa(ri, S.P(f"C{30 + 10 * ch}", "1"))
     S.gnd_stub(S.P(f"C{30 + 10 * ch}", "2"))
-    for num in ("20", "17"):                              # BOOST 미사용 (v0.9 검토: DAC 옆에 부스트 자리 없음, 결정 #32)
-        S.nc(S.P(D, num))
+    S.nc(S.P(D, "20"))                                    # BOOST 미사용 — 발열은 VAO 16.1 V로 해결 (결정 #37)
+    S.gl(f"DAC{ch}_CMP", S.P(D, "17"), "R", length=1)    # CMP: VOUT–CMP 4.7 nF + CMP–GND 100 pF (SBAS528D 8.3.2)
     # 오결선 보호 TPS26611: IN이 VOUT 줄과 같은 높이 → 곧게
     S.place(Pr, "TPS26611", "TPS26611DDFR", "Package_TO_SOT_SMD:SOT-23-8",
             62, vo[1] - S.dy + 1, nets={
-        "4": f"DAC{ch}_OUT", "6": "VS_CLAMP", "1": "GND", "3": "GND", "2": "GND", "5": f"OUT{ch}_P", "8": f"OUT{ch}_SGOOD"})
-    S.wa(vo, S.P(Pr, "4"))
-    S.gl("VS_CLAMP", S.P(Pr, "6"), "U", length=1)          # v0.9: +Vs 24 V 제너 클램프 (시트 Aux)
+        "4": f"DAC{ch}_OUT", "6": "VAO", "1": "GND", "3": "GND", "2": "GND", "5": f"OUT{ch}_P", "8": f"OUT{ch}_SGOOD"})
+    S.wa(vo, (vo[0] + 7, vo[1]), S.P(Pr, "4"))
+    S.gl(f"DAC{ch}_OUT", (vo[0] + 7, vo[1]), "U", length=1)    # → CMP 콘덴서·클램프 다이오드 (CH 디커플링 칸)
+    S.sup_stub("VAO", S.P(Pr, "6"))                       # +Vs = VAO 16.1 V (결정 #37, 이전 24 V 제너 폴로워)
     for num in ("1", "3", "2"):                           # GND, -Vs = GND (단전원), MODE = GND
         S.gnd_stub(S.P(Pr, num))
     S.nc(S.P(Pr, "7"))                                    # EN 개방 = 켜짐 (내부 풀업)
@@ -934,8 +939,19 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.gl(f"DAC{ch}_AVDD", S.P(ca, "1"), "R", length=1)
     S.gnd_stub(S.P(ca, "2"))
     decap(S, f"C{34 + 10 * ch}", "100n", "C0402", 107, y0, "+3V3")
-    if ch == 1:
-        decap(S, "C43", "4.7u 50V", "C1210", 113, y0, "VIN_P")
+    # IVS320 AO rev 1.0 방식 (결정 #37): CMP 보상 + DAC 출력 클램프 (보호기 차단·재연결 과도 → DAC 핀 보호, 외부 검수 H03)
+    c47, c48, dcl = f"C{37 + 10 * ch}", f"C{38 + 10 * ch}", f"D{31 + 10 * ch}"
+    S.v2(c47, "C", "4.7n", FP["C0402"], 111, y0 - 2, f"DAC{ch}_OUT", f"DAC{ch}_CMP")
+    S.gl(f"DAC{ch}_OUT", S.P(c47, "1"), "R", length=1)
+    S.v2(c48, "C", "100p C0G", FP["C0402"], 111, y0 + 3, f"DAC{ch}_CMP", "GND")
+    S.wa(S.P(c47, "2"), S.P(c48, "1"))
+    S.gl(f"DAC{ch}_CMP", S.P(c48, "1"), "R", length=1)
+    S.gnd_stub(S.P(c48, "2"))
+    S.place(dcl, "BAS70-04", "BAS70-04", FP["SOT23"], 108, y0 + 13, nets={
+        "3": f"DAC{ch}_OUT", "2": f"DAC{ch}_AVDD", "1": "GND"})
+    S.gl(f"DAC{ch}_OUT", S.P(dcl, "3"), "L", length=1)
+    S.gl(f"DAC{ch}_AVDD", S.P(dcl, "2"), "R", length=1)
+    S.gnd_stub(S.P(dcl, "1"))
     cb = f"C{35 + 10 * ch}"                                # OPA197 V+ (= DAC AVDD)
     S.v2(cb, "C", "100n 50V", FP["C0805"], 97, y0 + 10.5, f"DAC{ch}_AVDD", "GND")
     S.gl(f"DAC{ch}_AVDD", S.P(cb, "1"), "R", length=1)
@@ -946,7 +962,7 @@ for ch, y0 in ((1, 10), (2, 46)):
     S.text("  no +VSENSE 60k leakage in current mode, series-R drop corrected in voltage mode.  "
            f"ISET-R = R{22 + 10 * ch} 15k 0.1%.  SGOOD low = OK.", (8.5, y0 + 27.0), 1.27)
     S.box(95, y0 - 6, 120, y0 + 18, f"CH{ch} DECOUPLING")
-    S.text(f"C{35 + 10 * ch}: {Bf} V+ (AVDD)" + ("   C43: VIN_P bulk" if ch == 1 else ""), (95.5, y0 + 17), 1.27)
+    S.text(f"C{35 + 10 * ch}: {Bf} V+.  C{37 + 10 * ch}/C{38 + 10 * ch}: CMP.  D{31 + 10 * ch}: DAC out clamp", (95.5, y0 + 17), 1.27)
 S.box(121, 4, 156, 24, "DAC SELECTION  (decision #10)")
 for i, t_ in enumerate([
         "U7/U8 fitted: DAC8760 (16-bit, I + V output).",
@@ -987,14 +1003,16 @@ S.gl("DAC_ALARM", S.P("R33", "2"), "D", length=1)
 
 part_table(S, 8, 78, [
     ("U7, U8", "DAC8760IPWP", "아날로그 출력 1·2", "16비트, 4–20 / 0–20 / 0–24 mA · 0–5 / 0–10 V 선택, 내부 기준, 고장 알람 — 대체 DAC7760/8750/7750"),
-    ("U9, U10", "TPS26611DDFR", "출력 오결선 보호", "±50 V, 단자 > +Vs 또는 < −0.2 V면 5 µs 차단·자동 복귀, 전류 제한 32 mA, RON 7.5 Ω, SGOOD Low = 정상. +Vs = VS_CLAMP (24 V 제너 폴로워 ≈ 23.4 V, 시트 Aux)"),
+    ("U9, U10", "TPS26611DDFR", "출력 오결선 보호", "±50 V, 단자 > +Vs 또는 < −0.2 V면 5 µs 차단·자동 복귀, 전류 제한 32 mA, RON 7.5 Ω, SGOOD Low = 정상. +Vs = VAO 16.1 V (벅, 시트 Aux, 결정 #37)"),
     ("R30, R40", "10R pulse (2512)", "서지 전류 제한", "출력 보호기와 TVS 사이 직렬"),
     ("D30, D40", "TVS3301DRBR", "출력 서지 클램프", "TI 평탄 클램프 33 V 양방향, 40 V @ 27 A — TPS26611 ±55 V 보호 (데이터시트 권장)"),
     ("C41, C51", "1n 100V", "출력 고주파 필터", "케이블로 들어오는 RF 억제"),
     ("U12, U13", "OPA197IDBVR", "+VSENSE 버퍼 (이득 1)", "36 V, 입출력 레일투레일 — 단자 전압을 +VSENSE로, 전류 모드 누설 0. V+ = DAC AVDD"),
     ("R31, R41", "100k", "버퍼 입력 보호", "R30·R40 뒤 단자 전압을 OPA197 + 입력으로 (서지 전류 제한, ±30 V 오배선 9 mW, v0.9)"),
     ("R32, R42", "15k 0.1% 25ppm", "외부 ISET-R (전류 기준)", "내부 저항보다 온도 드리프트 작음 (REXT 비트 설정)"),
-    ("R34, R44", "10R", "DAC AVDD 직렬", "전원 상승 속도 제한 (데이터시트 10장)"),
+    ("R34, R44", "10R", "DAC AVDD 직렬", "VAO → AVDD, 전원 상승 속도 제한 (데이터시트 10장)"),
+    ("C47/C48, C57/C58", "4.7n / 100p C0G", "DAC CMP 보상", "VOUT–CMP 4.7 nF + CMP–GND 100 pF (SBAS528D 8.3.2: 470 pF 초과 시 100 pF 추가) — 케이블 용량·보호기 RON 포함 루프 안정 (IVS320 AO rev 1.0)"),
+    ("D41, D51", "BAS70-04", "DAC 출력 클램프", "DAC 출력 줄을 GND − 0.3 V ~ AVDD + 0.3 V로 — TPS26611 차단·재연결 순간 DAC 핀 보호 (외부 검수 H03, IVS320과 동일)"),
     ("U14", "SN74LVC2G32DCUR", "DAC별 SCLK 게이트", "OR 2회로: DACn_SCLK = SCK OR LATCHn (SPI2 모드 3)"),
     ("R33", "10k", "ALARM 풀업", "오픈 드레인 ALARM 두 개를 한 선으로 (데이터시트: 외부 10 kΩ)"),
 ])
@@ -1035,50 +1053,63 @@ part_table(S, 8, 40, [
 ])
 
 # ════════════════════════════ 7. 보조 회로 (v0.9) ════════════════════════════
-S = Sheet("aux.kicad_sch", "Aux", "TPS26611 +Vs clamp, supply monitor", dx=4, dy=4)
+S = Sheet("aux.kicad_sch", "Aux", "AO supply VAO 16.1 V (buck), supply monitor", dx=4, dy=4)
 SHEETS.append(S)
-# ── TPS26611 +Vs 클램프 (v0.9): eFuse OVP 최대 34.2 V까지 VIN_P가 오를 수 있어 +Vs(절대 최대 32 V)를 약 26.4 V로 제한.
-#   이미터 폴로워 — +Vs 전류(최대 1.65 mA × 2, SLVSFE3C 7.5)를 트랜지스터가 흘려 낮은 전원에서 강하 약 1 V (저항 분압이면 2–3.5 V)
-S.place("Q1", "NPN_SOT23", "MMBTA06", FP["SOT23"], 20, 14, nets={"3": "VIN_P", "1": "VS_BASE", "2": "VS_CLAMP"})
-qb, qc, qe = S.P("Q1", "1"), S.P("Q1", "3"), S.P("Q1", "2")
-S.sup_stub("VIN_P", qc)
-S.v2("R50", "R", "10k", FP["R0402"], 10, 10, "VIN_P", "VS_BASE")
-S.sup_stub("VIN_P", S.P("R50", "1"))
-S.v2("D50", "ZENER", "BZX84C24", FP["SOT23"], 10, 16, "VS_BASE", "GND")
-S.gnd_stub(S.P("D50", "1"))
-nb = (S.P("R50", "2")[0], qb[1])
-S.wa(S.P("R50", "2"), nb, S.P("D50", "3"))
-S.wa(nb, qb)
-ye = qe[1] + 1
-S.wa(qe, (qe[0], ye))
+# ── AO 전원 VAO 16.1 V (결정 #37, VibrationSensor IVS320 AO rev 1.0과 같은 방식): DAC AVDD·TPS26611 +Vs·OPA197 V+
+#   VIN_P(최대 34 V)를 바로 쓰면 DAC 발열(28 V·24 mA 단락 약 0.66 W/채널)과 +Vs(권장 30 V) 여유 문제 → 벅으로 16.1 V 고정.
+#   VAO = 0.8 × (1 + 422k/22.1k) = 16.08 V (기준 ±1.5 % → 15.5–16.6 V). VIN_P < 약 17 V는 최대 듀티 98 %로 따라 내려감.
+S.place("U15", "LMR51606", "LMR51606YFDBVR", FP["SOT236"], 24, 15, nets={
+    "5": "VIN_P", "4": "VIN_P", "1": "VAO_CB", "6": "VAO_SW", "3": "VAO_FB", "2": "GND"})
+vin, ven = S.P("U15", "5"), S.P("U15", "4")
+S.sup_stub("VIN_P", vin)
+S.wa(ven, vin)                                    # EN = VIN (켜짐)
+S.gnd_stub(S.P("U15", "2"))
+decap(S, "C61", "2.2u 50V", "C0805", 7, 11, "VIN_P")
+decap(S, "C62", "100n/50V", "C0603", 15, 11, "VIN_P")
+cb, sw = S.P("U15", "1"), S.P("U15", "6")
+xc = sw[0] + 3
+S.v2("C63", "C", "100n", FP["C0402"], xc - S.dx, sw[1] - 3 - S.dy, "VAO_CB", "VAO_SW")
+S.wa(cb, (xc - 1, cb[1]), (xc - 1, sw[1] - 3), S.P("C63", "1"))
+S.h2("L3", "L", "22uH", "Inductor_SMD:L_Taiyo-Yuden_NR-40xx", xc + 2 - S.dx, sw[1] - S.dy, "VAO_SW", "VAO")
+S.wa(sw, S.P("C63", "2"), S.P("L3", "1"))
+lo = S.P("L3", "2")
 xs = []
-for i_, ref in enumerate(("C53", "C46", "C56")):
-    S.v2(ref, "C", "100n/50V", FP["C0603"], 26 + 6 * i_, ye - S.dy, "VS_CLAMP", "GND")
+for i_, (ref, val, fpk) in enumerate((("C64", "10u 50V", "C1206"), ("C65", "10u 50V", "C1206"),
+                                     ("C46", "100n/50V", "C0603"), ("C56", "100n/50V", "C0603"))):
+    S.v2(ref, "C", val, FP[fpk], lo[0] + 3 + 5 * i_ - S.dx, lo[1] - S.dy, "VAO", "GND")
     S.gnd_stub(S.P(ref, "2"))
     xs.append(S.P(ref, "1"))
-S.wa((qe[0], ye), *xs, (xs[-1][0] + 6, ye))
-S.gl("VS_CLAMP", (xs[-1][0] + 6, ye), "R", length=0)
-S.box(4, 5, 60, 26, "OUTPUT PROTECTOR SUPPLY CLAMP")
-S.text("+Vs rec. max 30 V / abs 32 V; VIN_P up to 34.2 V. Q1 follower: VS = min(VIN_P - 1, Vz - VBE) <= 26.4 V worst.", (4.5, 23.6), 1.27)
-S.text("C46 at U9 pin 6, C56 at U10 pin 6.", (4.5, 25.0), 1.27)
+S.wa(lo, *xs, (xs[-1][0] + 3, lo[1]))
+S.pw("VAO", (xs[-1][0] + 3, lo[1]), absolute=True)
+S.gl("VAO_FB", S.P("U15", "3"), "R", length=1)
+S.v2("R51", "R", "422k 1%", FP["R0402"], 60, 8, "VAO", "VAO_FB")
+S.sup_stub("VAO", S.P("R51", "1"))
+S.v2("R52", "R", "22.1k 1%", FP["R0402"], 60, 13, "VAO_FB", "GND")
+S.wa(S.P("R51", "2"), S.P("R52", "1"))
+S.gl("VAO_FB", S.P("R52", "1"), "R", length=1)
+S.gnd_stub(S.P("R52", "2"))
+S.box(4, 4, 68, 27, "AO SUPPLY VAO 16.1 V  -  DC-DC (decision #37)")
+S.text("VAO = 0.8 V x (1 + 422k/22.1k) = 16.08 V (15.5-16.6 V). LMR51606 FPWM 1.1 MHz, max duty 98 %.", (4.5, 23.4), 1.27)
+S.text("Load 2 x (DAC 27 + OPA197 1.3 + TPS26611 1.75 mA) = 60 mA. C46/C56 at U9/U10 pin 6.", (4.5, 24.8), 1.27)
+S.text("VIN_P < ~17 V: VAO follows VIN_P (dropout). 24 mA x 500 ohm OK down to VIN ~15.8 V.", (4.5, 26.2), 1.27)
 # ── 전원 전압 감시: VIN_P / 11 → PB0 (ADC_IN8), 32.6 V → 2.96 V ──
-S.v2("R14", "R", "100k 1%", FP["R0402"], 70, 10, "VIN_P", "VIN_SENSE")
+S.v2("R14", "R", "100k 1%", FP["R0402"], 72, 10, "VIN_P", "VIN_SENSE")
 S.sup_stub("VIN_P", S.P("R14", "1"))
-S.v2("R15", "R", "10k 1%", FP["R0402"], 70, 16, "VIN_SENSE", "GND")
+S.v2("R15", "R", "10k 1%", FP["R0402"], 72, 16, "VIN_SENSE", "GND")
 S.gnd_stub(S.P("R15", "2"))
-S.v2("C30", "C", "100n", FP["C0402"], 80, 16, "VIN_SENSE", "GND")
+S.v2("C30", "C", "100n", FP["C0402"], 82, 16, "VIN_SENSE", "GND")
 S.gnd_stub(S.P("C30", "2"))
-S.w((70, 13), (70, 16))
-S.w((70, 16), (80, 16), (88, 16))
-S.gl("VIN_SENSE", S.o((88, 16)), "R", length=0)
-S.box(64, 5, 104, 26, "SUPPLY MONITOR")
-S.text("VIN_SENSE = VIN_P / 11 -> MCU PB0 (ADC_IN8)", (64.5, 25.0), 1.27)
+S.w((72, 13), (72, 16))
+S.w((72, 16), (82, 16), (90, 16))
+S.gl("VIN_SENSE", S.o((90, 16)), "R", length=0)
+S.box(69, 5, 104, 26, "SUPPLY MONITOR")
+S.text("VIN_SENSE = VIN_P / 11 -> PB0 (ADC_IN8)", (69.5, 25.0), 1.27)
 # v0.9: 검토 권장 DNP 자리(DAC 부스트, HSE 크리스털, 센서선 ESD)는 효과 있는 위치(DAC 핀·MCU OSC 핀·J3 옆)에
 #   빈자리가 없어 넣지 않음 (결정 #32) — 대안은 아래 메모
 S.box(4, 30, 104, 58, "OPTIONS NOT FITTED ON PCB")
-for i_, t_ in enumerate(["DAC8760 IOUT boost (SBAS528D 8.4.2): no room next to U7/U8 without moving ISET-R / REF / AVDD parts.",
-                         "  -> worst case 0.73 W per DAC (28 V, 24 mA short): thermal test on a potted prototype;",
-                         "     if too hot: limit spec (supply <= 24 V or load >= 250 ohm) or add boost in next PCB rev.",
+for i_, t_ in enumerate(["DAC8760 IOUT boost: not needed - AVDD = VAO 16.1 V (decision #37) cuts DAC heat",
+                         "  from about 0.66 W to 0.39 W per channel (24 mA short, any supply 12-28 V).",
+                         "  Thermal test on a potted prototype still planned.",
                          "HSE crystal: no room next to PF0/PF1 -> factory HSI trim + firmware HSI calibration",
                          "  from Modbus frame timing (USART auto-baud / timer capture).",
                          "Sensor-line ESD array: no room next to J3 -> probe ESD test (IEC 61000-4-2) decides;",
@@ -1086,8 +1117,11 @@ for i_, t_ in enumerate(["DAC8760 IOUT boost (SBAS528D 8.4.2): no room next to U
     S.text(t_, (4.5, 34.0 + 2.2 * i_), 1.27)
 
 part_table(S, 4, 62, [
-    ("Q1, R50, D50", "MMBTA06 / 10k / BZX84C24", "TPS26611 +Vs 클램프", "이미터 폴로워: VS = VIN_P − 약 1 V, 최대 = Vz − VBE ≈ 23.4 V (최악 22.8–25.6 V + 85 °C 드리프트 → ≤ 26.4 V, 외부 검수 H04) — +Vs 권장 30 V 여유, 낮은 전원에서 강하 작음. SOT-23 (Q1: 1 B, 2 E, 3 C / D50: 1 A, 3 K)"),
-    ("C53, C46, C56", "100n", "+Vs 바이패스", "C46 → U9 6번, C56 → U10 6번 핀 옆 (TPS26611 11.1)"),
+    ("U15", "LMR51606YFDBVR", "AO 전원 VAO 16.1 V 벅", "4–65 V 입력 0.6 A, 1.1 MHz FPWM, SOT-23-6 — DAC AVDD·TPS26611 +Vs·OPA197 V+ 공용 (IVS320 AO rev 1.0과 같은 회로, 결정 #37)"),
+    ("L3, C64, C65", "22uH / 10u 50V ×2", "벅 출력", "22 µH 1.05 A 4 × 4 × 2 mm, 10 µF 50 V X7R 1206 × 2 (16 V에서 실효 약 4 µF × 2)"),
+    ("R51, R52", "422k / 22.1k 1%", "VAO 설정", "0.8 V × (1 + 422/22.1) = 16.08 V"),
+    ("C61, C62, C63", "2.2u 50V / 100n / 100n", "입력·부트스트랩", "VIN 핀 옆 입력 C, CB–SW 100 nF"),
+    ("C46, C56", "100n/50V", "+Vs 바이패스", "C46 → U9 6번, C56 → U10 6번 핀 옆"),
     ("R14, R15, C30", "100k / 10k / 100n", "전원 전압 감시", "VIN_P / 11 → PB0 ADC (UVLO 8.9 V ~ DAC 최소 10 V 사이 판정)"),
 ])
 
@@ -1567,7 +1601,7 @@ def write_all():
         ("Protection target: any pin pair +/-30 V continuous (miswiring), surge +/-1 kV, ESD +/-8 kV contact.", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("History v0.3-v0.8 (MCU G0B1, JST harness, DAC8760/TPS26611 datasheet pinouts, RTN isolation, gated DAC SCLK ...): docs/decision-log.md #9-#26.", 1.4, False),
-        ("v0.9: 3-pass review (docs/hw/final-review-260313A.md): OVP 32.6 V (R5 36.5k) + TPS26611 +Vs follower clamp (24 V zener); D3 series Schottky; RS-485 TVS D60/D61; D2 -> TVS3301; eFuse IN C2; buck CIN;", 1.4, False),
+        ("v0.9: 3-pass review (docs/hw/final-review-260313A.md): OVP 32.6 V (R5 36.5k); AO supply VAO 16.1 V buck U15 (DAC AVDD, TPS26611 +Vs; dec. #37, IVS320 AO); D3 series Schottky; RS-485 TVS D60/D61; D2 -> TVS3301; eFuse IN C2; buck CIN;", 1.4, False),
         ("      RS485_DE 10k pull-down (in-house bootloader, dec. #31); THVD2410; X7R only; R2 HV 1206; SGOOD -> PA0/PA4; CS_CDC -> PA15; VIN_SENSE PB0;", 1.4, False),
         ("      LATCH/CS pull-ups; OPA197 V+ = DAC AVDD; R31/R41 100k; SWD no-connect flags removed; sheet Aux: +Vs clamp, VIN monitor (DAC boost / HSE / sensor ESD: no room, dec. #32).", 1.4, False),
         ("Footprints: KiCad 7.0.11 library + project library HMT500_260313A (LMR36006 RNX0012A, GDT Bourns 2035-xx-SM, TVS3301 pad floating).", 1.4, False),
