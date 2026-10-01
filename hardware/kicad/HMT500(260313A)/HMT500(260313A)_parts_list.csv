@@ -30,9 +30,9 @@
 29,생산,J2,1,TC2030-IDC-NL,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Tag-Connect,(PCB 패드만),SWD 기록용 패드 — 부품 실장 없음,0.0,0.0,확정,,
 30,커넥터,J3,1,SM04B-SRSS-TB,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB(LF)(SN),"SH 1.0 mm 4핀 헤더, 옆 삽입(직각) SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안,C160404,Extended
 31,커넥터,J5,1,CHASSIS wire,SolderWire_Chassis_D0.6mm,-,PCB 납땜 구멍 (부품 없음),샤시 선 AWG 28 PTFE 약 25 mm + M2 링 단자 → 홀더 축 나사. 선·단자는 기구 부품표(JLCMC),0.0,0.0,확정,,
-32,보호,L1,1,CMC 1mH 0.8A,L_CommonMode_Wuerth_WE-SL2,Bourns,SRF0905-102Y,"공통모드 초크 2 × 1 mH, 0.8 A, 0.31 Ω, 9.2 × 6 × 5.3 mm (LCSC, Würth 744222 동등). WE-SL2 풋프린트 사용 — 랜드·권선 핀 배정은 Bourns 데이터시트로 확인 필요 [LCSC: 재고 적음 (약 810개). 풋프린트 대조 필요]",0.5,1.2,확인 필요,C2651138,Extended
-33,전원,L2,1,10uH,L_Taiyo-Yuden_NR-40xx,SXN,SMNR4020-10UH,파워 인덕터 10 µH ±20 % 0.62 A 0.95 Ω 4 × 4 × 2 mm (NR-40xx 랜드) — 5 V 벅 (부하 약 60 mA) [LCSC: 랜드 패턴을 NR-40xx와 대조 필요],0.05,0.12,확인 필요,C135263,Extended
-34,출력,L3,1,22uH,L_Taiyo-Yuden_NR-40xx,(LCSC),SMNR4020-22UH,파워 인덕터 22 µH ±20 % 1.05 A 455 mΩ 4 × 4 × 2 mm (NR-40xx 랜드) — VAO 벅 [LCSC: 랜드 패턴을 NR-40xx와 대조 필요],0.05,0.15,확인 필요,C135264,Extended
+32,보호,L1,1,CMC 1mH 0.8A,L_CommonMode_Wuerth_WE-SL2,Bourns,SRF0905-102Y,"공통모드 초크 2 × 1 mH, 0.8 A, 0.31 Ω, 9.2 × 6 × 5.3 mm (LCSC, Würth 744222 동등). WE-SL2 랜드 일치: 패드 2×1.2, 중심 ±3.75/±1.27 mm; SRF0905 원문 권선 1–4/2–3 대조 완료 [LCSC: SRF0905 권장 랜드와 WE-SL2 패드 치수·핀 배정 대조 완료 (2026-10-01); 주문 시 재고 확인]",0.5,1.2,확인 필요,C2651138,Extended
+33,전원,L2,1,10uH,L_SXN_SMNR4020,SXN,SMNR4020-10UH,"파워 인덕터 10 µH ±20 %, 원문 정격 DC 1.60 A, DCR 0.165 Ω ±30 %, 4 × 4 × 2.2 mm max (전용 랜드; 포화 기준 확인 필요) — 5 V 벅 (부하 약 60 mA) [LCSC: SXN 원문 F=.95/G=2.1/H=3.3 mm 전용 랜드 반영; Isat 정의 확인 필요]",0.05,0.12,확인 필요,C135263,Extended
+34,출력,L3,1,22uH,L_SXN_SMNR4020,(LCSC),SMNR4020-22UH,"파워 인덕터 22 µH ±20 %, 원문 정격 DC 1.05 A, DCR 0.350 Ω ±30 %, 4 × 4 × 2.2 mm max (전용 랜드; 포화 기준 확인 필요) — VAO 벅 [LCSC: SXN 원문 F=.95/G=2.1/H=3.3 mm 전용 랜드 반영; Isat 정의 확인 필요]",0.05,0.15,확인 필요,C135264,Extended
 35,보호,R1,1,4.7R 1W pulse,R_2512_6332Metric,Vishay,CRCW25124R70FKEG,"CRCW 2512 4.7 Ω 1% 1 W (결정 #38: JLC 부품 — 펄스 내성 HP형 대신 일반형, 서지 시험 T1로 확인) [LCSC: 결정 #38: 일반형 (HP 대신)]",0.05,0.15,LCSC,C242563,Extended
 36,보호,R2,1,1M HV,R_1206_3216Metric,ROHM,KTR18EZPF1004,"서지용 칩 저항 1 MΩ 1% 1206, 최고 사용 전압 500 V (GDT 방전 전 임펄스. LCSC — 1 kV 1206은 LCSC에 없음) [LCSC: 500 V (1 kV 1206은 LCSC에 없음)]",0.02,0.06,LCSC,C253347,Extended
 37,전원,R3,1,866k 1%,R_0603_1608Metric,Vishay,RCS0603866KFKEA,저항 866 kΩ 1% 0603 (UVLO),0.002,0.005,제안,C3954581,Extended

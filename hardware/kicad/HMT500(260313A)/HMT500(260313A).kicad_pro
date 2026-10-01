@@ -217,6 +217,91 @@
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "GROUND",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "POWER",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.35,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "SWITCH",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.35,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.15,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "ANALOG",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.25,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "RTN",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.25,
+        "via_diameter": 0.45,
+        "via_drill": 0.2,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -228,6 +313,110 @@
       {
         "netclass": "CHASSIS",
         "pattern": "CHASSIS"
+      },
+      {
+        "netclass": "GROUND",
+        "pattern": "GND"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "VIN_EXT"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "VIN_L"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "VIN_F"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "VIN_D"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "VIN_P"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "GND_IN"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "VAO"
+      },
+      {
+        "netclass": "POWER",
+        "pattern": "+5V"
+      },
+      {
+        "netclass": "SWITCH",
+        "pattern": "BUCK_SW"
+      },
+      {
+        "netclass": "SWITCH",
+        "pattern": "VAO_SW"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "DAC1_OUT"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "DAC2_OUT"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "OUT1_P"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "OUT2_P"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "OUT1_EXT"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "OUT2_EXT"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "SENS_C1"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "SENS_C2"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "CREF_A"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "CREF_B"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "PT_P"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "PT_N"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "PT_SP_F"
+      },
+      {
+        "netclass": "ANALOG",
+        "pattern": "PT_SN_F"
+      },
+      {
+        "netclass": "RTN",
+        "pattern": "EF_RTN"
       }
     ]
   },

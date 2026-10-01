@@ -126,7 +126,7 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
   (layers
     (0 "F.Cu" signal)
     (1 "In1.Cu" power)
-    (2 "In2.Cu" power)
+    (2 "In2.Cu" signal)
     (31 "B.Cu" signal)
     (32 "B.Adhes" user "B.Adhesive")
     (33 "F.Adhes" user "F.Adhesive")
@@ -175,7 +175,7 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
 
 def build():
     Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
-    o = [HEADER.format(date=P.DATE, rev=P.DRAWING_REV, ox=OX, oy=OY)]
+    o = [HEADER.format(date=P.DATE, rev="A1", ox=OX, oy=OY)]
     # 외곽선
     for i, sg in enumerate(fillet_outline(outline_pts(), Pc["corner_r"])):
         if sg[0] == "line":
@@ -209,7 +209,8 @@ def build():
         o.append(gr_text(lab, (xa + xb) / 2, yb - 0.8, "Dwgs.User", key + "t", 0.5))
     # PCB 마킹 (실크): 프로젝트 번호 = 파일명. 아랫면(B.SilkS, 거울 글자), 보드 가운데
     xm = (Pc["zones"][0][2] + Pc["zones"][-1][3]) / 2
-    o.append(f'  (gr_text "{PROJECT}" (at {xm} 0) (layer "B.SilkS") (tstamp {uid("mark")})\n'
+    a, b = K(xm, 0)
+    o.append(f'  (gr_text "{PROJECT}" (at {a} {b}) (layer "B.SilkS") (tstamp {uid("mark")})\n'
              f'    (effects (font (size 1.2 1.2) (thickness 0.18)) (justify mirror)))')
     # 부품 높이 한계 (Cmts.User)
     y = -14.0

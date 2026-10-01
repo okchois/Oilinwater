@@ -21,7 +21,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#41 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#43 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-01)
 
@@ -29,9 +29,9 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 |---|---|
 | 기구 Rev I, 도면, STEP, 조립 시방서 HMT500-A-001, JLCCNC 주문 패키지 | 형상 개선 완료, 실제 품번·가공성·압력·온도 확인 전 주문 보류 |
 | 회로도 v0.10 (부품 110, 넷 81, 넷리스트 일치) | 완료 — 외부 검수 H01–H11 반영(결정 #35), DAC 확정(#37), JLC 부품(#38·#39) |
-| PCB 배치 (110개 전부, 4층 57 × 23 mm, pcbnew DRC 간격 오류 0) | 완료 — **배선 전** |
+| PCB A1 아트워크 초안 (110개, 4층, 기구 Rev I 외형 유지) | **배선 진행 중, 미연결 남음 — 제작 불가**. `docs/hw/artwork-a1-261001.md` 참조 |
 | JLC BOM·CPL (61줄 중 59줄 LCSC) | 완료 — 남은 2줄: 2.2 µF 50 V X7R 0805(C61), 22.1k 1 % 0402(R9·R52) |
-| **PCB 배선 → 거버 → JLCPCB 주문** | **다음 할 일** |
+| **PCB 배선 → 거버 → JLCPCB 주문** | 배선 초안 재배치/미연결 해소가 먼저. 거버·주문 패키지는 미발행 |
 | 앱 펌웨어 (Modbus, PCAP04, ADS1220, DAC8760, 부트로더 STM32 포팅) | 미착수 |
 | 시제품 시험 (시험 계획 T1–T7) | 기판 수령 후 |
 
@@ -65,17 +65,17 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#42부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#44부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
 
 ## 6. 다음 할 일 (우선순위)
 
-1. **PCB 배선** (4층): 전원·벅 루프(U2·U15 입력 C, 인덕터)·eFuse RTN 구리, DAC·TPS26611·R30/R40·TVS 짧게, 측정부(PCAP04·ADS1220) 가드, CHASSIS 넷클래스(간격 1.0, 선폭 0.5) J5까지 전용 선. 배치 메모: `docs/hw/pcb-placement-260313A.md`, `docs/hw/final-review-260313A.md` H절(남은 거리 문제: C54, R30/R40, D41, C47, GDT1–J5).
+1. **PCB A1 미연결 해소·재배치** (4층): 전원·벅 루프(U2·U15 입력 C, 인덕터)·eFuse RTN 구리, DAC·TPS26611·R30/R40·TVS 짧게, 측정부(PCAP04·ADS1220) 가드, CHASSIS 넷클래스(간격 1.0, 선폭 0.5) J5까지 전용 선. 배치 메모: `docs/hw/pcb-placement-260313A.md`, `docs/hw/final-review-260313A.md` H절(남은 거리 문제: C54, R30/R40, D41, C47, GDT1–J5).
 2. 거버·드릴 생성 → JLCPCB 주문 패키지 (BOM·CPL 회전 보정 확인).
 3. 앱 펌웨어: 요구 F1–F6 (`docs/hw/external-review-response-260930.md` 6절), 부트로더 STM32G0B1 포팅.
-4. 주문 전 확인: L1 Bourns SRF0905-102Y ↔ WE-SL2 풋프린트, L2/L3 SMNR4020 ↔ NR-40xx 랜드, LCSC 미확인 2줄.
+4. 주문 전 확인: L1 Bourns SRF0905-102Y 랜드/핀은 원문 대조 완료. L2/L3는 SMNR4020 전용 랜드로 수정(#42); 포화 전류 정의는 확인 필요. LCSC 미확인 2줄은 유지.
 
 ## 7. 미결 (두텍 결정 필요)
 
@@ -95,3 +95,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 ## 10. Rev I 인계
 
 `docs/mech/rev-i-implementation-261001.md` 참조. M3 경사 구멍을 축 방향으로 바꾸면 O링 홈을 침범하므로 반드시 20° 유지. STEP 나사는 단순 원통: 도면의 나사/끼워맞춤 공차를 우선 적용. 제조사 DFM 확인 필요.
+
+## 11. PCB A1 초안 재현
+
+`hardware/kicad/rebuild_artwork.sh` 사용. `KICAD_PYTHON`, `KICAD_CLI`, `TEST_PYTHON`으로 실행 환경을 지정한다. 배치는 `place_pcb.py`, 배선은 `routing/artwork_A1_draft.json`에서 재현하며 배치가 달라지면 복원을 거부한다. **현재 미연결이 있으므로 제작/주문 금지.** 스냅샷 수정도 원본 배치/넷 대조와 DRC 재검사가 필요하다. 현재 검사는 KiCad 10.0.6 CLI로 수행했다.

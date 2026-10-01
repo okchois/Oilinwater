@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/Users/deuknamchoi/Documents/Codex/2026-09-30/new-chat-2/work/hmt_mech_review/source/hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch")
-		(date "2026-10-01T20:49:21")
+		(date "2026-10-01T22:00:23")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -393,10 +393,10 @@
 		(comp
 			(ref "C1")
 			(value "100n 100V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -439,10 +439,10 @@
 		(comp
 			(ref "C3")
 			(value "4.7n 2kV")
-			(footprint "Capacitor_SMD:C_1812_4532Metric")
+			(footprint "HMT500_260313A:C_1812_4532Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1812_4532Metric")
+					(name "Footprint") "HMT500_260313A:C_1812_4532Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -485,10 +485,10 @@
 		(comp
 			(ref "D1")
 			(value "SMDJ36CA")
-			(footprint "Diode_SMD:D_SMC")
+			(footprint "HMT500_260313A:D_SMC")
 			(fields
 				(field
-					(name "Footprint") "Diode_SMD:D_SMC")
+					(name "Footprint") "HMT500_260313A:D_SMC")
 				(field
 					(name "Datasheet")
 				)
@@ -595,10 +595,10 @@
 		(comp
 			(ref "D3")
 			(value "PMEG10010ELR")
-			(footprint "Diode_SMD:D_SOD-123F")
+			(footprint "HMT500_260313A:D_SOD-123F")
 			(fields
 				(field
-					(name "Footprint") "Diode_SMD:D_SOD-123F")
+					(name "Footprint") "HMT500_260313A:D_SOD-123F")
 				(field
 					(name "Datasheet")
 				)
@@ -687,10 +687,10 @@
 		(comp
 			(ref "J1")
 			(value "SM08B-GHS-TB")
-			(footprint "Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal")
+			(footprint "HMT500_260313A:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal")
 			(fields
 				(field
-					(name "Footprint") "Connector_JST:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal")
+					(name "Footprint") "HMT500_260313A:JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal")
 				(field
 					(name "Datasheet")
 				)
@@ -794,10 +794,10 @@
 		(comp
 			(ref "L1")
 			(value "CMC 1mH 0.8A")
-			(footprint "Inductor_SMD:L_CommonMode_Wuerth_WE-SL2")
+			(footprint "HMT500_260313A:L_CommonMode_Wuerth_WE-SL2")
 			(fields
 				(field
-					(name "Footprint") "Inductor_SMD:L_CommonMode_Wuerth_WE-SL2")
+					(name "Footprint") "HMT500_260313A:L_CommonMode_Wuerth_WE-SL2")
 				(field
 					(name "Datasheet")
 				)
@@ -846,10 +846,10 @@
 		(comp
 			(ref "R1")
 			(value "4.7R 1W pulse")
-			(footprint "Resistor_SMD:R_2512_6332Metric")
+			(footprint "HMT500_260313A:R_2512_6332Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_2512_6332Metric")
+					(name "Footprint") "HMT500_260313A:R_2512_6332Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -892,10 +892,10 @@
 		(comp
 			(ref "R2")
 			(value "1M HV")
-			(footprint "Resistor_SMD:R_1206_3216Metric")
+			(footprint "HMT500_260313A:R_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:R_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -938,10 +938,10 @@
 		(comp
 			(ref "C2")
 			(value "2.2u 100V")
-			(footprint "Capacitor_SMD:C_1210_3225Metric")
+			(footprint "HMT500_260313A:C_1210_3225Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1210_3225Metric")
+					(name "Footprint") "HMT500_260313A:C_1210_3225Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -984,10 +984,10 @@
 		(comp
 			(ref "C4")
 			(value "22n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1030,10 +1030,10 @@
 		(comp
 			(ref "C5")
 			(value "10u 50V")
-			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(footprint "HMT500_260313A:C_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:C_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1076,10 +1076,10 @@
 		(comp
 			(ref "C6")
 			(value "22u 25V")
-			(footprint "Capacitor_SMD:C_1210_3225Metric")
+			(footprint "HMT500_260313A:C_1210_3225Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1210_3225Metric")
+					(name "Footprint") "HMT500_260313A:C_1210_3225Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1122,10 +1122,10 @@
 		(comp
 			(ref "C8")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1168,10 +1168,10 @@
 		(comp
 			(ref "C12")
 			(value "1u")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1214,10 +1214,10 @@
 		(comp
 			(ref "C13")
 			(value "10u")
-			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(footprint "HMT500_260313A:C_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:C_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1260,10 +1260,10 @@
 		(comp
 			(ref "C16")
 			(value "220n 100V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1306,10 +1306,10 @@
 		(comp
 			(ref "C26")
 			(value "1u")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1352,10 +1352,10 @@
 		(comp
 			(ref "FB1")
 			(value "600R@100MHz")
-			(footprint "Inductor_SMD:L_0603_1608Metric")
+			(footprint "HMT500_260313A:L_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Inductor_SMD:L_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:L_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1398,10 +1398,10 @@
 		(comp
 			(ref "L2")
 			(value "10uH")
-			(footprint "Inductor_SMD:L_Taiyo-Yuden_NR-40xx")
+			(footprint "HMT500_260313A:L_SXN_SMNR4020")
 			(fields
 				(field
-					(name "Footprint") "Inductor_SMD:L_Taiyo-Yuden_NR-40xx")
+					(name "Footprint") "HMT500_260313A:L_SXN_SMNR4020")
 				(field
 					(name "Datasheet")
 				)
@@ -1444,10 +1444,10 @@
 		(comp
 			(ref "R3")
 			(value "866k 1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1490,10 +1490,10 @@
 		(comp
 			(ref "R4")
 			(value "97.6k 1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1536,10 +1536,10 @@
 		(comp
 			(ref "R5")
 			(value "36.5k 1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1582,10 +1582,10 @@
 		(comp
 			(ref "R6")
 			(value "80.6k 1%")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1628,10 +1628,10 @@
 		(comp
 			(ref "R8")
 			(value "118k 1%")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1674,10 +1674,10 @@
 		(comp
 			(ref "R9")
 			(value "22.1k 1%")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1720,10 +1720,10 @@
 		(comp
 			(ref "U1")
 			(value "TPS26600PWPR")
-			(footprint "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.46x2.31mm_ThermalVias")
+			(footprint "HMT500_260313A:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.46x2.31mm_ThermalVias")
 			(fields
 				(field
-					(name "Footprint") "Package_SO:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.46x2.31mm_ThermalVias")
+					(name "Footprint") "HMT500_260313A:HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.46x2.31mm_ThermalVias")
 				(field
 					(name "Datasheet")
 				)
@@ -1811,10 +1811,10 @@
 		(comp
 			(ref "U2")
 			(value "LMR51606YFDBVR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-6")
+			(footprint "HMT500_260313A:SOT-23-6")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-6")
+					(name "Footprint") "HMT500_260313A:SOT-23-6")
 				(field
 					(name "Datasheet")
 				)
@@ -1869,10 +1869,10 @@
 		(comp
 			(ref "U3")
 			(value "TPS7A2033PDBVR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-5")
+			(footprint "HMT500_260313A:SOT-23-5")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-5")
+					(name "Footprint") "HMT500_260313A:SOT-23-5")
 				(field
 					(name "Datasheet")
 				)
@@ -1924,10 +1924,10 @@
 		(comp
 			(ref "C14")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -1970,10 +1970,10 @@
 		(comp
 			(ref "C15")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2016,10 +2016,10 @@
 		(comp
 			(ref "C18")
 			(value "4.7u")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2062,10 +2062,10 @@
 		(comp
 			(ref "C20")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2108,10 +2108,10 @@
 		(comp
 			(ref "C21")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2154,10 +2154,10 @@
 		(comp
 			(ref "J2")
 			(value "TC2030-IDC-NL")
-			(footprint "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical")
+			(footprint "HMT500_260313A:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical")
 			(fields
 				(field
-					(name "Footprint") "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical")
+					(name "Footprint") "HMT500_260313A:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical")
 				(field
 					(name "Datasheet")
 				)
@@ -2212,10 +2212,10 @@
 		(comp
 			(ref "R10")
 			(value "10k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2258,10 +2258,10 @@
 		(comp
 			(ref "R11")
 			(value "10k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2304,10 +2304,10 @@
 		(comp
 			(ref "R12")
 			(value "100k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2350,10 +2350,10 @@
 		(comp
 			(ref "R13")
 			(value "100k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2396,10 +2396,10 @@
 		(comp
 			(ref "U4")
 			(value "STM32G0B1CCT6")
-			(footprint "Package_QFP:LQFP-48_7x7mm_P0.5mm")
+			(footprint "HMT500_260313A:LQFP-48_7x7mm_P0.5mm")
 			(fields
 				(field
-					(name "Footprint") "Package_QFP:LQFP-48_7x7mm_P0.5mm")
+					(name "Footprint") "HMT500_260313A:LQFP-48_7x7mm_P0.5mm")
 				(field
 					(name "Datasheet")
 				)
@@ -2580,10 +2580,10 @@
 		(comp
 			(ref "C22")
 			(value "330p C0G 1%")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2626,10 +2626,10 @@
 		(comp
 			(ref "C23")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2672,10 +2672,10 @@
 		(comp
 			(ref "C24")
 			(value "22u 10V")
-			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(footprint "HMT500_260313A:C_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:C_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2718,10 +2718,10 @@
 		(comp
 			(ref "C25")
 			(value "10u")
-			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(footprint "HMT500_260313A:C_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:C_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2764,10 +2764,10 @@
 		(comp
 			(ref "C27")
 			(value "10n C0G")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2810,10 +2810,10 @@
 		(comp
 			(ref "C28")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2856,10 +2856,10 @@
 		(comp
 			(ref "C29")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -2902,10 +2902,10 @@
 		(comp
 			(ref "J3")
 			(value "SM04B-SRSS-TB")
-			(footprint "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
+			(footprint "HMT500_260313A:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
 			(fields
 				(field
-					(name "Footprint") "Connector_JST:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
+					(name "Footprint") "HMT500_260313A:JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal")
 				(field
 					(name "Datasheet")
 				)
@@ -2954,10 +2954,10 @@
 		(comp
 			(ref "R17")
 			(value "1k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3000,10 +3000,10 @@
 		(comp
 			(ref "R18")
 			(value "1k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3046,10 +3046,10 @@
 		(comp
 			(ref "R19")
 			(value "4.02k 0.02% 5ppm")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3092,10 +3092,10 @@
 		(comp
 			(ref "R20")
 			(value "1k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3138,10 +3138,10 @@
 		(comp
 			(ref "U5")
 			(value "PCAP04-AQFM-24")
-			(footprint "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
+			(footprint "HMT500_260313A:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
 			(fields
 				(field
-					(name "Footprint") "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
+					(name "Footprint") "HMT500_260313A:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm")
 				(field
 					(name "Datasheet")
 				)
@@ -3253,10 +3253,10 @@
 		(comp
 			(ref "U6")
 			(value "ADS1220IPWR")
-			(footprint "Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
+			(footprint "HMT500_260313A:TSSOP-16_4.4x5mm_P0.65mm")
 			(fields
 				(field
-					(name "Footprint") "Package_SO:TSSOP-16_4.4x5mm_P0.65mm")
+					(name "Footprint") "HMT500_260313A:TSSOP-16_4.4x5mm_P0.65mm")
 				(field
 					(name "Datasheet")
 				)
@@ -3341,10 +3341,10 @@
 		(comp
 			(ref "C36")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3387,10 +3387,10 @@
 		(comp
 			(ref "C40")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3433,10 +3433,10 @@
 		(comp
 			(ref "C41")
 			(value "1n 100V")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3479,10 +3479,10 @@
 		(comp
 			(ref "C42")
 			(value "100n 50V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3525,10 +3525,10 @@
 		(comp
 			(ref "C44")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3571,10 +3571,10 @@
 		(comp
 			(ref "C45")
 			(value "100n 50V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3617,10 +3617,10 @@
 		(comp
 			(ref "C47")
 			(value "4.7n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3663,10 +3663,10 @@
 		(comp
 			(ref "C48")
 			(value "100p C0G")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3709,10 +3709,10 @@
 		(comp
 			(ref "C50")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3755,10 +3755,10 @@
 		(comp
 			(ref "C51")
 			(value "1n 100V")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3801,10 +3801,10 @@
 		(comp
 			(ref "C52")
 			(value "100n 50V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3847,10 +3847,10 @@
 		(comp
 			(ref "C54")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3893,10 +3893,10 @@
 		(comp
 			(ref "C55")
 			(value "100n 50V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3939,10 +3939,10 @@
 		(comp
 			(ref "C57")
 			(value "4.7n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -3985,10 +3985,10 @@
 		(comp
 			(ref "C58")
 			(value "100p C0G")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4159,10 +4159,10 @@
 		(comp
 			(ref "D41")
 			(value "BAS70-04")
-			(footprint "Package_TO_SOT_SMD:SOT-23")
+			(footprint "HMT500_260313A:SOT-23")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23")
+					(name "Footprint") "HMT500_260313A:SOT-23")
 				(field
 					(name "Datasheet")
 				)
@@ -4208,10 +4208,10 @@
 		(comp
 			(ref "D51")
 			(value "BAS70-04")
-			(footprint "Package_TO_SOT_SMD:SOT-23")
+			(footprint "HMT500_260313A:SOT-23")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23")
+					(name "Footprint") "HMT500_260313A:SOT-23")
 				(field
 					(name "Datasheet")
 				)
@@ -4257,10 +4257,10 @@
 		(comp
 			(ref "R30")
 			(value "10R pulse")
-			(footprint "Resistor_SMD:R_2512_6332Metric")
+			(footprint "HMT500_260313A:R_2512_6332Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_2512_6332Metric")
+					(name "Footprint") "HMT500_260313A:R_2512_6332Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4303,10 +4303,10 @@
 		(comp
 			(ref "R31")
 			(value "100k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4349,10 +4349,10 @@
 		(comp
 			(ref "R32")
 			(value "15k 0.1% 25ppm")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4395,10 +4395,10 @@
 		(comp
 			(ref "R33")
 			(value "10k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4441,10 +4441,10 @@
 		(comp
 			(ref "R34")
 			(value "10R")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4487,10 +4487,10 @@
 		(comp
 			(ref "R40")
 			(value "10R pulse")
-			(footprint "Resistor_SMD:R_2512_6332Metric")
+			(footprint "HMT500_260313A:R_2512_6332Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_2512_6332Metric")
+					(name "Footprint") "HMT500_260313A:R_2512_6332Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4533,10 +4533,10 @@
 		(comp
 			(ref "R41")
 			(value "100k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4579,10 +4579,10 @@
 		(comp
 			(ref "R42")
 			(value "15k 0.1% 25ppm")
-			(footprint "Resistor_SMD:R_0603_1608Metric")
+			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:R_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4625,10 +4625,10 @@
 		(comp
 			(ref "R44")
 			(value "10R")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -4671,10 +4671,10 @@
 		(comp
 			(ref "U7")
 			(value "DAC8760IPWP")
-			(footprint "Package_SO:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
+			(footprint "HMT500_260313A:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
 			(fields
 				(field
-					(name "Footprint") "Package_SO:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
+					(name "Footprint") "HMT500_260313A:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
 				(field
 					(name "Datasheet")
 				)
@@ -4786,10 +4786,10 @@
 		(comp
 			(ref "U8")
 			(value "DAC8760IPWP")
-			(footprint "Package_SO:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
+			(footprint "HMT500_260313A:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
 			(fields
 				(field
-					(name "Footprint") "Package_SO:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
+					(name "Footprint") "HMT500_260313A:HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm")
 				(field
 					(name "Datasheet")
 				)
@@ -4901,10 +4901,10 @@
 		(comp
 			(ref "U9")
 			(value "TPS26611DDFR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-8")
+			(footprint "HMT500_260313A:SOT-23-8")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-8")
+					(name "Footprint") "HMT500_260313A:SOT-23-8")
 				(field
 					(name "Datasheet")
 				)
@@ -4965,10 +4965,10 @@
 		(comp
 			(ref "U10")
 			(value "TPS26611DDFR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-8")
+			(footprint "HMT500_260313A:SOT-23-8")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-8")
+					(name "Footprint") "HMT500_260313A:SOT-23-8")
 				(field
 					(name "Datasheet")
 				)
@@ -5029,10 +5029,10 @@
 		(comp
 			(ref "U12")
 			(value "OPA197IDBVR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-5")
+			(footprint "HMT500_260313A:SOT-23-5")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-5")
+					(name "Footprint") "HMT500_260313A:SOT-23-5")
 				(field
 					(name "Datasheet")
 				)
@@ -5084,10 +5084,10 @@
 		(comp
 			(ref "U13")
 			(value "OPA197IDBVR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-5")
+			(footprint "HMT500_260313A:SOT-23-5")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-5")
+					(name "Footprint") "HMT500_260313A:SOT-23-5")
 				(field
 					(name "Datasheet")
 				)
@@ -5139,10 +5139,10 @@
 		(comp
 			(ref "U14")
 			(value "SN74LVC2G32DCUR")
-			(footprint "Package_SO:VSSOP-8_2.3x2mm_P0.5mm")
+			(footprint "HMT500_260313A:VSSOP-8_2.3x2mm_P0.5mm")
 			(fields
 				(field
-					(name "Footprint") "Package_SO:VSSOP-8_2.3x2mm_P0.5mm")
+					(name "Footprint") "HMT500_260313A:VSSOP-8_2.3x2mm_P0.5mm")
 				(field
 					(name "Datasheet")
 				)
@@ -5203,10 +5203,10 @@
 		(comp
 			(ref "C60")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5377,10 +5377,10 @@
 		(comp
 			(ref "R60")
 			(value "10k")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5423,10 +5423,10 @@
 		(comp
 			(ref "U11")
 			(value "THVD2410DGKR")
-			(footprint "Package_SO:VSSOP-8_3.0x3.0mm_P0.65mm")
+			(footprint "HMT500_260313A:VSSOP-8_3.0x3.0mm_P0.65mm")
 			(fields
 				(field
-					(name "Footprint") "Package_SO:VSSOP-8_3.0x3.0mm_P0.65mm")
+					(name "Footprint") "HMT500_260313A:VSSOP-8_3.0x3.0mm_P0.65mm")
 				(field
 					(name "Datasheet")
 				)
@@ -5487,10 +5487,10 @@
 		(comp
 			(ref "C30")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5533,10 +5533,10 @@
 		(comp
 			(ref "C46")
 			(value "100n/50V")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5579,10 +5579,10 @@
 		(comp
 			(ref "C56")
 			(value "100n/50V")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5625,10 +5625,10 @@
 		(comp
 			(ref "C61")
 			(value "2.2u 50V")
-			(footprint "Capacitor_SMD:C_0805_2012Metric")
+			(footprint "HMT500_260313A:C_0805_2012Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+					(name "Footprint") "HMT500_260313A:C_0805_2012Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5671,10 +5671,10 @@
 		(comp
 			(ref "C62")
 			(value "100n/50V")
-			(footprint "Capacitor_SMD:C_0603_1608Metric")
+			(footprint "HMT500_260313A:C_0603_1608Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0603_1608Metric")
+					(name "Footprint") "HMT500_260313A:C_0603_1608Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5717,10 +5717,10 @@
 		(comp
 			(ref "C63")
 			(value "100n")
-			(footprint "Capacitor_SMD:C_0402_1005Metric")
+			(footprint "HMT500_260313A:C_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:C_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5763,10 +5763,10 @@
 		(comp
 			(ref "C64")
 			(value "10u 50V")
-			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(footprint "HMT500_260313A:C_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:C_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5809,10 +5809,10 @@
 		(comp
 			(ref "C65")
 			(value "10u 50V")
-			(footprint "Capacitor_SMD:C_1206_3216Metric")
+			(footprint "HMT500_260313A:C_1206_3216Metric")
 			(fields
 				(field
-					(name "Footprint") "Capacitor_SMD:C_1206_3216Metric")
+					(name "Footprint") "HMT500_260313A:C_1206_3216Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5855,10 +5855,10 @@
 		(comp
 			(ref "L3")
 			(value "22uH")
-			(footprint "Inductor_SMD:L_Taiyo-Yuden_NR-40xx")
+			(footprint "HMT500_260313A:L_SXN_SMNR4020")
 			(fields
 				(field
-					(name "Footprint") "Inductor_SMD:L_Taiyo-Yuden_NR-40xx")
+					(name "Footprint") "HMT500_260313A:L_SXN_SMNR4020")
 				(field
 					(name "Datasheet")
 				)
@@ -5901,10 +5901,10 @@
 		(comp
 			(ref "R14")
 			(value "100k 1%")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5947,10 +5947,10 @@
 		(comp
 			(ref "R15")
 			(value "10k 1%")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -5993,10 +5993,10 @@
 		(comp
 			(ref "R51")
 			(value "422k 1%")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -6039,10 +6039,10 @@
 		(comp
 			(ref "R52")
 			(value "22.1k 1%")
-			(footprint "Resistor_SMD:R_0402_1005Metric")
+			(footprint "HMT500_260313A:R_0402_1005Metric")
 			(fields
 				(field
-					(name "Footprint") "Resistor_SMD:R_0402_1005Metric")
+					(name "Footprint") "HMT500_260313A:R_0402_1005Metric")
 				(field
 					(name "Datasheet")
 				)
@@ -6085,10 +6085,10 @@
 		(comp
 			(ref "U15")
 			(value "LMR51606YFDBVR")
-			(footprint "Package_TO_SOT_SMD:SOT-23-6")
+			(footprint "HMT500_260313A:SOT-23-6")
 			(fields
 				(field
-					(name "Footprint") "Package_TO_SOT_SMD:SOT-23-6")
+					(name "Footprint") "HMT500_260313A:SOT-23-6")
 				(field
 					(name "Datasheet")
 				)
@@ -8029,7 +8029,7 @@
 		(net
 			(code "3")
 			(name "+5V")
-			(class "Default")
+			(class "POWER")
 			(node
 				(ref "C26")
 				(pin "1")
@@ -8329,7 +8329,7 @@
 		(net
 			(code "16")
 			(name "DAC1_OUT")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "C47")
 				(pin "1")
@@ -8467,7 +8467,7 @@
 		(net
 			(code "21")
 			(name "DAC2_OUT")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "C57")
 				(pin "1")
@@ -8615,7 +8615,7 @@
 		(net
 			(code "27")
 			(name "EF_RTN")
-			(class "Default")
+			(class "RTN")
 			(node
 				(ref "C4")
 				(pin "2")
@@ -8653,7 +8653,7 @@
 		(net
 			(code "28")
 			(name "GND")
-			(class "Default")
+			(class "GROUND")
 			(node
 				(ref "C1")
 				(pin "2")
@@ -9864,7 +9864,7 @@
 		(net
 			(code "60")
 			(name "OUT1_EXT")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "C41")
 				(pin "1")
@@ -9927,7 +9927,7 @@
 		(net
 			(code "62")
 			(name "OUT2_EXT")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "C51")
 				(pin "1")
@@ -9990,7 +9990,7 @@
 		(net
 			(code "64")
 			(name "PT_N")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "J3")
 				(pin "4")
@@ -10017,7 +10017,7 @@
 		(net
 			(code "65")
 			(name "PT_P")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "J3")
 				(pin "3")
@@ -10192,7 +10192,7 @@
 		(net
 			(code "72")
 			(name "SENS_C1")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "J3")
 				(pin "1")
@@ -10209,7 +10209,7 @@
 		(net
 			(code "73")
 			(name "SENS_C2")
-			(class "Default")
+			(class "ANALOG")
 			(node
 				(ref "J3")
 				(pin "2")
@@ -10277,7 +10277,7 @@
 		(net
 			(code "77")
 			(name "VAO")
-			(class "Default")
+			(class "POWER")
 			(node
 				(ref "C46")
 				(pin "1")
@@ -10355,7 +10355,7 @@
 		(net
 			(code "79")
 			(name "VIN_D")
-			(class "Default")
+			(class "POWER")
 			(node
 				(ref "C2")
 				(pin "1")
@@ -10387,7 +10387,7 @@
 		(net
 			(code "80")
 			(name "VIN_P")
-			(class "Default")
+			(class "POWER")
 			(node
 				(ref "C16")
 				(pin "1")

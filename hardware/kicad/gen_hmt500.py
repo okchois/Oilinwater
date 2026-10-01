@@ -625,7 +625,7 @@ bt, sw = S.P("U2", "1"), S.P("U2", "6")
 xc_ = sw[0] + 3
 S.v2("C8", "C", "100n", FP["C0402"], xc_ - S.dx, sw[1] - 3 - S.dy, "BUCK_BOOT", "BUCK_SW")
 S.wa(bt, (xc_ - 1, bt[1]), (xc_ - 1, sw[1] - 3), S.P("C8", "1"))
-S.h2("L2", "L", "10uH", "Inductor_SMD:L_Taiyo-Yuden_NR-40xx", xc_ + 2 - S.dx, sw[1] - S.dy, "BUCK_SW", "+5V")
+S.h2("L2", "L", "10uH", "HMT500_260313A:L_SXN_SMNR4020", xc_ + 2 - S.dx, sw[1] - S.dy, "BUCK_SW", "+5V")
 S.wa(sw, S.P("C8", "2"), S.P("L2", "1"))
 l2o = S.P("L2", "2")
 S.wa(l2o, (l2o[0] + 1, l2o[1]))
@@ -1060,7 +1060,7 @@ cb, sw = S.P("U15", "1"), S.P("U15", "6")
 xc = sw[0] + 3
 S.v2("C63", "C", "100n", FP["C0402"], xc - S.dx, sw[1] - 3 - S.dy, "VAO_CB", "VAO_SW")
 S.wa(cb, (xc - 1, cb[1]), (xc - 1, sw[1] - 3), S.P("C63", "1"))
-S.h2("L3", "L", "22uH", "Inductor_SMD:L_Taiyo-Yuden_NR-40xx", xc + 2 - S.dx, sw[1] - S.dy, "VAO_SW", "VAO")
+S.h2("L3", "L", "22uH", "HMT500_260313A:L_SXN_SMNR4020", xc + 2 - S.dx, sw[1] - S.dy, "VAO_SW", "VAO")
 S.wa(sw, S.P("C63", "2"), S.P("L3", "1"))
 lo = S.P("L3", "2")
 xs = []
@@ -1160,7 +1160,7 @@ def sheet_items(S, sheet_uuid):
         vface = f' (face "{HANGUL_FACE}")' if has_hangul(p["val"]) else ""
         props = [f'(property "Reference" {q(ref)} (at {mm(rx)} {mm(ry)} {fa}) (effects (font (size {REF_SZ} {REF_SZ}) bold){fx(rj)}{" hide" if hide_ref else ""}))',
                  f'(property "Value" {q(p["val"])} (at {mm(vx)} {mm(vy)} {fa}) (effects (font{vface} (size {VAL_SZ} {VAL_SZ}){vstyle}){fx(vj)}{" hide" if hide_val else ""}))',
-                 f'(property "Footprint" {q(p["fp"])} (at {mm(p["x"])} {mm(p["y"])} 0) {HIDE})',
+                 f'(property "Footprint" {q(("HMT500_260313A:" + p["fp"].split(":")[-1]) if p["fp"] else "")} (at {mm(p["x"])} {mm(p["y"])} 0) {HIDE})',
                  f'(property "Datasheet" "~" (at {mm(p["x"])} {mm(p["y"])} 0) {HIDE})']
         if s.get("verify"):
             props.append(f'(property "VERIFY" "YES - pin numbers are placeholders" (at {mm(p["x"])} {mm(p["y"])} 0) {HIDE})')
@@ -1554,6 +1554,8 @@ def title_block(title):
 
 
 def write_all():
+    from gen_artwork_footprints import generate
+    generate()
     os.makedirs(OUT, exist_ok=True)
     uuids = []
     for S in SHEETS:

@@ -1,7 +1,7 @@
 """HMT500(260313A) PCB 부품 배치 (배선 전 승인용).
 
   python3 hardware/kicad/place_pcb.py
-    → HMT500(260313A)/HMT500(260313A).kicad_pcb   (외곽선·금지 구역 + 부품 84개, 넷 지정, 배선 없음)
+    → HMT500(260313A)/HMT500(260313A).kicad_pcb   (외곽선·금지 구역 + 부품 110개, 넷 지정, 배선 없음)
     → HMT500(260313A)/placement.json               (배치 결과: 기구 좌표 — 조립 시뮬레이션·그림용)
 
 좌표는 기구 좌표(x 축 방향 뒤쪽 +, y 폭 방향, z 윗면 +)로 계산하고 KiCad 좌표로 바꿔 넣는다 (gen_pcb_outline.K).
@@ -48,7 +48,7 @@ HEIGHT = {
     "C_1206": 1.8, "SOIC-8": 1.75, "LQFP-48": 1.6, "SOT-23": 1.45, "HTSSOP": 1.2, "TSSOP": 1.2,
     "C_0805": 1.35, "VSSOP": 1.0, "Texas_DRB": 1.0, "Texas_RNX": 1.0, "QFN-24": 0.9,
     "R_2512": 0.7, "_0603_": 0.95, "Tag-Connect": 0.0, "SolderWire": 0.0,
-    "R_1206": 0.7, "D_SOD-123F": 1.1, "_0402_": 0.6, "L_Taiyo-Yuden_NR-40xx": 2.0,
+    "R_1206": 0.7, "D_SOD-123F": 1.1, "_0402_": 0.6, "L_Taiyo-Yuden_NR-40xx": 2.0, "L_SXN_SMNR4020": 2.2,
 }
 
 
@@ -280,6 +280,12 @@ PLAN = [
     ("U7", "B", ("at", 46.5, -6.6), dict(rots=(0, 180))),
     ("U8", "B", ("at", 46.5, 6.6), dict(rots=(180,))),      # U7과 대칭: ISET·REF 핀(13·14)이 안쪽 → R42·C50 핀 옆
     # v0.9: DAC 핀에 붙어야 하는 부품 (ISET-R, REF C, AVDD R·C, +3V3 C) — DAC 다음 바로
+    ("C47", "B", ("near", "U7", "DAC1_CMP"), {}),
+    ("C57", "B", ("near", "U8", "DAC2_CMP"), {}),
+    ("C48", "B", ("near", "C47", "DAC1_CMP"), {}),
+    ("C58", "B", ("near", "C57", "DAC2_CMP"), {}),
+    ("D41", "TB", ("near", "U7", "DAC1_OUT"), {}),
+    ("D51", "TB", ("near", "U8", "DAC2_OUT"), {}),
     ("R32", "B", ("pin", "U7", "13"), {}),
     ("C40", "B", ("pin", "U7", "14"), {}),
     ("R42", "B", ("pin", "U8", "13"), {}),
@@ -346,12 +352,6 @@ PLAN = [
     ("R15", "TB", ("near", "R14", "VIN_SENSE"), {}),
     ("C30", "TB", ("near", "R14", "VIN_SENSE"), {}),
     # 결정 #37 (IVS320 AO rev 1.0 방식): DAC CMP 보상·출력 클램프, AO 전원 VAO 16.1 V 벅 — 남은 자리에
-    ("C47", "B", ("near", "U7", "DAC1_CMP"), {}),
-    ("C57", "B", ("near", "U8", "DAC2_CMP"), {}),
-    ("C48", "B", ("near", "C47", "DAC1_CMP"), {}),
-    ("C58", "B", ("near", "C57", "DAC2_CMP"), {}),
-    ("D41", "TB", ("near", "U7", "DAC1_OUT"), {}),
-    ("D51", "TB", ("near", "U8", "DAC2_OUT"), {}),
     ("L3", "TB", ("near", "U9", "VAO"), {}),
     ("U15", "TB", ("near", "L3", "VAO_SW"), {}),
     ("C63", "TB", ("pin", "U15", "1"), {}),
@@ -419,7 +419,7 @@ def build():
         (scratch if tmp else board).Add(fp)
         if tmp:
             return fp
-        fp.SetFPID(pcbnew.LIB_ID(*p["fp"].split(":")))
+        fp.SetFPID(pcbnew.LIB_ID("HMT500_260313A", p["fp"].split(":")[-1]))
         fp.SetReference(ref)
         fp.SetValue(p["val"])
         for pad in fp.Pads():
@@ -540,6 +540,45 @@ def build():
         _, _, side, x, y, rot = best
         set_pose(fp, side, x, y, rot)
         commit(ref, fp, side, x, y, rot)
+
+    # 아트워크 전 국부 최적화: 기존 기구/코트야드 규칙을 유지하며 핵심 핀 거리를 최소화.
+    critical = {
+        "C16": [("1", "U2", "5"), ("2", "U2", "2")],
+        "L2": [("1", "U2", "6")],
+        "C8": [("1", "U2", "1"), ("2", "U2", "6")],
+        "C62": [("1", "U15", "5"), ("2", "U15", "2")],
+        "L3": [("1", "U15", "6")],
+        "C63": [("1", "U15", "1"), ("2", "U15", "6")],
+        "C47": [("2", "U7", "17"), ("1", "U7", "19")],
+        "C57": [("2", "U8", "17"), ("1", "U8", "19")],
+        "C44": [("1", "U7", "2")], "C54": [("1", "U8", "2")],
+        "C46": [("1", "U9", "6")], "C56": [("1", "U10", "6")],
+    }
+    for ref, links in critical.items():
+        old = placed.pop(ref)
+        fp, side = old["fp"], old["side"]
+        targets = [(pn, pin_xy(parent, pin)) for pn, parent, pin in links]
+        def score(x, y, pins):
+            return sum(math.dist((x+pins[pn][0], y+pins[pn][1]), target) for pn,target in targets)
+        abs_pins = {pd.GetNumber():from_k(pd.GetPosition()) for pd in fp.Pads()}
+        best = (sum(math.dist(abs_pins[pn], target) for pn,target in targets), old["x"], old["y"], old["rot"])
+        before = best[0]
+        for rot in (0,90,180,270):
+            set_pose(fp, side, 0, 0, rot)
+            box0 = crt(fp)
+            pins = {pd.GetNumber():from_k(pd.GetPosition()) for pd in fp.Pads()}
+            for ix in range(-24,25):
+                for iy in range(-24,25):
+                    x,y=old["x"]+ix*.25,old["y"]+iy*.25
+                    cost=score(x,y,pins)
+                    if cost >= best[0]-.01: continue
+                    box=(x+box0[0],y+box0[1],x+box0[2],y+box0[3])
+                    if region_ok(side,box,height(PARTS[ref]["fp"])) and free(side,box,ref):
+                        best=(cost,x,y,rot)
+        _,x,y,rot=best
+        set_pose(fp,side,x,y,rot)
+        commit(ref,fp,side,x,y,rot)
+        print(f"Critical placement {ref}: pin-distance sum {before:.2f} -> {best[0]:.2f} mm",flush=True)
 
     board.BuildConnectivity()
     pro_path = OUT[:-len(".kicad_pcb")] + ".kicad_pro"
