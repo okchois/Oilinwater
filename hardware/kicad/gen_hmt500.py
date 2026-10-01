@@ -679,7 +679,7 @@ part_table(S, 6, 46, [
 ])
 
 # ════════════════════════════ 3. MCU ════════════════════════════
-S = Sheet("mcu.kicad_sch", "MCU", "STM32G0B1CCT3, SWD, reset, internal temperature sensor", dx=6, dy=6)
+S = Sheet("mcu.kicad_sch", "MCU", "STM32G0B1CCT6, SWD, reset, internal temperature sensor", dx=6, dy=6)
 SHEETS.append(S)
 mnet = {"4": "+3V3", "6": "+3V3", "5": "+3V3", "7": "GND", "10": "NRST",
         "12": "RS485_DE", "13": "RS485_TX", "14": "RS485_RX", "16": "SPI_SCK", "17": "SPI_MISO", "18": "SPI_MOSI",
@@ -688,7 +688,7 @@ mnet = {"4": "+3V3", "6": "+3V3", "5": "+3V3", "7": "GND", "10": "NRST",
         "22": "DAC1_LATCH", "23": "DAC2_LATCH", "24": "CDC_INT", "11": "OUT1_SGOOD", "15": "OUT2_SGOOD",
 
         "25": "DAC_SCK", "26": "DAC_MISO", "27": "DAC_MOSI"}
-S.place("U4", "STM32G0B1CxTx", "STM32G0B1CCT3", "Package_QFP:LQFP-48_7x7mm_P0.5mm", 62, 52, nets=mnet)
+S.place("U4", "STM32G0B1CxTx", "STM32G0B1CCT6", "Package_QFP:LQFP-48_7x7mm_P0.5mm", 62, 52, nets=mnet)
 for n in ("4", "6", "5"):                        # VBAT, VDD, VREF+(= VDD) 각각 +3V3 심볼
     S.sup_stub("+3V3", S.P("U4", n), d=2)
 gp = S.P("U4", "7")
@@ -751,7 +751,7 @@ for i, t in enumerate(["BOOT0 shares PA14/SWCLK - no pull-down.",
     S.text(t, (7, 66 + 2.3 * i), 1.27)
 
 part_table(S, 6, 86, [
-    ("U4", "STM32G0B1CCT3", "제어·통신·보정 연산", "Cortex-M0+ 64 MHz, 플래시 256 KB, RAM 144 KB, −40–125 °C, LQFP48, 내부 온도센서 (PCB 온도). SPI1 = ADS1220, SPI2 = DAC (모드 3, SCLK 게이트), SPI3 = PCAP04"),
+    ("U4", "STM32G0B1CCT6", "제어·통신·보정 연산", "Cortex-M0+ 64 MHz, 플래시 256 KB, RAM 144 KB, −40–85 °C (샘플 #39), LQFP48, 내부 온도센서 (PCB 온도). SPI1 = ADS1220, SPI2 = DAC (모드 3, SCLK 게이트), SPI3 = PCAP04"),
     ("J2", "TC2030-IDC-NL", "생산 때 펌웨어 기록 (SWD)", "PCB 패드만 (부품 없음). 이후 업데이트는 RS-485 부트로더"),
     ("C21", "100n", "리셋 노이즈 필터", "NRST 핀, 몰딩 후 EMC 여유"),
     ("R10, R11", "10k", "DAC LATCH 풀업", "리셋 중 LATCH High → SCLK 게이트 닫힘, DAC 오입력 방지 (v0.9)"),

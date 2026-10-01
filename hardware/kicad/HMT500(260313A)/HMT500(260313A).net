@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/home/user/Oilinwater/hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch")
-    (date "Thu Oct  1 07:33:12 2026")
+    (date "Thu Oct  1 08:42:07 2026")
     (tool "Eeschema 7.0.11+dfsg-1build4")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -502,7 +502,7 @@
       (sheetpath (names "/3. MCU/") (tstamps "/830cc970-0977-5b18-8aa0-756d399279ac/"))
       (tstamps "36bcda4a-8697-556e-9251-5a4329155559"))
     (comp (ref "U4")
-      (value "STM32G0B1CCT3")
+      (value "STM32G0B1CCT6")
       (footprint "Package_QFP:LQFP-48_7x7mm_P0.5mm")
       (libsource (lib "HMT500_260313A") (part "STM32G0B1CxTx") (description "STM32G0B1CCT3 LQFP48, -40..125C (pinout from KiCad library STM32G0B1C_B-C-E_Tx)"))
       (property (name "Sheetname") (value "3. MCU"))
