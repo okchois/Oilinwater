@@ -175,7 +175,7 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
 
 def build():
     Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
-    o = [HEADER.format(date=P.DATE, rev="A1", ox=OX, oy=OY)]
+    o = [HEADER.format(date=P.DATE, rev=os.environ.get("HMT_ARTWORK", "A2"), ox=OX, oy=OY)]
     # 외곽선
     for i, sg in enumerate(fillet_outline(outline_pts(), Pc["corner_r"])):
         if sg[0] == "line":

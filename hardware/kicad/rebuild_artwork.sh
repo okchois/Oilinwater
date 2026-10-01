@@ -2,6 +2,7 @@
 # 저장소 루트에서 실행. PCB 배치와 스냅샷이 다르면 복원을 중단한다.
 # 이 파일의 성공은 제작 승인이 아니다. DRC 미연결/오류를 별도로 확인한다.
 set -eu
+export HMT_ARTWORK=${HMT_ARTWORK:-A2}
 PY=${KICAD_PYTHON:-python3}
 CLI=${KICAD_CLI:-kicad-cli}
 TEST_PY=${TEST_PYTHON:-python3}
@@ -13,7 +14,7 @@ python3 hardware/kicad/check_netlist.py "$BASE.net"
 "$PY" hardware/kicad/make_parts_list.py
 "$PY" hardware/kicad/place_pcb.py
 "$PY" hardware/kicad/route_pcb.py prepare "${TMPDIR:-/tmp}/hmt500_artwork.dsn"
-"$PY" hardware/kicad/artwork_snapshot.py restore hardware/kicad/routing/artwork_A1_draft.json
+"$PY" hardware/kicad/artwork_snapshot.py restore "hardware/kicad/routing/artwork_${HMT_ARTWORK}_draft.json"
 "$CLI" pcb drc --refill-zones --save-board --format json -o "${BASE}_artwork_drc.json" "$BASE.kicad_pcb"
 "$PY" hardware/kicad/check_artwork.py
 "$PY" manufacturing/jlc/make_jlcpcb_files.py

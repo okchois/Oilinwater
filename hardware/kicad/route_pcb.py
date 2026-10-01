@@ -5,6 +5,7 @@ import: 동일 배치에 해당하는 로컬 라우터 SES를 반영하고 동�
 """
 import argparse
 import json
+import os
 from pathlib import Path
 import pcbnew as p
 import wx
@@ -23,10 +24,11 @@ def rect(b, layer, xy, net=None, keepout=False, name=''):
         z.SetDoNotAllowPads(False)
         z.SetDoNotAllowFootprints(False)
     else:
-        z.SetNet(b.FindNet(net)); z.SetLocalClearance(MM(.3))
+        z.SetNet(b.FindNet(net)); z.SetLocalClearance(MM(.15 if net=='GND' else .3))
         z.SetPadConnection(p.ZONE_CONNECTION_FULL)
         z.SetThermalReliefGap(MM(.25)); z.SetThermalReliefSpokeWidth(MM(.25))
         z.SetMinThickness(MM(.15))
+        if net=='GND':z.SetIslandRemovalMode(p.ISLAND_REMOVAL_MODE_ALWAYS)
     outline=z.Outline(); outline.NewOutline()
     x0,y0,x1,y1=xy
     for x,y in [(x0,y0),(x1,y0),(x1,y1),(x0,y1)]:outline.Append(MM(x),MM(y))
@@ -41,6 +43,23 @@ def prepare(b,dsn):
     fps={f.GetReference():f for f in b.GetFootprints()}
     ep=max((pd for pd in fps['U1'].Pads() if pd.GetNumber()=='17'),key=lambda pd:pd.GetSize().x*pd.GetSize().y)
     x,y=p.ToMM(ep.GetPosition().x),p.ToMM(ep.GetPosition().y)
+    # A2: DAC PowerPAD -> GND reference plane. Opposite-side pads were checked
+    # before choosing these sites; F.Mask tenting limits solder wicking.
+    if os.environ.get('HMT_ARTWORK','A2')=='A2':
+        sites=json.loads((HERE/'placement'/'thermal_vias_A2.json').read_text())
+        expected={'U7':(127.8,107.1),'U8':(134.7,92.9)}
+        for ref,pos in expected.items():
+            actual=fps[ref].GetPosition()
+            if abs(p.ToMM(actual.x)-pos[0])>.001 or abs(p.ToMM(actual.y)-pos[1])>.001:
+                raise ValueError('Re-evaluate A2 thermal vias after moving '+ref)
+        for site in sites:
+            pt=p.VECTOR2I(MM(site['xy'][0]),MM(site['xy'][1]))
+            existing=next((v for v in b.GetTracks() if isinstance(v,p.PCB_VIA) and v.GetNetname()=='GND' and (v.GetPosition()-pt).EuclideanNorm()<1000),None)
+            v=existing or p.PCB_VIA(b)
+            if existing is None:
+                v.SetPosition(pt);v.SetWidth(MM(.45));v.SetDrill(MM(.2))
+                v.SetViaType(p.VIATYPE_THROUGH);v.SetLayerPair(p.F_Cu,p.B_Cu);v.SetNet(b.FindNet('GND'));b.Add(v)
+            v.SetFrontTentingMode(p.TENTING_MODE_TENTED)
     # A local return island around the exposed pad. Isolation verified by DRC.
     rt=(x-2.2,y-3.0,x+2.2,y+3.0)
     for layer in (p.F_Cu,p.B_Cu):

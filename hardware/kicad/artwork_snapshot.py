@@ -17,13 +17,14 @@ def capture(b):
     tracks=[]
     for t in b.GetTracks():
         if isinstance(t,p.PCB_VIA):
-            tracks.append(dict(kind='via',net=t.GetNetname(),pos=xy(t.GetPosition()),width=p.ToMM(t.GetWidth(p.F_Cu)),drill=p.ToMM(t.GetDrillValue())))
+            tracks.append(dict(kind='via',net=t.GetNetname(),pos=xy(t.GetPosition()),width=p.ToMM(t.GetWidth(p.F_Cu)),drill=p.ToMM(t.GetDrillValue()),front_tenting=int(t.GetFrontTentingMode()),back_tenting=int(t.GetBackTentingMode())))
         else:tracks.append(dict(kind='track',net=t.GetNetname(),start=xy(t.GetStart()),end=xy(t.GetEnd()),width=p.ToMM(t.GetWidth()),layer=b.GetLayerName(t.GetLayer())))
+        tracks[-1]['locked']=t.IsLocked()
     zones=[]
     for z in b.Zones():
         poly=z.Outline()
         if any(poly.HoleCount(i) for i in range(poly.OutlineCount())):raise ValueError('Zone holes unsupported; extend serializer before capture')
-        zones.append(dict(name=z.GetZoneName(),layers=[b.GetLayerName(l) for l in z.GetLayerSet().Seq()],net=z.GetNetname(),rule=z.GetIsRuleArea(),tracks=z.GetDoNotAllowTracks(),vias=z.GetDoNotAllowVias(),fills=z.GetDoNotAllowZoneFills(),priority=z.GetAssignedPriority(),clearance=p.ToMM(z.GetLocalClearance()),minimum=p.ToMM(z.GetMinThickness()),points=[[xy(poly.COutline(i).CPoint(j)) for j in range(poly.COutline(i).PointCount())] for i in range(poly.OutlineCount())]))
+        zones.append(dict(name=z.GetZoneName(),layers=[b.GetLayerName(l) for l in z.GetLayerSet().Seq()],net=z.GetNetname(),rule=z.GetIsRuleArea(),tracks=z.GetDoNotAllowTracks(),vias=z.GetDoNotAllowVias(),fills=z.GetDoNotAllowZoneFills(),priority=z.GetAssignedPriority(),island_mode=int(z.GetIslandRemovalMode()),island_area=z.GetMinIslandArea(),clearance=p.ToMM(z.GetLocalClearance()),minimum=p.ToMM(z.GetMinThickness()),points=[[xy(poly.COutline(i).CPoint(j)) for j in range(poly.COutline(i).PointCount())] for i in range(poly.OutlineCount())]))
     return dict(status='DRAFT — NOT FOR FABRICATION',placement=placement(b),tracks=tracks,zones=zones)
 def restore(b,d):
     if placement(b)!=d['placement']:raise ValueError('Placement differs from routing snapshot: reroute required')
@@ -32,9 +33,11 @@ def restore(b,d):
     for q in d['tracks']:
         if q['kind']=='via':
             t=p.PCB_VIA(b);t.SetPosition(vec(q['pos']));t.SetWidth(p.FromMM(q['width']));t.SetDrill(p.FromMM(q['drill']));t.SetViaType(p.VIATYPE_THROUGH);t.SetLayerPair(p.F_Cu,p.B_Cu)
+            if 'front_tenting' in q:t.SetFrontTentingMode(q['front_tenting'])
+            if 'back_tenting' in q:t.SetBackTentingMode(q['back_tenting'])
         else:
             t=p.PCB_TRACK(b);t.SetStart(vec(q['start']));t.SetEnd(vec(q['end']));t.SetWidth(p.FromMM(q['width']));t.SetLayer(b.GetLayerID(q['layer']))
-        t.SetNet(b.FindNet(q['net']));b.Add(t)
+        t.SetNet(b.FindNet(q['net']));t.SetLocked(q.get('locked',False));b.Add(t)
     for q in d['zones']:
         z=p.ZONE(b);layers=p.LSET()
         for layer in q['layers']:
@@ -44,6 +47,9 @@ def restore(b,d):
         z.SetLayerSet(layers);z.SetZoneName(q['name']);z.SetIsRuleArea(q['rule'])
         z.SetDoNotAllowTracks(q['tracks']);z.SetDoNotAllowVias(q['vias']);z.SetDoNotAllowZoneFills(q['fills']);z.SetDoNotAllowPads(False);z.SetDoNotAllowFootprints(False)
         if not q['rule']:z.SetNet(b.FindNet(q['net']))
+
+        if 'island_mode' in q:z.SetIslandRemovalMode(q['island_mode'])
+        if 'island_area' in q:z.SetMinIslandArea(q['island_area'])
         z.SetAssignedPriority(q['priority']);z.SetLocalClearance(p.FromMM(q['clearance']));z.SetMinThickness(p.FromMM(q['minimum']));z.SetPadConnection(p.ZONE_CONNECTION_FULL)
         for pts in q['points']:
             z.Outline().NewOutline()

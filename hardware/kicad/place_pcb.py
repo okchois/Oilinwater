@@ -1,4 +1,4 @@
-"""HMT500(260313A) PCB 부품 배치 (배선 전 승인용).
+"""HMT500(260313A) PCB 부품 배치 원본 생성기 (A2 기본, HMT_ARTWORK=A1으로 A1 재현).
 
   python3 hardware/kicad/place_pcb.py
     → HMT500(260313A)/HMT500(260313A).kicad_pcb   (외곽선·금지 구역 + 부품 110개, 넷 지정, 배선 없음)
@@ -7,7 +7,8 @@
 좌표는 기구 좌표(x 축 방향 뒤쪽 +, y 폭 방향, z 윗면 +)로 계산하고 KiCad 좌표로 바꿔 넣는다 (gen_pcb_outline.K).
 윗면 = F (z+), 아랫면 = B.
 
-배치 방법: 고정 부품(J3·J1·U4)을 먼저 놓고, 나머지는 표 PLAN 순서대로
+A2는 placement/artwork_A2.json의 검증된 좌표를 읽고 아래 모든 제약을 재검사한다.
+A1 배치 방법: 고정 부품(J3·J1·U4)을 먼저 놓고, 나머지는 표 PLAN 순서대로
 "기준점(부모 부품의 같은 넷 패드) 가까운 빈 자리"를 0.25 mm 격자에서 찾는다.
 자리 조건 = 보드 안(가장자리 0.3 mm), 홀더 홈·지지링 홈 금지 구역, 하네스 플러그·전선 통로(윗면),
 높이 한계(보어 − 판 두께/2 − 0.5 mm), 같은 면 코트야드 겹침 없음(J2 Tag-Connect는 구멍 때문에 양면).
@@ -178,7 +179,9 @@ OFFSETS = sorted((math.hypot(i * STEP, j * STEP), i * STEP, j * STEP)
 
 
 def overlap(a, b, gap=GAP):
-    return a[0] < b[2] + gap and b[0] < a[2] + gap and a[1] < b[3] + gap and b[1] < a[3] + gap
+    # KiCad 정수 nm 변환으로 생기는 경계 오차만 허용한다. A1 재현은 기존 판정 유지.
+    eps = 1e-5 if os.environ.get("HMT_ARTWORK", "A2") == "A2" else 0.0
+    return a[0] < b[2] + gap - eps and b[0] < a[2] + gap - eps and a[1] < b[3] + gap - eps and b[1] < a[3] + gap - eps
 
 
 # ── KiCad ↔ 기구 좌표 ──
@@ -368,6 +371,15 @@ J3_FRONT = P.PCB["jst"]["x"][0]         # 30.5 — 플러그가 앞(-x)에서 �
 J1_REAR = P.HARNESS2["plug"]["x"][0]     # 58.5 — 플러그가 뒤(+x)에서 꽂힘
 
 
+ARTWORK_REV = os.environ.get("HMT_ARTWORK", "A2")
+if ARTWORK_REV == "A2":
+    import placement_a2
+    PLAN = placement_a2.plan(PLAN)
+
+A2_LAYOUT = json.load(open(os.environ.get("HMT_A2_LAYOUT", placement_a2.LAYOUT_PATH))) if ARTWORK_REV == "A2" else None
+if A2_LAYOUT is not None:
+    assert set(A2_LAYOUT) == set(PARTS), "A2 placement must contain every circuit part"
+
 UNPLACED = []
 CHASSIS_PARTS = {"GDT1", "C3", "R2"}     # v0.9: 샤시 부품 ~ 회로 부품 코트야드 0.5 mm (+ 넷클래스 CHASSIS 동박 간격 1.0 — 에폭시 몰딩 안, 검토 D2)
 CH_GAP = 0.5
@@ -450,6 +462,8 @@ def build():
         return out
 
     def free(side, box, ref, own_holes=()):
+        if ARTWORK_REV == "A2" and side == "B" and any(overlap(box, area, 0) for area in placement_a2.BACK_ESCAPES):
+            return False
         if "J5" in placed and ref != "J5":            # v0.9: 샤시 선 납땜 구멍 둘레 양면 금지 (손납땜 브리지 방지)
             j = placed["J5"]
             dx_ = max(box[0] - j["x"], 0.0, j["x"] - box[2])
@@ -484,6 +498,15 @@ def build():
     for ref, sides, how, opt in PLAN:
         fp = make(ref)
         h = height(PARTS[ref]["fp"])
+        if A2_LAYOUT is not None:
+            q = A2_LAYOUT[ref]
+            side, x, y, rot = q["side"], q["x"], q["y"], q["rot"]
+            set_pose(fp, side, x, y, rot)
+            assert free(side, crt(fp), ref, holes(fp)), (ref, "overlap", crt(fp))
+            if ref not in ("J1", "J3", "J5", "J2"):
+                assert region_ok(side, crt(fp), h), (ref, "region", crt(fp))
+            commit(ref, fp, side, x, y, rot)
+            continue
         if how[0] == "fix":
             side, rot = sides, opt["rot"]
             if ref in ("J3", "J1"):
@@ -501,7 +524,7 @@ def build():
             continue
         if how[0] in ("near", "pin") and how[1] not in placed:
             UNPLACED.append(ref)
-            board.Remove(fp)
+            board.RemoveNative(fp)
             continue
         if how[0] == "at":
             ax, ay = how[1] + DX, how[2]
@@ -535,7 +558,7 @@ def build():
         best = min((c for c in cands if c[1] <= dmin + SLACK), default=None)
         if not best:
             UNPLACED.append(ref)
-            board.Remove(fp)
+            board.RemoveNative(fp)
             continue
         _, _, side, x, y, rot = best
         set_pose(fp, side, x, y, rot)
@@ -554,7 +577,8 @@ def build():
         "C44": [("1", "U7", "2")], "C54": [("1", "U8", "2")],
         "C46": [("1", "U9", "6")], "C56": [("1", "U10", "6")],
     }
-    for ref, links in critical.items():
+    for ref, links in ([] if A2_LAYOUT is not None else critical.items()):
+        if ref not in placed: continue
         old = placed.pop(ref)
         fp, side = old["fp"], old["side"]
         targets = [(pn, pin_xy(parent, pin)) for pn, parent, pin in links]
