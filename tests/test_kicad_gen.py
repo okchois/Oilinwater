@@ -96,7 +96,9 @@ class KicadGenTest(unittest.TestCase):
         path = subprocess.run(["fc-match", "-f", "%{file}", g.HANGUL_FACE], capture_output=True, text=True).stdout
         if not path or "Nanum" not in path:
             self.skipTest("NanumGothic 없음")
-        cmap = TTFont(path).getBestCmap()
+        index = subprocess.run(["fc-match", "-f", "%{index}", g.HANGUL_FACE],
+                               capture_output=True, text=True, check=True).stdout
+        cmap = TTFont(path, fontNumber=int(index or 0)).getBestCmap()
         for S in g.SHEETS:
             for t, *_ in S.texts:
                 if g.has_hangul(t):

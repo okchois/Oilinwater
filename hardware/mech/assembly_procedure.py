@@ -5,7 +5,7 @@
 
 출력: hardware/mech/out/assembly_procedure/step_XX.png, HMT500-A-001_assembly_procedure.pdf
 
-형상은 hmt500_cad.py(기구 Rev H)와 KiCad 배치(placement.json) 그대로. 순서는 조립 시뮬레이션(assembly_sim.py, 23항목 NG 0)과 같다.
+형상은 hmt500_cad.py(기구 Rev I)와 KiCad 배치(placement.json) 그대로. 순서는 조립 시뮬레이션(assembly_sim.py, 명목 조립·공구·두께 공차 검사; 몰딩 유동은 확인 필요)과 같다.
 그림 색: 회색 = 이미 조립된 부품, 주황 = 이번 단계에서 다는 부품, 빨간 화살표 = 움직이는 방향.
 금속·수지 부품은 안이 보이도록 윗 절반(z > 0)을 잘라 그린 단계가 있다 (절단면 표시).
 """
@@ -221,7 +221,7 @@ def steps():
         cam=((-20, 14), TOPV, 1.0))
     add(key="bench_pcb", title="[벤치] PCB ⑧을 홀더 ⑫ 홈에 끼우고 가로 나사 2개", group="B. 전자부 (벤치)",
         parts="⑧ PCB E-301, ⑫ PCB 홀더 M-105, ⑭ M2×12 ×2", tools="정밀 드라이버 (날 Ø3 이하), ESD 매트·손목띠",
-        mat="-", spec="PCB 앞 끝을 홀더 홈(폭 1.7, 깊이 3.5) 끝까지. 가로 나사 M2×12 손 조임 (약 0.1 N·m, 수지 탭).",
+        mat="-", spec="PCB 앞 끝을 홀더 홈(폭 1.9, 깊이 3.5) 끝까지. 가로 나사 M2×12 손 조임 (약 0.1 N·m, 수지 탭).",
         check="PCB가 홈에 꽉 끼고 흔들림 없음, 나사 머리가 홀더 면에 묻힘",
         caution="ESD 주의. 나사 과조임 금지 (POM 탭 손상).",
         scene=lambda: pcb_asm(cut_holder=False, with_cw=False) + [(mv(S("screws_x"), 0, 0, 9), NEW),
@@ -320,7 +320,7 @@ def steps():
         cam=((-22, 98), ISO, 1.2))
     add(key="potting2", title="2차 몰딩: 엔드캡 M3 구멍으로 하우징 안 전체 주입", group="F. 몰딩·마감",
         parts="⑤ 에폭시, ⑲ M3×3 무두나사 ×2", tools="진공 주입 장치, 디스펜서, 육각 렌치 1.5",
-        mat="에폭시 약 25 cm³, 나사 실런트", spec="M12를 위로 세우고 한쪽 M3 구멍으로 진공 주입, 다른 구멍으로 공기 빠짐. "
+        mat="에폭시 주입량 확인 필요 (현재 CAD·실측 기준), 나사 실런트", spec="M12를 위로 세우고 한쪽 M3 구멍으로 진공 주입, 다른 구멍으로 공기 빠짐. Rev I: 포트 r11.8, 안쪽 경사 20°, M12 어깨 Ø20 이하·노즐 외경 Ø2.5 이하 조건. 실제 품번·수지 점도에 따른 주입 시험 필요. "
                                                "경화 후 ⑲ + 실런트로 막음 (0.3 N·m).",
         check="공기 빠짐 구멍으로 에폭시가 나옴, 경화 후 2차 교정",
         caution="몰딩 후 전자부 분해·수리 불가 — 몰딩 전 검사 기록 확인. 최종 교정은 경화 뒤.",
@@ -340,7 +340,7 @@ def steps():
         cam=((-100, 20), FRONT, 1.5))
     add(key="seal", title="본디드 씰 ⑦ 끼움, 최종 검사", group="F. 몰딩·마감",
         parts="⑦ 본디드 씰 G½ (강 + FKM)", tools="내압 시험기, 절연 저항계, 교정 장치",
-        mat="-", spec="씰을 보호캡 쪽에서 G½ 나사 뒤 씰면까지. 내압 75 bar 유지 누설 없음, 절연, 출력·온도 교정, 레이저 마킹 확인.",
+        mat="-", spec="씰을 보호캡 쪽에서 G½ 나사 뒤 씰면까지. 내압 조건 확인 필요 (75 bar 제안값), 절연, 출력·온도 교정, 레이저 마킹 확인.",
         check="최종 검사 기록 (부록 체크시트)",
         caution="씰 고무면 손상 주의. 설치 토크는 현장 설치 설명서.",
         scene=lambda: [(S("body"), METAL), (S("cap"), METAL), (S("housing"), METAL), (S("endcap"), METAL), (S("m12"), CONN_C),
@@ -457,9 +457,9 @@ def build_pdf():
 <img src="{img('exploded.png')}" style="width:100%;margin:5mm 0 2mm;border:0.6px solid #bbb">
 <table><tr><th>적용 범위</th><td>HMT500(260313) 시제품 조립 (기계부 · 하네스 · 몰딩 · 최종 검사). 회로 조립(SMT)은 JLCPCB PCBA로 완료된 PCB를 받는 것으로 함.</td></tr>
 <tr><th>관련 도면</th><td>HMT500-M-000 조립도, M-101 바디, M-102~104 캡·하우징·엔드캡, M-105~106 홀더·지지링 (HMT500_mechanical_drawings.pdf) · KiCad HMT500(260313A)</td></tr>
-<tr><th>근거</th><td>조립 순서는 조립 시뮬레이션 (hardware/mech/assembly_sim.py, 23항목 NG 0)으로 공구·부품 간섭을 확인한 순서. 그림은 3D 모델(hmt500_cad.py)을 그대로 그림.</td></tr>
+<tr><th>근거</th><td>조립 순서는 조립 시뮬레이션 (hardware/mech/assembly_sim.py, 명목 조립·공구·두께 공차 검사; 몰딩 유동은 확인 필요)으로 공구·부품 간섭을 확인한 순서. 그림은 3D 모델(hmt500_cad.py)을 그대로 그림.</td></tr>
 <tr><th>그림 읽는 법</th><td class="legend">회색<span style="background:#bcc2cc"></span> 이미 조립됨 · 주황<span style="background:#f5851f"></span> 이번 단계 부품 · 빨강<span style="background:#d91f1f"></span> 움직이는 방향 · 금속·수지 부품 일부는 안이 보이게 절반을 잘라 그림</td></tr>
-<tr><th>(TBD)</th><td>토크·에폭시·M12 품번 등 표시된 값은 시제품 시험 후 확정. 확정 전에는 표시값으로 작업하고 결과를 기록.</td></tr></table>
+<tr><th>(TBD)</th><td>토크·에폭시·M12 품번 등 표시된 값은 시제품 시험 후 확정. 확정 전에는 생산 작업 기준으로 사용하지 말 것. 시제품 시험 계획에서 별도 승인·기록.</td></tr></table>
 """))
     # 2. 흐름 + 외관
     pages.append(("조립 흐름", f"""
@@ -467,7 +467,7 @@ def build_pdf():
 <div style="display:grid;grid-template-columns:1fr 118mm;gap:6mm">
 <table><tr><th>No</th><th>구분</th><th>작업</th></tr>{flow}</table>
 <div><img src="{img('overview.png')}" style="width:118mm;border:0.6px solid #bbb">
-<p class="small">완성품 외형 (Rev H): 전장 {P.OVERALL:g} · 노출 프로브 Ø12 × {P.BODY['gthread']['x'][0] - P.CAP['x_tip']:g} · G½ 14 · 육각 AF27 × 10 ·
+<p class="small">완성품 외형 (Rev I): 전장 {P.OVERALL:g} · 노출 프로브 Ø12 × {P.BODY['gthread']['x'][0] - P.CAP['x_tip']:g} · G½ 14 · 육각 AF27 × 10 ·
 몸통 Ø{P.HOUSING['od']:g} · 씰면 ~ 엔드캡 끝 {P.ENDCAP['flange']['x'][1]:g} · M12 15.</p>
 <p class="small warn"><b>순서를 바꾸지 말 것.</b> 특히 ① HTX99R 체결은 W-1 선 끝이 자유로운 상태에서, ② 홀더 축 나사는 W-1 플러그를 창으로 꿴 뒤,
 ③ 하우징은 턴버클로 하우징만 돌림 — 모두 하네스 꼬임·간섭을 피하려는 순서.</p></div></div>
@@ -495,7 +495,7 @@ def build_pdf():
 <tr><td>내압 시험기 (≥ 75 bar), 절연 저항계, 교정 장치</td><td>최종 검사</td></tr></table></div>
 <div><h3>소모품</h3><table>
 <tr><th>품목</th><th>용도</th></tr>
-<tr><td>상온경화 에폭시 1종 (TBD: ≥ 120 °C, 내유성, SUS·PEEK·FR-4 접착)</td><td>1차 Ø7 통로 약 0.5 cm³, 2차 하우징 안 약 25 cm³</td></tr>
+<tr><td>상온경화 에폭시 1종 (TBD: ≥ 120 °C, 내유성, SUS·PEEK·FR-4 접착)</td><td>1차 Ø7 통로 약 0.5 cm³, 2차 하우징 안 실제 주입량 확인 필요</td></tr>
 <tr><td>실리콘 그리스 (O링용)</td><td>O링 ⑩ ×2, ⑯</td></tr>
 <tr><td>나사 고정제 중강도 (Loctite 243 급) / 저강도 (222 급)</td><td>턴버클 나사 / M2 축 나사</td></tr>
 <tr><td>나사 실런트</td><td>M3 무두나사 ⑲</td></tr>
@@ -503,11 +503,11 @@ def build_pdf():
 <h3>조임 기준 (TBD = 시험 후 확정)</h3><table>
 <tr><th>부위</th><th>토크</th></tr>
 <tr><td>HTX99R → 바디 M10×1.0</td><td>1.0 N·m (TBD, 두텍 사양)</td></tr>
-<tr><td>PCB 가로 나사 M2×12 → 홀더 (POM)</td><td>약 0.1 N·m (손 조임)</td></tr>
-<tr><td>홀더 축 나사 M2 → 바디 (SUS)</td><td>0.2 N·m</td></tr>
+<tr><td>PCB 가로 나사 M2×12 → 홀더 (POM)</td><td>약 0.1 N·m (확인 필요)</td></tr>
+<tr><td>홀더 축 나사 M2 → 바디 (SUS)</td><td>0.2 N·m (확인 필요)</td></tr>
 <tr><td>M12 → 엔드캡 M16×1.5</td><td>커넥터 사양 (TBD)</td></tr>
 <tr><td>하우징 턴버클 M26×1 (R/LH)</td><td>5 N·m (TBD)</td></tr>
-<tr><td>M3×3 무두나사</td><td>0.3 N·m + 실런트</td></tr>
+<tr><td>M3×3 무두나사</td><td>0.3 N·m (확인 필요) + 실런트</td></tr>
 <tr><td>보호캡 → HTX99R 위 나사</td><td>손 조임 + 0.5 N·m (TBD)</td></tr></table></div></div>
 <p class="small warn">ESD: B 단계부터 PCB를 다룰 때 손목띠·ESD 매트 사용. 청결: 접액부·O링 면에 먼지·금속 칩 없음. 에폭시 작업은 환기·보호장갑.</p>"""))
     # 5. 단계
@@ -528,8 +528,8 @@ def build_pdf():
     # 6. 최종 검사 기록지
     items = [("외관", "흠·찍힘·버 없음, 레이저 마킹 (모델·출력·전원·핀맵·시리얼)"),
              ("치수", f"전장 {P.OVERALL:g} ±0.5, 노출 프로브 34, 몸통 Ø30"),
-             ("샤시 도통", "M12 하우징(샤시) ~ 바디 < 1 Ω"), ("절연", "전원·신호 ~ 샤시 ≥ 100 MΩ (500 V DC)"),
-             ("내압", "75 bar, 5 분 유지, 누설·변형 없음 (접액부)"), ("전원", "12 / 24 / 28 V 소비 전류"),
+             ("샤시 도통", "M12 하우징(샤시) ~ 바디 < 1 Ω"), ("절연", "전원·신호 ~ 샤시 ≥ 100 MΩ (시험전압 확인 필요 — 샤시 보호소자와 협의)"),
+             ("내압", "확인 필요: 75 bar·5분은 제안값, 정격·시험 계획 승인 후 수행"), ("전원", "12 / 24 / 28 V 소비 전류"),
              ("출력", "4–20 mA 2채널 4·12·20 mA 점검, RS-485 Modbus 응답"),
              ("교정", "aw 2점 이상, 온도 2점 (2차 몰딩 경화 후)"), ("기록", "펌웨어 버전, 교정 계수, 시리얼")]
     rows = "".join(f"<tr><td>{e(a)}</td><td>{e(b)}</td><td></td><td>□ 합 □ 불</td></tr>" for a, b in items)

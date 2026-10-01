@@ -139,17 +139,17 @@
 <text x="107.200" y="180.100" font-size="2.7" text-anchor="start" class="t ">가장자리 5.0 / 중심 9.7 mm</text>
 <circle cx="250.000" cy="90.000" r="32.400" class="thick" fill="none"/>
 <circle cx="250.000" cy="90.000" r="9.000" class="thick" fill="none"/>
-<rect x="217.600" y="87.450" width="64.800" height="5.100" fill="#fff" class="thick"/>
+<rect x="217.600" y="87.150" width="64.800" height="5.700" fill="#fff" class="thick"/>
 <circle cx="250.000" cy="90.000" r="32.400" class="thick" fill="none"/>
 <circle cx="250.000" cy="114.000" r="3.300" class="thick" fill="none"/>
 <circle cx="250.000" cy="114.000" r="7.800" class="thin" fill="none"/>
 <circle cx="250.000" cy="66.000" r="3.300" class="thick" fill="none"/>
 <circle cx="250.000" cy="66.000" r="7.800" class="thin" fill="none"/>
-<rect x="241.600" y="77.850" width="16.800" height="9.600" fill="#fff" class="thick"/>
-<line x1="241.600" y1="79.850" x2="256.000" y2="154.400" class="thin"/>
-<polygon points="241.600,79.850 242.977,82.232 241.209,82.574" class="arrow"/>
+<rect x="241.600" y="77.160" width="16.800" height="9.900" fill="#fff" class="thick"/>
+<line x1="241.600" y1="79.160" x2="256.000" y2="154.400" class="thin"/>
+<polygon points="241.600,79.160 242.973,81.544 241.205,81.883" class="arrow"/>
 <line x1="256.000" y1="154.400" x2="278.000" y2="154.400" class="thin"/>
-<text x="257.000" y="153.400" font-size="3.2" text-anchor="start" class="t ">창 5.6 × 3.2 관통 (홈 위 0.85–4.05) — PCB 끼운 뒤 W-1 플러그 통과</text>
+<text x="257.000" y="153.400" font-size="3.2" text-anchor="start" class="t ">창 5.6 × 3.3 관통 (홈 위 0.98–4.28) — PCB 끼운 뒤 W-1 플러그 통과</text>
 <line x1="261.700" y1="60.600" x2="261.700" y2="119.400" class="hidden"/>
 <line x1="268.300" y1="60.600" x2="268.300" y2="119.400" class="hidden"/>
 <line x1="231.700" y1="60.600" x2="231.700" y2="119.400" class="hidden"/>
@@ -178,10 +178,10 @@
 <polygon points="255.000,63.000 256.037,60.451 257.390,61.638" class="arrow"/>
 <line x1="272.000" y1="43.600" x2="294.000" y2="43.600" class="thin"/>
 <text x="273.000" y="42.600" font-size="3.2" text-anchor="start" class="t ">2×Ø2.2 관통, 카운터보어 Ø5.2 깊이 2.2 (M2 → 바디, 위쪽은 링 단자 함께)</text>
-<line x1="279.400" y1="92.550" x2="244.000" y2="140.400" class="thin"/>
-<polygon points="279.400,92.550 278.577,95.175 277.130,94.105" class="arrow"/>
+<line x1="279.400" y1="92.850" x2="244.000" y2="140.400" class="thin"/>
+<polygon points="279.400,92.850 278.569,95.473 277.125,94.398" class="arrow"/>
 <line x1="244.000" y1="140.400" x2="222.000" y2="140.400" class="thin"/>
-<text x="243.000" y="139.400" font-size="3.2" text-anchor="end" class="t ">홈 폭 1.7 (+0.1/0) 깊이 3.5, 전폭</text>
+<text x="243.000" y="139.400" font-size="3.2" text-anchor="end" class="t ">홈 폭 1.9 (+0.1/0) 깊이 3.5, 전폭</text>
 <line x1="243.700" y1="96.300" x2="232.000" y2="132.400" class="thin"/>
 <polygon points="243.700,96.300 243.755,99.051 242.042,98.496" class="arrow"/>
 <line x1="232.000" y1="132.400" x2="210.000" y2="132.400" class="thin"/>
@@ -211,8 +211,8 @@
 <text x="215.000" y="32.000" font-size="2.8" text-anchor="start" class="t muted">왼쪽: 뒤(PCB 쪽)에서 본 끝면 / 오른쪽: 측면</text>
 <circle cx="370.000" cy="200.000" r="24.500" class="thick" fill="none"/>
 <circle cx="370.000" cy="200.000" r="20.000" class="thick" fill="none"/>
-<rect x="389.928" y="198.300" width="3.272" height="3.400" fill="#fff" class="thick"/>
-<rect x="346.800" y="198.300" width="3.272" height="3.400" fill="#fff" class="thick"/>
+<rect x="389.910" y="198.100" width="3.290" height="3.800" fill="#fff" class="thick"/>
+<rect x="346.800" y="198.100" width="3.290" height="3.800" fill="#fff" class="thick"/>
 <line x1="340.500" y1="200.000" x2="399.500" y2="200.000" class="center"/>
 <line x1="370.000" y1="170.500" x2="370.000" y2="229.500" class="center"/>
 <line x1="395.500" y1="175.500" x2="405.000" y2="175.500" class="thin"/>
@@ -231,10 +231,10 @@
 <polygon points="346.800,232.500 349.400,231.600 349.400,233.400" class="arrow"/>
 <polygon points="393.200,232.500 390.600,233.400 390.600,231.600" class="arrow"/>
 <text x="370.000" y="236.500" font-size="3.2" text-anchor="middle" class="t ">23.2 (+0.2/0)  홈 바닥 사이</text>
-<line x1="347.800" y1="201.700" x2="336.000" y2="210.000" class="thin"/>
-<polygon points="347.800,201.700 346.191,203.932 345.156,202.460" class="arrow"/>
+<line x1="347.800" y1="201.900" x2="336.000" y2="210.000" class="thin"/>
+<polygon points="347.800,201.900 346.166,204.113 345.147,202.629" class="arrow"/>
 <line x1="336.000" y1="210.000" x2="314.000" y2="210.000" class="thin"/>
-<text x="335.000" y="209.000" font-size="3.2" text-anchor="end" class="t ">홈 폭 1.7 (+0.1/0) 2곳</text>
+<text x="335.000" y="209.000" font-size="3.2" text-anchor="end" class="t ">홈 폭 1.9 (+0.1/0) 2곳</text>
 <text x="275.000" y="160.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-106  PCB 지지링 (2:1), 두께 4</text>
 <text x="275.000" y="166.000" font-size="2.8" text-anchor="start" class="t muted">하우징 안에서 PCB 뒤쪽을 받침. 엔드캡과 연결 안 함 (체결 회전 전달 없음)</text>
 <text x="18.000" y="196.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
@@ -273,7 +273,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-105~106</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">H / 2026-09-30</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">I / 2026-10-01</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">PEEK / PA66-GF30</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

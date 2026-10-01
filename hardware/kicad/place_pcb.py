@@ -193,7 +193,7 @@ def from_k(v):
 def layer_box(fp, layers):
     xs, ys = [], []
     for it in fp.GraphicalItems():
-        if it.GetLayer() in layers and not isinstance(it, pcbnew.FP_TEXT):
+        if it.GetLayer() in layers and not isinstance(it, getattr(pcbnew, "FP_TEXT", pcbnew.PCB_TEXT)):
             b = it.GetBoundingBox()
             (x0, y0), (x1, y1) = from_k(pcbnew.VECTOR2I(b.GetLeft(), b.GetBottom())), \
                 from_k(pcbnew.VECTOR2I(b.GetRight(), b.GetTop()))
@@ -204,12 +204,12 @@ def layer_box(fp, layers):
 
 def set_pose(fp, side, x, y, rot):
     if fp.IsFlipped():
-        fp.Flip(fp.GetPosition(), False)
+        fp.Flip(fp.GetPosition(), getattr(pcbnew, "FLIP_DIRECTION_TOP_BOTTOM", False))
     fp.SetOrientationDegrees(0)
     fp.SetPosition(to_k(x, y))
     fp.SetOrientationDegrees(rot)
     if side == "B":
-        fp.Flip(fp.GetPosition(), False)      # 위아래 뒤집기 (KiCad 기본)
+        fp.Flip(fp.GetPosition(), getattr(pcbnew, "FLIP_DIRECTION_TOP_BOTTOM", False))      # 위아래 뒤집기 (KiCad 기본)
 
 
 # ── 부품·넷 ──
@@ -544,7 +544,7 @@ def build():
     board.BuildConnectivity()
     pro_path = OUT[:-len(".kicad_pcb")] + ".kicad_pro"
     keep = json.load(open(pro_path))
-    pcbnew.SaveBoard(OUT, board)
+    pcbnew.SaveBoard(OUT, board, True)  # 프로젝트 설정은 아래 set_rules에서 보존·기록
     set_rules(pro_path, keep)
     prl = OUT[:-len(".kicad_pcb")] + ".kicad_prl"
     if os.path.exists(prl):
@@ -573,6 +573,10 @@ def report(placed):
 
 
 def main():
+    # macOS KiCad 10의 wx 런타임 초기화 (GUI 실행 없이 배치 생성).
+    if sys.platform == "darwin":
+        import wx
+        app = wx.GetApp() or wx.App(False)
     board, placed = build()
     rows, err = report(placed)
     area = {s: sum((r["crt"][2] - r["crt"][0]) * (r["crt"][3] - r["crt"][1]) for r in rows if r["side"] == s)

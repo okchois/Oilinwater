@@ -84,6 +84,18 @@ def housing():
     return s
 
 
+def endcap_port(angle, x0, x1, diameter):
+    """입구 r11.8에서 안쪽으로 20° 기울어진 주입구/공구 외형."""
+    e = P.ENDCAP
+    a = math.radians(angle)
+    slope = math.tan(math.radians(e["ports"]["tilt_deg"]))
+    r0 = e["ports"]["r"] + (x0 - e["flange"]["x"][1]) * slope
+    direction = cq.Vector(1, slope * math.cos(a), slope * math.sin(a))
+    return cq.Workplane("XY").add(cq.Solid.makeCylinder(diameter / 2,
+        (x1 - x0) * math.sqrt(1 + slope * slope),
+        cq.Vector(x0, r0 * math.cos(a), r0 * math.sin(a)), direction))
+
+
 def endcap():
     E = P.ENDCAP
     s = cyl(*E["mthread"]["x"], E["mthread"]["d"]).union(cyl(*E["seal"]["x"], E["seal"]["d"])).union(
@@ -95,10 +107,10 @@ def endcap():
         slab = cq.Workplane("XY").box(f1 - f0 + 0.2, 10, 40).translate(((f0 + f1) / 2, sgn * (E["flange"]["flats_af"] / 2 + 5), 0))
         s = s.cut(slab)
     s = s.cut(cyl(E["cbore"]["x"][0] - 0.1, E["cbore"]["x"][1], E["cbore"]["d"]))
-    Po = E["ports"]                                  # 몰딩 주입·공기 빠짐 구멍 M3 ×2 (축 방향, 플랜지 관통)
+    Po = E["ports"]  # 입구에서 안쪽으로 경사: O링 홈과 분리
     for ang in Po["angles"]:
         a = math.radians(ang)
-        s = s.cut(axial_hole(E["cbore"]["x"][1] - 0.5, f1 + 0.1, Po["r"] * math.cos(a), Po["r"] * math.sin(a), Po["d_minor"]))
+        s = s.cut(endcap_port(ang, E["cbore"]["x"][1] - 0.5, f1 + 0.1, Po["d_minor"]))
     return s.cut(cyl(E["thread"]["x"][0] - 0.1, f1 + 0.1, E["thread"]["d_minor"]))
 
 

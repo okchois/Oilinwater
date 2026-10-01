@@ -19,10 +19,10 @@ import gen_hmt500 as g  # noqa: E402
 def parse(path):
     txt = open(path, encoding="utf-8").read()
     nets = {}
-    blocks = re.split(r"\(net \(code ", txt)[1:]
+    blocks = re.split(r"\(net\s+\(code\s+", txt)[1:]
     for blk in blocks:
         name = re.search(r'\(name "([^"]*)"\)', blk).group(1).lstrip("/")
-        nodes = frozenset(re.findall(r'\(node \(ref "([^"]+)"\) \(pin "([^"]+)"\)', blk))
+        nodes = frozenset(re.findall(r'\(node\s+\(ref "([^"]+)"\)\s+\(pin "([^"]+)"\)', blk))
         nets[name] = nodes
     return nets
 

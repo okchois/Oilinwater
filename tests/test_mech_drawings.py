@@ -199,6 +199,22 @@ class MechTest(unittest.TestCase):
         self.assertEqual(len(j1), 6)                                    # 1·7 NC (GH 고정 패드 MP는 PCB 전용)
         self.assertIn("J5", next(S for S in g.SHEETS if "J5" in S.nets).nets)
 
+    def test_rev_i_assembly_margins(self):
+        # 최대 1.76 mm PCB가 최소 홈에 들어가야 함: 이전 1.7 mm 홈은 실패.
+        for support in (P.PCB_HOLDER, P.PCB_RING):
+            self.assertGreaterEqual(support["slot_w"] - P.PCB["t"] - P.PCB["t_tol"], 0.10)
+        sp = P.SENSOR_PROBE
+        self.assertGreaterEqual(sp["board"]["x"][1] - sp["board"]["x"][0],
+                                0.3 + sp["mk33"]["l"] + 0.6 + sp["pt1000"]["l"])
+        e, port = P.ENDCAP, P.ENDCAP["ports"]
+        slope = math.tan(math.radians(port["tilt_deg"]))
+        # 공구의 입구 단면과 M12 어깨 사이 최소 간격 (명목치).
+        self.assertGreaterEqual(port["r"] - port["access_d"]/2 * math.sqrt(1+slope*slope)
+                                - P.CONNECTOR["body"]["d"]/2, port["access_clearance"])
+        # 나사 대경까지 보수적으로 고려해도 O링 홈을 침범하면 안 됨.
+        rg = port["r"] + (e["seal"]["groove_x"][1] - e["flange"]["x"][1]) * slope
+        self.assertGreaterEqual(P.ORING["groove_d"]/2 - rg - 1.5*math.sqrt(1+slope*slope), .5)
+
     def test_svg_valid(self):
         for fn in (D.sheet_assembly, D.sheet_body, D.sheet_small, D.sheet_pcb):
             with tempfile.NamedTemporaryFile("w", suffix=".svg", delete=False, encoding="utf-8") as f:

@@ -1,14 +1,15 @@
 Request for quotation - CNC machining (JLCCNC)
 Project: HMT500(260313) oil moisture transmitter, prototype lot
 Company: DOTECH Co., Ltd.
-Drawing revision: H   Date: 2026-09-30
+Drawing revision: I   Date: 2026-10-01
+STATUS: DFM / prototype preparation only. Connector P/N, resin, pressure and temperature qualification remain open.
 Quantity: 5 sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
 
-TOLERANCE: the online option is +/-0.05 mm. The fit diameters in these STEP files are already set to the middle of
-the ISO fit band, so machining to the STEP within +/-0.05 is acceptable:
-  seal spigots dia 26.94 (M-101, M-104), seal bores dia 27.06 (M-103), O-ring grooves dia 24.65,
-  connector seal bore dia 10.05 (M-101), holder dia 21.55 / slot 1.75, ring dia 24.45 / slot 1.75.
-  (The Korean drawings show the ISO fit symbols f7/H8 on nominal 27 / 10.)
+TOLERANCE: STEP and PDF use the SAME nominal geometry (Rev I). The explicit drawing tolerances control.
+  Seal spigots dia 27 f7, seal bores dia 27 H8, connector seal bore dia 10 H8, O-ring groove dia 24.6 h9.
+  Holder/ring PCB slots: 1.9 (+0.1/0), for finished PCB thickness 1.6 +/-0.16.
+  Do NOT substitute general +/-0.05 for these fits. Please confirm achievable tolerances and quote accordingly.
+  If these tolerances cannot be met, request approval for a revised design before machining.
 
 MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
   M-101, M-102, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
@@ -19,7 +20,7 @@ and in order_jlccnc_EN.csv. Sheet M-102~104 carries three parts: cap M-102 (top)
 Sheet M-105~106 also shows the PCB outline, which is NOT a machined part.
 
 HMT500-M-101  Process body  x5
-  3D: HMT500-M-101_body_SUS304.step   2D: HMT500-M-101_drawing_revH_SUS304.pdf
+  3D: HMT500-M-101_body_SUS304.step   2D: HMT500-M-101_drawing_revI_SUS304.pdf
   Material: Stainless steel SUS304 for this prototype lot (316L for production)
   Finish: As machined, deburr, passivation (ASTM A967)
   Threads: G1/2-A (ISO 228-1) external; M26x1-6g external (right hand); M10x1.0-6H internal, thread length 5.5 (ends 8.0 behind the connector seat face, after dia 11.2 x 1 counterbore and dia 10 H8 x 1.5 seal bore); 2x M2-6H tapped, depth 5, on counterbore bottom, PCD 16
@@ -27,7 +28,7 @@ HMT500-M-101  Process body  x5
   Note: No front tube: the part starts with the G1/2 thread. Front sleeve bore dia 12.3 (+0.1/0) x 3.5 deep, machined into the G1/2 front face (holds the cap root against side load; connector seat face at its bottom). Through channel dia 7 x 12.5 long. Hex AF27 x 10 long with 30 deg chamfer; collar dia 30.
 
 HMT500-M-102  Sensor protection cap  x5
-  3D: HMT500-M-102_cap_SUS304.step   2D: HMT500-M-102_drawing_revH_SUS304.pdf
+  3D: HMT500-M-102_cap_SUS304.step   2D: HMT500-M-102_drawing_revI_SUS304.pdf
   Material: Stainless steel SUS304 (wetted, oil)
   Finish: As machined, deburr inside and outside of all holes, passivation
   Threads: M10x1.0-6H internal (fine pitch 1.0), depth 8.5 from the open end
@@ -35,7 +36,7 @@ HMT500-M-102  Sensor protection cap  x5
   Note: Filter cap screwed onto the sensor connector, overall length 37.5. Drawing sheet M-102~104 (cap at top).
 
 HMT500-M-103  Housing tube  x5
-  3D: HMT500-M-103_housing_SUS304.step   2D: HMT500-M-103_drawing_revH_SUS304.pdf
+  3D: HMT500-M-103_housing_SUS304.step   2D: HMT500-M-103_drawing_revI_SUS304.pdf
   Material: Stainless steel SUS304
   Finish: As machined, deburr, passivation; outer laser marking if available (text supplied later)
   Threads: Front: M26x1-6H internal, RIGHT hand, length 7; Rear: M26x1-LH-6H internal, LEFT hand, length 7
@@ -43,27 +44,27 @@ HMT500-M-103  Housing tube  x5
   Note: Turnbuckle tube: front thread RIGHT hand, rear thread LEFT hand. Please confirm.
 
 HMT500-M-104  End cap  x5
-  3D: HMT500-M-104_endcap_SUS304.step   2D: HMT500-M-104_drawing_revH_SUS304.pdf
+  3D: HMT500-M-104_endcap_SUS304.step   2D: HMT500-M-104_drawing_revI_SUS304.pdf
   Material: Stainless steel SUS304
   Finish: As machined, deburr, passivation
-  Threads: M26x1-LH-6g external, LEFT hand; M16x1.5-6H internal, length 6 (connector, TENTATIVE - will be confirmed with the connector part number; please quote as M16x1.5); 2x M3 through (fill/vent ports, r10 at 90/270 deg)
+  Threads: M26x1-LH-6g external, LEFT hand; M16x1.5-6H internal, length 6 (connector, TENTATIVE - will be confirmed with the connector part number; please quote as M16x1.5); 2x M3 depth 4 mm, pilot dia 2.5 through, inclined 20 deg inward from axial direction (fill/vent ports, entry r11.8 at 90/270 deg)
   Tolerances: O-ring seat dia 27 f7 with groove, Ra 0.8; flange dia 30 x 4 with wrench flats AF27; others ISO 2768-mK
-  Note: LEFT hand external thread. Please confirm.
+  Note: LEFT hand external thread. Fill/vent access assumes connector shoulder OD <=20 and axial tool/nozzle OD <=2.5. Actual connector P/N must be confirmed before manufacture.
 
 HMT500-M-105  PCB holder  x5
-  3D: HMT500-M-105_holder_POM-White.step   2D: HMT500-M-105_drawing_revH_POM-White.pdf
+  3D: HMT500-M-105_holder_POM-White.step   2D: HMT500-M-105_drawing_revI_POM-White.pdf
   Material: POM (White) for this prototype lot (PEEK for production)
   Finish: As machined, deburr
   Threads: 2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2
-  Tolerances: OD 21.6 (0/-0.1); slot width 1.7 (+0.1/0) depth 3.5; window 5.6 x 3.2 (+0.1/0); others ISO 2768-mK
+  Tolerances: OD 21.6 (0/-0.1); slot width 1.9 (+0.1/0) depth 3.5; window 5.6 x 3.3 (+0.1/0); others ISO 2768-mK
   Note: Drawing sheet M-105~106 (holder at top right).
 
 HMT500-M-106  PCB rear support ring  x5
-  3D: HMT500-M-106_ring_POM-White.step   2D: HMT500-M-106_drawing_revH_POM-White.pdf
+  3D: HMT500-M-106_ring_POM-White.step   2D: HMT500-M-106_drawing_revI_POM-White.pdf
   Material: POM (White) for this prototype lot (PEEK for production)
   Finish: As machined, deburr
   Threads: -
-  Tolerances: OD 24.5 (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4
+  Tolerances: OD 24.5 (0/-0.1); ID 20; 2 slots width 1.9 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4
   Note: Drawing sheet M-105~106 (ring at right).
 
 General:

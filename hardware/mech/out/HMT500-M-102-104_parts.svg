@@ -172,12 +172,12 @@
 <polygon points="312.500,67.500 314.090,65.255 315.138,66.719" class="arrow"/>
 <line x1="360.000" y1="33.500" x2="382.000" y2="33.500" class="thin"/>
 <text x="361.000" y="32.500" font-size="3.2" text-anchor="start" class="t ">Ø22 깊이 9</text>
-<line x1="327.500" y1="116.875" x2="342.500" y2="116.875" class="hidden"/>
-<line x1="327.500" y1="123.125" x2="342.500" y2="123.125" class="hidden"/>
-<line x1="338.750" y1="120.000" x2="360.000" y2="145.500" class="thin"/>
-<polygon points="338.750,120.000 341.106,121.421 339.723,122.574" class="arrow"/>
+<line x1="327.500" y1="115.915" x2="342.500" y2="121.375" class="hidden"/>
+<line x1="327.500" y1="122.165" x2="342.500" y2="127.625" class="hidden"/>
+<line x1="338.750" y1="124.500" x2="360.000" y2="145.500" class="thin"/>
+<polygon points="338.750,124.500 341.232,125.687 339.967,126.968" class="arrow"/>
 <line x1="360.000" y1="145.500" x2="382.000" y2="145.500" class="thin"/>
-<text x="361.000" y="144.500" font-size="3.2" text-anchor="start" class="t ">2×M3 관통 (주입·공기 빠짐)</text>
+<text x="361.000" y="144.500" font-size="3.2" text-anchor="start" class="t ">2×M3 깊이 4 (주기 5)</text>
 <line x1="327.500" y1="125.750" x2="360.000" y2="158.500" class="thin"/>
 <polygon points="327.500,125.750 329.970,126.962 328.693,128.229" class="arrow"/>
 <line x1="360.000" y1="158.500" x2="382.000" y2="158.500" class="thin"/>
@@ -249,7 +249,7 @@
 <text x="18.000" y="259.400" font-size="3.0" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 버 제거. 지정 외 표면 Ra 1.6. 일반공차 ISO 2768-mK.</text>
 <text x="18.000" y="265.600" font-size="3.0" text-anchor="start" class="t ">3. ③–① M26×1 오른나사, ③–④ M26×1 왼나사 (턴버클: ③만 돌림) + O링 24×1.5 FKM, Ø27 H8/f7. 왼나사 끝에 &#x27;LH&#x27; 각인.</text>
 <text x="18.000" y="271.800" font-size="3.0" text-anchor="start" class="t ">4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 보호캡은 SUS304 (두텍 필터 기반) — 접액부 316L 통일 여부 검토.</text>
-<text x="18.000" y="278.000" font-size="3.0" text-anchor="start" class="t ">5. ④ M3 구멍 2개 (r10, 90°·270°, 플랜지 관통): 하우징 안 몰딩 주입·공기 빠짐. 경화 후 M3×3 무두나사 + 실런트로 막음.</text>
+<text x="18.000" y="278.000" font-size="3.0" text-anchor="start" class="t ">5. ④ M3 구멍 2개 (r11.8, 90°·270°, 축에서 안쪽 20°, Ø2.5 관통): 하우징 안 몰딩 주입·공기 빠짐. 경화 후 M3×3 무두나사 + 실런트로 막음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
 <text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
 <text x="85.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">2</text>
@@ -279,7 +279,7 @@
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-102~104</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">H / 2026-09-30</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">I / 2026-10-01</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
 <text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS316L (1.4404)</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>

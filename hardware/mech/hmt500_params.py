@@ -38,8 +38,9 @@ Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두
   → 피드스루를 바디 뒤쪽(Ø22 카운터보어 바닥) Ø8 H7 자리에 뒤에서 넣고 뒤에서 레이저 용접.
 """
 
-DRAWING_REV = "H"
-DATE = "2026-09-30"
+# Rev I: 센서 300pF 외형·13.5 mm 캐리어, M3 r11.8 공구 접근, PCB 최대두께 1.76/홈 최소1.9, 제작 공차 통일.
+DRAWING_REV = "I"
+DATE = "2026-10-01"
 
 # ── 보호캡 = 두텍 SUS PROBE OIL FILTER (품번 390000-001100, 도면 2020-06-08, SUS304) ──
 # 원 도면 좌표(끝 0 → 열린 끝 32)를 제품 x로: x = x_tip + xf. 열린 끝이 커넥터 플랜지 앞면(x=-30)에 닿음
@@ -81,13 +82,13 @@ SENSOR_CONN = dict(step="ref/HTX99R_Sensor_Probe_Sensor_Connector.STEP", x0=-22.
                    name="HTX99R sensor connector 4P (DOTECH)")
 CONN_ORING = dict(id=8.0, cs=1.2, name="O-ring 8 x 1.2 FKM (connector seal in Ø10 H8)")
 
-# ── 교체형 센서 프로브 (MK33-W mini + Pt1000 MiniSens) ──
+# ── 교체형 센서 프로브 (MK33-W 300pF + Pt1000 MiniSens) ──
 SENSOR_PROBE = dict(plug=dict(x=(-39.5 + FRONT_SHIFT, -37.0 + FRONT_SHIFT), d=7.6),   # 필터 Ø8 센서실 안          # 수지 플러그 (PEEK)
                     pins=dict(x=(-37.0 + FRONT_SHIFT, -32.0 + FRONT_SHIFT), d=1.0, pitch=2.54),  # 소켓에 꽂히는 핀 4개 (규격 확인)
-                    board=dict(x=(-46.3 + FRONT_SHIFT, -39.5 + FRONT_SHIFT), w=6.0, t=0.8),    # 센서 기판 (세라믹 또는 FR-4)
-                    mk33=dict(l=5.0, w=3.81, t=0.4),              # IST MK33-W mini (150138)
+                    board=dict(x=(-53.0 + FRONT_SHIFT, -39.5 + FRONT_SHIFT), w=6.0, t=0.8),    # 센서 기판 (세라믹 또는 FR-4)
+                    mk33=dict(l=10.8, w=3.81, t=0.8),             # IST MK33-W 300 pF Au/Cu, DHMK33-W_E2.4.0; 실제 공급 품번 확인 필요
                     pt1000=dict(l=1.6, w=1.2, t=0.5),             # IST MiniSens Pt1000 F0.1
-                    name="Sensor probe insert: MK33-W mini + Pt1000, 4 pins")
+                    name="Sensor probe insert: MK33-W 300pF + Pt1000, 4 pins (P/N verify)")
 
 # ── O링 (바디–하우징, 하우징–엔드캡 공통, 반경 방향 정적 밀봉) ──
 # Rev H: Ø27 자리, 단면 1.5 (홈 바닥과 카운터보어 Ø22 사이 벽 1.3). 압축 20 %, 늘림 2.5 %
@@ -129,7 +130,7 @@ ENDCAP = dict(mthread=dict(x=(62.0, 69.0), d=26.0, d_minor=24.917, thread="M26x1
               flange=dict(x=(73.0, 77.0), d=30.0, flats_af=27.0),   # Rev H: 길이 4, 맞변 AF27 (육각과 같은 스패너)
               cbore=dict(x=(62.0, 71.0), d=22.0),                   # 경량화·리드선 공간
               thread=dict(x=(71.0, 77.0), d=16.0, d_minor=14.376, thread="M16x1.5-6H"),   # Rev H: 안쪽으로 2 (플랜지 4 + 2)
-              ports=dict(r=10.0, angles=(90, 270), thread="M3", d_minor=2.5, plug="M3x3 set screw + sealant"))  # 몰딩 주입·공기 빠짐
+              ports=dict(r=11.8, tilt_deg=20.0, tap_depth=4.0, access_d=2.5, access_clearance=0.3, angles=(90, 270), thread="M3", d_minor=2.5, plug="M3x3 set screw + sealant"))  # 몰딩 주입·공기 빠짐
 
 # ── 구매품 (단순 형상) ──
 SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 3869 type), steel + FKM")
@@ -137,11 +138,11 @@ SEAL = dict(x=(-2.0, 0.0), id=21.5, od=28.7, name="Bonded seal G1/2 (USIT/DIN 38
 # 압력 격벽: HTX99R O링 + 몰드 핀 → Ø7 × 34 에폭시 몰딩 (전선 매립). 피드스루 없음
 POTTING = dict(x=(-2.5, 10.0), d=7.0, name="Epoxy molding, Ø7 x 12.5 channel (W-1 embedded)")
 # 하우징 안 전체 몰딩 (2차, 같은 상온경화 에폭시): 바디 Ø22 카운터보어 + 하우징 Ø25 + 엔드캡 Ø22 (M12 뒤면까지)
-POTTING2 = dict(zones=[(10.0, 24.0, 22.0), (24.0, 62.0, 25.0), (62.0, 69.0, 22.0)],
+POTTING2 = dict(zones=[(10.0, 24.0, 22.0), (24.0, 62.0, 25.0), (62.0, 71.0, 22.0)],
                 material="상온경화 에폭시 1종 (통로·전자부 공통)", name="Epoxy potting, housing interior (electronics)")
 # ── PCB E-301: 축 방향 1장, 축을 지나는 평면(z=0)에 세움. 폭은 y 방향 ──
 # Rev H: 모양·배치 그대로, 위치만 x −2 (육각 10). KiCad 좌표 = (100 + x − PCB x0, 100 − y) 라 KiCad 파일은 변하지 않음
-PCB = dict(t=1.6, x=(12.5, 69.0),
+PCB = dict(t=1.6, t_tol=0.16, slot_clearance=0.10, x=(12.5, 69.0),
            sections=[(12.5, 24.0, 18.0),    # 바디 카운터보어 Ø22 안
                      (24.0, 61.4, 23.0),    # 하우징 Ø25 안 (끝 61.4: 턴버클 끝 엔드캡 앞면 x 62와 틈 0.6 — 조립 시뮬레이션 ③)
                      (61.4, 69.0, 18.0)],   # 엔드캡 카운터보어 Ø22 안
@@ -194,9 +195,9 @@ def pcb_part_boxes():
             out.append(((x0 + x1) / 2, (y0 + y1) / 2, x1 - x0, y1 - y0, p["h"], 1 if p["side"] == "T" else -1))
     return out
 
-PCB_HOLDER = dict(x=(10.2, 16.0), d=21.6, hole_d=6.0, slot_w=1.7, slot_x=(12.5, 16.0),   # Ø6: 하네스 W-1 전선 통과
+PCB_HOLDER = dict(x=(10.2, 16.0), d=21.6, hole_d=6.0, slot_w=1.9, slot_x=(12.5, 16.0),   # Ø6: 하네스 W-1 전선 통과
                   # 창: PCB를 먼저 끼운 상태에서 W-1 플러그(5.0 × 2.8)가 지나가는 통로 (PCB 윗면 위, 조립 시뮬레이션 ①②)
-                  window=dict(wy=5.6, z=(0.85, 4.05)),
+                  window=dict(wy=5.6, z=(0.98, 4.28)),
                   # 축 나사 자리: Ø5.2 × 2.2 — 위쪽 나사는 샤시 선 M2 링 단자(바깥 Ø4.5, 두께 0.8)를 함께 조임
                   screw_pcd=16.0, screw_d=2.2, cbore_d=5.2, cbore_depth=2.2,
                   cross=dict(x=14.25, y=(5.0, -5.0), d=2.2, tap="M2"),
@@ -208,7 +209,7 @@ CHASSIS_WIRE = dict(pad=(17.5, 0.0), screw_z=8.0, length=25.0, wire="AWG 28 PTFE
 PUSH_TOOL = dict(length=70.0, width=14.0, t=2.4, slot_w=10.4, slot_len=55.0, tip_w=12.4, tip_t=3.0, tip_len=4.0,
                  name="Assembly tool T-001: W-2 plug push bar (3D print, PA12 or resin)")
 # Rev H: 바깥 Ø24.5 (하우징 Ø25, 나사 골지름 Ø24.917 통과). 홈 바닥 바깥 벽 0.65
-PCB_RING = dict(x=(57.0, 61.0), od=24.5, id=20.0, slot_w=1.7, slot_y=11.6,
+PCB_RING = dict(x=(57.0, 61.0), od=24.5, id=20.0, slot_w=1.9, slot_y=11.6,
                 name="PCB rear support ring (PEEK or PA66-GF30)")
 # M12 하네스 W-2: J1 GH 플러그 (입구 +x) → 엔드캡 카운터보어 → M12 커넥터 뒤 핀 8개 (납땜 + 수축튜브)
 HARNESS2 = dict(plug=dict(x=(56.5, 60.5), y=(-5.9, 5.9), z=(0.8, 4.3)),   # GHR-08V-S 꽂힌 상태 외형 (개략)
@@ -245,7 +246,7 @@ PARTS = [
     ("3", "HMT500-M-103", "Housing tube Ø30", "SUS316L (1.4404)", 1, "Machined, M26x1 R/LH ends, marking"),
     ("4", "HMT500-M-104", "End cap", "SUS316L (1.4404)", 1, "Machined, flats AF27"),
     ("5", "HMT500-P-209", "Epoxy, RT cure (1 type)", "Epoxy (TBD)", 1, "Pour 1: Ø7 channel / 2: interior"),
-    ("6", "HMT500-P-202", "Sensor probe: MK33-W mini + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
+    ("6", "HMT500-P-202", "Sensor probe: MK33-W 300pF + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
     ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500(260313A)"),
     ("9", "HMT500-P-204", "M12 8P male (M Connect), M16x1.5", "-", 1, "Front mount, leads → W-2, P/N TBD"),

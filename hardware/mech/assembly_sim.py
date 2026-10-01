@@ -236,16 +236,50 @@ def main():
     check("10 턴버클 (체결 후)", "하우징 vs PCB·부품·링", hv < 1e-3, f"최소 거리 {hd:.2f} mm")
 
     # ════ 11. 2차 몰딩 ════
-    check("11 2차 몰딩 (M12 위, M3 구멍 주입)", "흐름 경로", True,
+    check("11 2차 몰딩 (M12 위, M3 구멍 주입)", "흐름 경로 (형상 설명, 유동 시험 아님)", True,
           f"엔드캡 Ø{P.ENDCAP['cbore']['d']:g} → 링 안(Ø{Rg['id']:g}) → 하우징 Ø{Hs['id']:g} → 홀더 뒤. "
           f"링 바깥 {(Hs['id'] - Rg['od']) / 2:.2f} mm 틈은 좁아 공기 빼기는 링 안쪽으로",
-          "PCB가 세로로 서 있어 양면이 같이 참. J1·J3 플러그 몸체 안 오목한 곳은 진공 주입 권장", level="OK")
+          "PCB가 세로로 서 있어 양면이 같이 참. J1·J3 플러그 몸체 안 오목한 곳은 진공 주입 권장", level="WARN")
+
+    # Rev I: 원래 검사에서 빠진 구매품·공구·공차 조건을 명시적으로 검사.
+    ec, cn = P.ENDCAP, P.CONNECTOR
+    for angle in ec["ports"]["angles"]:
+        a = math.radians(angle)
+        y, z = ec["ports"]["r"] * math.cos(a), ec["ports"]["r"] * math.sin(a)
+        access = M.endcap_port(angle, ec["flange"]["x"][1], cn["body"]["x"][1] + 10, ec["ports"]["access_d"])
+        v = vol(access, M.connector())
+        d = dist(access, M.connector())
+        check("12 M3 주입·마감 공구 접근", f"경사 20° 공구 Ø{ec['ports']['access_d']:g}, 원주 {angle}°", v < 1e-3 and d >= ec["ports"]["access_clearance"],
+              f"최소거리 {d:.3f} mm, 겹침 {v:.6f} mm³", "M12 어깨 Ø20 개략 형상 조건. 실제 품번 확인 필요")
+    thick_max = P.PCB["t"] + P.PCB["t_tol"]
+    for name, support in (("홀더", P.PCB_HOLDER), ("지지링", P.PCB_RING)):
+        gap = support["slot_w"] - thick_max
+        check("13 PCB 두께 최악 공차", name, gap >= P.PCB["slot_clearance"],
+              f"최소 홈 {support['slot_w']:.2f} - 최대 PCB {thick_max:.2f} = {gap:.2f} mm")
+    sp = P.SENSOR_PROBE
+    needed = 0.3 + sp["mk33"]["l"] + 0.6 + sp["pt1000"]["l"]
+    check("14 300pF 센서 캐리어", "소자 길이와 캐리어", needed <= sp["board"]["x"][1] - sp["board"]["x"][0],
+          f"필요 {needed:.2f}, 캐리어 {sp['board']['x'][1] - sp['board']['x'][0]:.2f} mm", "IST Au/Cu 300pF 외형 기준; 공급 품번/접합 방식 확인 필요")
+    vs = vol(M.sensor_elements(), M.cap())
+    check("14 300pF 센서 외형", "보호캡과 교차", vs < 1e-3, f"겹침 {vs:.6f} mm³")
+    slope = math.tan(math.radians(ec["ports"]["tilt_deg"]))
+    r_inner = ec["ports"]["r"] + (ec["cbore"]["x"][1] - 0.5 - ec["flange"]["x"][1]) * slope
+    exit_outer = r_inner + ec["ports"]["d_minor"] / 2 * math.sqrt(1+slope*slope)
+    check("15 M3 내부 연결", "경사 구멍 끝이 Ø22 공간에 완전히 열림", exit_outer < ec["cbore"]["d"]/2,
+          f"출구 최대 반경 {exit_outer:.3f} / 보어 반경 11 mm", "실제 점도/노즐/주입 시험 필요")
+    # 나사 대경 Ø3을 전 길이에 적용해도 홈과 겹치지 않아야 함 (실제 탭 깊이는 입구 4 mm).
+    rg = ec["ports"]["r"] + (ec["seal"]["groove_x"][1] - ec["flange"]["x"][1]) * slope
+    web = P.ORING["groove_d"]/2 - (rg + 1.5 * math.sqrt(1+slope*slope))
+    check("16 몰딩 구멍–O링 홈", "대경 Ø3 보수 외형 사이 살 두께", web >= 0.5,
+          f"명목 최소 {web:.3f} mm", "가공 공차 포함 잔여 두께는 제작사 DFM 확인")
 
     json.dump(dict(placement=PL["meta"]["project"], results=results), open(os.path.join(OUT, "report.json"), "w"),
               ensure_ascii=False, indent=1)
     ng = sum(1 for r in results if r["verdict"] == "NG")
     wn = sum(1 for r in results if r["verdict"] == "WARN")
     print(f"\n{len(results)} checks: NG {ng}, WARN {wn}")
+    if ng:
+        raise RuntimeError(f"Assembly validation failed: {ng} NG")
     return dict(body=body, holder=holder, ring=ring, housing=housing, endcap=endcap, pcb=pcb, solids=solids, cw=cw)
 
 

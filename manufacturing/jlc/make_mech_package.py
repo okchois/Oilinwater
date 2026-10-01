@@ -56,7 +56,7 @@ CNC = [
     dict(part="HMT500-M-104", name="End cap", fn=M.endcap, step="HMT500-M-104_endcap.step",
          material="SUS304 (이번 시제품)", alt="양산: SUS316L 또는 SUS304", finish="As machined + 부동태화",
          threads=f"{E['mthread']['thread']} (왼나사 LH) 수나사; {E['thread']['thread']} 암나사 (M12 커넥터); "
-                 f"2×{E['ports']['thread']} 관통 (r {E['ports']['r']:g}, 90°·270°)",
+                 f"2×{E['ports']['thread']} 깊이 4 / Ø2.5 관통 (입구 r {E['ports']['r']:g}, 90°·270°, 안쪽 경사 20°)",
          tol=f"O링 자리 Ø{E['seal']['d']:g} f7 + 홈, 플랜지 Ø{E['flange']['d']:g} 맞변 AF{E['flange']['flats_af']:g}, 나머지 ISO 2768-mK",
          note="왼나사 표기 필수. 1개/세트"),
     dict(part="HMT500-M-105", name="PCB holder", fn=M.pcb_holder, step="HMT500-M-105_holder.step",
@@ -106,21 +106,21 @@ CNC_EN = {
         material="Stainless steel SUS304",
         finish="As machined, deburr, passivation",
         threads=f"{E['mthread']['thread']} external, LEFT hand; M16x1.5-6H internal, length 6 (connector, TENTATIVE - will be "
-                "confirmed with the connector part number; please quote as M16x1.5); 2x M3 through (fill/vent ports, r10 at 90/270 deg)",
+                "confirmed with the connector part number; please quote as M16x1.5); 2x M3 depth 4 mm, pilot dia 2.5 through, inclined 20 deg inward from axial direction (fill/vent ports, entry r11.8 at 90/270 deg)",
         tol=f"O-ring seat dia {E['seal']['d']:g} f7 with groove, Ra 0.8; flange dia {E['flange']['d']:g} x 4 with wrench flats "
             f"AF{E['flange']['flats_af']:g}; others ISO 2768-mK",
-        note="LEFT hand external thread. Please confirm."),
+        note="LEFT hand external thread. Fill/vent access assumes connector shoulder OD <=20 and axial tool/nozzle OD <=2.5. Actual connector P/N must be confirmed before manufacture."),
     "HMT500-M-105": dict(
         material="POM (White) for this prototype lot (PEEK for production)",
         finish="As machined, deburr",
         threads="2x M2 tapped cross holes (perpendicular to slot); 2x dia 2.2 through with counterbore dia 5.2 depth 2.2",
-        tol="OD 21.6 (0/-0.1); slot width 1.7 (+0.1/0) depth 3.5; window 5.6 x 3.2 (+0.1/0); others ISO 2768-mK",
+        tol="OD 21.6 (0/-0.1); slot width 1.9 (+0.1/0) depth 3.5; window 5.6 x 3.3 (+0.1/0); others ISO 2768-mK",
         note="Drawing sheet M-105~106 (holder at top right)."),
     "HMT500-M-106": dict(
         material="POM (White) for this prototype lot (PEEK for production)",
         finish="As machined, deburr",
         threads="-",
-        tol=f"OD {R['od']:g} (0/-0.1); ID 20; 2 slots width 1.7 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4",
+        tol=f"OD {R['od']:g} (0/-0.1); ID 20; 2 slots width 1.9 (+0.1/0); slot bottoms 23.2 (+0.2/0) apart; thickness 4",
         note="Drawing sheet M-105~106 (ring at right)."),
 }
 TAG = {"HMT500-M-101": "SUS304", "HMT500-M-102": "SUS304", "HMT500-M-103": "SUS304", "HMT500-M-104": "SUS304",      # 이번 시제품: JLCCNC 온라인 선택지
@@ -132,13 +132,14 @@ RFQ = """Request for quotation - CNC machining (JLCCNC)
 Project: HMT500(260313) oil moisture transmitter, prototype lot
 Company: DOTECH Co., Ltd.
 Drawing revision: {rev}   Date: {date}
+STATUS: DFM / prototype preparation only. Connector P/N, resin, pressure and temperature qualification remain open.
 Quantity: {sets} sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
 
-TOLERANCE: the online option is +/-0.05 mm. The fit diameters in these STEP files are already set to the middle of
-the ISO fit band, so machining to the STEP within +/-0.05 is acceptable:
-  seal spigots dia 26.94 (M-101, M-104), seal bores dia 27.06 (M-103), O-ring grooves dia 24.65,
-  connector seal bore dia 10.05 (M-101), holder dia 21.55 / slot 1.75, ring dia 24.45 / slot 1.75.
-  (The Korean drawings show the ISO fit symbols f7/H8 on nominal 27 / 10.)
+TOLERANCE: STEP and PDF use the SAME nominal geometry (Rev I). The explicit drawing tolerances control.
+  Seal spigots dia 27 f7, seal bores dia 27 H8, connector seal bore dia 10 H8, O-ring groove dia 24.6 h9.
+  Holder/ring PCB slots: 1.9 (+0.1/0), for finished PCB thickness 1.6 +/-0.16.
+  Do NOT substitute general +/-0.05 for these fits. Please confirm achievable tolerances and quote accordingly.
+  If these tolerances cannot be met, request approval for a revised design before machining.
 
 MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
   M-101, M-102, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
@@ -195,29 +196,7 @@ LC = [
 ]
 
 
-# JLCCNC 온라인 견적의 가장 엄격한 공차는 ±0.05 → 끼워맞춤 지름을 공차 범위 가운데 값으로 옮긴 JLC 전용 STEP.
-#  O링 자리 (Rev H): 축 Ø26.94 / 구멍 Ø27.06 (±0.05 → 틈 0.02–0.22), 홈 Ø24.65 (압축 약 16–23 %, O링 24 × 1.5 늘림 2.7 %)
-#  커넥터 밀봉면 Ø10.05 (±0.05 → 10.00–10.10, O링 8 × 1.2 압축 약 21–25 %)
-#  홀더 Ø21.55, 홈 폭 1.75, 창 5.65 × 3.25 / 링 Ø24.45, 홈 폭 1.75, 홈 바닥 사이 23.3
-JLC_NOMINAL = [
-    (P.BODY["seal"], "d", 26.94), (P.ENDCAP["seal"], "d", 26.94), (P.HOUSING, "seal_bore", 27.06),
-    (P.ORING, "groove_d", 24.65), (P.BODY["conn_land"], "d", 10.05),
-    (P.PCB_HOLDER, "d", 21.55), (P.PCB_HOLDER, "slot_w", 1.75), (P.PCB_HOLDER["window"], "wy", 5.65),
-    (P.PCB_HOLDER["window"], "z", (0.85, 4.10)),
-    (P.PCB_RING, "od", 24.45), (P.PCB_RING, "slot_w", 1.75), (P.PCB_RING, "slot_y", 11.65),
-]
-
-
-class jlc_nominal:
-    def __enter__(self):
-        self.old = [(d, k, d[k]) for d, k, _ in JLC_NOMINAL]
-        for d, k, v in JLC_NOMINAL:
-            d[k] = v
-
-    def __exit__(self, *a):
-        for d, k, v in self.old:
-            d[k] = v
-
+# Rev I: JLC 전용 치수 변환을 없앰. STEP/PDF/견적서가 같은 파라미터와 공차를 사용.
 
 def write_csv(path, header, rows):
     with open(path, "w", newline="", encoding="utf-8-sig") as f:
@@ -242,8 +221,7 @@ def main():
     rows = []
     for c in CNC:
         c["step"] = c["step"].replace(".step", f"_{TAG[c['part']]}.step")    # 파일 이름에 재질 (JLCCNC 기본값 알루미늄 방지)
-        with jlc_nominal():                                                   # ±0.05 공차용 가운데 값 지름
-            cq.exporters.export(c["fn"](), os.path.join(d_cnc, c["step"]))
+        cq.exporters.export(c["fn"](), os.path.join(d_cnc, c["step"]))
         pdf = f"{c['part']}_drawing_rev{REV}_{TAG[c['part']]}.pdf"
         pdf_page(DWG_PAGE[c["part"].replace("HMT500-", "")], os.path.join(d_cnc, pdf))
         rows.append([c["part"], c["name"], c["step"], pdf, c["material"], c["alt"], c["finish"], c["threads"], c["tol"],
