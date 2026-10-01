@@ -116,7 +116,7 @@
 (text "R1" (at 21.59 178.308 0) (effects (font (size 1.27 1.27) bold) (justify left bottom)) (uuid cceb5374-4572-5129-8c5a-cf79607575b0))
 (text "4.7R 1W pulse" (at 33.7871 178.308 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid 4a6e4650-5dee-580c-b803-654783f2034c))
 (text "1단·2단 서지 분담" (at 58.6791 178.308 0) (effects (font (face "NanumGothic") (size 1.27 1.27)) (justify left bottom)) (uuid ea6cd638-56f5-5a1d-9fd5-8bc16d86a394))
-(text "2512 1 W 펄스 내성 (CRCW-HP, JLC 글로벌 소싱)" (at 81.7296 178.308 0) (effects (font (face "NanumGothic") (size 1.27 1.27)) (justify left bottom)) (uuid 4a39dc51-31c8-5a65-9618-0c8d3adcb3dd))
+(text "2512 1 W (Vishay CRCW2512, JLC 부품 — 결정 #38, 펄스 에너지 시험 T1)" (at 81.7296 178.308 0) (effects (font (face "NanumGothic") (size 1.27 1.27)) (justify left bottom)) (uuid 4a39dc51-31c8-5a65-9618-0c8d3adcb3dd))
 (text "D2" (at 21.59 182.626 0) (effects (font (size 1.27 1.27) bold) (justify left bottom)) (uuid 9137f6c0-b864-5f99-8d7b-dc1a55d426d6))
 (text "TVS3301DRBR" (at 33.7871 182.626 0) (effects (font (size 1.27 1.27)) (justify left bottom)) (uuid e63ea515-356a-5606-9392-076c2f6b4f7c))
 (text "입력 서지 2단 클램프" (at 58.6791 182.626 0) (effects (font (face "NanumGothic") (size 1.27 1.27)) (justify left bottom)) (uuid 66ed92fa-119c-5537-82ed-8f4553441d31))

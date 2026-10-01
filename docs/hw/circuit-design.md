@@ -5,6 +5,8 @@
 > **v0.9 외부 검수 반영 (2026-09-30, 결정 #35, [external-review-response-260930.md](external-review-response-260930.md)):** D2 뒤·U1 앞 **직렬 쇼트키 D3 PMEG10010ELR (100 V)** — 음(−) 서지·역극성은 D3가 받아 eFuse IN–OUT 역전압 없음, U1 입력 넷 = VIN_D. **RS-485 버스 TVS D60/D61 = TVS3301** (A·B–GND). U11 → **THVD2410DGKR (VSSOP-8, 같은 핀)**. +Vs 제너 **BZX84C24** (27 → 24 V, +Vs 최악 ≤ 26.4 V). **C7 삭제** (D3로 VIN_P 유지 필요 없음, 벌크 C5·C43 유지). ADS1220 **IDAC = 250 µA 고정**.
 >
 > **결정 #37 (2026-10-01, DAC 부분 확정 — VibrationSensor IVS320 AO rev 1.0 방식):** AO 전용 전원 **VAO 16.1 V** (벅 U15 LMR51606YFDBVR + L3 22 µH + C64/C65) → DAC AVDD(10 Ω)·TPS26611 +Vs·OPA197 V+. 제너 폴로워(Q1·R50·D50·C53)·C43 삭제. DAC CMP 보상 4.7 nF(VOUT–CMP) + 100 pF(CMP–GND), DAC 출력 클램프 BAS70-04 (D41/D51). 출력 TVS3301·SGOOD→ADC는 유지. DAC 손실 28 V 단락 0.66 → 0.39 W/채널.
+>
+> **결정 #38 (2026-10-01, JLC 부품 우선):** 5 V 벅 U2 = **LMR51606YFDBVR** (1.1 MHz, L2 10 µH, C6 22 µF, R8/R9 118k/22.1k → 5.07 V; 아래 본문의 LMR36006 값은 이 줄이 우선). R19 = ERA-3AEB4021V (0.1 %·25 ppm), R1·R30·R40 = CRCW2512 일반형.
 
 작성일: 2026-09-26 · 상태: 상세 회로 설계안 (회로도 CAD 입력 전). 부품값은 초기값이며, 평가보드와 EMC 사전시험으로 확정합니다.
 

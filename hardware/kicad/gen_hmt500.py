@@ -558,7 +558,7 @@ part_table(S, 6, 58, [
     ("J1", "SM08B-GHS-TB", "현장 커넥터 연결", "JST GH 1.25 mm 8P 옆 삽입, 하네스 W-2 → M12 8P, 핀 n = M12 핀 n"),
     ("L1", "CMC 1mH 0.8A", "전원선 공통모드 노이즈 차단", "Bourns SRF0905-102Y (LCSC, 744222 동등), 2 × 1 mH, 0.8 A, 9.2 × 6 × 5.3 mm — 전도 방출·내성 대책"),
     ("D1", "SMDJ36CA", "입력 서지 1단 흡수", "TVS 양방향 3000 W, 36 V — −30 V 오결선에 도통 안 함"),
-    ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "2512 1 W 펄스 내성 (CRCW-HP, JLC 글로벌 소싱)"),
+    ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "2512 1 W (Vishay CRCW2512, JLC 부품 — 결정 #38, 펄스 에너지 시험 T1)"),
     ("D2", "TVS3301DRBR", "입력 서지 2단 클램프", "TI 평탄 클램프 ±33 V, 최대 42.5 V @ 27 A. DC 입력 33 V 초과 금지 (v0.9, 이전 SMBJ33CA)"),
     ("D3", "PMEG10010ELR", "음(−) 서지·역극성 차단", "Nexperia 100 V 1 A 쇼트키 (저누설). D2가 −42.5 V로 잡는 동안 출력 쪽 +28 V → 역전압 약 71 V를 D3가 받음 → eFuse IN–OUT 역전압 없음 (외부 검수 H01). 손실 약 0.45 V × 0.1 A"),
     ("GDT1", "2035-25-SM", "회로 GND–외함 서지 방전", "Bourns 2전극 SMD GDT 250 V (LCSC), Ø5 × 4.4 mm — 선–대지 서지 때만 도통"),
@@ -611,42 +611,31 @@ for r_ in ("R6", "C4"):
     S.rtn_stub(S.P(r_, "2"))
 decap(S, "C5", "10u 50V", "C1206", 53, 22, "VIN_P")
 # 벅: 전원 핀마다 전원 심볼, BOOT 콘덴서는 위로, FB·SW는 라벨
-S.place("U2", "LMR36006", "LMR36006BRNXR", "HMT500_260313A:Texas_RNX0012A_VQFN-HR-12_2x3mm", 72, 23, nets={
-    "2": "VIN_P", "10": "VIN_P", "9": "VIN_P", "7": "BUCK_FB", "6": "GND", "1": "GND", "11": "GND",
-    "4": "BUCK_BOOT", "12": "BUCK_SW", "5": "BUCK_VCC", "3": "BUCK_SW"})
-vi, vi2, en = S.P("U2", "2"), S.P("U2", "10"), S.P("U2", "9")
-S.wa(en, vi2, vi)                          # EN = VIN (데이터시트 허용)
+# 결정 #38: 5 V 벅 = LMR51606YFDBVR (JLC 부품, VAO 벅 U15와 같은 IC). SLUSEY1B 표 8-1 (1.1 MHz, 5 V): L 10 µH,
+#   COUT ≥ 10 µF / 25 V, RFBT 118k / RFBB 22.1k → 0.8 V × (1 + 118/22.1) = 5.07 V
+S.place("U2", "LMR51606", "LMR51606YFDBVR", FP["SOT236"], 72, 23, nets={
+    "5": "VIN_P", "4": "VIN_P", "1": "BUCK_BOOT", "6": "BUCK_SW", "3": "BUCK_FB", "2": "GND"})
+vi, en = S.P("U2", "5"), S.P("U2", "4")
 S.sup_stub("VIN_P", vi)
-S.nc(S.P("U2", "8"))                       # PG 미사용 → 개방 허용
-S.gl("BUCK_SW", S.P("U2", "3"), "D", length=1)   # v0.9: NC 핀 3 = SW (데이터시트 핀 표)
-for n_ in ("6", "1", "11"):
-    S.gnd_stub(S.P("U2", n_))
-bt = S.P("U2", "4")
-S.v2("C8", "C", "100n", FP["C0402"], bt[0] - S.dx, bt[1] - S.dy - 3, "BUCK_SW", "BUCK_BOOT")
-S.h2("L2", "L", "15uH", "Inductor_SMD:L_Coilcraft_XAL4040-XXX", 83, 21, "BUCK_SW", "+5V")
-sw, c8t = S.P("U2", "12"), S.P("C8", "1")
-S.wa(sw, (81 + S.dx, sw[1]))
-S.wa((81 + S.dx, sw[1]), S.P("L2", "1"))
-S.wa(c8t, (81 + S.dx, c8t[1]), (81 + S.dx, sw[1]))       # 부트스트랩: C8 위 → SW 선 (1 꺾임)
-S.gl("BUCK_FB", S.P("U2", "7"), "R", length=1)
-S.gl("BUCK_SW", S.P("C8", "1"), "L", length=1)
-vcc = S.P("U2", "5")
-S.v2("C9", "C", "1u", FP["C0402"], 80, vcc[1] - S.dy, "BUCK_VCC", "GND")
-S.wa(vcc, S.P("C9", "1"))
-S.gnd_stub(S.P("C9", "2"))
+S.wa(en, vi)                               # EN = VIN (데이터시트 허용)
+S.gnd_stub(S.P("U2", "2"))
+bt, sw = S.P("U2", "1"), S.P("U2", "6")
+xc_ = sw[0] + 3
+S.v2("C8", "C", "100n", FP["C0402"], xc_ - S.dx, sw[1] - 3 - S.dy, "BUCK_BOOT", "BUCK_SW")
+S.wa(bt, (xc_ - 1, bt[1]), (xc_ - 1, sw[1] - 3), S.P("C8", "1"))
+S.h2("L2", "L", "10uH", "Inductor_SMD:L_Taiyo-Yuden_NR-40xx", xc_ + 2 - S.dx, sw[1] - S.dy, "BUCK_SW", "+5V")
+S.wa(sw, S.P("C8", "2"), S.P("L2", "1"))
 l2o = S.P("L2", "2")
 S.wa(l2o, (l2o[0] + 1, l2o[1]))
 S.flag((l2o[0] + 1, l2o[1]), absolute=True)
 S.sup_stub("+5V", (l2o[0] + 1, l2o[1]))
-decap(S, "C10", "22u 25V", "C1210", 90, 22, "+5V")
+S.gl("BUCK_FB", S.P("U2", "3"), "R", length=1)
 decap(S, "C6", "22u 25V", "C1210", 95, 22, "+5V")
-S.v2("C11", "C", "20p C0G", FP["C0402"], 100, 22, "+5V", "BUCK_FB")
-S.v2("R8", "R", "100k 1%", FP["R0402"], 105, 22, "+5V", "BUCK_FB")
-S.v2("R9", "R", "24.9k 1%", FP["R0603"], 105, 25, "BUCK_FB", "GND")
-S.sup_stub("+5V", S.P("C11", "1"))
+S.v2("R8", "R", "118k 1%", FP["R0402"], 105, 22, "+5V", "BUCK_FB")
+S.v2("R9", "R", "22.1k 1%", FP["R0402"], 105, 26, "BUCK_FB", "GND")
 S.sup_stub("+5V", S.P("R8", "1"))
-S.wa(S.P("R8", "2"), S.P("C11", "2"))
-S.gl("BUCK_FB", S.P("C11", "2"), "D", length=0)
+S.wa(S.P("R8", "2"), S.P("R9", "1"))
+S.gl("BUCK_FB", S.P("R9", "1"), "R", length=1)
 S.gnd_stub(S.P("R9", "2"))
 # LDO + 아날로그 레일
 S.place("U3", "TPS7A2033", "TPS7A2033PDBVR", "Package_TO_SOT_SMD:SOT-23-5", 122, 21,
@@ -667,25 +656,24 @@ S.sup_stub("+3V3A", (fo[0] + 1, fo[1]))
 decap(S, "C13", "10u", "C1206", 146, 22, "+3V3A")
 # v0.9: 벅 입력 220 nF × 2 (U2 핀 옆) + 벌크 = C5 10 µF를 U2 옆에 배치, LDO 입력 1 µF (U3 옆) — SNVSB48C 9.2.1.2.6, SBVS338H 5.3
 decap(S, "C16", "220n 100V", "C0805", 121, 38.5, "VIN_P")
-decap(S, "C17", "220n 100V", "C0805", 129, 38.5, "VIN_P")
 decap(S, "C26", "1u", "C0402", 147, 38.5, "+5V")
 S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 32.6 V  /  UVLO 8.9 V")
 S.text("UVLO = 1.19 V x (R3+R4+R5)/(R4+R5) = 8.9 V   OVP rise 1.19 V x (R3+R4+R5)/R5 = 32.6 V (31.5-34.2), fall 30.1 V", (6.5, 35.5), 1.27)
 S.text("I_OL = 12 / R6 = 149 mA.  Supply 12-28 V recovers after OVP trip (fall > 29.2 V).  TPS26611 +Vs clamped (sheet Aux).", (6.5, 37), 1.27)
 S.text("EF_RTN = TPS2660 RTN reference: R5, R6, C4, MODE, PowerPAD. NEVER connect to GND (datasheet 9.3.5.5).", (6.5, 38.5), 1.27)
-S.box(64, 12, 111.5, 33, "BUCK 5 V   LMR36006  (4.2-60 V in, 0.6 A)")
-S.text("Vout = 1.0 V x (1 + R8/R9) = 5.0 V.  1 MHz: L 15 uH, COUT 2 x 22 uF, CFF 20 pF (datasheet Table 1)", (64, 35.5 + 3), 1.27)
+S.box(64, 12, 111.5, 33, "BUCK 5 V   LMR51606  (4-65 V in, 0.6 A, 1.1 MHz)")
+S.text("Vout = 0.8 V x (1 + R8/R9) = 5.07 V.  1.1 MHz: L 10 uH, COUT 22 uF (SLUSEY1B Table 8-1). Same IC as U15.", (64, 35.5 + 3), 1.27)
 S.box(112.5, 12, 155, 33, "LDO 3.3 V   TPS7A2033   +   analog rail +3V3A")
 S.box(118, 33.5, 156, 45.5, "LOCAL INPUT CAPS")
-S.text("C16/C17 at U2 VIN-PGND, C5 (bulk) next to U2; C26 at U3 IN", (118.5, 44.8), 1.27)
+S.text("C16 at U2 VIN-GND, C5 (bulk) next to U2; C26 at U3 IN", (118.5, 44.8), 1.27)
 
 part_table(S, 6, 46, [
     ("U1", "TPS26600PWPR", "전자 퓨즈 (입력 보호)", "역극성 −60 V 차단, 과전압 32.6 V (복귀 30.1 V)·저전압 8.9 V (R3–R5), 전류 제한 149 mA (R6), 돌입 제한 (C4), 고장 출력 FLT"),
     ("C2", "2.2u 100V", "eFuse 입력 콘덴서", "TVS와 함께 IN ≥ 1 µF (데이터시트 11.1), U1 핀 옆 — 핫플러그 링잉 억제"),
     ("EF_RTN", "(기준 접지)", "TPS2660 내부 기준", "R5·R6·C4·MODE·방열 패드는 RTN에 연결. GND와 연결 금지 — 역극성 보호 무효·손상"),
-    ("U2", "LMR36006BRNXR", "5 V 강압 전원 (벅)", "입력 4.2–60 V, 0.6 A 동기식, 1 MHz, 출력 = 1 V × (1 + R8/R9)"),
-    ("L2, C6, C10, C11", "15uH / 22u×2 / 20p", "벅 출력 필터·보상", "데이터시트 권장값 (5 V, 1 MHz). L2 Coilcraft XGL4030-153, 4 × 4 × 3.1 mm"),
-    ("C16, C17 (+C5)", "220n ×2 (+10u)", "벅 입력 콘덴서", "VIN–PGND 핀마다 220 nF, 벌크 C5 10 µF를 U2 옆에 (데이터시트 CIN 4.7 µF + 220 nF × 2)"),
+    ("U2", "LMR51606YFDBVR", "5 V 강압 전원 (벅)", "입력 4–65 V, 0.6 A 동기식, 1.1 MHz FPWM, SOT-23-6, 출력 = 0.8 V × (1 + R8/R9) = 5.07 V (결정 #38, JLC 부품, U15와 같은 IC)"),
+    ("L2, C6", "10uH / 22u 25V", "벅 출력 필터", "SLUSEY1B 표 8-1 (5 V, 1.1 MHz: 10 µH, ≥ 10 µF). L2 SMNR4020-10UH 4 × 4 × 2 mm"),
+    ("C16 (+C5)", "220n (+10u)", "벅 입력 콘덴서", "VIN–GND 핀 옆 220 nF, 벌크 C5 10 µF를 U2 옆에"),
     ("U3", "TPS7A2033PDBVR", "3.3 V 저잡음 레귤레이터", "300 mA, 저잡음·높은 PSRR → 벅 리플 제거, SOT-23-5"),
     ("FB1", "600R@100MHz", "아날로그 전원 +3V3A 분리", "페라이트 비드 + C13 10 µF → PCAP04·ADS1220 전원"),
 ])
@@ -1215,7 +1203,7 @@ DRV_T = ("output", "tri_state", "open_collector", "power_out")
 
 
 # 수동 소자만 있는 넷의 신호 흐름 (주는 쪽 부품): 아날로그 출력 → 커넥터, 커넥터 → eFuse, 분압 → 벅 FB
-FLOW = {"OUT1_EXT": ("R30",), "OUT2_EXT": ("R40",), "VIN_F": ("R1",), "BUCK_FB": ("R8", "C11")}
+FLOW = {"OUT1_EXT": ("R30",), "OUT2_EXT": ("R40",), "VIN_F": ("R1",), "BUCK_FB": ("R8",)}
 
 
 def net_roles():
@@ -1604,7 +1592,7 @@ def write_all():
         ("v0.9: 3-pass review (docs/hw/final-review-260313A.md): OVP 32.6 V (R5 36.5k); AO supply VAO 16.1 V buck U15 (DAC AVDD, TPS26611 +Vs; dec. #37, IVS320 AO); D3 series Schottky; RS-485 TVS D60/D61; D2 -> TVS3301; eFuse IN C2; buck CIN;", 1.4, False),
         ("      RS485_DE 10k pull-down (in-house bootloader, dec. #31); THVD2410; X7R only; R2 HV 1206; SGOOD -> PA0/PA4; CS_CDC -> PA15; VIN_SENSE PB0;", 1.4, False),
         ("      LATCH/CS pull-ups; OPA197 V+ = DAC AVDD; R31/R41 100k; SWD no-connect flags removed; sheet Aux: +Vs clamp, VIN monitor (DAC boost / HSE / sensor ESD: no room, dec. #32).", 1.4, False),
-        ("Footprints: KiCad 7.0.11 library + project library HMT500_260313A (LMR36006 RNX0012A, GDT Bourns 2035-xx-SM, TVS3301 pad floating).", 1.4, False),
+        ("Footprints: KiCad 7.0.11 library + project library HMT500_260313A (GDT Bourns 2035-xx-SM, TVS3301 pad floating).", 1.4, False),
         ("표기 규칙: 부품번호 = 굵은 글자 (R1, U4) / 부품값 = 보통 글자 (10k, DAC8760) / 전원 네트 = 기울인 글자 (+3V3, VIN_P)", 1.4, False),
         ("         신호 네트 = 테두리 있는 라벨 (SPI_SCK, OUT1_EXT) - 네트 이름은 부품번호·부품명과 겹치지 않게 지음", 1.4, False),
         ("         라벨 모양 = 신호 방향: 뾰족한 쪽이 밖 = 이 시트에서 내보냄(출력), 안 = 받음(입력), 양쪽 = 양방향, 네모 = 아날로그·수동", 1.4, False),
