@@ -12,7 +12,7 @@ def overlap(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
 
 def finish(b,report_path):
     for drawing in list(b.GetDrawings()):
-        if isinstance(drawing,p.PCB_TEXT) and drawing.GetText() in ('HMT500 A1','HMT500 A2','HMT500 A3','HMT500 A4'):b.RemoveNative(drawing)
+        if isinstance(drawing,p.PCB_TEXT) and drawing.GetText() in ('HMT500 A1','HMT500 A2','HMT500 A3','HMT500 A4','HMT500 A5'):b.RemoveNative(drawing)
     fps=sorted(b.GetFootprints(),key=lambda f:(not f.GetReference().startswith(('J','U','D','L')),f.GetReference()))
     for fp in fps:
         fp.SetFPID(p.LIB_ID('HMT500_260313A',fp.GetFPID().GetLibItemName()))
@@ -56,7 +56,7 @@ def finish(b,report_path):
     for item in b.GetDrawings():
         if isinstance(item,p.PCB_TEXT) and item.GetLayer()==p.B_SilkS:
             item.SetLayer(p.Cmts_User) # artwork ID goes in free space below, original preserved in documentation
-    mark=p.PCB_TEXT(b);mark.SetText('HMT500 '+os.environ.get('HMT_ARTWORK','A4'));mark.SetLayer(p.F_SilkS)
+    mark=p.PCB_TEXT(b);mark.SetText('HMT500 '+os.environ.get('HMT_ARTWORK','A5'));mark.SetLayer(p.F_SilkS)
     mark.SetTextSize(p.VECTOR2I(MM(.8),MM(.8)));mark.SetTextThickness(MM(.12))
     mark.SetPosition(p.VECTOR2I(MM(152),MM(100)));b.Add(mark)
     tracks=list(b.GetTracks());lengths={};vias={}

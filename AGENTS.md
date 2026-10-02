@@ -1,7 +1,7 @@
 # AGENTS.md — HMT500(260313) 오일 수분 트랜스미터 (두텍 DOTECH)
 
 이 파일은 이 저장소를 맡는 AI 에이전트(Codex 등)용 인계 문서입니다. 작업 전에 끝까지 읽으세요.
-마지막 인계: 2026-10-02 (PCB A4 초안, 아직 제작 불가). 사람 담당자: 두텍 대표 (지시는 한국어).
+마지막 인계: 2026-10-02 (PCB A5 배선 연결 완료, 제조 검토/발주 보류). 사람 담당자: 두텍 대표 (지시는 한국어).
 
 ## 1. 제품 한 줄
 
@@ -21,7 +21,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#46 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#47 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-02)
 
@@ -29,9 +29,9 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 |---|---|
 | 기구 Rev I, 도면, STEP, 조립 시방서 HMT500-A-001, JLCCNC 주문 패키지 | 형상 개선 완료, 실제 품번·가공성·압력·온도 확인 전 주문 보류 |
 | 회로도 v0.10 (부품 110, 넷 81, 넷리스트 일치) | 완료 — 외부 검수 H01–H11 반영(결정 #35), DAC 확정(#37), JLC 부품(#38·#39) |
-| PCB A4 아트워크 초안 (110개, 6층, 기구 Rev I 외형 유지) | **미연결 남음 — 제작 불가**. `docs/hw/artwork-a4-261002.md` 참조. A1/A2/A3 스냅샷도 보존 |
+| PCB A5 (110개, 6층, 기구 Rev I 외형 유지) | **배선 연결 완료 — DRC 오류 0, 미연결 0**. `docs/hw/artwork-a5-261002.md` 참조. 제조 DFM/발주 보류. A1–A4 스냅샷 보존 |
 | JLC BOM·CPL (61줄 중 59줄 LCSC) | 완료 — 남은 2줄: 2.2 µF 50 V X7R 0805(C61), 22.1k 1 % 0402(R9·R52) |
-| **PCB 배선 → 거버 → JLCPCB 주문** | 배선 초안 재배치/미연결 해소가 먼저. 거버·주문 패키지는 미발행 |
+| **PCB 배선 → 거버 → JLCPCB 주문** | A5 거버·드릴·BOM/CPL 제조 검토 묶음 생성. JLC 업로드/주문은 하지 않음 |
 | 앱 펌웨어 (Modbus, PCAP04, ADS1220, DAC8760, 부트로더 STM32 포팅) | 미착수 |
 | 시제품 시험 (시험 계획 T1–T7) | 기판 수령 후 |
 
@@ -65,15 +65,15 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#47부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#48부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
 
 ## 6. 다음 할 일 (우선순위)
 
-1. **PCB A4 미연결 해소·재배치** (6층): 최신 미연결 목록과 개선한 경로는 `docs/hw/artwork-a4-261002.md`를 먼저 읽을 것. VIN_P 1건, RS485_A_EXT 2건, SWCLK 1건, OUT1_SGOOD 1건이 남는다. 배선 개수나 일반 DRC 오류 0을 완료로 해석하지 말 것. 전원·서지 병목, 리턴 경로, 디커플링 루프까지 검토한 뒤 제작 여부 판단. 기존 설계 근거는 `docs/hw/pcb-placement-260313A.md`, `docs/hw/final-review-260313A.md` 참조.
-2. 거버·드릴 생성 → JLCPCB 주문 패키지 (BOM·CPL 회전 보정 확인).
+1. **A5 제조 검토**: `docs/hw/artwork-a5-261002.md`를 먼저 읽을 것. 미연결 0, 일반 DRC 오류 0, dangling 경고 0, C44/D1 실크→Fab 라이브러리 차이 경고 2개. In1 GND 전용이며 In4는 GND 동박과 제한된 7개 넷을 혼용한다. `artwork_a5.py`의 배선 범위를 지킬 것. 전원·서지 병목, 신호 에지·센서 잡음·발열·EMC는 실물/제조 검토 필요.
+2. `manufacturing/jlc/artwork_A5_review/`로 DFM 준비. 0.15 mm 비아/POFV 공정 혼용, 미확정 LCSC(C61, R9/R52), CPL 방향을 확인한 뒤 발주 판단.
 3. 앱 펌웨어: 요구 F1–F6 (`docs/hw/external-review-response-260930.md` 6절), 부트로더 STM32G0B1 포팅.
 4. 주문 전 확인: L1 Bourns SRF0905-102Y 랜드/핀은 원문 대조 완료. L2/L3는 SMNR4020 전용 랜드로 수정(#42); 포화 전류 정의는 확인 필요. LCSC 미확인 2줄은 유지.
 
@@ -98,4 +98,4 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 
 ## 11. PCB 초안 재현
 
-`hardware/kicad/rebuild_artwork.sh` 사용. 기본은 A4(6층)이며 `HMT_ARTWORK=A1` 또는 `A2`이면 이전 4층 판을 재현한다. `KICAD_PYTHON`, `KICAD_CLI`, `TEST_PYTHON`으로 실행 환경을 지정한다. A4 배치는 `placement/artwork_A4.json`, 배선은 `routing/artwork_A4_draft.json`에서 재현하며 배치/층수가 다르면 복원을 거부한다. **현재 미연결이 있으므로 제작/주문 금지.** 신호 비아는 패드 0.30/드릴 0.15 mm, 혼잡 신호 선폭/간격은 0.10/0.10 mm. 전원·서지·방열 비아는 유지한다. In1/In4는 GND 기준면이며 RTN 영역은 네 내층 모두 비운다. 패드 내 비아의 충전·동도금 공정과 0.15 mm 일반 비아 혼용은 제조사 DFM 확인 필요. 검사는 KiCad 10.0.6 CLI로 수행한다.
+`hardware/kicad/rebuild_artwork.sh` 사용. 기본 A5(6층)이며 `HMT_ARTWORK=A1`~`A4`로 이전 판을 재현한다. `KICAD_PYTHON`, `KICAD_CLI`, `TEST_PYTHON`으로 환경을 지정한다. A5 배치·배선 스냅샷은 배치/층수가 다르면 복원을 거부한다. **A5는 DRC 오류 또는 미연결이 있으면 재생성 실패**다. 신호 비아 0.30/0.15 mm, 혼잡 신호 선폭/간격 0.10/0.10 mm. In1 GND 전용, In4 GND 동박/제한 배선 혼용, RTN 영역은 네 내층 모두 비운다. 전원·서지·방열 비아는 별도 치수를 유지한다. `audit_artwork.py`가 POFV 후보·면적을 기록하며 공정 혼용은 제조사 DFM 확인 필요. 검사는 KiCad 10.0.6 CLI로 수행한다. 제조 검토 파일 생성은 `manufacturing/jlc/export_artwork_review.py` 사용. 발주 승인이 아니다.

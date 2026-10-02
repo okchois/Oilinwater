@@ -175,10 +175,11 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
 
 def build():
     Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
-    rev = os.environ.get("HMT_ARTWORK", "A4")
+    rev = os.environ.get("HMT_ARTWORK", "A5")
     header = HEADER
-    if rev in ("A3", "A4"):
+    if rev in ("A3", "A4", "A5"):
         header = header.replace('(31 "B.Cu" signal)', '(3 "In3.Cu" signal)\n    (4 "In4.Cu" power)\n    (31 "B.Cu" signal)')
+        if rev == "A5":header = header.replace('(4 "In4.Cu" power)', '(4 "In4.Cu" signal)')
         start = header.index('      (layer "F.Cu" (type "copper")')
         end = header.index('      (layer "B.Mask"', start)
         # JLC06161H-2116A published nominal stack. Central dielectric is the

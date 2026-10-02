@@ -41,13 +41,13 @@ def prepare(b,dsn):
     # In1 = continuous ground reference; In2 = power/slow signals.
     b.SetLayerType(p.In1_Cu,p.LT_POWER); b.SetLayerType(p.In2_Cu,p.LT_SIGNAL)
     if b.GetCopperLayerCount()==6:
-        b.SetLayerType(p.In3_Cu,p.LT_SIGNAL);b.SetLayerType(p.In4_Cu,p.LT_POWER)
+        b.SetLayerType(p.In3_Cu,p.LT_SIGNAL);b.SetLayerType(p.In4_Cu,p.LT_SIGNAL if os.environ.get("HMT_ARTWORK","A5")=="A5" else p.LT_POWER)
     fps={f.GetReference():f for f in b.GetFootprints()}
     ep=max((pd for pd in fps['U1'].Pads() if pd.GetNumber()=='17'),key=lambda pd:pd.GetSize().x*pd.GetSize().y)
     x,y=p.ToMM(ep.GetPosition().x),p.ToMM(ep.GetPosition().y)
     # A2: DAC PowerPAD -> GND reference plane. Opposite-side pads were checked
     # before choosing these sites; F.Mask tenting limits solder wicking.
-    if os.environ.get('HMT_ARTWORK','A4')in ('A2','A3','A4'):
+    if os.environ.get('HMT_ARTWORK','A5')in ('A2','A3','A4','A5'):
         sites=json.loads((HERE/'placement'/'thermal_vias_A2.json').read_text())
         expected={'U7':(127.8,107.1),'U8':(134.7,92.9)}
         for ref,pos in expected.items():
@@ -85,7 +85,7 @@ def prepare(b,dsn):
 """)
     data=dsn.read_text()
     ground_rules='(layer_rule In1.Cu (active off))'
-    if b.GetCopperLayerCount()==6:ground_rules+=' (layer_rule In4.Cu (active off))'
+    if b.GetCopperLayerCount()==6 and os.environ.get('HMT_ARTWORK','A5')!='A5':ground_rules+=' (layer_rule In4.Cu (active off))'
     data=data.replace('(boundary', '(autoroute_settings (fanout off) (autoroute on) (postroute off) '+ground_rules+')\n    (boundary',1)
     dsn.write_text(data)
 
