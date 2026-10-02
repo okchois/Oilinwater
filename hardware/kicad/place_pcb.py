@@ -180,7 +180,7 @@ OFFSETS = sorted((math.hypot(i * STEP, j * STEP), i * STEP, j * STEP)
 
 def overlap(a, b, gap=GAP):
     # KiCad 정수 nm 변환으로 생기는 경계 오차만 허용한다. A1 재현은 기존 판정 유지.
-    eps = 1e-5 if os.environ.get("HMT_ARTWORK", "A2") == "A2" else 0.0
+    eps = 1e-5 if os.environ.get("HMT_ARTWORK", "A3") in ("A2", "A3") else 0.0
     return a[0] < b[2] + gap - eps and b[0] < a[2] + gap - eps and a[1] < b[3] + gap - eps and b[1] < a[3] + gap - eps
 
 
@@ -371,24 +371,24 @@ J3_FRONT = P.PCB["jst"]["x"][0]         # 30.5 — 플러그가 앞(-x)에서 �
 J1_REAR = P.HARNESS2["plug"]["x"][0]     # 58.5 — 플러그가 뒤(+x)에서 꽂힘
 
 
-ARTWORK_REV = os.environ.get("HMT_ARTWORK", "A2")
-if ARTWORK_REV == "A2":
+ARTWORK_REV = os.environ.get("HMT_ARTWORK", "A3")
+if ARTWORK_REV in ("A2", "A3"):
     import placement_a2
     PLAN = placement_a2.plan(PLAN)
 
-A2_LAYOUT = json.load(open(os.environ.get("HMT_A2_LAYOUT", placement_a2.LAYOUT_PATH))) if ARTWORK_REV == "A2" else None
+A2_LAYOUT = json.load(open(os.environ.get("HMT_A2_LAYOUT", placement_a2.LAYOUT_PATH.with_name("artwork_A3.json") if ARTWORK_REV=="A3" else placement_a2.LAYOUT_PATH))) if ARTWORK_REV in ("A2", "A3") else None
 if A2_LAYOUT is not None:
-    assert set(A2_LAYOUT) == set(PARTS), "A2 placement must contain every circuit part"
+    assert set(A2_LAYOUT) == set(PARTS), "artwork placement must contain every circuit part"
 
 UNPLACED = []
 CHASSIS_PARTS = {"GDT1", "C3", "R2"}     # v0.9: 샤시 부품 ~ 회로 부품 코트야드 0.5 mm (+ 넷클래스 CHASSIS 동박 간격 1.0 — 에폭시 몰딩 안, 검토 D2)
 CH_GAP = 0.5
 J5_KO = 3.3          # J5 구멍 중심 ~ 다른 부품 코트야드 (양면). 패드 Ø1.6 + 코트야드 여유 → 코트야드 간격 ≥ 2 mm (재검토)
 
-# 4층 기판 설계 규칙 (일반 4층 공정: 선폭·간격 0.1 mm 급, 최소 드릴 0.2 mm 가능 — 여유 두고 설정)
+# A1/A2 4층; A3 6층. A3 저전압 신호만 0.10/0.10 mm, 비아 0.30/0.15 mm.
 #  - 간격 0.15: SOT-23-8(0.65 피치) 패드 사이 0.15, TPS2660 방열 비아 드릴 0.2
-RULES = dict(min_through_hole_diameter=0.2, min_via_diameter=0.4, min_hole_clearance=0.2,
-             min_copper_edge_clearance=0.3)
+RULES = dict(min_through_hole_diameter=(0.15 if ARTWORK_REV=="A3" else 0.2), min_via_diameter=(0.3 if ARTWORK_REV=="A3" else 0.4), min_hole_clearance=0.2,
+             min_copper_edge_clearance=0.3, min_via_annular_width=(0.075 if ARTWORK_REV=="A3" else 0.1))
 NETCLASS = dict(clearance=0.15, track_width=0.15, via_diameter=0.45, via_drill=0.2)
 CHASSIS_CLASS = dict(clearance=1.0, track_width=0.5, via_diameter=0.8, via_drill=0.4)
 
@@ -407,6 +407,12 @@ def set_rules(pro_path, keep):
     ns["classes"] = [c for c in ns["classes"] if c["name"] != "CHASSIS"] + [dict(base, name="CHASSIS", **CHASSIS_CLASS)]
     ns["netclass_patterns"] = [p_ for p_ in ns.get("netclass_patterns") or [] if p_.get("netclass") != "CHASSIS"] + \
         [{"netclass": "CHASSIS", "pattern": "CHASSIS"}]
+    ns["classes"] = [c for c in ns["classes"] if c["name"] != "SIGNAL_A3"]
+    ns["netclass_patterns"] = [q for q in ns["netclass_patterns"] if q["netclass"] != "SIGNAL_A3"]
+    if ARTWORK_REV == "A3":
+        from artwork_a3 import SIGNAL_NETS, SIGNAL_VIA_DIAMETER, SIGNAL_VIA_DRILL
+        ns["classes"].append(dict(base, name="SIGNAL_A3", clearance=.10, track_width=.10, via_diameter=SIGNAL_VIA_DIAMETER, via_drill=SIGNAL_VIA_DRILL))
+        ns["netclass_patterns"] += [dict(netclass="SIGNAL_A3",pattern=n) for n in sorted(SIGNAL_NETS)]
     open(pro_path, "w").write(json.dumps(pro, indent=2) + "\n")
 
 
@@ -462,7 +468,7 @@ def build():
         return out
 
     def free(side, box, ref, own_holes=()):
-        if ARTWORK_REV == "A2" and side == "B" and any(overlap(box, area, 0) for area in placement_a2.BACK_ESCAPES):
+        if ARTWORK_REV in ("A2", "A3") and side == "B" and any(overlap(box, area, 0) for area in placement_a2.BACK_ESCAPES):
             return False
         if "J5" in placed and ref != "J5":            # v0.9: 샤시 선 납땜 구멍 둘레 양면 금지 (손납땜 브리지 방지)
             j = placed["J5"]

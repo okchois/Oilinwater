@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-02T08:38:59",
+    "date": "2026-10-02T12:16:01",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -49,15 +49,15 @@
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "86b5dfcc-59e5-4b65-bfb7-5381f7388e18"
+                    "uuid": "b8e434e5-a833-4a89-9054-9cc2788cf553"
                 },
                 {
-                    "description": "구역 'GND' [GND] on F.Cu, 우선순위 0",
+                    "description": "구역 'GND' [GND] on B.Cu, 우선순위 0",
                     "pos": {
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "c52cd44f-3cac-43e4-8af8-e310d367ddcd"
+                    "uuid": "b8e434e5-a833-4a89-9054-9cc2788cf553"
                 }
             ],
             "severity": "error",
@@ -72,7 +72,7 @@
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "86b5dfcc-59e5-4b65-bfb7-5381f7388e18"
+                    "uuid": "b8e434e5-a833-4a89-9054-9cc2788cf553"
                 },
                 {
                     "description": "구역 'GND' [GND] on F.Cu, 우선순위 0",
@@ -80,7 +80,7 @@
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "c52cd44f-3cac-43e4-8af8-e310d367ddcd"
+                    "uuid": "93389c05-010d-450b-a32a-b55763a92d4c"
                 }
             ],
             "severity": "error",
@@ -95,7 +95,7 @@
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "86b5dfcc-59e5-4b65-bfb7-5381f7388e18"
+                    "uuid": "b8e434e5-a833-4a89-9054-9cc2788cf553"
                 },
                 {
                     "description": "구역 'GND' [GND] on F.Cu, 우선순위 0",
@@ -103,7 +103,7 @@
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "c52cd44f-3cac-43e4-8af8-e310d367ddcd"
+                    "uuid": "93389c05-010d-450b-a32a-b55763a92d4c"
                 }
             ],
             "severity": "error",
@@ -112,90 +112,21 @@
         {
             "description": "Missing connection between items",
             "items": [
-                {
-                    "description": "구역 'GND' [GND] on F.Cu, 우선순위 0",
-                    "pos": {
-                        "x": 99.0,
-                        "y": 88.0
-                    },
-                    "uuid": "c52cd44f-3cac-43e4-8af8-e310d367ddcd"
-                },
                 {
                     "description": "구역 'GND' [GND] on B.Cu, 우선순위 0",
                     "pos": {
                         "x": 99.0,
                         "y": 88.0
                     },
-                    "uuid": "86b5dfcc-59e5-4b65-bfb7-5381f7388e18"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [RS485_RX] on F.Cu, 길이 1.5440 mm",
-                    "pos": {
-                        "x": 115.2166,
-                        "y": 107.4448
-                    },
-                    "uuid": "eb008e9b-e894-44fb-a633-05194fcca806"
+                    "uuid": "b8e434e5-a833-4a89-9054-9cc2788cf553"
                 },
                 {
-                    "description": "패드 14 [RS485_RX]의 U4 위F.Cu",
+                    "description": "구역 'GND' [GND] on F.Cu, 우선순위 0",
                     "pos": {
-                        "x": 126.05,
-                        "y": 104.1625
+                        "x": 99.0,
+                        "y": 88.0
                     },
-                    "uuid": "04c2ac85-df05-4518-aa22-75f51ad48370"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "패드 4 [RS485_TX]의 U11 위F.Cu",
-                    "pos": {
-                        "x": 112.625,
-                        "y": 106.85
-                    },
-                    "uuid": "864dd0a8-07e2-4143-91d3-6484eda38f0d"
-                },
-                {
-                    "description": "비아 [RS485_TX] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 123.675,
-                        "y": 104.475
-                    },
-                    "uuid": "2ff2e0a6-501f-420d-9031-0f97b37f3a06"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [RS485_A_EXT] on B.Cu, 길이 0.6500 mm",
-                    "pos": {
-                        "x": 118.525,
-                        "y": 107.275
-                    },
-                    "uuid": "d1bd5d41-03d4-4a6c-9347-dc81f51d1026"
-                },
-                {
-                    "description": "패드 3 [RS485_A_EXT]의 J1 위F.Cu",
-                    "pos": {
-                        "x": 139.65,
-                        "y": 101.875
-                    },
-                    "uuid": "0d007a7e-0fa7-4f1b-9b44-7401e2bf91da"
+                    "uuid": "93389c05-010d-450b-a32a-b55763a92d4c"
                 }
             ],
             "severity": "error",
@@ -210,7 +141,7 @@
                         "x": 116.23,
                         "y": 108.275
                     },
-                    "uuid": "85f6bfea-b39e-487b-b2f7-acf40622d1bf"
+                    "uuid": "6e740581-273e-4eb1-8124-16c2a59b5379"
                 },
                 {
                     "description": "배선 [+3V3] on F.Cu, 길이 0.0282 mm",
@@ -218,7 +149,7 @@
                         "x": 119.487,
                         "y": 108.375
                     },
-                    "uuid": "2e28784c-180e-4d37-a8ac-239a6a794cec"
+                    "uuid": "ae434bd8-0d9e-4d2e-b2ed-0f25f71e68f4"
                 }
             ],
             "severity": "error",
@@ -228,20 +159,43 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "배선 [+3V3] on F.Cu, 길이 0.5283 mm",
+                    "description": "배선 [+3V3] on B.Cu, 길이 0.5845 mm",
                     "pos": {
-                        "x": 138.5733,
-                        "y": 109.2
+                        "x": 130.725,
+                        "y": 109.3385
                     },
-                    "uuid": "4b0dd0c0-57cc-41e3-b077-2ad0d2d1d38b"
+                    "uuid": "250c7350-e07a-44a9-a04d-792185d4feed"
                 },
+                {
+                    "description": "배선 [+3V3] on B.Cu, 길이 0.4738 mm",
+                    "pos": {
+                        "x": 120.115,
+                        "y": 108.775
+                    },
+                    "uuid": "22aebdf0-6c91-41c6-a0e6-f2a7e97ae999"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
                 {
                     "description": "배선 [+3V3] on B.Cu, 길이 1.2654 mm",
                     "pos": {
                         "x": 131.705199,
                         "y": 108.9252
                     },
-                    "uuid": "21ae512c-6c00-4368-a7ff-11f264273ebe"
+                    "uuid": "44c4e436-4a3a-4674-9f0c-a9a0e0421a62"
+                },
+                {
+                    "description": "배선 [+3V3] on F.Cu, 길이 0.5283 mm",
+                    "pos": {
+                        "x": 138.5733,
+                        "y": 109.2
+                    },
+                    "uuid": "4999002b-dddf-48f4-8603-6ee09ec13516"
                 }
             ],
             "severity": "error",
@@ -251,20 +205,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "배선 [+3V3A] on F.Cu, 길이 0.5250 mm",
+                    "description": "패드 36 [SWCLK]의 U4 위F.Cu",
                     "pos": {
-                        "x": 114.225,
-                        "y": 108.275
+                        "x": 132.4625,
+                        "y": 97.25
                     },
-                    "uuid": "c7b616b6-22d2-4bd7-b4d8-72fefb8c9af3"
+                    "uuid": "7fe251c4-42c2-4232-9b2b-21d5d5316cfc"
                 },
                 {
-                    "description": "패드 12 [+3V3A]의 U6 위F.Cu",
+                    "description": "비아 [SWCLK] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 119.4875,
-                        "y": 107.725
+                        "x": 107.85,
+                        "y": 97.0
                     },
-                    "uuid": "3f03bfcc-25f3-4e9a-8a85-6fa82862bfcc"
+                    "uuid": "84078898-fcbd-4d9c-8e03-c9b1bfdcd65a"
                 }
             ],
             "severity": "error",
@@ -274,181 +228,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "배선 [+3V3A] on B.Cu, 길이 3.4337 mm",
+                    "description": "배선 [RS485_A_EXT] on B.Cu, 길이 0.6500 mm",
                     "pos": {
-                        "x": 120.4139,
-                        "y": 93.0823
+                        "x": 118.525,
+                        "y": 107.275
                     },
-                    "uuid": "ee5e9829-7c50-4198-aaa7-f3f24e937afc"
+                    "uuid": "c12ba329-b4dd-4858-b446-96ad121d85a8"
                 },
                 {
-                    "description": "패드 12 [+3V3A]의 U6 위F.Cu",
+                    "description": "배선 [RS485_A_EXT] on F.Cu, 길이 0.6000 mm",
                     "pos": {
-                        "x": 119.4875,
-                        "y": 107.725
+                        "x": 139.65,
+                        "y": 101.875
                     },
-                    "uuid": "3f03bfcc-25f3-4e9a-8a85-6fa82862bfcc"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "패드 8 [REF_N]의 U6 위F.Cu",
-                    "pos": {
-                        "x": 125.2125,
-                        "y": 105.775
-                    },
-                    "uuid": "a9b9e9b3-8b50-41d5-a1f5-bd5497507fa3"
-                },
-                {
-                    "description": "배선 [REF_N] on F.Cu, 길이 0.0354 mm",
-                    "pos": {
-                        "x": 117.6,
-                        "y": 108.45
-                    },
-                    "uuid": "50c3bc15-e6bd-4f5a-a8a6-d9ede82a87da"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "패드 22 [DAC1_LATCH]의 U4 위F.Cu",
-                    "pos": {
-                        "x": 130.05,
-                        "y": 104.1625
-                    },
-                    "uuid": "ce4f319d-1c4a-4d02-a415-23ca1718fb12"
-                },
-                {
-                    "description": "패드 7 [DAC1_LATCH]의 U7 위B.Cu",
-                    "pos": {
-                        "x": 127.475,
-                        "y": 109.975
-                    },
-                    "uuid": "6e32453a-ddfc-4536-878e-35fe08470fd9"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "패드 22 [DAC1_LATCH]의 U4 위F.Cu",
-                    "pos": {
-                        "x": 130.05,
-                        "y": 104.1625
-                    },
-                    "uuid": "ce4f319d-1c4a-4d02-a415-23ca1718fb12"
-                },
-                {
-                    "description": "패드 2 [DAC1_LATCH]의 U14 위F.Cu",
-                    "pos": {
-                        "x": 136.1,
-                        "y": 109.7
-                    },
-                    "uuid": "6f50f43b-f4f4-4fe3-a73d-5d2722920f38"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [DAC2_LATCH] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 130.55,
-                        "y": 104.162
-                    },
-                    "uuid": "0675f67b-8946-417d-be25-fdeb69e33b5f"
-                },
-                {
-                    "description": "배선 [DAC2_LATCH] on F.Cu, 길이 0.5000 mm",
-                    "pos": {
-                        "x": 138.6,
-                        "y": 110.25
-                    },
-                    "uuid": "924654e0-dad6-4591-963f-46081a99e843"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [DAC2_LATCH] on B.Cu, 길이 1.0000 mm",
-                    "pos": {
-                        "x": 135.025,
-                        "y": 90.025
-                    },
-                    "uuid": "0d602ddd-6097-44f9-81da-97c5a64d0942"
-                },
-                {
-                    "description": "배선 [DAC2_LATCH] on F.Cu, 길이 2.3000 mm",
-                    "pos": {
-                        "x": 130.55,
-                        "y": 104.162
-                    },
-                    "uuid": "19dff549-449f-4c16-b4a2-55f5124b953e"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [PT_P] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 119.4875,
-                        "y": 107.075
-                    },
-                    "uuid": "9b06193d-a509-45f9-9be9-c3d32d112d33"
-                },
-                {
-                    "description": "배선 [PT_P] on F.Cu, 길이 1.3750 mm",
-                    "pos": {
-                        "x": 120.625,
-                        "y": 100.5
-                    },
-                    "uuid": "5e0d2671-9e2d-4c52-a226-753b2e9c72d6"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [NRST] on F.Cu, 길이 2.1010 mm",
-                    "pos": {
-                        "x": 124.138,
-                        "y": 101.75
-                    },
-                    "uuid": "1754c560-3352-4a3d-a104-51ad2d40f836"
-                },
-                {
-                    "description": "배선 [NRST] on B.Cu, 길이 0.0500 mm",
-                    "pos": {
-                        "x": 124.75,
-                        "y": 101.925
-                    },
-                    "uuid": "4318cfaf-fd87-4c28-9b0b-e2fe1abcea8a"
+                    "uuid": "d30eebf5-2d8f-4f20-bfbc-765d191eafa0"
                 }
             ],
             "severity": "error",
@@ -463,7 +256,7 @@
                         "x": 135.337,
                         "y": 106.175
                     },
-                    "uuid": "a5f2cdbe-a641-4844-93e1-c9f33dd58e2b"
+                    "uuid": "c7e0b492-128b-4215-ae6c-251b374e0d72"
                 },
                 {
                     "description": "배선 [OUT1_SGOOD] on F.Cu, 길이 1.6995 mm",
@@ -471,7 +264,7 @@
                         "x": 122.438,
                         "y": 102.25
                     },
-                    "uuid": "31e7478c-776d-4a90-8a62-1c81fd7210c8"
+                    "uuid": "b6e7acdd-61a8-4e94-9363-d56c3d22fc93"
                 }
             ],
             "severity": "error",
@@ -481,43 +274,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "배선 [SPI_SCK] on F.Cu, 길이 1.3973 mm",
+                    "description": "비아 [SPI_MISO] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 125.2125,
-                        "y": 110.325
-                    },
-                    "uuid": "ecadeafe-71c5-44cb-9418-3fc2b0817959"
-                },
-                {
-                    "description": "배선 [SPI_SCK] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 127.05,
-                        "y": 104.162
-                    },
-                    "uuid": "aadfa349-ade0-45be-93db-2b41dfa5fa08"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "패드 15 [SPI_MISO]의 U6 위F.Cu",
-                    "pos": {
-                        "x": 119.4875,
+                        "x": 120.1,
                         "y": 109.675
                     },
-                    "uuid": "0f934100-e352-4137-a5b7-b6d671fe3200"
+                    "uuid": "4ddc720b-db37-40f9-83a4-8d9b4827aae2"
                 },
                 {
-                    "description": "배선 [SPI_MISO] on F.Cu, 길이 0.0005 mm",
+                    "description": "패드 17 [SPI_MISO]의 U4 위F.Cu",
                     "pos": {
                         "x": 127.55,
-                        "y": 104.162
+                        "y": 104.1625
                     },
-                    "uuid": "bc474a4b-f6d1-437b-80fc-177bdb9b863e"
+                    "uuid": "c5d7d9ec-2f46-4bd5-b06e-7b8c07b2b032"
                 }
             ],
             "severity": "error",
@@ -527,20 +297,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "배선 [SPI_MOSI] on F.Cu, 길이 0.0005 mm",
+                    "description": "배선 [PT_P] on F.Cu, 길이 0.0005 mm",
                     "pos": {
-                        "x": 128.05,
-                        "y": 104.162
+                        "x": 119.4875,
+                        "y": 107.075
                     },
-                    "uuid": "644bb84c-80e5-415f-b63f-243dcf610694"
+                    "uuid": "8f203144-8ebe-4249-afa5-7fd71e0e9740"
                 },
                 {
-                    "description": "배선 [SPI_MOSI] on In2.Cu, 길이 1.5750 mm",
+                    "description": "배선 [PT_P] on F.Cu, 길이 1.3750 mm",
                     "pos": {
-                        "x": 121.85,
-                        "y": 108.875
+                        "x": 120.625,
+                        "y": 100.5
                     },
-                    "uuid": "76b1342a-f0c6-49d1-adc6-62fdea9e8196"
+                    "uuid": "56a0170b-5cb1-472f-aa79-98554f998cb0"
                 }
             ],
             "severity": "error",
@@ -550,204 +320,20 @@
             "description": "Missing connection between items",
             "items": [
                 {
-                    "description": "배선 [CS_ADC] on F.Cu, 길이 1.4085 mm",
+                    "description": "배선 [VIN_P] on B.Cu, 길이 1.0645 mm",
                     "pos": {
-                        "x": 125.2125,
-                        "y": 109.675
+                        "x": 133.699998,
+                        "y": 107.64
                     },
-                    "uuid": "bc8c6016-d68c-45b3-9ac1-fcf642c67090"
+                    "uuid": "0bfbe391-180c-446d-a604-afd86964df30"
                 },
                 {
-                    "description": "배선 [CS_ADC] on F.Cu, 길이 0.0005 mm",
+                    "description": "비아 [VIN_P] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 129.05,
-                        "y": 104.162
-                    },
-                    "uuid": "be03ec57-dca7-4033-8cf2-48ae21013ca9"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [ADC_DRDY] on F.Cu, 길이 0.0250 mm",
-                    "pos": {
-                        "x": 120.55,
-                        "y": 109.4
-                    },
-                    "uuid": "1583046b-59b8-4783-89af-17e9a6a1fc19"
-                },
-                {
-                    "description": "배선 [ADC_DRDY] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 129.55,
-                        "y": 104.162
-                    },
-                    "uuid": "3cb5e2a4-8d6c-489d-9fcb-ebc050b1b192"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [DAC_MISO] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 132.4625,
-                        "y": 102.25
-                    },
-                    "uuid": "f76ab2b1-a39c-4aaf-8ec2-2a36b4948f38"
-                },
-                {
-                    "description": "배선 [DAC_MISO] on B.Cu, 길이 1.0000 mm",
-                    "pos": {
-                        "x": 125.525,
-                        "y": 109.975
-                    },
-                    "uuid": "a524b79d-0312-487b-a69d-598825dbffdf"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [DAC_MISO] on F.Cu, 길이 1.5000 mm",
-                    "pos": {
-                        "x": 132.463,
-                        "y": 102.25
-                    },
-                    "uuid": "82370a01-d404-4398-a91b-d8e511b8cce8"
-                },
-                {
-                    "description": "배선 [DAC_MISO] on B.Cu, 길이 1.0000 mm",
-                    "pos": {
-                        "x": 136.975,
-                        "y": 90.025
-                    },
-                    "uuid": "de1f17be-7a68-4a40-94c8-05c7a71eab8a"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [DAC_MOSI] on B.Cu, 길이 1.0000 mm",
-                    "pos": {
-                        "x": 126.175,
-                        "y": 109.975
-                    },
-                    "uuid": "16036535-0222-4542-8155-93a5a6f204e9"
-                },
-                {
-                    "description": "배선 [DAC_MOSI] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 132.463,
+                        "x": 118.5,
                         "y": 101.75
                     },
-                    "uuid": "bdcc5c37-fc47-4584-a49b-36fa1c203953"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "비아 [DAC_MOSI] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 133.5625,
-                        "y": 101.75
-                    },
-                    "uuid": "2af92c1b-5cfc-4c2d-b62e-328d53caad12"
-                },
-                {
-                    "description": "배선 [DAC_MOSI] on B.Cu, 길이 1.0000 mm",
-                    "pos": {
-                        "x": 136.325,
-                        "y": 90.025
-                    },
-                    "uuid": "734e0e90-6ee3-4a88-8c16-05baf7624b17"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [SWDIO] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 132.463,
-                        "y": 97.75
-                    },
-                    "uuid": "a086fa97-3da3-4999-abd2-04ab5da32621"
-                },
-                {
-                    "description": "배선 [SWDIO] on F.Cu, 길이 1.6416 mm",
-                    "pos": {
-                        "x": 105.265,
-                        "y": 100.77
-                    },
-                    "uuid": "555d844f-d782-422c-bbe3-7e2ecb86f18b"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [SWCLK] on F.Cu, 길이 1.5250 mm",
-                    "pos": {
-                        "x": 105.275,
-                        "y": 99.5
-                    },
-                    "uuid": "330c50ea-1e6e-44fc-a936-f7547094ff21"
-                },
-                {
-                    "description": "배선 [SWCLK] on F.Cu, 길이 0.0005 mm",
-                    "pos": {
-                        "x": 132.4625,
-                        "y": 97.25
-                    },
-                    "uuid": "c815c135-3e55-47e6-81dd-15ec9e750091"
-                }
-            ],
-            "severity": "error",
-            "type": "unconnected_items"
-        },
-        {
-            "description": "Missing connection between items",
-            "items": [
-                {
-                    "description": "배선 [DAC_ALARM] on F.Cu, 길이 3.4620 mm",
-                    "pos": {
-                        "x": 127.05,
-                        "y": 95.838
-                    },
-                    "uuid": "5b94861f-75be-41ec-b3a4-80a73526ee73"
-                },
-                {
-                    "description": "배선 [DAC_ALARM] on B.Cu, 길이 1.0000 mm",
-                    "pos": {
-                        "x": 130.074998,
-                        "y": 109.975
-                    },
-                    "uuid": "2af10455-6c21-4007-af13-338e8000036c"
+                    "uuid": "81050e79-f02a-4f1d-9570-e81a90660086"
                 }
             ],
             "severity": "error",
@@ -762,7 +348,7 @@
                         "x": 109.7875,
                         "y": 98.525
                     },
-                    "uuid": "38779241-97d4-407b-a98f-d1aaa0bab2ef"
+                    "uuid": "871ae8dd-0377-4ca5-8b73-ae3033d8cf18"
                 },
                 {
                     "description": "패드 2 [OV_DIV]의 R4 위B.Cu",
@@ -770,7 +356,7 @@
                         "x": 111.025,
                         "y": 93.6
                     },
-                    "uuid": "372023da-70bb-48c2-bbb6-a166d20e1022"
+                    "uuid": "b8668a9d-d9a5-405a-8d9e-e90c830df4dd"
                 }
             ],
             "severity": "error",
@@ -785,7 +371,7 @@
                         "x": 111.025,
                         "y": 93.6
                     },
-                    "uuid": "372023da-70bb-48c2-bbb6-a166d20e1022"
+                    "uuid": "b8668a9d-d9a5-405a-8d9e-e90c830df4dd"
                 },
                 {
                     "description": "패드 1 [OV_DIV]의 R5 위B.Cu",
@@ -793,7 +379,7 @@
                         "x": 109.45,
                         "y": 92.025
                     },
-                    "uuid": "3e070d4a-9c68-4bd5-b356-82ecf5ac72ef"
+                    "uuid": "2b6a964c-4ad3-4c31-a885-f815869c8213"
                 }
             ],
             "severity": "error",
@@ -805,102 +391,12 @@
             "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "비아 [RS485_RX] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 115.2166,
-                        "y": 107.4448
-                    },
-                    "uuid": "03211769-f724-4e2f-bafb-9d8a58ac3b54"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [RS485_RX] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 126.05,
-                        "y": 100.8625
-                    },
-                    "uuid": "7c82af0b-c715-4d7b-ac9e-c9ae5c7b3254"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [RS485_TX] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 123.675,
-                        "y": 104.475
-                    },
-                    "uuid": "2ff2e0a6-501f-420d-9031-0f97b37f3a06"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [RS485_TX] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 113.0964,
-                        "y": 108.9689
-                    },
-                    "uuid": "8bfd2dce-cfde-4fa9-8155-735d04394715"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [RS485_A_EXT] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 139.65,
-                        "y": 101.275
-                    },
-                    "uuid": "c666190d-a38c-4ab2-9173-4991f6397d86"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [+3V3] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 130.725,
-                        "y": 110.975
-                    },
-                    "uuid": "0bc1e498-e45f-48d3-9b96-35caae572a4c"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
                     "description": "비아 [+3V3] on F.Cu - B.Cu",
                     "pos": {
                         "x": 116.1,
                         "y": 107.75
                     },
-                    "uuid": "b29ed3d9-ef01-4d7e-a262-f2cec4bf242f"
+                    "uuid": "c7a7066e-1951-4474-89e8-2e6e62dd9181"
                 }
             ],
             "severity": "warning",
@@ -915,7 +411,7 @@
                         "x": 131.05,
                         "y": 92.625
                     },
-                    "uuid": "e2edb720-b55d-4b58-a84a-6681041f737c"
+                    "uuid": "db881869-6792-4b30-a815-2ed8e113b61e"
                 }
             ],
             "severity": "warning",
@@ -925,372 +421,12 @@
             "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "비아 [+3V3A] on F.Cu - B.Cu",
+                    "description": "비아 [+3V3] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 114.225,
-                        "y": 107.75
-                    },
-                    "uuid": "2d9073d7-ca1e-465f-9172-b5397359d76d"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [+3V3A] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 120.425,
-                        "y": 107.625
-                    },
-                    "uuid": "db6492e1-54b4-49c8-8276-d480d4baf957"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [REF_N] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 116.85,
-                        "y": 110.8
-                    },
-                    "uuid": "94097a4a-e9c3-4f91-a9ab-c1c29b9ea317"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC1_LATCH] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 127.475,
+                        "x": 130.725,
                         "y": 110.975
                     },
-                    "uuid": "08146382-9cf3-4dac-bc66-784382d948e9"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC1_LATCH] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 130.05,
-                        "y": 100.8625
-                    },
-                    "uuid": "092511f8-cdd6-4db3-80a2-1854ab2bc13c"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC2_LATCH] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 135.025,
-                        "y": 89.025
-                    },
-                    "uuid": "ac37f7eb-bbaa-44f1-a4ab-e23827d0ef69"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC2_LATCH] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 130.55,
-                        "y": 101.8625
-                    },
-                    "uuid": "cc629717-d114-4566-89a8-f7c6137f2fa0"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [PT_P] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 122.0,
-                        "y": 100.5
-                    },
-                    "uuid": "22b7ab39-9368-46e9-a4b8-21e347339fc8"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [NRST] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 125.075,
-                        "y": 101.8
-                    },
-                    "uuid": "3df22436-92e0-45d1-9335-a2182224cf75"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [NRST] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 107.3,
-                        "y": 97.9
-                    },
-                    "uuid": "babae967-ae10-4091-980b-f790d310dd92"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [OUT1_SGOOD] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 122.4375,
-                        "y": 102.25
-                    },
-                    "uuid": "10afac09-140d-4461-8f9a-ec6580032139"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [OUT1_SGOOD] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 135.668749,
-                        "y": 106.925
-                    },
-                    "uuid": "ca54ae6d-f962-4d3d-94ec-626ec29c0c99"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [SPI_SCK] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 123.2009,
-                        "y": 109.7107
-                    },
-                    "uuid": "d1140154-d28d-48e7-8f99-6c78b79e678c"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [SPI_MISO] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 127.55,
-                        "y": 101.8625
-                    },
-                    "uuid": "c558d0bd-1a2f-4c0f-b83f-080ac9a567e4"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [SPI_MOSI] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 128.05,
-                        "y": 100.8625
-                    },
-                    "uuid": "43623c6a-bf9a-4f85-89d2-3451a5e9b607"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [SPI_MOSI] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 121.85,
-                        "y": 107.3
-                    },
-                    "uuid": "8700d848-5fbc-4c64-aecc-16db3b732573"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [CS_ADC] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 129.05,
-                        "y": 100.8625
-                    },
-                    "uuid": "86081011-e854-4bd1-a1ad-05f5c5e14f5b"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [ADC_DRDY] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 120.575,
-                        "y": 109.4
-                    },
-                    "uuid": "313f73d9-cebd-4b63-b0ff-4a55aa0a2a6f"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [ADC_DRDY] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 129.55,
-                        "y": 101.8625
-                    },
-                    "uuid": "757d5c51-e0fa-4853-a241-d9c1c99d5adc"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC_MISO] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 136.975,
-                        "y": 89.025
-                    },
-                    "uuid": "02cc770f-3423-43c8-8d62-db534782ea70"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC_MISO] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 133.9625,
-                        "y": 102.25
-                    },
-                    "uuid": "96fcf6c4-05b2-47df-ab75-da7cc13d315f"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC_MISO] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 125.525,
-                        "y": 110.975
-                    },
-                    "uuid": "ffb2ab29-5963-4036-ae48-ff35e510321e"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC_MOSI] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 126.175,
-                        "y": 110.975
-                    },
-                    "uuid": "1eb56a44-731d-4d3f-ad7e-d999fa3f18b1"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC_MOSI] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 133.5625,
-                        "y": 101.75
-                    },
-                    "uuid": "2af92c1b-5cfc-4c2d-b62e-328d53caad12"
-                }
-            ],
-            "severity": "warning",
-            "type": "via_dangling"
-        },
-        {
-            "description": "Via is not connected or connected on only one layer",
-            "items": [
-                {
-                    "description": "비아 [DAC_MOSI] on F.Cu - B.Cu",
-                    "pos": {
-                        "x": 136.325,
-                        "y": 89.025
-                    },
-                    "uuid": "6d851356-513f-409b-8117-c0b6d9fcec68"
+                    "uuid": "e693fcfc-7001-4773-b97f-9ed597c65720"
                 }
             ],
             "severity": "warning",
@@ -1305,7 +441,7 @@
                         "x": 133.5625,
                         "y": 97.75
                     },
-                    "uuid": "38af9589-c0dd-45ef-85b2-3992efaa01e5"
+                    "uuid": "dd8c6347-cbc0-4bb1-a4e9-e239e03def00"
                 }
             ],
             "severity": "warning",
@@ -1315,12 +451,12 @@
             "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "비아 [SWDIO] on F.Cu - B.Cu",
+                    "description": "비아 [NRST] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 104.8713,
-                        "y": 102.3637
+                        "x": 122.0375,
+                        "y": 101.75
                     },
-                    "uuid": "b1cb4c49-325a-4073-b170-db7286a08b2f"
+                    "uuid": "31492651-d844-4c1c-8eda-5342036e9468"
                 }
             ],
             "severity": "warning",
@@ -1335,7 +471,7 @@
                         "x": 133.9625,
                         "y": 97.25
                     },
-                    "uuid": "8543baf3-178b-4915-a682-7e6acd1a3989"
+                    "uuid": "1d54674f-a5a3-4f36-a2e1-1f667adf7ee0"
                 }
             ],
             "severity": "warning",
@@ -1347,10 +483,10 @@
                 {
                     "description": "비아 [SWCLK] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 103.75,
-                        "y": 99.5
+                        "x": 107.85,
+                        "y": 97.0
                     },
-                    "uuid": "bb9ac5db-c0cf-46ec-a162-55bb6c477566"
+                    "uuid": "84078898-fcbd-4d9c-8e03-c9b1bfdcd65a"
                 }
             ],
             "severity": "warning",
@@ -1360,12 +496,237 @@
             "description": "Via is not connected or connected on only one layer",
             "items": [
                 {
-                    "description": "비아 [DAC_ALARM] on F.Cu - B.Cu",
+                    "description": "비아 [VIN_SENSE] on F.Cu - B.Cu",
                     "pos": {
-                        "x": 130.074998,
-                        "y": 110.975
+                        "x": 128.55,
+                        "y": 101.8625
                     },
-                    "uuid": "90b42b7e-1852-452d-b033-44565b9a8f81"
+                    "uuid": "e3ce4402-4d92-4870-95f9-6a05570cae39"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [CDC_INT] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 131.05,
+                        "y": 100.8625
+                    },
+                    "uuid": "eec50837-ab11-4c5c-9d95-1436320a7f53"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [CDC_MOSI] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 127.55,
+                        "y": 98.5
+                    },
+                    "uuid": "f442da88-2f92-4722-8f27-70b7fbeba399"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [CDC_SCK] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 128.55,
+                        "y": 98.5
+                    },
+                    "uuid": "3454fa80-a4cc-458c-a929-e0077ad8e6f4"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [RS485_A_EXT] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 139.65,
+                        "y": 101.275
+                    },
+                    "uuid": "7477af1c-bb7c-4b91-8bcf-5212407f3bca"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [OUT1_SGOOD] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 135.668749,
+                        "y": 106.925
+                    },
+                    "uuid": "36e1801f-1bad-46b7-810a-106c6262cb83"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [OUT1_SGOOD] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 122.4375,
+                        "y": 102.25
+                    },
+                    "uuid": "f47aae31-90b1-4c26-ad46-02cb9bd10182"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [OUT2_SGOOD] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 127.1625,
+                        "y": 93.175
+                    },
+                    "uuid": "3603ba2e-42f9-470e-8930-ea919422d8dc"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [SPI_MISO] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 127.55,
+                        "y": 101.8625
+                    },
+                    "uuid": "0c8cf986-8d9c-4675-b6d4-81fc6a3c1a24"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [SPI_MISO] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 120.1,
+                        "y": 109.675
+                    },
+                    "uuid": "4ddc720b-db37-40f9-83a4-8d9b4827aae2"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [SPI_MOSI] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 128.05,
+                        "y": 100.8625
+                    },
+                    "uuid": "e2bbdd8b-1a16-4999-91e1-e2ed95f78c8c"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "배선 [DAC_MOSI] on In3.Cu, 길이 0.0707 mm",
+                    "pos": {
+                        "x": 120.0,
+                        "y": 110.35
+                    },
+                    "uuid": "30118ee5-417a-48af-9cef-0af7d895826d"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [PT_P] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 122.0,
+                        "y": 100.5
+                    },
+                    "uuid": "78c3f42f-c7fc-4718-b695-9d020f0a29cb"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [DAC2_SCLK] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 135.5,
+                        "y": 110.2
+                    },
+                    "uuid": "4ff61a53-575e-4021-8ef2-6c6b10896fc6"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [DAC2_SCLK] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 135.675,
+                        "y": 89.025
+                    },
+                    "uuid": "e5b65157-47ce-4c3c-ac13-43e763d720ce"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [VAO] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 132.15,
+                        "y": 103.25
+                    },
+                    "uuid": "8af0e544-fa74-4523-b6a4-98f3ded4f97c"
                 }
             ],
             "severity": "warning",
@@ -1380,7 +741,7 @@
                         "x": 115.0,
                         "y": 94.45
                     },
-                    "uuid": "39c0e512-449a-475b-85e8-aa68b30cd654"
+                    "uuid": "369ec2c8-a74c-4551-900f-979708ddf97a"
                 }
             ],
             "severity": "warning",
@@ -1395,7 +756,7 @@
                         "x": 108.625,
                         "y": 94.2
                     },
-                    "uuid": "9695273d-d0cb-4cac-adda-03254c13159a"
+                    "uuid": "b455866c-7363-4746-a13e-81226231aeb1"
                 }
             ],
             "severity": "warning",
@@ -1410,11 +771,26 @@
                         "x": 115.1,
                         "y": 94.4
                     },
-                    "uuid": "da7191d0-1bfc-4a37-a8fa-314e0a047b5b"
+                    "uuid": "ce0493a2-79a2-4ae4-968d-0b6b51c4ebc8"
                 }
             ],
             "severity": "warning",
             "type": "track_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "비아 [DAC1_SENSE] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 132.05,
+                        "y": 105.25
+                    },
+                    "uuid": "255cd3ab-df0d-4d6a-9a89-5a4e6622aa41"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
         },
         {
             "description": "풋프린트 'D_SMC'이(가) 라이브러리 'HMT500_260313A'의 사본과 일치하지 않습니다",
@@ -1425,7 +801,7 @@
                         "x": 143.95,
                         "y": 94.2
                     },
-                    "uuid": "b0fde400-38be-456d-9476-e9a2bfbd1b81"
+                    "uuid": "b1cd7515-aeb5-47f8-b703-075fbdaa9966"
                 }
             ],
             "severity": "warning",
@@ -1440,7 +816,7 @@
                         "x": 132.6,
                         "y": 110.3
                     },
-                    "uuid": "dc729bb2-0dcf-46b1-a72f-cb3690c00356"
+                    "uuid": "fa8b821d-0f61-4e82-8028-55168cadd8eb"
                 }
             ],
             "severity": "warning",

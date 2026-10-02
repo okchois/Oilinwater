@@ -40,12 +40,14 @@ def prepare(b,dsn):
         if z.GetZoneName() in ('RTN dedicated island','RTN isolation under U1','GND'):b.RemoveNative(z)
     # In1 = continuous ground reference; In2 = power/slow signals.
     b.SetLayerType(p.In1_Cu,p.LT_POWER); b.SetLayerType(p.In2_Cu,p.LT_SIGNAL)
+    if b.GetCopperLayerCount()==6:
+        b.SetLayerType(p.In3_Cu,p.LT_SIGNAL);b.SetLayerType(p.In4_Cu,p.LT_POWER)
     fps={f.GetReference():f for f in b.GetFootprints()}
     ep=max((pd for pd in fps['U1'].Pads() if pd.GetNumber()=='17'),key=lambda pd:pd.GetSize().x*pd.GetSize().y)
     x,y=p.ToMM(ep.GetPosition().x),p.ToMM(ep.GetPosition().y)
     # A2: DAC PowerPAD -> GND reference plane. Opposite-side pads were checked
     # before choosing these sites; F.Mask tenting limits solder wicking.
-    if os.environ.get('HMT_ARTWORK','A2')=='A2':
+    if os.environ.get('HMT_ARTWORK','A3')in ('A2','A3'):
         sites=json.loads((HERE/'placement'/'thermal_vias_A2.json').read_text())
         expected={'U7':(127.8,107.1),'U8':(134.7,92.9)}
         for ref,pos in expected.items():
@@ -64,15 +66,15 @@ def prepare(b,dsn):
     rt=(x-2.2,y-3.0,x+2.2,y+3.0)
     for layer in (p.F_Cu,p.B_Cu):
         z=rect(b,layer,rt,'EF_RTN',name='RTN dedicated island'); z.SetAssignedPriority(5)
-    for layer in (p.In1_Cu,p.In2_Cu):
+    for layer in ([p.In1_Cu,p.In2_Cu,p.In3_Cu,p.In4_Cu] if b.GetCopperLayerCount()==6 else [p.In1_Cu,p.In2_Cu]):
         rect(b,layer,(rt[0]-.3,rt[1]-.3,rt[2]+.3,rt[3]+.3),keepout=True,name='RTN isolation under U1')
-    for layer in (p.F_Cu,p.In1_Cu,p.B_Cu):
+    for layer in ([p.F_Cu,p.In1_Cu,p.In4_Cu,p.B_Cu] if b.GetCopperLayerCount()==6 else [p.F_Cu,p.In1_Cu,p.B_Cu]):
         rect(b,layer,(99,88,157.5,112),'GND',name='GND')
     p.ZONE_FILLER(b).Fill(b.Zones())
     p.SaveBoard(str(BASE)+'.kicad_pcb',b,True)
     # Outer GND fills must be rebuilt around tracks after routing, not imported as fixed obstacles.
     for z in list(b.Zones()):
-        if not z.GetIsRuleArea() and z.GetLayer()!=p.In1_Cu: b.RemoveNative(z)
+        if not z.GetIsRuleArea() and z.GetLayer() not in (p.In1_Cu,p.In4_Cu): b.RemoveNative(z)
     b.SetLayerType(p.In1_Cu,p.LT_POWER)
     if not p.ExportSpecctraDSN(b,str(dsn)):raise RuntimeError('DSN export failed')
     # Pad pitch constrains RTN-to-adjacent control pins to .25; GND isolation stays .30.
@@ -82,7 +84,9 @@ def prepare(b,dsn):
  (constraint clearance (min 0.3mm)))
 """)
     data=dsn.read_text()
-    data=data.replace('(boundary', '(autoroute_settings (fanout off) (autoroute on) (postroute off) (layer_rule In1.Cu (active off)))\n    (boundary',1)
+    ground_rules='(layer_rule In1.Cu (active off))'
+    if b.GetCopperLayerCount()==6:ground_rules+=' (layer_rule In4.Cu (active off))'
+    data=data.replace('(boundary', '(autoroute_settings (fanout off) (autoroute on) (postroute off) '+ground_rules+')\n    (boundary',1)
     dsn.write_text(data)
 
 def main():

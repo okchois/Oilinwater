@@ -175,7 +175,27 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
 
 def build():
     Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
-    o = [HEADER.format(date=P.DATE, rev=os.environ.get("HMT_ARTWORK", "A2"), ox=OX, oy=OY)]
+    rev = os.environ.get("HMT_ARTWORK", "A3")
+    header = HEADER
+    if rev == "A3":
+        header = header.replace('(31 "B.Cu" signal)', '(3 "In3.Cu" signal)\n    (4 "In4.Cu" power)\n    (31 "B.Cu" signal)')
+        start = header.index('      (layer "F.Cu" (type "copper")')
+        end = header.index('      (layer "B.Mask"', start)
+        # JLC06161H-2116A published nominal stack. Central dielectric is the
+        # combined 0.1164 prepreg + 0.7 core + 0.1164 prepreg, not a single core.
+        copper = ["F.Cu", "In1.Cu", "In2.Cu", "In3.Cu", "In4.Cu", "B.Cu"]
+        dielectric = [(0.1164,"prepreg","2116"), (.13,"core","FR4"),
+                      (.9328,"prepreg","2116+0.7mm core+2116"),
+                      (.13,"core","FR4"), (.1164,"prepreg","2116")]
+        lines=[]
+        for i, layer in enumerate(copper):
+            thick=.035 if i in (0,5) else .0152
+            lines.append(f'      (layer "{layer}" (type "copper") (thickness {thick}))')
+            if i<5:
+                thick,kind,material=dielectric[i]
+                lines.append(f'      (layer "dielectric {i+1}" (type "{kind}") (thickness {thick}) (material "{material}"))')
+        header=header[:start]+'\n'.join(lines)+'\n'+header[end:]
+    o = [header.format(date=P.DATE, rev=rev, ox=OX, oy=OY)]
     # 외곽선
     for i, sg in enumerate(fillet_outline(outline_pts(), Pc["corner_r"])):
         if sg[0] == "line":

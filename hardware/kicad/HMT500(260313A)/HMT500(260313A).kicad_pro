@@ -116,10 +116,10 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.7999999999999999,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.2,
+        "min_through_hole_diameter": 0.15,
         "min_track_width": 0.0,
-        "min_via_annular_width": 0.09999999999999999,
-        "min_via_diameter": 0.4,
+        "min_via_annular_width": 0.075,
+        "min_via_diameter": 0.3,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
@@ -220,6 +220,23 @@
       },
       {
         "bus_width": 12,
+        "clearance": 0.1,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "SIGNAL_A3",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.1,
+        "via_diameter": 0.3,
+        "via_drill": 0.15,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
         "clearance": 0.15,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
@@ -313,6 +330,114 @@
       {
         "netclass": "CHASSIS",
         "pattern": "CHASSIS"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "ADC_DRDY"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "CDC_INT"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "CDC_MISO"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "CDC_MOSI"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "CDC_SCK"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "CS_ADC"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "CS_CDC"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC1_LATCH"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC1_SCLK"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC2_LATCH"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC2_SCLK"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC_ALARM"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC_MISO"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC_MOSI"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "DAC_SCK"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "NRST"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "OUT1_SGOOD"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "OUT2_SGOOD"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "PWR_FLT"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "RS485_DE"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "RS485_RX"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "RS485_TX"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "SPI_MISO"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "SPI_MOSI"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "SPI_SCK"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "SWCLK"
+      },
+      {
+        "netclass": "SIGNAL_A3",
+        "pattern": "SWDIO"
       },
       {
         "netclass": "GROUND",

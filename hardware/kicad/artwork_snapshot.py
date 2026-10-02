@@ -25,8 +25,9 @@ def capture(b):
         poly=z.Outline()
         if any(poly.HoleCount(i) for i in range(poly.OutlineCount())):raise ValueError('Zone holes unsupported; extend serializer before capture')
         zones.append(dict(name=z.GetZoneName(),layers=[b.GetLayerName(l) for l in z.GetLayerSet().Seq()],net=z.GetNetname(),rule=z.GetIsRuleArea(),tracks=z.GetDoNotAllowTracks(),vias=z.GetDoNotAllowVias(),fills=z.GetDoNotAllowZoneFills(),priority=z.GetAssignedPriority(),island_mode=int(z.GetIslandRemovalMode()),island_area=z.GetMinIslandArea(),clearance=p.ToMM(z.GetLocalClearance()),minimum=p.ToMM(z.GetMinThickness()),points=[[xy(poly.COutline(i).CPoint(j)) for j in range(poly.COutline(i).PointCount())] for i in range(poly.OutlineCount())]))
-    return dict(status='DRAFT — NOT FOR FABRICATION',placement=placement(b),tracks=tracks,zones=zones)
+    return dict(status='DRAFT — NOT FOR FABRICATION',copper_layers=b.GetCopperLayerCount(),placement=placement(b),tracks=tracks,zones=zones)
 def restore(b,d):
+    if d.get('copper_layers',b.GetCopperLayerCount())!=b.GetCopperLayerCount():raise ValueError('Copper layer count differs from routing snapshot')
     if placement(b)!=d['placement']:raise ValueError('Placement differs from routing snapshot: reroute required')
     for t in list(b.GetTracks()):b.RemoveNative(t)
     for z in list(b.Zones()):b.RemoveNative(z)

@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/Users/deuknamchoi/Documents/Codex/2026-09-30/new-chat-2/work/hmt_mech_review/source/hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch")
-		(date "2026-10-02T08:34:09")
+		(date "2026-10-02T12:15:54")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -8066,7 +8066,7 @@
 		(net
 			(code "4")
 			(name "ADC_DRDY")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "21")
@@ -8104,7 +8104,7 @@
 		(net
 			(code "6")
 			(name "CDC_INT")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "24")
@@ -8121,7 +8121,7 @@
 		(net
 			(code "7")
 			(name "CDC_MISO")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "43")
@@ -8138,7 +8138,7 @@
 		(net
 			(code "8")
 			(name "CDC_MOSI")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "44")
@@ -8155,7 +8155,7 @@
 		(net
 			(code "9")
 			(name "CDC_SCK")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "42")
@@ -8198,7 +8198,7 @@
 		(net
 			(code "11")
 			(name "CS_ADC")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "R12")
 				(pin "2")
@@ -8220,7 +8220,7 @@
 		(net
 			(code "12")
 			(name "CS_CDC")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "R13")
 				(pin "2")
@@ -8301,7 +8301,7 @@
 		(net
 			(code "15")
 			(name "DAC1_LATCH")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "R10")
 				(pin "2")
@@ -8363,7 +8363,7 @@
 		(net
 			(code "17")
 			(name "DAC1_SCLK")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U14")
 				(pin "7")
@@ -8439,7 +8439,7 @@
 		(net
 			(code "20")
 			(name "DAC2_LATCH")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "R11")
 				(pin "2")
@@ -8501,7 +8501,7 @@
 		(net
 			(code "22")
 			(name "DAC2_SCLK")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U14")
 				(pin "3")
@@ -8518,7 +8518,7 @@
 		(net
 			(code "23")
 			(name "DAC_ALARM")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "R33")
 				(pin "2")
@@ -8546,7 +8546,7 @@
 		(net
 			(code "24")
 			(name "DAC_MISO")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "26")
@@ -8569,7 +8569,7 @@
 		(net
 			(code "25")
 			(name "DAC_MOSI")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "27")
@@ -8592,7 +8592,7 @@
 		(net
 			(code "26")
 			(name "DAC_SCK")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U14")
 				(pin "1")
@@ -9271,7 +9271,7 @@
 		(net
 			(code "29")
 			(name "NRST")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "C21")
 				(pin "1")
@@ -9910,7 +9910,7 @@
 		(net
 			(code "61")
 			(name "OUT1_SGOOD")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "11")
@@ -9973,7 +9973,7 @@
 		(net
 			(code "63")
 			(name "OUT2_SGOOD")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U10")
 				(pin "8")
@@ -10039,7 +10039,7 @@
 		(net
 			(code "66")
 			(name "PWR_FLT")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U1")
 				(pin "14")
@@ -10130,7 +10130,7 @@
 		(net
 			(code "69")
 			(name "RS485_DE")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "R60")
 				(pin "1")
@@ -10158,7 +10158,7 @@
 		(net
 			(code "70")
 			(name "RS485_RX")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U11")
 				(pin "1")
@@ -10175,7 +10175,7 @@
 		(net
 			(code "71")
 			(name "RS485_TX")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U11")
 				(pin "4")
@@ -10226,7 +10226,7 @@
 		(net
 			(code "74")
 			(name "SPI_MISO")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "17")
@@ -10243,7 +10243,7 @@
 		(net
 			(code "75")
 			(name "SPI_MOSI")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "18")
@@ -10260,7 +10260,7 @@
 		(net
 			(code "76")
 			(name "SPI_SCK")
-			(class "Default")
+			(class "SIGNAL_A3")
 			(node
 				(ref "U4")
 				(pin "16")
