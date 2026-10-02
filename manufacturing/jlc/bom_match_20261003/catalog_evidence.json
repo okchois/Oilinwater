@@ -1,0 +1,3651 @@
+{
+  "C11702": {
+    "url": "https://www.lcsc.com/product-detail/C11702.html",
+    "checked_date": "2026-10-03",
+    "sku": "C11702",
+    "mpn": "0402WGF1001TCE",
+    "brand": {
+      "@type": "Brand",
+      "name": "UNI-ROYAL"
+    },
+    "description": "1kΩ ±1% 62.5mW 0402 Thick Film Resistor",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "1kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C11702"
+    }
+  },
+  "C125847": {
+    "url": "https://www.lcsc.com/product-detail/C125847.html",
+    "checked_date": "2026-10-03",
+    "sku": "C125847",
+    "mpn": "CC0805KKX7R9BB225",
+    "brand": {
+      "@type": "Brand",
+      "name": "YAGEO"
+    },
+    "description": "2.2uF ±10% 50V Ceramic Capacitor X7R 0805",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0805"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "2.2uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C125847"
+    }
+  },
+  "C135263": {
+    "url": "https://www.lcsc.com/product-detail/C135263.html",
+    "checked_date": "2026-10-03",
+    "sku": "C135263",
+    "mpn": "SMNR4020-10UH",
+    "brand": {
+      "@type": "Brand",
+      "name": "Shun Xiang Nuo"
+    },
+    "description": "1.6A 10uH ±20% 1.6A 215mΩ Magnetic Shielded Inductor SMD,4x4mm Fixed Inductors ",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SMD,4x4mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current Rating",
+        "value": "1.6A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Inductance",
+        "value": "10uH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±20%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current - Saturation(Isat)",
+        "value": "1.6A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "DC Resistance(DCR)",
+        "value": "215mΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Magnetic Shielded Inductor"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/c30b0f031d0070e2292eba9306a4bf8b.pdf?productCode=C135263"
+    }
+  },
+  "C135264": {
+    "url": "https://www.lcsc.com/product-detail/C135264.html",
+    "checked_date": "2026-10-03",
+    "sku": "C135264",
+    "mpn": "SMNR4020-22UH",
+    "brand": {
+      "@type": "Brand",
+      "name": "Shun Xiang Nuo"
+    },
+    "description": "1.05A 22uH ±20% 1.05A 455mΩ Magnetic Shielded Inductor SMD,4x4mm Fixed Inductors ",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SMD,4x4mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current Rating",
+        "value": "1.05A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Inductance",
+        "value": "22uH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±20%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current - Saturation(Isat)",
+        "value": "1.05A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "DC Resistance(DCR)",
+        "value": "455mΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Magnetic Shielded Inductor"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/c30b0f031d0070e2292eba9306a4bf8b.pdf?productCode=C135264"
+    }
+  },
+  "C141713": {
+    "url": "https://www.lcsc.com/product-detail/C141713.html",
+    "checked_date": "2026-10-03",
+    "sku": "C141713",
+    "mpn": "5.0SMDJ36CA",
+    "brand": {
+      "@type": "Brand",
+      "name": "Littelfuse"
+    },
+    "description": "58.1VC Clamp 86.1A@10/1000us Ipp TVS DIODE DO-214AB",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "DO-214AB"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Clamping Voltage",
+        "value": "58.1V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-65℃~+150℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Peak Pulse Current (Ipp)",
+        "value": "86.1A@10/1000us"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Peak Pulse Power Dissipation (Ppp)",
+        "value": "5kW@10/1000us"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Breakdown",
+        "value": "44.2V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "type",
+        "value": "TVS"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reverse Leakage Current (Ir)",
+        "value": "5uA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Polarity",
+        "value": "Bidirectional"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reverse Stand-Off Voltage (Vrwm)",
+        "value": "36V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/55fd985e1fd0410a15b778d3d0dbe679.pdf?productCode=C141713"
+    }
+  },
+  "C144804": {
+    "url": "https://www.lcsc.com/product-detail/C144804.html",
+    "checked_date": "2026-10-03",
+    "sku": "C144804",
+    "mpn": "AC0402FR-07118KL",
+    "brand": {
+      "@type": "Brand",
+      "name": "YAGEO"
+    },
+    "description": "62.5mW 118kΩ 50V Thick Film Resistor ±100ppm/℃ ±1% 0402 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "118kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/3511efb0564cb1711d9237ab09d6e97b.pdf?productCode=C144804"
+    }
+  },
+  "C14663": {
+    "url": "https://www.lcsc.com/product-detail/C14663.html",
+    "checked_date": "2026-10-03",
+    "sku": "C14663",
+    "mpn": "CC0603KRX7R9BB104",
+    "brand": {
+      "@type": "Brand",
+      "name": "YAGEO"
+    },
+    "description": "100nF ±10% 50V Ceramic Capacitor X7R 0603",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "100nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C14663"
+    }
+  },
+  "C1525": {
+    "url": "https://www.lcsc.com/product-detail/C1525.html",
+    "checked_date": "2026-10-03",
+    "sku": "C1525",
+    "mpn": "CL05B104KO5NNNC",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "100nF ±10% 16V Ceramic Capacitor X7R 0402",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "100nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "16V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C1525"
+    }
+  },
+  "C160404": {
+    "url": "https://www.lcsc.com/product-detail/C160404.html",
+    "checked_date": "2026-10-03",
+    "sku": "C160404",
+    "mpn": "SM04B-SRSS-TB(LF)(SN)",
+    "brand": {
+      "@type": "Brand",
+      "name": "JST"
+    },
+    "description": "Connector Header 4 position 1mm Pitch 1A Surface Mount, Right Angle -25℃~+85℃",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SMD,P=1mm,Surface Mount,Right Angle"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Connector Type",
+        "value": "Surface Mount, Right Angle"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reference Series",
+        "value": "SH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating (Max)",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Material",
+        "value": "Copper alloy"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of PINs Per Row",
+        "value": "4"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Rows",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Pitch",
+        "value": "1mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Flame Retardant Rating",
+        "value": "UL94V-0"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current Rating",
+        "value": "1A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Supplementary Features",
+        "value": "Auxiliary Solder Pin"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of PINs",
+        "value": "4P"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-25℃~+85℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Plating",
+        "value": "Tin"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Plastic Material",
+        "value": "PA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Color",
+        "value": "White"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "X-Length of Bottom Edge on Board (Spacing Line)",
+        "value": "6mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Row Spacing",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Pin Structure",
+        "value": "1x4P"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/40c649e22fa9bda892cfec952005fd51.pdf?productCode=C160404"
+    }
+  },
+  "C162427": {
+    "url": "https://www.lcsc.com/product-detail/C162427.html",
+    "checked_date": "2026-10-03",
+    "sku": "C162427",
+    "mpn": "GRM21BR71E475KA73L",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "4.7uF ±10% 25V Ceramic Capacitor X7R 0805",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0805"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "4.7uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "25V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/7a18b9c52c5224c61d889960b6b14204.pdf?productCode=C162427"
+    }
+  },
+  "C1849891": {
+    "url": "https://www.lcsc.com/product-detail/C1849891.html",
+    "checked_date": "2026-10-03",
+    "sku": "C1849891",
+    "mpn": "TVS1401DRBR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "14V Surface Mount 2 VSON-8-EP(3x3) Surge Suppression ICs RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "VSON-8-EP(3x3)"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "14V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Trigger Current",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Width",
+        "value": "3mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Mounting Type",
+        "value": "Surface Mount"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Overvoltage clamping protection"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Length",
+        "value": "3mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Threshold Voltage",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Height",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "RDS(on)",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reset Voltage",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "2"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/32c0efc07645e79fb237f2aed45e210a.pdf?productCode=C1849891"
+    }
+  },
+  "C1858306": {
+    "url": "https://www.lcsc.com/product-detail/C1858306.html",
+    "checked_date": "2026-10-03",
+    "sku": "C1858306",
+    "mpn": "THVD2410DGKR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "3V~5.5V Transceiver 500Kbps 256 VSSOP-8-0.65mm Drivers, Receivers, Transceivers RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "VSSOP-8-0.65mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "3V~5.5V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Transceiver"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Data Rate",
+        "value": "500Kbps"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Nodes",
+        "value": "256"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "ESD Protect",
+        "value": "±16kV"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Communication Mode",
+        "value": "Half-Duplex"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Drivers",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Tx/Rx enable;Enable shutdown;Fail-safe;Overcurrent Protection;Thermal shutdown protection;Low-power mode"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Receivers",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Quiescent Supply Current",
+        "value": "1uA"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/10cad1ecf324dbae8d5fbe24e4cd47d3.pdf?productCode=C1858306"
+    }
+  },
+  "C189897": {
+    "url": "https://www.lcsc.com/product-detail/C189897.html",
+    "checked_date": "2026-10-03",
+    "sku": "C189897",
+    "mpn": "SSHL-002T-P0.2",
+    "brand": {
+      "@type": "Brand",
+      "name": "JST"
+    },
+    "description": "Connector Terminal GH Tin 26~30 AWG Crimp",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Wire Gauge - mm2",
+        "value": "0.05~0.13"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Wire Gauge - AWG",
+        "value": "26~30"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Plating",
+        "value": "Tin"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Material",
+        "value": "Phosphor bronze"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reference Series",
+        "value": "GH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Insulation OD",
+        "value": "0.76mm~1mm"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/145d85af57fc54ac5a4f36dce2b36dd3.pdf?productCode=C189897"
+    }
+  },
+  "C2074558": {
+    "url": "https://www.lcsc.com/product-detail/C2074558.html",
+    "checked_date": "2026-10-03",
+    "sku": "C2074558",
+    "mpn": "ERA-3AEB9762V",
+    "brand": {
+      "@type": "Brand",
+      "name": "PANASONIC"
+    },
+    "description": "97.6kΩ 100mW 75V Thin Film Resistor ±0.1% ±25ppm/℃ 0603 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "97.6kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "100mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "75V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thin Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±0.1%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±25ppm/℃"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/6eeba5ce2c338b56d0cecb71d320bc16.pdf?productCode=C2074558"
+    }
+  },
+  "C221351": {
+    "url": "https://www.lcsc.com/product-detail/C221351.html",
+    "checked_date": "2026-10-03",
+    "sku": "C221351",
+    "mpn": "OPA197IDBVR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "65mA 1 100uV 20V/us 140dB 5pA 1mA 10MHz Rail-to-Rail Input, Rail-to-Rail Output SOT-23-5 Instrumentation, Op Amps, Buffer Amps RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SOT-23-5"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Current",
+        "value": "65mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Vos - Input Offset Voltage",
+        "value": "100uV"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Slew Rate",
+        "value": "20V/us"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Input Offset Current(Ios)",
+        "value": "20pA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Common Mode Rejection Ratio(CMRR)",
+        "value": "140dB"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Ib - Input Bias Current",
+        "value": "5pA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Input Offset Voltage Drift(Vos TC)",
+        "value": "2.5uV/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Quiescent Current",
+        "value": "1mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Gain Bandwidth Product",
+        "value": "10MHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "EMI filtering/RF suppression"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Input Voltage Noise Density",
+        "value": "5.5nV/√Hz@1kHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Dual Supply",
+        "value": "-18V~-2.25V;2.25V~18V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Rail to Rail",
+        "value": "Rail-to-Rail Input, Rail-to-Rail Output"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Single Supply",
+        "value": "4.5V~36V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/e2783a6fd1a6133ae7a2787c6a90b99d.pdf?productCode=C221351"
+    }
+  },
+  "C22439294": {
+    "url": "https://www.lcsc.com/product-detail/C22439294.html",
+    "checked_date": "2026-10-03",
+    "sku": "C22439294",
+    "mpn": "LMR51606YFDBVR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "Buck Switching Regulator IC SOT-23-6",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SOT-23-6"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+150℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Outputs",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Function",
+        "value": "Step-down type"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Frequency - Switching",
+        "value": "1.1MHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Cycle-by-cycle current limiting;Hiccup current limiting;Light load efficient mode;Overcurrent Protection"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Type",
+        "value": "Adjustable"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Topology",
+        "value": "Buck"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Voltage",
+        "value": "4V~65V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Switch tube (built-in/external)",
+        "value": "Built-in"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Current",
+        "value": "600mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Voltage",
+        "value": "800mV~28V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Quiescent Current",
+        "value": "420uA"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/a04d1ffa617a9d2aa81bf312fe63cb39.pdf?productCode=C22439294"
+    }
+  },
+  "C23249": {
+    "url": "https://www.lcsc.com/product-detail/C23249.html",
+    "checked_date": "2026-10-03",
+    "sku": "C23249",
+    "mpn": "0603WAF8062T5E",
+    "brand": {
+      "@type": "Brand",
+      "name": "UNI-ROYAL"
+    },
+    "description": "80.6kΩ ±1% 100mW 0603 Thick Film Resistor",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "80.6kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "100mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "75V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C23249"
+    }
+  },
+  "C242563": {
+    "url": "https://www.lcsc.com/product-detail/C242563.html",
+    "checked_date": "2026-10-03",
+    "sku": "C242563",
+    "mpn": "CRCW25124R70FKEG",
+    "brand": {
+      "@type": "Brand",
+      "name": "VISHAY"
+    },
+    "description": "1W 4.7Ω 500V Thick Film Resistor ±1% ±100ppm/℃ 2512 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "2512"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "1W"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "4.7Ω"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "500V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/4eac2644eaec1607cd52ca1e4d0c86f5.pdf?productCode=C242563"
+    }
+  },
+  "C25077": {
+    "url": "https://www.lcsc.com/product-detail/C25077.html",
+    "checked_date": "2026-10-03",
+    "sku": "C25077",
+    "mpn": "0402WGF100JTCE",
+    "brand": {
+      "@type": "Brand",
+      "name": "UNI-ROYAL"
+    },
+    "description": "10Ω ±1% 62.5mW 0402 Thick Film Resistor",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "10Ω"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±200ppm/℃"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25077"
+    }
+  },
+  "C253347": {
+    "url": "https://www.lcsc.com/product-detail/C253347.html",
+    "checked_date": "2026-10-03",
+    "sku": "C253347",
+    "mpn": "KTR18EZPF1004",
+    "brand": {
+      "@type": "Brand",
+      "name": "ROHM"
+    },
+    "description": "250mW 1MΩ 500V Thick Film Resistor ±100ppm/℃ ±1% 1206 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1206"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "250mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "1MΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "500V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/636a1b7059def1f7c09a69544e048c65.pdf?productCode=C253347"
+    }
+  },
+  "C25741": {
+    "url": "https://www.lcsc.com/product-detail/C25741.html",
+    "checked_date": "2026-10-03",
+    "sku": "C25741",
+    "mpn": "0402WGF1003TCE",
+    "brand": {
+      "@type": "Brand",
+      "name": "UNI-ROYAL"
+    },
+    "description": "100kΩ ±1% 62.5mW 0402 Thick Film Resistor",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "100kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25741"
+    }
+  },
+  "C25744": {
+    "url": "https://www.lcsc.com/product-detail/C25744.html",
+    "checked_date": "2026-10-03",
+    "sku": "C25744",
+    "mpn": "0402WGF1002TCE",
+    "brand": {
+      "@type": "Brand",
+      "name": "UNI-ROYAL"
+    },
+    "description": "10kΩ ±1% 62.5mW 0402 Thick Film Resistor",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "10kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C25744"
+    }
+  },
+  "C263995": {
+    "url": "https://www.lcsc.com/product-detail/C263995.html",
+    "checked_date": "2026-10-03",
+    "sku": "C263995",
+    "mpn": "SSH-003T-P0.2-H",
+    "brand": {
+      "@type": "Brand",
+      "name": "JST"
+    },
+    "description": "Connector Terminal SH APSH Tin 28~32 AWG Crimp",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Wire Gauge - mm2",
+        "value": "0.032~0.08"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Wire Gauge - AWG",
+        "value": "28~32"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Plating",
+        "value": "Tin"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Material",
+        "value": "Phosphor bronze"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reference Series",
+        "value": "SH;APSH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Insulation OD",
+        "value": "0.4mm~0.8mm"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/db160e543e1b6c5991eca6adf02030a1.pdf?productCode=C263995"
+    }
+  },
+  "C26409": {
+    "url": "https://www.lcsc.com/product-detail/C26409.html",
+    "checked_date": "2026-10-03",
+    "sku": "C26409",
+    "mpn": "CL05C101JB5NNNC",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "100pF ±5% 50V Ceramic Capacitor C0G 0402",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "100pF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "C0G"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±5%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C26409"
+    }
+  },
+  "C265111": {
+    "url": "https://www.lcsc.com/product-detail/C265111.html",
+    "checked_date": "2026-10-03",
+    "sku": "C265111",
+    "mpn": "SM08B-GHS-TB(LF)(SN)",
+    "brand": {
+      "@type": "Brand",
+      "name": "JST"
+    },
+    "description": "Connector Header 8 position 1.25mm Pitch 1A Surface Mount, Right Angle -25℃~+85℃",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SMD,P=1.25mm,Surface Mount,Right Angle"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Connector Type",
+        "value": "Surface Mount, Right Angle"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reference Series",
+        "value": "GH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating (Max)",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Material",
+        "value": "Phosphor bronze"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of PINs Per Row",
+        "value": "8"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Rows",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Pitch",
+        "value": "1.25mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Flame Retardant Rating",
+        "value": "UL94V-0"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current Rating",
+        "value": "1A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Supplementary Features",
+        "value": "Auxiliary Solder Pin"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of PINs",
+        "value": "8P"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-25℃~+85℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Contact Plating",
+        "value": "Tin"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Plastic Material",
+        "value": "PA9T"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Color",
+        "value": "White"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "X-Length of Bottom Edge on Board (Spacing Line)",
+        "value": "13.25mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Row Spacing",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Pin Structure",
+        "value": "1x8P"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/b3ecb1f66f95a78afd3a49a21e48bedf.pdf?productCode=C265111"
+    }
+  },
+  "C2651138": {
+    "url": "https://www.lcsc.com/product-detail/C2651138.html",
+    "checked_date": "2026-10-03",
+    "sku": "C2651138",
+    "mpn": "SRF0905-102Y",
+    "brand": {
+      "@type": "Brand",
+      "name": "BOURNS"
+    },
+    "description": "1mH@1kHz 2Line Common Mode Choke Surface Mount-4P 9.2x6mm 1.5kΩ@15MHz 800mA DCR 310mΩ",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SMD-4P,9.2x6mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Inductance @ Frequency",
+        "value": "1mH@1kHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "DC Resistance(DCR)",
+        "value": "310mΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Lines",
+        "value": "2"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+105℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "80V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Withstand",
+        "value": "500V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Impedance @ Frequency",
+        "value": "1.5kΩ@15MHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current Rating",
+        "value": "800mA"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/631a4f558c347fa0372fe5573f4be6f1.pdf?productCode=C2651138"
+    }
+  },
+  "C28233": {
+    "url": "https://www.lcsc.com/product-detail/C28233.html",
+    "checked_date": "2026-10-03",
+    "sku": "C28233",
+    "mpn": "CL21B104KCFNNNE",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "100nF ±10% 100V Ceramic Capacitor X7R 0805",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0805"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "100nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "100V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C28233"
+    }
+  },
+  "C2829318": {
+    "url": "https://www.lcsc.com/product-detail/C2829318.html",
+    "checked_date": "2026-10-03",
+    "sku": "C2829318",
+    "mpn": "PCAP04-AQFM-24",
+    "brand": {
+      "@type": "Brand",
+      "name": "ams"
+    },
+    "description": "TQFN-24-EP(4x4) Analog to Digital Converters (ADC) ",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "TQFN-24-EP(4x4)"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Built-in temperature sensor"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/13e6615207907673d0a6b6e0fc09b0bf.pdf?productCode=C2829318"
+    }
+  },
+  "C2862740": {
+    "url": "https://www.lcsc.com/product-detail/C2862740.html",
+    "checked_date": "2026-10-03",
+    "sku": "C2862740",
+    "mpn": "TPS7A2033PDBVR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "Linear Voltage Regulator IC Positive Fixed 1 Output 300mA SOT-23-5",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SOT-23-5"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Voltage",
+        "value": "3.3V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Outputs",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃@(Tj)"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Supply Current (Iq)",
+        "value": "8.5uA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Configuration",
+        "value": "Positive"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Current",
+        "value": "300mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Voltage",
+        "value": "6V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Enable control;Built-in soft-start;Input under-voltage protection;Output discharge;Thermal shutdown;Over Current Protection;Short Circuit Protection"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Type",
+        "value": "Fixed"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/e9493c53ea71c523359aed2b3e8071a4.pdf?productCode=C2862740"
+    }
+  },
+  "C2864392": {
+    "url": "https://www.lcsc.com/product-detail/C2864392.html",
+    "checked_date": "2026-10-03",
+    "sku": "C2864392",
+    "mpn": "TVS3301DRBR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "33V 1 SON-8(3x3) Mixed Technology RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SON-8(3x3)"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Overvoltage clamping protection"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "33V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "1"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://www.ti.com/cn/lit/ds/symlink/tvs3301.pdf"
+    }
+  },
+  "C307542": {
+    "url": "https://www.lcsc.com/product-detail/C307542.html",
+    "checked_date": "2026-10-03",
+    "sku": "C307542",
+    "mpn": "CL21B224KCFSFNE",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "220nF ±10% 100V Ceramic Capacitor X7R 0805",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0805"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "220nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "100V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C307542"
+    }
+  },
+  "C309511": {
+    "url": "https://www.lcsc.com/product-detail/C309511.html",
+    "checked_date": "2026-10-03",
+    "sku": "C309511",
+    "mpn": "CC1812KKX7RDBB472",
+    "brand": {
+      "@type": "Brand",
+      "name": "YAGEO"
+    },
+    "description": "4.7nF ±10% 2kV Ceramic Capacitor X7R 1812",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1812"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "4.7nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "2kV"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/9a86cbae8c34c796174906a7ab23dad0.pdf?productCode=C309511"
+    }
+  },
+  "C3148140": {
+    "url": "https://www.lcsc.com/product-detail/C3148140.html",
+    "checked_date": "2026-10-03",
+    "sku": "C3148140",
+    "mpn": "TPS26611DDFR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "TSOT-23-8 Current Regulation/Management RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "TSOT-23-8"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Overcurrent Protection;Protection latch;Operating status indication"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://www.ti.com/cn/lit/ds/symlink/tps2661.pdf"
+    }
+  },
+  "C318579": {
+    "url": "https://www.lcsc.com/product-detail/C318579.html",
+    "checked_date": "2026-10-03",
+    "sku": "C318579",
+    "mpn": "CL05B223KO5NNNC",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "22nF ±10% 16V Ceramic Capacitor X7R 0402",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "22nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "16V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/02336ea48ea44ca18c72517dd3cb7b47.pdf?productCode=C318579"
+    }
+  },
+  "C3660127": {
+    "url": "https://www.lcsc.com/product-detail/C3660127.html",
+    "checked_date": "2026-10-03",
+    "sku": "C3660127",
+    "mpn": "2035-25-SM-RPLF",
+    "brand": {
+      "@type": "Brand",
+      "name": "BOURNS"
+    },
+    "description": "Gas Discharge Tube 250V 5kA ±15% 2 POLE Surface Mount",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SMD"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Impulse Discharge Current",
+        "value": "5kA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±15%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - DC Spark Over (Nom)",
+        "value": "250V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Poles",
+        "value": "2"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/e9c2d6ed1823aeaac0e483d67f4b0ec7.pdf?productCode=C3660127"
+    }
+  },
+  "C385125": {
+    "url": "https://www.lcsc.com/product-detail/C385125.html",
+    "checked_date": "2026-10-03",
+    "sku": "C385125",
+    "mpn": "SHR-04V-S",
+    "brand": {
+      "@type": "Brand",
+      "name": "JST"
+    },
+    "description": "Connector Housing 4 Position 1mm Pitch Single Row SH Series PBT -25℃~+85℃",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "P=1mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Pitch",
+        "value": "1mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Row Spacing",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Flame Retardant Rating",
+        "value": "UL94V-0"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Rows",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "With Wings",
+        "value": "Without Fins"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-25℃~+85℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reference Series",
+        "value": "SH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Holes Structure",
+        "value": "1x4P"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Color",
+        "value": "White"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Plastic Material",
+        "value": "PBT"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of PINs Per Row",
+        "value": "4"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "With Locker",
+        "value": "Non-Latching"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/695bd0e196b59f8933bfc356f4aa9128.pdf?productCode=C385125"
+    }
+  },
+  "C389351": {
+    "url": "https://www.lcsc.com/product-detail/C389351.html",
+    "checked_date": "2026-10-03",
+    "sku": "C389351",
+    "mpn": "BAS70-04,215",
+    "brand": {
+      "@type": "Brand",
+      "name": "Nexperia"
+    },
+    "description": "Diode Array 1 Pair Series Connection 70V 70mA Surface Mount SOT-23",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SOT-23"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Non-Repetitive Peak Forward Surge Current",
+        "value": "100mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Diode Configuration",
+        "value": "1 Pair Series Connection"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current - Rectified",
+        "value": "70mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Junction Temperature Range",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - DC Reverse(Vr)",
+        "value": "70V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reverse Leakage Current (Ir)",
+        "value": "10uA@70V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Forward(Vf@If)",
+        "value": "1V@15mA"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/f3a4ff9858edbdbc380fa085ba0ae7f3.pdf?productCode=C389351"
+    }
+  },
+  "C3898227": {
+    "url": "https://www.lcsc.com/product-detail/C3898227.html",
+    "checked_date": "2026-10-03",
+    "sku": "C3898227",
+    "mpn": "VJ0603A331GXACW1BC",
+    "brand": {
+      "@type": "Brand",
+      "name": "VISHAY"
+    },
+    "description": "330pF C0G ±2% 50V 0603 Ceramic Capacitors RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "330pF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "C0G"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±2%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/f92b5b50c1d428b0e4ea30eaa54cda54.pdf?productCode=C3898227"
+    }
+  },
+  "C3954581": {
+    "url": "https://www.lcsc.com/product-detail/C3954581.html",
+    "checked_date": "2026-10-03",
+    "sku": "C3954581",
+    "mpn": "RCS0603866KFKEA",
+    "brand": {
+      "@type": "Brand",
+      "name": "VISHAY"
+    },
+    "description": "250mW 866kΩ Thick Film Resistor ±100ppm/℃ ±1% 0603 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "250mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "866kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/eb5074a42af2337dd31797b7c4115e0b.pdf?productCode=C3954581"
+    }
+  },
+  "C4027587": {
+    "url": "https://www.lcsc.com/product-detail/C4027587.html",
+    "checked_date": "2026-10-03",
+    "sku": "C4027587",
+    "mpn": "RM06F3652CT",
+    "brand": {
+      "@type": "Brand",
+      "name": "CAL-CHIP ELECTRONICS, INC."
+    },
+    "description": "100mW 36.5kΩ Thick Film Resistor ±100ppm/℃ ±1% 0603 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "100mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "36.5kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/f53ea1a39934e56b6adf3d1c9cb3e71d.pdf?productCode=C4027587"
+    }
+  },
+  "C424136": {
+    "url": "https://www.lcsc.com/product-detail/C424136.html",
+    "checked_date": "2026-10-03",
+    "sku": "C424136",
+    "mpn": "GRM32ER71E226ME15L",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "22uF ±20% 25V Ceramic Capacitor X7R 1210",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1210"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "22uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±20%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "25V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/1b1da4017eb01d9d08e8306051513329.pdf?productCode=C424136"
+    }
+  },
+  "C43473": {
+    "url": "https://www.lcsc.com/product-detail/C43473.html",
+    "checked_date": "2026-10-03",
+    "sku": "C43473",
+    "mpn": "0402WGF2212TCE",
+    "brand": {
+      "@type": "Brand",
+      "name": "UNI-ROYAL"
+    },
+    "description": "22.1kΩ ±1% 62.5mW 0402 Thick Film Resistor",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "22.1kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a975aaa49b7c97f38a963127be4a823.pdf?productCode=C43473"
+    }
+  },
+  "C473244": {
+    "url": "https://www.lcsc.com/product-detail/C473244.html",
+    "checked_date": "2026-10-03",
+    "sku": "C473244",
+    "mpn": "ERA3AEB153V",
+    "brand": {
+      "@type": "Brand",
+      "name": "PANASONIC"
+    },
+    "description": "15kΩ ±0.1% 100mW 0603 Thin Film Resistor AEC-Q200",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "15kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "100mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "75V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thin Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±0.1%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±25ppm/℃"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/2fbb44989909631f54b785f66bf877b9.pdf?productCode=C473244"
+    }
+  },
+  "C477738": {
+    "url": "https://www.lcsc.com/product-detail/C477738.html",
+    "checked_date": "2026-10-03",
+    "sku": "C477738",
+    "mpn": "RC0402FR-07422KL",
+    "brand": {
+      "@type": "Brand",
+      "name": "YAGEO"
+    },
+    "description": "62.5mW 422kΩ 50V Thick Film Resistor ±100ppm/℃ ±1% 0402 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "62.5mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "422kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/b426be3ce22c6de3e0c3a2248e49159e.pdf?productCode=C477738"
+    }
+  },
+  "C48263": {
+    "url": "https://www.lcsc.com/product-detail/C48263.html",
+    "checked_date": "2026-10-03",
+    "sku": "C48263",
+    "mpn": "ADS1220IPWR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "SPI 2.3V~5.5V TSSOP-16 Analog to Digital Converters (ADC) RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "TSSOP-16"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Interface",
+        "value": "SPI"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Quiescent Current (Iq)",
+        "value": "100nA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "2.3V~5.5V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "2;4"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Integral non - linearity",
+        "value": "6LSB"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Reference",
+        "value": "Built-in"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Clock/Oscillator",
+        "value": "Built-in"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Clock Frequency",
+        "value": "500kHz~4.5MHz;4.096MHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Multiplexers;Integrated modulator;Built-in temperature sensor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resolution(Bits)",
+        "value": "2kHz;24"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "S/N Ratio",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "ADC architecture",
+        "value": "Sigma-Delta"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Programmable Gain",
+        "value": "Support"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/d3ba43d74f6945cbb862760eac01c65f.pdf?productCode=C48263"
+    }
+  },
+  "C485357": {
+    "url": "https://www.lcsc.com/product-detail/C485357.html",
+    "checked_date": "2026-10-03",
+    "sku": "C485357",
+    "mpn": "GHR-08V-S",
+    "brand": {
+      "@type": "Brand",
+      "name": "JST"
+    },
+    "description": "Connector Housing 8 Position 1.25mm Pitch Single Row GH Series PBT -25℃~+85℃",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "P=1.25mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Pitch",
+        "value": "1.25mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Row Spacing",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Flame Retardant Rating",
+        "value": "UL94V-0"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Rows",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "With Wings",
+        "value": "Without Fins"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+105℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reference Series",
+        "value": "GH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Holes Structure",
+        "value": "1x8P"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Color",
+        "value": "White"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of PINs Per Row",
+        "value": "8"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Plastic Material",
+        "value": "PBT"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "With Locker",
+        "value": "Locking"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/b3ecb1f66f95a78afd3a49a21e48bedf.pdf?productCode=C485357"
+    }
+  },
+  "C491130": {
+    "url": "https://www.lcsc.com/product-detail/C491130.html",
+    "checked_date": "2026-10-03",
+    "sku": "C491130",
+    "mpn": "ERA3AEB4021V",
+    "brand": {
+      "@type": "Brand",
+      "name": "PANASONIC"
+    },
+    "description": "4.02kΩ ±0.1% 100mW 0603 Thin Film Resistor AEC-Q200",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "100mW"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "4.02kΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "75V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thin Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±0.1%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±25ppm/℃"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/50a7c3887ee142530afc3589eaa5fe61.pdf?productCode=C491130"
+    }
+  },
+  "C49678": {
+    "url": "https://www.lcsc.com/product-detail/C49678.html",
+    "checked_date": "2026-10-03",
+    "sku": "C49678",
+    "mpn": "CC0805KRX7R9BB104",
+    "brand": {
+      "@type": "Brand",
+      "name": "YAGEO"
+    },
+    "description": "100nF ±10% 50V Ceramic Capacitor X7R 0805",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0805"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "100nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/23ccee80ee542e7cf156a772bb589942.pdf?productCode=C49678"
+    }
+  },
+  "C5270241": {
+    "url": "https://www.lcsc.com/product-detail/C5270241.html",
+    "checked_date": "2026-10-03",
+    "sku": "C5270241",
+    "mpn": "STM32G0B1CCT6",
+    "brand": {
+      "@type": "Brand",
+      "name": "ST"
+    },
+    "description": "ARM Cortex-M0+ 32 Bit 64MHz LQFP-48(7x7) Microcontrollers RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "LQFP-48(7x7)"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of I/O",
+        "value": "44"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+85℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Program Memory Type",
+        "value": "FLASH"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "1.7V~3.6V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "EEPROM",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Program Storage Size",
+        "value": "256KB"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "CPU Core",
+        "value": "ARM Cortex-M0+"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Core Size",
+        "value": "32 Bit"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "CPU Maximum Speed",
+        "value": "64MHz"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Oscillator Type",
+        "value": "Built-in+External"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/33700851102aca0a58008909376512cb.pdf?productCode=C5270241"
+    }
+  },
+  "C528974": {
+    "url": "https://www.lcsc.com/product-detail/C528974.html",
+    "checked_date": "2026-10-03",
+    "sku": "C528974",
+    "mpn": "GRM155Z71A105KE01D",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "1uF ±10% 10V Ceramic Capacitor X7R 0402",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "1uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "10V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/c16a134a85a10475f6c30df3852ccafa.pdf?productCode=C528974"
+    }
+  },
+  "C5361358": {
+    "url": "https://www.lcsc.com/product-detail/C5361358.html",
+    "checked_date": "2026-10-03",
+    "sku": "C5361358",
+    "mpn": "PMEG10010ELR-QX",
+    "brand": {
+      "@type": "Brand",
+      "name": "Nexperia"
+    },
+    "description": "Diode 100V 1A Surface Mount SOD-123W",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "SOD-123W"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Diode Configuration",
+        "value": "Standalone"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Junction Temperature Range",
+        "value": "-65℃~+150℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - DC Reverse (Vr) (Max)",
+        "value": "100V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Forward(Vf@If)",
+        "value": "770mV@1A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Reverse Leakage Current (Ir)",
+        "value": "150nA@100V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current - Rectified",
+        "value": "1A"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/1ab9b70f9da7fd62719d8495be80ed92.pdf?productCode=C5361358"
+    }
+  },
+  "C544399": {
+    "url": "https://www.lcsc.com/product-detail/C544399.html",
+    "checked_date": "2026-10-03",
+    "sku": "C544399",
+    "mpn": "TPS26600PWPR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "4.2V~60V 1 HTSSOP-16-EP Current Regulation/Management RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "HTSSOP-16-EP"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Overcurrent Protection;Short-Circuit  Protection;Overvoltage clamping protection;Under-voltage lockout;Thermal Protection"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "4.2V~60V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Trigger Current",
+        "value": "100mA~2.23A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "FET Type",
+        "value": "Integrated FET"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Width",
+        "value": "4.4mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Threshold Voltage",
+        "value": "1V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Length",
+        "value": "5mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Height",
+        "value": "1.2mm"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Peak Output Current(Source)",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "RDS(on)",
+        "value": "150mΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Peak Output Current(Sink)",
+        "value": "-"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/b69480febcac9ee0ae1ce1668329acd5.pdf?productCode=C544399"
+    }
+  },
+  "C55047": {
+    "url": "https://www.lcsc.com/product-detail/C55047.html",
+    "checked_date": "2026-10-03",
+    "sku": "C55047",
+    "mpn": "DAC8760IPWPR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "10us 2.7V~5.5V SPI HTSSOP-24-EP Digital to Analog Converters (DAC) RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "HTSSOP-24-EP"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Settling Time",
+        "value": "10us"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Quiescent Current (Iq)",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "2.7V~5.5V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Function",
+        "value": "Bipolar output;Built-in reference source;Integrated buffer;Output short-circuit protection;Power-on reset"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Integral non - linearity",
+        "value": "-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resolution (Bits)",
+        "value": "16;-"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Interface Type",
+        "value": "SPI"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/c1a69c8402404f068a00acb753de19bc.pdf?productCode=C55047"
+    }
+  },
+  "C77093": {
+    "url": "https://www.lcsc.com/product-detail/C77093.html",
+    "checked_date": "2026-10-03",
+    "sku": "C77093",
+    "mpn": "GRM31CR71E106KA12L",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "10uF ±10% 25V Ceramic Capacitor X7R 1206",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1206"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "10uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "25V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/a4d1e2744bd5d44ba57842651a3fd598.pdf?productCode=C77093"
+    }
+  },
+  "C844885": {
+    "url": "https://www.lcsc.com/product-detail/C844885.html",
+    "checked_date": "2026-10-03",
+    "sku": "C844885",
+    "mpn": "CRCW251210R0FKEG",
+    "brand": {
+      "@type": "Brand",
+      "name": "VISHAY"
+    },
+    "description": "10Ω 1W Thick Film Resistor ±100ppm/℃ ±1% 2512 Chip Resistor - Surface Mount RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "2512"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Resistance",
+        "value": "10Ω"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Power(Watts)",
+        "value": "1W"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+155℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Type",
+        "value": "Thick Film Resistor"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "±100ppm/℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±1%"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/0a275c0eea827164d1e4cd4623a22986.pdf?productCode=C844885"
+    }
+  },
+  "C84705": {
+    "url": "https://www.lcsc.com/product-detail/C84705.html",
+    "checked_date": "2026-10-03",
+    "sku": "C84705",
+    "mpn": "CL05B472KB5NNNC",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "4.7nF ±10% 50V Ceramic Capacitor X7R 0402",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0402"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "4.7nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/61b8a52ad9f6bbda0838948a03e436a3.pdf?productCode=C84705"
+    }
+  },
+  "C85833": {
+    "url": "https://www.lcsc.com/product-detail/C85833.html",
+    "checked_date": "2026-10-03",
+    "sku": "C85833",
+    "mpn": "BLM18KG601SN1D",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "600Ω@100MHz 1 Line Ferrite Bead 0603 1.3A 150mΩ",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "DC Resistance(DCR)",
+        "value": "150mΩ"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-55℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Lines",
+        "value": "1"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±25%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current Rating",
+        "value": "1.3A"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Impedance @ Frequency",
+        "value": "600Ω@100MHz"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/2d503a4b167da9bb5d0eb4a3fa711314.pdf?productCode=C85833"
+    }
+  },
+  "C85973": {
+    "url": "https://www.lcsc.com/product-detail/C85973.html",
+    "checked_date": "2026-10-03",
+    "sku": "C85973",
+    "mpn": "GRM1885C1H103JA01D",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "10nF ±5% 50V Ceramic Capacitor C0G 0603",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "10nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "C0G"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±5%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/a4d1e2744bd5d44ba57842651a3fd598.pdf?productCode=C85973"
+    }
+  },
+  "C86054": {
+    "url": "https://www.lcsc.com/product-detail/C86054.html",
+    "checked_date": "2026-10-03",
+    "sku": "C86054",
+    "mpn": "GRM32ER72A225KA35L",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "2.2uF ±10% 100V Ceramic Capacitor X7R 1210",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1210"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "2.2uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "100V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/a4d1e2744bd5d44ba57842651a3fd598.pdf?productCode=C86054"
+    }
+  },
+  "C89632": {
+    "url": "https://www.lcsc.com/product-detail/C89632.html",
+    "checked_date": "2026-10-03",
+    "sku": "C89632",
+    "mpn": "CL31B106KBHNNNE",
+    "brand": {
+      "@type": "Brand",
+      "name": "Samsung Electro-Mechanics"
+    },
+    "description": "10uF ±10% 50V Ceramic Capacitor X7R 1206",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1206"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "10uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "50V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/a1390a51092e4f3c84866ab492516a00.pdf?productCode=C89632"
+    }
+  },
+  "C91604": {
+    "url": "https://www.lcsc.com/product-detail/C91604.html",
+    "checked_date": "2026-10-03",
+    "sku": "C91604",
+    "mpn": "GRM31CR71A226KE15L",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "22uF ±10% 10V Ceramic Capacitor X7R 1206",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "1206"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "22uF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "10V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/87e5b0b6746f42a659f0f9532afc0fb6.pdf?productCode=C91604"
+    }
+  },
+  "C91874": {
+    "url": "https://www.lcsc.com/product-detail/C91874.html",
+    "checked_date": "2026-10-03",
+    "sku": "C91874",
+    "mpn": "SN74LVC2G32DCUR",
+    "brand": {
+      "@type": "Brand",
+      "name": "TI"
+    },
+    "description": "1.65V~5.5V 3.8ns@3.3V 10uA VSSOP-8 Gates and Inverters RoHS",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "VSSOP-8"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Logic Family",
+        "value": "74LVC Series"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage - Supply",
+        "value": "1.65V~5.5V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Logic Level - Low",
+        "value": "450mV;300mV;400mV;550mV"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Propagation Delay",
+        "value": "3.8ns@3.3V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Features",
+        "value": "Live insertion protection;Local shutdown mode;Rear drive protection;Overvoltage-tolerant input"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Input Logic Level - Low",
+        "value": "700mV;800mV"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Input Logic Level - High",
+        "value": "1.7V;2V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Operating Temperature",
+        "value": "-40℃~+125℃"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Output Logic Level - High",
+        "value": "1.2V;1.9V;2.4V;3.8V"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Quiescent Current(Iq)",
+        "value": "10uA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current - Output High(IOH)",
+        "value": "24mA"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Number of Channels",
+        "value": "2;2"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Current - Output Low(IOL)",
+        "value": "32mA"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/a8cd658f803d734a2eab65056c9afff4.pdf?productCode=C91874"
+    }
+  },
+  "C97897": {
+    "url": "https://www.lcsc.com/product-detail/C97897.html",
+    "checked_date": "2026-10-03",
+    "sku": "C97897",
+    "mpn": "GRM188R72A102KA01D",
+    "brand": {
+      "@type": "Brand",
+      "name": "muRata"
+    },
+    "description": "1nF ±10% 100V Ceramic Capacitor X7R 0603",
+    "additionalProperty": [
+      {
+        "@type": "PropertyValue",
+        "name": "Package",
+        "value": "0603"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Capacitance",
+        "value": "1nF"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Temperature Coefficient",
+        "value": "X7R"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Tolerance",
+        "value": "±10%"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage Rating",
+        "value": "100V"
+      }
+    ],
+    "subjectOf": {
+      "@type": "DigitalDocument",
+      "name": "Datasheet",
+      "url": "https://datasheet.lcsc.com/datasheet/pdf/bb1b775b947842d39c9599301f942de1.pdf?productCode=C97897"
+    }
+  }
+}

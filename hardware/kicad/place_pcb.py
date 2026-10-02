@@ -53,7 +53,10 @@ HEIGHT = {
 }
 
 
-def height(fp):
+def height(fp, ref=None):
+    # 결정 #53: YAGEO C61 개별 제조사 최대 높이.
+    if ref == "C61":
+        return 1.45
     for k, h in HEIGHT.items():
         if k in fp:
             return h
@@ -503,7 +506,7 @@ def build():
 
     for ref, sides, how, opt in PLAN:
         fp = make(ref)
-        h = height(PARTS[ref]["fp"])
+        h = height(PARTS[ref]["fp"], ref)
         if A2_LAYOUT is not None:
             q = A2_LAYOUT[ref]
             side, x, y, rot = q["side"], q["x"], q["y"], q["rot"]
@@ -603,7 +606,7 @@ def build():
                     cost=score(x,y,pins)
                     if cost >= best[0]-.01: continue
                     box=(x+box0[0],y+box0[1],x+box0[2],y+box0[3])
-                    if region_ok(side,box,height(PARTS[ref]["fp"])) and free(side,box,ref):
+                    if region_ok(side,box,height(PARTS[ref]["fp"], ref)) and free(side,box,ref):
                         best=(cost,x,y,rot)
         _,x,y,rot=best
         set_pose(fp,side,x,y,rot)
@@ -625,7 +628,7 @@ def report(placed):
     rows, err = [], []
     for ref, q in sorted(placed.items(), key=lambda kv: (kv[1]["side"], kv[1]["x"])):
         fp = PARTS[ref]["fp"]
-        h = height(fp)
+        h = height(fp, ref)
         c = q["crt"]
         ymax = max(abs(c[1]), abs(c[3]))
         ha = h_allow(c[0], c[2], ymax)

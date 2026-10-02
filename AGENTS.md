@@ -21,7 +21,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#52 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#53 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-02)
 
@@ -30,7 +30,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | 기구 Rev I, 도면, STEP, 조립 시방서 HMT500-A-001, JLCCNC 주문 패키지 | 형상 개선 완료, 실제 품번·가공성·압력·온도 확인 전 주문 보류 |
 | 회로도 v0.10 (부품 110, 넷 81, 넷리스트 일치) | 완료 — 외부 검수 H01–H11 반영(결정 #35), DAC 확정(#37), JLC 부품(#38·#39) |
 | PCB A5 (110개, 6층, 기구 Rev I 외형 유지) | **배선 연결 완료 — DRC 오류 0, 미연결 0**. `docs/hw/artwork-a5-261002.md` 참조. 제조 DFM/발주 보류. A1–A4 스냅샷 보존 |
-| JLC BOM·CPL (61줄 중 59줄 LCSC) | 완료 — 남은 2줄: 2.2 µF 50 V X7R 0805(C61), 22.1k 1 % 0402(R9·R52) |
+| JLC BOM·CPL (61줄 모두 LCSC) | 2026-10-03 매칭: C61=C125847, R9/R52=C43473, C4=C318579 정정. 제조사/패키지 대조 완료; 재고/실장 가능 여부는 주문 시 확인 |
 | **PCB 배선 → 거버 → JLCPCB 주문** | A5 거버·드릴·BOM/CPL 제조 검토 묶음 생성. JLC 업로드/주문은 하지 않음 |
 | 앱 펌웨어 (Modbus, PCAP04, ADS1220, DAC8760, 부트로더 STM32 포팅) | 미착수 |
 | 시제품 시험 (시험 계획 T1–T7) | 기판 수령 후 |
@@ -65,7 +65,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#53부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#54부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
@@ -73,9 +73,9 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 ## 6. 다음 할 일 (우선순위)
 
 1. **A5 제조 검토**: `docs/hw/artwork-a5-261002.md`를 먼저 읽을 것. 미연결 0, 일반 DRC 오류 0, dangling 경고 0, C44/D1 실크→Fab 라이브러리 차이 경고 2개. In1 GND 전용이며 In4는 GND 동박과 제한된 7개 넷을 혼용한다. `artwork_a5.py`의 배선 범위를 지킬 것. 전원·서지 병목, 신호 에지·센서 잡음·발열·EMC는 실물/제조 검토 필요.
-2. `manufacturing/jlc/artwork_A5_review/`로 DFM 준비. 0.15 mm 비아/POFV 공정 혼용, 미확정 LCSC(C61, R9/R52), CPL 방향을 확인한 뒤 발주 판단.
+2. `manufacturing/jlc/artwork_A5_review/`로 DFM 준비. 0.15 mm 비아/POFV 공정 혼용, JLC 재고/실장 가능 여부, CPL 방향을 확인한 뒤 발주 판단.
 3. 앱 펌웨어: 요구 F1–F6 (`docs/hw/external-review-response-260930.md` 6절), 부트로더 STM32G0B1 포팅.
-4. 주문 전 확인: L1 Bourns SRF0905-102Y 랜드/핀은 원문 대조 완료. L2/L3는 SMNR4020 전용 랜드로 수정(#42); 포화 전류 정의는 확인 필요. LCSC 미확인 2줄은 유지.
+4. 주문 전 확인: L1 Bourns SRF0905-102Y 랜드/핀은 원문 대조 완료. L2/L3는 SMNR4020 전용 랜드로 수정(#42); 포화 전류 정의는 확인 필요. LCSC 빈칸 0. 결정 #53 매칭표와 주문 시 재고/실장 가능 여부 확인.
 
 ## 7. 미결 (두텍 결정 필요)
 
@@ -118,3 +118,6 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 M12 선정 사양서 Rev A(결정 #51): `hardware/mech/m12_specification.py`, 결과 `hardware/mech/out/m12/`. 프로젝트 모델 외형도와 제조사 참고품은 구분되어 있으며 실제 M Connect 구매품 품번 확정이 아니다.
 
 M12 외형도 Rev B(결정 #52): `hardware/mech/m12_outline_drawing.py`로 흑백 제조사 도면 스타일 생성. `hardware/mech/out/m12/HMT500_M12_외형도_RevB.pdf`. 모델 치수 유지, 실제 공급품 확정 아님.
+
+## LCSC–BOM 매칭 — 결정 #53 (2026-10-03)
+`manufacturing/jlc/bom_match_20261003/`에 61행/108개 PCB 매칭표, 하네스 4종, 공식 카탈로그 대조 근거. C4 번호 오류 수정, C61 YAGEO 동일 명목 사양 대체(최대 높이 1.45 mm), R9/R52 번호 보완. C22/R19 공차 표시는 기존 결정 #34/#38에 맞춰 정정. 배선/위치 동일, 전체 재생성 검사 통과. 이전 A5-R1 ZIP의 BOM은 과거 판이므로 최신 jlcpcb/ 또는 매칭 묶음의 BOM/CPL을 사용. C61의 28 V DC 바이어스 실효 용량은 확인 필요.

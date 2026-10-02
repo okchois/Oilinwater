@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-02T15:23:56",
+    "date": "2026-10-03T05:15:53",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -42,21 +42,6 @@
     "unconnected_items": [],
     "violations": [
         {
-            "description": "풋프린트 'D_SMC'이(가) 라이브러리 'HMT500_260313A'의 사본과 일치하지 않습니다",
-            "items": [
-                {
-                    "description": "풋프린트 D1",
-                    "pos": {
-                        "x": 143.95,
-                        "y": 94.2
-                    },
-                    "uuid": "c2a43ceb-1e42-44ec-b02b-f6e606d5cc8e"
-                }
-            ],
-            "severity": "warning",
-            "type": "lib_footprint_mismatch"
-        },
-        {
             "description": "풋프린트 'C_0402_1005Metric'이(가) 라이브러리 'HMT500_260313A'의 사본과 일치하지 않습니다",
             "items": [
                 {
@@ -65,7 +50,22 @@
                         "x": 132.6,
                         "y": 110.3
                     },
-                    "uuid": "cac8ced3-ced5-465c-9172-69c25fbf48d1"
+                    "uuid": "96d6e264-b159-45e1-9891-2ec40b5f2d74"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "풋프린트 'D_SMC'이(가) 라이브러리 'HMT500_260313A'의 사본과 일치하지 않습니다",
+            "items": [
+                {
+                    "description": "풋프린트 D1",
+                    "pos": {
+                        "x": 143.95,
+                        "y": 94.2
+                    },
+                    "uuid": "aa667050-27af-49d7-97d0-450164498e42"
                 }
             ],
             "severity": "warning",
