@@ -21,7 +21,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#53 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#54 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-02)
 
@@ -65,7 +65,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#54부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#55부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
@@ -121,3 +121,6 @@ M12 외형도 Rev B(결정 #52): `hardware/mech/m12_outline_drawing.py`로 흑�
 
 ## LCSC–BOM 매칭 — 결정 #53 (2026-10-03)
 `manufacturing/jlc/bom_match_20261003/`에 61행/108개 PCB 매칭표, 하네스 4종, 공식 카탈로그 대조 근거. C4 번호 오류 수정, C61 YAGEO 동일 명목 사양 대체(최대 높이 1.45 mm), R9/R52 번호 보완. C22/R19 공차 표시는 기존 결정 #34/#38에 맞춰 정정. 배선/위치 동일, 전체 재생성 검사 통과. 이전 A5-R1 ZIP의 BOM은 과거 판이므로 최신 jlcpcb/ 또는 매칭 묶음의 BOM/CPL을 사용. C61의 28 V DC 바이어스 실효 용량은 확인 필요.
+
+## A5-R2 실크·로고 (2026-10-03)
+두텍 요청으로 `silk_layout.py`에서 부품 옆의 레퍼런스를 재배치하고 탑면 DOTECH 원본 워드마크(폭 8 mm)를 추가했다. 기본 높이 0.8 mm, 혼잡 위치 0.6 mm, 선폭 0.1 mm. 0.6 mm는 제조사 고정밀 권장 최소보다 작으므로 인쇄성 확인 필요. 부품 아래/패드 위 배치는 금지하며 모든 번호가 인쇄되지는 않는다. 실제 표시/누락 목록은 `artwork_metrics.json`과 `docs/hw/artwork-a5-r2-silk-logo-261003.md` 참조. 최신 거버/현재 BOM은 `manufacturing/jlc/artwork_A5_R2_review/`. 배선·위치·패드 불변.

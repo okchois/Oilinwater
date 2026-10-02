@@ -2,425 +2,1182 @@
   "status": "DRAFT - not released",
   "silk_leaders": [
     "D30",
-    "D51",
-    "U1",
-    "U13",
-    "C16",
-    "C2",
-    "C24",
-    "C36",
+    "D40",
+    "D41",
+    "L3",
+    "U6",
+    "U9",
+    "C12",
+    "C13",
+    "C20",
+    "C23",
+    "C30",
+    "C40",
+    "C41",
+    "C5",
+    "C52",
+    "C57",
     "C60",
-    "FB1"
+    "R10",
+    "R11",
+    "R17",
+    "R18",
+    "R30",
+    "R32",
+    "R33",
+    "R4",
+    "R41"
   ],
-  "silk_revision": "A5-R1",
-  "silk_text_mm": [
-    0.6,
-    0.8,
-    0.12
+  "silk_revision": "A5-R2",
+  "silk_text_sizes_mm": [
+    [
+      0.5,
+      0.8,
+      0.1
+    ],
+    [
+      0.4,
+      0.6,
+      0.1
+    ]
   ],
+  "logo": {
+    "position_mm": [
+      147.0,
+      99.0
+    ],
+    "size_mm": [
+      8.0,
+      1.342560553633218
+    ],
+    "source": "assets/dotech_logo_source.png",
+    "tagline_omitted": true
+  },
   "silk_refs_visible": {
-    "D61": {
-      "x": 120.425,
-      "y": 107.175,
-      "angle": 0,
-      "body_distance_mm": 0.949
-    },
-    "R10": {
-      "x": 151.125,
-      "y": 107.97500000000001,
-      "angle": 0,
-      "body_distance_mm": 1.28
-    },
-    "U15": {
-      "x": 144.25,
-      "y": 109.77499999999999,
-      "angle": 0,
-      "body_distance_mm": 1.141
-    },
-    "R31": {
-      "x": 135.04999999999998,
-      "y": 102.375,
-      "angle": 90,
-      "body_distance_mm": 1.02
-    },
-    "C18": {
-      "x": 124.15,
-      "y": 92.64999999999999,
-      "angle": 0,
-      "body_distance_mm": 0.95
-    },
-    "C40": {
-      "x": 126.25,
-      "y": 101.14999999999999,
-      "angle": 0,
-      "body_distance_mm": 1.09
-    },
-    "C15": {
-      "x": 125.9,
-      "y": 98.67500000000001,
-      "angle": 90,
-      "body_distance_mm": 1.09
-    },
-    "R34": {
-      "x": 131.075,
-      "y": 101.125,
-      "angle": 0,
-      "body_distance_mm": 1.08
-    },
-    "R5": {
-      "x": 108.075,
-      "y": 92.025,
-      "angle": 0,
-      "body_distance_mm": 0.975
-    },
-    "U14": {
-      "x": 140.65,
-      "y": 109.95,
-      "angle": 90,
-      "body_distance_mm": 1.05
-    },
-    "R60": {
-      "x": 114.0,
-      "y": 107.575,
-      "angle": 0,
-      "body_distance_mm": 1.08
-    },
-    "U5": {
-      "x": 121.55000000000001,
-      "y": 89.89999999999999,
-      "angle": 0,
-      "body_distance_mm": 1.05
-    },
-    "R13": {
-      "x": 114.625,
-      "y": 95.25,
-      "angle": 90,
-      "body_distance_mm": 1.02
-    },
-    "U3": {
-      "x": 144.60000000000002,
-      "y": 90.275,
-      "angle": 0,
-      "body_distance_mm": 1.0
-    },
-    "C48": {
-      "x": 128.25,
-      "y": 100.95,
-      "angle": 90,
-      "body_distance_mm": 1.29
-    },
-    "L3": {
-      "x": 146.6,
-      "y": 104.3,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "R33": {
-      "x": 127.75,
-      "y": 98.375,
-      "angle": 0,
-      "body_distance_mm": 1.159
-    },
-    "C25": {
-      "x": 114.2,
-      "y": 91.175,
-      "angle": 90,
-      "body_distance_mm": 1.1
-    },
-    "R42": {
-      "x": 131.375,
-      "y": 99.17500000000001,
-      "angle": 90,
-      "body_distance_mm": 1.125
-    },
-    "C61": {
-      "x": 147.15,
-      "y": 109.52499999999999,
-      "angle": 0,
-      "body_distance_mm": 1.075
-    },
-    "C65": {
-      "x": 141.15,
-      "y": 97.05,
-      "angle": 0,
-      "body_distance_mm": 0.95
-    },
-    "R12": {
-      "x": 122.425,
-      "y": 108.775,
-      "angle": 90,
-      "body_distance_mm": 1.02
-    },
-    "D60": {
-      "x": 114.75,
-      "y": 109.475,
-      "angle": 90,
-      "body_distance_mm": 1.1
-    },
-    "R44": {
-      "x": 129.85000000000002,
-      "y": 99.02499999999999,
-      "angle": 90,
-      "body_distance_mm": 1.28
-    },
-    "C56": {
-      "x": 124.42500000000001,
-      "y": 90.625,
-      "angle": 90,
-      "body_distance_mm": 1.125
-    },
-    "C64": {
-      "x": 144.8,
-      "y": 98.7,
-      "angle": 0,
-      "body_distance_mm": 1.1
-    },
-    "U11": {
-      "x": 114.825,
-      "y": 105.875,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "C26": {
-      "x": 146.75,
-      "y": 91.825,
-      "angle": 90,
-      "body_distance_mm": 1.04
-    },
-    "C1": {
-      "x": 148.275,
-      "y": 97.75,
-      "angle": 0,
-      "body_distance_mm": 0.95
-    },
-    "R3": {
-      "x": 107.775,
-      "y": 94.425,
-      "angle": 0,
-      "body_distance_mm": 1.125
-    },
-    "L2": {
-      "x": 106.2,
-      "y": 106.45,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "C6": {
-      "x": 103.1,
-      "y": 99.6,
-      "angle": 90,
-      "body_distance_mm": 0.95
-    },
-    "GDT1": {
-      "x": 115.225,
-      "y": 92.475,
-      "angle": 90,
-      "body_distance_mm": 0.0
-    },
-    "J5": {
-      "x": 105.3,
-      "y": 94.39999999999999,
-      "angle": 0,
-      "body_distance_mm": 1.0
-    },
-    "C3": {
-      "x": 107.5,
-      "y": 106.0,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "R30": {
-      "x": 130.225,
-      "y": 108.875,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "R40": {
-      "x": 129.275,
-      "y": 91.125,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "R2": {
-      "x": 107.925,
-      "y": 92.6,
-      "angle": 0,
-      "body_distance_mm": 0.975
-    },
-    "R1": {
-      "x": 121.05,
-      "y": 92.7,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "U6": {
-      "x": 122.35,
-      "y": 108.05,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "J3": {
-      "x": 118.625,
-      "y": 100.0,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "J2": {
-      "x": 104.5,
-      "y": 102.3,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
-    "L1": {
-      "x": 152.7,
-      "y": 97.55,
-      "angle": 0,
-      "body_distance_mm": 0.0
-    },
     "D1": {
-      "x": 143.95,
-      "y": 94.2,
-      "angle": 0,
-      "body_distance_mm": 0.0
+      "x": 143.94,
+      "y": 90.02190499999999,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
     },
-    "J1": {
-      "x": 141.5,
-      "y": 100.0,
-      "angle": 0,
-      "body_distance_mm": 0.0
+    "D2": {
+      "x": 152.0,
+      "y": 107.22809500000001,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
     },
-    "U4": {
-      "x": 128.3,
-      "y": 100.0,
-      "angle": 0,
-      "body_distance_mm": 0.0
+    "D3": {
+      "x": 154.31,
+      "y": 107.92809500000001,
+      "angle": 90,
+      "body_distance_mm": 1.028,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
     },
     "D30": {
-      "x": 133.15,
-      "y": 104.2,
+      "x": 133.26649999999998,
+      "y": 104.0,
       "angle": 90,
-      "body_distance_mm": 1.334,
+      "body_distance_mm": 1.188,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
       "leader": true
     },
-    "D51": {
-      "x": 133.1,
-      "y": 95.42500000000001,
+    "D40": {
+      "x": 133.219048,
+      "y": 96.30000000000001,
       "angle": 0,
-      "body_distance_mm": 1.75,
+      "body_distance_mm": 1.235,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "D41": {
+      "x": 138.91649999999998,
+      "y": 106.00999999999999,
+      "angle": 90,
+      "body_distance_mm": 1.066,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "D60": {
+      "x": 114.9665,
+      "y": 108.975,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "D61": {
+      "x": 120.225,
+      "y": 107.1585,
+      "angle": 0,
+      "body_distance_mm": 0.889,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J1": {
+      "x": 144.96857099999997,
+      "y": 99.97500000000001,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J2": {
+      "x": 108.179871,
+      "y": 99.4647,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J3": {
+      "x": 115.08142899999999,
+      "y": 100.0,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J5": {
+      "x": 103.64142899999999,
+      "y": 92.61,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "L1": {
+      "x": 153.21,
+      "y": 92.01952399999999,
+      "angle": 90,
+      "body_distance_mm": 0.78,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "L2": {
+      "x": 103.32952399999999,
+      "y": 106.66,
+      "angle": 0,
+      "body_distance_mm": 0.78,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "L3": {
+      "x": 150.6565,
+      "y": 107.30999999999999,
+      "angle": 90,
+      "body_distance_mm": 2.171,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
       "leader": true
     },
     "U1": {
-      "x": 115.05000000000001,
-      "y": 95.05,
+      "x": 108.25,
+      "y": 97.35999999999999,
       "angle": 0,
-      "body_distance_mm": 1.3,
+      "body_distance_mm": 0.75,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "U10": {
+      "x": 128.3,
+      "y": 96.90650000000001,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "U11": {
+      "x": 114.80000000000001,
+      "y": 103.4015,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U12": {
+      "x": 138.7,
+      "y": 102.3265,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U14": {
+      "x": 140.4835,
+      "y": 109.96,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U3": {
+      "x": 144.43999999999997,
+      "y": 90.535,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U4": {
+      "x": 122.56,
+      "y": 99.89999999999999,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U5": {
+      "x": 122.3,
+      "y": 96.49000000000001,
+      "angle": 90,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U6": {
+      "x": 123.15,
+      "y": 104.32,
+      "angle": 90,
+      "body_distance_mm": 1.14,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
       "leader": true
     },
-    "U13": {
-      "x": 138.925,
-      "y": 102.32,
+    "U7": {
+      "x": 122.96999999999998,
+      "y": 108.95,
       "angle": 0,
-      "body_distance_mm": 1.35,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U8": {
+      "x": 139.52999999999997,
+      "y": 89.95,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U9": {
+      "x": 133.399999,
+      "y": 102.61,
+      "angle": 90,
+      "body_distance_mm": 1.05,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
       "leader": true
+    },
+    "C1": {
+      "x": 146.72190500000002,
+      "y": 98.9,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C12": {
+      "x": 133.71,
+      "y": 94.82619,
+      "angle": 90,
+      "body_distance_mm": 1.366,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C13": {
+      "x": 138.45000000000002,
+      "y": 94.11619,
+      "angle": 90,
+      "body_distance_mm": 2.88,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C14": {
+      "x": 122.17649999999999,
+      "y": 97.89,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C15": {
+      "x": 125.7235,
+      "y": 98.415,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
     },
     "C16": {
-      "x": 112.575,
-      "y": 109.47500000000001,
-      "angle": 90,
-      "body_distance_mm": 1.675,
-      "leader": true
+      "x": 112.52499999999999,
+      "y": 108.6835,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C18": {
+      "x": 124.125,
+      "y": 92.7165,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
     },
     "C2": {
-      "x": 122.05,
-      "y": 98.22500000000001,
+      "x": 121.0,
+      "y": 102.9415,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "C20": {
+      "x": 127.12349999999999,
+      "y": 99.415,
       "angle": 90,
-      "body_distance_mm": 1.57,
+      "body_distance_mm": 2.286,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C21": {
+      "x": 122.12349999999999,
+      "y": 102.61,
+      "angle": 90,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "C22": {
+      "x": 121.23349999999999,
+      "y": 89.785,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C23": {
+      "x": 111.62380999999999,
+      "y": 108.03499999999998,
+      "angle": 0,
+      "body_distance_mm": 1.366,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
       "leader": true
     },
     "C24": {
-      "x": 126.69999999999999,
-      "y": 93.875,
+      "x": 125.8835,
+      "y": 93.92500000000001,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C25": {
+      "x": 114.4165,
+      "y": 91.125,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C26": {
+      "x": 145.29,
+      "y": 93.0485,
       "angle": 0,
-      "body_distance_mm": 1.7,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C27": {
+      "x": 129.9835,
+      "y": 106.085,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C29": {
+      "x": 114.7065,
+      "y": 94.285,
+      "angle": 90,
+      "body_distance_mm": 0.983,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C3": {
+      "x": 107.45,
+      "y": 103.47190499999999,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C30": {
+      "x": 132.559999,
+      "y": 108.184048,
+      "angle": 90,
+      "body_distance_mm": 1.468,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
       "leader": true
     },
     "C36": {
-      "x": 142.07500000000002,
-      "y": 108.05,
+      "x": 141.3185,
+      "y": 108.00999999999999,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C40": {
+      "x": 127.29,
+      "y": 101.1265,
       "angle": 0,
-      "body_distance_mm": 1.64,
+      "body_distance_mm": 1.396,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
       "leader": true
+    },
+    "C41": {
+      "x": 134.866499,
+      "y": 104.785,
+      "angle": 90,
+      "body_distance_mm": 1.333,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C42": {
+      "x": 122.45,
+      "y": 107.5085,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C46": {
+      "x": 135.36,
+      "y": 110.5665,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "C47": {
+      "x": 129.58999999999997,
+      "y": 101.3265,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C5": {
+      "x": 121.840476,
+      "y": 99.77499999999999,
+      "angle": 0,
+      "body_distance_mm": 1.244,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C51": {
+      "x": 129.5165,
+      "y": 93.93499999999999,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C52": {
+      "x": 125.73349999999999,
+      "y": 93.4,
+      "angle": 90,
+      "body_distance_mm": 1.747,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C54": {
+      "x": 127.80649899999999,
+      "y": 89.785,
+      "angle": 90,
+      "body_distance_mm": 0.884,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C56": {
+      "x": 124.6515,
+      "y": 91.1,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C57": {
+      "x": 134.19,
+      "y": 100.88095200000001,
+      "angle": 90,
+      "body_distance_mm": 3.145,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C58": {
+      "x": 131.39000000000001,
+      "y": 98.6335,
+      "angle": 0,
+      "body_distance_mm": 0.889,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C6": {
+      "x": 103.22190499999999,
+      "y": 99.55,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
     },
     "C60": {
-      "x": 121.60000000000001,
-      "y": 103.0,
-      "angle": 0,
-      "body_distance_mm": 1.933,
+      "x": 121.2435,
+      "y": 103.25999999999999,
+      "angle": 90,
+      "body_distance_mm": 1.474,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
       "leader": true
     },
-    "FB1": {
-      "x": 138.825,
-      "y": 93.85,
+    "C61": {
+      "x": 146.6,
+      "y": 109.51619000000001,
       "angle": 90,
-      "body_distance_mm": 1.575,
+      "body_distance_mm": 1.066,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C62": {
+      "x": 143.7835,
+      "y": 109.96,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C63": {
+      "x": 145.16,
+      "y": 109.57619,
+      "angle": 90,
+      "body_distance_mm": 1.166,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C64": {
+      "x": 144.75,
+      "y": 98.9165,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C65": {
+      "x": 142.9335,
+      "y": 98.7,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C8": {
+      "x": 106.83190499999999,
+      "y": 103.44,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "GDT1": {
+      "x": 117.375,
+      "y": 96.04150000000001,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "R1": {
+      "x": 123.56809500000001,
+      "y": 89.525,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R10": {
+      "x": 147.9815,
+      "y": 109.495,
+      "angle": 90,
+      "body_distance_mm": 1.511,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
       "leader": true
+    },
+    "R11": {
+      "x": 137.609048,
+      "y": 110.72,
+      "angle": 0,
+      "body_distance_mm": 1.239,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R12": {
+      "x": 120.645,
+      "y": 110.0185,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R13": {
+      "x": 114.7615,
+      "y": 96.09,
+      "angle": 90,
+      "body_distance_mm": 1.005,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R15": {
+      "x": 134.76500000000001,
+      "y": 110.69650000000001,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "R17": {
+      "x": 114.584048,
+      "y": 110.47,
+      "angle": 0,
+      "body_distance_mm": 1.231,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R18": {
+      "x": 122.345,
+      "y": 101.49880999999999,
+      "angle": 90,
+      "body_distance_mm": 2.77,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R2": {
+      "x": 110.9,
+      "y": 94.31809500000001,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R20": {
+      "x": 112.9115,
+      "y": 109.63999999999999,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R3": {
+      "x": 108.04440499999998,
+      "y": 93.5,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R30": {
+      "x": 134.8665,
+      "y": 107.38499999999999,
+      "angle": 90,
+      "body_distance_mm": 1.066,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R32": {
+      "x": 125.71100000000001,
+      "y": 100.4,
+      "angle": 90,
+      "body_distance_mm": 2.084,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R33": {
+      "x": 125.67,
+      "y": 95.38404799999999,
+      "angle": 90,
+      "body_distance_mm": 1.235,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R34": {
+      "x": 131.395,
+      "y": 101.2815,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R4": {
+      "x": 108.094405,
+      "y": 94.9,
+      "angle": 0,
+      "body_distance_mm": 2.428,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R40": {
+      "x": 127.9,
+      "y": 93.69850000000001,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R41": {
+      "x": 134.84,
+      "y": 102.3135,
+      "angle": 0,
+      "body_distance_mm": 2.383,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R42": {
+      "x": 131.541548,
+      "y": 99.95,
+      "angle": 0,
+      "body_distance_mm": 0.931,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "R44": {
+      "x": 129.57000000000002,
+      "y": 98.66850000000001,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R5": {
+      "x": 108.22190499999999,
+      "y": 92.0225,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R6": {
+      "x": 115.77809500000001,
+      "y": 104.7725,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R60": {
+      "x": 114.32,
+      "y": 107.41850000000001,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R8": {
+      "x": 115.845476,
+      "y": 103.415,
+      "angle": 0,
+      "body_distance_mm": 0.74,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
     }
   },
   "silk_refs_hidden": [
-    "C12",
-    "C13",
-    "C14",
-    "C21",
-    "C22",
-    "C23",
-    "C27",
+    "D51",
+    "U13",
+    "U15",
+    "U2",
     "C28",
-    "C29",
-    "C30",
     "C4",
-    "C41",
-    "C42",
     "C44",
     "C45",
-    "C46",
-    "C5",
+    "C48",
     "C50",
-    "C51",
-    "C52",
-    "C54",
     "C55",
-    "C57",
-    "C58",
-    "C8",
-    "D3",
-    "D40",
-    "D41",
-    "R11",
+    "FB1",
     "R14",
-    "R15",
-    "R17",
-    "R18",
     "R19",
-    "R20",
-    "R32",
-    "R4",
-    "R41",
+    "R31",
     "R51",
     "R52",
-    "R6",
-    "R8",
-    "R9",
-    "U10",
-    "U12",
-    "U2",
-    "U7",
-    "U8",
-    "U9",
-    "C62",
-    "C63",
-    "C20",
-    "C47",
-    "D2"
+    "R9"
   ],
   "track_mm": {
     "DAC1_REF": 2.494,
