@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / 'hardware/kicad/HMT500(260313A)/HMT500(260313A)'
 p = argparse.ArgumentParser()
 p.add_argument('--kicad-cli', default='kicad-cli')
-p.add_argument('--output', type=Path, default=ROOT / 'manufacturing/jlc/artwork_A5_review')
+p.add_argument('--revision', default='A5-R1')
+p.add_argument('--output', type=Path, default=ROOT / 'manufacturing/jlc/artwork_A5_R1_review')
 a = p.parse_args()
 out = a.output.resolve()
 out.mkdir(parents=True, exist_ok=True)
@@ -43,18 +44,18 @@ cpl_refs = [row['Designator'] for row in cpl]
 if set(bom_refs) != set(cpl_refs) or len(bom_refs) != len(set(bom_refs)) or len(cpl_refs) != len(set(cpl_refs)):
     raise SystemExit('BOM/CPL 참조번호 불일치 또는 중복')
 missing = [row['Designator'] for row in bom if not row['LCSC Part #'].strip()]
-archive = out / 'HMT500_A5_Gerber_제조검토용.zip'
+archive = out / f'HMT500_{a.revision}_Gerber_제조검토용.zip'
 with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
     for file in sorted(gerbers.iterdir()):
         if file.is_file(): z.write(file, file.name)
 with zipfile.ZipFile(archive) as z:
     if z.testzip() is not None: raise SystemExit('ZIP 검사 실패')
-manifest = dict(status='MANUFACTURING REVIEW ONLY — ORDER ON HOLD', pcb_sha256=hashlib.sha256(board.read_bytes()).hexdigest(), drc_errors=0, unconnected=0, drc_warnings=len(r['violations']), bom_rows=len(bom), placement_count=len(cpl), missing_lcsc_designators=missing, files={f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(gerbers.iterdir()) if f.is_file()})
+manifest = dict(revision=a.revision, status='MANUFACTURING REVIEW ONLY — ORDER ON HOLD', pcb_sha256=hashlib.sha256(board.read_bytes()).hexdigest(), drc_errors=0, unconnected=0, drc_warnings=len(r['violations']), bom_rows=len(bom), placement_count=len(cpl), missing_lcsc_designators=missing, files={f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(gerbers.iterdir()) if f.is_file()})
 (out / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
-(out / '먼저_읽으세요.txt').write_text('''HMT500 PCB A5 — 제조 검토용, 주문 보류
+(out / '먼저_읽으세요.txt').write_text(f'''HMT500 PCB {a.revision} — 제조 검토용, 주문 보류
 6층 / 명목 1.6 mm / 최소 일반 비아 패드 0.30, 드릴 0.15 mm
 In1 GND 전용, In4 GND 동박과 제한된 신호·전원 혼용
-Gerber·드릴·BOM·CPL은 동일 A5에서 생성했습니다.
+Gerber·드릴·BOM·CPL은 동일 PCB에서 생성했습니다.
 
 주문 전 확인:
 - 0.15 mm 관통 비아와 0.20 mm 이상 패드 위 비아의 충전·동도금 혼용 DFM

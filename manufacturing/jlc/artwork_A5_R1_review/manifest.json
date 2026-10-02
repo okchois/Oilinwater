@@ -1,0 +1,32 @@
+{
+  "revision": "A5-R1",
+  "status": "MANUFACTURING REVIEW ONLY — ORDER ON HOLD",
+  "pcb_sha256": "712c8d93fc80e4eb45f1a59dccb752b9ffb17c3e719aa07ed12215aadf7daf8f",
+  "drc_errors": 0,
+  "unconnected": 0,
+  "drc_warnings": 2,
+  "bom_rows": 61,
+  "placement_count": 108,
+  "missing_lcsc_designators": [
+    "C61",
+    "R9,R52"
+  ],
+  "files": {
+    "HMT500(260313A)-B_Cu.gbl": "691c0d3e09de3309e06982959c53dea4594c0b2db56a781c1cc6b80e179fd309",
+    "HMT500(260313A)-B_Mask.gbs": "09ced9499815c26b79feb9210fdf16d973da419aa5906c966cdf278c7beaeafe",
+    "HMT500(260313A)-B_Paste.gbp": "e0304c0d73918d1cc4b40cfcfa444b038414f48574947a6ea8f7688f69bc3373",
+    "HMT500(260313A)-B_Silkscreen.gbo": "e4500b473d5e7cb274116f86e2bc1abaf4b42e2cb3d95ccc5e2cc90fe1327830",
+    "HMT500(260313A)-Edge_Cuts.gm1": "46b40879df4b2014490e24cb07c30edd3455fab3622e5394c41577af8fff0a88",
+    "HMT500(260313A)-F_Cu.gtl": "baf4031f9f9c9910d2bb110d6a03791d5701a221190e6881c6d569707bebd476",
+    "HMT500(260313A)-F_Mask.gts": "72cd3308c03d9afe72c0c3d549cb9ec2a4b467aa886fa29569a61bc826adad4d",
+    "HMT500(260313A)-F_Paste.gtp": "6c8412f3942db2fee3e9a358b8cb85c049c800cd58281c7693560afb8251d75a",
+    "HMT500(260313A)-F_Silkscreen.gto": "10f81f0b6b064bc4077f5f622d6c79ceb9c2f08177336a1bc881a2cba8fbbe8b",
+    "HMT500(260313A)-In1_Cu.g1": "818539f0e1c81358d31d28ad0d30de8d3f51fedc7e40b30006fe0111f76c327d",
+    "HMT500(260313A)-In2_Cu.g2": "5d0127939115aac3cbb138f3a708eb0fb72f8280f5733f1bb73c661ddb81b49c",
+    "HMT500(260313A)-In3_Cu.g3": "5fd17c13a0c6794149cba5677eb00a5b6c3a773796d7c52a2e9a7e6698c4e8b1",
+    "HMT500(260313A)-In4_Cu.g4": "ddbc5ffa40950138a6934893cbeaf6b0b0b6aa4d534048540ca25f7ae1c7ba9c",
+    "HMT500(260313A)-NPTH.drl": "719be8910e92368c7cdd24e3870708051fedd59de476dd079b5bc9f54b6a21c1",
+    "HMT500(260313A)-PTH.drl": "375272ca68c9ce601dcf4196e77d58ee12cbcae9040200e38d46d8f2c6f60f8b",
+    "HMT500(260313A)-job.gbrjob": "34c9b59781396918552df907237af9d1a9586da8ddba195d7101f3a538968ce3"
+  }
+}

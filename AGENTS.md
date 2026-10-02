@@ -21,7 +21,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#47 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#48 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-02)
 
@@ -65,7 +65,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#48부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#49부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
@@ -99,3 +99,6 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 ## 11. PCB 초안 재현
 
 `hardware/kicad/rebuild_artwork.sh` 사용. 기본 A5(6층)이며 `HMT_ARTWORK=A1`~`A4`로 이전 판을 재현한다. `KICAD_PYTHON`, `KICAD_CLI`, `TEST_PYTHON`으로 환경을 지정한다. A5 배치·배선 스냅샷은 배치/층수가 다르면 복원을 거부한다. **A5는 DRC 오류 또는 미연결이 있으면 재생성 실패**다. 신호 비아 0.30/0.15 mm, 혼잡 신호 선폭/간격 0.10/0.10 mm. In1 GND 전용, In4 GND 동박/제한 배선 혼용, RTN 영역은 네 내층 모두 비운다. 전원·서지·방열 비아는 별도 치수를 유지한다. `audit_artwork.py`가 POFV 후보·면적을 기록하며 공정 혼용은 제조사 DFM 확인 필요. 검사는 KiCad 10.0.6 CLI로 수행한다. 제조 검토 파일 생성은 `manufacturing/jlc/export_artwork_review.py` 사용. 발주 승인이 아니다.
+
+## A5-R1 실크 수정
+2026-10-02: 실제 PCB/거버 실크는 A5-R1. `docs/hw/artwork-a5-r1-silk-261002.md` 참조. A5 배선 스냅샷 유지, finisher가 근접 레퍼런스·지시선을 재현한다. 제조 검토 패키지는 `manufacturing/jlc/artwork_A5_R1_review/`. 이전 PDF REF 덧글은 실제 실크와 다르므로 제작 근거로 사용하지 않는다.

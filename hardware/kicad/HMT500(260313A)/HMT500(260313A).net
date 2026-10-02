@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/Users/deuknamchoi/Documents/Codex/2026-09-30/new-chat-2/work/hmt_mech_review/source/hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch")
-		(date "2026-10-02T14:29:38")
+		(date "2026-10-02T15:23:31")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
