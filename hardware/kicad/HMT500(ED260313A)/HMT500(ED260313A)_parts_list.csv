@@ -1,0 +1,75 @@
+﻿No,분류,참조번호,수량,값,풋프린트,제조사,품번,설명,단가USD_하한,단가USD_상한,상태,LCSC,JLC구분
+1,수동,C1,1,100n 100V,C_0805_2012Metric,Samsung,CL21B104KCFNNNE,MLCC 100 nF 100 V X7R 0805,0.02,0.05,제안,C28233,Basic
+2,수동,C2,1,2.2u 100V,C_1210_3225Metric,Murata,GRM32ER72A225KA35L,MLCC 2.2 uF 100 V X7R 1210,0.15,0.35,제안,C86054,Extended
+3,보호,C3,1,4.7n 2kV,C_1812_4532Metric,YAGEO,CC1812KKX7RDBB472,MLCC 4.7 nF 2 kV X7R 1812 (GND–외함. LCSC에 Y2 1812 없음 — DC 기기라 Y2 불필요),0.1,0.2,LCSC,C309511,Extended
+4,수동,C4,1,22n,C_0402_1005Metric,Samsung,CL05B223KO5NNNC,"MLCC 22 nF 16 V X7R 0402 (eFuse dV/dt, RTN 기준 저전압) [LCSC: 2026-10-03 LCSC 품번 대조: C1532는 FH 제품이므로 정정; JLC 등급/재고 확인 필요]",0.002,0.005,LCSC,C318579,확인 필요
+5,수동,C5 C64 C65,3,10u 50V,C_1206_3216Metric,Samsung,CL31B106KBHNNNE,"MLCC 10 uF 50 V X7R 1206 (벅 입력 C5, VAO 출력 C64·C65)",0.1,0.25,LCSC,C89632,Extended
+6,전원,C6,1,22u 25V,C_1210_3225Metric,Murata,GRM32ER71E226ME15L,"MLCC 22 uF 25 V X7R 1210 (벅 출력 2개, LMR36006 X7R 요구. LCSC에 1206 X7R 없음 → 1210)",0.15,0.4,LCSC,C424136,Extended
+7,수동,C8 C14 C15 C20 C21 C23 C28 C29 C30 C36 C40 C44 C50 C54 C60 C63,16,100n,C_0402_1005Metric,Samsung,CL05B104KO5NNNC,MLCC 100 nF 16 V X7R 0402 (3.3·5 V 디커플링 — 결정 #35 0402로 자리 확보),0.002,0.005,LCSC,C1525,Basic
+8,수동,C12 C26,2,1u,C_0402_1005Metric,Murata,GRM155Z71A105KE01D,"MLCC 1 uF 10 V X7R 0402 (5 V 이하 넷: 벅 VCC, LDO 입·출력. LCSC 표기 X7R — 데이터시트 확인) [LCSC: X7R 1 µF 0402 16 V는 LCSC에서 못 찾음 → 10 V (5 V 이하 넷)]",0.006,0.02,LCSC,C528974,Extended
+9,수동,C13 C25,2,10u,C_1206_3216Metric,Murata,GRM31CR71E106KA12L,"MLCC 10 uF 25 V X7R 1206 (v0.9: 0805 X5R → 1206 X7R, DC 바이어스 여유)",0.05,0.12,제안,C77093,Extended
+10,전원,C16,1,220n 100V,C_0805_2012Metric,Samsung,CL21B224KCFSFNE,MLCC 220 nF 100 V X7R 0805 (LMR36006 VIN–PGND 핀마다. LCSC에 0603 없음 → 0805),0.02,0.06,LCSC,C307542,Extended
+11,수동,C18,1,4.7u,C_0805_2012Metric,Murata,GRM21BR71E475KA73L,MLCC 4.7 uF 25 V X7R 0805 (품번 확인 필요),0.03,0.08,확인 필요,C162427,Extended
+12,측정,C22,1,330p C0G 2%,C_0603_1608Metric,Vishay,VJ0603A331GXACW1BC,"MLCC 330 pF 50 V C0G ±2% 0603 (결정 #34, PCAP04 기준 C) [LCSC: ±2 % (LCSC에 ±1 % 없음) — 기준 C 절대값은 교정으로 제거, C0G라 온도 안정]",0.01,0.04,제안,C3898227,Extended
+13,측정,C24,1,22u 10V,C_1206_3216Metric,Murata,GRM31CR71A226KE15L,"MLCC 22 uF 10 V X7R 1206 (PCAP04 VDD33 ≥ 10 µF 실효, 품번 확인 필요)",0.08,0.2,확인 필요,C91604,Extended
+14,측정,C27,1,10n C0G,C_0603_1608Metric,Murata,GRM1885C1H103JA01D,MLCC 10 nF 50 V C0G 0603 (ADS1220 차동 필터),0.01,0.03,제안,C85973,Extended
+15,보호,C41 C51,2,1n 100V,C_0603_1608Metric,Murata,GRM188R72A102KA01D,MLCC 1 nF 100 V X7R 0603,0.004,0.01,제안,C97897,Extended
+16,수동,C42 C45 C52 C55,4,100n 50V,C_0805_2012Metric,YAGEO,CC0805KRX7R9BB104,MLCC 100 nF 50 V X7R 0805,0.01,0.03,제안,C49678,Basic
+17,출력,C46 C56 C62,3,100n/50V,C_0603_1608Metric,YAGEO,CC0603KRX7R9BB104,MLCC 100 nF 50 V X7R 0603 (VS_CLAMP 약 24 V),0.004,0.01,LCSC,C14663,Basic
+18,출력,C47 C57,2,4.7n,C_0402_1005Metric,Samsung,CL05B472KB5NNNC,MLCC 4.7 nF 50 V X7R 0402 (DAC VOUT–CMP 보상),0.002,0.005,LCSC,C84705,Extended
+19,출력,C48 C58,2,100p C0G,C_0402_1005Metric,Samsung,CL05C101JB5NNNC,MLCC 100 pF 50 V C0G 0402 (DAC CMP–GND),0.002,0.005,LCSC,C26409,Extended
+20,출력,C61,1,2.2u 50V,C_0805_2012Metric,YAGEO,CC0805KKX7R9BB225,"MLCC 2.2 uF 50 V X7R ±10% 0805, 최대 높이 1.45 mm (VAO 벅 입력) [LCSC: 결정 #53: 2.2 µF 50 V X7R ±10% 0805; 최대 높이 1.45 mm; DC 바이어스 실효 용량 확인 필요]",0.02,0.15,LCSC,C125847,Extended
+21,보호,D1,1,SMDJ36CA,D_SMC,Littelfuse,5.0SMDJ36CA,"TVS 5000 W 36 V 양방향 SMC (입력 1단. LCSC — 같은 36 V·SMC, 3 kW → 5 kW)",0.3,0.7,LCSC,C141713,Extended
+22,보호,D2 D60 D61,3,TVS3301DRBR,Texas_DRB0008A_PadFloat,TI,TVS3301DRBR,"평탄 클램프 TVS 33 V 양방향, 40 V @ 27 A, SON-8 3×3 (아날로그 출력, TPS2661 데이터시트 권장) [LCSC: D2/D60/D61 3개 유지; 재고 확인 필요]",0.35,0.6,제안,C2864392,Extended
+23,보호,D3,1,PMEG10010ELR,D_SOD-123F,Nexperia,PMEG10010ELR-QX,"쇼트키 100 V 1 A 저누설 SOD-123W (SOD-123F 풋프린트) — eFuse 앞 직렬, 음(−) 서지·역극성 차단 (외부 검수 H01)",0.05,0.12,LCSC,C5361358,Extended
+24,보호,D30 D40,2,TVS1401DRBR,Texas_DRB0008A_PadFloat,TI,TVS1401DRBR,"평탄 클램프 TVS 14 V 양방향, 최대 23.55 V @ 30 A/125 C, SON-8 3×3 (AO 전용, 지속 ±28/30 V 오결선 보장 제외) [LCSC: D30/D40; LCSC 품번 확인, JLC 등급/재고 확인 필요]",0.35,0.6,제안,C1849891,
+25,출력,D41 D51,2,BAS70-04,SOT-23,Nexperia,"BAS70-04,215","쇼트키 2개 직렬 70 V SOT-23 — DAC 출력 클램프 (1 A, 2 K, 3 공통)",0.02,0.05,LCSC,C389351,Extended
+26,수동,FB1,1,600R@100MHz,L_0603_1608Metric,Murata,BLM18KG601SN1D,페라이트 비드 600 Ω@100 MHz 0603 [LCSC: Basic 비드 C1002는 200 mA라 쓰지 않음],0.01,0.03,제안,C85833,Extended
+27,보호,GDT1,1,2035-25-SM,GDT_Bourns_2035-xx-SM,Bourns,2035-25-SM-RPLF,"2전극 SMD GDT 250 V, Ø5 × 4.4 mm (회로 GND–외함. LCSC — 230 V형은 LCSC에 없음)",0.4,1.0,LCSC,C3660127,Extended
+28,커넥터,J1,1,SM08B-GHS-TB,JST_GH_SM08B-GHS-TB_1x08-1MP_P1.25mm_Horizontal,JST,SM08B-GHS-TB(LF)(SN),"GH 1.25 mm 8핀 헤더, 옆 삽입(직각) SMD (M12 하네스 W-2, 정격 −25~+85 °C)",0.35,0.8,제안,C265111,Extended
+29,생산,J2,1,TC2030-IDC-NL,Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Tag-Connect,(PCB 패드만),SWD 기록용 패드 — 부품 실장 없음,0.0,0.0,확정,,
+30,커넥터,J3,1,SM04B-SRSS-TB,JST_SH_SM04B-SRSS-TB_1x04-1MP_P1.00mm_Horizontal,JST,SM04B-SRSS-TB(LF)(SN),"SH 1.0 mm 4핀 헤더, 옆 삽입(직각) SMD (센서 하네스 W-1, 정격 −25~+85 °C)",0.3,0.6,제안,C160404,Extended
+31,커넥터,J5,1,CHASSIS wire,SolderWire_Chassis_D0.6mm,-,PCB 납땜 구멍 (부품 없음),샤시 선 AWG 28 PTFE 약 25 mm + M2 링 단자 → 홀더 축 나사. 선·단자는 기구 부품표(JLCMC),0.0,0.0,확정,,
+32,보호,L1,1,CMC 1mH 0.8A,L_CommonMode_Wuerth_WE-SL2,Bourns,SRF0905-102Y,"공통모드 초크 2 × 1 mH, 0.8 A, 0.31 Ω, 9.2 × 6 × 5.3 mm (LCSC, Würth 744222 동등). WE-SL2 랜드 일치: 패드 2×1.2, 중심 ±3.75/±1.27 mm; SRF0905 원문 권선 1–4/2–3 대조 완료 [LCSC: SRF0905 권장 랜드와 WE-SL2 패드 치수·핀 배정 대조 완료 (2026-10-01); 주문 시 재고 확인]",0.5,1.2,확인 필요,C2651138,Extended
+33,전원,L2,1,10uH,L_SXN_SMNR4020,SXN,SMNR4020-10UH,"파워 인덕터 10 µH ±20 %, 원문 정격 DC 1.60 A, DCR 0.165 Ω ±30 %, 4 × 4 × 2.2 mm max (전용 랜드; 포화 기준 확인 필요) — 5 V 벅 (부하 약 60 mA) [LCSC: SXN 원문 F=.95/G=2.1/H=3.3 mm 전용 랜드 반영; Isat 정의 확인 필요]",0.05,0.12,확인 필요,C135263,Extended
+34,출력,L3,1,22uH,L_SXN_SMNR4020,SXN,SMNR4020-22UH,"파워 인덕터 22 µH ±20 %, 원문 정격 DC 1.05 A, DCR 0.350 Ω ±30 %, 4 × 4 × 2.2 mm max (전용 랜드; 포화 기준 확인 필요) — VAO 벅 [LCSC: SXN 원문 F=.95/G=2.1/H=3.3 mm 전용 랜드 반영; Isat 정의 확인 필요]",0.05,0.15,확인 필요,C135264,Extended
+35,보호,R1,1,4.7R 1W pulse,R_2512_6332Metric,Vishay,CRCW25124R70FKEG,"CRCW 2512 4.7 Ω 1% 1 W (결정 #38: JLC 부품 — 펄스 내성 HP형 대신 일반형, 서지 시험 T1로 확인) [LCSC: 결정 #38: 일반형 (HP 대신)]",0.05,0.15,LCSC,C242563,Extended
+36,보호,R2,1,1M HV,R_1206_3216Metric,ROHM,KTR18EZPF1004,"서지용 칩 저항 1 MΩ 1% 1206, 최고 사용 전압 500 V (GDT 방전 전 임펄스. LCSC — 1 kV 1206은 LCSC에 없음) [LCSC: 500 V (1 kV 1206은 LCSC에 없음)]",0.02,0.06,LCSC,C253347,Extended
+37,전원,R3,1,866k 1%,R_0603_1608Metric,Vishay,RCS0603866KFKEA,저항 866 kΩ 1% 0603 (UVLO),0.002,0.005,제안,C3954581,Extended
+38,전원,R4,1,97.6k 1%,R_0603_1608Metric,Panasonic,ERA-3AEB9762V,"저항 97.6 kΩ 1% 0603 (UVLO/OVP) [LCSC: 0.1 % 25 ppm (1 %형 LCSC에 없음, 더 좋음)]",0.002,0.005,제안,C2074558,Extended
+39,전원,R5,1,36.5k 1%,R_0603_1608Metric,CAL-CHIP,RM06F3652CT,"저항 36.5 kΩ 1% 0603 (OVP 32.6 V, 복귀 30.1 V — v0.9)",0.002,0.005,제안,C4027587,Extended
+40,전원,R6,1,80.6k 1%,R_0603_1608Metric,UNI-ROYAL,0603WAF8062T5E,저항 80.6 kΩ 1% 0603 (TPS2660 전류제한 149 mA = 12/R),0.002,0.005,제안,C23249,Extended
+41,전원,R8,1,118k 1%,R_0402_1005Metric,YAGEO,AC0402FR-07118KL,저항 118 kΩ 1% 0402 (5 V 벅 FB 상단),0.001,0.003,LCSC,C144804,Extended
+42,출력,R9 R52,2,22.1k 1%,R_0402_1005Metric,UNI-ROYAL,0402WGF2212TCE,저항 22.1 kΩ 1% 0402 (VAO 분압 하단) [LCSC: 2026-10-03 LCSC/JLC 품번·22.1 kΩ ±1%·0402 대조],0.001,0.003,확인 필요,C43473,Extended
+43,수동,R10 R11 R33 R60,4,10k,R_0402_1005Metric,UNI-ROYAL,0402WGF1002TCE,저항 10 kΩ 1% 0402 (50 V),0.001,0.003,LCSC,C25744,Basic
+44,수동,R12 R13 R31 R41,4,100k,R_0402_1005Metric,UNI-ROYAL,0402WGF1003TCE,저항 100 kΩ 1% 0402 (50 V),0.001,0.003,LCSC,C25741,Basic
+45,전원,R14,1,100k 1%,R_0402_1005Metric,UNI-ROYAL,0402WGF1003TCE,"저항 100 kΩ 1% 0402 (벅 FB, 전원 감시)",0.001,0.003,LCSC,C25741,Basic
+46,수동,R15,1,10k 1%,R_0402_1005Metric,UNI-ROYAL,0402WGF1002TCE,저항 10 kΩ 1% 0402 (전원 감시 분압),0.001,0.003,LCSC,C25744,Basic
+47,수동,R17 R18 R20,3,1k,R_0402_1005Metric,UNI-ROYAL,0402WGF1001TCE,저항 1 kΩ 1% 0402,0.001,0.003,LCSC,C11702,Basic
+48,측정,R19,1,4.02k 0.1% 25ppm,R_0603_1608Metric,Panasonic,ERA-3AEB4021V,"Pt1000 기준저항 4.02 kΩ 0.1 % 25 ppm/K 박막 0603 (결정 #38: JLC 부품 — 이전 PLTT 0.02 %·5 ppm. 초기 오차는 교정, 온도 드리프트는 ADS1220 내부 온도로 보정 검토) [LCSC: 결정 #38: 0.1 %·25 ppm (PLTT 0.02 %·5 ppm 대신)]",0.1,0.3,LCSC,C491130,Extended
+49,보호,R30 R40,2,10R pulse,R_2512_6332Metric,Vishay,CRCW251210R0FKEG,"CRCW 2512 10 Ω 1% 1 W (결정 #38: JLC 부품 — 일반형, 서지 시험 T3로 확인) [LCSC: 결정 #38: 일반형 (HP 대신)]",0.03,0.1,LCSC,C844885,Extended
+50,출력,R32 R42,2,15k 0.1% 25ppm,R_0603_1608Metric,Panasonic,ERA-3AEB153V,저항 15 kΩ 0.1% 25 ppm/K 0603 (DAC8760 외부 ISET-R),0.02,0.06,제안,C473244,Extended
+51,출력,R34 R44,2,10R,R_0402_1005Metric,UNI-ROYAL,0402WGF100JTCE,"저항 10 Ω 1% 0402 (DAC8760 AVDD 직렬, 약 8 mW)",0.001,0.003,LCSC,C25077,Basic
+52,출력,R51,1,422k 1%,R_0402_1005Metric,YAGEO,RC0402FR-07422KL,저항 422 kΩ 1% 0402 (VAO 분압 상단),0.001,0.003,LCSC,C477738,Extended
+53,전원,U1,1,TPS26600PWPR,HTSSOP-16-1EP_4.4x5mm_P0.65mm_EP3.4x5mm_Mask2.46x2.31mm_ThermalVias,TI,TPS26600PWPR,"eFuse 60 V 2 A, 역극성·OVP·UVLO, HTSSOP-16",1.5,3.0,확정,C544399,Extended
+54,전원,U2 U15,2,LMR51606YFDBVR,SOT-23-6,TI,LMR51606YFDBVR,"벅 4–65 V 0.6 A 1.1 MHz FPWM SOT-23-6 — U2 5 V (결정 #38), U15 VAO 16.1 V (결정 #37)",0.6,1.2,LCSC,C22439294,Extended
+55,전원,U3,1,TPS7A2033PDBVR,SOT-23-5,TI,TPS7A2033PDBVR,LDO 3.3 V 300 mA 저잡음 SOT-23-5 [LCSC: TECHPUBLIC 복제품 C49452001 아님],0.07,0.3,확정,C2862740,Extended
+56,MCU,U4,1,STM32G0B1CCT6,LQFP-48_7x7mm_P0.5mm,ST,STM32G0B1CCT6,"MCU Cortex-M0+ 64 MHz 256 KB, LQFP48, −40~85 °C — 사내 DP2000과 같은 품번. 샘플 단계 JLC 부품 (결정 #39), 양산은 전자부 온도 사양 확정 후 CCT3(125 °C) 검토 [LCSC: 샘플 단계 (결정 #39). 85 °C 등급 — 양산 전 온도 사양 확인]",1.5,2.5,LCSC,C5270241,Extended
+57,측정,U5,1,PCAP04-AQFM-24,QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm,ScioSense,PCAP04-AQFM-24,정전용량-디지털 변환기 QFN24,6.5,7.1,확정,C2829318,Extended
+58,측정,U6,1,ADS1220IPWR,TSSOP-16_4.4x5mm_P0.65mm,TI,ADS1220IPWR,"24-bit ADC, Pt1000 2선 (J3 패드에서 켈빈 분기), TSSOP-16",1.9,3.5,확정,C48263,Extended
+59,출력,U7 U8,2,DAC8760IPWP,HTSSOP-24-1EP_4.4x7.8mm_P0.65mm_EP3.2x5mm,TI,DAC8760IPWPR,"16-bit 전압/전류 출력 DAC, HTSSOP-24. 사양 확정 후 같은 핀 대체: DAC7760(12-bit V/I), DAC8750(16-bit 전류), DAC7750(12-bit 전류)",7.8,12.4,확정,C55047,Extended
+60,출력,U9 U10,2,TPS26611DDFR,SOT-23-8,TI,TPS26611DDFR,"±50 V 아날로그 출력 오결선 보호, 32 mA 제한, SOT-23-8",1.2,2.5,확정,C3148140,Extended
+61,통신,U11,1,THVD2410DGKR,VSSOP-8_3.0x3.0mm_P0.65mm,TI,THVD2410DGKR,"RS-485 트랜시버 500 kbps (느린 에지), 버스 ±70 V 내성, VSSOP-8 (SOIC와 같은 핀, 외부 검수 H02 TVS 자리 확보) — THVD2450과 같은 핀 (v0.9)",1.5,3.0,확정,C1858306,Extended
+62,출력,U12 U13,2,OPA197IDBVR,SOT-23-5,TI,OPA197IDBVR,36 V 레일투레일 연산증폭기 SOT-23-5 — DAC8760 +VSENSE 버퍼 (이득 1),0.6,1.1,제안,C221351,Extended
+63,출력,U14,1,SN74LVC2G32DCUR,VSSOP-8_2.3x2mm_P0.5mm,TI,SN74LVC2G32DCUR,OR 게이트 2회로 VSSOP-8 — DAC별 SCLK 게이트 (DAC8760 8.5.1.5),0.08,0.2,제안,C91874,Extended
+64,기판,PCB,1,-,-,-,HMT500(ED260313A) (E-301),"PCB 6층 57×23 mm, FR-4 nominal 1.6 t, ENIG (A5-R1, 기구 Rev I 외곽)",0.8,2.0,추정,,
+65,센서,센서 헤드,1,-,-,IST,"MK33-W (300 pF, 품번 확인 필요)","정전용량 습도 소자 300 pF (센서 프로브 P-202에 실장, 결정 #33)",0.0,0.0,사내 단가,,
+66,센서,센서 헤드,1,-,-,IST,MiniSens Pt1000 F0.1,온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장),0.5,3.0,추정,,
+67,커넥터,P-204,1,-,-,M Connect,TBD (두텍 사용품),"M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)",2.0,10.0,TBD,,
+68,하네스,W-2,1,-,-,JST,GHR-08V-S,GH 1.25 mm 8핀 소켓 하우징 (M12 하네스 W-2),0.06,0.15,제안,C485357,LCSC 주문
+69,하네스,W-2,8,-,-,JST,SSHL-002T-P0.2,GH 크림프 단자 AWG 30–26,0.03,0.06,제안,C189897,LCSC 주문
+70,하네스,W-2,1,-,-,TBD,PTFE AWG28 전선,"UL1213 계열 200 °C, 8심 × 40±2 mm 설계값(절단/완성 길이 확인 필요) + 수축튜브 (M12 핀 납땜)",0.15,0.4,추정,,
+71,하네스,W-1,1,-,-,JST,SHR-04V-S,SH 1.0 mm 4핀 소켓 하우징 (센서 하네스 W-1),0.04,0.1,제안,C385125,LCSC 주문
+72,하네스,W-1,4,-,-,JST,SSH-003T-P0.2-H,SH 크림프 단자 AWG 32–28,0.03,0.06,제안,C263995,LCSC 주문
+73,하네스,W-1,1,-,-,TBD,PTFE AWG30 전선,"UL1213 계열 200 °C, 4심 × 40±2 mm 설계값(절단/완성 길이 확인 필요) (HTX99R 뒤 핀 납땜 + 수축튜브)",0.1,0.3,추정,,
+74,조립,-,1,-,-,-,SMT 양면 실장,1k 기준 조립비,2.0,4.0,추정,,

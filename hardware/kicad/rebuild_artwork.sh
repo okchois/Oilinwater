@@ -6,7 +6,7 @@ export HMT_ARTWORK=${HMT_ARTWORK:-A5}
 PY=${KICAD_PYTHON:-python3}
 CLI=${KICAD_CLI:-kicad-cli}
 TEST_PY=${TEST_PYTHON:-python3}
-BASE='hardware/kicad/HMT500(260313A)/HMT500(260313A)'
+BASE='hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A)'
 python3 hardware/kicad/gen_hmt500.py
 "$CLI" sch export netlist -o "$BASE.net" "$BASE.kicad_sch"
 python3 hardware/kicad/check_netlist.py "$BASE.net"

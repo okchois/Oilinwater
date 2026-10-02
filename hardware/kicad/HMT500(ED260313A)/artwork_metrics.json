@@ -1,0 +1,1326 @@
+{
+  "status": "DRAFT - not released",
+  "silk_leaders": [
+    "D30",
+    "D40",
+    "D41",
+    "L3",
+    "U6",
+    "U9",
+    "C12",
+    "C13",
+    "C20",
+    "C23",
+    "C30",
+    "C40",
+    "C41",
+    "C5",
+    "C52",
+    "C57",
+    "C60",
+    "R10",
+    "R11",
+    "R17",
+    "R18",
+    "R30",
+    "R32",
+    "R33",
+    "R4",
+    "R41"
+  ],
+  "silk_revision": "A5-R3",
+  "silk_text_sizes_mm": [
+    [
+      0.5,
+      0.8,
+      0.1
+    ],
+    [
+      0.4,
+      0.6,
+      0.1
+    ]
+  ],
+  "logo": {
+    "position_mm": [
+      144.6,
+      96.8
+    ],
+    "size_mm": [
+      11.5,
+      3.203287197231834
+    ],
+    "source": "assets/dotech_logo_source.png",
+    "tagline_omitted": false
+  },
+  "silk_refs_visible": {
+    "D1": {
+      "x": 143.94,
+      "y": 90.02190499999999,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "D2": {
+      "x": 152.0,
+      "y": 107.22809500000001,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "D3": {
+      "x": 154.31,
+      "y": 107.92809500000001,
+      "angle": 90,
+      "body_distance_mm": 1.028,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "D30": {
+      "x": 133.26649999999998,
+      "y": 104.0,
+      "angle": 90,
+      "body_distance_mm": 1.188,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "D40": {
+      "x": 133.219048,
+      "y": 96.30000000000001,
+      "angle": 0,
+      "body_distance_mm": 1.235,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "D41": {
+      "x": 138.91649999999998,
+      "y": 106.00999999999999,
+      "angle": 90,
+      "body_distance_mm": 1.066,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "D60": {
+      "x": 114.9665,
+      "y": 108.975,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "D61": {
+      "x": 120.225,
+      "y": 107.1585,
+      "angle": 0,
+      "body_distance_mm": 0.889,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J1": {
+      "x": 144.96857099999997,
+      "y": 100.875,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J2": {
+      "x": 108.179871,
+      "y": 99.4647,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J3": {
+      "x": 115.08142899999999,
+      "y": 100.0,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "J5": {
+      "x": 103.64142899999999,
+      "y": 92.61,
+      "angle": 0,
+      "body_distance_mm": 0.769,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "L1": {
+      "x": 153.21,
+      "y": 92.01952399999999,
+      "angle": 90,
+      "body_distance_mm": 0.78,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "L2": {
+      "x": 103.32952399999999,
+      "y": 106.66,
+      "angle": 0,
+      "body_distance_mm": 0.78,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "L3": {
+      "x": 150.6565,
+      "y": 107.30999999999999,
+      "angle": 90,
+      "body_distance_mm": 2.171,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "U1": {
+      "x": 108.25,
+      "y": 97.35999999999999,
+      "angle": 0,
+      "body_distance_mm": 0.75,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "U10": {
+      "x": 128.3,
+      "y": 96.90650000000001,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "U11": {
+      "x": 114.80000000000001,
+      "y": 103.4015,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U12": {
+      "x": 138.7,
+      "y": 102.3265,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U14": {
+      "x": 140.4835,
+      "y": 109.96,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U3": {
+      "x": 144.43999999999997,
+      "y": 90.535,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U4": {
+      "x": 122.56,
+      "y": 99.89999999999999,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U5": {
+      "x": 122.3,
+      "y": 96.49000000000001,
+      "angle": 90,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U6": {
+      "x": 123.15,
+      "y": 104.32,
+      "angle": 90,
+      "body_distance_mm": 1.14,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "U7": {
+      "x": 122.96999999999998,
+      "y": 108.95,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U8": {
+      "x": 139.52999999999997,
+      "y": 89.95,
+      "angle": 0,
+      "body_distance_mm": 0.84,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "U9": {
+      "x": 133.399999,
+      "y": 102.61,
+      "angle": 90,
+      "body_distance_mm": 1.05,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C1": {
+      "x": 146.72190500000002,
+      "y": 98.9,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C12": {
+      "x": 133.71,
+      "y": 94.82619,
+      "angle": 90,
+      "body_distance_mm": 1.366,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C13": {
+      "x": 138.45000000000002,
+      "y": 94.11619,
+      "angle": 90,
+      "body_distance_mm": 2.88,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C14": {
+      "x": 122.17649999999999,
+      "y": 97.89,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C15": {
+      "x": 125.7235,
+      "y": 98.415,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C16": {
+      "x": 112.52499999999999,
+      "y": 108.6835,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C18": {
+      "x": 124.125,
+      "y": 92.7165,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C2": {
+      "x": 121.0,
+      "y": 102.9415,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "C20": {
+      "x": 127.12349999999999,
+      "y": 99.415,
+      "angle": 90,
+      "body_distance_mm": 2.286,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C21": {
+      "x": 122.12349999999999,
+      "y": 102.61,
+      "angle": 90,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "C22": {
+      "x": 121.23349999999999,
+      "y": 89.785,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C23": {
+      "x": 111.62380999999999,
+      "y": 108.03499999999998,
+      "angle": 0,
+      "body_distance_mm": 1.366,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C24": {
+      "x": 125.8835,
+      "y": 93.92500000000001,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C25": {
+      "x": 114.4165,
+      "y": 91.125,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C26": {
+      "x": 145.29,
+      "y": 93.0485,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C27": {
+      "x": 129.9835,
+      "y": 106.085,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C29": {
+      "x": 114.7065,
+      "y": 94.285,
+      "angle": 90,
+      "body_distance_mm": 0.983,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C3": {
+      "x": 107.45,
+      "y": 103.47190499999999,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C30": {
+      "x": 132.559999,
+      "y": 108.184048,
+      "angle": 90,
+      "body_distance_mm": 1.468,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C36": {
+      "x": 141.3185,
+      "y": 108.00999999999999,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C40": {
+      "x": 127.29,
+      "y": 101.1265,
+      "angle": 0,
+      "body_distance_mm": 1.396,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C41": {
+      "x": 134.866499,
+      "y": 104.785,
+      "angle": 90,
+      "body_distance_mm": 1.333,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C42": {
+      "x": 122.45,
+      "y": 107.5085,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C46": {
+      "x": 135.36,
+      "y": 110.5665,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "C47": {
+      "x": 129.58999999999997,
+      "y": 101.3265,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C5": {
+      "x": 121.840476,
+      "y": 99.77499999999999,
+      "angle": 0,
+      "body_distance_mm": 1.244,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C51": {
+      "x": 129.5165,
+      "y": 93.93499999999999,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C52": {
+      "x": 125.73349999999999,
+      "y": 93.4,
+      "angle": 90,
+      "body_distance_mm": 1.747,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C54": {
+      "x": 127.80649899999999,
+      "y": 89.785,
+      "angle": 90,
+      "body_distance_mm": 0.884,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C56": {
+      "x": 124.6515,
+      "y": 91.1,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C57": {
+      "x": 134.19,
+      "y": 100.88095200000001,
+      "angle": 90,
+      "body_distance_mm": 3.145,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "C58": {
+      "x": 131.39000000000001,
+      "y": 98.6335,
+      "angle": 0,
+      "body_distance_mm": 0.889,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C6": {
+      "x": 103.22190499999999,
+      "y": 99.55,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C60": {
+      "x": 121.2435,
+      "y": 103.25999999999999,
+      "angle": 90,
+      "body_distance_mm": 1.474,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "C61": {
+      "x": 146.6,
+      "y": 109.51619000000001,
+      "angle": 90,
+      "body_distance_mm": 1.066,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C62": {
+      "x": 143.7835,
+      "y": 109.96,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C63": {
+      "x": 145.16,
+      "y": 109.57619,
+      "angle": 90,
+      "body_distance_mm": 1.166,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C64": {
+      "x": 144.75,
+      "y": 98.9165,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C65": {
+      "x": 142.9335,
+      "y": 98.7,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "C8": {
+      "x": 106.83190499999999,
+      "y": 103.44,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "GDT1": {
+      "x": 117.375,
+      "y": 96.04150000000001,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "R1": {
+      "x": 123.56809500000001,
+      "y": 89.525,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R10": {
+      "x": 147.9815,
+      "y": 109.495,
+      "angle": 90,
+      "body_distance_mm": 1.511,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R11": {
+      "x": 137.609048,
+      "y": 110.72,
+      "angle": 0,
+      "body_distance_mm": 1.239,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R12": {
+      "x": 120.645,
+      "y": 110.0185,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R13": {
+      "x": 114.7615,
+      "y": 96.09,
+      "angle": 90,
+      "body_distance_mm": 1.005,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R15": {
+      "x": 134.76500000000001,
+      "y": 110.69650000000001,
+      "angle": 0,
+      "body_distance_mm": 0.767,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "R17": {
+      "x": 114.584048,
+      "y": 110.47,
+      "angle": 0,
+      "body_distance_mm": 1.231,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R18": {
+      "x": 122.345,
+      "y": 101.49880999999999,
+      "angle": 90,
+      "body_distance_mm": 2.77,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R2": {
+      "x": 110.9,
+      "y": 94.31809500000001,
+      "angle": 90,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R20": {
+      "x": 112.9115,
+      "y": 109.63999999999999,
+      "angle": 90,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R3": {
+      "x": 108.04440499999998,
+      "y": 93.5,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R30": {
+      "x": 134.8665,
+      "y": 107.38499999999999,
+      "angle": 90,
+      "body_distance_mm": 1.066,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R32": {
+      "x": 125.71100000000001,
+      "y": 100.4,
+      "angle": 90,
+      "body_distance_mm": 2.084,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R33": {
+      "x": 125.67,
+      "y": 95.38404799999999,
+      "angle": 90,
+      "body_distance_mm": 1.235,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": true
+    },
+    "R34": {
+      "x": 131.395,
+      "y": 101.2815,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R4": {
+      "x": 108.094405,
+      "y": 94.9,
+      "angle": 0,
+      "body_distance_mm": 2.428,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R40": {
+      "x": 127.9,
+      "y": 93.69850000000001,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R41": {
+      "x": 134.84,
+      "y": 102.3135,
+      "angle": 0,
+      "body_distance_mm": 2.383,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": true
+    },
+    "R42": {
+      "x": 131.541548,
+      "y": 99.95,
+      "angle": 0,
+      "body_distance_mm": 0.931,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    },
+    "R44": {
+      "x": 129.57000000000002,
+      "y": 98.66850000000001,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R5": {
+      "x": 108.22190499999999,
+      "y": 92.0225,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R6": {
+      "x": 115.77809500000001,
+      "y": 104.7725,
+      "angle": 0,
+      "body_distance_mm": 0.828,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R60": {
+      "x": 114.32,
+      "y": 107.41850000000001,
+      "angle": 0,
+      "body_distance_mm": 0.883,
+      "text_mm": [
+        0.5,
+        0.8,
+        0.1
+      ],
+      "leader": false
+    },
+    "R8": {
+      "x": 115.845476,
+      "y": 103.415,
+      "angle": 0,
+      "body_distance_mm": 0.74,
+      "text_mm": [
+        0.4,
+        0.6,
+        0.1
+      ],
+      "leader": false
+    }
+  },
+  "silk_refs_hidden": [
+    "D51",
+    "U13",
+    "U15",
+    "U2",
+    "C28",
+    "C4",
+    "C44",
+    "C45",
+    "C48",
+    "C50",
+    "C55",
+    "FB1",
+    "R14",
+    "R19",
+    "R31",
+    "R51",
+    "R52",
+    "R9"
+  ],
+  "track_mm": {
+    "DAC1_REF": 2.494,
+    "BUCK_FB": 2.892,
+    "DAC1_ISET": 6.361,
+    "VAO_FB": 2.743,
+    "DAC1_SENSE": 32.965,
+    "DAC2_CMP": 4.871,
+    "BUCK_BOOT": 1.474,
+    "DAC1_CMP": 3.548,
+    "OUT2_SNS": 6.809,
+    "DAC2_SENSE": 10.99,
+    "VAO_SW": 4.334,
+    "VAO_CB": 1.453,
+    "DAC2_ISET": 11.145,
+    "VIN_F": 45.5,
+    "VIN_L": 36.734,
+    "DAC2_REF": 2.373,
+    "OUT1_SNS": 1.44,
+    "VIN_P": 69.305,
+    "EF_ILIM": 10.417,
+    "OV_DIV": 10.3,
+    "UV_DIV": 10.264,
+    "VIN_D": 74.989,
+    "BUCK_SW": 4.339,
+    "VAO": 91.034,
+    "EF_RTN": 50.283,
+    "EF_DVDT": 7.068,
+    "DAC1_SCLK": 15.903,
+    "DAC2_SCLK": 33.697,
+    "PWR_FLT": 14.631,
+    "DAC_ALARM": 65.04,
+    "DAC_MOSI": 44.565,
+    "DAC_MISO": 58.784,
+    "DAC_SCK": 17.794,
+    "DAC2_LATCH": 48.303,
+    "DAC1_LATCH": 43.867,
+    "ADC_DRDY": 15.903,
+    "CS_ADC": 18.45,
+    "SPI_MOSI": 19.089,
+    "SPI_MISO": 18.221,
+    "SPI_SCK": 30.949,
+    "OUT2_SGOOD": 12.067,
+    "OUT1_SGOOD": 19.323,
+    "CREF_B": 2.022,
+    "CREF_A": 1.587,
+    "CDC_SCK": 14.488,
+    "CDC_MOSI": 6.894,
+    "CDC_INT": 16.574,
+    "CDC_MISO": 15.645,
+    "CDC_V18": 2.179,
+    "PT_SP_F": 17.007,
+    "PT_SN_F": 12.174,
+    "+5V": 66.025,
+    "REF_N": 20.382,
+    "RS485_TX": 25.34,
+    "RS485_DE": 16.884,
+    "RS485_RX": 37.119,
+    "PT_N": 14.768,
+    "PT_P": 13.611,
+    "SENS_C2": 13.789,
+    "SENS_C1": 8.571,
+    "OUT2_P": 6.045,
+    "DAC1_OUT": 15.655,
+    "DAC1_AVDD": 29.953,
+    "OUT1_P": 12.536,
+    "CS_CDC": 22.735,
+    "VIN_EXT": 14.412,
+    "GND_IN": 16.889,
+    "OUT2_EXT": 33.476,
+    "RS485_A_EXT": 30.268,
+    "RS485_B_EXT": 40.171,
+    "SWCLK": 41.518,
+    "NRST": 41.447,
+    "SWDIO": 41.938,
+    "DAC2_OUT": 17.327,
+    "DAC2_AVDD": 31.942,
+    "CHASSIS": 33.843,
+    "OUT1_EXT": 26.965,
+    "+3V3": 163.868,
+    "+3V3A": 59.843,
+    "GND": 125.65,
+    "VIN_SENSE": 11.004
+  },
+  "vias": {
+    "DAC1_SENSE": 2,
+    "OUT2_SNS": 2,
+    "DAC2_SENSE": 2,
+    "VIN_F": 2,
+    "VIN_L": 2,
+    "VIN_P": 8,
+    "EF_ILIM": 2,
+    "UV_DIV": 2,
+    "VIN_D": 6,
+    "VAO": 6,
+    "EF_RTN": 6,
+    "EF_DVDT": 2,
+    "DAC1_SCLK": 2,
+    "DAC2_SCLK": 4,
+    "PWR_FLT": 4,
+    "DAC_ALARM": 7,
+    "DAC_MOSI": 5,
+    "DAC_MISO": 5,
+    "DAC_SCK": 2,
+    "DAC2_LATCH": 6,
+    "DAC1_LATCH": 3,
+    "ADC_DRDY": 2,
+    "CS_ADC": 2,
+    "SPI_MOSI": 2,
+    "SPI_MISO": 2,
+    "SPI_SCK": 5,
+    "OUT2_SGOOD": 1,
+    "OUT1_SGOOD": 2,
+    "CDC_MOSI": 2,
+    "CDC_MISO": 2,
+    "PT_SP_F": 3,
+    "+5V": 3,
+    "REF_N": 2,
+    "RS485_TX": 5,
+    "RS485_DE": 2,
+    "RS485_RX": 7,
+    "SENS_C2": 2,
+    "SENS_C1": 2,
+    "OUT2_P": 1,
+    "DAC1_OUT": 2,
+    "DAC1_AVDD": 5,
+    "OUT1_P": 3,
+    "CS_CDC": 4,
+    "VIN_EXT": 1,
+    "GND_IN": 1,
+    "OUT2_EXT": 3,
+    "RS485_A_EXT": 4,
+    "RS485_B_EXT": 2,
+    "SWCLK": 4,
+    "NRST": 6,
+    "SWDIO": 3,
+    "DAC2_OUT": 2,
+    "DAC2_AVDD": 1,
+    "CHASSIS": 2,
+    "OUT1_EXT": 3,
+    "+3V3": 19,
+    "+3V3A": 6,
+    "GND": 38,
+    "VIN_SENSE": 1
+  }
+}

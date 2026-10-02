@@ -1,8 +1,8 @@
-"""HMT500(260313A) PCB 부품 배치 원본 생성기 (A2 기본, HMT_ARTWORK=A1으로 A1 재현).
+"""HMT500(ED260313A) PCB 부품 배치 원본 생성기 (A2 기본, HMT_ARTWORK=A1으로 A1 재현).
 
   python3 hardware/kicad/place_pcb.py
-    → HMT500(260313A)/HMT500(260313A).kicad_pcb   (외곽선·금지 구역 + 부품 110개, 넷 지정, 배선 없음)
-    → HMT500(260313A)/placement.json               (배치 결과: 기구 좌표 — 조립 시뮬레이션·그림용)
+    → HMT500(ED260313A)/HMT500(ED260313A).kicad_pcb   (외곽선·금지 구역 + 부품 110개, 넷 지정, 배선 없음)
+    → HMT500(ED260313A)/placement.json               (배치 결과: 기구 좌표 — 조립 시뮬레이션·그림용)
 
 좌표는 기구 좌표(x 축 방향 뒤쪽 +, y 폭 방향, z 윗면 +)로 계산하고 KiCad 좌표로 바꿔 넣는다 (gen_pcb_outline.K).
 윗면 = F (z+), 아랫면 = B.

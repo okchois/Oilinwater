@@ -20,7 +20,7 @@ sys.path.insert(0, HERE)
 import hmt500_params as P  # noqa: E402
 
 OUT = os.path.join(HERE, "out", "assembly_sim")
-PL = json.load(open(os.path.join(HERE, "..", "kicad", "HMT500(260313A)", "placement.json"), encoding="utf-8"))
+PL = json.load(open(os.path.join(HERE, "..", "kicad", "HMT500(ED260313A)", "placement.json"), encoding="utf-8"))
 T = P.PCB["t"]
 STEEL, PEEK, PCBC, BAD, GOOD, PART = "#9aa3ad", "#d9b36c", "#2e7d32", "#d62728", "#1f77b4", "#555555"
 plt.rcParams["font.family"] = ["NanumGothic", "DejaVu Sans"]

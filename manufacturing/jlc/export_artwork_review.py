@@ -9,11 +9,11 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BASE = ROOT / 'hardware/kicad/HMT500(260313A)/HMT500(260313A)'
+BASE = ROOT / 'hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A)'
 p = argparse.ArgumentParser()
 p.add_argument('--kicad-cli', default='kicad-cli')
-p.add_argument('--revision', default='A5-R2')
-p.add_argument('--output', type=Path, default=ROOT / 'manufacturing/jlc/artwork_A5_R2_review')
+p.add_argument('--revision', default='A5-R3')
+p.add_argument('--output', type=Path, default=ROOT / 'manufacturing/jlc/artwork_A5_R3_review')
 a = p.parse_args()
 out = a.output.resolve()
 out.mkdir(parents=True, exist_ok=True)
@@ -44,7 +44,7 @@ cpl_refs = [row['Designator'] for row in cpl]
 if set(bom_refs) != set(cpl_refs) or len(bom_refs) != len(set(bom_refs)) or len(cpl_refs) != len(set(cpl_refs)):
     raise SystemExit('BOM/CPL 참조번호 불일치 또는 중복')
 missing = [row['Designator'] for row in bom if not row['LCSC Part #'].strip()]
-archive = out / f'HMT500_{a.revision}_Gerber_제조검토용.zip'
+archive = out / f'{BASE.name}_{a.revision}_Gerber_제조검토용.zip'
 with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED) as z:
     for file in sorted(gerbers.iterdir()):
         if file.is_file(): z.write(file, file.name)

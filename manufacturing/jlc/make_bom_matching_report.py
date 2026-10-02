@@ -39,8 +39,8 @@ for sh in wb:
  sh.sheet_properties.pageSetUpPr.fitToPage=True;sh.page_setup.orientation='landscape';sh.page_setup.paperSize=sh.PAPERSIZE_A3;sh.page_setup.fitToWidth=1;sh.page_setup.fitToHeight=0
 wb.save(out/'HMT500_LCSC_BOM_매칭.xlsx')
 with open(out/'HMT500_LCSC_BOM_매칭.csv','w',encoding='utf-8-sig',newline='') as f:w=csv.writer(f);w.writerow(headers);w.writerows(export)
-for name in ['HMT500(260313A)_BOM_JLC.csv','HMT500(260313A)_CPL_JLC.csv','jlc_parts_map.csv']:shutil.copy2(root/'manufacturing/jlc/jlcpcb'/name,out/name)
-with open(out/'HMT500(260313A)_CPL_JLC.csv',encoding='utf-8-sig') as f:cp=list(csv.DictReader(f))
+for name in ['HMT500(ED260313A)_BOM_JLC.csv','HMT500(ED260313A)_CPL_JLC.csv','jlc_parts_map.csv']:shutil.copy2(root/'manufacturing/jlc/jlcpcb'/name,out/name)
+with open(out/'HMT500(ED260313A)_CPL_JLC.csv',encoding='utf-8-sig') as f:cp=list(csv.DictReader(f))
 refs=[x for r in rows for x in r['refs'].split()];assert len(refs)==len(set(refs))==len(cp)==108;assert set(refs)=={r['Designator'] for r in cp}
 assert len(rows)==61 and all(r['lcsc'] for r in rows)
 book=load_workbook(out/'HMT500_LCSC_BOM_매칭.xlsx');assert book['PCB 매칭'].max_row==62

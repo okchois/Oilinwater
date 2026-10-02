@@ -1,7 +1,7 @@
-"""HMT500(260313A) PCB(E-301) 보드 파일 생성: 외곽선, 고정 구멍, 금지 구역, 배치 구역.
+"""HMT500(ED260313A) PCB(E-301) 보드 파일 생성: 외곽선, 고정 구멍, 금지 구역, 배치 구역.
 
 치수는 기구 파라미터(hardware/mech/hmt500_params.py)를 그대로 읽는다.
-  python3 hardware/kicad/gen_pcb_outline.py  →  hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb
+  python3 hardware/kicad/gen_pcb_outline.py  →  hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).kicad_pcb
 
 좌표: 보드 앞 끝(피드스루 쪽) 가운데 = (100, 100). KiCad x = 축 방향(뒤쪽 +), y = 폭 방향(아래 +).
 부품 배치·배선은 아직 없음 — 회로도에서 "PCB 업데이트"로 부품을 불러와 배치 구역에 맞춰 놓는다.
@@ -17,7 +17,7 @@ import sys  # noqa: E402
 sys.path.insert(0, os.path.join(HERE, "..", "mech"))
 import hmt500_params as P  # noqa: E402
 
-PROJECT = "HMT500(260313A)"          # 회로·PCB·거버 공통 파일명 = 프로젝트 번호
+PROJECT = "HMT500(ED260313A)"          # 회로·PCB·거버 공통 파일명 = 프로젝트 번호
 OUT = os.path.join(HERE, PROJECT, PROJECT + ".kicad_pcb")
 OX, OY = 100.0, 100.0
 F0 = P.PCB["x"][0]
@@ -117,7 +117,7 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
   (general (thickness 1.6))
   (paper "A4")
   (title_block
-    (title "HMT500(260313A) PCB E-301 (outline & keepouts)")
+    (title "HMT500(ED260313A) PCB E-301 (outline & keepouts)")
     (date "{date}")
     (rev "{rev}")
     (company "DOTECH Co., Ltd.")

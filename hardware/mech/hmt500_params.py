@@ -177,7 +177,7 @@ PCB_PARTS = [
     (67.5, 0.0, 5.0, 4.0, 2.0, -1),    # CM 초크
 ]
 PLACEMENT = __import__("os").path.join(__import__("os").path.dirname(__import__("os").path.abspath(__file__)),
-                                       "..", "kicad", "HMT500(260313A)", "placement.json")
+                                       "..", "kicad", "HMT500(ED260313A)", "placement.json")
 
 
 def pcb_part_boxes():
@@ -248,7 +248,7 @@ PARTS = [
     ("5", "HMT500-P-209", "Epoxy, RT cure (1 type)", "Epoxy (TBD)", 1, "Pour 1: Ø7 channel / 2: interior"),
     ("6", "HMT500-P-202", "Sensor probe: MK33-W 300pF + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
-    ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500(260313A)"),
+    ("8", "HMT500-E-301", "PCB assembly 57x23 (1 board)", "FR-4", 1, "See KiCad HMT500(ED260313A)"),
     ("9", "HMT500-P-204", "M12 8P male (M Connect), M16x1.5", "-", 1, "Front mount, leads → W-2, P/N TBD"),
     ("10", "HMT500-P-205", "O-ring 24 x 1.5", "FKM 75", 2, "1-3 and 3-4 seal"),
     ("11", "HMT500-P-206", "O-ring for connector", "FKM", 1, "Per connector spec"),

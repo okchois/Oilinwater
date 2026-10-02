@@ -1,0 +1,405 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-03T06:06:49",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "PTH inside courtyard",
+            "key": "pth_inside_courtyard"
+        },
+        {
+            "description": "NPTH inside courtyard",
+            "key": "npth_inside_courtyard"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.6",
+    "schematic_parity": [],
+    "source": "HMT500(ED260313A).kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "풋프린트 'C_0402_1005Metric'이(가) 라이브러리 'HMT500_260313A'의 사본과 일치하지 않습니다",
+            "items": [
+                {
+                    "description": "풋프린트 C44",
+                    "pos": {
+                        "x": 132.6,
+                        "y": 110.3
+                    },
+                    "uuid": "a07a274b-4623-481b-a881-c8d44e23f422"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "풋프린트 'D_SMC'이(가) 라이브러리 'HMT500_260313A'의 사본과 일치하지 않습니다",
+            "items": [
+                {
+                    "description": "풋프린트 D1",
+                    "pos": {
+                        "x": 143.95,
+                        "y": 94.2
+                    },
+                    "uuid": "b0c22210-3e1f-4be5-8916-5469c0698c4f"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R17 의 참조 필드",
+                    "pos": {
+                        "x": 114.584048,
+                        "y": 110.47
+                    },
+                    "uuid": "0625a0f5-d355-44db-ba17-de73b11aef4c"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R30 의 참조 필드",
+                    "pos": {
+                        "x": 134.8665,
+                        "y": 107.384999
+                    },
+                    "uuid": "93eaebf0-f86b-4305-b77c-63ce77bf82c7"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C41 의 참조 필드",
+                    "pos": {
+                        "x": 134.866499,
+                        "y": 104.785
+                    },
+                    "uuid": "a9544b8b-5df7-4b82-8a98-190c1ea5c14d"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "D41 의 참조 필드",
+                    "pos": {
+                        "x": 138.916499,
+                        "y": 106.009999
+                    },
+                    "uuid": "79f35599-adfe-417b-a653-2a48863cf93e"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "D40 의 참조 필드",
+                    "pos": {
+                        "x": 133.219047,
+                        "y": 96.3
+                    },
+                    "uuid": "6a6d1528-7dec-4c42-96b7-d01d6f4fd053"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R15 의 참조 필드",
+                    "pos": {
+                        "x": 134.765,
+                        "y": 110.6965
+                    },
+                    "uuid": "76e1117d-591f-4789-a7cd-7e35ca27c38d"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C2 의 참조 필드",
+                    "pos": {
+                        "x": 121.0,
+                        "y": 102.9415
+                    },
+                    "uuid": "fc997d3b-f9b4-43cc-a5de-35176483a8e8"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C5 의 참조 필드",
+                    "pos": {
+                        "x": 121.840476,
+                        "y": 99.774999
+                    },
+                    "uuid": "68025e37-520b-451b-8088-bb5cf387d3e3"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "L3 의 참조 필드",
+                    "pos": {
+                        "x": 150.6565,
+                        "y": 107.309999
+                    },
+                    "uuid": "125969d1-84e0-46f0-9638-86b0e45b41db"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R42 의 참조 필드",
+                    "pos": {
+                        "x": 131.541548,
+                        "y": 99.95
+                    },
+                    "uuid": "10f281af-0b92-488f-a7c6-7351f7f40ae5"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R33 의 참조 필드",
+                    "pos": {
+                        "x": 125.67,
+                        "y": 95.384048
+                    },
+                    "uuid": "72180786-f25c-44d5-a4fd-10a5bd797099"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R8 의 참조 필드",
+                    "pos": {
+                        "x": 115.845476,
+                        "y": 103.415
+                    },
+                    "uuid": "2e61a364-792d-452b-ab4e-98e87df68fc7"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C52 의 참조 필드",
+                    "pos": {
+                        "x": 125.733499,
+                        "y": 93.4
+                    },
+                    "uuid": "311404d6-aa4d-494e-b723-1a09f0e80bef"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "U1 의 참조 필드",
+                    "pos": {
+                        "x": 108.25,
+                        "y": 97.359999
+                    },
+                    "uuid": "e74568a9-6e12-465f-8c68-d5dfc9562303"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "U10 의 참조 필드",
+                    "pos": {
+                        "x": 128.3,
+                        "y": 96.9065
+                    },
+                    "uuid": "119284d4-d16a-42ea-90d5-9012f5e4b6c2"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "U9 의 참조 필드",
+                    "pos": {
+                        "x": 133.399999,
+                        "y": 102.61
+                    },
+                    "uuid": "e58c5e28-a3df-4e87-834e-ac9b4ee60526"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C46 의 참조 필드",
+                    "pos": {
+                        "x": 135.36,
+                        "y": 110.5665
+                    },
+                    "uuid": "3c26e631-19e6-480f-8910-2da003b4ece7"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C21 의 참조 필드",
+                    "pos": {
+                        "x": 122.1235,
+                        "y": 102.61
+                    },
+                    "uuid": "864cc00d-a08f-439f-9f13-adb338de7ad2"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "GDT1 의 참조 필드",
+                    "pos": {
+                        "x": 117.375,
+                        "y": 96.0415
+                    },
+                    "uuid": "163ab247-ae9e-4452-b6b5-1c2f38fd6332"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C30 의 참조 필드",
+                    "pos": {
+                        "x": 132.559999,
+                        "y": 108.184048
+                    },
+                    "uuid": "300dd7a8-4837-4e06-a6aa-4df78082b116"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "C57 의 참조 필드",
+                    "pos": {
+                        "x": 134.19,
+                        "y": 100.880952
+                    },
+                    "uuid": "e7baa7b8-4ff0-4f46-bacc-8a4b0144b1a2"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        },
+        {
+            "description": "텍스트 높이가 범위를 벗어남 (보드의 최대 실크 텍스트 높이 제한 최소 높이 0.8000 mm; 실제 0.6000 mm)",
+            "items": [
+                {
+                    "description": "R11 의 참조 필드",
+                    "pos": {
+                        "x": 137.609048,
+                        "y": 110.72
+                    },
+                    "uuid": "9143cba7-9f5a-429d-8155-ee780c84b8c8"
+                }
+            ],
+            "severity": "warning",
+            "type": "text_height"
+        }
+    ]
+}

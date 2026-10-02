@@ -4,7 +4,7 @@
     → hardware/mech/out/assembly_sim/report.json   (단계별 검사 결과)
     → hardware/mech/out/assembly_sim/*.png          (문제 장면 그림)
 
-형상: hmt500_cad.py (기구) + PCB 실제 배치 (hardware/kicad/HMT500(260313A)/placement.json, 부품 = Fab 외형 × 높이).
+형상: hmt500_cad.py (기구) + PCB 실제 배치 (hardware/kicad/HMT500(ED260313A)/placement.json, 부품 = Fab 외형 × 높이).
 방법: 움직이는 부품·공구를 경로를 따라 여러 위치에 놓고 정지 부품과의 겹침 부피·최소 거리를 계산한다.
       (나사산은 골지름 원통, 플러그·공구는 외형 상자·원통으로 단순화)
 """
@@ -22,7 +22,7 @@ import hmt500_cad as M  # noqa: E402
 import hmt500_params as P  # noqa: E402
 
 OUT = os.path.join(M.OUT, "assembly_sim")
-PLACEMENT = os.path.join(HERE, "..", "kicad", "HMT500(260313A)", "placement.json")
+PLACEMENT = os.path.join(HERE, "..", "kicad", "HMT500(ED260313A)", "placement.json")
 T = P.PCB["t"]
 
 # ── 가정 (구매품 치수 개략 — 데이터시트 확인 전) ──

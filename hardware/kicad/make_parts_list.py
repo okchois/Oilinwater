@@ -1,9 +1,9 @@
-"""HMT500(260313A) 구매용 부품리스트 생성 (회로도 BOM + 제조사 품번·단가 가정).
+"""HMT500(ED260313A) 구매용 부품리스트 생성 (회로도 BOM + 제조사 품번·단가 가정).
 
-  python3 hardware/kicad/gen_hmt500.py        # 먼저 회로도·HMT500(260313A)_BOM.csv 생성
-  python3 hardware/kicad/make_parts_list.py   # → HMT500(260313A)/HMT500(260313A)_parts_list.xlsx, .csv
+  python3 hardware/kicad/gen_hmt500.py        # 먼저 회로도·HMT500(ED260313A)_BOM.csv 생성
+  python3 hardware/kicad/make_parts_list.py   # → HMT500(ED260313A)/HMT500(ED260313A)_parts_list.xlsx, .csv
 
-- 회로도 부품(참조번호·수량·값·풋프린트)은 HMT500(260313A)_BOM.csv 에서 그대로 읽는다. 여기서는 품번과 단가만 붙인다.
+- 회로도 부품(참조번호·수량·값·풋프린트)은 HMT500(ED260313A)_BOM.csv 에서 그대로 읽는다. 여기서는 품번과 단가만 붙인다.
 - 수동소자 품번은 "제안" (동등품 대체 가능). 단가는 1k 기준 추정값이며 견적으로 확정한다.
 - 회로도에 없지만 1대분에 필요한 전자 부품(PCB, 센서, 커넥터 등)은 EXTRA 로 덧붙인다.
 """
@@ -12,7 +12,7 @@ import csv
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJECT = "HMT500(260313A)"   # 파일명 = 프로젝트 번호
+PROJECT = "HMT500(ED260313A)"   # 파일명 = 프로젝트 번호
 OUTD = os.path.join(HERE, PROJECT)
 FX = 1400  # 원/달러 가정
 
@@ -174,7 +174,7 @@ EXTRA_LCSC = {"GHR-08V-S": "C485357", "SSHL-002T-P0.2": "C189897", "SHR-04V-S": 
 
 # 회로도에는 없지만 1대분 전자부에 필요한 것
 EXTRA = [
-    ("기판", "PCB", "-", "HMT500(260313A) (E-301)", "PCB 6층 57×23 mm, FR-4 nominal 1.6 t, ENIG (A5-R1, 기구 Rev I 외곽)", "-", 1, 0.80, 2.00, "추정"),
+    ("기판", "PCB", "-", "HMT500(ED260313A) (E-301)", "PCB 6층 57×23 mm, FR-4 nominal 1.6 t, ENIG (A5-R1, 기구 Rev I 외곽)", "-", 1, 0.80, 2.00, "추정"),
     ("센서", "센서 헤드", "IST", "MK33-W (300 pF, 품번 확인 필요)", "정전용량 습도 소자 300 pF (센서 프로브 P-202에 실장, 결정 #33)", "-", 1, 0.0, 0.0, "사내 단가"),
     ("센서", "센서 헤드", "IST", "MiniSens Pt1000 F0.1", "온도 소자 1.6×1.2 mm (센서 프로브 P-202에 실장)", "-", 1, 0.50, 3.00, "추정"),
     ("커넥터", "P-204", "M Connect", "TBD (두텍 사용품)", "M12 8핀 수컷 전면 장착형 M16×1.5, 리드선형 (W-2 납땜)", "-", 1, 2.0, 10.0, "TBD"),

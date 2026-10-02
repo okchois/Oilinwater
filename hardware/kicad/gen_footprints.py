@@ -1,4 +1,4 @@
-"""HMT500(260313A) 프로젝트 풋프린트 라이브러리 — 직접 만드는 풋프린트 3개 (KiCad 7 pcbnew API).
+"""HMT500(ED260313A) 프로젝트 풋프린트 라이브러리 — 직접 만드는 풋프린트 3개 (KiCad 7 pcbnew API).
 
   python3 hardware/kicad/gen_footprints.py  →  hardware/kicad/lib/HMT500_260313A.pretty/
 

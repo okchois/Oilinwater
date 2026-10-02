@@ -1,4 +1,4 @@
-"""A5-R2: 부품 몸체 밖의 가까운 레퍼런스와 원본 DOTECH 벡터 로고."""
+"""A5-R3: 부품 몸체 밖의 가까운 레퍼런스와 원본 DOTECH 벡터 로고."""
 import json,math,random,uuid
 from pathlib import Path
 import pcbnew as p
@@ -14,8 +14,12 @@ def layout(b,fps):
  logo=json.loads((Path(__file__).parent/'assets/dotech_wordmark.json').read_text())
  ids={uid('logo'+str(i)) for i in range(max(logo.get('legacy_triangle_count',0),len(logo['polygons'])))}
  ids|={uid('leader'+f.GetReference()+suffix) for f in fps for suffix in ('','0','1')}
+ for group in list(b.Groups()):
+  if group.GetName()=="DOTECH full logo":
+   for member in list(group.GetItems()):group.RemoveItem(member)
+   b.RemoveNative(group)
  for q in list(b.GetDrawings()):
-  if q.m_Uuid.AsString() in ids or (isinstance(q,p.PCB_TEXT) and q.GetText().startswith('HMT500 A')):b.RemoveNative(q)
+  if q.m_Uuid.AsString() in ids or (isinstance(q,p.PCB_TEXT) and q.GetLayer()==p.F_SilkS and q.GetText().startswith('HMT500')):b.RemoveNative(q)
  layers=(p.F_SilkS,p.B_SilkS);obs={l:[] for l in layers};bodies={};hulls={};sides={}
  for fp in fps:
   name=fp.GetReference();layer=p.B_SilkS if fp.IsFlipped() else p.F_SilkS;sides[name]=layer
@@ -35,9 +39,10 @@ def layout(b,fps):
  outline=p.SHAPE_POLY_SET();b.GetBoardPolygonOutlines(outline,False)
  def inside(q):return all(outline.Contains(p.VECTOR2I(MM(x),MM(y))) for x in (q[0]-.2,q[2]+.2) for y in (q[1]-.2,q[3]+.2))
  # Wordmark occupies the clear top-side area behind J1; reserve before references.
- lx,ly,lw=147.0,99.0,8.0;lh=lw*logo['aspect'];lb=(lx-.15,ly-.15,lx+lw+.15,ly+lh+.15)
+ lx,ly,lw=144.6,96.8,11.5;lh=lw*logo['aspect'];lb=(lx-.15,ly-.15,lx+lw+.15,ly+lh+.15)
  assert inside(lb) and not any(hit(lb,q) for q in obs[p.F_SilkS]),'logo clearance'
  obs[p.F_SilkS].append(lb)
+ logo_group=p.PCB_GROUP(b);logo_group.SetName('DOTECH full logo');b.Add(logo_group)
  for i,glyph in enumerate(logo['polygons']):
   poly=p.SHAPE_POLY_SET();poly.NewOutline()
   for x,y in glyph['outer']:poly.Append(int(MM(lx+x*lw)),int(MM(ly+y*lw)),0,-1)
@@ -45,8 +50,8 @@ def layout(b,fps):
    h=poly.NewHole(0)
    for x,y in hole:poly.Append(int(MM(lx+x*lw)),int(MM(ly+y*lw)),0,h)
   poly.Fracture()
-  q=p.PCB_SHAPE(b);q.SetUuid(p.KIID(uid('logo'+str(i))));q.SetShape(p.S_POLYGON);q.SetPolyShape(poly);q.SetFilled(True);q.SetWidth(0);q.SetLayer(p.F_SilkS);b.Add(q)
- mark=p.PCB_TEXT(b);mark.SetText('HMT500 A5-R2');mark.SetLayer(p.F_SilkS);mark.SetTextSize(p.VECTOR2I(MM(.5),MM(.8)));mark.SetTextThickness(MM(.1));mark.SetPosition(p.VECTOR2I(MM(151),MM(102.0)))
+  q=p.PCB_SHAPE(b);q.SetUuid(p.KIID(uid('logo'+str(i))));q.SetShape(p.S_POLYGON);q.SetPolyShape(poly);q.SetFilled(True);q.SetWidth(0);q.SetLayer(p.F_SilkS);b.Add(q);logo_group.AddItem(q)
+ mark=p.PCB_TEXT(b);mark.SetText('HMT500(ED260313A)\nA5-R3');mark.SetLayer(p.F_SilkS);mark.SetTextSize(p.VECTOR2I(MM(.4),MM(.8)));mark.SetTextThickness(MM(.1));mark.SetPosition(p.VECTOR2I(MM(150.35),MM(102.5)))
  assert inside(box(mark,.1)) and not any(hit(box(mark,.1),q) for q in obs[p.F_SilkS]),'ID clearance'
  obs[p.F_SilkS].append(box(mark,.1));b.Add(mark)
  options={}
@@ -164,4 +169,4 @@ def layout(b,fps):
     q=p.PCB_SHAPE(b);q.SetUuid(p.KIID(uid('leader'+name+str(i))));q.SetShape(p.S_SEGMENT);q.SetLayer(sides[name]);q.SetWidth(MM(.1));q.SetStart(p.VECTOR2I(MM(start[0]),MM(start[1])));q.SetEnd(p.VECTOR2I(MM(end[0]),MM(end[1])));b.Add(q)
    leaders.append(name)
  print('R2 silk visible',len(placements),'hidden',hidden,flush=True)
- return placements,hidden,leaders,{'position_mm':[lx,ly],'size_mm':[lw,lh],'source':'assets/dotech_logo_source.png','tagline_omitted':True}
+ return placements,hidden,leaders,{'position_mm':[lx,ly],'size_mm':[lw,lh],'source':'assets/dotech_logo_source.png','tagline_omitted':False}

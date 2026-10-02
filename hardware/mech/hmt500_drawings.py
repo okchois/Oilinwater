@@ -798,7 +798,7 @@ def sheet_pcb():
              f"4. J1 = {Pc['gh']['part']}, 입구 뒤쪽(+x). 하네스 W-2({P.HARNESS2['length']:g} mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).",
              f"   PCB 폭 23 구간은 x {Pc['sections'][1][1]:g}에서 끝 (턴버클 끝 엔드캡 앞면 x {E['mthread']['x'][0]:g}와 틈 {E['mthread']['x'][0] - Pc['sections'][1][1]:.1f}). "
              f"링 뒤(x ≥ {R['x'][0]:g}) 부품은 Ø{R['id']:g} 안 (링을 뒤에서 끼움).",
-             "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음."]
+             "5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).kicad_pcb 와 같음."]
     for i, n in enumerate(notes):
         sh.text(18, 196 + i * 6.0, n, 2.9 if i else 3.6, bold=(i == 0))
     sh.frame()

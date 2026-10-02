@@ -11,7 +11,7 @@ def bbox(obj, margin=0):
 def overlap(a,b):return a[0]<b[2] and a[2]>b[0] and a[1]<b[3] and a[3]>b[1]
 
 def finish(b,report_path):
-    b.GetTitleBlock().SetRevision(os.environ.get("HMT_ARTWORK","A5")+"-R2")
+    b.GetTitleBlock().SetRevision(os.environ.get("HMT_ARTWORK","A5")+"-R3")
     leader_ids={str(uuid.uuid5(uuid.NAMESPACE_URL,"hmt500/silk-leader/"+f.GetReference())) for f in b.GetFootprints()}
     for drawing in list(b.GetDrawings()):
         if isinstance(drawing,p.PCB_SHAPE) and drawing.m_Uuid.AsString() in leader_ids:b.RemoveNative(drawing);continue
@@ -35,5 +35,5 @@ def finish(b,report_path):
     for t in tracks:
         if isinstance(t,p.PCB_VIA):vias[t.GetNetname()]=vias.get(t.GetNetname(),0)+1
         else:lengths[t.GetNetname()]=lengths.get(t.GetNetname(),0)+p.ToMM(t.GetLength())
-    data={'status':'DRAFT - not released','silk_leaders':leaders,'silk_revision':'A5-R2','silk_text_sizes_mm':[[.5,.8,.1],[.4,.6,.1]],'logo':logo,'silk_refs_visible':placements,'silk_refs_hidden':hidden,'track_mm':{n:round(v,3) for n,v in lengths.items()},'vias':vias}
+    data={'status':'DRAFT - not released','silk_leaders':leaders,'silk_revision':'A5-R3','silk_text_sizes_mm':[[.5,.8,.1],[.4,.6,.1]],'logo':logo,'silk_refs_visible':placements,'silk_refs_hidden':hidden,'track_mm':{n:round(v,3) for n,v in lengths.items()},'vias':vias}
     Path(report_path).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')

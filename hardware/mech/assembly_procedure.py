@@ -453,10 +453,10 @@ def build_pdf():
     flow = "".join(f"<tr><td>{i}</td><td>{e(s['group'])}</td><td>{e(s['title'])}</td></tr>" for i, s in enumerate(st, 1))
     pages.append(("표지·적용 범위", f"""
 <h1>HMT500(260313) 조립 시방서</h1>
-<div class="grp">문서 {DOC_NO} · 기구 Rev {P.DRAWING_REV} (외형 = E+E EE364와 같은 치수) · PCB HMT500(260313A) · 작성 {P.DATE}</div>
+<div class="grp">문서 {DOC_NO} · 기구 Rev {P.DRAWING_REV} (외형 = E+E EE364와 같은 치수) · PCB HMT500(ED260313A) · 작성 {P.DATE}</div>
 <img src="{img('exploded.png')}" style="width:100%;margin:5mm 0 2mm;border:0.6px solid #bbb">
 <table><tr><th>적용 범위</th><td>HMT500(260313) 시제품 조립 (기계부 · 하네스 · 몰딩 · 최종 검사). 회로 조립(SMT)은 JLCPCB PCBA로 완료된 PCB를 받는 것으로 함.</td></tr>
-<tr><th>관련 도면</th><td>HMT500-M-000 조립도, M-101 바디, M-102~104 캡·하우징·엔드캡, M-105~106 홀더·지지링 (HMT500_mechanical_drawings.pdf) · KiCad HMT500(260313A)</td></tr>
+<tr><th>관련 도면</th><td>HMT500-M-000 조립도, M-101 바디, M-102~104 캡·하우징·엔드캡, M-105~106 홀더·지지링 (HMT500_mechanical_drawings.pdf) · KiCad HMT500(ED260313A)</td></tr>
 <tr><th>근거</th><td>조립 순서는 조립 시뮬레이션 (hardware/mech/assembly_sim.py, 명목 조립·공구·두께 공차 검사; 몰딩 유동은 확인 필요)으로 공구·부품 간섭을 확인한 순서. 그림은 3D 모델(hmt500_cad.py)을 그대로 그림.</td></tr>
 <tr><th>그림 읽는 법</th><td class="legend">회색<span style="background:#bcc2cc"></span> 이미 조립됨 · 주황<span style="background:#f5851f"></span> 이번 단계 부품 · 빨강<span style="background:#d91f1f"></span> 움직이는 방향 · 금속·수지 부품 일부는 안이 보이게 절반을 잘라 그림</td></tr>
 <tr><th>(TBD)</th><td>토크·에폭시·M12 품번 등 표시된 값은 시제품 시험 후 확정. 확정 전에는 생산 작업 기준으로 사용하지 말 것. 시제품 시험 계획에서 별도 승인·기록.</td></tr></table>

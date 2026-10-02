@@ -1,4 +1,4 @@
-# AGENTS.md — HMT500(260313) 오일 수분 트랜스미터 (두텍 DOTECH)
+# AGENTS.md — HMT500(ED260313A) 오일 수분 트랜스미터 (두텍 DOTECH)
 
 이 파일은 이 저장소를 맡는 AI 에이전트(Codex 등)용 인계 문서입니다. 작업 전에 끝까지 읽으세요.
 마지막 인계: 2026-10-02 (PCB A5 배선 연결 완료, 제조 검토/발주 보류). 사람 담당자: 두텍 대표 (지시는 한국어).
@@ -6,7 +6,7 @@
 ## 1. 제품 한 줄
 
 오일(윤활유·유압유) 속 수분(aw, ppm)과 온도를 재는 프로브형 트랜스미터. 전원 12–28 V DC, 4–20 mA/0–10 V × 2 + RS-485 Modbus RTU,
-G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev I). 프로젝트 번호 **HMT500(260313A)** = 회로·PCB·거버 파일명.
+G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev I). 프로젝트 번호 **HMT500(ED260313A)** = 회로·PCB·거버 파일명.
 
 ## 2. 저장소·폴더
 
@@ -15,13 +15,13 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | 폴더 | 내용 |
 |---|---|
 | `hardware/kicad/` | **회로도·PCB 생성기** (`gen_hmt500.py` = 모든 부품·연결의 원본), 배치(`place_pcb.py`), 부품리스트(`make_parts_list.py` — 제조사 품번·**LCSC 표**), 넷리스트 검사(`check_netlist.py`), 풋프린트 `lib/HMT500_260313A.pretty/` |
-| `hardware/kicad/HMT500(260313A)/` | 생성 결과: `.kicad_sch`(8시트) `.kicad_pcb` `.net` `_schematic.pdf` `_BOM.csv` `_parts_list.xlsx/.csv` `placement.json/.png` |
+| `hardware/kicad/HMT500(ED260313A)/` | 생성 결과: `.kicad_sch`(8시트) `.kicad_pcb` `.net` `_schematic.pdf` `_BOM.csv` `_parts_list.xlsx/.csv` `placement.json/.png` |
 | `hardware/mech/` | 기구 (CadQuery): `hmt500_params.py`(모든 치수), `hmt500_cad.py`(STEP), `hmt500_drawings.py`+`make_pdf.sh`(도면), `assembly_sim.py`(조립 시뮬레이션 31항목), `assembly_procedure.py`(조립 시방서 PDF), `out/` |
 | `manufacturing/jlc/` | 주문 패키지: `jlcpcb/`(BOM·CPL — `make_jlcpcb_files.py`), `jlccnc/` `jlc3d/` `jlcmc/` `lcsc/`(기구·하네스 — `make_mech_package.py`) |
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#54 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#55 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-02)
 
@@ -54,9 +54,9 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 2. 재생성·검사 순서 (모두 통과해야 커밋):
    ```
    python3 hardware/kicad/gen_hmt500.py                      # 작도 규칙 검사 포함 (겹침·용지 밖이면 실패)
-   kicad-cli sch export netlist -o "hardware/kicad/HMT500(260313A)/HMT500(260313A).net" "hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch"
-   python3 hardware/kicad/check_netlist.py "hardware/kicad/HMT500(260313A)/HMT500(260313A).net"   # errors: 0
-   kicad-cli sch export pdf -o "hardware/kicad/HMT500(260313A)/HMT500(260313A)_schematic.pdf" "hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_sch"
+   kicad-cli sch export netlist -o "hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).net" "hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).kicad_sch"
+   python3 hardware/kicad/check_netlist.py "hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).net"   # errors: 0
+   kicad-cli sch export pdf -o "hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A)_schematic.pdf" "hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).kicad_sch"
    python3 hardware/kicad/make_parts_list.py
    python3 hardware/kicad/place_pcb.py                       # 'ERROR ... no free place'가 없어야 함
    python3 manufacturing/jlc/make_jlcpcb_files.py
@@ -65,7 +65,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#55부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#56부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
@@ -124,3 +124,7 @@ M12 외형도 Rev B(결정 #52): `hardware/mech/m12_outline_drawing.py`로 흑�
 
 ## A5-R2 실크·로고 (2026-10-03)
 두텍 요청으로 `silk_layout.py`에서 부품 옆의 레퍼런스를 재배치하고 탑면 DOTECH 원본 워드마크(폭 8 mm)를 추가했다. 기본 높이 0.8 mm, 혼잡 위치 0.6 mm, 선폭 0.1 mm. 0.6 mm는 제조사 고정밀 권장 최소보다 작으므로 인쇄성 확인 필요. 부품 아래/패드 위 배치는 금지하며 모든 번호가 인쇄되지는 않는다. 실제 표시/누락 목록은 `artwork_metrics.json`과 `docs/hw/artwork-a5-r2-silk-logo-261003.md` 참조. 최신 거버/현재 BOM은 `manufacturing/jlc/artwork_A5_R2_review/`. 배선·위치·패드 불변.
+
+## 정식 명칭·전체 로고 A5-R3 — 결정 #55
+2026-10-03 사용자 확인: PCB 정식 명칭 **HMT500(ED260313A)**. 최신 KiCad 폴더/프로젝트 파일과 제조용 파일은 이 명칭으로 통일. 기술용 라이브러리 별칭 HMT500_260313A는 유지. A5-R2까지의 과거 릴리스는 옛 이름 그대로 보존한다.
+탑면 로고는 DOTECH + SENSING & CONTROL 전체(11.5×3.20 mm), KiCad 네이티브 다각형 그룹 `DOTECH full logo`. 레퍼런스는 각 부품의 Reference 필드, PCB 명칭은 PCB_TEXT로 편집 가능. 사용자 직접 KiCad 수정 요청을 존중하고 편집본을 새로 생성해 덮어쓰지 않도록 변경 전 상태를 확인할 것. 최신 제조 검토 묶음은 `manufacturing/jlc/artwork_A5_R3_review/`.

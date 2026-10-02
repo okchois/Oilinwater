@@ -56,7 +56,7 @@ c.showPage()
 page(2,'M12 8핀 커넥터 — 전기·하네스·구매 사양')
 t(18,249,'HMT500 핀 배정 (표준 공통 기능 배정이 아닌 본 제품 배정)',12,True)
 pins=[('1','예비 / PCB NC'),('2','RS485_B_EXT'),('3','RS485_A_EXT'),('4','OUT1_EXT'),('5','OUT2_EXT'),('6','GND_IN / 전원 −'),('7','예비 / PCB NC'),('8','VIN_EXT / 전원 +')]
-pl=json.loads((ROOT/'hardware/kicad/HMT500(260313A)/placement.json').read_text());j=next(q for q in pl['parts'] if q['ref']=='J1');nets={p['n']:p['net'] for p in j['pads']}
+pl=json.loads((ROOT/'hardware/kicad/HMT500(ED260313A)/placement.json').read_text());j=next(q for q in pl['parts'] if q['ref']=='J1');nets={p['n']:p['net'] for p in j['pads']}
 for k,v in [('2','RS485_B_EXT'),('3','RS485_A_EXT'),('4','OUT1_EXT'),('5','OUT2_EXT'),('6','GND_IN'),('8','VIN_EXT')]:assert nets[k]==v
 for i,(num,net) in enumerate(pins):
  y=237-i*10;t(22,y,num,10,True);t(38,y,net,10);t(125,y,'→ J1.'+num,10);line(20,y-3,167,y-3,'#ced9df')

@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name "HMT500_260313A")(type "KiCad")(uri "${KIPRJMOD}/../lib/HMT500_260313A.pretty")(options "")(descr "HMT500(260313A) footprints"))
-)

@@ -11,7 +11,7 @@ import pcbnew as p
 import wx
 
 HERE=Path(__file__).resolve().parent
-BASE=HERE/'HMT500(260313A)'/'HMT500(260313A)'
+BASE=HERE/'HMT500(ED260313A)'/'HMT500(ED260313A)'
 MM=p.FromMM
 
 def rect(b, layer, xy, net=None, keepout=False, name=''):

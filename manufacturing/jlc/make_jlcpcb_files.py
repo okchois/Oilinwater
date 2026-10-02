@@ -1,8 +1,8 @@
-"""Build JLCPCB PCBA files (BOM + CPL) for HMT500(260313A): one board, 4 layers, parts on both sides.
+"""Build JLCPCB PCBA files (BOM + CPL) for HMT500(ED260313A): one board, 4 layers, parts on both sides.
 
   python3 manufacturing/jlc/make_jlcpcb_files.py     (needs kicad-cli)
-    -> manufacturing/jlc/jlcpcb/HMT500(260313A)_BOM_JLC.csv   Comment, Designator, Footprint, LCSC Part #
-    -> manufacturing/jlc/jlcpcb/HMT500(260313A)_CPL_JLC.csv   Designator, Mid X, Mid Y, Layer, Rotation
+    -> manufacturing/jlc/jlcpcb/HMT500(ED260313A)_BOM_JLC.csv   Comment, Designator, Footprint, LCSC Part #
+    -> manufacturing/jlc/jlcpcb/HMT500(ED260313A)_CPL_JLC.csv   Designator, Mid X, Mid Y, Layer, Rotation
     -> manufacturing/jlc/jlcpcb/jlc_parts_map.csv             value/footprint -> LCSC number (filled in after lookup)
 
 - The CPL comes straight from the KiCad placement (same coordinates as the Gerbers, absolute KiCad coordinates).

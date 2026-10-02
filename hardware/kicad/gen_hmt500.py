@@ -1,6 +1,6 @@
-"""DOTECH HMT500(260313) KiCad 회로도 생성기 (파일명·프로젝트 번호 HMT500(260313A)) v0.3 — 배치·배선된 정식 회로도.
+"""DOTECH HMT500(260313) KiCad 회로도 생성기 (파일명·프로젝트 번호 HMT500(ED260313A)) v0.3 — 배치·배선된 정식 회로도.
 
-python3 hardware/kicad/gen_hmt500.py  →  hardware/kicad/HMT500(260313A)/
+python3 hardware/kicad/gen_hmt500.py  →  hardware/kicad/HMT500(ED260313A)/
 
 - 좌표 단위 u = 2.54 mm(100 mil). 모든 핀·선은 1.27 mm 격자 위.
 - 신호는 왼쪽→오른쪽, 전원은 위(전원 심볼), GND는 아래(GND 심볼).
@@ -14,8 +14,8 @@ import json
 import os
 import uuid
 
-PROJECT = "HMT500(260313A)"      # 회로·PCB·거버 파일명 = 프로젝트 번호
-PRODUCT = "HMT500(260313)"       # 제품(프로젝트) 이름
+PROJECT = "HMT500(ED260313A)"      # 회로·PCB·거버 파일명 = 프로젝트 번호
+PRODUCT = "HMT500(ED260313A)"       # 제품(프로젝트) 이름
 LIB = "HMT500_260313A"           # 심볼 라이브러리 별칭 (lib_id에 괄호를 넣지 않음)
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), PROJECT)
 NS = uuid.UUID("6f1c0a52-8d7e-4c1a-9a53-4d2f0b7e1a10")

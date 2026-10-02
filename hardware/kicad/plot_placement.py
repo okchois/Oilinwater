@@ -20,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "mech"))
 import hmt500_params as P  # noqa: E402
 
-PROJECT = "HMT500(260313A)"
+PROJECT = "HMT500(ED260313A)"
 JSON_IN = os.path.join(HERE, PROJECT, "placement.json")
 
 GROUP = [("J3", "U5", "U6", "C22", "C25", "C29", "R17", "R18", "C27", "R19", "R20", "C23", "C28", "C24"),
