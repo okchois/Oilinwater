@@ -21,7 +21,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 | `firmware/` | 자체 RS-485 부트로더 코어(`bootloader/bl_core.*`, 호스트 시뮬레이터), 공용(`common/`). **앱 펌웨어는 아직 없음** |
 | `tools/` | `fwupdate.py`(PC 업데이트 도구), `moisture_calc.py` |
 | `tests/` | `test_kicad_gen.py`(작도 규칙·넷·배치), `test_mech_drawings.py`, `test_bootloader.py` |
-| `docs/` | **`decision-log.md`(결정 #1–#49 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
+| `docs/` | **`decision-log.md`(결정 #1–#50 + 미결 항목 — 가장 중요)**, `hw/`(회로 설계서·검토서·외부 검수 대응·배치), `market/`, `mech/`, `rs485-bootloader-design.md`, `prompts/` |
 
 ## 3. 현재 상태 (2026-10-02)
 
@@ -65,7 +65,7 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
    DRC: 이 환경의 `kicad-cli 7.0.11`에는 `pcb drc`가 없음 → `pcbnew.WriteDRCReport(board, path, pcbnew.EDA_UNITS_MILLIMETRES, True)`로. 간격(clearance)·코트야드 오류 0이어야 함.
    기구를 바꾸면: `hmt500_cad.py`, `assembly_sim.py`(NG 0, 몰딩 유동은 WARN/실험 필요), `hmt500_drawings.py` + `make_pdf.sh`, `tests/test_mech_drawings.py`.
 3. 기판이 꽉 차 있음 (윗면 657 / 아랫면 759 mm² 코트야드). 부품 추가 시 `place_pcb.py`의 PLAN 순서·`("pin", IC, 핀)` 기준이 결과를 크게 바꿈 → 핀 거리(디커플링·벅 루프)를 확인할 것.
-4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#50부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
+4. 결정이 생기면 `docs/decision-log.md`에 번호를 이어서 기록 (#51부터). 관련 문서(`docs/hw/circuit-design.md` 맨 위 요약 등)도 함께.
 5. 데이터시트 값은 원문으로 확인하고, 확인 못 한 값은 "확인 필요"로 표시. **저작권 있는 데이터시트 PDF는 커밋 금지.**
 6. 문서는 한국어, 쉬운 말. 사람에게 보고할 때 바뀐 것·남은 위험·결정 필요한 것을 구분.
 7. 커밋은 작업 브랜치에 푸시. main 직접 푸시·강제 푸시 금지.
@@ -112,3 +112,5 @@ G½ 나사·M12 8핀 커넥터, 외형은 E+E EE364와 같은 치수(기구 Rev 
 - 위 값은 현재 설계값이며 최종 제조 길이 확정이 아니다. 전선 절단 길이/단자 조립 후 완성 길이를 구분하고 탈피·압착·납땜 길이, 공차, 선색·핀맵, 굽힘/고정/수납 경로를 도면에 표기.
 - 최종 값은 hmt500_params.py의 HARNESS/HARNESS2/CHASSIS_WIRE에서 관리하고 조립도·하네스 제작도·조립 시방서·구매 목록에 동기화. assembly_procedure.py의 40 mm 및 make_mech_package.py의 W-3 25 mm 등 고정 문자열도 대조. assembly_sim.py의 과거 “60 유지” 설명과 현재 40 mm 값 불일치도 도면 발행 시 정리.
 - 미확정 길이는 “확인 필요”로 표시하고, 실제 길이 변경 후 조립 경로 검사를 다시 수행한다.
+
+하네스 검토도 Rev A(결정 #50): `hardware/mech/harness_drawings.py`로 생성, `hardware/mech/out/harness/`에 W-1/W-2/W-3 및 합본 PDF. ReportLab과 NanumGothic 폰트 사용. 현재 길이·논리 핀맵만 검증; 제조 승인 도면이 아니며 #49의 미확정 치수는 그대로 남는다.
