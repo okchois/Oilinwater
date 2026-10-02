@@ -175,9 +175,9 @@ HEADER = """(kicad_pcb (version 20221018) (generator pcbnew)
 
 def build():
     Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
-    rev = os.environ.get("HMT_ARTWORK", "A3")
+    rev = os.environ.get("HMT_ARTWORK", "A4")
     header = HEADER
-    if rev == "A3":
+    if rev in ("A3", "A4"):
         header = header.replace('(31 "B.Cu" signal)', '(3 "In3.Cu" signal)\n    (4 "In4.Cu" power)\n    (31 "B.Cu" signal)')
         start = header.index('      (layer "F.Cu" (type "copper")')
         end = header.index('      (layer "B.Mask"', start)

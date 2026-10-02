@@ -2,7 +2,7 @@
 # 저장소 루트에서 실행. PCB 배치와 스냅샷이 다르면 복원을 중단한다.
 # 이 파일의 성공은 제작 승인이 아니다. DRC 미연결/오류를 별도로 확인한다.
 set -eu
-export HMT_ARTWORK=${HMT_ARTWORK:-A3}
+export HMT_ARTWORK=${HMT_ARTWORK:-A4}
 PY=${KICAD_PYTHON:-python3}
 CLI=${KICAD_CLI:-kicad-cli}
 TEST_PY=${TEST_PYTHON:-python3}

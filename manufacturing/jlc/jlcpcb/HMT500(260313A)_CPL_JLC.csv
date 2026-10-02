@@ -3,7 +3,7 @@ C1,148.275mm,-100.150mm,Bottom,90
 C2,119.050mm,-100.825mm,Bottom,0
 C4,115.025mm,-102.250mm,Bottom,180
 C5,119.050mm,-97.875mm,Bottom,0
-C6,106.150mm,-99.600mm,Bottom,0
+C6,106.100mm,-99.600mm,Bottom,0
 C8,108.000mm,-103.100mm,Bottom,270
 C14,123.400mm,-97.850mm,Bottom,90
 C15,124.500mm,-98.275mm,Bottom,90
@@ -56,7 +56,7 @@ R32,123.125mm,-100.425mm,Bottom,90
 R33,126.550mm,-96.975mm,Bottom,0
 R34,131.875mm,-102.525mm,Bottom,180
 R41,134.800mm,-99.150mm,Bottom,270
-R42,132.425mm,-99.575mm,Bottom,270
+R42,132.975mm,-99.775mm,Bottom,270
 R44,130.050mm,-97.425mm,Bottom,0
 R51,139.475mm,-108.225mm,Bottom,0
 R52,139.475mm,-107.125mm,Bottom,180

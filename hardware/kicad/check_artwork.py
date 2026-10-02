@@ -17,7 +17,7 @@ def check(b):
             if net!=expected.get(key,''):errors.append(f'{key}: expected {expected.get(key,"")}, PCB {net}')
     for key in expected:
         if key not in actual:errors.append(f'missing pad {key}')
-    expected_layers=6 if os.environ.get('HMT_ARTWORK','A3')=='A3' else 4
+    expected_layers=6 if os.environ.get('HMT_ARTWORK','A4') in ('A3','A4') else 4
     if b.GetCopperLayerCount()!=expected_layers:errors.append(f'expected {expected_layers} copper layers')
     layers={};nets={};vias=0
     for tr in b.GetTracks():
@@ -26,7 +26,7 @@ def check(b):
         net=tr.GetNetname();nets[net]=nets.get(net,0)+p.ToMM(tr.GetLength())
     for ground_layer in (('In1.Cu','In4.Cu') if b.GetCopperLayerCount()==6 else ('In1.Cu',)):
         if layers.get(ground_layer,0):errors.append('signal tracks found on reserved '+ground_layer+' ground plane')
-    critical_limits = {} if os.environ.get('HMT_ARTWORK','A3') not in ('A2','A3') else {
+    critical_limits = {} if os.environ.get('HMT_ARTWORK','A4') not in ('A2','A3','A4') else {
         'CREF_A':3.0, 'CREF_B':3.0, 'BUCK_SW':6.0, 'BUCK_FB':4.0,
         'VAO_SW':6.0, 'VAO_FB':4.0, 'DAC1_CMP':6.0, 'DAC2_CMP':6.0,
     }

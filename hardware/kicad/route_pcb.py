@@ -47,7 +47,7 @@ def prepare(b,dsn):
     x,y=p.ToMM(ep.GetPosition().x),p.ToMM(ep.GetPosition().y)
     # A2: DAC PowerPAD -> GND reference plane. Opposite-side pads were checked
     # before choosing these sites; F.Mask tenting limits solder wicking.
-    if os.environ.get('HMT_ARTWORK','A3')in ('A2','A3'):
+    if os.environ.get('HMT_ARTWORK','A4')in ('A2','A3','A4'):
         sites=json.loads((HERE/'placement'/'thermal_vias_A2.json').read_text())
         expected={'U7':(127.8,107.1),'U8':(134.7,92.9)}
         for ref,pos in expected.items():
