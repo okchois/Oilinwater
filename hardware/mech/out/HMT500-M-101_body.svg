@@ -179,7 +179,7 @@
 <text x="352.000" y="156.295" font-size="3.0" text-anchor="middle" class="t ">숨은선 원 2개: 2×M2-6H 깊이 5, PCD 16</text>
 <text x="352.000" y="161.295" font-size="3.0" text-anchor="middle" class="t ">(Ø22 카운터보어 바닥, PCB 홀더 M-105 고정)</text>
 <text x="18.000" y="205.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
-<text x="18.000" y="211.200" font-size="3.1" text-anchor="start" class="t ">1. 재질 SUS316L (1.4404), 봉재 선삭. 재질성적서 EN 10204 3.1.</text>
+<text x="18.000" y="211.200" font-size="3.1" text-anchor="start" class="t ">1. 재질 SUS304 (prototype), 봉재 선삭. 재질성적서 EN 10204 3.1.</text>
 <text x="18.000" y="217.400" font-size="3.1" text-anchor="start" class="t ">2. 지정 없는 모서리 C0.3, 날카로운 모서리 제거. 지정 외 표면 Ra 1.6.</text>
 <text x="18.000" y="223.600" font-size="3.1" text-anchor="start" class="t ">3. 씰면(기준면 A) Ra 0.8, 평면도 0.02, 공구 자국 반경 방향 금지 (씰 누설 방지).</text>
 <text x="18.000" y="229.800" font-size="3.1" text-anchor="start" class="t ">4. Ø7 관통 통로 양끝 C0.3·버 완전 제거 (하네스 피복 보호). Ø10 H8 Ra 0.8 (O링 밀봉면), 입구 C0.3.</text>
@@ -210,15 +210,15 @@
 <line x1="290.000" y1="255.000" x2="290.000" y2="287.000" class="thin"/>
 <line x1="350.000" y1="255.000" x2="350.000" y2="287.000" class="thin"/>
 <text x="233.000" y="252.000" font-size="4.2" text-anchor="start" font-weight="700" class="t ">(주)두텍  DOTECH Co., Ltd.</text>
-<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500(260313) 오일 수분 트랜스미터</text>
+<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500(ED260313A) 오일 수분 트랜스미터</text>
 <text x="231.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">품명</text>
 <text x="231.500" y="262.200" font-size="2.7" text-anchor="start" font-weight="700" class="t ">프로세스 바디 (Process body)</text>
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-101</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">I / 2026-10-01</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">J / 2026-10-03</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
-<text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS316L (1.4404)</text>
+<text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">SUS304 (prototype)</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>
 <text x="291.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">3 : 1</text>
 <text x="351.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">단위 / 투상</text>

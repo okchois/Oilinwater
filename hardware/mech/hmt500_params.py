@@ -39,8 +39,8 @@ Rev E (2026-09-29): HTX99R 커넥터의 두 Ø10 원통은 M10×0.75 나사 (두
 """
 
 # Rev I: 센서 300pF 외형·13.5 mm 캐리어, M3 r11.8 공구 접근, PCB 최대두께 1.76/홈 최소1.9, 제작 공차 통일.
-DRAWING_REV = "I"
-DATE = "2026-10-01"
+DRAWING_REV = "J"
+DATE = "2026-10-03"
 
 # ── 보호캡 = 두텍 SUS PROBE OIL FILTER (품번 390000-001100, 도면 2020-06-08, SUS304) ──
 # 원 도면 좌표(끝 0 → 열린 끝 32)를 제품 x로: x = x_tip + xf. 열린 끝이 커넥터 플랜지 앞면(x=-30)에 닿음
@@ -241,10 +241,10 @@ def hex_corner_d(af):
 
 # 부품 목록 (조립도 부품표)
 PARTS = [
-    ("1", "HMT500-M-101", "Process body", "SUS316L (1.4404)", 1, "Machined"),
+    ("1", "HMT500-M-101", "Process body", "SUS304 (prototype)", 1, "Machined"),
     ("2", "HMT500-M-102", "Sensor cap (ex 390000-001100)", "SUS304", 1, "Machined, M10x1.0, 25 holes"),
-    ("3", "HMT500-M-103", "Housing tube Ø30", "SUS316L (1.4404)", 1, "Machined, M26x1 R/LH ends, marking"),
-    ("4", "HMT500-M-104", "End cap", "SUS316L (1.4404)", 1, "Machined, flats AF27"),
+    ("3", "HMT500-M-103", "Housing tube Ø30", "SUS304 (prototype)", 1, "Machined, M26x1 R/LH ends, marking"),
+    ("4", "HMT500-M-104", "End cap", "SUS304 (prototype)", 1, "Machined, flats AF27"),
     ("5", "HMT500-P-209", "Epoxy, RT cure (1 type)", "Epoxy (TBD)", 1, "Pour 1: Ø7 channel / 2: interior"),
     ("6", "HMT500-P-202", "Sensor probe: MK33-W 300pF + Pt1000", "PEEK + ceramic", 1, "Plug-in, replaceable"),
     ("7", "HMT500-P-203", "Bonded seal G1/2", "Steel + FKM", 1, "Purchased"),
@@ -252,8 +252,8 @@ PARTS = [
     ("9", "HMT500-P-204", "M12 8P male (M Connect), M16x1.5", "-", 1, "Front mount, leads → W-2, P/N TBD"),
     ("10", "HMT500-P-205", "O-ring 24 x 1.5", "FKM 75", 2, "1-3 and 3-4 seal"),
     ("11", "HMT500-P-206", "O-ring for connector", "FKM", 1, "Per connector spec"),
-    ("12", "HMT500-M-105", "PCB holder", "PEEK / PA66-GF30", 1, "Machined or molded"),
-    ("13", "HMT500-M-106", "PCB rear support ring", "PEEK / PA66-GF30", 1, "Machined or molded"),
+    ("12", "HMT500-M-105", "PCB holder", "PA12-HP (MJF)", 1, "Print + finish; prototype"),
+    ("13", "HMT500-M-106", "PCB rear support ring", "PA12-HP (MJF)", 1, "Print + finish; prototype"),
     ("14", "HMT500-P-207", "Screw M2x6 + M2x8 + M2x12 (2)", "A4 stainless", 4, "ISO 14580 / 7380"),
     ("15", "HTX99R-SC", "Sensor connector 4P, M10x1.0 x2", "per DOTECH dwg", 1, "In-house, screwed into 1"),
     ("16", "HMT500-P-208", "O-ring 8 x 1.2", "FKM 75", 1, "Connector seal"),

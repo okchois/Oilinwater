@@ -24,7 +24,7 @@ import cadquery as cq  # noqa: E402
 import hmt500_cad as M  # noqa: E402
 import hmt500_params as P  # noqa: E402
 
-SETS = 5                       # 시제품 세트 수 (가정)
+SETS = 1                       # 시제품 세트 수 (가정)
 REV = P.DRAWING_REV
 DWG_PDF = os.path.join(MECH, "out", "HMT500_mechanical_drawings.pdf")
 DWG_PAGE = {"M-101": 2, "M-102": 3, "M-103": 3, "M-104": 3, "M-105": 4, "M-106": 4}   # 도면 PDF 쪽 번호
@@ -72,6 +72,9 @@ CNC = [
          note="1개/세트"),
 ]
 
+
+# Rev J: 1세트, 홀더/지지링은 JLC3D로 이동.
+CNC = [c for c in CNC if c["part"] not in ("HMT500-M-105", "HMT500-M-106")]
 
 # English order data for JLCCNC (the drawings are in Korean — this sheet and QUOTE_REQUEST.txt carry the key specs)
 CNC_EN = {
@@ -129,13 +132,13 @@ NAME_EN = {"HMT500-M-101": "Process body", "HMT500-M-102": "Sensor protection ca
            "HMT500-M-105": "PCB holder", "HMT500-M-106": "PCB rear support ring"}
 
 RFQ = """Request for quotation - CNC machining (JLCCNC)
-Project: HMT500(260313) oil moisture transmitter, prototype lot
+Project: HMT500(ED260313A) oil moisture transmitter, prototype lot
 Company: DOTECH Co., Ltd.
 Drawing revision: {rev}   Date: {date}
 STATUS: DFM / prototype preparation only. Connector P/N, resin, pressure and temperature qualification remain open.
-Quantity: {sets} sets (1 of each part per set) - please also quote 10 and 50 sets if possible.
+Quantity: {sets} sets (1 of each part per set) - one prototype set only.
 
-TOLERANCE: STEP and PDF use the SAME nominal geometry (Rev I). The explicit drawing tolerances control.
+TOLERANCE: STEP and PDF use the SAME nominal geometry (Rev J). The explicit drawing tolerances control.
   Seal spigots dia 27 f7, seal bores dia 27 H8, connector seal bore dia 10 H8, O-ring groove dia 24.6 h9.
   Holder/ring PCB slots: 1.9 (+0.1/0), for finished PCB thickness 1.6 +/-0.16.
   Do NOT substitute general +/-0.05 for these fits. Please confirm achievable tolerances and quote accordingly.
@@ -143,7 +146,7 @@ TOLERANCE: STEP and PDF use the SAME nominal geometry (Rev I). The explicit draw
 
 MATERIAL: NOT aluminium. The file names carry the material (SUS304 / POM-White). Please set it per part:
   M-101, M-102, M-103, M-104 = stainless steel (online option SUS304 accepted for this prototype lot; 316L preferred later);
-  M-105, M-106 = POM (White) for this prototype lot (PEEK not offered online).
+  M-105, M-106 are NOT CNC items in Rev J; they are MJF PA12-HP printed prototypes.
 
 Files: one STEP (3D) and one PDF (2D) per part. The PDFs are in Korean; the key specs are listed below
 and in order_jlccnc_EN.csv. Sheet M-102~104 carries three parts: cap M-102 (top), housing M-103, end cap M-104.
@@ -164,12 +167,12 @@ General:
 
 # ── JLC3D: 3D 프린트 ──
 PRINT = [
-    dict(part="HMT500-T-001", name="W-2 plug push bar (assembly tool)", fn=M.push_tool, qty=2,
-         material="SLA 레진 (예: 8001) 또는 MJF PA12", note="조립 공구 (제품 아님). 끝 두께 3.0, 가운데 홈 10.4"),
-    dict(part="HMT500-M-105", name="PCB holder — fit check", fn=M.pcb_holder, qty=2,
-         material="SLA 레진 (고정밀)", note="선택: PEEK 가공 전 PCB·플러그 끼움 확인용"),
-    dict(part="HMT500-M-106", name="Support ring — fit check", fn=M.pcb_ring, qty=2,
-         material="SLA 레진 (고정밀)", note="선택: 가공 전 끼움 확인용"),
+    dict(part="HMT500-T-001", name="W-2 plug push bar (assembly tool)", fn=M.push_tool, qty=1,
+         material="MJF PA12-HP Nylon", note="조립 공구 (제품 아님). 끝 두께 3.0, 가운데 홈 10.4"),
+    dict(part="HMT500-M-105", name="PCB holder — prototype", fn=M.pcb_holder, qty=1,
+         material="MJF PA12-HP Nylon", note="제품 시제품. 출력 후 홈/외경 검사·다듬기 및 M2 탭 필요; 부족 치수 재출력"),
+    dict(part="HMT500-M-106", name="Support ring — prototype", fn=M.pcb_ring, qty=1,
+         material="MJF PA12-HP Nylon", note="제품 시제품. 출력 후 홈/외경 검사·다듬기 필요; 부족 치수 재출력"),
 ]
 
 # ── JLCMC: 표준 기계 부품 (품번은 JLCMC 검색 후 기입) ──
@@ -241,6 +244,18 @@ def main():
     write_csv(os.path.join(d_cnc, "order_jlccnc.csv"),
               ["Part", "Name", "3D (STEP)", "2D (PDF)", "Material", "Alternative", "Finish", "Threads", "Tolerance",
                "Qty", "Note"], rows)
+    # Rev J: each printed part also receives the finishing drawing and instructions.
+    pdf_page(4, os.path.join(d_3d, f"HMT500-M-105-106_drawing_rev{REV}_PA12-HP.pdf"))
+    with open(os.path.join(d_3d, "PRINT_AND_FINISH.txt"), "w", encoding="utf-8") as f:
+        f.write("Rev J / one prototype set. M-105 and M-106: MJF PA12-HP Nylon, one each. T-001 tool: one.\n"
+                "Printed dimensions are nominal. JLC published as-printed tolerance +/-0.3 mm does NOT meet all drawing fits.\n"
+                "M-105/106: inspect and finish OD and PCB slots to drawing final dimensions before assembly.\n"
+                "M-105: two nominal dia1.6 pilot holes for M2x0.4. Check actual pilot size before tapping; oversized holes require reprint.\n"
+                "No printed thread helix. Do not assume thread strength or fit is validated. Do not overtighten.\n"
+                "Remove loose powder and burrs. If supplier does not offer finishing, receiver must finish and inspect.\n"
+                "Reject/reprint undersize external fits or oversized holes/slots that cannot be corrected. No unconditional drop-in fit claim.\n"
+                "Temperature, creep, epoxy compatibility and finished assembly require prototype tests. HDT is not continuous service temperature.\n"
+                "Source: https://jlc3dp.com/help/article/pa12-hp-nylon\n")
     rows = []
     for p in PRINT:
         base = f"{p['part']}_{p['name'].split(' —')[0].replace(' ', '_').replace('(', '').replace(')', '')}"

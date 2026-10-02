@@ -112,7 +112,7 @@
 <line x1="44.000" y1="39.250" x2="66.000" y2="39.250" class="thin"/>
 <text x="45.000" y="38.250" font-size="3.2" text-anchor="start" class="t ">2×Ø2.2, 간격 10 (홀더 가로 나사 M2)</text>
 <text x="45.000" y="26.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-E-301  PCB 외곽 — 기구 인터페이스 (2.5:1)</text>
-<text x="45.000" y="32.000" font-size="2.8" text-anchor="start" class="t muted">4층 FR-4 t1.6, 모서리 R1. 빗금 = 부품·동박 금지 (양면): 홀더 홈 물림, 지지링 홈. 기준 = 앞 끝(피드스루 쪽)</text>
+<text x="45.000" y="32.000" font-size="2.8" text-anchor="start" class="t muted">6층 FR-4 t1.6, 모서리 R1. 빗금 = 부품·동박 금지 (양면): 홀더 홈 물림, 지지링 홈. 기준 = 앞 끝(피드스루 쪽)</text>
 <rect x="18.0" y="160.0" width="178" height="21.6" class="thick" fill="#fff"/>
 <text x="19.200" y="163.900" font-size="2.7" text-anchor="start" font-weight="700" class="t ">구간 (앞 끝 기준)</text>
 <line x1="60.000" y1="160.000" x2="60.000" y2="181.600" class="thin"/>
@@ -238,12 +238,13 @@
 <text x="275.000" y="160.000" font-size="4.6" text-anchor="start" font-weight="700" class="t ">HMT500-M-106  PCB 지지링 (2:1), 두께 4</text>
 <text x="275.000" y="166.000" font-size="2.8" text-anchor="start" class="t muted">하우징 안에서 PCB 뒤쪽을 받침. 엔드캡과 연결 안 함 (체결 회전 전달 없음)</text>
 <text x="18.000" y="196.000" font-size="3.6" text-anchor="start" font-weight="700" class="t ">주기 (NOTES)</text>
-<text x="18.000" y="202.000" font-size="2.9" text-anchor="start" class="t ">1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.</text>
-<text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
-<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95, 홀더 뒤 12.5 (꽂을 공간). W-1(40 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.</text>
-<text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">4. J1 = JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD), 입구 뒤쪽(+x). 하네스 W-2(40 mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).</text>
-<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">   PCB 폭 23 구간은 x 61.4에서 끝 (턴버클 끝 엔드캡 앞면 x 62와 틈 0.6). 링 뒤(x ≥ 57) 부품은 Ø20 안 (링을 뒤에서 끼움).</text>
-<text x="18.000" y="232.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(260313A)/HMT500(260313A).kicad_pcb 와 같음.</text>
+<text x="18.000" y="202.000" font-size="2.9" text-anchor="start" class="t ">1. M-105/106: MJF PA12-HP, 시제품 각 1개. 지정 공차는 출력 후 최종 검사 치수.</text>
+<text x="18.000" y="208.000" font-size="2.9" text-anchor="start" class="t ">1a. 출력 공차 ±0.3 mm: 홈/외경 다듬기, M2 탭 후가공. 부족 치수는 재출력. 고온 성능 미확정.</text>
+<text x="18.000" y="214.000" font-size="2.9" text-anchor="start" class="t ">2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.</text>
+<text x="18.000" y="220.000" font-size="2.9" text-anchor="start" class="t ">3. J3 = JST SM04B-SRSS-TB (SH 1.0 mm 4P, side entry, SMD), 높이 2.95, 홀더 뒤 12.5 (꽂을 공간). W-1(40 mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.</text>
+<text x="18.000" y="226.000" font-size="2.9" text-anchor="start" class="t ">4. J1 = JST SM08B-GHS-TB (GH 1.25 mm 8P, side entry, SMD), 입구 뒤쪽(+x). 하네스 W-2(40 mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).</text>
+<text x="18.000" y="232.000" font-size="2.9" text-anchor="start" class="t ">   PCB 폭 23 구간은 x 61.4에서 끝 (턴버클 끝 엔드캡 앞면 x 62와 틈 0.6). 링 뒤(x ≥ 57) 부품은 Ø20 안 (링을 뒤에서 끼움).</text>
+<text x="18.000" y="238.000" font-size="2.9" text-anchor="start" class="t ">5. PCB 외곽·구역은 KiCad hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).kicad_pcb 와 같음.</text>
 <rect x="10" y="10" width="400.0" height="277.0" class="thick" fill="none"/>
 <text x="35.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">1</text>
 <text x="85.000" y="8.200" font-size="2.8" text-anchor="middle" class="t ">2</text>
@@ -267,15 +268,15 @@
 <line x1="290.000" y1="255.000" x2="290.000" y2="287.000" class="thin"/>
 <line x1="350.000" y1="255.000" x2="350.000" y2="287.000" class="thin"/>
 <text x="233.000" y="252.000" font-size="4.2" text-anchor="start" font-weight="700" class="t ">(주)두텍  DOTECH Co., Ltd.</text>
-<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500(260313) 오일 수분 트랜스미터</text>
+<text x="407.000" y="252.000" font-size="3.4" text-anchor="end" class="t ">HMT500(ED260313A) 오일 수분 트랜스미터</text>
 <text x="231.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">품명</text>
 <text x="231.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">PCB 홀더 · 지지링 · PCB 외곽</text>
 <text x="291.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">도번</text>
 <text x="291.500" y="262.200" font-size="3.3" text-anchor="start" font-weight="700" class="t ">HMT500-M-105~106</text>
 <text x="351.500" y="258.200" font-size="2.3" text-anchor="start" class="t muted">Rev / 일자</text>
-<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">I / 2026-10-01</text>
+<text x="351.500" y="262.200" font-size="3.3" text-anchor="start" class="t ">J / 2026-10-03</text>
 <text x="231.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">재질</text>
-<text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">PEEK / PA66-GF30</text>
+<text x="231.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">PA12-HP (MJF)</text>
 <text x="291.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">척도</text>
 <text x="291.500" y="270.200" font-size="3.3" text-anchor="start" class="t ">표기</text>
 <text x="351.500" y="266.200" font-size="2.3" text-anchor="start" class="t muted">단위 / 투상</text>

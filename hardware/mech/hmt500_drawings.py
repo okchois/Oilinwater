@@ -115,7 +115,7 @@ class Sheet:
         self.line(x0 + 60, y0 + 10, x0 + 60, y0 + h, "thin")
         self.line(x0 + 120, y0 + 10, x0 + 120, y0 + h, "thin")
         self.text(x0 + 3, y0 + 7, "(주)두텍  DOTECH Co., Ltd.", 4.2, bold=True)
-        self.text(x0 + w - 3, y0 + 7, "HMT500(260313) 오일 수분 트랜스미터", 3.4, "end")
+        self.text(x0 + w - 3, y0 + 7, "HMT500(ED260313A) 오일 수분 트랜스미터", 3.4, "end")
         cells = [("품명", self.title, x0, rows[0]), ("도번", self.dwg_no, x0 + 60, rows[0]),
                  ("Rev / 일자", f"{P.DRAWING_REV} / {P.DATE}", x0 + 120, rows[0]),
                  ("재질", self.material, x0, rows[1]), ("척도", self.scale_txt, x0 + 60, rows[1]),
@@ -472,7 +472,7 @@ def sheet_assembly():
 
 # ═════════════════════ 시트 2: 바디 부품도 ═════════════════════
 def sheet_body():
-    sh = Sheet("HMT500-M-101", "프로세스 바디 (Process body)", "3 : 1", "SUS316L (1.4404)", "2/4")
+    sh = Sheet("HMT500-M-101", "프로세스 바디 (Process body)", "3 : 1", "SUS304 (prototype)", "2/4")
     s = 3.0
     v = View(sh, 150, 120, s)
     v.axis(B["gthread"]["x"][0], B["mthread"]["x"][1])
@@ -538,7 +538,7 @@ def sheet_body():
     sh.text(cx, cy + R + 22, f"숨은선 원 2개: 2×{T['thread']} 깊이 {T['depth']:.0f}, PCD {T['pcd']:.0f}", 3.0, "middle")
     sh.text(cx, cy + R + 27, "(Ø22 카운터보어 바닥, PCB 홀더 M-105 고정)", 3.0, "middle")
     notes = ["주기 (NOTES)",
-             "1. 재질 SUS316L (1.4404), 봉재 선삭. 재질성적서 EN 10204 3.1.",
+             "1. 재질 SUS304 (prototype), 봉재 선삭. 재질성적서 EN 10204 3.1.",
              "2. 지정 없는 모서리 C0.3, 날카로운 모서리 제거. 지정 외 표면 Ra 1.6.",
              "3. 씰면(기준면 A) Ra 0.8, 평면도 0.02, 공구 자국 반경 방향 금지 (씰 누설 방지).",
              "4. Ø7 관통 통로 양끝 C0.3·버 완전 제거 (하네스 피복 보호). Ø10 H8 Ra 0.8 (O링 밀봉면), 입구 C0.3.",
@@ -554,7 +554,7 @@ def sheet_body():
 
 # ═════════════════════ 시트 3: 캡 / 하우징 / 엔드캡 ═════════════════════
 def sheet_small():
-    sh = Sheet("HMT500-M-102~104", "필터 캡 · 하우징 · 엔드캡", "표기", "SUS316L (1.4404)", "3/4")
+    sh = Sheet("HMT500-M-102~104", "필터 캡 · 하우징 · 엔드캡", "표기", "SUS304 (prototype)", "3/4")
     # ── 보호캡 = 두텍 SUS 오일 필터 390000-001100 (3.5:1, 참고도), 왼쪽 위 ──
     s = 3.5
     v = View(sh, 0, 92, s)
@@ -629,7 +629,7 @@ def sheet_small():
     sh.text(190, 152, "HMT500-M-103  하우징 (1.5:1)", 4.6, bold=True)
     sh.text(190, 158, "양 끝 C0.5×15° (O링 도입부) / 외면 Ra 0.8 헤어라인 또는 비드 / 레이저 마킹 영역 45×20", 2.8, cls="muted")
     notes = ["주기 (NOTES)",
-             "1. 재질 SUS316L (1.4404), 재질성적서 EN 10204 3.1, 부동태 처리 (ASTM A967).",
+             "1. 재질 SUS304 (prototype), 재질성적서 EN 10204 3.1, 부동태 처리 (ASTM A967).",
              "2. 지정 없는 모서리 C0.3, 버 제거. 지정 외 표면 Ra 1.6. 일반공차 ISO 2768-mK.",
              f"3. ③–① {MTH[:-3]} 오른나사, ③–④ {MTH[:-3]} 왼나사 (턴버클: ③만 돌림) + {ORT} FKM, {DSB} H8/f7. 왼나사 끝에 'LH' 각인.",
              "4. ③ 나사·밀봉 보어는 한 번 척킹으로 가공 (동축도 Ø0.05). ② 보호캡은 SUS304 (두텍 필터 기반) — 접액부 316L 통일 여부 검토.",
@@ -654,7 +654,7 @@ def pcb_limits():
 
 
 def sheet_pcb():
-    sh = Sheet("HMT500-M-105~106", "PCB 홀더 · 지지링 · PCB 외곽", "표기", "PEEK / PA66-GF30", "4/4")
+    sh = Sheet("HMT500-M-105~106", "PCB 홀더 · 지지링 · PCB 외곽", "표기", "PA12-HP (MJF)", "4/4")
     Pc, Hh, R = P.PCB, P.PCB_HOLDER, P.PCB_RING
     f = Pc["x"][0]
     # ── PCB 외곽 (2:1) ──
@@ -705,7 +705,7 @@ def sheet_pcb():
     sh.dim_v_ext(X(Pc["x"][1]), X(Pc["x"][1]) + 8, Y(9), Y(-9), "18")
     sh.leader(X(Pc["holes"][0][0]) - 1, Y(5) - 1, X(f) + 4, Y(11.5) - 24, f"2×Ø{Pc['hole_d']}, 간격 10 (홀더 가로 나사 M2)")
     sh.text(45, 26, "HMT500-E-301  PCB 외곽 — 기구 인터페이스 (2.5:1)", 4.6, bold=True)
-    sh.text(45, 32, f"4층 FR-4 t{Pc['t']}, 모서리 R{Pc['corner_r']:g}. 빗금 = 부품·동박 금지 (양면): 홀더 홈 물림, 지지링 홈. 기준 = 앞 끝(피드스루 쪽)", 2.8, cls="muted")
+    sh.text(45, 32, f"6층 FR-4 t{Pc['t']}, 모서리 R{Pc['corner_r']:g}. 빗금 = 부품·동박 금지 (양면): 홀더 홈 물림, 지지링 홈. 기준 = 앞 끝(피드스루 쪽)", 2.8, cls="muted")
     # 높이 한계 표
     tx, ty = 18.0, 160.0
     hdr = ["구간 (앞 끝 기준)", "폭", "둘러싼 보어", "부품 높이 한계 (한 면, 여유 0.5 포함)"]
@@ -792,7 +792,8 @@ def sheet_pcb():
     sh.text(275, 160, f"HMT500-M-106  PCB 지지링 (2:1), 두께 {R['x'][1] - R['x'][0]:g}", 4.6, bold=True)
     sh.text(275, 166, "하우징 안에서 PCB 뒤쪽을 받침. 엔드캡과 연결 안 함 (체결 회전 전달 없음)", 2.8, cls="muted")
     notes = ["주기 (NOTES)",
-             "1. M-105/106 재질 PEEK (연속 사용 ≥ 150 °C) 또는 PA66-GF30. 양산은 사출 검토.",
+             "1. M-105/106: MJF PA12-HP, 시제품 각 1개. 지정 공차는 출력 후 최종 검사 치수.",
+             "1a. 출력 공차 ±0.3 mm: 홈/외경 다듬기, M2 탭 후가공. 부족 치수는 재출력. 고온 성능 미확정.",
              "2. PCB는 ⑫ 홀더에만 고정. ⑬ 링은 흔들림 방지(축 방향 자유) — 열팽창 흡수.",
              f"3. J3 = {Pc['jst']['part']}, 높이 {Pc['jst']['h']:g}, 홀더 뒤 12.5 (꽂을 공간). W-1({P.HARNESS['length']:g} mm)로 HTX99R와 연결. 조립 후 하우징 안 전체 몰딩.",
              f"4. J1 = {Pc['gh']['part']}, 입구 뒤쪽(+x). 하네스 W-2({P.HARNESS2['length']:g} mm)로 M12 8P. J5 = 샤시 선 납땜 구멍 (→ 홀더 위 축 나사 링 단자).",

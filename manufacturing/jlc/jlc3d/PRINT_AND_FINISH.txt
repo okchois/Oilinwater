@@ -1,0 +1,9 @@
+Rev J / one prototype set. M-105 and M-106: MJF PA12-HP Nylon, one each. T-001 tool: one.
+Printed dimensions are nominal. JLC published as-printed tolerance +/-0.3 mm does NOT meet all drawing fits.
+M-105/106: inspect and finish OD and PCB slots to drawing final dimensions before assembly.
+M-105: two nominal dia1.6 pilot holes for M2x0.4. Check actual pilot size before tapping; oversized holes require reprint.
+No printed thread helix. Do not assume thread strength or fit is validated. Do not overtighten.
+Remove loose powder and burrs. If supplier does not offer finishing, receiver must finish and inspect.
+Reject/reprint undersize external fits or oversized holes/slots that cannot be corrected. No unconditional drop-in fit claim.
+Temperature, creep, epoxy compatibility and finished assembly require prototype tests. HDT is not continuous service temperature.
+Source: https://jlc3dp.com/help/article/pa12-hp-nylon

@@ -223,7 +223,7 @@ def steps():
         parts="⑧ PCB E-301, ⑫ PCB 홀더 M-105, ⑭ M2×12 ×2", tools="정밀 드라이버 (날 Ø3 이하), ESD 매트·손목띠",
         mat="-", spec="PCB 앞 끝을 홀더 홈(폭 1.9, 깊이 3.5) 끝까지. 가로 나사 M2×12 손 조임 (약 0.1 N·m, 수지 탭).",
         check="PCB가 홈에 꽉 끼고 흔들림 없음, 나사 머리가 홀더 면에 묻힘",
-        caution="ESD 주의. 나사 과조임 금지 (POM 탭 손상).",
+        caution="ESD 주의. 나사 과조임 금지 (PA12 출력 탭 손상).",
         scene=lambda: pcb_asm(cut_holder=False, with_cw=False) + [(mv(S("screws_x"), 0, 0, 9), NEW),
                                                                    (arrow((H["cross"]["x"], 12, 26), (H["cross"]["x"], 5.5, 16)), ARROW)],
         cam=((6, 72), ISO, 1.0))
@@ -477,7 +477,7 @@ def build_pdf():
                    for a, b, c, d, q, n in P.PARTS)
     pages.append(("부품표", f"""<h2>부품표 (1대분)</h2>
 <table><tr><th>No</th><th>도번·품번</th><th>품명</th><th>재질</th><th>수량</th><th>비고</th></tr>{rows}</table>
-<p class="small">시제품: M-101~104는 SUS304 (JLCCNC), M-105·106은 POM 백색. 양산 재질은 도면 표기 (SUS316L / PEEK).</p>"""))
+<p class="small">시제품: M-101~104는 SUS304 (JLCCNC), M-105·106은 MJF PA12-HP, 출력 후 치수검사·다듬기·M2 탭 필요. Rev J 시제품 재질이며 양산 고온/크리프 성능은 미확정.</p>"""))
     # 4. 공구·소모품·토크
     pages.append(("공구·소모품·조임", f"""<h2>공구 · 소모품 · 조임 기준</h2>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:6mm">
@@ -503,7 +503,7 @@ def build_pdf():
 <h3>조임 기준 (TBD = 시험 후 확정)</h3><table>
 <tr><th>부위</th><th>토크</th></tr>
 <tr><td>HTX99R → 바디 M10×1.0</td><td>1.0 N·m (TBD, 두텍 사양)</td></tr>
-<tr><td>PCB 가로 나사 M2×12 → 홀더 (POM)</td><td>약 0.1 N·m (확인 필요)</td></tr>
+<tr><td>PCB 가로 나사 M2×12 → 홀더 (PA12-HP)</td><td>약 0.1 N·m (확인 필요)</td></tr>
 <tr><td>홀더 축 나사 M2 → 바디 (SUS)</td><td>0.2 N·m (확인 필요)</td></tr>
 <tr><td>M12 → 엔드캡 M16×1.5</td><td>커넥터 사양 (TBD)</td></tr>
 <tr><td>하우징 턴버클 M26×1 (R/LH)</td><td>5 N·m (TBD)</td></tr>

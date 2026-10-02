@@ -400,8 +400,7 @@ def main():
     print(f"assembly bbox x {bb.xmin:.1f}..{bb.xmax:.1f} (length {bb.xlen:.1f}), dia {bb.ylen:.1f}")
     for name, s in shapes.items():
         v = s.val().Volume()
-        rho, mat = (1.32e-3, "PEEK") if name in ("M-105_holder", "M-106_ring") else (7.98e-3, "316L")
-        print(f"  {name:18s} volume {v / 1000:7.2f} cm3" + (f"  mass({mat}) {v * rho:6.1f} g" if name.startswith("M-") else ""))
+        print(f"  {name:18s} volume {v / 1000:7.2f} cm3 (mass: selected material density required)")
 
 
 if __name__ == "__main__":
