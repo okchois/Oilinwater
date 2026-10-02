@@ -1,0 +1,37 @@
+{
+  "deltaT_0C": {
+    "UVLO_rise": [
+      8.41767173317404,
+      9.20292237441417
+    ],
+    "OVP_rise": [
+      31.301653962512685,
+      34.37254829238265
+    ],
+    "OVP_fall": [
+      29.01473882814211,
+      31.58135739177999
+    ]
+  },
+  "deltaT_100C": {
+    "UVLO_rise": [
+      8.311852274292995,
+      9.31790289929857
+    ],
+    "OVP_rise": [
+      30.726881545071674,
+      35.01507331966387
+    ],
+    "OVP_fall": [
+      28.481847931626298,
+      32.17157134744641
+    ]
+  },
+  "nominal": {
+    "UVLO_rise": 8.73351087771943,
+    "OVP_rise": 32.61,
+    "OVP_fall": 30.143697478991598,
+    "ILIM_mA": 146.34146341463415
+  },
+  "notes": "Divider voltage referenced to EF_RTN at VIN_D, not connector; IC threshold limits, independent resistor initial tolerance/TCR and both +/-100nA leakage included. deltaT100 covers -40..125C relative to25C, not product temperature qualification. 82k exact current-limit min/max not tabulated: bench check required."
+}

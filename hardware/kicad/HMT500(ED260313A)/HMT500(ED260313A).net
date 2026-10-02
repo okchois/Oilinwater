@@ -2,7 +2,7 @@
 	(version "E")
 	(design
 		(source "/Users/deuknamchoi/Documents/Codex/2026-09-30/new-chat-2/work/hmt_mech_review/source/hardware/kicad/HMT500(ED260313A)/HMT500(ED260313A).kicad_sch")
-		(date "2026-10-03T08:27:54")
+		(date "2026-10-03T08:47:04")
 		(tool "Eeschema 10.0.6")
 		(sheet
 			(number "1")
@@ -11,8 +11,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  Top")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A).kicad_sch")
 				(comment
 					(number "1")
@@ -59,8 +59,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  Connector & input protection")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_connector.kicad_sch")
 				(comment
 					(number "1")
@@ -107,8 +107,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  Power")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_power.kicad_sch")
 				(comment
 					(number "1")
@@ -155,8 +155,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  MCU")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_mcu.kicad_sch")
 				(comment
 					(number "1")
@@ -203,8 +203,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  Measurement")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_measurement.kicad_sch")
 				(comment
 					(number "1")
@@ -251,8 +251,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  Analog outputs")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_analog_out.kicad_sch")
 				(comment
 					(number "1")
@@ -299,8 +299,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  RS-485")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_rs485.kicad_sch")
 				(comment
 					(number "1")
@@ -347,8 +347,8 @@
 			(title_block
 				(title "HMT500(ED260313A)  Aux")
 				(company "DOTECH Co., Ltd.")
-				(rev "0.10")
-				(date "2026-10-01")
+				(rev "0.11")
+				(date "2026-10-03")
 				(source "HMT500(ED260313A)_aux.kicad_sch")
 				(comment
 					(number "1")
@@ -845,7 +845,7 @@
 		)
 		(comp
 			(ref "R1")
-			(value "4.7R 1W pulse")
+			(value "4.7R 1W 5%")
 			(footprint "HMT500_260313A:R_2512_6332Metric")
 			(fields
 				(field
@@ -1443,7 +1443,7 @@
 		)
 		(comp
 			(ref "R3")
-			(value "866k 1%")
+			(value "845k 1%")
 			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
@@ -1535,7 +1535,7 @@
 		)
 		(comp
 			(ref "R5")
-			(value "36.5k 1%")
+			(value "35.7k 1%")
 			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field
@@ -1581,7 +1581,7 @@
 		)
 		(comp
 			(ref "R6")
-			(value "80.6k 1%")
+			(value "82k 1%")
 			(footprint "HMT500_260313A:R_0603_1608Metric")
 			(fields
 				(field

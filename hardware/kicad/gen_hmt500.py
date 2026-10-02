@@ -516,7 +516,7 @@ S.pw("GND", g, absolute=True)
 S.flag((g[0] + 1, g[1]), absolute=True)
 a = S.P("L1", "4")
 S.v2("D1", "TVS_BI", "SMDJ36CA", FP["SMC"], 40, 26, "VIN_L", "GND")
-S.h2("R1", "R", "4.7R 1W pulse", FP["R2512"], 45, 26, "VIN_L", "VIN_F")
+S.h2("R1", "R", "4.7R 1W 5%", FP["R2512"], 45, 26, "VIN_L", "VIN_F")
 S.wa(a, S.P("D1", "1"), S.P("R1", "1"))
 S.gnd_stub(S.P("D1", "2"))
 S.v2("D2", "TVS3301", "TVS3301DRBR", "HMT500_260313A:Texas_DRB0008A_PadFloat", 52, 26, "VIN_F", "GND")
@@ -560,7 +560,7 @@ part_table(S, 6, 58, [
     ("J1", "SM08B-GHS-TB", "현장 커넥터 연결", "JST GH 1.25 mm 8P 옆 삽입, 하네스 W-2 → M12 8P, 핀 n = M12 핀 n"),
     ("L1", "CMC 1mH 0.8A", "전원선 공통모드 노이즈 차단", "Bourns SRF0905-102Y (LCSC, 744222 동등), 2 × 1 mH, 0.8 A, 9.2 × 6 × 5.3 mm — 전도 방출·내성 대책"),
     ("D1", "SMDJ36CA", "입력 서지 1단 흡수", "TVS 양방향 3000 W, 36 V — −30 V 오결선에 도통 안 함"),
-    ("R1", "4.7R 1W pulse", "1단·2단 서지 분담", "2512 1 W (Vishay CRCW2512, JLC 부품 — 결정 #38, 펄스 에너지 시험 T1)"),
+    ("R1", "4.7R 1W 5%", "1단·2단 서지 분담", "2512 1 W (Vishay CRCW2512, JLC 부품 — 결정 #38, 펄스 에너지 시험 T1)"),
     ("D2", "TVS3301DRBR", "입력 서지 2단 클램프", "TI 평탄 클램프 ±33 V, 최대 42.5 V @ 27 A. DC 입력 33 V 초과 금지 (v0.9, 이전 SMBJ33CA)"),
     ("D3", "PMEG10010ELR", "음(−) 서지·역극성 차단", "Nexperia 100 V 1 A 쇼트키 (저누설). D2가 −42.5 V로 잡는 동안 출력 쪽 +28 V → 역전압 약 71 V를 D3가 받음 → eFuse IN–OUT 역전압 없음 (외부 검수 H01). 손실 약 0.45 V × 0.1 A"),
     ("GDT1", "2035-25-SM", "회로 GND–외함 서지 방전", "Bourns 2전극 SMD GDT 250 V (LCSC), Ø5 × 4.4 mm — 선–대지 서지 때만 도통"),
@@ -578,9 +578,9 @@ S.place("U1", "TPS2660", "TPS26600PWPR",
 # 입력: VIN_F 라벨을 핀마다, 분압 R3–R5는 한 줄 세로, 탭은 UVLO·OVP 핀과 같은 높이 → 직선
 # 분압 R3–R5: 위 끝 = IN 줄, 탭 = UVLO·OVP 줄 → 모두 곧은 선
 p1, p2 = S.P("U1", "1"), S.P("U1", "2")
-S.v2("R3", "R", "866k 1%", FP["R0603"], 14, p1[1] - S.dy, "VIN_D", "UV_DIV")
+S.v2("R3", "R", "845k 1%", FP["R0603"], 14, p1[1] - S.dy, "VIN_D", "UV_DIV")
 S.v2("R4", "R", "97.6k 1%", FP["R0603"], 14, p1[1] - S.dy + 3, "UV_DIV", "OV_DIV")
-S.v2("R5", "R", "36.5k 1%", FP["R0603"], 14, p1[1] - S.dy + 6, "OV_DIV", "EF_RTN")
+S.v2("R5", "R", "35.7k 1%", FP["R0603"], 14, p1[1] - S.dy + 6, "OV_DIV", "EF_RTN")
 S.wa(S.P("R3", "1"), p1)
 S.wa(p2, p1)                               # IN 두 핀은 핀 끝끼리
 S.gl("VIN_D", S.P("R3", "1"), "U", length=0)
@@ -606,7 +606,7 @@ S.wa(o16, o15)
 S.sup_stub("VIN_P", o15)
 S.gl("PWR_FLT", S.P("U1", "14"), "R", length=2)
 S.v2("C4", "C", "22n", FP["C0402"], 42, 25, "EF_DVDT", "EF_RTN")
-S.v2("R6", "R", "80.6k 1%", FP["R0603"], 46, 23, "EF_ILIM", "EF_RTN")
+S.v2("R6", "R", "82k 1%", FP["R0603"], 46, 23, "EF_ILIM", "EF_RTN")
 S.wa(S.P("U1", "12"), S.P("C4", "1"))
 S.wa(S.P("U1", "11"), S.P("R6", "1"))
 for r_ in ("R6", "C4"):
@@ -659,9 +659,9 @@ decap(S, "C13", "10u", "C1206", 146, 22, "+3V3A")
 # v0.9: 벅 입력 220 nF × 2 (U2 핀 옆) + 벌크 = C5 10 µF를 U2 옆에 배치, LDO 입력 1 µF (U3 옆) — SNVSB48C 9.2.1.2.6, SBVS338H 5.3
 decap(S, "C16", "220n 100V", "C0805", 121, 38.5, "VIN_P")
 decap(S, "C26", "1u", "C0402", 147, 38.5, "+5V")
-S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 32.6 V  /  UVLO 8.9 V")
-S.text("UVLO = 1.19 V x (R3+R4+R5)/(R4+R5) = 8.9 V   OVP rise 1.19 V x (R3+R4+R5)/R5 = 32.6 V (31.5-34.2), fall 30.1 V", (6.5, 35.5), 1.27)
-S.text("I_OL = 12 / R6 = 149 mA.  Supply 12-28 V recovers after OVP trip (fall > 29.2 V).  TPS26611 +Vs clamped (sheet Aux).", (6.5, 37), 1.27)
+S.box(6, 12, 63.5, 34.5, "eFuse  TPS2660   reverse -60 V  /  OVP 32.6 V  /  UVLO 8.7 V")
+S.text("R3/R4/R5 = 845k/97.6k/35.7k. UVLO rise 8.73 V; OVP rise 32.61 V, fall 30.14 V (nominal).", (6.5, 35.5), 1.27)
+S.text("R6 = 82k: I_OL nominal 146 mA. Tolerance/leakage analysis: decision #57. TPS26611 +Vs = VAO 16.1 V.", (6.5, 37), 1.27)
 S.text("EF_RTN = TPS2660 RTN reference: R5, R6, C4, MODE, PowerPAD. NEVER connect to GND (datasheet 9.3.5.5).", (6.5, 38.5), 1.27)
 S.box(64, 12, 111.5, 33, "BUCK 5 V   LMR51606  (4-65 V in, 0.6 A, 1.1 MHz)")
 S.text("Vout = 0.8 V x (1 + R8/R9) = 5.07 V.  1.1 MHz: L 10 uH, COUT 22 uF (SLUSEY1B Table 8-1). Same IC as U15.", (64, 35.5 + 3), 1.27)
@@ -1547,7 +1547,7 @@ def wire_metrics(S):
 
 
 def title_block(title):
-    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-10-01") (rev "0.10") '
+    return (f'(title_block (title {q(PROJECT + "  " + title)}) (date "2026-10-03") (rev "0.11") '
             f'(company "DOTECH Co., Ltd.") (comment 1 "Project No. {PROJECT}  -  {PRODUCT} oil moisture transmitter") '
             f'(comment 2 "Design notes: docs/hw/circuit-design.md") '
             f'(comment 3 "Pinouts checked vs manufacturer datasheets 2026-09-30 (STM32: KiCad lib)"))')
@@ -1590,6 +1590,7 @@ def write_all():
         (f"File names (schematic, PCB, Gerber) = {PROJECT}.*   PCB silkscreen marking = {PROJECT}", 1.4, False),
         ("Signal flow: J1 field connector -> protection -> eFuse -> 5 V buck -> 3.3 V LDO; sensor head J3 -> PCAP04 / ADS1220 -> MCU -> DAC8760 x2 / THVD2410 -> J1", 1.4, False),
         ("Outputs: RS-485 Modbus RTU + 2x analog (4-20 mA / 0-20 mA / 0-10 V / 0-5 V selectable).  Supply 12-28 V DC.", 1.4, False),
+        ("v0.11: stocked resistors R1/R3/R4/R5/R6; R3 845k, R5 35.7k, R6 82k; see decision #57.", 1.4, False),
         ("v0.10: AO D30/D40 TVS1401 +/-14 V. AO +/-28/30 V continuous miswiring is NOT guaranteed (#41).", 1.4, False),
         ("Power symbols: GND, +3V3, +3V3A (analog 3.3 V), +5V, VIN_P (protected input), CHASSIS.  Inter-sheet signals: global labels.", 1.4, False),
         ("History v0.3-v0.8 (MCU G0B1, JST harness, DAC8760/TPS26611 datasheet pinouts, RTN isolation, gated DAC SCLK ...): docs/decision-log.md #9-#26.", 1.4, False),
