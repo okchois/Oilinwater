@@ -1,0 +1,7 @@
+2026-10-03
+전체 생성기 재생성 완료
+넷리스트: 81 / 81, errors 0
+DRC errors 0 / unconnected 0 / warnings 24 (기존 소형 실크 22, 라이브러리 차이 2)
+33 tests OK
+배선·비아 형상, 부품 위치/방향/층, 패드 형상/넷 불변 대조 통과
+PCB A5-R3 / BOM R1

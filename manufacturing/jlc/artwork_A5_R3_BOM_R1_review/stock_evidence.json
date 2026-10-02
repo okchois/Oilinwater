@@ -1,0 +1,40 @@
+{
+  "C153291": {
+    "url": "https://jlcpcb.com/partdetail/C153291",
+    "checked_at": "2026-10-03T08:22:32.961178+09:00",
+    "componentCode": "C153291",
+    "componentModelEn": "CL10B102KC8NNNC",
+    "componentBrandEn": "Samsung Electro-Mechanics",
+    "componentSpecificationEn": "0603",
+    "assemblyMode": "smtWeld",
+    "componentLibraryType": "expand",
+    "assemblyComponentFlag": false,
+    "canPresaleNumber": 163721,
+    "overseasStockCount": 171211,
+    "preMinPurchaseNum": 860,
+    "isBuyComponent": "1",
+    "allowPostFlag": true,
+    "noBuyReason": null,
+    "lossNumber": 10,
+    "leastPatchNumber": 20
+  },
+  "C23029": {
+    "url": "https://jlcpcb.com/partdetail/C23029",
+    "checked_at": "2026-10-03T08:22:32.513595+09:00",
+    "componentCode": "C23029",
+    "componentModelEn": "0603WAF3652T5E",
+    "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+    "componentSpecificationEn": "0603",
+    "assemblyMode": "smtWeld",
+    "componentLibraryType": "expand",
+    "assemblyComponentFlag": false,
+    "canPresaleNumber": 108890,
+    "overseasStockCount": 117320,
+    "preMinPurchaseNum": 5000,
+    "isBuyComponent": "1",
+    "allowPostFlag": true,
+    "noBuyReason": null,
+    "lossNumber": 10,
+    "leastPatchNumber": 20
+  }
+}
